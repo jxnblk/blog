@@ -9,9 +9,9 @@ var Header = React.createClass({
     return (
       <header className="py3">
         <h1>
-          <Link to="/">
+          <a href="/writing">
             {this.props.title}
-          </Link>
+          </a>
         </h1>
         <p>{this.props.description}</p>
       </header>

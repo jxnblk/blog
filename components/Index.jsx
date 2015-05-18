@@ -1,7 +1,5 @@
 
 var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
 
 var Index = React.createClass({
 
@@ -9,9 +7,9 @@ var Index = React.createClass({
     return (
       <li key={'post-'+i}>
         <h2>
-          <Link to={'/'+post.slug}>
+          <a href={'/writing/'+post.slug}>
             {post.title}
-          </Link>
+          </a>
         </h2>
       </li>
     )
