@@ -8,7 +8,9 @@ var cssnext = require('cssnext');
 var pkg = require('./package.json');
 
 var dir = './posts';
-var filenames = fs.readdirSync(dir);
+var filenames = fs.readdirSync(dir).filter(function(filename){
+  return !/^\./.test(filename);
+});
 var posts = filenames.map(function(filename) {
   var content = fs.readFileSync(path.join(dir, filename), 'utf8');
   var matter = fm(content);
@@ -18,6 +20,8 @@ var posts = filenames.map(function(filename) {
     html: marked(matter.body)
   });
   return post;
+}).sort(function(a, b) {
+  return new Date(b.date) - new Date(a.date); 
 });
 
 var routes = filenames.map(function(filename) {
