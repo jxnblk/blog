@@ -8,12 +8,13 @@ var Index = React.createClass({
     var date = moment(post.date).format('MMMM D, YYYY');
     return (
       <li key={'post-'+i} className="mb3">
-        <span className="h5">{date}</span>
-        <h2 className="m0">
+        <span className="h5 bold">{date}</span>
+        <h2 className="mt0">
           <a href={'/writing/posts/'+post.slug}>
             {post.title}
           </a>
         </h2>
+        <p className="serif">{post.excerpt}</p>
       </li>
     )
   },

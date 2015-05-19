@@ -1,9 +1,9 @@
 
-.link-basic {
-  color: inherit;
-  text-decoration: underline;
+.link-simple {
+  text-decoration: none;
 }
 
+.serif,
 .prose p {
   font-family: var(--serif);
 }

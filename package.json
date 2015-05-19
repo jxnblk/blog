@@ -1,7 +1,7 @@
 {
   "name": "writing",
   "version": "1.0.0",
-  "description": "Blog posts and thoughts from Jxnblk",
+  "description": "Blog posts and thoughts on design, minimalism, and the web from Jxnblk",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
@@ -17,10 +17,12 @@
   "license": "MIT",
   "dependencies": {
     "basscss": "^6.1.4",
+    "cheerio": "^0.19.0",
     "cssnext": "^1.4.0",
     "front-matter": "^1.0.0",
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.13.2",
+    "jxnblk-avatar": "git://github.com/jxnblk/avatar.git",
     "lodash": "^3.8.0",
     "marked": "^0.3.3",
     "moment": "^2.10.3",

@@ -1,20 +1,18 @@
 
 var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
 
 var Header = React.createClass({
 
   render: function() {
     return (
       <header className="py3">
-        <a href="/" className="bold">Jxnblk</a>
+        <a href="/" className="bold link-simple">Jxnblk</a>
         <h1 className="h2 m0">
-          <a href="/writing">
+          <a href="/writing" className="link-simple">
             {this.props.title}
           </a>
         </h1>
-        <p>{this.props.description}</p>
+        <p className="m0">{this.props.description}</p>
       </header>
     )
   }
