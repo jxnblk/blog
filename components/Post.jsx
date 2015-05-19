@@ -1,6 +1,5 @@
 
 var _ = require('lodash');
-var moment = require('moment');
 var React = require('react');
 var CrossPosted = require('./CrossPosted.jsx');
 
@@ -13,7 +12,7 @@ var Post = React.createClass({
     });
     var crossposted = post.crossposted;
     var body = { __html: post.html };
-    var date = moment(post.date).format('MMMM D, YYYY');
+    var date = new Date(post.date).toDateString();
     return (
       <div className="py3 mb4">
         <div className="h5 bold">{date}</div>

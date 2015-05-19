@@ -1,11 +1,12 @@
 {
   "name": "writing",
   "version": "1.0.0",
-  "description": "Blog posts and thoughts on design, minimalism, and the web from Jxnblk",
+  "description": "Thoughts on design, minimalism, and the Web from Jxnblk",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
     "webpack": "webpack --progress --colors",
+    "prod": "webpack -p --progress --colors",
     "dev": "webpack-dev-server --progress --colors",
     "start": "npm run dev"
   },
@@ -25,7 +26,6 @@
     "jxnblk-avatar": "git://github.com/jxnblk/avatar.git",
     "lodash": "^3.8.0",
     "marked": "^0.3.3",
-    "moment": "^2.10.3",
     "node-libs-browser": "^0.5.0",
     "react": "^0.13.3",
     "react-router": "^0.13.3",

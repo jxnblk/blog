@@ -1,6 +1,8 @@
 ---
 title: 'I’m Sick of Your Tiny, Tiny Type'
 date: '01-29-2013'
+crossposted:
+  - http://jxnblk.tumblr.com/post/41796724549/im-sick-of-your-tiny-tiny-type
 ---
 
 Your tiny type is hard to read – no, not hard to read, impossible to read. I carry my phone with me everywhere, but I always seem to forget my magnifying glass. I tap the Safari Reader button, but that’s not a solution to the problem. That’s a band-aid for your bad typesetting.

@@ -1,6 +1,8 @@
 ---
 title: 'Organizing Mobile Navigation Based on Information-Seeking Behavior'
 date: '01-16-2013'
+crossposted:
+  - http://jxnblk.tumblr.com/post/40693165132/organizing-mobile-navigation-based-on
 ---
 
 When opening an application, a user should be able to understand its functionality, see relevant content, and get to where they want to go. Applications that obscure navigation with the intent of focusing on content can make finding specific information difficult. On the other hand, skewing towards too much navigation can overwhelm the user. Mobile apps should balance navigation for users with different information needs.

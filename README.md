@@ -1,12 +1,14 @@
 
 # writing
 
-Blog posts and thoughts from Jxnblk
+Thoughts on design, minimalism, and the Web from Jxnblk
+
+http://jxnblk.com/writing
 
 ---
 
 ## To do:
-- [ ] Excerpts
+- [x] Excerpts
 - [ ] Tweet section
 - [ ] Fix missing links
 - [ ] Fix missing images

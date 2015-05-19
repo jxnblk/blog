@@ -1,6 +1,8 @@
 ---
 title: 'Buckets and Jumpoffs: Using Content-Centric Contextual Navigation'
 date: '12-07-2012'
+crossposted:
+  - http://jxnblk.tumblr.com/post/37416765650/buckets-jumpoffs-using-content-centric
 ---
 
 While table views provide a clear and simple way to navigate certain types of content, mobile should be about putting content and user goals first and navigation second. Don't overload the user with navigation choices, show meaningful content instead. Even though tab bars are great – sitting below the content, out of the way until the user needs them – there are new opportunities to explore content-centric contextual navigation when designing for mobile.

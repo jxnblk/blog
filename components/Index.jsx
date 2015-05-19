@@ -1,11 +1,10 @@
 
 var React = require('react');
-var moment = require('moment');
 
 var Index = React.createClass({
 
   renderPost: function(post, i) {
-    var date = moment(post.date).format('MMMM D, YYYY');
+    var date = new Date(post.date).toDateString();
     return (
       <li key={'post-'+i} className="mb3">
         <span className="h5 bold">{date}</span>
