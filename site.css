@@ -1,19 +1,22 @@
 
-.link-simple {
-  text-decoration: none;
-}
+.container {
+  max-width: 48rem;
+  margin-right: auto;
+  margin-left: auto;
+} 
+
+.link-simple { text-decoration: none }
 
 .serif,
-.prose p {
+.prose p,
+.prose ul,
+.prose ol {
   font-family: var(--serif);
 }
 
-.prose p:first-child {
-  font-size: var(--h3);
-}
+.prose p:first-child { font-size: var(--h3) }
 
-.prose blockquote {
-}
+.prose blockquote {}
 
 :root {
   --serif: Georgia, serif;

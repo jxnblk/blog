@@ -4,7 +4,7 @@ var React = require('react');
 var CrossPosted = React.createClass({
 
   renderLink: function(href, i) {
-    return <li><a key={i} href={href}>{href}</a></li>
+    return <li><a key={i} href={href} className="break-word">{href}</a></li>
   },
 
   render: function() {

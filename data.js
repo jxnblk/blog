@@ -40,7 +40,13 @@ module.exports = {
   description: pkg.description,
   author: pkg.author,
   css: cssnext([
-    '@import "basscss";',
+    '@import "basscss-base-reset";',
+    '@import "basscss-base-typography";',
+    '@import "basscss-color-base";',
+    '@import "basscss-utility-typography";',
+    '@import "basscss-utility-layout";',
+    '@import "basscss-white-space";',
+    '@import "basscss-defaults";',
     '@import "site";',
   ].join('\n'), {
     compress: true,
