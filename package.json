@@ -1,7 +1,7 @@
 {
   "name": "writing",
   "version": "1.0.0",
-  "description": "Articles and blog posts by Brent Jackson",
+  "description": "Blog posts and thoughts from Jxnblk",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",

@@ -1,6 +1,8 @@
 ---
 title: 'Designing in the Browser Faster'
 date: '04-14-2014'
+crossposted:
+  - https://medium.com/@jxnblk/designing-in-the-browser-faster-bd413d2bc4f3
 ---
 
 I’ve been dabbling with HTML and CSS for years—building small websites for myself and friends and building prototypes to test designs. And, while I’ve been fascinated with the idea of designing in the browser for a long time, it wasn’t until recently that it’s become much, much faster for me than using traditional design software.

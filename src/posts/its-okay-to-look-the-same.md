@@ -2,6 +2,8 @@
 title: 'It’s Okay to Look the Same'
 subhead: 'Why frameworks are actually pretty great'
 date: '04-25-2014'
+crossposted:
+  - https://medium.com/@jxnblk/its-okay-to-look-the-same-e95e79f409b7
 ---
 
 Every once in a while I hear someone complain about the visual homogenization of the web, and front-end frameworks often get the brunt of the attack. This visual sameness isn’t necessarily a bad thing.

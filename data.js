@@ -7,7 +7,7 @@ var marked = require('marked');
 var cssnext = require('cssnext');
 var pkg = require('./package.json');
 
-var dir = './posts';
+var dir = './src/posts';
 var filenames = fs.readdirSync(dir).filter(function(filename){
   return !/^\./.test(filename);
 });
@@ -25,7 +25,7 @@ var posts = filenames.map(function(filename) {
 });
 
 var routes = filenames.map(function(filename) {
-  return '/' + filename.replace(/\.md$/,'');
+  return '/posts/' + filename.replace(/\.md$/,'');
 });
 routes.unshift('/');
 console.log(routes);
@@ -49,6 +49,8 @@ module.exports = {
           'heading-font-weight': '500',
           'button-font-weight': '500',
           'bold-font-weight': '500',
+          'link-color': 'inherit',
+          'link-text-decoration': 'underline',
           'button-font-size': 'var(--h5)',
           'container-width': '48em',
         }

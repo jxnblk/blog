@@ -10,7 +10,7 @@ var Index = React.createClass({
       <li key={'post-'+i} className="mb3">
         <span className="h5">{date}</span>
         <h2 className="m0">
-          <a href={'/writing/'+post.slug}>
+          <a href={'/writing/posts/'+post.slug}>
             {post.title}
           </a>
         </h2>
