@@ -11,7 +11,7 @@ Sometimes I’m on my computer, and Reader doesn’t work on your web app. I hit
 
 And I know I’m not the only one who hates your tiny type. How many times have I heard users complain about fonts being too small? More times than I’ve heard them complain about fonts being too large – wait, I’ve never heard a user complain about that. Your users aren’t asking for a faster horse – they’re struggling to read your content. Surely that isn’t what you’re going for, and surely that isn’t a good experience.
 
-**Further reading:**
+### Further reading:
 
 [Relative Readability](http://wm4.wilsonminer.com/posts/2008/oct/20/relative-readability/)
 

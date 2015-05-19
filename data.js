@@ -36,7 +36,7 @@ routes.unshift('/');
 console.log(routes);
 
 module.exports = {
-  title: 'Writing',
+  title: 'jxnblk.com/writing',
   description: pkg.description,
   author: pkg.author,
   css: cssnext([

@@ -23,21 +23,21 @@ Since then, a few things have happened.
 
 Despite all of this, I still haven't seen any evidence suggesting that the hamburger menu is an improvement.
 
-**Patterns**
+## Patterns
 
 Basically it comes down to interface design patterns.&nbsp;Patterns rely on familiarity and emerge slowly over time.&nbsp;Most of the ones we use on the web today have been around for many years.
 
 Users have plenty of new things to learn without adding contrived navigation patterns into the mix.&nbsp;Let's stop trying to innovate device-specific interactions and leave it to the device manufacturers.
 
-**Let's focus on the real problems**
+## Let's focus on the real problems
 
 Product design requires solving many more difficult problems.
 For example:
 
-* How does your product align with a user's mental model?
-* How do you scale your information architecture?
-* How do you make your product meaningful to your users?
-* How do you reach a wider audience with your product?
+- How does your product align with a user's mental model?
+- How do you scale your information architecture?
+- How do you make your product meaningful to your users?
+- How do you reach a wider audience with your product?
 
 Personally, I'd much rather be designing and testing solutions for problems like these.
 

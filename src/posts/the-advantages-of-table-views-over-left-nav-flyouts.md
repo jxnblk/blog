@@ -12,7 +12,7 @@ crossposted:
 At first glance, these two navigation patterns seem very similar, but there are a few points that give table views[*]() a huge leg up. When dealing with a multi-tiered hierarchy or a variable amount of navigation items – such as text messages, emails, folksonomic categories, folders, files, etc. – table views can be a great solution. Lists are generally easier to scan than tiles, and vertical scrolling is an easy interaction for touchscreen mobile devices.
 
 
-**Some advantages of table views:**
+## Some advantages of table views:
 
 ![image](http://jxnblk.com/images/SettingsApp.png)
 
@@ -25,7 +25,7 @@ At first glance, these two navigation patterns seem very similar, but there are 
 - Table views can be effectively combined with tab bars, bringing the advantages of persistent navigation to a complex IA.
 - The back button is in a hard-to-reach location, but when combined with a tab bar, the tab bar button can act as an easy-to-reach shortcut to the top-level.
 
-**What can be learned from left nav flyouts**
+## What can be learned from left nav flyouts
 
 One advantage that the left nav flyout pattern generally has over table views is the swipe-to-reveal gesture shortcut. For table views, this gesture could be used as a shortcut for the back button – much like Loren Brichter's original Twitter for iPad – and navigation is probably a more common action than deleting items with the swipe-to-delete gesture.
 
@@ -33,7 +33,7 @@ One advantage that the left nav flyout pattern generally has over table views is
 
 Some may argue that the modal nature of left nav flyouts is well-suited for use as filtering controls for large collections. But, to use the Apple Store app as an example again, table views can be a very efficient way to filter through large collections of information.
 
-**Forget the flyout – use table views**
+## Forget the flyout – use table views
 
 If your product has a complex IA that can't neatly fit into a tab bar, consider the advantages that table views can provide before jumping on the left nav flyout bandwagon.
 

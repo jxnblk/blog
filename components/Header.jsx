@@ -6,7 +6,6 @@ var Header = React.createClass({
   render: function() {
     return (
       <header className="py3">
-        <a href="/" className="bold link-simple">Jxnblk</a>
         <h1 className="h2 m0">
           <a href="/writing" className="link-simple">
             {this.props.title}
