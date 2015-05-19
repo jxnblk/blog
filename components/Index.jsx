@@ -4,6 +4,7 @@ var React = require('react');
 var Index = React.createClass({
 
   renderPost: function(post, i) {
+    if (post.draft) { return false }
     var date = new Date(post.date).toDateString();
     return (
       <li key={'post-'+i} className="mb3">
