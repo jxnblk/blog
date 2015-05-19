@@ -23,15 +23,15 @@ Discovery is when the user isn't looking for anything in particular – for inst
 
 ## Examples
 
-![Fab.com App](http://jxnblk.com/images/fab-search.png)
+![Fab.com App](http://jxnblk.s3.amazonaws.com/assets/images/fab-search.png)
 
 While the navigation in Fab.com's mobile app is poorly organized and not very obvious, the app still supports known-item and exploratory seeking. Its Search view has both a text field for traditional search, and a table view navigation of categories, colors, and prices.&nbsp;
 
-![Apple Store App](http://jxnblk.com/images/apple-store-categories.png)
+![Apple Store App](http://jxnblk.s3.amazonaws.com/assets/images/apple-store-categories.png)
 
 The Apple Store app's navigation includes a Featured tab, which encourages discovery, and a Products tab for seeking. A table view of well-labeled product categories provides quick known-item seeking, and both tabs include a search field at the top.
 
-![Etsy App](http://jxnblk.com/images/etsy-search.png)
+![Etsy App](http://jxnblk.s3.amazonaws.com/assets/images/etsy-search.png)
 
 Similarly, the Etsy app supports discovery with its Explore tab and facilitates known-item and exploratory seeking with the categories listed in the Search tab. Like the desktop website, the mobile app's navigation provides obvious paths to specific items within their large inventory, but is significantly simpler at the top-level.
 

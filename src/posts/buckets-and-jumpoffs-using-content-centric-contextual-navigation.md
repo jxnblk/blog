@@ -10,7 +10,7 @@ While table views provide a clear and simple way to navigate certain types of co
 
 ## Create Better Table Views with Teasers
 
-![Mail & Messages](http://jxnblk.com/images/Buckets-Mail-Messages.png)
+![Mail & Messages](http://jxnblk.s3.amazonaws.com/assets/images/Buckets-Mail-Messages.png)
 
 A quick and dirty way to give table views more meaning is by using teasers. Apple's Mail App shows a numerical indicator of &nbsp;unread emails at the top level, then shows truncated previews of actual messages at the inbox level. Similarly, Messages shows previews of the last message sent before the user drills into the conversation.
 
@@ -22,19 +22,19 @@ While teasers can make basic table views more meaningful, they prioritize naviga
 
 You've probably seen this pattern before: take a collection of items, group them into categories, present a limited number of those items in buckets or lists, and provide a link to jump off and view more. There doesn't seem to be a great name for this pattern, some have suggested calling it the _egg carton_&nbsp;or the _showcase_, but neither of those terms seem to capture the essence of the jumpoff link's contextual navigation – thus, _buckets & jumpoffs_.
 
-![Twitter](http://jxnblk.com/images/Buckets-Twitter.png)
+![Twitter](http://jxnblk.s3.amazonaws.com/assets/images/Buckets-Twitter.png)
 
 Twitter uses this approach in its profile view, along with a mix of standard table views. Instead of seeing all of the user's tweets in the profile view, there is a small bucket showing the latest three tweets and a link to view more.
 
-![Rdio](http://jxnblk.com/images/Buckets-Rdio.png)
+![Rdio](http://jxnblk.s3.amazonaws.com/assets/images/Buckets-Rdio.png)
 
 Rdio does this to great effect in its search results view, showing results bucketed by artists, albums, songs, playlists, and people. This view provides direct links to the top results and a link to view more results in each bucket as well.
 
-![App Store & iTunes](http://jxnblk.com/images/Buckets-AppStore-iTunes.png)
+![App Store & iTunes](http://jxnblk.s3.amazonaws.com/assets/images/Buckets-AppStore-iTunes.png)
 
 Using a mixture of swipeable carousel buckets and tiles, Apple creates a lot of visual interest in its App Store and iTunes apps. These _Featured_&nbsp;views are frequently updated and serve as a great way to promote content discovery in an otherwise extremely complex IA. Apple also uses buckets on its desktop version of iTunes, showing that this pattern can be effectively scaled up to larger displays.
 
-![Foursquare](http://jxnblk.com/images/Buckets-Foursquare.png)
+![Foursquare](http://jxnblk.s3.amazonaws.com/assets/images/Buckets-Foursquare.png)
 
 Similarly, Foursquare places contextual navigation – which is often delegated to detail views – in-line with its content-rich list view. Unfortunately, Foursquare's desktop site lacks the same level of content discovery afforded in its mobile app and, instead, relies heavily on traditional search.
 
