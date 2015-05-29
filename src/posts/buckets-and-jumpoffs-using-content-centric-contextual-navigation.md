@@ -1,6 +1,6 @@
 ---
 title: 'Buckets and Jumpoffs: Using Content-Centric Contextual Navigation'
-date: '12-07-2012'
+created: '12-07-2012'
 crossposted:
   - http://jxnblk.tumblr.com/post/37416765650/buckets-jumpoffs-using-content-centric
 ---

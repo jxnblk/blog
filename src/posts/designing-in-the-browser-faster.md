@@ -1,6 +1,6 @@
 ---
 title: 'Designing in the Browser Faster'
-date: '04-14-2014'
+created: '04-14-2014'
 crossposted:
   - https://medium.com/@jxnblk/designing-in-the-browser-faster-bd413d2bc4f3
 ---

@@ -1,6 +1,6 @@
 ---
 title: Static Site Generation with React
-date: 05-19-2015
+created: 05-19-2015
 draft: true
 ---
 

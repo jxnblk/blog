@@ -1,6 +1,6 @@
 ---
 title: 'An Update on the Hamburger Menu'
-date: '04-12-2014'
+created: '04-12-2014'
 crossposted:
   - http://jxnblk.tumblr.com/post/82486816704/an-update-on-the-hamburger-menu
 ---

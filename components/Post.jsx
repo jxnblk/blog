@@ -12,7 +12,7 @@ var Post = React.createClass({
     });
     var crossposted = post.crossposted;
     var body = { __html: post.html };
-    var date = new Date(post.date).toDateString();
+    var date = new Date(post.created).toDateString();
     return (
       <div className="py3 mb4">
         <div className="h5 bold">{date}</div>

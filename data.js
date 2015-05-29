@@ -26,7 +26,7 @@ var posts = filenames.map(function(filename) {
   });
   return post;
 }).sort(function(a, b) {
-  return new Date(b.date) - new Date(a.date); 
+  return new Date(b.created) - new Date(a.created); 
 });
 
 var routes = filenames.map(function(filename) {
@@ -56,8 +56,12 @@ module.exports = {
       colorRgba: false,
       customProperties: {
         variables: {
-          'h3': '1.375rem',
-          'h4': '1.125rem',
+          'h1': '2.5rem',
+          'h2': '1.75rem',
+          'h3': '1.5rem',
+          'h4': '1.25rem',
+          'h5': '1rem',
+          'line-height': '1.625',
           'heading-font-weight': '500',
           'button-font-weight': '500',
           'bold-font-weight': '500',

@@ -8,7 +8,7 @@ var Footer = React.createClass({
     return (
       <footer className="center py4 border-top">
         <a href="/" className="bold link-simple">
-          <Jxnblk width={64} height={64} />
+          <Jxnblk size={48} />
           <div>Made by Jxnblk</div>
         </a>
       </footer>

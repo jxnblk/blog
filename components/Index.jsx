@@ -5,7 +5,7 @@ var Index = React.createClass({
 
   renderPost: function(post, i) {
     if (post.draft) { return false }
-    var date = new Date(post.date).toDateString();
+    var date = new Date(post.created).toDateString();
     return (
       <li key={'post-'+i} className="mb3">
         <span className="h5 bold">{date}</span>

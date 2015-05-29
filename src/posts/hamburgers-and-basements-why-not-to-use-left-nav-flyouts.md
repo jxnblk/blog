@@ -1,6 +1,6 @@
 ---
 title: 'Hamburgers & Basements: Why Not to Use Left Nav Flyouts'
-date: '11-21-2012'
+created: '11-21-2012'
 crossposted:
   - http://jxnblk.tumblr.com/post/36218805036/hamburgers-basements-why-not-to-use-left-nav
 ---

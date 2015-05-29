@@ -1,7 +1,7 @@
 {
   "name": "writing",
   "version": "1.0.0",
-  "description": "Thoughts on design, minimalism, and the Web from Jxnblk",
+  "description": "Thoughts on Design, Minimalism, and the Web",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
@@ -40,5 +40,8 @@
     "static-site-generator-webpack-plugin": "^1.0.0",
     "webpack": "^1.9.7",
     "webpack-dev-server": "^1.8.2"
+  },
+  "devDependencies": {
+    "jxnblk-avatar": "^1.1.0"
   }
 }

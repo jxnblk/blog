@@ -10,6 +10,7 @@ http://jxnblk.com/writing
 ## To do:
 - [x] Excerpts
 - [ ] Tweet section
+- [ ] Pagination 
 - [x] Fix missing links
 - [x] Fix missing images
 - [ ] Footer colophon
