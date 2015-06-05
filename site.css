@@ -1,4 +1,15 @@
 
+pre {
+  padding: var(--space-2);
+  border-radius: var(--border-radius);
+  background-color: var(--darken-1);
+}
+
+code {
+  color: var(--navy);
+  background-color: color(var(--aqua) a(.125));
+}
+
 .container {
   max-width: 48rem;
   margin-right: auto;
@@ -7,16 +18,33 @@
 
 .link-simple { text-decoration: none }
 
-.serif,
+.prose {
+  font-family: var(--serif);
+  font-size: var(--h4);
+}
+
 .prose p,
 .prose ul,
-.prose ol {
-  font-family: var(--serif);
+.prose ol,
+.prose dl {
+  font-size: inherit;
+}
+
+.prose code {
+  font-size: 87.5%;
+}
+
+.prose pre {
+  font-size: 75%;
 }
 
 .prose p:first-child { font-size: var(--h3) }
-
 .prose blockquote {}
+
+@media (--breakpoint-sm) {
+  .prose { font-size: var(--h3) }
+  .prose p:first-child { font-size: var(--h2) }
+}
 
 :root {
   --serif: Georgia, serif;

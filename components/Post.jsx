@@ -15,11 +15,13 @@ var Post = React.createClass({
     var date = new Date(post.created).toDateString();
     return (
       <div className="py3 mb4">
+        {/*
         <div className="h5 bold">{date}</div>
         <h1 className="m0">{post.title}</h1>
         <h2 className="mt0">{post.subhead}</h2>
+        */}
         <div
-          className="prose mt4 mb4"
+          className="prose mb4"
           dangerouslySetInnerHTML={body} />
         <CrossPosted links={crossposted} />
       </div>

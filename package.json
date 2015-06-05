@@ -42,6 +42,8 @@
     "webpack-dev-server": "^1.8.2"
   },
   "devDependencies": {
-    "jxnblk-avatar": "^1.1.0"
+    "basscss-highlight": "^0.1.0",
+    "highlight.js": "^8.6.0",
+    "jxnblk-avatar": "git://github.com/jxnblk/avatar"
   }
 }

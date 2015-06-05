@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var fm = require('front-matter');
 var marked = require('marked');
+var markedRenderer = require('./marked-renderer');
 var cssnext = require('cssnext');
 var cheerio = require('cheerio');
 var pkg = require('./package.json');
@@ -15,7 +16,7 @@ var filenames = fs.readdirSync(dir).filter(function(filename){
 var posts = filenames.map(function(filename) {
   var content = fs.readFileSync(path.join(dir, filename), 'utf8');
   var matter = fm(content);
-  var html = marked(matter.body);
+  var html = marked(matter.body, { renderer: markedRenderer });
   var $ = cheerio.load(html);
   var excerpt = $('p').first().text();
   var post = _.assign(matter.attributes, {
@@ -46,8 +47,9 @@ module.exports = {
     '@import "basscss-utility-typography";',
     '@import "basscss-utility-layout";',
     '@import "basscss-white-space";',
-    '@import "basscss-defaults";',
+    '@import "basscss-highlight";',
     '@import "site";',
+    '@import "basscss-defaults";',
   ].join('\n'), {
     compress: true,
     features: {
@@ -56,11 +58,11 @@ module.exports = {
       colorRgba: false,
       customProperties: {
         variables: {
-          'h1': '2.5rem',
-          'h2': '1.75rem',
-          'h3': '1.5rem',
-          'h4': '1.25rem',
-          'h5': '1rem',
+          //'h1': '2.5rem',
+          //'h2': '1.75rem',
+          //'h3': '1.5rem',
+          'h4': '1.125rem',
+          //'h5': '1rem',
           'line-height': '1.625',
           'heading-font-weight': '500',
           'button-font-weight': '500',
@@ -73,6 +75,7 @@ module.exports = {
           'link-text-decoration': 'underline',
           'button-font-size': 'var(--h5)',
           'container-width': '48em',
+          //'pre-background-color': 'var(--darken-1)',
         }
       }
     }
