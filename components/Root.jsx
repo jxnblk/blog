@@ -1,7 +1,7 @@
 
-var React = require('react');
-var Head = require('./Head.jsx');
-var Body = require('./Body.jsx');
+var React = require('react')
+var Head = require('./Head.jsx')
+var Body = require('./Body.jsx')
 
 var Root = React.createClass({
 
@@ -14,7 +14,7 @@ var Root = React.createClass({
     )
   }
 
-});
+})
 
-module.exports = Root;
+module.exports = Root
 
