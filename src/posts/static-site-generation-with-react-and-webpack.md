@@ -1,6 +1,11 @@
 ---
 title: Static Site Generation with React and Webpack
 created: 06-06-2015
+tags:
+  - react
+  - webpack
+  - static-site
+  - tutorial
 ---
 
 I’ve been dabbling with React for a few months now and using it in several small open source projects

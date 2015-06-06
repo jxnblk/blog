@@ -40,6 +40,7 @@ module.exports = {
   title: 'jxnblk.com/writing',
   description: pkg.description,
   author: pkg.author,
+  keywords: pkg.keywords,
   css: cssnext([
     '@import "basscss-base-reset";',
     '@import "basscss-base-typography";',
