@@ -18,6 +18,7 @@ code {
 
 .link-simple { text-decoration: none }
 
+.serif,
 .prose {
   font-family: var(--serif);
   font-size: var(--h4);
@@ -42,7 +43,7 @@ code {
 .prose blockquote {}
 
 @media (--breakpoint-sm) {
-  .prose { font-size: var(--h3) }
+  .serif, .prose { font-size: var(--h3) }
   .prose p:first-child { font-size: var(--h2) }
 }
 

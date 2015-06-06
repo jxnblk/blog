@@ -12,13 +12,19 @@ var Index = React.createClass({
     var date = new Date(post.created).toDateString()
     return (
       <li key={'post-' + i} className='mb3'>
-        <span className='h5 bold'>{date}</span>
         <h2 className='mt0'>
           <a href={'/writing/posts/' + post.slug}>
             {post.title}
           </a>
         </h2>
-        <p className='serif'>{post.excerpt}</p>
+        <p className='serif m0'>{post.excerpt}</p>
+        <div className=''>
+          <span className='h5 bold mr1'>{date}</span>
+          <a href={'/writing/posts/' + post.slug}
+            className='h5 bold'>
+            Read more
+          </a>
+        </div>
       </li>
     )
   },
