@@ -313,7 +313,8 @@ module.exports = function render(locals, callback) {
 }
 ```
 
-Next, update the Root component to pass props into the HTML in a script tag and to link to the `bundle.js` file.
+The `initialProps` value will come from a script tag with the id `initial-props`.
+Update the Root component to add this script tag, add a `safeStringify` function, and link to the `bundle.js` file.
 
 ```js
 // components/Root.jsx
@@ -418,7 +419,7 @@ module.exports = Root
 ## Using Client-Side Routing
 
 React router can also do client-side routing using the Link component.
-This can make transitioning pages feel faster.
+This can make transitioning pages feel faster and behaves like a fake single-page application.
 
 To use client-side routing, replace the anchor links in the Header with React Routers’s Link components.
 
@@ -531,12 +532,17 @@ or check out the
 
 Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven’t tried this so your mileage may vary.
 
+The `routes` array is passed in as props, and navigation links could be created dynamically rather than being hard coded.
+This could make handling lots of pages easier.
+
 If you’re hosting the static site on gh-pages, you’ll need a way to handle the base url when using React Router’s Link component.
+I don’t know of a good way to do this yet and would love to hear suggestions on how to improve that.
 
-Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag, and I’m not sure if there’s a better way to handle that.
+Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag,
+and I’m not sure if there’s a better way to handle that.
 
-This is just one way that I’ve found works for building static sites with React. If you’ve seen other ways or have any suggestions for improving on this, I’d love to hear them.
-
-
+This is just one way to build static sites with React.
+You might also be interested in Brad Denver’s blog post <a href="http://braddenver.com/blog/2015/react-static-site.html" target="_blank">React Static Site</a>.
+If you’ve seen other ways or have any suggestions for improving on this, I’d love to hear them.
 
 

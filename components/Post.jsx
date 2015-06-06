@@ -16,13 +16,13 @@ var Post = React.createClass({
     var crossposted = post.crossposted
     var body = { __html: post.html }
     return (
-      <div className='py3'>
+      <div className='py2'>
         <div
-          className='prose mb4'
+          className='prose mb3'
           dangerouslySetInnerHTML={body} />
         <CrossPosted links={crossposted} />
         <Issues title={post.title} />
-        <div className='py3'>
+        <div className='mt3'>
           <TweetButton {...this.props} />
         </div>
       </div>
