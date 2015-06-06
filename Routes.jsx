@@ -8,11 +8,11 @@ var Index = require('./components/Index.jsx')
 var Post = require('./components/Post.jsx')
 
 var Routes = (
-  <Route handler={Root} path="/">
+  <Route handler={Root} path='/'>
     <DefaultRoute handler={Index} />
-    <Route name="post" path="/posts/:post" handler={Post} />
+    <Route name='post' path='/posts/:post' handler={Post} />
   </Route>
-);
+)
 
 module.exports = Routes
 

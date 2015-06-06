@@ -1,13 +1,13 @@
 
-var React = require('react');
-var Jxnblk = require('jxnblk-avatar');
+var React = require('react')
+var Jxnblk = require('jxnblk-avatar')
 
 var Footer = React.createClass({
 
-  render: function() {
+  render: function () {
     return (
-      <footer className="center py4 border-top">
-        <a href="/" className="bold link-simple">
+      <footer className='center py4 border-top'>
+        <a href='/' className='bold link-simple'>
           <Jxnblk size={48} />
           <div>Made by Jxnblk</div>
         </a>
@@ -15,7 +15,7 @@ var Footer = React.createClass({
     )
   }
 
-});
+})
 
-module.exports = Footer;
+module.exports = Footer
 

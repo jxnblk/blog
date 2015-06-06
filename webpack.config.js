@@ -1,6 +1,6 @@
 
-var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
-var data = require('./data');
+var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin')
+var data = require('./data')
 
 module.exports = {
 
@@ -15,7 +15,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx$/, loader: 'jsx-loader' },
-      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.json$/, loader: 'json-loader' }
     ]
   },
 
@@ -23,5 +23,5 @@ module.exports = {
     new StaticSiteGeneratorPlugin('bundle.js', data.routes, data)
   ]
 
-};
+}
 

@@ -1,14 +1,13 @@
 ---
 title: Static Site Generation with React and Webpack
-created: 05-19-2015
-draft: true
+created: 06-06-2015
 ---
 
-I've been dabbling with React for a few months now and using it in several small open source projects
+I’ve been dabbling with React for a few months now and using it in several small open source projects
 to better understand the technology.
 React’s focus on reusablility, along with the ability to install and require components via npm,
 provides an elegant way to rapidly build application UI in an efficient and consistent way.
-It's also a great way to handle server-side rendering and provides high cohesion between markup and display logic.
+It’s also a great way to handle server-side rendering and provides high cohesion between markup and display logic.
 
 ## Why
 
@@ -19,14 +18,14 @@ With a static React site, the page loads just like any other static HTML,
 and the JavaScript kicks in whenever it’s downloaded.
 This is extremely helpful for combining documentation with interactive demonstrations,
 like [Colorable](http://jxnblk.com/colorable) or [Building SVG Icons with React](http://jxnblk.com/react-icons).
-Using React along with something like webpack also allows you to consolidate the entire build process 
+Using React with webpack also allows you to consolidate the entire build process 
 in Node and take advantage of anything in the npm ecosystem.
-And, lastly, React is just fun to use.
+Last but not least, React is just fun to use.
 
 ## How
 
 Although there are several ways to render static sites with React,
-the following is what I've found to be easiest.
+the following is what I’ve found to be easiest.
 
 First start a fresh project and initialize npm.
 
@@ -81,7 +80,8 @@ module.exports = {
 
 ## Create an Entry File
 
-The entry file is what webpack will read to build the bundle, and that is what the static-site-generator-webpack-plugin will use to generate HTML.
+The entry file is what webpack will read to build `bundle.js`,
+and the static-site-generator-webpack-plugin uses the bundle to generate HTML.
 
 For a single rendered page, you can skip React Router and create an `entry.js` file like the following.
 
@@ -92,8 +92,8 @@ var Root = require('./components/Root.jsx')
 
 module.exports = function render(locals, callback) {
   var html = React.renderToStaticMarkup(React.createElement(Root, locals))
-  callback(null, '<!DOCTYPE html>'+html)
-};
+  callback(null, '<!DOCTYPE html>' + html)
+}
 ```
 
 For handling multiple routes, update the entry file using React Router and create a `Routes.jsx` file.
@@ -105,9 +105,9 @@ var Router = require('react-router')
 var Routes = require('./Routes.jsx')
 
 module.exports = function render(locals, callback) {
-  Router.run(Routes, locals.path, function(Handler) {
+  Router.run(Routes, locals.path, function (Handler) {
     var html = React.renderToStaticMarkup(React.createElement(Handler, locals))
-    callback(null, '<!DOCTYPE html>'+html)
+    callback(null, '<!DOCTYPE html>' + html)
   })
 }
 ```
@@ -122,10 +122,10 @@ var Root = require('./components/Root.jsx')
 var Index = require('./components/Index.jsx')
 
 var Routes = (
-  <Route handler={Root} path="/">
+  <Route handler={Root} path='/'>
     <DefaultRoute handler={Index} />
   </Route>
-);
+)
 
 module.exports = Routes
 ```
@@ -147,17 +147,17 @@ module.exports = {
 ## Create Root.jsx
 
 The Root component will include the `<html>` element, `<head>` and other code that will be shared across all pages.
-The `<RouteHandler>` component will handle the different routes.
+The page components themselves will be passed through the `<RouteHander>` component with React Router.
 To keep things somewhat organized, create this file in a new `components` directory.
 
 ```js
 // components/Root.jsx
 var React = require('react')
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
+var Router = require('react-router')
+var RouteHandler = Router.RouteHandler
 
 var Root = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <html>
         <head>
@@ -183,7 +183,7 @@ The Index component will be the page rendered with `<DefaultRoute>` and should c
 var React = require('react')
 
 var Index = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <main>
         Index component
@@ -245,11 +245,11 @@ var Index = require('./components/Index.jsx')
 var About = require('./components/About.jsx')
 
 var Routes = (
-  <Route handler={Root} path="/">
+  <Route handler={Root} path='/'>
     <DefaultRoute handler={Index} />
-    <Route path="/about" handler={About} />
+    <Route path='/about' handler={About} />
   </Route>
-);
+)
 
 module.exports = Routes
 ```
@@ -261,7 +261,7 @@ Create a new `About.jsx` component.
 var React = require('react')
 
 var About = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <main>
         About component
@@ -286,7 +286,7 @@ Stop the development server and run `npm run webpack`. This should generate two 
 
 ## Adding Client-Size JS
 
-In order to use React for client side JavaScript, you'll need to ensure that the props match up between the static page and the bundle.js file.
+In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.
 
 First, edit `entry.js` to change the render function
 from `React.renderToStaticMarkup` to `React.renderString`
@@ -299,16 +299,16 @@ var Router = require('react-router')
 var Routes = require('./Routes.jsx')
 
 if (typeof document !== 'undefined') {
-  var initialProps = JSON.parse(document.getElementById('initial-props').innerHTML);
-  Router.run(Routes, Router.HistoryLocation, function(Handler) {
-    React.render(React.createElement(Handler, initialProps), document);
+  var initialProps = JSON.parse(document.getElementById('initial-props').innerHTML)
+  Router.run(Routes, Router.HistoryLocation, function (Handler) {
+    React.render(React.createElement(Handler, initialProps), document)
   })
 }
 
 module.exports = function render(locals, callback) {
-  Router.run(Routes, locals.path, function(Handler) {
+  Router.run(Routes, locals.path, function (Handler) {
     var html = React.renderToString(React.createElement(Handler, locals))
-    callback(null, '<!DOCTYPE html>'+html)
+    callback(null, '<!DOCTYPE html>' + html)
   })
 }
 ```
@@ -322,7 +322,7 @@ var Router = require('react-router')
 var RouteHandler = Router.RouteHandler
 
 var Root = React.createClass({
-  render: function() {
+  render: function () {
     var initialProps = {
       __html: safeStringify(this.props)
     }
@@ -335,10 +335,10 @@ var Root = React.createClass({
         <body>
           <RouteHandler {...this.props} />
           <script
-            id="initial-props"
-            type="application/json"
+            id='initial-props'
+            type='application/json'
             dangerouslySetInnerHTML={initialProps} />
-          <script src="bundle.js" />
+          <script src='bundle.js' />
         </body>
       </html>
     )
@@ -361,11 +361,11 @@ To link the pages together, create a new Header component.
 var React = require('react')
 
 var Header = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <header>
-        <a href="/">Index</a>
-        <a href="/about">About</a>
+        <a href='/'>Index</a>
+        <a href='/about'>About</a>
       </header>
     )
   }
@@ -384,7 +384,7 @@ var RouteHandler = Router.RouteHandler
 var Header = require('./Header.jsx')
 
 var Root = React.createClass({
-  render: function() {
+  render: function () {
     var initialProps = {
       __html: safeStringify(this.props)
     }
@@ -398,10 +398,10 @@ var Root = React.createClass({
           <Header />
           <RouteHandler {...this.props} />
           <script
-            id="initial-props"
-            type="application/json"
+            id='initial-props'
+            type='application/json'
             dangerouslySetInnerHTML={initialProps} />
-          <script src="bundle.js" />
+          <script src='bundle.js' />
         </body>
       </html>
     )
@@ -420,7 +420,7 @@ module.exports = Root
 React router can also do client-side routing using the Link component.
 This can make transitioning pages feel faster.
 
-To use client-side routing, replace the anchor links in the Header with React Routers's Link components.
+To use client-side routing, replace the anchor links in the Header with React Routers’s Link components.
 
 ```js
 // components/Header.jsx
@@ -429,11 +429,11 @@ var Router = require('react-router')
 var Link = Router.Link
 
 var Header = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <header>
-        <Link to="/">Index</Link>
-        <Link to="/about">About</Link>
+        <Link to='/'>Index</Link>
+        <Link to='/about'>About</Link>
       </header>
     )
   }
@@ -492,7 +492,7 @@ and add some padding to the body.
 ```js
 // components/Root.jsx
   // ...
-  render: function() {
+  render: function () {
     var initialProps = {
       __html: safeStringify(this.props)
     }
@@ -506,14 +506,14 @@ and add some padding to the body.
           <title>{this.props.title}</title>
           <style dangerouslySetInnerHTML={css} />
         </head>
-        <body className="p2">
+        <body className='p2'>
           <Header />
           <RouteHandler {...this.props} />
           <script
-            id="initial-props"
-            type="application/json"
+            id='initial-props'
+            type='application/json'
             dangerouslySetInnerHTML={initialProps} />
-          <script src="bundle.js" />
+          <script src='bundle.js' />
         </body>
       </html>
     )
@@ -529,13 +529,13 @@ or check out the
 
 ## Other Considerations and Improvements
 
-Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven't tried this so your mileage may vary.
+Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven’t tried this so your mileage may vary.
 
-If you're hosting the static site on gh-pages, you'll need a way to handle the base url when using React Router's Link component.
+If you’re hosting the static site on gh-pages, you’ll need a way to handle the base url when using React Router’s Link component.
 
-Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag, and I'm not sure if there's a better way to handle that.
+Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag, and I’m not sure if there’s a better way to handle that.
 
-This is just one way that I've found works for building static sites with React. If you've seen other ways or have any suggestions for improving on this, I'd love to hear them.
+This is just one way that I’ve found works for building static sites with React. If you’ve seen other ways or have any suggestions for improving on this, I’d love to hear them.
 
 
 

@@ -4,12 +4,12 @@ var highlight = require('highlight.js')
 
 var renderer = new marked.Renderer()
 
-renderer.code = function(code, lang) {
+renderer.code = function (code, lang) {
 
   var result = [
     '<pre>',
     highlight.highlightAuto(code, [lang]).value,
-    '</pre>',
+    '</pre>'
   ].join('')
 
   return result

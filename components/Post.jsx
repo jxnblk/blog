@@ -1,34 +1,35 @@
 
-var _ = require('lodash');
-var React = require('react');
-var CrossPosted = require('./CrossPosted.jsx');
+var React = require('react')
+var CrossPosted = require('./CrossPosted.jsx')
+var Issues = require('./Issues.jsx')
+var TweetButton = require('./TweetButton.jsx')
 
 var Post = React.createClass({
 
-  render: function() {
-    var slug = this.props.params.post;
-    var post = _.find(this.props.posts, function(post){
-      return post.slug === slug;
-    });
-    var crossposted = post.crossposted;
-    var body = { __html: post.html };
-    var date = new Date(post.created).toDateString();
+  propTypes: {
+    params: React.PropTypes.object,
+    posts: React.PropTypes.array
+  },
+
+  render: function () {
+    var post = this.props.post
+    var crossposted = post.crossposted
+    var body = { __html: post.html }
     return (
-      <div className="py3 mb4">
-        {/*
-        <div className="h5 bold">{date}</div>
-        <h1 className="m0">{post.title}</h1>
-        <h2 className="mt0">{post.subhead}</h2>
-        */}
+      <div className='py3'>
         <div
-          className="prose mb4"
+          className='prose mb4'
           dangerouslySetInnerHTML={body} />
         <CrossPosted links={crossposted} />
+        <Issues title={post.title} />
+        <div className='py3'>
+          <TweetButton {...this.props} />
+        </div>
       </div>
     )
   }
 
-});
+})
 
-module.exports = Post;
+module.exports = Post
 

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
+    "standard": "standard",
     "webpack": "webpack --progress --colors",
     "prod": "webpack -p --progress --colors",
     "dev": "webpack-dev-server --progress --colors",
@@ -39,11 +40,10 @@
     "react-router": "^0.13.3",
     "static-site-generator-webpack-plugin": "^1.0.0",
     "webpack": "^1.9.7",
-    "webpack-dev-server": "^1.8.2"
-  },
-  "devDependencies": {
+    "webpack-dev-server": "^1.8.2",
     "basscss-highlight": "^0.1.0",
     "highlight.js": "^8.6.0",
-    "jxnblk-avatar": "git://github.com/jxnblk/avatar"
-  }
+    "standard": "^4.0.1"
+  },
+  "devDependencies": {}
 }
