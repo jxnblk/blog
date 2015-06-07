@@ -13,6 +13,7 @@ var Body = React.createClass({
         <Header {...this.props} />
         <RouteHandler {...this.props} />
         <Footer {...this.props} />
+        <script dangerouslySetInnerHTML={{ __html: this.props.gaScript }} />
       </body>
     )
   }
