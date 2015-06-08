@@ -1,4 +1,13 @@
 
+@import "basscss-base-reset";
+@import "basscss-base-typography";
+@import "basscss-color-base";
+@import "basscss-utility-typography";
+@import "basscss-utility-layout";
+@import "basscss-white-space";
+@import "basscss-highlight";
+@import "basscss-defaults";
+
 pre {
   padding: var(--space-2);
   border-radius: var(--border-radius);
@@ -49,5 +58,18 @@ code {
 
 :root {
   --serif: Georgia, serif;
+  --h4: 1.125rem;
+  --line-height: 1.625;
+  --bold-font-weight: 500;
+  --heading-font-weight: var(--bold-font-weight);
+  --button-font-weight: var(--bold-font-weight);
+  --button-font-size: var(--h5);
+  --space-1: .75rem;
+  --space-2: 1.5rem;
+  --space-3: 3rem;
+  --space-4: 6rem;
+  --link-color: inherit;
+  --link-text-decoration: underline;
+  --container-width: 48em;
 }
 

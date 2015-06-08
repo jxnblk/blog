@@ -454,6 +454,10 @@ Although there are many different approaches to styling components in React,
 adding some critical CSS base styles to the head can help speed up performance and development time.
 You can skip this step if you prefer using inline styles or linking to a larger stylesheet.
 
+UPDATE: Using css-loader and cssnext-loader for handling critical CSS seems to be a slightly better approach, since it avoids 
+- json
+- reload in dev server
+
 First install <a href="http://basscss.com" target="_blank">Basscss</a>
 and <a href="http://cssnext.io/" target="_blank">cssnext</a>.
 

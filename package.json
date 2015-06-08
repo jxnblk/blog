@@ -26,12 +26,16 @@
     "basscss-color-base": "^1.4.0",
     "basscss-defaults": "^2.0.1",
     "basscss-grid": "^1.0.2",
+    "basscss-highlight": "^0.1.0",
     "basscss-utility-layout": "^1.1.0",
     "basscss-utility-typography": "^1.1.0",
     "basscss-white-space": "^1.0.1",
     "cheerio": "^0.19.0",
+    "css-loader": "^0.14.4",
     "cssnext": "^1.4.0",
+    "cssnext-loader": "^1.0.1",
     "front-matter": "^1.0.0",
+    "highlight.js": "^8.6.0",
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.13.2",
     "jxnblk-avatar": "git://github.com/jxnblk/avatar.git",
@@ -40,12 +44,13 @@
     "node-libs-browser": "^0.5.0",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
+    "standard": "^4.0.1",
     "static-site-generator-webpack-plugin": "^1.0.0",
     "webpack": "^1.9.7",
-    "webpack-dev-server": "^1.8.2",
-    "basscss-highlight": "^0.1.0",
-    "highlight.js": "^8.6.0",
-    "standard": "^4.0.1"
+    "webpack-dev-server": "^1.8.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "css-loader": "^0.14.4",
+    "cssnext-loader": "^1.0.1"
+  }
 }

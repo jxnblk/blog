@@ -1,6 +1,8 @@
 
 var React = require('react')
 
+var bass = require('../css/base.css')
+
 var Head = React.createClass({
 
   propTypes: {
@@ -24,7 +26,7 @@ var Head = React.createClass({
         <meta name='author' content={this.props.author} />
         <meta name='keywords' content={keywords.join()} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
+        <style dangerouslySetInnerHTML={{ __html: bass }} />
       </head>
     )
   }

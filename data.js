@@ -41,41 +41,6 @@ module.exports = {
   description: pkg.description,
   author: pkg.author,
   keywords: pkg.keywords,
-  css: cssnext([
-    '@import "basscss-base-reset";',
-    '@import "basscss-base-typography";',
-    '@import "basscss-color-base";',
-    '@import "basscss-utility-typography";',
-    '@import "basscss-utility-layout";',
-    '@import "basscss-white-space";',
-    '@import "basscss-highlight";',
-    '@import "site";',
-    '@import "basscss-defaults";'
-  ].join('\n'), {
-    compress: true,
-    features: {
-      rem: false,
-      pseudoElements: false,
-      colorRgba: false,
-      customProperties: {
-        variables: {
-          'h4': '1.125rem',
-          'line-height': '1.625',
-          'heading-font-weight': '500',
-          'button-font-weight': '500',
-          'bold-font-weight': '500',
-          'space-1': '.75rem',
-          'space-2': '1.5rem',
-          'space-3': '3rem',
-          'space-4': '6rem',
-          'link-color': 'inherit',
-          'link-text-decoration': 'underline',
-          'button-font-size': 'var(--h5)',
-          'container-width': '48em'
-        }
-      }
-    }
-  }),
   posts: posts,
   routes: routes,
   baseUrl: '/writing/',
