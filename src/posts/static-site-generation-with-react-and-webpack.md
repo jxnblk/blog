@@ -6,6 +6,9 @@ tags:
   - webpack
   - static-site
   - tutorial
+related:
+  - name: 'Building SVG Icons with React'
+    href: 'http://jxnblk.com/react-icons'
 ---
 
 I’ve been dabbling with React for a few months now and using it in several small open source projects
@@ -454,67 +457,94 @@ Although there are many different approaches to styling components in React,
 adding some critical CSS base styles to the head can help speed up performance and development time.
 You can skip this step if you prefer using inline styles or linking to a larger stylesheet.
 
-UPDATE: Using css-loader and cssnext-loader for handling critical CSS seems to be a slightly better approach, since it avoids 
-- json
-- reload in dev server
+_UPDATE: Originally, this tutorial showed how to include CSS using props.
+Using a combination of css-loader and cssnext-loader seems to be a better solution
+as it doesn't require restarting the server when making changes to the stylesheet
+and doesn't duplicate the CSS in the `initialProps` JSON object._
 
-First install <a href="http://basscss.com" target="_blank">Basscss</a>
-and <a href="http://cssnext.io/" target="_blank">cssnext</a>.
+
+First install <a href="http://basscss.com" target="_blank">Basscss</a>,
+<a href="https://github.com/webpack/css-loader" target="_blank">css-loader</a>,
+and <a href="https://github.com/cssnext/cssnext-loader" target="_blank">cssnext-loader</a>.
 
 ```bash
-npm i --save-dev basscss cssnext
+npm i --save-dev basscss css-loader cssnext-loader
 ```
 
-Open `data.js` and use cssnext to compile Basscss.
+Add css-loader and cssnext-loader to the webpack config as well as options for cssnext.
 
 ```js
-// data.js
-var cssnext = require('cssnext')
+// webpack.config.js
+var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin')
+var data = require('./data')
 
 module.exports = {
-  title: 'My Static Site',
-  routes: [
-    '/',
-    '/about'
+  entry: './entry.js',
+
+  output: {
+    filename: 'bundle.js',
+    path: __dirname,
+    libraryTarget: 'umd'
+  },
+
+  module: {
+    loaders: [
+      { test: /\.jsx$/, loader: 'jsx-loader' },
+      { test: /\.css/, loader: 'css-loader!cssnext-loader' }
+    ]
+  },
+
+  plugins: [
+    new StaticSiteGeneratorPlugin('bundle.js', data.routes, data)
   ],
-  css: cssnext('@import "basscss";', {
+
+  cssnext: {
     compress: true,
     features: {
       rem: false,
-      colorRgba: false,
-      customProperties: {
-        variables: {
-          'font-family': '"Avenir Next", "Helvetica Neue", Helvetica, sans-serif'
-        }
-      },
+      pseudoElements: false,
+      colorRgba: false
     }
-  })
+  }
+
 }
 ```
 
-In the cssnext configuration options, the output is compressed,
-the rem and colorRgba postcss plugins have been disabled,
-and the font-family has been set in the postcss-custom-properties plugin.
+In the cssnext configuration options, the output is compressed and the rem and colorRgba postcss plugins have been disabled.
 
-Next, add a style tag in the head of the Root component
-and add some padding to the body.
+Create a new `css` directory and a `base.css` file.
+Import Basscss and set a new value for the `--font-family` custom property.
+
+```css
+/* css/base.css */
+@import 'basscss';
+
+:root {
+  --font-family: 'Avenier Next', 'Hevletica Neue', sans-serif;
+}
+```
+
+In the Root component, import the stylesheet, add a style tag to the head, and add some padding to the body.
 
 ```js
 // components/Root.jsx
-  // ...
+var React = require('react')
+var Router = require('react-router')
+var RouteHandler = Router.RouteHandler
+var Header = require('./Header.jsx')
+var css = require('../css/base.css')
+
+var Root = React.createClass({
   render: function () {
     var initialProps = {
       __html: safeStringify(this.props)
-    }
-    var css = {
-      __html: this.props.css
     }
 
     return (
       <html>
         <head>
           <title>{this.props.title}</title>
-          <style dangerouslySetInnerHTML={css} />
+          <style dangerouslySetInnerHTML={{ __html: css }} />
         </head>
         <body className='p2'>
           <Header />
@@ -528,8 +558,17 @@ and add some padding to the body.
       </html>
     )
   }
-  // ...
+})
+
+function safeStringify(obj) {
+  return JSON.stringify(obj).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--')
+}
+
+module.exports = Root
 ```
+
+Restart the dev server to see the changes.
+
 
 You should now have a basic static site rendered with React.
 For a complete example, see the
@@ -547,8 +586,8 @@ This could make handling lots of pages easier.
 If you’re hosting the static site on gh-pages, you’ll need a way to handle the base url when using React Router’s Link component.
 I don’t know of a good way to do this yet and would love to hear suggestions on how to improve that.
 
-Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag,
-and I’m not sure if there’s a better way to handle that.
+~~Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag,
+and I’m not sure if there’s a better way to handle that.~~
 
 This is just one way to build static sites with React.
 You might also be interested in Brad Denver’s blog post <a href="http://braddenver.com/blog/2015/react-static-site.html" target="_blank">React Static Site</a>.

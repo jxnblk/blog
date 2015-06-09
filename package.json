@@ -48,9 +48,5 @@
     "static-site-generator-webpack-plugin": "^1.0.0",
     "webpack": "^1.9.7",
     "webpack-dev-server": "^1.8.2"
-  },
-  "devDependencies": {
-    "css-loader": "^0.14.4",
-    "cssnext-loader": "^1.0.1"
   }
 }
