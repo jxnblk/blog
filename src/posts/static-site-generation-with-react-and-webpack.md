@@ -289,7 +289,7 @@ React-router can also handle route params such as `posts/:id` for dynamic routin
 
 Stop the development server and run `npm run webpack`. This should generate two static `index.html` files in the root and `about` directories.
 
-## Adding Client-Size JS
+## Adding Client-Side JS
 
 In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.
 
