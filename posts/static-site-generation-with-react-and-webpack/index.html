@@ -1,10 +1,9 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Static Site Generation with React and Webpack | jxnblk.com/writing</title><meta name="description" content="Thoughts on Design, Minimalism, and the Web"><meta name="author" content="Brent Jackson"><meta name="keywords" content="blog,writing,design,minimalism,react,webpack,static-site,tutorial"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body,h1,h2,h3,h4,h5,h6{font-family:Helvetica Neue,Helvetica,sans-serif}dl,ol,p,pre,ul{margin-top:0;margin-bottom:1.5rem}a,a:hover{text-decoration:underline}.nowrap,.truncate{white-space:nowrap}.fit,.truncate,img{max-width:100%}body{margin:0;line-height:1.625;font-size:100%;color:#111;background-color:#fff}svg{max-height:100%}h1,h2,h3,h4,h5,h6{font-weight:500;line-height:1.25;margin-top:1em;margin-bottom:.5em}dl,ol,p,ul{font-size:1.125rem}code,pre,samp{font-family:Source Code Pro,Consolas,monospace;font-size:inherit}pre{overflow-x:scroll}.overflow-hidden,.truncate{overflow:hidden}blockquote{margin:3rem 0;padding:0 1.5rem}blockquote,blockquote p{font-size:1.25rem;font-style:italic}.h1,h1{font-size:2rem}.h2,h2{font-size:1.5rem}.h3,h3{font-size:1.25rem}.h4,.prose,.serif,h4{font-size:1.125rem}.h5,h5{font-size:.875rem}.h6,h6{font-size:.75rem}.list-reset{list-style:none;padding-left:0}a{color:inherit}code,pre{background-color:transparent;border-radius:3px}hr{margin-top:3rem;margin-bottom:3rem;border:0;border-bottom-style:solid;border-bottom-width:1px;border-bottom-color:rgba(0,0,0,.125)}.border,.button:focus{border-color:rgba(0,0,0,.125)}.button,.rounded{border-radius:3px}.button{color:#fff;background-color:#0074d9}.button:hover{box-shadow:inset 0 0 0 20rem rgba(0,0,0,.0625)}.button:focus{outline:0;box-shadow:0 0 0 3px rgba(0,0,0,.25)}.button.is-active,.button:active{box-shadow:inset 0 0 0 20rem rgba(0,0,0,.125),inset 0 3px 4px 0 rgba(0,0,0,.25),0 0 1px rgba(0,0,0,.125)}.button.is-disabled,.button:disabled{opacity:.5}.bold{font-weight:700;font-weight:500}.regular{font-weight:400}.italic{font-style:italic}.caps{text-transform:uppercase;letter-spacing:.2em}.left-align{text-align:left}.center{text-align:center}.right-align{text-align:right}.justify{text-align:justify}.break-word{word-wrap:break-word}.truncate{text-overflow:ellipsis}.inline{display:inline}.block{display:block}.inline-block{display:inline-block}.table{display:table}.table-cell{display:table-cell}.overflow-scroll{overflow:scroll}.overflow-auto{overflow:auto}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix:after{clear:both}.left{float:left}.right{float:right}.half-width{width:50%}.full-width{width:100%}.m0{margin:0}.mt0{margin-top:0}.mr0{margin-right:0}.mb0{margin-bottom:0}.ml0{margin-left:0}.m1{margin:.75rem}.mt1{margin-top:.75rem}.mr1{margin-right:.75rem}.mb1{margin-bottom:.75rem}.ml1{margin-left:.75rem}.m2{margin:1.5rem}.mt2{margin-top:1.5rem}.mr2{margin-right:1.5rem}.mb2{margin-bottom:1.5rem}.ml2{margin-left:1.5rem}.m3{margin:3rem}.mt3{margin-top:3rem}.mr3{margin-right:3rem}.mb3{margin-bottom:3rem}.ml3{margin-left:3rem}.m4{margin:6rem}.mt4{margin-top:6rem}.mr4{margin-right:6rem}.mb4{margin-bottom:6rem}.ml4{margin-left:6rem}.mxn1{margin-left:-.75rem;margin-right:-.75rem}.mxn2{margin-left:-1.5rem;margin-right:-1.5rem}.mxn3{margin-left:-3rem;margin-right:-3rem}.mxn4{margin-left:-6rem;margin-right:-6rem}.container,.mx-auto{margin-right:auto;margin-left:auto}.p1{padding:.75rem}.py1{padding-top:.75rem;padding-bottom:.75rem}.px1{padding-left:.75rem;padding-right:.75rem}.p2{padding:1.5rem}.py2{padding-top:1.5rem;padding-bottom:1.5rem}.px2{padding-left:1.5rem;padding-right:1.5rem}.p3{padding:3rem}.py3{padding-top:3rem;padding-bottom:3rem}.px3{padding-left:3rem;padding-right:3rem}.p4{padding:6rem}.py4{padding-top:6rem;padding-bottom:6rem}.px4{padding-left:6rem;padding-right:6rem}.hljs{-webkit-text-size-adjust:none}.diff .hljs-header,.hljs-comment,.hljs-javadoc{color:#aaa;font-style:italic}.css .rule .hljs-keyword,.hljs-keyword,.hljs-request,.hljs-status,.hljs-subst,.hljs-winutils,.nginx .hljs-title{color:#111;font-weight:700}.hljs-hexcolor,.hljs-number,.ruby .hljs-constant{color:#3d9970}.hljs-dartdoc,.hljs-phpdoc,.hljs-string,.hljs-tag .hljs-value,.tex .hljs-formula{color:#ff4136}.hljs-id,.hljs-title,.scss .hljs-preprocessor{color:#ff4136;font-weight:700}.hljs-list .hljs-keyword,.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type,.tex .hljs-command,.vhdl .hljs-literal{color:#001f3f;font-weight:700}.django .hljs-tag .hljs-keyword,.hljs-rules .hljs-property,.hljs-tag,.hljs-tag .hljs-title{color:#001f3f;font-weight:400}.hljs-attribute,.hljs-regexp,.hljs-variable,.lisp .hljs-body{color:#3d9970}.clojure .hljs-keyword,.hljs-prompt,.hljs-symbol,.lisp .hljs-keyword,.ruby .hljs-symbol .hljs-string,.scheme .hljs-keyword,.tex .hljs-special{color:#b10dc9}.hljs-built_in{color:#001f3f}.hljs-cdata,.hljs-doctype,.hljs-pi,.hljs-pragma,.hljs-preprocessor,.hljs-shebang{color:#aaa;font-weight:700}.hljs-deletion{background:#f012be}.hljs-addition{background:#01ff70}.diff .hljs-change{background:#001f3f}.hljs-chunk{color:#ddd}.border{border-style:solid;border-width:1px}.border-top{border-top-style:solid;border-top-width:1px;border-top-color:rgba(0,0,0,.125)}.border-right{border-right-style:solid;border-right-width:1px;border-right-color:rgba(0,0,0,.125)}.border-bottom{border-bottom-style:solid;border-bottom-width:1px;border-bottom-color:rgba(0,0,0,.125)}.border-left{border-left-style:solid;border-left-width:1px;border-left-color:rgba(0,0,0,.125)}.circle{border-radius:50%}.rounded-top{border-radius:3px 3px 0 0}.rounded-right{border-radius:0 3px 3px 0}.rounded-bottom{border-radius:0 0 3px 3px}.rounded-left{border-radius:3px 0 0 3px}.not-rounded{border-radius:0}pre{padding:1.5rem;border-radius:3px;background-color:rgba(0,0,0,.0625)}code{color:#001f3f;background-color:rgba(127,219,255,.125)}.container{max-width:48rem}.link-simple{text-decoration:none}.prose,.serif{font-family:Georgia,serif}.prose dl,.prose ol,.prose p,.prose ul{font-size:inherit}.prose code{font-size:87.5%}.prose pre{font-size:75%}.prose p:first-child{font-size:1.25rem}@media(min-width:40em){.prose,.serif{font-size:1.25rem}.prose p:first-child{font-size:1.5rem}}</style></head><body class="container px2"><header class="py3"><h1 class="h3 m0"><a href="/writing" class="link-simple">jxnblk.com/writing</a></h1><div><h1 class="mt1 mb0">Static Site Generation with React and Webpack</h1><div class="h5 bold">Sat Jun 06 2015</div></div></header><div class="py2"><div class="prose mb3"><p>I’ve been dabbling with React for a few months now and using it in several small open source projects
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Static Site Generation with React and Webpack | jxnblk.com/writing</title><meta name="description" content="Thoughts on Design, Minimalism, and the Web"><meta name="author" content="Brent Jackson"><meta name="keywords" content="blog,writing,design,minimalism,react,webpack,static-site,tutorial"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body,h1,h2,h3,h4,h5,h6{font-family:Helvetica Neue,Helvetica,sans-serif}dl,ol,p,pre,ul{margin-top:0;margin-bottom:1.5rem}a,a:hover{text-decoration:underline}.nowrap,.truncate{white-space:nowrap}.fit,.truncate,img{max-width:100%}body{margin:0;line-height:1.625;font-size:100%;color:#111;background-color:#fff}svg{max-height:100%}h1,h2,h3,h4,h5,h6{font-weight:500;line-height:1.25;margin-top:1em;margin-bottom:.5em}dl,ol,p,ul{font-size:1.125rem}code,pre,samp{font-family:Source Code Pro,Consolas,monospace;font-size:inherit}pre{overflow-x:scroll}.overflow-hidden,.truncate{overflow:hidden}blockquote{margin:3rem 0;padding:0 1.5rem}blockquote,blockquote p{font-size:1.25rem;font-style:italic}.h1,h1{font-size:2rem}.h2,h2{font-size:1.5rem}.h3,h3{font-size:1.25rem}.h4,.prose,.serif,h4{font-size:1.125rem}.h5,h5{font-size:.875rem}.h6,h6{font-size:.75rem}.list-reset{list-style:none;padding-left:0}a{color:inherit}code,pre{background-color:transparent;border-radius:3px}hr{margin-top:3rem;margin-bottom:3rem;border:0;border-bottom-style:solid;border-bottom-width:1px;border-bottom-color:rgba(0,0,0,.125)}.border,.button:focus{border-color:rgba(0,0,0,.125)}.button,.rounded{border-radius:3px}.button{color:#fff;background-color:#0074d9}.button:hover{box-shadow:inset 0 0 0 20rem rgba(0,0,0,.0625)}.button:focus{outline:0;box-shadow:0 0 0 3px rgba(0,0,0,.25)}.button.is-active,.button:active{box-shadow:inset 0 0 0 20rem rgba(0,0,0,.125),inset 0 3px 4px 0 rgba(0,0,0,.25),0 0 1px rgba(0,0,0,.125)}.button.is-disabled,.button:disabled{opacity:.5}.bold{font-weight:700;font-weight:500}.regular{font-weight:400}.italic{font-style:italic}.caps{text-transform:uppercase;letter-spacing:.2em}.left-align{text-align:left}.center{text-align:center}.right-align{text-align:right}.justify{text-align:justify}.break-word{word-wrap:break-word}.truncate{text-overflow:ellipsis}.inline{display:inline}.block{display:block}.inline-block{display:inline-block}.table{display:table}.table-cell{display:table-cell}.overflow-scroll{overflow:scroll}.overflow-auto{overflow:auto}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix:after{clear:both}.left{float:left}.right{float:right}.half-width{width:50%}.full-width{width:100%}.m0{margin:0}.mt0{margin-top:0}.mr0{margin-right:0}.mb0{margin-bottom:0}.ml0{margin-left:0}.m1{margin:.75rem}.mt1{margin-top:.75rem}.mr1{margin-right:.75rem}.mb1{margin-bottom:.75rem}.ml1{margin-left:.75rem}.m2{margin:1.5rem}.mt2{margin-top:1.5rem}.mr2{margin-right:1.5rem}.mb2{margin-bottom:1.5rem}.ml2{margin-left:1.5rem}.m3{margin:3rem}.mt3{margin-top:3rem}.mr3{margin-right:3rem}.mb3{margin-bottom:3rem}.ml3{margin-left:3rem}.m4{margin:6rem}.mt4{margin-top:6rem}.mr4{margin-right:6rem}.mb4{margin-bottom:6rem}.ml4{margin-left:6rem}.mxn1{margin-left:-.75rem;margin-right:-.75rem}.mxn2{margin-left:-1.5rem;margin-right:-1.5rem}.mxn3{margin-left:-3rem;margin-right:-3rem}.mxn4{margin-left:-6rem;margin-right:-6rem}.container,.mx-auto{margin-right:auto;margin-left:auto}.p1{padding:.75rem}.py1{padding-top:.75rem;padding-bottom:.75rem}.px1{padding-left:.75rem;padding-right:.75rem}.p2{padding:1.5rem}.py2{padding-top:1.5rem;padding-bottom:1.5rem}.px2{padding-left:1.5rem;padding-right:1.5rem}.p3{padding:3rem}.py3{padding-top:3rem;padding-bottom:3rem}.px3{padding-left:3rem;padding-right:3rem}.p4{padding:6rem}.py4{padding-top:6rem;padding-bottom:6rem}.px4{padding-left:6rem;padding-right:6rem}.hljs{-webkit-text-size-adjust:none}.diff .hljs-header,.hljs-comment,.hljs-javadoc{color:#aaa;font-style:italic}.css .rule .hljs-keyword,.hljs-keyword,.hljs-request,.hljs-status,.hljs-subst,.hljs-winutils,.nginx .hljs-title{color:#111;font-weight:700}.hljs-hexcolor,.hljs-number,.ruby .hljs-constant{color:#3d9970}.hljs-dartdoc,.hljs-phpdoc,.hljs-string,.hljs-tag .hljs-value,.tex .hljs-formula{color:#ff4136}.hljs-id,.hljs-title,.scss .hljs-preprocessor{color:#ff4136;font-weight:700}.hljs-list .hljs-keyword,.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type,.tex .hljs-command,.vhdl .hljs-literal{color:#001f3f;font-weight:700}.django .hljs-tag .hljs-keyword,.hljs-rules .hljs-property,.hljs-tag,.hljs-tag .hljs-title{color:#001f3f;font-weight:400}.hljs-attribute,.hljs-regexp,.hljs-variable,.lisp .hljs-body{color:#3d9970}.clojure .hljs-keyword,.hljs-prompt,.hljs-symbol,.lisp .hljs-keyword,.ruby .hljs-symbol .hljs-string,.scheme .hljs-keyword,.tex .hljs-special{color:#b10dc9}.hljs-built_in{color:#001f3f}.hljs-cdata,.hljs-doctype,.hljs-pi,.hljs-pragma,.hljs-preprocessor,.hljs-shebang{color:#aaa;font-weight:700}.hljs-deletion{background:#f012be}.hljs-addition{background:#01ff70}.diff .hljs-change{background:#001f3f}.hljs-chunk{color:#ddd}.border{border-style:solid;border-width:1px}.border-top{border-top-style:solid;border-top-width:1px;border-top-color:rgba(0,0,0,.125)}.border-right{border-right-style:solid;border-right-width:1px;border-right-color:rgba(0,0,0,.125)}.border-bottom{border-bottom-style:solid;border-bottom-width:1px;border-bottom-color:rgba(0,0,0,.125)}.border-left{border-left-style:solid;border-left-width:1px;border-left-color:rgba(0,0,0,.125)}.circle{border-radius:50%}.rounded-top{border-radius:3px 3px 0 0}.rounded-right{border-radius:0 3px 3px 0}.rounded-bottom{border-radius:0 0 3px 3px}.rounded-left{border-radius:3px 0 0 3px}.not-rounded{border-radius:0}pre{padding:1.5rem;border-radius:3px;background-color:rgba(0,0,0,.0625)}code{color:#001f3f;background-color:rgba(127,219,255,.125)}h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{text-decoration:none}h1 a:hover,h2 a:hover,h3 a:hover,h4 a:hover,h5 a:hover,h6 a:hover{text-decoration:underline}.container{max-width:48rem}.link-simple{text-decoration:none}.prose,.serif{font-family:Georgia,serif}.prose dl,.prose ol,.prose p,.prose ul{font-size:inherit}.prose code{font-size:87.5%}.prose pre{font-size:75%}.prose p:first-child{font-size:1.25rem}@media(min-width:40em){.prose,.serif{font-size:1.25rem}.prose p:first-child{font-size:1.5rem}}</style></head><body class="container px2"><header class="py3"><h1 class="h3 m0"><a href="/writing" class="link-simple">jxnblk.com/writing</a></h1><div><h1 class="mt1 mb0">Static Site Generation with React and Webpack</h1><div class="h5 bold">Sat Jun 06 2015</div></div></header><div class="py2"><div class="prose mb3"><p>I’ve been dabbling with React for a few months now and using it in several small open source projects
 to better understand the technology.
 React’s focus on reusablility, along with the ability to install and require components via npm,
 provides an elegant way to rapidly build application UI in an efficient and consistent way.
 It’s also a great way to handle server-side rendering and provides high cohesion between markup and display logic.</p>
-<h2 id="why">Why</h2>
-<p>React is incredibly intuitive and flexible to work with,
+<h2 id="why"><a href="#why">Why</a></h2><p>React is incredibly intuitive and flexible to work with,
 but relying solely on client side rendering
 leaves a lot to be desired in regards to percieved performance.
 With a static React site, the page loads just like any other static HTML,
@@ -14,8 +13,7 @@ like <a href="http://jxnblk.com/colorable">Colorable</a> or <a href="http://jxnb
 Using React with webpack also allows you to consolidate the entire build process 
 in Node and take advantage of anything in the npm ecosystem.
 Last but not least, React is just fun to use.</p>
-<h2 id="how">How</h2>
-<p>Although there are several ways to render static sites with React,
+<h2 id="how"><a href="#how">How</a></h2><p>Although there are several ways to render static sites with React,
 the following is what I’ve found to be easiest.</p>
 <p>First start a fresh project and initialize npm.</p>
 <pre>mkdir react-static-site
@@ -25,8 +23,7 @@ npm init</pre><p>Install the following modules.</p>
 The jsx-loader is used to transpile imported jsx files. If you prefer ES6, you can use babel-loader instead of jsx-loader.
 The <a href="https://github.com/markdalgleish/static-site-generator-webpack-plugin" target="_blank">static-site-generator-webpack-plugin</a> module is what is used to generate static HTML.
 And <a href="http://rackt.github.io/react-router/" target="_blank">React Router</a> is used to handle routing. For single page static sites, React Router is not needed.</p>
-<h2 id="set-up-webpack">Set up Webpack</h2>
-<p>Webpack is a module bundler similar to Browserify, but can also replace front-end build systems like Grunt and Gulp.</p>
+<h2 id="set-up-webpack"><a href="#set-up-webpack">Set up Webpack</a></h2><p>Webpack is a module bundler similar to Browserify, but can also replace front-end build systems like Grunt and Gulp.</p>
 <p>First off, you’ll need a <code>webpack.config.js</code> file. The webpack command line interface will use this config file.</p>
 <pre><span class="hljs-comment">// webpack.config.js</span>
 <span class="hljs-keyword">var</span> StaticSiteGeneratorPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'static-site-generator-webpack-plugin'</span>)
@@ -50,8 +47,7 @@ And <a href="http://rackt.github.io/react-router/" target="_blank">React Router<
   plugins: [
     <span class="hljs-keyword">new</span> StaticSiteGeneratorPlugin(<span class="hljs-string">'bundle.js'</span>, data.routes, data)
   ]
-}</pre><h2 id="create-an-entry-file">Create an Entry File</h2>
-<p>The entry file is what webpack will read to build <code>bundle.js</code>,
+}</pre><h2 id="create-an-entry-file"><a href="#create-an-entry-file">Create an Entry File</a></h2><p>The entry file is what webpack will read to build <code>bundle.js</code>,
 and the static-site-generator-webpack-plugin uses the bundle to generate HTML.</p>
 <p>For a single rendered page, you can skip React Router and create an <code>entry.js</code> file like the following.</p>
 <pre><span class="hljs-comment">// entry.js with no routing</span>
@@ -86,16 +82,14 @@ and the static-site-generator-webpack-plugin uses the bundle to generate HTML.</
   <span class="hljs-tag">&lt;/<span class="hljs-title">Route</span>&gt;</span>
 )</span>
 
-<span class="hljs-built_in">module</span>.exports = Routes</pre><h2 id="create-a-data-file">Create a Data File</h2>
-<p>Next create a <code>data.js</code> file that will include initial props passed to the Root component and routes used for the router.</p>
+<span class="hljs-built_in">module</span>.exports = Routes</pre><h2 id="create-a-data-file"><a href="#create-a-data-file">Create a Data File</a></h2><p>Next create a <code>data.js</code> file that will include initial props passed to the Root component and routes used for the router.</p>
 <pre><span class="hljs-comment">// data.js</span>
 <span class="hljs-built_in">module</span>.exports = {
   title: <span class="hljs-string">'My Static Site'</span>,
   routes: [
     <span class="hljs-string">'/'</span>
   ]
-}</pre><h2 id="create-root-jsx">Create Root.jsx</h2>
-<p>The Root component will include the <code>&lt;html&gt;</code> element, <code>&lt;head&gt;</code> and other code that will be shared across all pages.
+}</pre><h2 id="create-root-jsx"><a href="#create-root-jsx">Create Root.jsx</a></h2><p>The Root component will include the <code>&lt;html&gt;</code> element, <code>&lt;head&gt;</code> and other code that will be shared across all pages.
 The page components themselves will be passed through the <code>&lt;RouteHander&gt;</code> component with React Router.
 To keep things somewhat organized, create this file in a new <code>components</code> directory.</p>
 <pre><span class="hljs-comment">// components/Root.jsx</span>
@@ -118,8 +112,7 @@ To keep things somewhat organized, create this file in a new <code>components</c
   }
 })
 
-<span class="hljs-built_in">module</span>.exports = Root</pre><h2 id="create-index-jsx">Create Index.jsx</h2>
-<p>The Index component will be the page rendered with <code>&lt;DefaultRoute&gt;</code> and should contain the content for the root <code>index.html</code> file.</p>
+<span class="hljs-built_in">module</span>.exports = Root</pre><h2 id="create-index-jsx"><a href="#create-index-jsx">Create Index.jsx</a></h2><p>The Index component will be the page rendered with <code>&lt;DefaultRoute&gt;</code> and should contain the content for the root <code>index.html</code> file.</p>
 <pre><span class="hljs-comment">// components/Index.jsx</span>
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>)
 
@@ -133,8 +126,7 @@ To keep things somewhat organized, create this file in a new <code>components</c
   }
 })
 
-<span class="hljs-built_in">module</span>.exports = Index</pre><h2 id="package-scripts">Package Scripts</h2>
-<p>Add the following scripts to <code>package.json</code> to run webpack.</p>
+<span class="hljs-built_in">module</span>.exports = Index</pre><h2 id="package-scripts"><a href="#package-scripts">Package Scripts</a></h2><p>Add the following scripts to <code>package.json</code> to run webpack.</p>
 <pre>"scripts": {
   "webpack": "webpack --progress --colors",
   "dev": "webpack-dev-server --progress --colors",
@@ -142,8 +134,7 @@ To keep things somewhat organized, create this file in a new <code>components</c
 }</pre><p>Run the start script to start a development server.</p>
 <pre>npm start</pre><p>Open <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> in a browser.
 You should see an unstyled page with the words <em>Index component</em>.</p>
-<h2 id="adding-pages">Adding Pages</h2>
-<p>Next, add a new route for an <em>about</em> page.
+<h2 id="adding-pages"><a href="#adding-pages">Adding Pages</a></h2><p>Next, add a new route for an <em>about</em> page.
 In <code>data.js</code> add <code>/about</code> to the routes array.</p>
 <pre><span class="hljs-comment">// data.js</span>
 <span class="hljs-built_in">module</span>.exports = {
@@ -188,10 +179,8 @@ In <code>data.js</code> add <code>/about</code> to the routes array.</p>
 You should see a page similar to the index but with the words <em>About component</em>.</p>
 <p>React-router can also handle route params such as <code>posts/:id</code> for dynamic routing –
 <a href="http://rackt.github.io/react-router/" target="_blank">View the docs</a> to learn more.</p>
-<h2 id="render-to-static-markup">Render to Static Markup</h2>
-<p>Stop the development server and run <code>npm run webpack</code>. This should generate two static <code>index.html</code> files in the root and <code>about</code> directories.</p>
-<h2 id="adding-client-side-js">Adding Client-Side JS</h2>
-<p>In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.</p>
+<h2 id="render-to-static-markup"><a href="#render-to-static-markup">Render to Static Markup</a></h2><p>Stop the development server and run <code>npm run webpack</code>. This should generate two static <code>index.html</code> files in the root and <code>about</code> directories.</p>
+<h2 id="adding-client-side-js"><a href="#adding-client-side-js">Adding Client-Side JS</a></h2><p>In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.</p>
 <p>First, edit <code>entry.js</code> to change the render function
 from <code>React.renderToStaticMarkup</code> to <code>React.renderString</code>
 and add a conditional block that will only run client-side.</p>
@@ -247,8 +236,7 @@ Update the Root component to add this script tag, add a <code>safeStringify</cod
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.stringify(obj).replace(<span class="hljs-regexp">/&lt;\/script/g</span>, <span class="hljs-string">'&lt;\\/script'</span>).replace(<span class="hljs-regexp">/&lt;!--/g</span>, <span class="hljs-string">'&lt;\\!--'</span>)
 }
 
-<span class="hljs-built_in">module</span>.exports = Root</pre><h2 id="navigation-links">Navigation Links</h2>
-<p>To link the pages together, create a new Header component.</p>
+<span class="hljs-built_in">module</span>.exports = Root</pre><h2 id="navigation-links"><a href="#navigation-links">Navigation Links</a></h2><p>To link the pages together, create a new Header component.</p>
 <pre><span class="hljs-comment">// components/Header.jsx</span>
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>)
 
@@ -299,8 +287,7 @@ Update the Root component to add this script tag, add a <code>safeStringify</cod
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.stringify(obj).replace(<span class="hljs-regexp">/&lt;\/script/g</span>, <span class="hljs-string">'&lt;\\/script'</span>).replace(<span class="hljs-regexp">/&lt;!--/g</span>, <span class="hljs-string">'&lt;\\!--'</span>)
 }
 
-<span class="hljs-built_in">module</span>.exports = Root</pre><h2 id="using-client-side-routing">Using Client-Side Routing</h2>
-<p>React router can also do client-side routing using the Link component.
+<span class="hljs-built_in">module</span>.exports = Root</pre><h2 id="using-client-side-routing"><a href="#using-client-side-routing">Using Client-Side Routing</a></h2><p>React router can also do client-side routing using the Link component.
 This can make transitioning pages feel faster and behaves like a fake single-page application.</p>
 <p>To use client-side routing, replace the anchor links in the Header with React Routers’s Link components.</p>
 <pre><span class="hljs-comment">// components/Header.jsx</span>
@@ -319,8 +306,7 @@ This can make transitioning pages feel faster and behaves like a fake single-pag
   }
 })
 
-<span class="hljs-built_in">module</span>.exports = Header</pre><h2 id="adding-critical-css">Adding Critical CSS</h2>
-<p>Although there are many different approaches to styling components in React,
+<span class="hljs-built_in">module</span>.exports = Header</pre><h2 id="adding-critical-css"><a href="#adding-critical-css">Adding Critical CSS</a></h2><p>Although there are many different approaches to styling components in React,
 adding some critical CSS base styles to the head can help speed up performance and development time.
 You can skip this step if you prefer using inline styles or linking to a larger stylesheet.</p>
 <p><em>UPDATE: Originally, this tutorial showed how to include CSS using props.
@@ -416,8 +402,7 @@ For a complete example, see the
 <a href="https://github.com/jxnblk/react-static-site-boilerplate" target="_blank">Boilerplate Demo</a>
 or check out the
 <a href="https://github.com/jxnblk/writing" target="_blank">source for this blog</a>, which uses a very similar approach.</p>
-<h2 id="other-considerations-and-improvements">Other Considerations and Improvements</h2>
-<p>Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven’t tried this so your mileage may vary.</p>
+<h2 id="other-considerations-and-improvements"><a href="#other-considerations-and-improvements">Other Considerations and Improvements</a></h2><p>Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven’t tried this so your mileage may vary.</p>
 <p>The <code>routes</code> array is passed in as props, and navigation links could be created dynamically rather than being hard coded.
 This could make handling lots of pages easier.</p>
 <p>If you’re hosting the static site on gh-pages, you’ll need a way to handle the base url when using React Router’s Link component.
