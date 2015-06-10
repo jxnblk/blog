@@ -18,7 +18,7 @@ var Header = React.createClass({
         <div>
           <h1 className='mt1 mb0'>{post.title}</h1>
           {post.subhead ? <h2 className='mt0'>{post.subhead}</h2> : false }
-          <div className='h5 bold'>{date}</div>
+          <div className='h5 bold mt1'>{date}</div>
         </div>
       )
     }
