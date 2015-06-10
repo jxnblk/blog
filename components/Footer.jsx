@@ -11,6 +11,7 @@ var Footer = React.createClass({
           <Jxnblk size={48} />
           <div>Made by Jxnblk</div>
         </a>
+        <p className='h5 georgia mt2'><i>Typeset in Georgia by Matthew Carter</i></p>
       </footer>
     )
   }

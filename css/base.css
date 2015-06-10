@@ -37,7 +37,8 @@ h4 a:hover, h5 a:hover, h6 a:hover {
 
 .link-simple { text-decoration: none }
 
-.serif,
+.georgia { font-family: var(--serif) }
+
 .prose {
   font-family: var(--serif);
   font-size: var(--h4);
