@@ -7,8 +7,12 @@ tags:
   - static-site
   - tutorial
 related:
-  - name: 'Building SVG Icons with React'
-    href: 'http://jxnblk.com/react-icons'
+  - name: Building SVG Icons with React
+    href: http://jxnblk.com/react-icons
+  - name: React Static Site by Brad Denver
+    href: http://braddenver.com/blog/2015/react-static-site.html
+  - name: Antwar
+    href: http://antwarjs.github.io/
 ---
 
 I’ve been dabbling with React for a few months now and using it in several small open source projects
@@ -590,7 +594,6 @@ I don’t know of a good way to do this yet and would love to hear suggestions o
 and I’m not sure if there’s a better way to handle that.~~
 
 This is just one way to build static sites with React.
-You might also be interested in Brad Denver’s blog post <a href="http://braddenver.com/blog/2015/react-static-site.html" target="_blank">React Static Site</a>.
 If you’ve seen other ways or have any suggestions for improving on this, I’d love to hear them.
 
 

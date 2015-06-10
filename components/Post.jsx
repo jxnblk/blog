@@ -1,6 +1,7 @@
 
 var React = require('react')
 var CrossPosted = require('./CrossPosted.jsx')
+var Related = require('./Related.jsx')
 var Issues = require('./Issues.jsx')
 var TweetButton = require('./TweetButton.jsx')
 
@@ -13,14 +14,14 @@ var Post = React.createClass({
 
   render: function () {
     var post = this.props.post
-    var crossposted = post.crossposted
-    var body = { __html: post.html }
+
     return (
       <div className='py2'>
         <div
           className='prose mb3'
-          dangerouslySetInnerHTML={body} />
-        <CrossPosted links={crossposted} />
+          dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Related links={post.related} />
+        <CrossPosted links={post.crossposted} />
         <Issues title={post.title} />
         <div className='mt3'>
           <TweetButton {...this.props} />

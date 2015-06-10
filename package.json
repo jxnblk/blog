@@ -23,6 +23,7 @@
     "basscss": "^6.1.4",
     "basscss-base-reset": "^2.0.1",
     "basscss-base-typography": "^1.1.1",
+    "basscss-borders": "^1.0.2",
     "basscss-color-base": "^1.4.0",
     "basscss-defaults": "^2.0.1",
     "basscss-grid": "^1.0.2",

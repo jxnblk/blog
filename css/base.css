@@ -6,6 +6,7 @@
 @import "basscss-utility-layout";
 @import "basscss-white-space";
 @import "basscss-highlight";
+@import "basscss-borders";
 @import "basscss-defaults";
 
 pre {
