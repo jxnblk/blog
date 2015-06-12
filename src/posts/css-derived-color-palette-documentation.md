@@ -16,8 +16,6 @@ related:
     href: http://jxnblk.com/colorable
   - name: postcss
     href: https://github.com/postcss/postcss
-  - name: CSS Stats Node.js Module
-    href: https://github.com/cssstats/css-statistics
   - name: Basscss Color Combinations
     href: http://basscss.com/docs/reference/color-combinations
 draft: true
@@ -50,7 +48,7 @@ npm init
 Install the following modules.
 
 ```bash
-npm i --save-dev postcss colorable lodash
+npm i --save-dev postcss color colorable lodash
 ```
 
 The [postcss](https://github.com/postcss/postcss) module will be used to transform the source CSS into an
@@ -58,6 +56,7 @@ The [postcss](https://github.com/postcss/postcss) module will be used to transfo
   <abbr title="Abstract Syntax Tree">AST</abbr>
 </a>
 for manipulation with JavaScript.
+[Color](https://www.npmjs.com/package/color) will be used to convert the values found in the stylesheet to hexidecimal.
 [Colorable](http://jxnblk.com/colorable) will be used to get color contrast values and
 [W3AG](http://www.w3.org/TR/WCAG20/#visual-audio-contrast)
 scores for every possible combination of colors.
@@ -73,24 +72,14 @@ Create a new `build.js` file that will be used to read the CSS file and eventual
 ```js
 // build.js
 var fs = require('fs')
-var postcss = require('postcss')
 
 // Read the contents of basscss.css
 var css = fs.readFileSync('basscss.css', 'utf8')
 
-// Parse the CSS file and get the AST
-var root = postcss.parse(css)
-
-// Array for storing colors and background-colors
-var colors = []
-
-// Iterate through every declaration and log the property
-root.eachDecl(function(decl) {
-  console.log(decl.prop)
-})
+console.log(css)
 ```
 
-For now, this script just logs all properties in the stylesheet.
+For now, this script just prints the stylesheet.
 
 ## Package Scripts
 
@@ -104,14 +93,35 @@ Add a script to `package.json` for the build script.
 ```
 
 Run the script to make sure everything is working.
-You should see a list of CSS properties in the terminal.
 
 ```bash
 npm start
 ```
 
+## Parsing CSS
+
+Create a new directory and module for `lib/parse-css.js`.
+
+```js
+// lib/parse-css.js
+var _ = require('lodash')
+var postcss = require('postcss')
+var Color = require('color')
+
+module.exports = function(css) {
+  // Array of colors to return
+  var colors = []
+
+  // Parse the CSS file and get the AST
+  var root = postcss.parse(css)
+
+  return colors
+}
+```
+
 ## Filtering Properties
 
+To keep things organized
 Next update `build.js` to filter the declarations to only include `color` and `background-color` properties.
 While color can be set for other properties and can set with the `background` shorthand, that adds complexity and will be omitted from this tutorial.
 
