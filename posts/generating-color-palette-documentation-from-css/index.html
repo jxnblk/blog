@@ -1,0 +1,243 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Generating Color Palette Documentation from CSS | jxnblk.com/writing</title><meta name="description" content="Thoughts on Design, Minimalism, and the Web"><meta name="author" content="Brent Jackson"><meta name="keywords" content="blog,writing,design,minimalism,css,color,documentation,style guide,living style guide,color contrast,accessibility,a11y"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body,h1,h2,h3,h4,h5,h6{font-family:Helvetica Neue,Helvetica,sans-serif}dl,ol,p,pre,ul{margin-top:0;margin-bottom:1.5rem}a,a:hover{text-decoration:underline}.nowrap,.truncate{white-space:nowrap}.fit,.truncate,img{max-width:100%}body{margin:0;line-height:1.625;font-size:100%;color:#111;background-color:#fff}svg{max-height:100%}h1,h2,h3,h4,h5,h6{font-weight:500;line-height:1.25;margin-top:1em;margin-bottom:.5em}dl,ol,p,ul{font-size:1.125rem}code,pre,samp{font-family:Source Code Pro,Consolas,monospace;font-size:inherit}pre{overflow-x:scroll}.overflow-hidden,.truncate{overflow:hidden}blockquote{margin:3rem 0;padding:0 1.5rem}blockquote,blockquote p{font-size:1.25rem;font-style:italic}.h1,h1{font-size:2rem}.h2,h2{font-size:1.5rem}.h3,h3{font-size:1.25rem}.h4,.prose,h4{font-size:1.125rem}.h5,h5{font-size:.875rem}.h6,h6{font-size:.75rem}.list-reset{list-style:none;padding-left:0}a{color:inherit}code,pre{background-color:transparent;border-radius:3px}hr{margin-top:3rem;margin-bottom:3rem;border:0;border-bottom-style:solid;border-bottom-width:1px;border-bottom-color:rgba(0,0,0,.125)}.border,.button:focus{border-color:rgba(0,0,0,.125)}.button,.rounded{border-radius:3px}.button{color:#fff;background-color:#0074d9}.button:hover{box-shadow:inset 0 0 0 20rem rgba(0,0,0,.0625)}.button:focus{outline:0;box-shadow:0 0 0 3px rgba(0,0,0,.25)}.button.is-active,.button:active{box-shadow:inset 0 0 0 20rem rgba(0,0,0,.125),inset 0 3px 4px 0 rgba(0,0,0,.25),0 0 1px rgba(0,0,0,.125)}.button.is-disabled,.button:disabled{opacity:.5}.bold{font-weight:700;font-weight:500}.regular{font-weight:400}.italic{font-style:italic}.caps{text-transform:uppercase;letter-spacing:.2em}.left-align{text-align:left}.center{text-align:center}.right-align{text-align:right}.justify{text-align:justify}.break-word{word-wrap:break-word}.truncate{text-overflow:ellipsis}.inline{display:inline}.block{display:block}.inline-block{display:inline-block}.table{display:table}.table-cell{display:table-cell}.overflow-scroll{overflow:scroll}.overflow-auto{overflow:auto}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix:after{clear:both}.left{float:left}.right{float:right}.half-width{width:50%}.full-width{width:100%}.m0{margin:0}.mt0{margin-top:0}.mr0{margin-right:0}.mb0{margin-bottom:0}.ml0{margin-left:0}.m1{margin:.75rem}.mt1{margin-top:.75rem}.mr1{margin-right:.75rem}.mb1{margin-bottom:.75rem}.ml1{margin-left:.75rem}.m2{margin:1.5rem}.mt2{margin-top:1.5rem}.mr2{margin-right:1.5rem}.mb2{margin-bottom:1.5rem}.ml2{margin-left:1.5rem}.m3{margin:3rem}.mt3{margin-top:3rem}.mr3{margin-right:3rem}.mb3{margin-bottom:3rem}.ml3{margin-left:3rem}.m4{margin:6rem}.mt4{margin-top:6rem}.mr4{margin-right:6rem}.mb4{margin-bottom:6rem}.ml4{margin-left:6rem}.mxn1{margin-left:-.75rem;margin-right:-.75rem}.mxn2{margin-left:-1.5rem;margin-right:-1.5rem}.mxn3{margin-left:-3rem;margin-right:-3rem}.mxn4{margin-left:-6rem;margin-right:-6rem}.container,.mx-auto{margin-right:auto;margin-left:auto}.p1{padding:.75rem}.py1{padding-top:.75rem;padding-bottom:.75rem}.px1{padding-left:.75rem;padding-right:.75rem}.p2{padding:1.5rem}.py2{padding-top:1.5rem;padding-bottom:1.5rem}.px2{padding-left:1.5rem;padding-right:1.5rem}.p3{padding:3rem}.py3{padding-top:3rem;padding-bottom:3rem}.px3{padding-left:3rem;padding-right:3rem}.p4{padding:6rem}.py4{padding-top:6rem;padding-bottom:6rem}.px4{padding-left:6rem;padding-right:6rem}.hljs{-webkit-text-size-adjust:none}.diff .hljs-header,.hljs-comment,.hljs-javadoc{color:#aaa;font-style:italic}.css .rule .hljs-keyword,.hljs-keyword,.hljs-request,.hljs-status,.hljs-subst,.hljs-winutils,.nginx .hljs-title{color:#111;font-weight:700}.hljs-hexcolor,.hljs-number,.ruby .hljs-constant{color:#3d9970}.hljs-dartdoc,.hljs-phpdoc,.hljs-string,.hljs-tag .hljs-value,.tex .hljs-formula{color:#ff4136}.hljs-id,.hljs-title,.scss .hljs-preprocessor{color:#ff4136;font-weight:700}.hljs-list .hljs-keyword,.hljs-subst{font-weight:400}.hljs-class .hljs-title,.hljs-type,.tex .hljs-command,.vhdl .hljs-literal{color:#001f3f;font-weight:700}.django .hljs-tag .hljs-keyword,.hljs-rules .hljs-property,.hljs-tag,.hljs-tag .hljs-title{color:#001f3f;font-weight:400}.hljs-attribute,.hljs-regexp,.hljs-variable,.lisp .hljs-body{color:#3d9970}.clojure .hljs-keyword,.hljs-prompt,.hljs-symbol,.lisp .hljs-keyword,.ruby .hljs-symbol .hljs-string,.scheme .hljs-keyword,.tex .hljs-special{color:#b10dc9}.hljs-built_in{color:#001f3f}.hljs-cdata,.hljs-doctype,.hljs-pi,.hljs-pragma,.hljs-preprocessor,.hljs-shebang{color:#aaa;font-weight:700}.hljs-deletion{background:#f012be}.hljs-addition{background:#01ff70}.diff .hljs-change{background:#001f3f}.hljs-chunk{color:#ddd}.border{border-style:solid;border-width:1px}.border-top{border-top-style:solid;border-top-width:1px;border-top-color:rgba(0,0,0,.125)}.border-right{border-right-style:solid;border-right-width:1px;border-right-color:rgba(0,0,0,.125)}.border-bottom{border-bottom-style:solid;border-bottom-width:1px;border-bottom-color:rgba(0,0,0,.125)}.border-left{border-left-style:solid;border-left-width:1px;border-left-color:rgba(0,0,0,.125)}.circle{border-radius:50%}.rounded-top{border-radius:3px 3px 0 0}.rounded-right{border-radius:0 3px 3px 0}.rounded-bottom{border-radius:0 0 3px 3px}.rounded-left{border-radius:3px 0 0 3px}.not-rounded{border-radius:0}pre{padding:0 1.5rem;border-left:4px solid rgba(0,0,0,.0625)}code{color:#001f3f;background-color:rgba(127,219,255,.125)}h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{text-decoration:none}h1 a:hover,h2 a:hover,h3 a:hover,h4 a:hover,h5 a:hover,h6 a:hover{text-decoration:underline}.container{max-width:48rem}.link-simple{text-decoration:none}.georgia,.prose{font-family:Georgia,serif}.prose dl,.prose ol,.prose p,.prose ul{font-size:inherit}.prose code{font-size:87.5%}.prose pre{font-size:75%}.prose p:first-child{font-size:1.25rem}@media(min-width:40em){.prose,.serif{font-size:1.25rem}.prose p:first-child{font-size:1.5rem}}</style></head><body class="container px2"><header class="py3"><h1 class="h3 m0"><a href="/writing" class="link-simple">jxnblk.com/writing</a></h1><div><h1 class="mt1 mb0">Generating Color Palette Documentation from CSS</h1><h2 class="mt0">How to use Node.js modules to create color documentation for living style guides</h2><div class="h5 bold mt1">Fri Jun 12 2015</div></div></header><div class="py2"><div class="prose mb3"><p>Virtually every style guide has a color palette section in its documentation.
+Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
+This often leads to the style guide falling out of sync with the actual values used on a site,
+and makes maintaining a living style guide less efficient.</p>
+<p>The problem with this approach is that two different things are serving as a source of truth.
+For a true living style guide, the actual code should be the definitive source of truth,
+and color values can be extracted from the CSS.
+Doing this can help expose legacy colors that should be removed
+and can point out ways to iteratively refactor and DRY up a code base.</p>
+<!-- so why not use CSS to populate the data for documentation? -->
+<p>The following will show how to use a combination of Node.js modules to build basic data-driven documentation for color palettes as well as present color contrast values for each combination as a guide for usage.</p>
+<h2 id="initial-setup"><a href="#initial-setup">Initial Setup</a></h2><p>If you’re already using Node.js in your build system,
+you can integrate this directly into your project.
+For the purposes of this tutorial, create a new sandboxed project to experiment with.</p>
+<pre>mkdir color-documentation
+<span class="hljs-built_in">cd</span> color-documentation
+npm init</pre><p>Install the following modules.</p>
+<pre>npm i --save-dev postcss color colorable lodash</pre><p>The <a href="https://github.com/postcss/postcss">postcss</a> module will be used to transform the source CSS into an
+<a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"><abbr title="Abstract Syntax Tree">AST</abbr></a>
+for manipulation with JavaScript.
+<a href="https://www.npmjs.com/package/color">Color</a> will be used to convert the values found in the stylesheet to hexidecimal.
+<a href="http://jxnblk.com/colorable">Colorable</a> will be used to get color contrast values and
+<a href="http://www.w3.org/TR/WCAG20/#visual-audio-contrast">WCAG</a>
+scores for every possible combination of colors.
+And <a href="https://lodash.com/docs">lodash</a> will be used to find unique color values and for creating a page template.</p>
+<p>Copy a CSS file into the project to use as a source for the color values.
+For this tutorial, you can use any stylesheet with colors or just download <a href="http://www.basscss.com/docs/">Basscss</a>.</p>
+<h2 id="build-script"><a href="#build-script">Build Script</a></h2><p>Create a new <code>build.js</code> file that will be used to read the CSS file and eventually to generate an HTML page.</p>
+<pre><span class="hljs-comment">// build.js</span>
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
+
+<span class="hljs-comment">// Read the contents of basscss.css</span>
+<span class="hljs-keyword">var</span> css = fs.readFileSync(<span class="hljs-string">'basscss.css'</span>, <span class="hljs-string">'utf8'</span>)
+
+<span class="hljs-built_in">console</span>.log(css)</pre><p>For now, this script just prints the stylesheet.</p>
+<h2 id="package-scripts"><a href="#package-scripts">Package Scripts</a></h2><p>Add a script to <code>package.json</code> for the build script.</p>
+<pre>// package.json
+"scripts": {
+  "start": "node build"
+}</pre><p>Run the script to make sure everything is working.</p>
+<pre>npm start</pre><h2 id="parsing-css"><a href="#parsing-css">Parsing CSS</a></h2><p>Create a new <code>lib/parse-css.js</code> for parsing the CSS.</p>
+<pre><span class="hljs-comment">// lib/parse-css.js</span>
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>)
+<span class="hljs-keyword">var</span> postcss = <span class="hljs-built_in">require</span>(<span class="hljs-string">'postcss'</span>)
+<span class="hljs-keyword">var</span> Color = <span class="hljs-built_in">require</span>(<span class="hljs-string">'color'</span>)
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">css</span>) </span>{
+  <span class="hljs-comment">// Array of colors to return</span>
+  <span class="hljs-keyword">var</span> colors = []
+
+  <span class="hljs-comment">// Parse the CSS file and get the AST</span>
+  <span class="hljs-keyword">var</span> root = postcss.parse(css)
+
+  <span class="hljs-comment">// Iterate through every declaration and log the property</span>
+  root.eachDecl(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">decl</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(decl.prop)
+  })
+
+  <span class="hljs-keyword">return</span> colors
+}</pre><p>Use this module in <code>build.js</code>.</p>
+<pre><span class="hljs-comment">// build.js</span>
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
+<span class="hljs-keyword">var</span> parseColors = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/parse-colors'</span>)
+
+<span class="hljs-comment">// Read the contents of basscss.css</span>
+<span class="hljs-keyword">var</span> css = fs.readFileSync(<span class="hljs-string">'basscss.css'</span>, <span class="hljs-string">'utf8'</span>)
+<span class="hljs-keyword">var</span> colors = parseColors(css)</pre><p>The <code>parse-colors</code> module takes raw CSS and transforms it into an AST that can be iterated over.
+For now, this just logs all the properties found in the stylesheet.</p>
+<h2 id="filtering-colors"><a href="#filtering-colors">Filtering Colors</a></h2><p>Next update the parse module to filter out everything but color and background-color properties,
+convert the values to hex, and remove duplicates.
+While color values can be used in other properties including the <code>background</code> shorthand,
+handling that would add complexity and will be omitted from this tutorial.</p>
+<pre><span class="hljs-comment">// lib/parse-colors.js</span>
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>)
+<span class="hljs-keyword">var</span> postcss = <span class="hljs-built_in">require</span>(<span class="hljs-string">'postcss'</span>)
+<span class="hljs-keyword">var</span> Color = <span class="hljs-built_in">require</span>(<span class="hljs-string">'color'</span>)
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">css</span>) </span>{
+
+  <span class="hljs-keyword">var</span> colors = []
+  <span class="hljs-keyword">var</span> root = postcss.parse(css)
+
+  <span class="hljs-comment">// Iterate through every color and background-color declaration</span>
+  root.eachDecl(<span class="hljs-regexp">/(color|background\-color)/</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">decl</span>) </span>{
+    <span class="hljs-comment">// Add each color to the colors array</span>
+    colors.push(decl.value)
+  })
+
+  <span class="hljs-comment">// Convert all color values to hex strings</span>
+  colors = colors.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">color</span>) </span>{
+    <span class="hljs-keyword">var</span> hex
+    <span class="hljs-keyword">try</span> {
+      hex = Color(color).hexString()
+      <span class="hljs-keyword">return</span> hex
+    } <span class="hljs-keyword">catch</span>(e) {
+      <span class="hljs-comment">// Handle color values like inherit and currentcolor</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    }
+  })
+  .filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+    <span class="hljs-comment">// Remove false values</span>
+    <span class="hljs-keyword">return</span> value
+  })
+
+  <span class="hljs-comment">// Remove duplicate values</span>
+  colors = _.uniq(colors)
+
+  <span class="hljs-keyword">return</span> colors
+
+}</pre><p>The first argument in <code>root.eachDecl</code> is a regular expression to filter declarations for either <code>color</code> or <code>background-color</code>.
+See the <a href="https://github.com/postcss/postcss/blob/master/docs/api.md#containereachdeclpropfilter-callback">postcss documentation</a> for more details.
+The <code>Color().hexString()</code> method converts any valid color value to hex format. The lodash <code>_.uniq</code> method removes duplicate values from an array.</p>
+<h2 id="html-template"><a href="#html-template">HTML Template</a></h2><p>Next, create a <code>template.html</code> file for displaying the colors.
+This tutorial uses lodash templates, but any JavaScript templating language could work.
+Note: if you’re using a stylesheet other than Basscss, the classes applied below may differ.</p>
+<pre><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-comment">&lt;!-- template.html --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"utf-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Color Palette Docs Demo<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"basscss.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"px3"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"py3"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Color Palette Docs Demo<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"list-reset flex flex-wrap flex-justify mxn2"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">%</span> <span class="hljs-attribute">colors.map</span>(<span class="hljs-attribute">renderColor</span>) %&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">%</span> <span class="hljs-attribute">function</span> <span class="hljs-attribute">renderColor</span>(<span class="hljs-attribute">color</span>) { %&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"m2"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:&lt;%= color %&gt;"</span>
+        <span class="hljs-attribute">class</span>=<span class="hljs-value">"p4"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">%=</span> <span class="hljs-attribute">color</span> %&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">%</span> } %&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span></pre><p>Inside the <code>&lt;ul&gt;</code> the <code>.map()</code> method is used to iterate over the <code>colors</code> array and passes the <code>renderColor</code> function as a callback.
+The <code>renderColor</code> function then renders an <code>&lt;li&gt;</code> for each color with a div that has its background color set to that value.</p>
+<p>Edit <code>build.js</code> to read the template and generate an HTML file.</p>
+<pre><span class="hljs-comment">// build.js</span>
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>)
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
+<span class="hljs-keyword">var</span> parseColors = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/parse-colors'</span>)
+
+<span class="hljs-keyword">var</span> css = fs.readFileSync(<span class="hljs-string">'basscss.css'</span>, <span class="hljs-string">'utf8'</span>)
+<span class="hljs-comment">// Read the template string</span>
+<span class="hljs-keyword">var</span> template = fs.readFileSync(<span class="hljs-string">'template.html'</span>, <span class="hljs-string">'utf8'</span>)
+<span class="hljs-comment">// Create a lodash template function</span>
+<span class="hljs-keyword">var</span> tpl = _.template(template)
+<span class="hljs-keyword">var</span> colors = parseColors(css)
+
+<span class="hljs-comment">// Render the template function to an HTML string</span>
+<span class="hljs-keyword">var</span> html = tpl({ colors: colors })
+
+<span class="hljs-comment">// Write an HTML file to disk</span>
+fs.writeFileSync(<span class="hljs-string">'index.html'</span>, html)</pre><p>Now run <code>npm start</code> and the build script should generate an HTML file with the colors parsed from the stylesheet.</p>
+<pre>npm start &amp;&amp; open index.html</pre><!-- img of color tiles -->
+<h2 id="readable-color-combinations"><a href="#readable-color-combinations">Readable Color Combinations</a></h2><p>The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and cannot be used.</p>
+<p>Create a new <code>lib/parse-combos.js</code> file.</p>
+<pre><span class="hljs-comment">// lib/parse-combos.js</span>
+<span class="hljs-keyword">var</span> colorable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'colorable'</span>)
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">colors</span>) </span>{
+
+  <span class="hljs-keyword">var</span> combos = []
+  <span class="hljs-comment">// Get the Colorable array</span>
+  <span class="hljs-keyword">var</span> arr = colorable(colors)
+
+  <span class="hljs-comment">// Flatten the array and combine the foreground and background colors</span>
+  arr.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">color</span>) </span>{
+    <span class="hljs-keyword">var</span> primary = color.hex
+    color.combinations.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">combo</span>) </span>{
+      combo.primary = primary
+      combos.push(combo)
+    })
+  })
+
+  <span class="hljs-comment">// Sort the array by contrast from high to low</span>
+  combos.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>{
+    <span class="hljs-keyword">return</span> b.contrast - a.contrast
+  })
+
+  <span class="hljs-keyword">return</span> combos
+
+}</pre><p>Create the combos array in <code>build.js</code> and pass the combos array into the template function.</p>
+<pre><span class="hljs-comment">// build.js </span>
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>)
+<span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
+<span class="hljs-keyword">var</span> parseColors = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/parse-colors'</span>)
+<span class="hljs-keyword">var</span> parseCombos = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/parse-combos'</span>)
+
+<span class="hljs-keyword">var</span> css = fs.readFileSync(<span class="hljs-string">'basscss.css'</span>, <span class="hljs-string">'utf8'</span>)
+<span class="hljs-keyword">var</span> template = fs.readFileSync(<span class="hljs-string">'template.html'</span>, <span class="hljs-string">'utf8'</span>)
+<span class="hljs-keyword">var</span> tpl = _.template(template)
+<span class="hljs-keyword">var</span> colors = parseColors(css)
+<span class="hljs-keyword">var</span> combos = parseCombos(colors)
+
+<span class="hljs-keyword">var</span> html = tpl({
+  colors: colors,
+  combos: combos
+})
+fs.writeFileSync(<span class="hljs-string">'index.html'</span>, html)</pre><p>Add a section to display the color combinations in <code>template.html</code>.</p>
+<pre>  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Combinations<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"list-reset flex flex-wrap"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">%</span> <span class="hljs-attribute">combos.map</span>(<span class="hljs-attribute">renderCombo</span>) %&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">%</span> <span class="hljs-attribute">function</span> <span class="hljs-attribute">renderCombo</span>(<span class="hljs-attribute">combo</span>) { %&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"py2 col-6 sm-col-4 md-col-3 lg-col-2"</span>
+      <span class="hljs-attribute">style</span>=<span class="hljs-value">"color:&lt;%= combo.primary %&gt;;background-color:&lt;%= combo.hex %&gt;"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"h1 bold px2"</span>&gt;</span>
+        Aa
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"h5 px2"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">%=</span> <span class="hljs-attribute">combo.primary</span> %&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">%=</span> <span class="hljs-attribute">combo.hex</span> %&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">%=</span> <span class="hljs-attribute">combo.contrast.toFixed</span>(<span class="hljs-attribute">2</span>) %&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">%</span> } %&gt;</span></pre><p>Run the build script. You should now have a list of color combinations along with the contrast value for each pair.</p>
+<!-- image of color combinations -->
+<p>While seeing combinations that don’t have enough contrast might be useful,
+for this tutorial set the threshold to 3 in Colorable’s options
+to only show combinations that pass the WCAG minimum for large text.
+Edit the options for Colorable in the <code>parse-combos</code> module.</p>
+<pre><span class="hljs-comment">// lib/parse-combos.js</span>
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">var</span> combos = []
+  <span class="hljs-keyword">var</span> arr = colorable(colors, { threshold: <span class="hljs-number">3</span> })
+  <span class="hljs-comment">// ...</span></pre><p>Run the build script again. Now you should only see color combinations with a contrast value of 3 or above.</p>
+<p>At this point, feel free to edit the styles of the rendered template and explore different ways of showing this information. You can even swap <code>basscss.css</code> out for another stylesheet to see how this looks in other frameworks.</p>
+<h2 id="expanding-on-this-idea"><a href="#expanding-on-this-idea">Expanding on This Idea</a></h2><p>Using postcss, things like the selectors used for each color
+or the number of times each color is used in a stylesheet can be incorporated into this approach.
+You could also compare how similar colors are to help expose
+inconsistencies and opportunities to normalize the design.</p>
+<h2 id="wrap-up"><a href="#wrap-up">Wrap Up</a></h2><p>While this is not a complete replacement for human written documentation,
+and creating guidelines around color usage requires carefully considered writing,
+using an automated tool to generate data-driven documentation
+for things like color values can help create a better living style guide.</p>
+</div><div class="mt3 mb3 py3 border-top border-bottom"><h4 class="m0">Related</h4><ul class="list-reset m0"><li><a href="http://jxnblk.com/colorable" class="break-word">Colorable</a></li><li><a href="https://github.com/postcss/postcss" class="break-word">postcss</a></li><li><a href="http://basscss.com/docs/reference/color-combinations" class="break-word">Basscss Color Combinations</a></li></ul></div><noscript></noscript><div><h4>Questions, Comments, Suggestions?</h4><a href="https://github.com/jxnblk/writing/issues/new?title=Generating Color Palette Documentation from CSS" class="bold" target="_blank">Open an Issue</a></div><div class="mt3"><div class="inline-block"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Generating Color Palette Documentation from CSS" data-via="jxnblk" data-size="large">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></div></div></div><footer class="center py4 border-top"><a href="/" class="bold link-simple"><svg viewBox="0 0 128 128" width="48" height="48" fill="currentcolor"><path d="M64 0 L64 4 L76 4 L74 6 L94 14 L92 16 L104 20 L100 22 L106 28 L102 28 L106 56 Q110 62 110 70 T105 84 L96 108 C92 116 76 128 64 128 C52 128 36 116 32 108 L23 84 Q18 78 18 70 T22 56 L22 22 L26 24 L34 12 L36 16z M72 40 Q56 30 40 30 Q32 34 30 48 L30 48 L28 74 C28 81 37 102 38 104 C46 118 62 121 64 121 C66 121 82 118 90 104 C91 102 100 81 100 74 L99 52 L94 40 L92 42 L84 38 L84 42 L74 36 M44 62 A5.5 5.5 0 0 0 44 73 A5.5 5.5 0 0 0 44 62 M84 62 A5.5 5.5 0 0 0 84 73 A5.5 5.5 0 0 0 84 62 M57 88 H71 A2 2 0 0 1 71 92 H57 A2 2 0 0 1 57 88 M53 104 H75 A2 2 0 0 1 75 108 H53 A2 2 0 0 1 53 104 M33.3 60.4 C34.6 57.8 37 55.9 39.7 55.2 C43 54.4 46.8 55.3 50.4 58 C51.3 58.6 52.5 58.4 53.2 57.5 C53.8 56.6 53.6 55.4 52.7 54.7 C46.8 50.5 41.8 50.5 38.7 51.3 C34.8 52.3 31.5 54.9 29.7 58.6 C29.2 59.6 29.6 60.8 30.6 61.3 C30.9 61.4 31.2 61.5 31.5 61.5 C32.2 61.5 32.9 61.1 33.3 60.4 z M97.7 61.9 C98.5 61.2  98.6  59.9  97.9  59.1 C94.3 55  90.1  52.9  85.4  53 C82 53  78.3  54.2  74.3  56.6 C73.3 57.2  73  58.4  73.6  59.3 C74.2 60.3  75.4  60.6  76.3  60 C79.7 58  82.7  57  85.5  57 C89 57  92.1  58.5  95  61.7 C95.4 62.2  95.9  62.4  96.5  62.4 C96.8 62.4 97.3 62.2 97.7 61.9 z"></path></svg><div>Made by Jxnblk</div></a><p class="h5 georgia mt2"><i>Typeset in Georgia by Matthew Carter</i></p></footer><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "UA-4603832-6", "auto"); ga("send", "pageview");</script></body></html>
