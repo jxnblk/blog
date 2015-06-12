@@ -115,43 +115,151 @@ module.exports = function(css) {
   // Parse the CSS file and get the AST
   var root = postcss.parse(css)
 
+  // Iterate through every declaration and log the property
+  root.eachDecl(function(decl) {
+    console.log(decl.prop)
+  })
+
   return colors
 }
 ```
 
-## Filtering Properties
-
-To keep things organized
-Next update `build.js` to filter the declarations to only include `color` and `background-color` properties.
-While color can be set for other properties and can set with the `background` shorthand, that adds complexity and will be omitted from this tutorial.
+Use this module in `build.js`.
 
 ```js
 // build.js
-// ...
-root.eachDecl(/color|background\-color/, function(decl) {
-  // Log the property and value
-  console.log(decl.prop, decl.value)
-})
+var fs = require('fs')
+var parseColors = require('./lib/parse-colors')
+
+// Read the contents of basscss.css
+var css = fs.readFileSync('basscss.css', 'utf8')
+var colors = parseColors(css)
+```
+
+The `parse-colors` module takes raw CSS and transforms it into an AST that can be iterated over.
+For now, this just logs all the properties found in the stylesheet.
+
+## Filtering Colors
+
+Next update the parse module to filter for color and background-color properties, convert the values to hex, and remove duplicates.
+While color can be set for other properties and can be set with the `background` shorthand, that adds complexity and will be omitted from this tutorial.
+
+```js
+// lib/parse-colors.js
+var _ = require('lodash')
+var postcss = require('postcss')
+var Color = require('color')
+
+module.exports = function(css) {
+
+  var colors = []
+  var root = postcss.parse(css)
+
+  // Iterate through every color and background-color declaration
+  root.eachDecl(/(color|background\-color)/, function(decl) {
+    // Add each color to the colors array
+    colors.push(decl.value)
+  })
+
+  // Convert all color values to hex strings
+  colors = colors.map(function(color) {
+    var hex
+    try {
+      hex = Color(color).hexString()
+      return hex
+    } catch(e) {
+      // Handle color values like inherit and currentcolor
+      return false
+    }
+  })
+  .filter(function(value) {
+    // Remove false values
+    return value
+  })
+
+  // Remove duplicate values
+  colors = _.uniq(colors)
+
+  return colors
+
+}
 ```
 
 The first argument in `root.eachDecl` is a regular expression to filter declarations for either `color` or `background-color`.
 See the [postcss documentation](https://github.com/postcss/postcss/blob/master/docs/api.md#containereachdeclpropfilter-callback) for more details.
+The `Color().hexString()` method converts any valid color value to hex format. The lodash `_.uniq` method removes duplicate values from an array.
+
+## HTML Template
+
+Next, create a `template.html` file that will be used as a template for displaying the colors. This tutorial uses lodash templates, but any JavaScript templating language could work.
+
+```html
+<!DOCTYPE html>
+<!-- template.html -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Color Palette Docs Demo</title>
+  <link rel="stylesheet" href="basscss.css">
+</head>
+<body>
+  <header class="p3">
+    <h1>Color Palette Docs Demo</h1>
+  </header>
+  <ul class="list-reset flex flex-wrap">
+    <% colors.map(renderColor) %>
+  </ul>
+  <% function renderColor(color) { %>
+    <li class="m3">
+      <div style="background-color:<%= color %>"
+        class="p4"></div>
+      <%= color %>
+    </li>
+  <% } %>
+</body>
+</html>
+```
+
+Inside the `<ul>` the `.map()` method is used to iterate over the `colors` array and passes the `renderColor` function as a callback.
+The `renderColor` function then renders an `<li>` for each color with a div that has its background color set to that value.
+
+Edit `build.js` to read the template and generate an HTML file.
+
+```js
+// build.js
+var _ = require('lodash')
+var fs = require('fs')
+var parseColors = require('./lib/parse-colors')
+
+var css = fs.readFileSync('basscss.css', 'utf8')
+// Read the template string
+var template = fs.readFileSync('template.html', 'utf8')
+// Create a lodash template function
+var tpl = _.template(template)
+var colors = parseColors(css)
+
+// Render the template function to an HTML string
+var html = tpl({ colors: colors })
+
+// Write an HTML file to disk
+fs.writeFileSync('index.html', html)
+```
+
+Now run `npm start` and the build script should generate an HTML file with the colors parsed from the stylesheet.
+
+```bash
+npm start && open index.html
+```
 
 <!--
   Outline
-  - push to colors
-  - convert to hex
-  - remove inherit etc
-  - remove duplicates
-  - create template.html
-  - pass colors array to template
   - list colors
   - list color values
   - colorable combinations
   - template for combos
 -->
 
----
+
 While this is not a complete replacement for human written documentation,
 and creating guidelines around color usage requires carefully considered writing,
 using an automated tool to generate data-driven documentation for color values can help create a
@@ -159,11 +267,8 @@ better living style guide.
 
 
 <!--
-
-
 Notes:
 
 The [cssstats](http://github.com/cssstats/css-statistics) is the core Node.js module that powers the
 [CSS Stats](http://cssstats.com) web app and will be used to 
-
 -->
