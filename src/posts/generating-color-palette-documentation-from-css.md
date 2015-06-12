@@ -251,6 +251,41 @@ Now run `npm start` and the build script should generate an HTML file with the c
 npm start && open index.html
 ```
 
+## Readable Color Combinations
+
+The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and cannot be used.
+
+Create a new `lib/parse-combos.js` file.
+
+```js
+// lib/parse-combos.js
+var colorable = require('colorable')
+
+module.exports = function(colors) {
+
+  var combos = []
+  // Get the Colorable array
+  var arr = colorable(colors)
+
+  // Flatten the array and combine the foreground and background colors
+  arr.forEach(function(color) {
+    var main = color.hex
+    color.combinations.forEach(function(combo) {
+      combo.main = main
+      combos.push(combo)
+    })
+  })
+
+  combos.sort(function(a, b) {
+    return b.contrast - a.contrast
+  })
+
+  return combos
+
+}
+
+```
+
 <!--
   Outline
   - list colors
