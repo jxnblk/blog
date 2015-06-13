@@ -20,7 +20,14 @@ code {
   background-color: color(var(--aqua) a(.125));
 }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+h1 a, h2 a, h3 a,
+h4 a, h5 a, h6 a,
+.link-simple {
+  text-decoration: none;
+}
+
+.link-block {
+  display: block;
   text-decoration: none;
 }
 
@@ -38,6 +45,9 @@ h4 a:hover, h5 a:hover, h6 a:hover {
 .link-simple { text-decoration: none }
 
 .georgia { font-family: var(--serif) }
+.compact { font-family: 'SF Compact Text', Roboto, Verdana, 'Helvetica Neue', Helvetica, sans-serif }
+
+.caps { letter-spacing: .1em }
 
 .prose {
   font-family: var(--serif);
@@ -68,10 +78,12 @@ h4 a:hover, h5 a:hover, h6 a:hover {
 }
 
 :root {
+  --font-family: 'SF UI Text', Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+  --heading-font-family: 'SF UI Display', Roboto, 'Helvetica Neue', Helvetica, sans-serif;
   --serif: Georgia, serif;
   --h4: 1.125rem;
   --line-height: 1.625;
-  --bold-font-weight: 500;
+  --bold-font-weight: 600;
   --heading-font-weight: var(--bold-font-weight);
   --button-font-weight: var(--bold-font-weight);
   --button-font-size: var(--h5);

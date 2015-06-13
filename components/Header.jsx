@@ -1,5 +1,6 @@
 
 var React = require('react')
+var PostTitle = require('./PostTitle.jsx')
 
 var Header = React.createClass({
 
@@ -11,20 +12,12 @@ var Header = React.createClass({
 
   render: function () {
     var postTitle
-    var post = this.props.post
-    if (post) {
-      var date = new Date(post.created).toDateString()
-      postTitle = (
-        <div>
-          <h1 className='mt1 mb0'>{post.title}</h1>
-          {post.subhead ? <h2 className='mt0'>{post.subhead}</h2> : false }
-          <div className='h5 bold mt1'>{date}</div>
-        </div>
-      )
+    if (this.props.post) {
+      postTitle = <PostTitle post={this.props.post} />
     }
     return (
       <header className='py3'>
-        <h1 className='h3 m0'>
+        <h1 className='h4 m0'>
           <a href='/writing' className='link-simple'>
             {this.props.title}
           </a>
