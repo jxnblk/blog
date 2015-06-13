@@ -14,11 +14,12 @@ tags:
 related:
   - name: Colorable
     href: http://jxnblk.com/colorable
-  - name: PostCSS
-    href: https://github.com/postcss/postcss
   - name: Basscss Color Combinations
     href: http://basscss.com/docs/reference/color-combinations
-draft: true
+  - name: PostCSS
+    href: https://github.com/postcss/postcss
+  - name: Color
+    href: https://npmjs.com/package/color
 ---
 
 Virtually every style guide has a color palette section in its documentation.
@@ -33,7 +34,7 @@ help expose legacy colors that should be removed
 as well as point out ways to iteratively refactor and DRY up a code base.
 
 The following will show how to use a combination of Node.js modules
-to build source-code-driven documentation for color palettes
+to build source-code-derived documentation for color palettes
 and present color contrast values for each possible pairing as a guide for usage.
 
 ## Initial Setup
@@ -372,7 +373,7 @@ inconsistencies and opportunities to normalize the design.
 
 While this is not a complete replacement for human written documentation,
 and creating guidelines around color usage requires carefully considered writing,
-using an automated tool to generate data-driven documentation
+using an automated tool to generate source-code-derived documentation
 for things like color values can help create a better living style guide.
 
 
