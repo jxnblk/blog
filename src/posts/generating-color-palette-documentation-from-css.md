@@ -142,7 +142,7 @@ For now, this just logs all the properties found in the stylesheet.
 
 ## Filtering Colors
 
-Next update the parse module to filter out everything but color and background-color properties,
+Next update the parse module to filter out everything but `color` and `background-color` properties,
 convert the values to hex, and remove duplicates.
 While color values can be used in other properties including the `background` shorthand,
 handling that would add complexity and will be omitted from this tutorial.

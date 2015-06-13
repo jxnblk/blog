@@ -18,7 +18,7 @@ var Header = React.createClass({
     return (
       <header className='py3'>
         <h1 className='h4 m0'>
-          <a href='/writing' className='link-simple'>
+          <a href='/writing' className='link-block'>
             {this.props.title}
           </a>
         </h1>
