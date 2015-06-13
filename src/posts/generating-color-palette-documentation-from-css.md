@@ -14,7 +14,7 @@ tags:
 related:
   - name: Colorable
     href: http://jxnblk.com/colorable
-  - name: postcss
+  - name: PostCSS
     href: https://github.com/postcss/postcss
   - name: Basscss Color Combinations
     href: http://basscss.com/docs/reference/color-combinations
@@ -23,18 +23,18 @@ draft: true
 
 Virtually every style guide has a color palette section in its documentation.
 Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
-This often leads to the style guide falling out of sync with the actual values used on a site,
-and makes maintaining a living style guide less efficient.
+This often leads to one falling out of sync with the other,
+and makes maintaining a living style guide more difficult.
 
-The problem with this approach is that two different things are serving as a source of truth.
-For a true living style guide, the actual code should be the definitive source of truth,
-and color values can be extracted from the CSS.
-Doing this can help expose legacy colors that should be removed
-and can point out ways to iteratively refactor and DRY up a code base.
+The problem with this approach is that two different things are serving as the source of truth.
+For a true living style guide, the source code should be the definitive source of truth.
+Parsing color values from CSS can keep things in sync and
+help expose legacy colors that should be removed
+as well as point out ways to iteratively refactor and DRY up a code base.
 
-<!-- so why not use CSS to populate the data for documentation? -->
-
-The following will show how to use a combination of Node.js modules to build basic data-driven documentation for color palettes as well as present color contrast values for each combination as a guide for usage.
+The following will show how to use a combination of Node.js modules
+to build source-code-driven documentation for color palettes
+and present color contrast values for each possible pairing as a guide for usage.
 
 ## Initial Setup
 
@@ -54,17 +54,17 @@ Install the following modules.
 npm i --save-dev postcss color colorable lodash
 ```
 
-The [postcss](https://github.com/postcss/postcss) module will be used to transform the source CSS into an
+The [PostCSS](https://github.com/postcss/postcss) module will be used to transform the source CSS into an
 <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"><abbr title="Abstract Syntax Tree">AST</abbr></a>
 for manipulation with JavaScript.
 [Color](https://www.npmjs.com/package/color) will be used to convert the values found in the stylesheet to hexidecimal.
 [Colorable](http://jxnblk.com/colorable) will be used to get color contrast values and
 [WCAG](http://www.w3.org/TR/WCAG20/#visual-audio-contrast)
-scores for every possible combination of colors.
+scores for every possible pairing of colors.
 And [lodash](https://lodash.com/docs) will be used to find unique color values and for creating a page template.
 
 Copy a CSS file into the project to use as a source for the color values.
-For this tutorial, you can use any stylesheet with colors or just download [Basscss](http://www.basscss.com/docs/).
+This tutorial will use [Basscss](http://www.basscss.com/docs/) as an example.
 
 ## Build Script
 
@@ -101,7 +101,7 @@ npm start
 
 ## Parsing CSS
 
-Create a new `lib/parse-css.js` for parsing the CSS.
+Create a new `lib/parse-css.js` file for parsing the CSS.
 
 ```js
 // lib/parse-css.js
@@ -116,7 +116,7 @@ module.exports = function(css) {
   // Parse the CSS file and get the AST
   var root = postcss.parse(css)
 
-  // Iterate through every declaration and log the property
+  // Iterate through each declaration and log the property
   root.eachDecl(function(decl) {
     console.log(decl.prop)
   })
@@ -189,7 +189,7 @@ module.exports = function(css) {
 ```
 
 The first argument in `root.eachDecl` is a regular expression to filter declarations for either `color` or `background-color`.
-See the [postcss documentation](https://github.com/postcss/postcss/blob/master/docs/api.md#containereachdeclpropfilter-callback) for more details.
+See the [PostCSS documentation](https://github.com/postcss/postcss/blob/master/docs/api.md#containereachdeclpropfilter-callback) for more details.
 The `Color().hexString()` method converts any valid color value to hex format. The lodash `_.uniq` method removes duplicate values from an array.
 
 ## HTML Template
@@ -256,11 +256,11 @@ Now run `npm start` and the build script should generate an HTML file with the c
 npm start && open index.html
 ```
 
-<!-- img of color tiles -->
+![Color Palette Demo](http://jxnblk.s3.amazonaws.com/assets/images/css-color-palette.png)
 
 ## Readable Color Combinations
 
-The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and cannot be used.
+The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and cannot be used for text.
 
 Create a new `lib/parse-combos.js` file.
 
@@ -293,7 +293,7 @@ module.exports = function(colors) {
 }
 ```
 
-Create the combos array in `build.js` and pass the combos array into the template function.
+Add the `parse-combos` module to `build.js` and pass the combos array into the template function.
 
 ```js
 // build.js 
@@ -341,12 +341,12 @@ Add a section to display the color combinations in `template.html`.
 
 Run the build script. You should now have a list of color combinations along with the contrast value for each pair.
 
-<!-- image of color combinations -->
+![Color Palette Demo](http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg)
 
 While seeing combinations that don’t have enough contrast might be useful,
-for this tutorial set the threshold to 3 in Colorable’s options
+for this tutorial set
+Colorable’s `threshold` option to 3
 to only show combinations that pass the WCAG minimum for large text.
-Edit the options for Colorable in the `parse-combos` module.
 
 ```js
 // lib/parse-combos.js
@@ -358,13 +358,14 @@ Edit the options for Colorable in the `parse-combos` module.
 
 Run the build script again. Now you should only see color combinations with a contrast value of 3 or above.
 
-At this point, feel free to edit the styles of the rendered template and explore different ways of showing this information. You can even swap `basscss.css` out for another stylesheet to see how this looks in other frameworks.
+At this point, feel free to edit the styles of the rendered template and explore different ways of showing this information.
+You can also swap `basscss.css` out for another framework or stylesheet to see how it looks.
 
 ## Expanding on This Idea
 
-Using postcss, things like the selectors used for each color
-or the number of times each color is used in a stylesheet can be incorporated into this approach.
-You could also compare how similar colors are to help expose
+Using PostCSS, other facets of the stylesheet can be presented along with the color values,
+such as the selectors used for each color or the number of times each color is used in a stylesheet.
+You could also show colors sorted by similarity to help expose
 inconsistencies and opportunities to normalize the design.
 
 ## Wrap Up
