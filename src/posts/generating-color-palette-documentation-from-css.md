@@ -1,6 +1,6 @@
 ---
 title: Generating Color Palette Documentation from CSS
-subhead: How to use Node.js modules to create color documentation for living style guides
+subhead: How to use Node.js to build better living style guides
 created: 06-12-2015
 tags:
   - css
@@ -27,14 +27,12 @@ Many times I’ve seen this documentation created manually, where every change t
 This often leads to one falling out of sync with the other,
 and makes maintaining a living style guide more difficult.
 
-The problem with this approach is that two different things are serving as the source of truth.
-For a true living style guide, the source code should be the definitive source of truth.
-Parsing color values from CSS can keep things in sync and
-help expose legacy colors that should be removed
-as well as point out ways to iteratively refactor and DRY up a code base.
+The problem with this approach is that the values are being defined in two different places.
+For a true living style guide, the code should serve as the single source of truth.
+Extracting color values from CSS can help keep documentation in sync,
+expose outdated colors, and point out opportunities for normalizing designs.
 
-The following will show how to use a combination of Node.js modules
-to build source-code-derived documentation for color palettes
+The following will show how to use Node.js to build source-code-derived documentation for color palettes
 and present color contrast values for each possible pairing as a guide for usage.
 
 ## Initial Setup
@@ -257,7 +255,10 @@ Now run `npm start` and the build script should generate an HTML file with the c
 npm start && open index.html
 ```
 
-![Color Palette Demo](http://jxnblk.s3.amazonaws.com/assets/images/css-color-palette.png)
+<img src="http://jxnblk.s3.amazonaws.com/assets/images/css-color-palette.png"
+  alt="Color palette demo"
+  width="768"
+  height="496" />
 
 ## Readable Color Combinations
 
@@ -342,7 +343,10 @@ Add a section to display the color combinations in `template.html`.
 
 Run the build script. You should now have a list of color combinations along with the contrast value for each pair.
 
-![Color Palette Demo](http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg)
+<img src="http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg"
+  alt="Color combination demo"
+  width="768"
+  height="576" />
 
 While seeing combinations that don’t have enough contrast might be useful,
 for this tutorial set
@@ -369,11 +373,9 @@ such as the selectors used for each color or the number of times each color is u
 You could also show colors sorted by similarity to help expose
 inconsistencies and opportunities to normalize the design.
 
-## Wrap Up
-
 While this is not a complete replacement for human written documentation,
 and creating guidelines around color usage requires carefully considered writing,
-using an automated tool to generate source-code-derived documentation
-for things like color values can help create a better living style guide.
+using automated tooling to generate source-code-derived documentation
+for things like color values can help create better living style guides.
 
 
