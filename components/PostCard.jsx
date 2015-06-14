@@ -24,7 +24,7 @@ var PostCard = React.createClass({
           <h2 className='m0'>
             {post.title}
           </h2>
-          {post.subhead ? <h3 className='mt0'>{post.subhead}</h3> : false }
+          {post.subhead ? <h3 className='m0'>{post.subhead}</h3> : false }
         </a>
         <PostDate date={post.created} />
         <p className='georgia h3 m0'>{post.excerpt}</p>
