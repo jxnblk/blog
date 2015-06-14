@@ -60,7 +60,8 @@ for manipulation with JavaScript.
 [Colorable](http://jxnblk.com/colorable) will be used to get color contrast values and
 [WCAG](http://www.w3.org/TR/WCAG20/#visual-audio-contrast)
 scores for every possible pairing of colors.
-And [lodash](https://lodash.com/docs) will be used to find unique color values and for creating a page template.
+And [lodash](https://lodash.com/docs) will be used to find unique color values and
+to render templates to HTML.
 
 Copy a CSS file into the project to use as a source for the color values.
 This tutorial will use [Basscss](http://www.basscss.com/docs/) as an example.
