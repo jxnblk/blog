@@ -17,6 +17,7 @@ pre {
 
 code {
   color: var(--red);
+  font-size: 87.5%;
 }
 
 a {

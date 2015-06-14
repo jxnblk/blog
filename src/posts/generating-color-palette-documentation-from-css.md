@@ -80,7 +80,7 @@ var css = fs.readFileSync('basscss.css', 'utf8')
 console.log(css)
 ```
 
-For now, this script just prints the stylesheet.
+For now, this script just logs the stylesheet.
 
 ## Package Scripts
 
@@ -158,9 +158,9 @@ module.exports = function(css) {
   var colors = []
   var root = postcss.parse(css)
 
-  // Iterate through every color and background-color declaration
+  // Iterate through each color and background-color declaration
   root.eachDecl(/(color|background\-color)/, function(decl) {
-    // Add each color to the colors array
+    // Add each color value to the colors array
     colors.push(decl.value)
   })
 
@@ -195,7 +195,7 @@ The `Color().hexString()` method converts any valid color value to hex format. T
 ## HTML Template
 
 Next, create a `template.html` file for displaying the colors.
-This tutorial uses lodash templates, but any JavaScript templating language could work.
+This tutorial uses lodash templates, but any JavaScript templating language would work.
 Note: if you’re using a stylesheet other than Basscss, the classes applied below may differ.
 
 ```html
@@ -250,7 +250,7 @@ var html = tpl({ colors: colors })
 fs.writeFileSync('index.html', html)
 ```
 
-Now run `npm start` and the build script should generate an HTML file with the colors parsed from the stylesheet.
+Now run `npm start` which should generate an HTML file with the colors parsed from the stylesheet.
 
 ```bash
 npm start && open index.html
@@ -263,7 +263,7 @@ npm start && open index.html
 
 ## Readable Color Combinations
 
-The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and cannot be used for text.
+The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and can’t be used for text.
 
 Create a new `lib/parse-combos.js` file.
 
@@ -279,9 +279,9 @@ module.exports = function(colors) {
 
   // Flatten the array and combine the foreground and background colors
   arr.forEach(function(color) {
-    var primary = color.hex
+    var pairing = color.hex
     color.combinations.forEach(function(combo) {
-      combo.primary = primary
+      combo.pairing = pairing
       combos.push(combo)
     })
   })
@@ -318,7 +318,7 @@ var html = tpl({
 fs.writeFileSync('index.html', html)
 ```
 
-Add a section to display the color combinations in `template.html`.
+Add a section to `template.html` to display the color combinations.
 
 ```html
   <h2>Combinations</h2>
@@ -327,12 +327,12 @@ Add a section to display the color combinations in `template.html`.
   </ul>
   <% function renderCombo(combo) { %>
     <li class="py2 col-6 sm-col-4 md-col-3 lg-col-2"
-      style="color:<%= combo.primary %>;background-color:<%= combo.hex %>">
+      style="color:<%= combo.pairing %>;background-color:<%= combo.hex %>">
       <div class="h1 bold px2">
         Aa
       </div>
       <div class="h5 px2">
-        <%= combo.primary %>
+        <%= combo.pairing %>
         <br>
         <%= combo.hex %>
         <br>
@@ -349,9 +349,8 @@ Run the build script. You should now have a list of color combinations along wit
   width="768"
   height="576" />
 
-While seeing combinations that don’t have enough contrast might be useful,
-for this tutorial set
-Colorable’s `threshold` option to 3
+While seeing combinations that don’t have high enough contrast might be useful,
+for this tutorial set Colorable’s `threshold` option to 3
 to only show combinations that pass the WCAG minimum for large text.
 
 ```js
@@ -365,11 +364,12 @@ to only show combinations that pass the WCAG minimum for large text.
 Run the build script again. Now you should only see color combinations with a contrast value of 3 or above.
 
 At this point, feel free to edit the styles of the rendered template and explore different ways of showing this information.
-You can also swap `basscss.css` out for another framework or stylesheet to see how it looks.
+You can also swap `basscss.css` out for another framework or stylesheet to test things out.
 
-## Expanding on This Idea
+## Expanding Upon This Idea
 
-Using PostCSS, other facets of the stylesheet can be presented along with the color values,
+In addition to displaying raw color values and contrast ratios,
+other aspects of color can be extracted from a stylesheet,
 such as the selectors used for each color or the number of times each color is used in a stylesheet.
 You could also show colors sorted by similarity to help expose
 inconsistencies and opportunities to normalize the design.
