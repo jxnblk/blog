@@ -1,6 +1,6 @@
 ---
 title: Color Palette Documentation for Living Style Guides
-created: 06-12-2015
+created: 06-15-2015
 tags:
   - css
   - color
@@ -100,10 +100,10 @@ npm start
 
 ## Parsing CSS
 
-Create a new `lib/parse-css.js` file for parsing the CSS.
+Create a new `lib/parse-colors.js` file for parsing the CSS.
 
 ```js
-// lib/parse-css.js
+// lib/parse-colors.js
 var _ = require('lodash')
 var postcss = require('postcss')
 var Color = require('color')
