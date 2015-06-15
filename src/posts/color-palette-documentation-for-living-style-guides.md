@@ -1,6 +1,5 @@
 ---
-title: Generating Color Palette Documentation from CSS
-subhead: How to use Node.js to build better living style guides
+title: Color Palette Documentation for Living Style Guides
 created: 06-12-2015
 tags:
   - css
