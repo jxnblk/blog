@@ -18,11 +18,17 @@ var Head = React.createClass({
     if (post && post.tags) {
       keywords = keywords.concat(post.tags)
     }
+    var description
+    if (post && post.excerpt) {
+      description = post.excerpt
+    } else {
+      description = this.props.description
+    }
     return (
       <head>
         <meta charSet='utf-8' />
         <title>{post ? (post.title + ' | ' + this.props.title) : this.props.title}</title>
-        <meta name='description' content={this.props.description} />
+        <meta name='description' content={description} />
         <meta name='author' content={this.props.author} />
         <meta name='keywords' content={keywords.join()} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
