@@ -10,6 +10,7 @@ var Post = require('./components/Post.jsx')
 var Routes = (
   <Route handler={Root} path='/'>
     <DefaultRoute handler={Index} />
+    <Route name='page' path='/page/:page' handler={Index} />
     <Route name='post' path='/posts/:post' handler={Post} />
   </Route>
 )
