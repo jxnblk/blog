@@ -18,7 +18,7 @@ var posts = filenames.map(function (filename) {
   var matter = fm(content)
   var html = marked(matter.body, { renderer: markedRenderer })
   var $ = cheerio.load(html)
-  var excerpt = $('p').first().text()
+  var excerpt = matter.attributes.excerpt || $('p').first().text()
   var post = _assign(matter.attributes, {
     slug: filename.replace(/\.md/, ''),
     body: matter.body,
