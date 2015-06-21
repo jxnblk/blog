@@ -35,7 +35,7 @@ var routes = filenames.map(function (filename) {
 })
 routes.unshift('/')
 
-var pageSize = 16
+var pageSize = 24
 var pages = Math.ceil(posts.length / pageSize)
 console.log('pagination', pages)
 for (var i = 0; i < pages; i++) {

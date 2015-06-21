@@ -32,5 +32,5 @@ Power: check. Beats: check.
 
 ## Performance
 
-Runs VIM like a champ.
+Runs Vim like a champ.
 
