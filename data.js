@@ -43,7 +43,9 @@ for (var i = 0; i < pages; i++) {
 }
 
 module.exports = {
-  title: 'jxnblk.com/writing',
+  title: 'Writing',
+  href: '/writing',
+  links: [],
   description: pkg.description,
   author: pkg.author,
   keywords: pkg.keywords,
