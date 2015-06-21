@@ -1,12 +1,12 @@
 
-var React = require('react')
-var _find = require('lodash').find
-var Head = require('./Head.jsx')
-var Body = require('./Body.jsx')
+import React from 'react'
+import { find as _find } from 'lodash'
+import Head from './Head.jsx'
+import Body from './Body.jsx'
 
-var Root = React.createClass({
+class Root extends React.Component {
 
-  render: function () {
+  render () {
     var post = false
     var params = this.props.params || false
     if (params && params.post) {
@@ -23,7 +23,7 @@ var Root = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Root
+export default Root
 

@@ -1,9 +1,9 @@
 
-var React = require('react')
+import React from 'react'
 
-var PostDate = React.createClass({
+class PostDate extends React.Component {
 
-  render: function() {
+  render () {
     var date = new Date(this.props.date).toDateString()
     return (
       <div className='h6 bold caps compact'>
@@ -12,7 +12,7 @@ var PostDate = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = PostDate
+export default PostDate
 

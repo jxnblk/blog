@@ -1,26 +1,22 @@
 
-var React = require('react')
-var _chunk = require('lodash').chunk
-var PostCard = require('./PostCard.jsx')
-var PostDate = require('./PostDate.jsx')
-var Pagination = require('./Pagination.jsx')
+import React from 'react'
+import { chunk as _chunk } from 'lodash'
+import PostCard from './PostCard.jsx'
+import PostDate from './PostDate.jsx'
+import Pagination from './Pagination.jsx'
 
-var Index = React.createClass({
+class Index extends React.Component {
 
-  propTypes: {
-    posts: React.PropTypes.array
-  },
-
-  renderPost: function (post, i) {
+  renderPost (post, i) {
     if (post.draft) { return false }
     return (
       <li key={'post-' + i} className='mb3'>
         <PostCard post={post} />
       </li>
     )
-  },
+  }
 
-  render: function () {
+  render () {
     var params = this.props.params || false
     var chunks = _chunk(this.props.posts, this.props.pageSize)
     var page
@@ -52,7 +48,11 @@ var Index = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Index
+Index.propTypes = {
+  posts: React.PropTypes.array
+}
+
+export default Index
 

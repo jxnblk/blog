@@ -1,17 +1,13 @@
 
-var React = require('react')
+import React from 'react'
 
-var Related = React.createClass({
+class Related extends React.Component {
 
-  propTypes: {
-    links: React.PropTypes.array
-  },
-
-  renderLink: function (link, i) {
+  renderLink (link, i) {
     return <li key={i}><a href={link.href} className='break-word'>{link.name}</a></li>
-  },
+  }
 
-  render: function () {
+  render () {
     if (!this.props.links) { return false }
     return (
       <div className='mt3 mb3 py3 border-top border-bottom'>
@@ -23,7 +19,11 @@ var Related = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Related
+Related.propTypes = {
+  links: React.PropTypes.array
+}
+
+export default Related
 

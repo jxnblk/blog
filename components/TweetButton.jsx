@@ -1,9 +1,9 @@
 
-var React = require('react')
+import React from 'react'
 
-var TweetButton = React.createClass({
+class TweetButton extends React.Component {
 
-  render: function () {
+  render () {
     var script = {
       __html: this.props.tweetScript
     }
@@ -25,7 +25,7 @@ var TweetButton = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = TweetButton
+export default TweetButton
 

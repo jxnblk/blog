@@ -1,21 +1,10 @@
 
-var React = require('react')
-var PostDate = require('./PostDate.jsx')
+import React from 'react'
+import PostDate from './PostDate.jsx'
 
-var PostCard = React.createClass({
+class PostCard extends React.Component {
 
-  propTypes: {
-    post: React.PropTypes.shape({
-      title: React.PropTypes.string,
-      subhead: React.PropTypes.string,
-      excerpt: React.PropTypes.string,
-      date: React.PropTypes.string,
-      slug: React.PropTypes.string,
-      draft: React.PropTypes.bool,
-    })
-  },
-
-  render: function() {
+  render () {
     var post = this.props.post
     return (
       <div>
@@ -38,7 +27,18 @@ var PostCard = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = PostCard
+PostCard.propTypes = {
+  post: React.PropTypes.shape({
+    title: React.PropTypes.string,
+    subhead: React.PropTypes.string,
+    excerpt: React.PropTypes.string,
+    date: React.PropTypes.string,
+    slug: React.PropTypes.string,
+    draft: React.PropTypes.bool,
+  })
+}
+
+export default PostCard
 

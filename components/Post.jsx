@@ -1,18 +1,13 @@
 
-var React = require('react')
-var CrossPosted = require('./CrossPosted.jsx')
-var Related = require('./Related.jsx')
-var Issues = require('./Issues.jsx')
-var TweetButton = require('./TweetButton.jsx')
+import React from 'react'
+import CrossPosted from './CrossPosted.jsx'
+import Related from './Related.jsx'
+import Issues from './Issues.jsx'
+import TweetButton from './TweetButton.jsx'
 
-var Post = React.createClass({
+class Post extends React.Component {
 
-  propTypes: {
-    params: React.PropTypes.object,
-    posts: React.PropTypes.array
-  },
-
-  render: function () {
+  render () {
     var post = this.props.post
 
     return (
@@ -30,7 +25,12 @@ var Post = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Post
+Post.propTypes = {
+  params: React.PropTypes.object,
+  posts: React.PropTypes.array
+}
+
+export default Post
 

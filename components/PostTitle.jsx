@@ -1,18 +1,10 @@
 
-var React = require('react')
-var PostDate = require('./PostDate.jsx')
+import React from 'react'
+import PostDate from './PostDate.jsx'
 
-var PostTitle = React.createClass({
+class PostTitle extends React.Component {
 
-  propTypes: {
-    post: React.PropTypes.shape({
-      title: React.PropTypes.string,
-      subhead: React.PropTypes.string,
-      date: React.PropTypes.string
-    })
-  },
-
-  render: function() {
+  render () {
     var post = this.props.post
     return (
       <div>
@@ -23,7 +15,15 @@ var PostTitle = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = PostTitle
+PostTitle.propTypes = {
+  post: React.PropTypes.shape({
+    title: React.PropTypes.string,
+    subhead: React.PropTypes.string,
+    date: React.PropTypes.string
+  })
+}
+
+export default PostTitle
 

@@ -1,18 +1,11 @@
 
-var React = require('react')
+import React from 'react'
 
-var bass = require('../css/base.css')
+import bass from '../css/base.css'
 
-var Head = React.createClass({
+class Head extends React.Component {
 
-  propTypes: {
-    title: React.PropTypes.string,
-    description: React.PropTypes.string,
-    author: React.PropTypes.string,
-    css: React.PropTypes.string
-  },
-
-  render: function () {
+  render () {
     var post = this.props.post
     var keywords = this.props.keywords
     if (post && post.tags) {
@@ -37,7 +30,14 @@ var Head = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Head
+Head.propTypes = {
+  title: React.PropTypes.string,
+  description: React.PropTypes.string,
+  author: React.PropTypes.string,
+  css: React.PropTypes.string
+}
+
+export default Head
 

@@ -1,13 +1,9 @@
 
-var React = require('react')
+import React from 'react'
 
-var Issues = React.createClass({
+class Issues extends React.Component {
 
-  propTypes: {
-    title: React.PropTypes.string
-  },
-
-  render: function () {
+  render () {
     var href = 'https://github.com/jxnblk/writing/issues/new?title=' + this.props.title
     return (
       <div>
@@ -21,6 +17,11 @@ var Issues = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Issues
+Issues.propTypes = {
+  title: React.PropTypes.string
+}
+
+export default Issues
+

@@ -1,16 +1,9 @@
 
-var React = require('react')
+import React from 'react'
 
-var Pagination = React.createClass({
+class Pagination extends React.Component {
 
-  getDefaultProps: function() {
-    return {
-      next: false,
-      previous: false
-    }
-  },
-
-  render: function() {
+  render () {
     var previous
     var next
     console.log('prev/next', this.props.index, this.props.previous, this.props.next)
@@ -39,7 +32,12 @@ var Pagination = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Pagination
+Pagination.defaultProps = {
+  next: false,
+  previous: false
+}
+
+export default Pagination
 

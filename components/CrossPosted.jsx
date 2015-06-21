@@ -1,17 +1,13 @@
 
-var React = require('react')
+import React from 'react'
 
-var CrossPosted = React.createClass({
+class CrossPosted extends React.Component {
 
-  propTypes: {
-    links: React.PropTypes.array
-  },
-
-  renderLink: function (href, i) {
+  renderLink (href, i) {
     return <li key={i}><a href={href} className='break-word'>{href}</a></li>
-  },
+  }
 
-  render: function () {
+  render () {
     if (!this.props.links) { return false }
     return (
       <div className='mt3 mb3 py3 border-top border-bottom'>
@@ -23,7 +19,12 @@ var CrossPosted = React.createClass({
     )
   }
 
-})
+}
+
+CrossPosted.propTypes = {
+  links: React.PropTypes.array
+}
+
 
 module.exports = CrossPosted
 

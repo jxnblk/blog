@@ -1,13 +1,12 @@
 
-var React = require('react')
-var Header = require('./Header.jsx')
-var Footer = require('./Footer.jsx')
-var Router = require('react-router')
-var RouteHandler = Router.RouteHandler
+import React from 'react'
+import { RouteHandler } from 'react-router'
+import Header from './Header.jsx'
+import Footer from './Footer.jsx'
 
-var Body = React.createClass({
+class Body extends React.Component {
 
-  render: function () {
+  render () {
     return (
       <body className='container px2'>
         <Header {...this.props} />
@@ -18,7 +17,7 @@ var Body = React.createClass({
     )
   }
 
-})
+}
 
-module.exports = Body
+export default Body
 
