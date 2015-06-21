@@ -44,6 +44,26 @@ For example, 1/2 = .5, 1/4 = .25, 1/8 = .125, etc.
 
 ---
 
+- Principles
+  - Content-out
+  - White Space
+  - Line Height
+  - Grain of the Web
+  - Screen resolutions
+- Problem
+  - Magic Numbers
+  - Side Effects
+  - Base 10 Numbers
+- Solution
+  - Browser defaults
+  - 16px/1rem
+  - Powers of Two
+  - 1 / Power of two
+  - Double/Half Modular Scales
+  - Separation of Concerns
+
+---
+
 - powers of two - bits and bytes
 - screen resolutions
 - 2 4 8 16 32 64 128 256
