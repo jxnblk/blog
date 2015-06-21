@@ -11,25 +11,20 @@ related:
 draft: true
 ---
 
-- Content-out
-- Modular scales
-- Browser defaults
-- 16px & powers of two
-- Doubles and halves
-- uine-height
-- Margin/padding white space
-- separation of concerns in CSS
+I'm a huge fan of modular scales, content-out layouts, and designing things that follow the grain of the web.
+Over the years, I've used some off-the-cuff math to help when typesetting and handling layout.
 
+If you look at screen technology, you'll encounter a lot of powers of two or sums of powers of two.
+I don't know exactly how this works, but I suspect this has to do with bits and bytes.
+For each place added in a binary number, you'll have twice as many numbers.
+So once you've dedicated hardware to handle one more byte, you might as well use double what you had without it.
 
----
+On the web, numbers based around powers of two are your friend.
+The default font size for most browsers is 16px - a power of two that visually works well when doubling or halving,
+but not so well when working with thirds or other prime numbers.
 
-I'm a huge fan of modular scales, content-out layouts, and designing things that follow the grain of the web. Over the years, I've used some off-the-cuff math to help when typesetting and handling layout.
-
-If you look at screen technology, you'll encounter a lot of powers of two or sums of powers of two. I don't know exactly how this works, but I suspect this has to do with bits and bytes. For each place added in a binary number, you'll have twice as many numbers. So once you've dedicated hardware to handle one more byte, you might as well use double what you had without it.
-
-On the web, numbers based around powers of two are your friend. The default font size for most browsers is 16px - a power of two that visually works well when doubling or halving, but not so well when working with thirds or other prime numbers.
-
-I like to base all modular scales off of this base unit. Occasionally, body copy will be adjusted depending on the font, but the base unit of measurement remains in tact.
+I like to base all modular scales off of this base unit.
+Occasionally, body copy will be adjusted depending on the font, but the base unit of measurement remains in tact.
 
 Often in stylesheets I see line-heights that are calculated as a quotient of the target line-height and the font size.
 This sometimes leads to irrational, magic numbers that need to be rounded and can cause unforeseen and unintended consequences.
@@ -62,4 +57,16 @@ For example, 1/2 = .5, 1/4 = .25, 1/8 = .125, etc.
 - unintended side effects
 
 - base 10, can be halved not quartered
+
+---
+
+- Content-out
+- Modular scales
+- Browser defaults
+- 16px & powers of two
+- Doubles and halves
+- uine-height
+- Margin/padding white space
+- separation of concerns in CSS
+
 
