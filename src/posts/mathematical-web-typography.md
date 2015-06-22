@@ -13,20 +13,22 @@ draft: true
 
 
 When it comes to designing for the web there are a handfull of principles that I like to follow.
-First and foremost, designing for the medium, or as Frank Chimero puts it,
-following [“the grain of the Web”](http://frankchimero.com/writing/the-webs-grain/).
-The web is fluid and largely based on screens and other devices of varying sizes,
+First, design for the medium, or as Frank Chimero puts it,
+follow [“the grain of the Web”](http://frankchimero.com/writing/the-webs-grain/).
+The web is fluid, based on screens and devices of varying sizes,
 and typography on the Web should reflect that.
-Second, designing
+Second, design
 [content-out](http://alistapart.com/article/content-out-layout),
-which generally means designing around a strong typographical base since the large majority of Web content is text.
-And last, designing with modular scales. Things built on the Web should be fluid and infinitely scalable.
+which generally means designing around a strong typographical base since the large majority of Web content and UI is text.
+And last, design with modular scales.
+Things built on the Web should be fluid and infinitely scalable.
 Using modular scales in a design compliments that idea and keeps things simple in the face of growing complexity.
 
-## Growing Complexity
+## Handling Complexity
 
 Often when looking at how different sites have handled typography, I see similar problems arise.
-Instead of sticking to a limited, modular type scale, any one site might have hundreds of font sizes declared.
+Instead of sticking to a limited, modular scale, any one site might have hundreds of font sizes declared
+and many more margin and padding declarations.
 Instead of conforming to a common convention that could help users navigate and make sense of the underlying complexity,
 these sites have added to the cognitive overhead with little to no benefit for the user.
 In my experience, a page rarely needs more than six font sizes to effectively convey its information hierarchy,
@@ -40,20 +42,23 @@ These context-specific problems should inform the larger system, not break it.
 While these one-off cases may seem harmless in isolation,
 they often cause increasing complexity in a code base, and can lead to unintended side effects –
 increasing technical debt and slowing down development speed.
-I'm not entirely sure how to prevent this from happening,
-but I suspect that setting up a well-designed, flexible typographic system that works in many situations can help deter it.
+I’m not entirely sure how to prevent this from happening,
+but I suspect that setting up a well-designed,
+flexible typographic system that works in many situations can help deter it.
+
+Many sites attempt to document and control this with the aid of a style guide.
 
 ## Screen Media
 
-While many typographic conventions have been around for centuries,
-most of that knowledge was based on technology that involved physical pieces of metal and paper media.
-I think that the large majority of that knowledge is still applicable on the Web,
+Many typographic conventions have been around for centuries,
+but most of that knowledge was based on technology that involved physical pieces of metal and paper media.
+I think that the majority of that knowledge is still applicable on the Web,
 but I also think that the different constraints and capabilities of screens warrants some new approaches.
 
 ## Start with the Defaults
 
-The default type scale most browsers implement provides a great starting point for developing a robust typographic system.
-Since some of the values result in non-integers,
+The browser defaults for font sizes provide a great starting point for developing a robust typographic system.
+Since some of the values result in non-integer pixel values,
 I tend to normalize and round the numbers to make them more scalable and easier to work with. 
 
 Default | Pixels   | Normalized | Rem
@@ -67,18 +72,17 @@ inherit | 16px     | 16px       | 1rem
 
 ## Powers of Two
 
-Paying attention to numbers used for screen-based media, there are a lot of powers of two.
+Taking a look at the numbers used in screen-based media, there are a lot of powers of two.
 The default font size for most browsers is 16px, which is 2<sup>4</sup>.
-Since screens are digital media, everything boils down to binary and is based around bits and bytes.
-Because screens are directly tied to graphics memory,
-nearly all their different dimensions are based on sums of powers of two, and are often divisible by 16.
+Screens are digital media, and everything boils down to binary and is based around bits and bytes.
+Because they are directly tied to graphics memory,
+nearly all screen dimensions are based on sums of powers of two, and are often divisible by 16.
 For example, the [XGA](https://en.wikipedia.org/wiki/Graphics_display_resolution#XGA_.281024.C3.97768.29)
 display standard is 1024&times;768px, which converted to rems (or divided by 16) is 64&times;48rem.
 
-
 ## Modular Scales and Factors
 
-Working with numbers based on powers of two can result in an entire system of rational numbers (often integers).
+Working with numbers based on powers of two can result in an entire system of rational, often integer, numbers.
 The normalized scale above starts with 16px (1rem) as a base, and multiplies each by specific factors to create integers.
 Taking this normalized scale and setting a line-height of either 1.25 or 1.5 yields the following pixel values.
 
@@ -100,14 +104,68 @@ Fraction | Decimal
 1/8      | 0.125
 1/16     | 0.0625
 
-This is similar to how imperial units such as inches or units of time in Western music are divided.
+This is similar to how imperial units – such as inches, ounces, and pounds – or units of time in Western music are divided.
 While evolution gave us ten fingers, and base 10 number systems arised from that,
 working with powers of two can be a more suitable convention for digital media.
 
-## Line Height and White Space
+## 1rem as a Base Unit
 
+When setting type, especially body copy, 1rem doesn’t always fit the content and the typeface used,
+and it’s often desirable to use other font sizes.
+Instead of altering the base font size and dealing with less-than-ideal numbers and complex calculations,
+I keep 1rem as the default and derive all other typographic sizes from that base.
+For example, setting body copy to 1.125rem (18px) and keeping other UI elements tied to the base 1rem
+can make spacing and alignment adjustments much simpler and help create a natural rhythm in the visual design.
+
+## Line Height
+
+In other stylesheets I often see line-heights that are calculated as a quotient of the target line-height and the font size.
+This sometimes leads to irrational, magic numbers that need to be rounded and can cause unforeseen and unintended consequences.
+
+```css
+/* Calculated from the target line-height */
+.small-copy {
+  font-size: 14px;
+  line-height: 1.4285714; /* 20px, e.g. 20 divided by 14 */
+}
+.body-copy {
+  font-size: 18px;
+  line-height: 1.3888889; /* 25px, e.g. 25 divided by 18 */
+}
+```
+
+Not only do browsers handle subpixel rounding differently,
+this can cause issues when inheritance and scaling font sizes comes in to play,
+and commonly results in type scales with line height set for each font size, which means less DRY, less flexible code.
+
+Keeping numbers tied to the same system yields interesting results.
+Below the line heights calculate to seemingly unrelated numbers: 21 and 27px.
+
+```css
+/* Using 1rem as a base */
+.small-copy {
+  font-size: .875rem;
+  line-height: 1.5; /* 21px */
+}
+.body-copy {
+  font-size: 1.125rem;
+  line-height: 1.5; /* 27px */
+}
+```
+
+But when adding these values together, the sum is 48px,
+which is also the line-height for 32px with a 1.5 line height.
+Although it might not seem like much, when applied to an entire typographic system,
+it can yield many subtle relationships among parts of the design.
+
+## White Space
+
+
+
+
+<!--
 ## Separation of Concerns
-- font-size separate from weight and other attributes
+font-size separate from weight and other attributes -->
 
 <!--
 
