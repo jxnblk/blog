@@ -17,6 +17,24 @@ code {
   text-decoration: underline;
 }
 
+.prose table {
+  font-family: var(--font-family);
+  font-size: var(--h4);
+  width: 100%;
+  margin-bottom: var(--space-2);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.prose th {
+  text-align: left;
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--darken-2)
+}
+.prose td {
+  vertical-align: top;
+  border-bottom: 1px solid var(--darken-1)
+}
+
 :root {
   --h4: 1.125rem;
   --line-height: 1.625;
