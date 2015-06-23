@@ -10,7 +10,6 @@ related:
     href: http://jxnblk.com/writing/posts/color-palette-documentation-for-living-style-guides/
   - name: Basscss
     href: http://basscss.com
-draft: true
 ---
 
 
