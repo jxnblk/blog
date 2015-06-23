@@ -6,6 +6,8 @@ tags:
   - typography
   - math
 related:
+  - name: Color Palette Documentation for Living Style Guides
+    href: http://jxnblk.com/writing/posts/color-palette-documentation-for-living-style-guides/
   - name: Basscss
     href: http://basscss.com
 draft: true
@@ -16,7 +18,7 @@ When it comes to designing for the Web
 I like to follow a handful of general principles.
 First, design for the medium, or as Frank Chimero puts it,
 follow [“the grain of the Web”](http://frankchimero.com/writing/the-webs-grain/).
-The web is fluid - based on screens and devices of varying sizes –
+The Web is fluid - based on screens and devices of varying sizes –
 and typography on the Web should reflect that.
 Second, design [content-out](http://alistapart.com/article/content-out-layout),
 which usually means designing around a strong typographical base since the large majority of Web content and UI is text.
@@ -102,8 +104,7 @@ Fraction | Decimal
 1/8      | 0.125
 1/16     | 0.0625
 
-This is similar to how imperial units – such as inches, ounces, and pounds
-– or how units of time in Western music are divided.
+This is similar to how units of time in Western music are divided.
 While evolution gave us ten fingers, and base 10 number systems arised from that,
 working with powers of two can be a more suitable convention for digital media.
 
@@ -153,10 +154,12 @@ The line heights below are computed to seemingly unrelated numbers: 21 and 27px.
 }
 ```
 
-The sum of these two numbers is 48px,
+The sum of the font sizes .875rem and 1.125rem is 2rem,
+and the sum of these two line heights is 48px,
 which is the same line height for 32px type when set to 1.5.
-Although it might not seem like much, when applied to an entire typographic system,
-this approach can yield many subtle relationships among different parts of the design.
+Although it might not seem like much,
+using this approach across an entire typographic system
+can create many subtle relationships among different parts of the design.
 
 ## White Space
 
@@ -176,7 +179,10 @@ Step | Value
 3    | 2rem
 4    | 4rem
 
-## Conclusion
+Each one of these values can be derived from either halving or doubling the 1rem base
+and is related to the other values used for typography.
+
+## Building Better Systems
 
 This is just one approach to creating modular typographic systems on the Web
 and only scratches the surface on some of the underlying details.
@@ -184,9 +190,5 @@ Hopefully this can help inform building more robust,
 fault tolerant design systems that
 promote consistency, reduce technical debt,
 and make designing and developing for the Web more efficient and more enjoyable.
-
-<!--
-## Separation of Concerns
-font-size separate from weight and other attributes -->
 
 
