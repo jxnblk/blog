@@ -1,6 +1,6 @@
 ---
 title: Mathematical Web Typography
-created: 06-10-2015
+created: 06-23-2015
 tags:
   - css
   - typography
@@ -176,7 +176,7 @@ Step | Value
 3    | 2rem
 4    | 4rem
 
-## Conclusion 
+## Conclusion
 
 This is just one approach to creating modular typographic systems on the Web
 and only scratches the surface on some of the underlying details.
