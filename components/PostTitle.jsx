@@ -9,8 +9,10 @@ class PostTitle extends React.Component {
     return (
       <div>
         <h1 className='mt1 mb0'>{post.title}</h1>
-        {post.subhead ? <h2 className='mt0'>{post.subhead}</h2> : false }
-        <PostDate date={post.created} />
+        {post.subhead ? <h2 className='m0'>{post.subhead}</h2> : false }
+        <div className='mt1'>
+          <PostDate date={post.created} />
+        </div>
       </div>
     )
   }
