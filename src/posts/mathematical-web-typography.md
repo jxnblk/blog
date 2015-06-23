@@ -12,24 +12,24 @@ draft: true
 ---
 
 
-When it comes to designing for the web there are a handfull of principles that I like to follow.
+When it comes to designing for the Web
+I like to follow a handful of general principles.
 First, design for the medium, or as Frank Chimero puts it,
 follow [“the grain of the Web”](http://frankchimero.com/writing/the-webs-grain/).
-The web is fluid, based on screens and devices of varying sizes,
+The web is fluid - based on screens and devices of varying sizes –
 and typography on the Web should reflect that.
-Second, design
-[content-out](http://alistapart.com/article/content-out-layout),
-which generally means designing around a strong typographical base since the large majority of Web content and UI is text.
-And last, design with modular scales.
+Second, design [content-out](http://alistapart.com/article/content-out-layout),
+which usually means designing around a strong typographical base since the large majority of Web content and UI is text.
+And last, design with [modular scales](http://alistapart.com/article/more-meaningful-typography).
 Things built on the Web should be fluid and infinitely scalable.
-Using modular scales in a design compliments that idea and keeps things simple in the face of growing complexity.
+Using modular scales in a design compliments that idea and keeps things organized in the face of growing complexity.
 
 ## Handling Complexity
 
 Often when looking at how different sites have handled typography, I see similar problems arise.
 Instead of sticking to a limited, modular scale, any one site might have hundreds of font sizes declared
-and many more margin and padding declarations.
-Instead of conforming to a common convention that could help users navigate and make sense of the underlying complexity,
+and many more margin and padding declarations affecting the white space.
+Instead of conforming to a common convention that could help users make sense of the underlying complexity,
 these sites have added to the cognitive overhead with little to no benefit for the user.
 In my experience, a page rarely needs more than six font sizes to effectively convey its information hierarchy,
 and that’s exactly how many font sizes are provided with HTML headings.
@@ -37,23 +37,21 @@ and that’s exactly how many font sizes are provided with HTML headings.
 ## Context-Specific Approaches
 
 Instead of focusing on systems that enhance the content,
-designers often focus on singular context-specific problems and introduce magic numbers that quickly grow out of hand.
+design solutions often focus on singular context-specific problems and introduce 
+[magic numbers](https://css-tricks.com/magic-numbers-in-css/) that quickly grow out of hand.
 These context-specific problems should inform the larger system, not break it.
 While these one-off cases may seem harmless in isolation,
 they often cause increasing complexity in a code base, and can lead to unintended side effects –
 increasing technical debt and slowing down development speed.
-I’m not entirely sure how to prevent this from happening,
-but I suspect that setting up a well-designed,
-flexible typographic system that works in many situations can help deter it.
-
-Many sites attempt to document and control this with the aid of a style guide.
+While there may not be any one way to solve these problems,
+many sites try to address them with a style guide and well-defined typographic systems.
 
 ## Screen Media
 
 Many typographic conventions have been around for centuries,
 but most of that knowledge was based on technology that involved physical pieces of metal and paper media.
-I think that the majority of that knowledge is still applicable on the Web,
-but I also think that the different constraints and capabilities of screens warrants some new approaches.
+The majority of these conventions are still applicable on the Web,
+but I also think that the different constraints and capabilities of screens warrant some new approaches.
 
 ## Start with the Defaults
 
@@ -61,7 +59,7 @@ The browser defaults for font sizes provide a great starting point for developin
 Since some of the values result in non-integer pixel values,
 I tend to normalize and round the numbers to make them more scalable and easier to work with. 
 
-Default | Pixels   | Normalized | Rem
+Default | Pixels   | Normalized | Normalized Rem
 --------|----------|------------|--------
 0.67em  | 10.72px  | 12px       | .75rem
 0.83em  | 13.28px  | 14px       | .875rem
@@ -74,7 +72,7 @@ inherit | 16px     | 16px       | 1rem
 
 Taking a look at the numbers used in screen-based media, there are a lot of powers of two.
 The default font size for most browsers is 16px, which is 2<sup>4</sup>.
-Screens are digital media, and everything boils down to binary and is based around bits and bytes.
+Screens are digital media, and everything boils down to binary bits and bytes.
 Because they are directly tied to graphics memory,
 nearly all screen dimensions are based on sums of powers of two, and are often divisible by 16.
 For example, the [XGA](https://en.wikipedia.org/wiki/Graphics_display_resolution#XGA_.281024.C3.97768.29)
@@ -104,7 +102,8 @@ Fraction | Decimal
 1/8      | 0.125
 1/16     | 0.0625
 
-This is similar to how imperial units – such as inches, ounces, and pounds – or units of time in Western music are divided.
+This is similar to how imperial units – such as inches, ounces, and pounds
+– or how units of time in Western music are divided.
 While evolution gave us ten fingers, and base 10 number systems arised from that,
 working with powers of two can be a more suitable convention for digital media.
 
@@ -119,7 +118,7 @@ can make spacing and alignment adjustments much simpler and help create a natura
 
 ## Line Height
 
-In other stylesheets I often see line-heights that are calculated as a quotient of the target line-height and the font size.
+In many stylesheets I see line-heights that are calculated as a quotient of the target line-height and the font size.
 This sometimes leads to irrational, magic numbers that need to be rounded and can cause unforeseen and unintended consequences.
 
 ```css
@@ -135,11 +134,12 @@ This sometimes leads to irrational, magic numbers that need to be rounded and ca
 ```
 
 Not only do browsers handle subpixel rounding differently,
-this can cause issues when inheritance and scaling font sizes comes in to play,
-and commonly results in type scales with line height set for each font size, which means less DRY, less flexible code.
+this can also cause issues when inheritance and scaling font sizes comes in to play,
+which can lead to type scales with line heights coupled to each font size
+and less DRY, less flexible code.
 
-Keeping numbers tied to the same system yields interesting results.
-Below the line heights calculate to seemingly unrelated numbers: 21 and 27px.
+On the other hand, keeping numbers tied to the same system yields interesting results.
+The line heights below are computed to seemingly unrelated numbers: 21 and 27px.
 
 ```css
 /* Using 1rem as a base */
@@ -153,100 +153,40 @@ Below the line heights calculate to seemingly unrelated numbers: 21 and 27px.
 }
 ```
 
-But when adding these values together, the sum is 48px,
-which is also the line-height for 32px with a 1.5 line height.
+The sum of these two numbers is 48px,
+which is the same line height for 32px type when set to 1.5.
 Although it might not seem like much, when applied to an entire typographic system,
-it can yield many subtle relationships among parts of the design.
+this approach can yield many subtle relationships among different parts of the design.
 
 ## White Space
 
+Font sizes and line heights are only parts of a typographic system.
+The white space between headings, paragraphs, and other elements plays a crucial part
+in creating typographic color and visual rhythm.
+For many of the same reasons listed above, and to stick to a content-out approach,
+I tend to base margin and padding values on numbers derived from the same typographic system
+and use a modular scale.
 
+For example, [Basscss](http://basscss.com) uses the following scale for margin and padding declarations.
 
+Step | Value
+-----|------
+1    | .5rem
+2    | 1rem
+3    | 2rem
+4    | 4rem
+
+## Conclusion 
+
+This is just one approach to creating modular typographic systems on the Web
+and only scratches the surface on some of the underlying details.
+Hopefully this can help inform building more robust,
+fault tolerant design systems that
+promote consistency, reduce technical debt,
+and make designing and developing for the Web more efficient and more enjoyable.
 
 <!--
 ## Separation of Concerns
 font-size separate from weight and other attributes -->
-
-<!--
-
-- Principles
-  - Content-out
-  - Grain of the Web
-- Problem
-  - Magic Numbers
-  - Side Effects
-  - Base 10 Numbers
-- Solution
-  - Browser defaults
-  - 16px/1rem
-  - Powers of Two
-  - Screen resolutions
-  - 1 / Power of two
-  - Double/Half Modular Scales
-  - Line Height
-  - White Space
-  - Separation of Concerns
-
-
-I'm a huge fan of modular scales, content-out layouts, and designing things that follow the grain of the web.
-Over the years, I've used some off-the-cuff math to help when typesetting and handling layout.
-
-If you look at screen technology, you'll encounter a lot of powers of two or sums of powers of two.
-I don't know exactly how this works, but I suspect this has to do with bits and bytes.
-For each place added in a binary number, you'll have twice as many numbers.
-So once you've dedicated hardware to handle one more byte, you might as well use double what you had without it.
-
-On the web, numbers based around powers of two are your friend.
-The default font size for most browsers is 16px - a power of two that visually works well when doubling or halving,
-but not so well when working with thirds or other prime numbers.
-
-I like to base all modular scales off of this base unit.
-Occasionally, body copy will be adjusted depending on the font, but the base unit of measurement remains in tact.
-
-Often in stylesheets I see line-heights that are calculated as a quotient of the target line-height and the font size.
-This sometimes leads to irrational, magic numbers that need to be rounded and can cause unforeseen and unintended consequences.
-Not only to browsers handle subpixel rounding differently, this can cause issues when scaling font sizes comes in to play.
-Sometimes this leads to type scales with line height set for each font size, which means less DRY, less flexible code.
-
-Multipliers/Factors
-If you start with 16, half of that, 8px, is much too small for font size.
-When building out a scale, I tend to use a set of factors to multiply by.
-For example 1.25rem is 20px - a nice, sensible number.
-For line height, 1.5 is generally a good starting point, and the product of 16 x 1.5 is 24px, another nice, clean number.
-When looking at modular type scales and these multipliers, a natural pattern emerges.
-All the "good" factors for dealing with a 16px base tend to be increments of 1 divided by a power of two.
-For example, 1/2 = .5, 1/4 = .25, 1/8 = .125, etc.
-// This should be a table
-(This is also how inches are divided)
-
----
-
-- powers of two - bits and bytes
-- screen resolutions
-- 2 4 8 16 32 64 128 256
-- the rem 16px
-- white space
-- rational numbers
-- alignment
-- flexibility
-- magic numbers
-- deriving line height values from desired product
-- unintended side effects
-
-- base 10, can be halved not quartered
-
----
-
-- Content-out
-- Modular scales
-- Browser defaults
-- 16px & powers of two
-- Doubles and halves
-- uine-height
-- Margin/padding white space
-- separation of concerns in CSS
-
-
--->
 
 

@@ -4,6 +4,8 @@ import CrossPosted from './CrossPosted.jsx'
 import Related from './Related.jsx'
 import Issues from './Issues.jsx'
 import TweetButton from './TweetButton.jsx'
+import DraftMessage from './DraftMessage.jsx'
+//import HireMe from './HireMe.jsx'
 
 class Post extends React.Component {
 
@@ -11,16 +13,17 @@ class Post extends React.Component {
     var post = this.props.post
 
     return (
-      <div className='py2'>
+      <div className=''>
+        {post.draft ? <DraftMessage /> : false}
         <div
           className='prose mb3'
           dangerouslySetInnerHTML={{ __html: post.html }} />
-        <Related links={post.related} />
         <CrossPosted links={post.crossposted} />
-        <Issues title={post.title} />
-        <div className='mt3'>
+        <div className='py3'>
           <TweetButton {...this.props} />
         </div>
+        <Issues title={post.title} />
+        <Related links={post.related} />
       </div>
     )
   }
