@@ -30,7 +30,7 @@ With a static React site, the page loads just like any other static HTML,
 and the JavaScript kicks in whenever it’s downloaded.
 This is extremely helpful for combining documentation with interactive demonstrations,
 like [Colorable](http://jxnblk.com/colorable) or [Building SVG Icons with React](http://jxnblk.com/react-icons).
-Using React with webpack also allows you to consolidate the entire build process 
+Using React with webpack also allows you to consolidate the entire build process
 in Node and take advantage of anything in the npm ecosystem.
 Last but not least, React is just fun to use.
 
@@ -524,7 +524,7 @@ Import Basscss and set a new value for the `--font-family` custom property.
 @import 'basscss';
 
 :root {
-  --font-family: 'Avenier Next', 'Hevletica Neue', sans-serif;
+  --font-family: 'Avenir Next', 'Hevletica Neue', sans-serif;
 }
 ```
 
