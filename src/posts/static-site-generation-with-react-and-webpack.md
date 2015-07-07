@@ -578,7 +578,13 @@ You should now have a basic static site rendered with React.
 For a complete example, see the
 <a href="https://github.com/jxnblk/react-static-site-boilerplate" target="_blank">Boilerplate Demo</a>
 or check out the
-<a href="https://github.com/jxnblk/writing" target="_blank">source for this blog</a>, which uses a very similar approach.
+<a href="https://github.com/jxnblk/writing" target="_blank">source for this blog</a> or
+<a href="https://github.com/basscss/basscss.github.io" target="_blank">the Basscss docs</a>,
+which use a very similar approach.
+
+*Update* Matthew Jones has forked and created an
+<a href="https://github.com/oompt/react-static-boilerplate-ES6" target="_blank">ES6 boilerplate</a>
+if you'd like to learn more.
 
 ## Other Considerations and Improvements
 
