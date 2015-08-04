@@ -301,7 +301,7 @@ Stop the development server and run `npm run webpack`. This should generate two 
 In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.
 
 First, edit `entry.js` to change the render function
-from `React.renderToStaticMarkup` to `React.renderString`
+from `React.renderToStaticMarkup` to `React.renderToString`
 and add a conditional block that will only run client-side.
 
 ```js
