@@ -11,6 +11,6 @@ Static site built with React and Webpack.
 ## Cross-post to Medium.com
 
 ```
-npm run medium my-post-title
+npm run medium path/to/my-post-title.md
 ```
 

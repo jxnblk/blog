@@ -1,7 +1,6 @@
 // Node script for cross-posting to medium.com
 
 import fs from 'fs'
-import path from 'path'
 import medium from 'medium-sdk'
 import frontMatter from 'front-matter'
 import colors from 'colors'
@@ -10,7 +9,8 @@ import config from './config.json'
 
 const { medium: { token: TOKEN } } = config
 const args = process.argv.slice(2)
-const slug = args[0]
+const filename = args[0]
+const slug = filename.replace(/^src\/posts\/|\.md$/g, '')
 
 const client = new medium.MediumClient({
   clientId: TOKEN,
@@ -26,7 +26,7 @@ if (!args.length || typeof slug !== 'string') {
 let src
 
 try {
-  src = fs.readFileSync(path.join(__dirname, 'src', 'posts', `${slug}.md`), 'utf8')
+  src = fs.readFileSync(filename, 'utf8')
 } catch (e) {
   throw new Error('Could not read file from /src/posts/' + args[0])
 }
