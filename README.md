@@ -8,3 +8,9 @@ http://jxnblk.com/writing
 Static site built with React and Webpack.
 [Read more](http://jxnblk.com/writing/posts/static-site-generation-with-react-and-webpack/)
 
+## Cross-post to Medium.com
+
+```
+npm run medium my-post-title
+```
+
