@@ -186,7 +186,7 @@ You should see a page similar to the index but with the words <em>About componen
 <h2 id="render-to-static-markup"><a href="#render-to-static-markup">Render to Static Markup</a></h2><p>Stop the development server and run <code>npm run webpack</code>. This should generate two static <code>index.html</code> files in the root and <code>about</code> directories.</p>
 <h2 id="adding-client-side-js"><a href="#adding-client-side-js">Adding Client-Side JS</a></h2><p>In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.</p>
 <p>First, edit <code>entry.js</code> to change the render function
-from <code>React.renderToStaticMarkup</code> to <code>React.renderString</code>
+from <code>React.renderToStaticMarkup</code> to <code>React.renderToString</code>
 and add a conditional block that will only run client-side.</p>
 <pre><span class="hljs-comment">// entry.js</span>
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>)
@@ -409,7 +409,7 @@ or check out the
 <a href="https://github.com/basscss/basscss.github.io" target="_blank">the Basscss docs</a>,
 which use a very similar approach.</p>
 <p><em>Update</em> Matthew Jones has forked and created an
-<a href="https://github.com/oompt/react-static-boilerplate-ES6" target="_blank">ES6 boilerplate</a>
+<a href="https://github.com/ookk/react-static-boilerplate-ES6" target="_blank">ES6 boilerplate</a>
 if you&#39;d like to learn more.</p>
 <h2 id="other-considerations-and-improvements"><a href="#other-considerations-and-improvements">Other Considerations and Improvements</a></h2><p>Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven’t tried this so your mileage may vary.</p>
 <p>The <code>routes</code> array is passed in as props, and navigation links could be created dynamically rather than being hard coded.
