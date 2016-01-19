@@ -583,7 +583,7 @@ or check out the
 which use a very similar approach.
 
 *Update* Matthew Jones has forked and created an
-<a href="https://github.com/oompt/react-static-boilerplate-ES6" target="_blank">ES6 boilerplate</a>
+<a href="https://github.com/ookk/react-static-boilerplate-ES6" target="_blank">ES6 boilerplate</a>
 if you'd like to learn more.
 
 ## Other Considerations and Improvements
