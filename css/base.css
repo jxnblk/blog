@@ -1,6 +1,4 @@
 
-@import 'blk';
-
 pre { font-size: 75% }
 
 code {
@@ -13,6 +11,7 @@ code {
   text-decoration: none;
 }
 
+/*
 .prose p a {
   text-decoration: underline;
 }
@@ -34,15 +33,5 @@ code {
   vertical-align: top;
   border-bottom: 1px solid var(--darken-1)
 }
-
-:root {
-  --h4: 1.125rem;
-  --line-height: 1.625;
-  --space-1: .75rem;
-  --space-2: 1.5rem;
-  --space-3: 3rem;
-  --space-4: 6rem;
-  --container-width: 48em;
-  --link-color: inherit;
-}
+*/
 

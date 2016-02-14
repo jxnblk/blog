@@ -1,17 +1,18 @@
 
 import React from 'react'
-import CrossPosted from './CrossPosted.jsx'
-import Related from './Related.jsx'
-import Issues from './Issues.jsx'
-import TweetButton from './TweetButton.jsx'
-import DraftMessage from './DraftMessage.jsx'
-//import HireMe from './HireMe.jsx'
+import CrossPosted from './CrossPosted'
+import Related from './Related'
+import Issues from './Issues'
+import TweetButton from './TweetButton'
+import DraftMessage from './DraftMessage'
 
 class Post extends React.Component {
 
   render () {
     var post = this.props.post
 
+    console.log('Post props', Object.keys(this.props.post))
+    console.log('POST', post.title)
     return (
       <div className=''>
         {post.draft ? <DraftMessage /> : false}

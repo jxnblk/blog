@@ -1,9 +1,9 @@
 
 import React from 'react'
 import { chunk as _chunk } from 'lodash'
-import PostCard from './PostCard.jsx'
-import PostDate from './PostDate.jsx'
-import Pagination from './Pagination.jsx'
+import PostCard from './PostCard'
+import PostDate from './PostDate'
+import Pagination from './Pagination'
 
 class Index extends React.Component {
 
@@ -21,7 +21,7 @@ class Index extends React.Component {
     var chunks = _chunk(this.props.posts, this.props.pageSize)
     var page
     var index = 0
-    var posts 
+    var posts = []
     var previous = false
     var next = false
     if (params && params.page) {

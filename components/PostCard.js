@@ -1,6 +1,6 @@
 
 import React from 'react'
-import PostDate from './PostDate.jsx'
+import PostDate from './PostDate'
 
 class PostCard extends React.Component {
 

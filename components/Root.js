@@ -1,20 +1,23 @@
 
 import React from 'react'
 import { find as _find } from 'lodash'
-import Head from './Head.jsx'
-import Body from './Body.jsx'
+import Head from './Head'
+import Body from './Body'
 
 class Root extends React.Component {
-
   render () {
-    var post = false
-    var params = this.props.params || false
+    const { posts, params } = this.props
+
+    let post = false
+    console.log('Root props', Object.keys(this.props), params)
+
     if (params && params.post) {
-      var slug = params.post
-      post = _find(this.props.posts, function(p) {
+      const slug = params.post
+      post = _find(posts, function(p) {
         return p.slug === slug
       })
     }
+
     return (
       <html>
         <Head {...this.props} post={post} />
@@ -22,7 +25,6 @@ class Root extends React.Component {
       </html>
     )
   }
-
 }
 
 export default Root
