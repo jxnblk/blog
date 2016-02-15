@@ -6,8 +6,8 @@ class Issues extends React.Component {
   render () {
     var href = 'https://github.com/jxnblk/writing/issues/new?title=' + this.props.title
     return (
-      <div className='py3'>
-        <h4>Questions, Comments, Suggestions?</h4>
+      <div className=''>
+        <h4 className='mb0'>Questions, Comments, Suggestions?</h4>
         <a href={href}
           className='bold'
           target='_blank'>

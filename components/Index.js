@@ -1,9 +1,8 @@
 
 import React from 'react'
-import { chunk as _chunk } from 'lodash'
-import PostCard from './PostCard.jsx'
-import PostDate from './PostDate.jsx'
-import Pagination from './Pagination.jsx'
+import { chunk } from 'lodash'
+import PostCard from './PostCard'
+import Pagination from './Pagination'
 
 class Index extends React.Component {
 
@@ -18,10 +17,10 @@ class Index extends React.Component {
 
   render () {
     var params = this.props.params || false
-    var chunks = _chunk(this.props.posts, this.props.pageSize)
+    var chunks = chunk(this.props.posts, this.props.pageSize)
     var page
     var index = 0
-    var posts 
+    var posts = []
     var previous = false
     var next = false
     if (params && params.page) {
@@ -36,7 +35,7 @@ class Index extends React.Component {
     }
     posts = chunks[index]
     return (
-      <div className='py3'>
+      <div className=''>
         <ul className='list-reset'>
           {posts.map(this.renderPost)}
         </ul>

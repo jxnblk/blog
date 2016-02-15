@@ -10,8 +10,8 @@ class CrossPosted extends React.Component {
   render () {
     if (!this.props.links) { return false }
     return (
-      <div className='mt3 mb3 py3 border-top border-bottom'>
-        <p className='m0'>Cross posted at</p>
+      <div className='mt3 mb3'>
+        <p className='sc m0'>Cross posted at</p>
         <ul className='list-reset m0'>
           {this.props.links.map(this.renderLink)}
         </ul>
