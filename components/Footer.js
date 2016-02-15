@@ -6,12 +6,8 @@ var Footer = React.createClass({
 
   render: function () {
     return (
-      <footer className='center py4 border-top'>
-        <a href='/' className='h5 bold link-block'>
-          <Jxnblk size={48} />
-          <div>Made by Jxnblk</div>
-        </a>
-        <p className='h5 georgia mt2'><i>Typeset in Georgia by Matthew Carter</i></p>
+      <footer className='sc py4'>
+        <a href='/'>Made by Jxnblk</a>
       </footer>
     )
   }

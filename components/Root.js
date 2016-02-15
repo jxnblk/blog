@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { find as _find } from 'lodash'
 import Head from './Head'
 import Body from './Body'
 
@@ -12,9 +11,7 @@ class Root extends React.Component {
 
     if (params && params.post) {
       const slug = params.post
-      post = _find(posts, function(p) {
-        return p.slug === slug
-      })
+      post = posts.find(p => (p.slug === slug))
     }
 
     return (

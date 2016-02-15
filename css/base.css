@@ -6,62 +6,33 @@ html {
 }
 
 body {
-  font-family: Athelas, Palatino, Georgia, serif;
+  font-family:
+    Athelas,
+    Georgia,
+    serif;
   line-height: 1.625;
   margin: 0;
   color: #311;
   background-color: #fff;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   color: #059;
   color: inherit;
   text-decoration: none;
-  background-image: linear-gradient(transparent, transparent 93.75%, #ccc 93.75%, #ccc);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 6px;
+  background-image: linear-gradient(transparent, transparent 5px, #ccc 5px, #ccc);
 }
 
 a:hover {
-  background-image: linear-gradient(transparent, transparent 93.75%, tomato 93.75%, tomato);
-}
-
-h3,
-h4, h5, h6 {
-  font-size: 1rem;
-}
-
-h1, .f1 {
-  text-transform: uppercase;
-  letter-spacing: .2em;
-  font-size: .7rem;
-  font-size: .8rem;
-  font-style: normal;
-  font-weight: 600;
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-}
-
-abbr,
-.sc {
-  text-transform: uppercase;
-  letter-spacing: .2em;
-  font-size: .7rem;
-  font-weight: 600;
-
-}
-
-h2, .f2 {
-  font-size: 1rem;
-  font-weight: normal;
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: normal;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
-}
-
-h3, h4, h5 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  background-image: linear-gradient(transparent, transparent 4px, #0cf 4px, #0cf);
 }
 
 h1 a,
@@ -81,10 +52,51 @@ h3 a:hover,
 h4 a:hover,
 h5 a:hover,
 h6 a:hover {
-  background-image: linear-gradient(transparent, transparent 93.75%, tomato 93.75%, tomato);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 6px;
+  background-image: linear-gradient(transparent, transparent 4px, #0cf 4px, #0cf);
 }
 
+h3,
+h4, h5, h6 {
+  font-size: 1rem;
+}
 
+h1, .f1 {
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .7rem;
+  font-size: .8rem;
+  font-style: normal;
+  font-weight: 600;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+h2, .f2 {
+  font-size: 1rem;
+  font-weight: normal;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+h3, h4, h5 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+abbr,
+.sc {
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .7rem;
+  font-weight: 600;
+}
 
 p, dl, ol, ul, blockquote {
   margin-top: 1rem;
@@ -97,6 +109,10 @@ blockquote {
   margin-right: 2rem;
 }
 
+
+code, pre, samp {
+  font-family: 'Roboto Mono', monospace;
+}
 
 pre {
   font-size: 75%;
@@ -143,7 +159,16 @@ tr:last-child td {
 }
 
 .link-block {
-  display: block;
+  display: inline-block;
   text-decoration: none;
+  background-image: none;
 }
+
+.link-block:hover {
+  background-image: none;
+}
+
+.measure { max-width: 38em }
+
+.blue { color: #0cf }
 

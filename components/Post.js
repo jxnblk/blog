@@ -15,12 +15,10 @@ class Post extends React.Component {
       <div className=''>
         {post.draft ? <DraftMessage /> : false}
         <div
-          className='prose mb3'
+          className='mb4'
           dangerouslySetInnerHTML={{ __html: post.html }} />
         <CrossPosted links={post.crossposted} />
-        <div className='py3'>
-          <TweetButton {...this.props} />
-        </div>
+        <TweetButton {...this.props} />
         <Issues title={post.title} />
         <Related links={post.related} />
       </div>

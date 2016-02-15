@@ -1,31 +1,29 @@
 
 import React from 'react'
-import PostDate from './PostDate'
 
 class PostCard extends React.Component {
 
   render () {
-    var post = this.props.post
+    const { post } = this.props
+    const date = new Date(post.created).toDateString()
+
     return (
       <div>
         <h2 className='f1 mb0'>
           <a href={'/writing/posts/' + post.slug}>
             {post.title}
             {post.subhead &&
-              <div className='f2 mt0 mb1'>
+              <div className='f2 mt1 mb1'>
                 {post.subhead}
               </div>
             }
           </a>
         </h2>
-        <div className='sc'>{post.created}</div>
-        <p className='mt1 mb0'>{post.excerpt}</p>
-        <div className=''>
-          <a href={'/writing/posts/' + post.slug}
-            className='bold mr1'>
-            Read more
-          </a>
-        </div>
+        <p className='mb0'>{post.excerpt}</p>
+        <a href={'/writing/posts/' + post.slug}
+          className='sc'>
+          Read more
+        </a>
       </div>
     )
   }
