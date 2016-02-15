@@ -5,7 +5,7 @@ class DraftMessage extends React.Component {
 
   render () {
     return (
-      <div className='bold p1 mb2 bg-yellow rounded'>
+      <div className='bold py2 mb2' style={{ color: 'tomato' }}>
         This is a draft post and may not be final.
       </div>
     )

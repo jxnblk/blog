@@ -10,21 +10,24 @@ related:
 draft: true
 ---
 
-React is a great component-based UI library well suited to generating static HTML. One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going. I wanted to make it dead-simple to get started building static pages without the need to install tons of npm modules and configure webpack.
+React is a great way to generate static HTML with a component-based UI.
+One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going.
+I wanted to make it dead-simple to start building static pages with React
+and without the need to install tons of npm modules and configure webpack.
 
-That's where static-react comes in. I started this repo a while back, but never got it to work quite like I imagined.
+That’s where [static-react](https://github.com/jxnblk/static-react) comes in.
 
-## 1. Install Things
+## 1. Install Dependencies
 
 ```sh
 npm i -D react static-react babel-preset-es2015 babel-preset-react
 ```
 
-- presets are optional
+The Babel presets are optional, but make working with React much nicer, in my opinion.
 
-## 2. Npm Run Script
+## 2. Add a Run Script
 
-Add a run script to package.json.
+Add the following run script to package.json.
 
 ```json
 "scripts": {
@@ -32,7 +35,7 @@ Add a run script to package.json.
 }
 ```
 
-## 3. Babel Configuration
+## 3. Configure Babel (Optional) [*](#1)
 
 Add the following to package.json.
 
@@ -72,7 +75,8 @@ Open `index.html` and you should see the rendered Root component.
 
 ## Building Out a Page
 
-You'll certainly want more than just a heading in the final page. Build out some more components and run `npm start` to rebuild.
+You'll certainly want more than just a heading in the final page.
+Build out some more components and run `npm start` to rebuild.
 
 Here is an example set of starter components:
 
@@ -159,4 +163,10 @@ const Footer = () => (
 export default Footer
 ```
 
+- Note about installable babel configs?
+
+
+<p id="1" class="italic">
+  * Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.
+</p>
 
