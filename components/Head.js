@@ -1,7 +1,9 @@
 
 import React from 'react'
 
-import basscss from 'basscss/css/basscss.min.css'
+import bassLayout from 'basscss-layout/css/layout.css'
+import bassMargin from 'basscss-margin/css/margin.css'
+import bassPadding from 'basscss-padding/css/padding.css'
 import base from '../css/base.css'
 
 const Head = ({ title, post, keywords, author, ...props }) => {
@@ -27,7 +29,9 @@ const Head = ({ title, post, keywords, author, ...props }) => {
         <meta name='keywords' content={tags.join()} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <style dangerouslySetInnerHTML={{ __html: base }} />
-        <style dangerouslySetInnerHTML={{ __html: basscss }} />
+        <style dangerouslySetInnerHTML={{ __html: bassLayout }} />
+        <style dangerouslySetInnerHTML={{ __html: bassMargin }} />
+        <style dangerouslySetInnerHTML={{ __html: bassPadding }} />
         <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400' rel='stylesheet' />
       </head>
     )

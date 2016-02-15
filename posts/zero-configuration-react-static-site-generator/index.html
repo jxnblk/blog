@@ -1,0 +1,478 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Zero-Configuration React Static Site Generator | Writing</title><meta name="description" content="React is a great way to generate static HTML with a component-based UI.
+One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going.
+I wanted to make it dead-simple to start building static pages with React
+and without the need to install tons of npm modules and configure webpack."/><meta name="author" content="Brent Jackson"/><meta name="keywords" content="blog,writing,design,minimalism,react,static-site-generator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><style>
+* { box-sizing: border-box }
+
+html {
+  font-size: 20px;
+}
+
+body {
+  font-family:
+    Athelas,
+    Georgia,
+    serif;
+  line-height: 1.625;
+  margin: 0;
+  color: #311;
+  background-color: #fff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #059;
+  color: inherit;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 6px;
+  background-image: linear-gradient(transparent, transparent 5px, #ccc 5px, #ccc);
+}
+
+a:hover {
+  background-image: linear-gradient(transparent, transparent 4px, #0cf 4px, #0cf);
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+  text-decoration: none;
+  background: none;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 6px;
+  background-image: linear-gradient(transparent, transparent 4px, #0cf 4px, #0cf);
+}
+
+h3,
+h4, h5, h6 {
+  font-size: 1rem;
+}
+
+h1, .f1 {
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .7rem;
+  font-size: .8rem;
+  font-style: normal;
+  font-weight: 600;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+h2, .f2 {
+  font-size: 1rem;
+  font-weight: normal;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+h3, h4, h5 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+abbr,
+.sc {
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+p, dl, ol, ul, blockquote {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  font-style: italic;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+
+code, pre, samp {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 80%;
+}
+
+pre {
+  padding-left: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow-x: scroll;
+  border-left: 4px solid rgba(0, 0, 0, .0625);
+}
+
+code {
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(transparent, transparent 4px, #ccc 4px);
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 0;
+  line-height: 2rem;
+}
+
+th {
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  text-align: left;
+  border-bottom: 2px solid;
+}
+
+td {
+  border-bottom: 1px solid rgba(0, 0, 0, .0625);
+}
+
+tr:last-child td {
+  border: 0;
+}
+
+.link-block {
+  display: inline-block;
+  text-decoration: none;
+  background-image: none;
+}
+
+.link-block:hover {
+  background-image: none;
+}
+
+.measure { max-width: 38em }
+
+.blue { color: #0cf }
+
+</style><style>/* Basscss Layout */
+
+.inline       { display: inline }
+
+.block        { display: block }
+
+.inline-block { display: inline-block }
+
+.table        { display: table }
+
+.table-cell   { display: table-cell }
+
+.overflow-hidden { overflow: hidden }
+
+.overflow-scroll { overflow: scroll }
+
+.overflow-auto   { overflow: auto }
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table
+}
+
+.clearfix:after { clear: both }
+
+.left  { float: left }
+
+.right { float: right }
+
+.fit { max-width: 100% }
+
+.max-width-1 { max-width: 24rem }
+
+.max-width-2 { max-width: 32rem }
+
+.max-width-3 { max-width: 48rem }
+
+.max-width-4 { max-width: 64rem }
+
+.border-box { box-sizing: border-box }
+
+</style><style>/* Basscss Margin */
+
+.m0  { margin:        0 }
+
+.mt0 { margin-top:    0 }
+
+.mr0 { margin-right:  0 }
+
+.mb0 { margin-bottom: 0 }
+
+.ml0 { margin-left:   0 }
+
+.mx0 { margin-left:   0; margin-right:  0 }
+
+.my0 { margin-top:    0; margin-bottom: 0 }
+
+.m1  { margin:        .5rem }
+
+.mt1 { margin-top:        .5rem }
+
+.mr1 { margin-right:        .5rem }
+
+.mb1 { margin-bottom:        .5rem }
+
+.ml1 { margin-left:        .5rem }
+
+.mx1 { margin-left:        .5rem; margin-right:        .5rem }
+
+.my1 { margin-top:        .5rem; margin-bottom:        .5rem }
+
+.m2  { margin:        1rem }
+
+.mt2 { margin-top:        1rem }
+
+.mr2 { margin-right:        1rem }
+
+.mb2 { margin-bottom:        1rem }
+
+.ml2 { margin-left:        1rem }
+
+.mx2 { margin-left:        1rem; margin-right:        1rem }
+
+.my2 { margin-top:        1rem; margin-bottom:        1rem }
+
+.m3  { margin:        2rem }
+
+.mt3 { margin-top:        2rem }
+
+.mr3 { margin-right:        2rem }
+
+.mb3 { margin-bottom:        2rem }
+
+.ml3 { margin-left:        2rem }
+
+.mx3 { margin-left:        2rem; margin-right:        2rem }
+
+.my3 { margin-top:        2rem; margin-bottom:        2rem }
+
+.m4  { margin:        4rem }
+
+.mt4 { margin-top:        4rem }
+
+.mr4 { margin-right:        4rem }
+
+.mb4 { margin-bottom:        4rem }
+
+.ml4 { margin-left:        4rem }
+
+.mx4 { margin-left:        4rem; margin-right:        4rem }
+
+.my4 { margin-top:        4rem; margin-bottom:        4rem }
+
+.mxn1 { margin-left:        -.5rem; margin-right:        -.5rem; }
+
+.mxn2 { margin-left:        -1rem; margin-right:        -1rem; }
+
+.mxn3 { margin-left:        -2rem; margin-right:        -2rem; }
+
+.mxn4 { margin-left:        -4rem; margin-right:        -4rem; }
+
+.ml-auto { margin-left: auto }
+
+.mr-auto { margin-right: auto }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+</style><style>/* Basscss Padding */
+
+.p0  { padding: 0 }
+
+.pt0 { padding-top: 0 }
+
+.pr0 { padding-right: 0 }
+
+.pb0 { padding-bottom: 0 }
+
+.pl0 { padding-left: 0 }
+
+.px0 { padding-left: 0; padding-right:  0 }
+
+.py0 { padding-top: 0;  padding-bottom: 0 }
+
+.p1  { padding: .5rem }
+
+.pt1 { padding-top: .5rem }
+
+.pr1 { padding-right: .5rem }
+
+.pb1 { padding-bottom: .5rem }
+
+.pl1 { padding-left: .5rem }
+
+.py1 { padding-top: .5rem; padding-bottom: .5rem }
+
+.px1 { padding-left: .5rem; padding-right: .5rem }
+
+.p2  { padding: 1rem }
+
+.pt2 { padding-top: 1rem }
+
+.pr2 { padding-right: 1rem }
+
+.pb2 { padding-bottom: 1rem }
+
+.pl2 { padding-left: 1rem }
+
+.py2 { padding-top: 1rem; padding-bottom: 1rem }
+
+.px2 { padding-left: 1rem; padding-right: 1rem }
+
+.p3  { padding: 2rem }
+
+.pt3 { padding-top: 2rem }
+
+.pr3 { padding-right: 2rem }
+
+.pb3 { padding-bottom: 2rem }
+
+.pl3 { padding-left: 2rem }
+
+.py3 { padding-top: 2rem; padding-bottom: 2rem }
+
+.px3 { padding-left: 2rem; padding-right: 2rem }
+
+.p4  { padding: 4rem }
+
+.pt4 { padding-top: 4rem }
+
+.pr4 { padding-right: 4rem }
+
+.pb4 { padding-bottom: 4rem }
+
+.pl4 { padding-left: 4rem }
+
+.py4 { padding-top: 4rem; padding-bottom: 4rem }
+
+.px4 { padding-left: 4rem; padding-right: 4rem }
+
+</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Zero-Configuration React Static Site Generator</h2><div class="sc">Mon Feb 15 2016</div></header><div class=""><div class="mb4"><p>React is a great way to generate static HTML with a component-based UI.
+One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going.
+I wanted to make it dead-simple to start building static pages with React
+and without the need to install tons of npm modules and configure webpack.</p>
+<p>That’s where <a href="https://github.com/jxnblk/static-react">static-react</a> comes in. Here’s out to get started.</p>
+<h2 id="1-install-dependencies"><a href="#1-install-dependencies">1. Install Dependencies</a></h2><pre>npm i -D react static-react babel-preset-es2015 babel-preset-react</pre><p>The Babel presets are optional, but make working with React much nicer, in my opinion.</p>
+<h2 id="2-add-a-run-script"><a href="#2-add-a-run-script">2. Add a Run Script</a></h2><p>Add the following run script to package.json.</p>
+<pre>"scripts": {
+  "start": "static-react components/Root.js &gt; index.html"
+}</pre><h2 id="3-configure-babel-optional-a-href-1-a"><a href="#3-configure-babel-optional-a-href-1-a">3. Configure Babel (Optional) <a href="#1">*</a></a></h2><p>Add the following to package.json.</p>
+<pre>"babel": {
+  "presets": [
+    "es2015",
+    "react"
+  ]
+}</pre><h2 id="4-add-components"><a href="#4-add-components">4. Add Components</a></h2><p>Create a <code>components</code> directory and a <code>Root.js</code> React component.</p>
+<pre><span class="hljs-comment">// Root.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+
+class Root extends React.Component {
+  render () {
+    return &lt;h1&gt;Hello&lt;/h1&gt;
+  }
+}
+
+export default Root</pre><h2 id="5-build"><a href="#5-build">5. Build</a></h2><pre>npm start</pre><p>Open <code>index.html</code> and you should see the rendered Root component.</p>
+<h2 id="building-out-a-page"><a href="#building-out-a-page">Building Out a Page</a></h2><p>You&#39;ll certainly want more than just a heading in the final page.
+Build out some more components and run <code>npm start</code> to rebuild.</p>
+<p>Here is an example set of starter components:</p>
+<pre><span class="hljs-comment">// Root.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> Head <span class="hljs-keyword">from</span> <span class="hljs-string">'./Head'</span>
+<span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">'./Header'</span>
+<span class="hljs-keyword">import</span> Main <span class="hljs-keyword">from</span> <span class="hljs-string">'./Main'</span>
+<span class="hljs-keyword">import</span> Footer <span class="hljs-keyword">from</span> <span class="hljs-string">'./Footer'</span>
+
+class Root extends React.Component {
+  render () {
+    return (
+      &lt;html&gt;
+        &lt;Head title=<span class="hljs-string">'Static React Demo'</span> /&gt;
+        &lt;body className=<span class="hljs-string">'px3'</span>&gt;
+          &lt;Header title=<span class="hljs-string">'Hello'</span> /&gt;
+          &lt;Main /&gt;
+          &lt;Footer /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    )
+  }
+}
+
+export default Root</pre><pre><span class="hljs-comment">// Head.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+
+const Head = ({ title }) =&gt; (
+  &lt;head&gt;
+    &lt;meta charSet=<span class="hljs-string">'utf-8'</span> /&gt;
+    &lt;title&gt;{title}&lt;/title&gt;
+    &lt;link href=<span class="hljs-string">'https://npmcdn.com/basscss-basic@1.0.0/index.css'</span> rel=<span class="hljs-string">'stylesheet'</span> /&gt;
+    &lt;link href=<span class="hljs-string">'https://npmcdn.com/basscss@8.0.0/css/basscss.min.css'</span> rel=<span class="hljs-string">'stylesheet'</span> /&gt;
+    &lt;meta name=<span class="hljs-string">'viewport'</span> content=<span class="hljs-string">'width=device-width, initial-scale=1'</span> /&gt;
+  &lt;/head&gt;
+)
+
+export default Head</pre><pre><span class="hljs-comment">// Header.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+
+const Header = ({ title }) =&gt; (
+  &lt;header className=<span class="hljs-string">'py3'</span>&gt;
+    &lt;h1&gt;{title}&lt;/h1&gt;
+  &lt;/header&gt;
+)
+
+export default Header</pre><pre><span class="hljs-comment">// Main.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+
+const Main = () =&gt; (
+  &lt;main className=<span class="hljs-string">'py4'</span>&gt;
+    &lt;img src=<span class="hljs-string">'http://lorempixel.com/256/256/cats/'</span>
+      alt=<span class="hljs-string">'Kitten'</span> /&gt;
+  &lt;/main&gt;
+)
+
+export default Main</pre><pre><span class="hljs-comment">// Footer.js</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+
+const Footer = () =&gt; (
+  &lt;footer className=<span class="hljs-string">'py3'</span>&gt;
+    &lt;p&gt;© 2016 Brent Jackson&lt;/p&gt;
+  &lt;/footer&gt;
+)
+
+export default Footer</pre><p>If you have any thoughts on or issues with the static-react module, please check out the repo on <a href="https://github.com/jxnblk/static-react">GitHub</a>.</p>
+<p id="1" class="mt3 italic">
+  * Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.
+</p>
+
+</div><noscript></noscript><div class="inline-block"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Zero-Configuration React Static Site Generator" data-via="jxnblk" data-size="large">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></div><p>Questions, Comments, Suggestions? <a href="https://github.com/jxnblk/writing/issues/new?title=Zero-Configuration React Static Site Generator" target="_blank">Open an Issue</a></p><div class="py3"><h4 class="m0">Related</h4><ul class="list-reset m0"><li><a href="http://jxnblk.com/writing/posts/static-site-generation-with-react-and-webpack/" class="break-word">Static Site Generation with React and Webpack</a></li></ul></div></div><footer class="sc py4"><a href="/">Made by Jxnblk</a></footer><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "UA-4603832-6", "auto"); ga("send", "pageview");</script></body></html>

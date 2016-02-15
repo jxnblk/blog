@@ -35,8 +35,11 @@ class Index extends React.Component {
     }
     posts = chunks[index]
     return (
-      <div className=''>
-        <ul className='list-reset'>
+      <div>
+        <ul style={{
+            listStyle: 'none',
+            paddingLeft: 0
+          }}>
           {posts.map(this.renderPost)}
         </ul>
         <Pagination {...this.props}

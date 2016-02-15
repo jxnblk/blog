@@ -1,13 +1,12 @@
 ---
 title: 'Zero-Configuration React Static Site Generator'
-created: '02-14-2016'
+created: '02-15-2016'
 tags:
   - react
   - static-site-generator
 related:
   - name: Static Site Generation with React and Webpack
     href: http://jxnblk.com/writing/posts/static-site-generation-with-react-and-webpack/
-draft: true
 ---
 
 React is a great way to generate static HTML with a component-based UI.
@@ -15,7 +14,7 @@ One of the biggest hurdles to working with React is the amount of boilerplate an
 I wanted to make it dead-simple to start building static pages with React
 and without the need to install tons of npm modules and configure webpack.
 
-That’s where [static-react](https://github.com/jxnblk/static-react) comes in.
+That’s where [static-react](https://github.com/jxnblk/static-react) comes in. Here’s out to get started.
 
 ## 1. Install Dependencies
 
@@ -163,10 +162,10 @@ const Footer = () => (
 export default Footer
 ```
 
-- Note about installable babel configs?
+If you have any thoughts on or issues with the static-react module, please check out the repo on [GitHub](https://github.com/jxnblk/static-react).
 
 
-<p id="1" class="italic">
+<p id="1" class="mt3 italic">
   * Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.
 </p>
 

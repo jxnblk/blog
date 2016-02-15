@@ -112,18 +112,18 @@ blockquote {
 
 code, pre, samp {
   font-family: 'Roboto Mono', monospace;
+  font-size: 80%;
 }
 
 pre {
-  font-size: 75%;
   padding-left: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  overflow-x: scroll;
   border-left: 4px solid rgba(0, 0, 0, .0625);
 }
 
 code {
-  font-size: 75%;
   background-size: 100% 6px;
   background-repeat: no-repeat;
   background-position: bottom;

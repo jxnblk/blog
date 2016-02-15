@@ -2,7 +2,7 @@
 import React from 'react'
 
 const Header = ({ title, description, ...props }) => (
-  <header className='py2'>
+  <header>
     <h1 className='f2'>
       <a href='/writing'>Jxnblk / Writing</a>
     </h1>

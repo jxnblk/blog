@@ -10,7 +10,7 @@ class Pagination extends React.Component {
     if (typeof this.props.previous === 'number') {
       previous = (
         <a href={this.props.baseUrl + 'page/' + this.props.previous}
-          className='left bold'>
+          className='left'>
           Previous
         </a>
       )
@@ -18,7 +18,7 @@ class Pagination extends React.Component {
     if (typeof this.props.next === 'number') {
       next = (
         <a href={this.props.baseUrl + 'page/' + this.props.next}
-          className='right bold'>
+          className='right'>
           Next
         </a>
       )
