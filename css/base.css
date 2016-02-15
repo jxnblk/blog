@@ -1,37 +1,149 @@
 
-pre { font-size: 75% }
+* { box-sizing: border-box }
+
+html {
+  font-size: 20px;
+}
+
+body {
+  font-family: Athelas, Palatino, Georgia, serif;
+  line-height: 1.625;
+  margin: 0;
+  color: #311;
+  background-color: #fff;
+}
+
+a {
+  color: #059;
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(transparent, transparent 93.75%, #ccc 93.75%, #ccc);
+}
+
+a:hover {
+  background-image: linear-gradient(transparent, transparent 93.75%, tomato 93.75%, tomato);
+}
+
+h3,
+h4, h5, h6 {
+  font-size: 1rem;
+}
+
+h1, .f1 {
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .7rem;
+  font-size: .8rem;
+  font-style: normal;
+  font-weight: 600;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+abbr,
+.sc {
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: .7rem;
+  font-weight: 600;
+
+}
+
+h2, .f2 {
+  font-size: 1rem;
+  font-weight: normal;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+h3, h4, h5 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+  text-decoration: none;
+  background: none;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  background-image: linear-gradient(transparent, transparent 93.75%, tomato 93.75%, tomato);
+}
+
+
+
+p, dl, ol, ul, blockquote {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  font-style: italic;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+
+pre {
+  font-size: 75%;
+  padding-left: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid rgba(0, 0, 0, .0625);
+}
 
 code {
   font-size: 87.5%;
   font-weight: bold;
 }
 
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 0;
+  line-height: 2rem;
+}
+
+th {
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  text-align: left;
+  border-bottom: 2px solid;
+}
+
+td {
+  border-bottom: 1px solid rgba(0, 0, 0, .0625);
+}
+
+tr:last-child td {
+  border: 0;
+}
+
 .link-block {
   display: block;
   text-decoration: none;
 }
-
-/*
-.prose p a {
-  text-decoration: underline;
-}
-
-.prose table {
-  font-family: var(--font-family);
-  font-size: var(--h4);
-  width: 100%;
-  margin-bottom: var(--space-2);
-  border-collapse: separate;
-  border-spacing: 0;
-}
-.prose th {
-  text-align: left;
-  vertical-align: bottom;
-  border-bottom: 2px solid var(--darken-2)
-}
-.prose td {
-  vertical-align: top;
-  border-bottom: 1px solid var(--darken-1)
-}
-*/
 

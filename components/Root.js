@@ -9,7 +9,6 @@ class Root extends React.Component {
     const { posts, params } = this.props
 
     let post = false
-    console.log('Root props', Object.keys(this.props), params)
 
     if (params && params.post) {
       const slug = params.post

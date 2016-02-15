@@ -11,8 +11,6 @@ class Post extends React.Component {
   render () {
     var post = this.props.post
 
-    console.log('Post props', Object.keys(this.props.post))
-    console.log('POST', post.title)
     return (
       <div className=''>
         {post.draft ? <DraftMessage /> : false}

@@ -8,18 +8,21 @@ class PostCard extends React.Component {
     var post = this.props.post
     return (
       <div>
-        <a href={'/writing/posts/' + post.slug}
-          className='link-block'>
-          <h2 className='m0'>
+        <h2 className='f1 mb0'>
+          <a href={'/writing/posts/' + post.slug}>
             {post.title}
-          </h2>
-          {post.subhead ? <h3 className='mt0 mb1'>{post.subhead}</h3> : false }
-        </a>
-        <PostDate date={post.created} />
-        <p className='georgia h3 mt1 mb0'>{post.excerpt}</p>
+            {post.subhead &&
+              <div className='f2 mt0 mb1'>
+                {post.subhead}
+              </div>
+            }
+          </a>
+        </h2>
+        <div className='sc'>{post.created}</div>
+        <p className='mt1 mb0'>{post.excerpt}</p>
         <div className=''>
           <a href={'/writing/posts/' + post.slug}
-            className='h5 bold mr1'>
+            className='bold mr1'>
             Read more
           </a>
         </div>
