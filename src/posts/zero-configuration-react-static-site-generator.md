@@ -16,13 +16,15 @@ and without the need to install tons of npm modules and configure webpack.
 
 That’s where [static-react](https://github.com/jxnblk/static-react) comes in. Here’s out to get started.
 
+*Update: As of version 3.2.0, static-react includes Babel presets and they do not need to be installed separately. This post has been updated to reflect those changes.*
+
 ## 1. Install Dependencies
 
 ```sh
-npm i -D react static-react babel-preset-es2015 babel-preset-react
+npm i -D react static-react
 ```
 
-The Babel presets are optional, but make working with React much nicer, in my opinion.
+~~The Babel presets are optional, but make working with React much nicer, in my opinion.~~
 
 ## 2. Add a Run Script
 
@@ -34,18 +36,9 @@ Add the following run script to package.json.
 }
 ```
 
-## 3. Configure Babel (Optional) [*](#1)
+## ~~3. Configure Babel (Optional) [*](#1)~~
 
-Add the following to package.json.
-
-```json
-"babel": {
-  "presets": [
-    "es2015",
-    "react"
-  ]
-}
-```
+~~Add the following to package.json.~~
 
 ## 4. Add Components
 
@@ -166,6 +159,6 @@ If you have any thoughts on or issues with the static-react module, please check
 
 
 <p id="1" class="mt3 italic">
-  * Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.
+  <del>* Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.</del>
 </p>
 

@@ -385,17 +385,13 @@ One of the biggest hurdles to working with React is the amount of boilerplate an
 I wanted to make it dead-simple to start building static pages with React
 and without the need to install tons of npm modules and configure webpack.</p>
 <p>That’s where <a href="https://github.com/jxnblk/static-react">static-react</a> comes in. Here’s out to get started.</p>
-<h2 id="1-install-dependencies"><a href="#1-install-dependencies">1. Install Dependencies</a></h2><pre>npm i -D react static-react babel-preset-es2015 babel-preset-react</pre><p>The Babel presets are optional, but make working with React much nicer, in my opinion.</p>
+<p><em>Update: As of version 3.2.0, static-react includes Babel presets and they do not need to be installed separately. This post has been updated to reflect those changes.</em></p>
+<h2 id="1-install-dependencies"><a href="#1-install-dependencies">1. Install Dependencies</a></h2><pre>npm i -D react static-react</pre><p><del>The Babel presets are optional, but make working with React much nicer, in my opinion.</del></p>
 <h2 id="2-add-a-run-script"><a href="#2-add-a-run-script">2. Add a Run Script</a></h2><p>Add the following run script to package.json.</p>
 <pre>"scripts": {
   "start": "static-react components/Root.js &gt; index.html"
-}</pre><h2 id="3-configure-babel-optional-a-href-1-a"><a href="#3-configure-babel-optional-a-href-1-a">3. Configure Babel (Optional) <a href="#1">*</a></a></h2><p>Add the following to package.json.</p>
-<pre>"babel": {
-  "presets": [
-    "es2015",
-    "react"
-  ]
-}</pre><h2 id="4-add-components"><a href="#4-add-components">4. Add Components</a></h2><p>Create a <code>components</code> directory and a <code>Root.js</code> React component.</p>
+}</pre><h2 id="del-3-configure-babel-optional-a-href-1-a-del"><a href="#del-3-configure-babel-optional-a-href-1-a-del"><del>3. Configure Babel (Optional) <a href="#1">*</a></del></a></h2><p><del>Add the following to package.json.</del></p>
+<h2 id="4-add-components"><a href="#4-add-components">4. Add Components</a></h2><p>Create a <code>components</code> directory and a <code>Root.js</code> React component.</p>
 <pre><span class="hljs-comment">// Root.js</span>
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 
@@ -474,7 +470,7 @@ const Footer = () =&gt; (
 
 export default Footer</pre><p>If you have any thoughts on or issues with the static-react module, please check out the repo on <a href="https://github.com/jxnblk/static-react">GitHub</a>.</p>
 <p id="1" class="mt3 italic">
-  * Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.
+  <del>* Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.</del>
 </p>
 
 </div><noscript></noscript><div class="inline-block"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Zero-Configuration React Static Site Generator" data-via="jxnblk" data-size="large">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></div><p>Questions, Comments, Suggestions? <a href="https://github.com/jxnblk/writing/issues/new?title=Zero-Configuration React Static Site Generator" target="_blank">Open an Issue</a></p><div class="py3"><h4 class="m0">Related</h4><ul class="list-reset m0"><li><a href="http://jxnblk.com/writing/posts/static-site-generation-with-react-and-webpack/" class="break-word">Static Site Generation with React and Webpack</a></li></ul></div></div><footer class="sc py4"><a href="/">Made by Jxnblk</a></footer><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "UA-4603832-6", "auto"); ga("send", "pageview");</script></body></html>
