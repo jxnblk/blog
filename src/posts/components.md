@@ -38,7 +38,7 @@ can help ensure composability.
 
 ## Why is everything a “component?”
 
-Naming things is hard, there’s no debate there, but when you start to categorize different parts of a UI into pages, views, flows, atoms, molecules, materials, or kittens, you’ve already started to undermine the concept of composability, and it probably takes more time and effort to get an entire team of people to "agree upon" your proposed naming conventions than it’s worth.
+Naming things is hard, there’s no debate there, but when you start to categorize different parts of a UI into pages, views, flows, atoms, molecules, materials, or kittens, you’ve already started to undermine the concept of composability, and it probably takes more time and effort to get an entire team of people to “agree upon” your proposed naming conventions than it’s worth.
 
 The point of this is to think about everything as an interoperable system.
 You can slice and dice components in any way you see fit, and these components are likely to change and be fine tuned as a system is developed.
