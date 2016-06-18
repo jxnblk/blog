@@ -38,7 +38,7 @@ and that’s exactly how many font sizes are provided with HTML headings.
 ## Context-Specific Approaches
 
 Instead of focusing on systems that enhance the content,
-design solutions often focus on singular context-specific problems and introduce 
+design solutions often focus on singular context-specific problems and introduce
 [magic numbers](https://css-tricks.com/magic-numbers-in-css/) that quickly grow out of hand.
 These context-specific problems should inform the larger system, not break it.
 While these one-off cases may seem harmless in isolation,
@@ -58,7 +58,7 @@ but I also think that the different constraints and capabilities of screens warr
 
 The browser defaults for font sizes provide a great starting point for developing a robust typographic system.
 Since some of the values result in non-integer pixel values,
-I tend to normalize and round the numbers to make them more scalable and easier to work with. 
+I tend to normalize and round the numbers to make them more scalable and easier to work with.
 
 Default | Pixels   | Normalized | Normalized Rem
 --------|----------|------------|--------
@@ -81,7 +81,7 @@ display standard is 1024&times;768px, which converted to rems (or divided by 16)
 
 ## Modular Scales and Factors
 
-Working with numbers based on powers of two can result in an entire system of rational, often integer, numbers.
+Working with numbers based on powers of two can result in an entire system of sensible numbers – often integers.
 The normalized scale above starts with 16px (1rem) as a base, and multiplies each by specific factors to create integers.
 Taking this normalized scale and setting a line-height of either 1.25 or 1.5 yields the following pixel values.
 

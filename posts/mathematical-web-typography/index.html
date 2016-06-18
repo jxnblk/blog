@@ -406,7 +406,7 @@ these sites have added to the cognitive overhead with little to no benefit for t
 In my experience, a page rarely needs more than six font sizes to effectively convey its information hierarchy,
 and that’s exactly how many font sizes are provided with HTML headings.</p>
 <h2 id="context-specific-approaches"><a href="#context-specific-approaches">Context-Specific Approaches</a></h2><p>Instead of focusing on systems that enhance the content,
-design solutions often focus on singular context-specific problems and introduce 
+design solutions often focus on singular context-specific problems and introduce
 <a href="https://css-tricks.com/magic-numbers-in-css/">magic numbers</a> that quickly grow out of hand.
 These context-specific problems should inform the larger system, not break it.
 While these one-off cases may seem harmless in isolation,
@@ -420,7 +420,7 @@ The majority of these conventions are still applicable on the Web,
 but I also think that the different constraints and capabilities of screens warrant some new approaches.</p>
 <h2 id="start-with-the-defaults"><a href="#start-with-the-defaults">Start with the Defaults</a></h2><p>The browser defaults for font sizes provide a great starting point for developing a robust typographic system.
 Since some of the values result in non-integer pixel values,
-I tend to normalize and round the numbers to make them more scalable and easier to work with. </p>
+I tend to normalize and round the numbers to make them more scalable and easier to work with.</p>
 <table>
 <thead>
 <tr>
@@ -476,7 +476,7 @@ Because they are directly tied to graphics memory,
 nearly all screen dimensions are based on sums of powers of two, and are often divisible by 16.
 For example, the <a href="https://en.wikipedia.org/wiki/Graphics_display_resolution#XGA_.281024.C3.97768.29">XGA</a>
 display standard is 1024&times;768px, which converted to rems (or divided by 16) is 64&times;48rem.</p>
-<h2 id="modular-scales-and-factors"><a href="#modular-scales-and-factors">Modular Scales and Factors</a></h2><p>Working with numbers based on powers of two can result in an entire system of rational, often integer, numbers.
+<h2 id="modular-scales-and-factors"><a href="#modular-scales-and-factors">Modular Scales and Factors</a></h2><p>Working with numbers based on powers of two can result in an entire system of sensible numbers – often integers.
 The normalized scale above starts with 16px (1rem) as a base, and multiplies each by specific factors to create integers.
 Taking this normalized scale and setting a line-height of either 1.25 or 1.5 yields the following pixel values.</p>
 <table>
