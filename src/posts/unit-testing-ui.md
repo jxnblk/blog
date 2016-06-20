@@ -28,6 +28,13 @@ Taking a cue from test driven development, these tests should be written before 
 
 Any work that follows should be towards making those tests pass.
 
+You might notice that this looks suspiciously like a [user story](https://en.wikipedia.org/wiki/User_story),
+but I think this approach differs in a few ways.
+First, user stories attempt to capture the _how_ and _why_ in addition to the _what._
+These unit tests only concern themselves with _what_.
+Secondly, user stories are very much a part of Agile software development,
+whereas these are simply meant to measure the design of UI components.
+
 ## “Running” tests
 
 Once you have a potential component, or even better, several potential components,

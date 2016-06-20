@@ -396,6 +396,12 @@ What if those tests were actually applied in user acceptance testing, A/B tests,
     expect: User should be able to click the button
     expect: Conversions should be above 4%</pre><p>Taking a cue from test driven development, these tests should be written before any design work is started, and they should &quot;fail&quot;  – because there’s no design yet.</p>
 <p>Any work that follows should be towards making those tests pass.</p>
+<p>You might notice that this looks suspiciously like a <a href="https://en.wikipedia.org/wiki/User_story">user story</a>,
+but I think this approach differs in a few ways.
+First, user stories attempt to capture the <em>how</em> and <em>why</em> in addition to the <em>what.</em>
+These unit tests only concern themselves with <em>what</em>.
+Secondly, user stories are very much a part of Agile software development,
+whereas these are simply meant to measure the design of UI components.</p>
 <h2 id="running-tests"><a href="#running-tests">“Running” tests</a></h2><p>Once you have a potential component, or even better, several potential components,
 you’d be ready to start testing it against the unit tests previously written.
 These tests shouldn’t overshadow the typical formats and methodologies of user testing, A/B testing, etc.
