@@ -1,12 +1,30 @@
 ---
 title: Universal UI Components
 created: 07-06-2016
-draft: true
+related:
+  - name: Components
+    href: http://jxnblk.com/writing/components
+  - name: Universal Components
+    href: http://jxnblk.com/universal-components
+  - name: Rebass
+    href: http://jxnblk.com/rebass
+  - name: cxs
+    href: http://jxnblk.com/cxs
+  - name: React-cxs
+    href: http://jxnblk.com/react-cxs
+  - name: hyp
+    href: http://jxnblk.com/hyp
 ---
 
 For a while now, I’ve been interested in the idea of creating portable,
 interoperable functional UI components that can work in any DOM rendering library,
-whether it’s React, Preact, hyperscript, bel, yo-yo, or some other library.
+whether it’s
+[React](https://facebook.github.io/react/),
+[Preact](https://preactjs.com),
+[hyperscript](https://github.com/dominictarr/hyperscript),
+[bel](https://github.com/shama/bel),
+[yo-yo](https://github.com/maxogden/yo-yo),
+or some other library.
 
 The idea of functional UI components is a simple one: pass arguments into a function and it returns a representation of the DOM,
 usually with encapsulated styles and interactivity handled with callbacks to a global state, a la Redux.
