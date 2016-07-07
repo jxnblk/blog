@@ -89,7 +89,7 @@ const Button = ({ text, ...props }) => (
 export default Button
 ```
 
-There are still quite a few difference in syntax between JSX, hyperscript, and tagged template literals.
+There are still quite a few differences in syntax between JSX, hyperscript, and tagged template literals.
 For the sake of this post, I’ll focus on implementing these components in JSX.
 
 The first three examples are covered, but here’s what the hyperscript and yo-yo examples would look like in JSX.
