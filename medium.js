@@ -63,8 +63,9 @@ client.getUser((err, user) => {
     }
 
     console.log(
-      `Draft post "${title}" published to Medium.com`.green,
-      colors.blue(JSON.stringify(post, null, 2))
+      `Draft post "${title}" published to Medium.com`.green
+      // ,
+      // colors.blue(JSON.stringify(post, null, 2))
     )
     open(post.url)
   })
