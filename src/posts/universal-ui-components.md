@@ -4,7 +4,7 @@ created: 07-06-2016
 draft: true
 ---
 
-For a while now I’ve been interested in the idea of creating portable,
+For a while now, I’ve been interested in the idea of creating portable,
 interoperable functional UI components that can work in any DOM rendering library,
 whether it’s React, Preact, hyperscript, bel, yo-yo, or some other library.
 
@@ -71,10 +71,9 @@ const Button = ({ text, ...props }) => (
 export default Button
 ```
 
-Other than the differences in syntax between JSX, hyperscript, and tagged template literals,
-the biggest difference in the code for each of these components is the `import` statement at the top of the file.
+There are still quite a few difference in syntax between JSX, hyperscript, and tagged template literals.
+For the sake of this post, I’ll focus on implementing these components in JSX.
 
-For the sake of this post, I’ll focus on implementing components for each library in JSX.
 The first three examples are covered, but here’s what the hyperscript and yo-yo examples would look like in JSX.
 
 ```js
@@ -130,11 +129,11 @@ const Button = (props) => (
 export default Button
 ```
 
-At this point, the only difference in these components across libraries is the import statement.
+At this point, the only difference in these components across libraries is the `import` statement.
 Using a module bundler like webpack, even this can be abstracted out of the component module.
 
 Using webpack’s ProvidePlugin, the create element function can be exposed to all modules.
-This does involve having a variable in the global scope, but I think the trade off might be worth it in some cases.
+This does involve having a variable in the global scope, but I think the trade-off might be worth it in some cases.
 
 ```js
 // Custom create-element module
@@ -160,7 +159,7 @@ module.exports = {
 To avoid variable collisions, the function could be named anything (e.g. `__h`) as long as the `.babelrc` pragma matches.
 
 In addition to the name of the create element function, there are some slight differences in the naming conventions
-for HTML attributes and handling child elements.
+for HTML attributes (e.g. `htmlFor` and `className`) and handling child elements.
 Transforming these props could be handled in the custom function, but the implementation details have been left out of this post.
 
 With this configuration, the Button component can now be written like this:
@@ -178,13 +177,6 @@ React, Preact, hyperscript, and bel here: [Universal Components](http://jxnblk.c
 With a little bit of configuration, a whole library of UI components could be written in a manner that would allow
 the DOM rendering library to be swapped out at some point in the future,
 without the need to use a tool like [Codemod](https://github.com/facebook/codemod).
-There’s probably a way to wrap components in an open-source library like [Rebass](http://jxnblk.com/rebass)
+There’s probably even a way to wrap components in an open-source library like [Rebass](http://jxnblk.com/rebass)
 to make them compatible with more than one functional DOM rendering library as well.
 
-<!--
-Some attribute properties are named differently to avoid using js reserved words, notably className and htmlFor. By creating a prop transform function we can normalize the differences across libraries.
-
-Now the only difference in the component code is the import statement for the create element function. Using something like webpacks provide plugin, even this line of code can be normalized. This does involve exposing a global variable across all modules, but I think the trade off might be worth it.
-
-At this point we have a functional component module that can be rendered in react, Preact, deku, bel, or  yo-yo, without the need to resort to tools like codemod.
--->

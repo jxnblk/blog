@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Universal UI Components | Writing</title><meta name="description" content="For a while now I’ve been interested in the idea of creating portable,
+<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Universal UI Components | Writing</title><meta name="description" content="For a while now, I’ve been interested in the idea of creating portable,
 interoperable functional UI components that can work in any DOM rendering library,
 whether it’s React, Preact, hyperscript, bel, yo-yo, or some other library."/><meta name="author" content="Brent Jackson"/><meta name="keywords" content="blog,writing,design,minimalism"/><meta name="viewport" content="width=device-width, initial-scale=1"/><style>
 * { box-sizing: border-box }
@@ -378,7 +378,7 @@ tr:last-child td {
 
 .px4 { padding-left: 4rem; padding-right: 4rem }
 
-</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Universal UI Components</h2><div class="sc">Wed Jul 06 2016</div></header><div class=""><div class="py2 mb2" style="color:tomato;">This is a draft post and may not be final.</div><div class="mb4"><p>For a while now I’ve been interested in the idea of creating portable,
+</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Universal UI Components</h2><div class="sc">Wed Jul 06 2016</div></header><div class=""><div class="py2 mb2" style="color:tomato;">This is a draft post and may not be final.</div><div class="mb4"><p>For a while now, I’ve been interested in the idea of creating portable,
 interoperable functional UI components that can work in any DOM rendering library,
 whether it’s React, Preact, hyperscript, bel, yo-yo, or some other library.</p>
 <p>The idea of functional UI components is a simple one: pass arguments into a function and it returns a representation of the DOM,
@@ -424,10 +424,9 @@ import yo from 'yo-yo'
 const Button = ({ text, ...props }) =&gt; (
   yo`&lt;button ${props}&gt;${text}&lt;/button`
 )
-export default Button</pre><p>Other than the differences in syntax between JSX, hyperscript, and tagged template literals,
-the biggest difference in the code for each of these components is the import statement at the top of the file.</p>
-<p>For the sake of this post, I’ll focus on implementing components for each library in JSX.
-The first three examples are covered, but here’s what the hyperscript and yo-yo examples would look like in JSX.</p>
+export default Button</pre><p>There are still quite a few difference in syntax between JSX, hyperscript, and tagged template literals.
+For the sake of this post, I’ll focus on implementing these components in JSX.</p>
+<p>The first three examples are covered, but here’s what the hyperscript and yo-yo examples would look like in JSX.</p>
 <pre><span class="hljs-comment">// Hyperscript with JSX</span>
 <span class="hljs-keyword">import</span> h <span class="hljs-keyword">from</span> <span class="hljs-string">'hyperscript'</span>
 
@@ -463,10 +462,10 @@ they can all be named <code>h</code> within the components for cross-library com
 const Button = (props) =&gt; (
   &lt;button {...props} /&gt;
 )
-export default Button</pre><p>At this point, the only difference in these components across libraries is the import statement.
+export default Button</pre><p>At this point, the only difference in these components across libraries is the <code>import</code> statement.
 Using a module bundler like webpack, even this can be abstracted out of the component module.</p>
 <p>Using webpack’s ProvidePlugin, the create element function can be exposed to all modules.
-This does involve having a variable in the global scope, but I think the trade off might be worth it in some cases.</p>
+This does involve having a variable in the global scope, but I think the trade-off might be worth it in some cases.</p>
 <pre><span class="hljs-comment">// Custom create-element module</span>
 <span class="hljs-keyword">const</span> h = <span class="hljs-built_in">require</span>(<span class="hljs-string">'preact'</span>).h
 <span class="hljs-built_in">module</span>.exports = h</pre><pre><span class="hljs-comment">// Example webpack configuration for Preact</span>
@@ -482,7 +481,7 @@ This does involve having a variable in the global scope, but I think the trade o
   ]
 }</pre><p>To avoid variable collisions, the function could be named anything (e.g. <code>__h</code>) as long as the <code>.babelrc</code> pragma matches.</p>
 <p>In addition to the name of the create element function, there are some slight differences in the naming conventions
-for HTML attributes and handling child elements.
+for HTML attributes (e.g. <code>htmlFor</code> and <code>className</code>) and handling child elements.
 Transforming these props could be handled in the custom function, but the implementation details have been left out of this post.</p>
 <p>With this configuration, the Button component can now be written like this:</p>
 <pre><span class="hljs-keyword">const</span> Button = (props) =&gt; (
@@ -493,13 +492,6 @@ React, Preact, hyperscript, and bel here: <a href="http://jxnblk.com/universal-c
 <p>With a little bit of configuration, a whole library of UI components could be written in a manner that would allow
 the DOM rendering library to be swapped out at some point in the future,
 without the need to use a tool like <a href="https://github.com/facebook/codemod">Codemod</a>.
-There’s probably a way to wrap components in an open-source library like <a href="http://jxnblk.com/rebass">Rebass</a>
+There’s probably even a way to wrap components in an open-source library like <a href="http://jxnblk.com/rebass">Rebass</a>
 to make them compatible with more than one functional DOM rendering library as well.</p>
-<!--
-Some attribute properties are named differently to avoid using js reserved words, notably className and htmlFor. By creating a prop transform function we can normalize the differences across libraries.
-
-Now the only difference in the component code is the import statement for the create element function. Using something like webpacks provide plugin, even this line of code can be normalized. This does involve exposing a global variable across all modules, but I think the trade off might be worth it.
-
-At this point we have a functional component module that can be rendered in react, Preact, deku, bel, or  yo-yo, without the need to resort to tools like codemod.
--->
 </div><noscript></noscript><div class="inline-block"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Universal UI Components" data-via="jxnblk" data-size="large">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></div><p>Questions, Comments, Suggestions? <a href="https://github.com/jxnblk/writing/issues/new?title=Universal UI Components" target="_blank">Open an Issue</a></p><noscript></noscript></div><footer class="sc py4"><a href="/">Made by Jxnblk</a></footer><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "UA-4603832-6", "auto"); ga("send", "pageview");</script></body></html>
