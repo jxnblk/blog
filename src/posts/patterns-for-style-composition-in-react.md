@@ -4,6 +4,15 @@ created: 8-3-2016
 draft: true
 ---
 
+<!--
+What problems does this help solve?
+- Maintainability - tracking and updating down styles, deprecating old styles, DRY
+- Ease of use - the dream of Bootstrap, but made with "real" code
+- Speed up the time it takes to create new views and flows
+- Readability - styles are encapsulated at a component-level - shared concerns
+- Composability and flexbility - create new styles
+-->
+
 While React is extremely flexible in terms of how you can structure your application’s UI,
 I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.
@@ -13,12 +22,12 @@ instead I’ll be focusing primarily on the visible and interactive parts of the
 
 ## Stateless Functional UI Components
 
-Generally, I like to keep styles out of the parts of the app that are tied to business logic and state.
-That means routes, views, containers, forms, and layouts should not have any styling or classes in them.
+Generally, I like to keep styles separated from the parts of the app that are tied to business logic and state.
+That means routes, views, containers, forms, layouts, etc. should not have any styling or classes in them.
 Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
 sometimes referred to as *presentational* components.
 
-A hypothetical form component render function might look something like this:
+For example, a form component render function might look something like this:
 
 ```js
 <form onSubmit={this.handleSubmit}>
@@ -73,9 +82,7 @@ const Button = ({
 ```
 
 I’ve used inline styles here for readability and to help demonstrate how this works,
-but using a CSS-in-JS solution,
-or even something like CSS modules can easily be swapped out,
-and won’t have any affect on the form component above.
+but any CSS-in-JS solution can be used instead and won’t have any affect on the form component above.
 By keeping all styling encapsulated in this component,
 the rest of the application doesn’t need to know anything about the Button beyond its props API.
 
@@ -280,8 +287,8 @@ const blueAlpha = [
 ## Base Component
 
 Beyond just importing style values, there is a tremendous amount of flexibility when it comes to component
-composition when using React.
-Take the Button component from above, and we’ll extract some of the style details to props to make it more reusable.
+composition when using React, since components are essentially just functions.
+Take the Button component from above, and we’ll change some of the style details to props to make it more reusable.
 
 ```js
 const Button = ({
@@ -352,7 +359,7 @@ const ButtonOutline = (props) => <Button {...props} outline />
 
 This pattern lends itself well to layout components as well.
 Assume we have a generic Box component that accepts props for various layout styles.
-This base layout component can then be extended to grid system components and other primitives.
+This base layout component can then be used to create grid system components and other primitives.
 
 ```js
 const Grid = (props) => (
@@ -436,7 +443,7 @@ Keep in mind, that these components are just a few examples and your needs will 
 
 ## Higher Order Components
 
-I'm generally a fan of keeping most of an applications state at the top level of a react tree,
+I'm generally a fan of keeping most of an applications state at the top level of a React tree,
 often with something like redux,
 however, sometimes there are isolated UI components that need a minimal amount of state for interaction.
 

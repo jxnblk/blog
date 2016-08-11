@@ -378,16 +378,24 @@ tr:last-child td {
 
 .px4 { padding-left: 4rem; padding-right: 4rem }
 
-</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Patterns for Style Composition in React</h2><div class="sc">Wed Aug 03 2016</div></header><div class=""><div class="py2 mb2" style="color:tomato;">This is a draft post and may not be final.</div><div class="mb4"><p>While React is extremely flexible in terms of how you can structure your application’s UI,
+</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Patterns for Style Composition in React</h2><div class="sc">Wed Aug 03 2016</div></header><div class=""><div class="py2 mb2" style="color:tomato;">This is a draft post and may not be final.</div><div class="mb4"><!--
+What problems does this help solve?
+- Maintainability - tracking and updating down styles, deprecating old styles, DRY
+- Ease of use - the dream of Bootstrap, but made with "real" code
+- Speed up the time it takes to create new views and flows
+- Readability - styles are encapsulated at a component-level - shared concerns
+- Composability and flexbility - create new styles
+-->
+<p>While React is extremely flexible in terms of how you can structure your application’s UI,
 I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.</p>
 <p>I won’t get into approaches for state management or handling the business logic of your app,
 instead I’ll be focusing primarily on the visible and interactive parts of the UI.</p>
-<h2 id="stateless-functional-ui-components"><a href="#stateless-functional-ui-components">Stateless Functional UI Components</a></h2><p>Generally, I like to keep styles out of the parts of the app that are tied to business logic and state.
-That means routes, views, containers, forms, and layouts should not have any styling or classes in them.
+<h2 id="stateless-functional-ui-components"><a href="#stateless-functional-ui-components">Stateless Functional UI Components</a></h2><p>Generally, I like to keep styles separated from the parts of the app that are tied to business logic and state.
+That means routes, views, containers, forms, layouts, etc. should not have any styling or classes in them.
 Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
 sometimes referred to as <em>presentational</em> components.</p>
-<p>A hypothetical form component render function might look something like this:</p>
+<p>For example, a form component render function might look something like this:</p>
 <pre>&lt;form onSubmit={<span class="hljs-keyword">this</span>.handleSubmit}&gt;
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Heading</span> <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">Input</span>
@@ -431,9 +439,7 @@ and the styling simply becomes an implementation detail.</p>
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">style</span>=<span class="hljs-value">{sx}</span> /&gt;</span>
   )</span>
 }</pre><p>I’ve used inline styles here for readability and to help demonstrate how this works,
-but using a CSS-in-JS solution,
-or even something like CSS modules can easily be swapped out,
-and won’t have any affect on the form component above.
+but any CSS-in-JS solution can be used instead and won’t have any affect on the form component above.
 By keeping all styling encapsulated in this component,
 the rest of the application doesn’t need to know anything about the Button beyond its props API.</p>
 <h2 id="styles-module"><a href="#styles-module">Styles Module</a></h2><p>You may have noticed that a few property values were hard-coded into the Button example.
@@ -576,8 +582,8 @@ const shade = [
   alpha(blue)(<span class="hljs-number">3</span> / <span class="hljs-number">4</span>),
   alpha(blue)(<span class="hljs-number">1</span>)
 ]</pre><h2 id="base-component"><a href="#base-component">Base Component</a></h2><p>Beyond just importing style values, there is a tremendous amount of flexibility when it comes to component
-composition when using React.
-Take the Button component from above, and we’ll extract some of the style details to props to make it more reusable.</p>
+composition when using React, since components are essentially just functions.
+Take the Button component from above, and we’ll change some of the style details to props to make it more reusable.</p>
 <pre><span class="hljs-keyword">const</span> Button = ({
   big,
   color = colors.white,
@@ -627,7 +633,7 @@ const ButtonGreen = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-t
 const ButtonRed = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">backgroundColor</span>=<span class="hljs-value">{colors.red}</span> /&gt;</span>
 const ButtonOutline = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">outline</span> /&gt;</span></span></pre><p>This pattern lends itself well to layout components as well.
 Assume we have a generic Box component that accepts props for various layout styles.
-This base layout component can then be extended to grid system components and other primitives.</p>
+This base layout component can then be used to create grid system components and other primitives.</p>
 <pre><span class="hljs-keyword">const</span> Grid = (props) =&gt; (
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Box</span> {<span class="hljs-attribute">...props</span>}
     <span class="hljs-attribute">display</span>=<span class="hljs-value">'inline-block'</span>
@@ -694,7 +700,7 @@ const CapsButton = ({ children, ...props }) =&gt; (
     <span class="hljs-tag">&lt;/<span class="hljs-title">Caps</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">Button</span>&gt;</span>
 )</span></pre><p>Keep in mind, that these components are just a few examples and your needs will vary greatly on an app-by-app basis.</p>
-<h2 id="higher-order-components"><a href="#higher-order-components">Higher Order Components</a></h2><p>I&#39;m generally a fan of keeping most of an applications state at the top level of a react tree,
+<h2 id="higher-order-components"><a href="#higher-order-components">Higher Order Components</a></h2><p>I&#39;m generally a fan of keeping most of an applications state at the top level of a React tree,
 often with something like redux,
 however, sometimes there are isolated UI components that need a minimal amount of state for interaction.</p>
 <p>One example of this is a carousel, where the state of the current slide generally doesn’t need to persist across page views.
