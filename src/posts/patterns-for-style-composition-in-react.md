@@ -39,8 +39,8 @@ A hypothetical form component render function might look something like this:
 ```
 
 Notice how none of the elements have a `className` or `style` prop.
-Each UI component used here encapsulates its own styling, and the styling simply becomes an
-implementation detail.
+Each UI component used here encapsulates its own styling,
+and the styling simply becomes an implementation detail.
 
 An example Button component might look something like the following:
 
@@ -72,15 +72,17 @@ const Button = ({
 }
 ```
 
-I’ve used inline styles here for readability and to help demonstrate how this works, but using a CSS-in-JS solution,
-or even something like CSS modules can easily be swapped out, and won’t have any affect on the form component above.
-By keeping all styling encapsulated in this component, the rest of the application doesn’t need to know anything about the Button
-beyond its props API.
+I’ve used inline styles here for readability and to help demonstrate how this works,
+but using a CSS-in-JS solution,
+or even something like CSS modules can easily be swapped out,
+and won’t have any affect on the form component above.
+By keeping all styling encapsulated in this component,
+the rest of the application doesn’t need to know anything about the Button beyond its props API.
 
 ## Styles Module
 
-You may have noticed that a few properties were hard-coded into the Button example.
-I wouldn’t recommend hard-coding things in like that.
+You may have noticed that a few property values were hard-coded into the Button example.
+Generally, I wouldn’t recommend hard-coding things in like that.
 Any values that are likely to be used across different UI components should be split into their own module.
 
 Here is a simple example module to start with:
@@ -148,7 +150,7 @@ const Button = ({
 ```
 
 The style object could store anything related to styling that is shared across components,
-including: borders, border radii, shadows, animation duration, etc.
+including borders, border radii, shadows, animation duration, etc.
 
 You could even export more elaborate combinations of styles like the following:
 
@@ -165,7 +167,7 @@ But I’d recommend delegating combinations like these to components and using c
 ## Style Functions
 
 Since we’re using JavaScript, we can also employ helper functions for styling elements.
-For example, a function to create `rgba` values of black is very convenient.
+For example, a function to create `rgba` values of black can be very handy.
 
 ```js
 const darken = (n) => `rgba(0, 0, 0, ${n})`
@@ -173,7 +175,7 @@ const darken = (n) => `rgba(0, 0, 0, ${n})`
 darken(1 / 8) // 'rgba(0, 0, 0, 0.125)'
 ```
 
-Functions like this can then be used to create scale array to help keep things consistent.
+Functions like this can then be used to create a value scale array to help keep things consistent.
 
 ```js
 const shade = [
@@ -191,13 +193,60 @@ const shade = [
 shade[4] // 'rgba(0, 0, 0, 0.5)'
 ```
 
-TK: margin/padding scale function
+Another example would be creating a scale for margin and padding to help keep visual rhythm consistent.
+
+```js
+// Modular powers of two scale
+const scale = [
+  0,
+  8,
+  16,
+  32,
+  64
+]
+
+// Functions to get partial style objects
+const createScaledPropertyGetter = (scale) => (prop) => (x) => {
+  return (typeof x === 'number' && typeof scale[x] === 'number')
+    ? { [prop]: scale[x] }
+    : null
+}
+const getScaledProperty = createScaledPropertyGetter(scale)
+
+export const getMargin = getScaledProperty('margin')
+export const getPadding = getScaledProperty('padding')
+```
+
+```js
+// Style function usage
+const Box = ({
+  m,
+  p,
+  ...props
+}) => {
+  const sx = {
+    ...getMargin(m),
+    ...getPadding(p)
+  }
+
+  return <div {...props} style={sx} />
+}
+```
+
+```js
+// Component usage
+<div>
+  <Box m={2} p={3}>
+    A box with 16px margin and 32px padding
+  </Box>
+</div>
+```
 
 ## Npm Modules
 
-While the function above is a fairly simple one,
+While the rgba color function above is a fairly simple one,
 sometimes more complex color transformations can be helpful when creating UI.
-Well, we’re in luck, because we can use literally anything on npm.
+Well, we’re in luck, because we can use literally anything on [npm](https://npmjs.com).
 
 Instead of the `darken` function above, here is an example using [`chroma-js`](https://www.npmjs.com/package/chroma-js)’s `alpha` function.
 
@@ -210,6 +259,8 @@ const darken = alpha('#000')
 
 const shade = [
   darken(0),
+  darken(1 / 8),
+  darken(1 / 4),
   // ...
 ]
 ```
@@ -263,11 +314,11 @@ const Button = ({
 }
 ```
 
-The `color` and `backgroundColor` properties have been moved up to the component's props.
+The `color` and `backgroundColor` properties have been moved up to the component’s props.
 Additionally, we’ve added a `big` prop to adjust the padding top and bottom.
 
 Now this component is fine by itself, but what if we want a secondary button style?
-Doing the following would become tedious very quickly:
+Doing the following would become tedious and error prone very quickly:
 
 ```js
 <Button
@@ -290,10 +341,98 @@ const ButtonSecondary = (props) => (
 )
 ```
 
-<!--
-- Base component
-  - Button/ButtonPrimary/ButtonSecondary/ButtonOutline/IconButton
-  -->
+By adjusting the props API of the base Button component, an entire set of button styles can be created.
+
+```js
+const ButtonBig = (props) => <Button {...props} big />
+const ButtonGreen = (props) => <Button {...props} backgroundColor={colors.green} />
+const ButtonRed = (props) => <Button {...props} backgroundColor={colors.red} />
+const ButtonOutline = (props) => <Button {...props} outline />
+```
+
+This pattern lends itself well to layout components as well.
+Assume we have a generic Box component that accepts props for various layout styles.
+This base layout component can then be extended to grid system components and other primitives.
+
+```js
+const Grid = (props) => (
+  <Box {...props}
+    display='inline-block'
+    verticalAlign='top'
+    px={2} />
+)
+
+const Half = (props) => (
+  <Grid {...props}
+    width={1 / 2} />
+)
+
+const Third = (props) => (
+  <Grid {...props}
+    width={1 / 3} />
+)
+
+const Quarter = (props) => (
+  <Grid {...props}
+    width={1 / 4} />
+)
+
+const Flex = (props) => (
+  <Box {...props}
+    display='flex' />
+)
+
+const FlexAuto = (props) => (
+  <Box {...props}
+    flex='1 1 auto' />
+)
+```
+
+Typography styles are another great candidate for building up with composition.
+By using a base typographic component, you can help ensure consistency and keep your styling DRY in a component-based architecture.
+
+```js
+import React from 'react'
+import { alternateFont, typeScale, boldFontWeight } from './styles'
+
+const Text = ({
+  tag = 'span',
+  size = 4,
+  alt,
+  center,
+  bold,
+  caps,
+  ...props
+}) => {
+  const Tag = tag
+  const sx = {
+    fontFamily: alt ? alternateFont : null,
+    fontSize: typeScale[size],
+    fontWeight: bold ? boldFontWeight : null,
+    textAlign: center ? 'center' : null,
+    textTransform: caps ? 'uppercase' : null
+  }
+
+  return <Tag {...props} style={sx} />
+}
+```
+
+```js
+const LeadText = (props) => <Text {...props} size={3} />
+const Caps = (props) => <Text {...props} caps />
+const MetaText = (props) => <Text {...props} size={5} caps />
+const AltParagraph = (props) => <Text {...props} tag='p' alt />
+
+const CapsButton = ({ children, ...props }) => (
+  <Button {...props}>
+    <Caps>
+      {children}
+    </Caps>
+  </Button>
+)
+```
+
+Keep in mind, that these components are just a few examples and your needs will vary greatly on an app-by-app basis.
 
 ## Higher Order Components
 
@@ -314,16 +453,17 @@ while a more complex one might include image thumbnails of each slide across the
 Both of these can use the same hoc to handle their state.
 
 
+<!--
+  - Toggle example
+-->
+
+<!--
 Higher order components can also be used to encapsulate frequently used generic styling,
 for example margin, padding, and display.
 This is the pattern used in Reflexbox, which is an extension of an even simpler Robox component.
 
 These higher order components wrap other components and add helper props such as m, mb, p, px, etc.
 They can even be abstracted into convenient components like boxes and grid columns
+-->
 
-
-<!--
-- Higher order components
-  - Carousel/Cycle hoc example
-  -->
 
