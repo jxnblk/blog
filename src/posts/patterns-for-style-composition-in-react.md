@@ -4,20 +4,19 @@ created: 8-3-2016
 draft: true
 ---
 
-While React is extremely flexible in terms of how you can structure your application's UI
-– it essentially leaves that up to you to figure out –,
-I've found that a few patterns for style composition have helped me keep things
+While React is extremely flexible in terms of how you can structure your application’s UI,
+I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.
 
-I won't get into approaches for state management or handling the business logic of your app,
-instead I'll be focusing primarily on the visible and interactive parts of the UI.
+I won’t get into approaches for state management or handling the business logic of your app,
+instead I’ll be focusing primarily on the visible and interactive parts of the UI.
 
 ## Stateless Functional UI Components
 
 Generally, I like to keep styles out of the parts of the app that are tied to business logic and state.
 That means routes, views, containers, forms, and layouts should not have any styling or classes in them.
-Instead these more functional parts of the app should be composed of primarily stateless functional UI components
-– or presentational components, as some might call them.
+Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
+sometimes referred to as *presentational* components.
 
 A hypothetical form component render function might look something like this:
 
@@ -73,15 +72,15 @@ const Button = ({
 }
 ```
 
-I've used inline styles here for readability and to help demonstrate how this works, but using a CSS-in-JS solution,
-or even something like CSS modules can easily be swapped out, and won't have any affect on the form component above.
-By keeping all styling encapsulated in this component, the rest of the application doesn't need to know anything about the Button
+I’ve used inline styles here for readability and to help demonstrate how this works, but using a CSS-in-JS solution,
+or even something like CSS modules can easily be swapped out, and won’t have any affect on the form component above.
+By keeping all styling encapsulated in this component, the rest of the application doesn’t need to know anything about the Button
 beyond its props API.
 
 ## Styles Module
 
 You may have noticed that a few properties were hard-coded into the Button example.
-I wouldn't recommend hard-coding things in like that.
+I wouldn’t recommend hard-coding things in like that.
 Any values that are likely to be used across different UI components should be split into their own module.
 
 Here is a simple example module to start with:
@@ -149,7 +148,7 @@ const Button = ({
 ```
 
 The style object could store anything related to styling that is shared across components,
-including: borders, border radii, shadows, animation durations, etc.
+including: borders, border radii, shadows, animation duration, etc.
 
 You could even export more elaborate combinations of styles like the following:
 
@@ -161,11 +160,11 @@ export const cardStyle = {
 }
 ```
 
-But I'd recommend delegating combinations like these to components and using composition instead, as I'll show below.
+But I’d recommend delegating combinations like these to components and using composition instead, as I’ll show below.
 
 ## Style Functions
 
-Since we're using JavaScript, we can also employ helper functions for styling elements.
+Since we’re using JavaScript, we can also employ helper functions for styling elements.
 For example, a function to create `rgba` values of black is very convenient.
 
 ```js
@@ -198,9 +197,9 @@ TK: margin/padding scale function
 
 While the function above is a fairly simple one,
 sometimes more complex color transformations can be helpful when creating UI.
-Well, we're in luck, because we can use literally anything on npm.
+Well, we’re in luck, because we can use literally anything on npm.
 
-Instead of the the `darken` function above, here is an example using [`chroma-js`](https://www.npmjs.com/package/chroma-js)’s `alpha` function.
+Instead of the `darken` function above, here is an example using [`chroma-js`](https://www.npmjs.com/package/chroma-js)’s `alpha` function.
 
 ```js
 import chroma from 'chroma-js'
@@ -231,7 +230,7 @@ const blueAlpha = [
 
 Beyond just importing style values, there is a tremendous amount of flexibility when it comes to component
 composition when using React.
-Take the Button component from above, and we'll extract some of the style details to props to make it more reusable.
+Take the Button component from above, and we’ll extract some of the style details to props to make it more reusable.
 
 ```js
 const Button = ({
@@ -265,7 +264,7 @@ const Button = ({
 ```
 
 The `color` and `backgroundColor` properties have been moved up to the component's props.
-Additionally, we've added a `big` prop to adjust the padding top and bottom.
+Additionally, we’ve added a `big` prop to adjust the padding top and bottom.
 
 Now this component is fine by itself, but what if we want a secondary button style?
 Doing the following would become tedious very quickly:
@@ -285,6 +284,7 @@ import Button from './Button'
 
 const ButtonSecondary = (props) => (
   <Button
+    {...props}
     color={colors.black}
     backgroundColor={colors.lightblue} />
 )
@@ -297,7 +297,30 @@ const ButtonSecondary = (props) => (
 
 ## Higher Order Components
 
-TK
+I'm generally a fan of keeping most of an applications state at the top level of a react tree,
+often with something like redux,
+however, sometimes there are isolated UI components that need a minimal amount of state for interaction.
+
+One example of this is a carousel, where the state of the current slide generally doesn’t need to persist across page views.
+Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
+The higher order component will have a current slide index, accept a length prop or get the length of children, and have methods for setting position.
+
+```js
+```
+
+Using a higher order component we can create a carousel from any number of UI elements.
+For example, a simple carousel may have only previous and next buttons,
+while a more complex one might include image thumbnails of each slide across the bottom.
+Both of these can use the same hoc to handle their state.
+
+
+Higher order components can also be used to encapsulate frequently used generic styling,
+for example margin, padding, and display.
+This is the pattern used in Reflexbox, which is an extension of an even simpler Robox component.
+
+These higher order components wrap other components and add helper props such as m, mb, p, px, etc.
+They can even be abstracted into convenient components like boxes and grid columns
+
 
 <!--
 - Higher order components
