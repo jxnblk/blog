@@ -1,6 +1,5 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Patterns for Style Composition in React | Writing</title><meta name="description" content="While React is extremely flexible in terms of how you can structure your application&#x27;s UI
-– it essentially leaves that up to you to figure out –,
-I&#x27;ve found that a few patterns for style composition have helped me keep things
+<!DOCTYPE html><html><head><meta charset="utf-8"/><title>Patterns for Style Composition in React | Writing</title><meta name="description" content="While React is extremely flexible in terms of how you can structure your application’s UI,
+I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with."/><meta name="author" content="Brent Jackson"/><meta name="keywords" content="blog,writing,design,minimalism"/><meta name="viewport" content="width=device-width, initial-scale=1"/><style>
 * { box-sizing: border-box }
 
@@ -379,16 +378,15 @@ tr:last-child td {
 
 .px4 { padding-left: 4rem; padding-right: 4rem }
 
-</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Patterns for Style Composition in React</h2><div class="sc">Wed Aug 03 2016</div></header><div class=""><div class="py2 mb2" style="color:tomato;">This is a draft post and may not be final.</div><div class="mb4"><p>While React is extremely flexible in terms of how you can structure your application&#39;s UI
-– it essentially leaves that up to you to figure out –,
-I&#39;ve found that a few patterns for style composition have helped me keep things
+</style><link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet"/></head><body class="measure mx-auto px3"><header><h1 class="f2"><a href="/writing">Jxnblk / Writing</a></h1><h2 class="f1">Patterns for Style Composition in React</h2><div class="sc">Wed Aug 03 2016</div></header><div class=""><div class="py2 mb2" style="color:tomato;">This is a draft post and may not be final.</div><div class="mb4"><p>While React is extremely flexible in terms of how you can structure your application’s UI,
+I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.</p>
-<p>I won&#39;t get into approaches for state management or handling the business logic of your app,
-instead I&#39;ll be focusing primarily on the visible and interactive parts of the UI.</p>
+<p>I won’t get into approaches for state management or handling the business logic of your app,
+instead I’ll be focusing primarily on the visible and interactive parts of the UI.</p>
 <h2 id="stateless-functional-ui-components"><a href="#stateless-functional-ui-components">Stateless Functional UI Components</a></h2><p>Generally, I like to keep styles out of the parts of the app that are tied to business logic and state.
 That means routes, views, containers, forms, and layouts should not have any styling or classes in them.
-Instead these more functional parts of the app should be composed of primarily stateless functional UI components
-– or presentational components, as some might call them.</p>
+Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
+sometimes referred to as <em>presentational</em> components.</p>
 <p>A hypothetical form component render function might look something like this:</p>
 <pre>&lt;form onSubmit={<span class="hljs-keyword">this</span>.handleSubmit}&gt;
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Heading</span> <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
@@ -405,8 +403,8 @@ Instead these more functional parts of the app should be composed of primarily s
     <span class="hljs-attribute">type</span>=<span class="hljs-value">'submit'</span>
     <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span></pre><p>Notice how none of the elements have a <code>className</code> or <code>style</code> prop.
-Each UI component used here encapsulates its own styling, and the styling simply becomes an
-implementation detail.</p>
+Each UI component used here encapsulates its own styling,
+and the styling simply becomes an implementation detail.</p>
 <p>An example Button component might look something like the following:</p>
 <pre><span class="hljs-keyword">const</span> Button = ({
   ...props
@@ -432,12 +430,14 @@ implementation detail.</p>
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">style</span>=<span class="hljs-value">{sx}</span> /&gt;</span>
   )</span>
-}</pre><p>I&#39;ve used inline styles here for readability and to help demonstrate how this works, but using a CSS-in-JS solution,
-or even something like CSS modules can easily be swapped out, and won&#39;t have any affect on the form component above.
-By keeping all styling encapsulated in this component, the rest of the application doesn&#39;t need to know anything about the Button
-beyond its props API.</p>
-<h2 id="styles-module"><a href="#styles-module">Styles Module</a></h2><p>You may have noticed that a few properties were hard-coded into the Button example.
-I wouldn&#39;t recommend hard-coding things in like that.
+}</pre><p>I’ve used inline styles here for readability and to help demonstrate how this works,
+but using a CSS-in-JS solution,
+or even something like CSS modules can easily be swapped out,
+and won’t have any affect on the form component above.
+By keeping all styling encapsulated in this component,
+the rest of the application doesn’t need to know anything about the Button beyond its props API.</p>
+<h2 id="styles-module"><a href="#styles-module">Styles Module</a></h2><p>You may have noticed that a few property values were hard-coded into the Button example.
+Generally, I wouldn’t recommend hard-coding things in like that.
 Any values that are likely to be used across different UI components should be split into their own module.</p>
 <p>Here is a simple example module to start with:</p>
 <pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> white = <span class="hljs-string">'#fff'</span>
@@ -493,18 +493,18 @@ const Button = ({
     &lt;button {...props} style={sx} /&gt;
   )
 }</pre><p>The style object could store anything related to styling that is shared across components,
-including: borders, border radii, shadows, animation durations, etc.</p>
+including borders, border radii, shadows, animation duration, etc.</p>
 <p>You could even export more elaborate combinations of styles like the following:</p>
 <pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> cardStyle = {
   backgroundColor: white,
   borderRadius: <span class="hljs-number">3</span>,
   boxShadow: <span class="hljs-string">`0 0 4px <span class="hljs-subst">${shade[1]}</span>`</span>
-}</pre><p>But I&#39;d recommend delegating combinations like these to components and using composition instead, as I&#39;ll show below.</p>
-<h2 id="style-functions"><a href="#style-functions">Style Functions</a></h2><p>Since we&#39;re using JavaScript, we can also employ helper functions for styling elements.
-For example, a function to create <code>rgba</code> values of black is very convenient.</p>
+}</pre><p>But I’d recommend delegating combinations like these to components and using composition instead, as I’ll show below.</p>
+<h2 id="style-functions"><a href="#style-functions">Style Functions</a></h2><p>Since we’re using JavaScript, we can also employ helper functions for styling elements.
+For example, a function to create <code>rgba</code> values of black can be very handy.</p>
 <pre><span class="hljs-keyword">const</span> darken = (n) =&gt; <span class="hljs-string">`rgba(0, 0, 0, <span class="hljs-subst">${n}</span>)`</span>
 
-darken(<span class="hljs-number">1</span> / <span class="hljs-number">8</span>) <span class="hljs-comment">// 'rgba(0, 0, 0, 0.125)'</span></pre><p>Functions like this can then be used to create scale array to help keep things consistent.</p>
+darken(<span class="hljs-number">1</span> / <span class="hljs-number">8</span>) <span class="hljs-comment">// 'rgba(0, 0, 0, 0.125)'</span></pre><p>Functions like this can then be used to create a value scale array to help keep things consistent.</p>
 <pre><span class="hljs-keyword">const</span> shade = [
   darken(<span class="hljs-number">0</span>),
   darken(<span class="hljs-number">1</span> / <span class="hljs-number">8</span>),
@@ -517,11 +517,46 @@ darken(<span class="hljs-number">1</span> / <span class="hljs-number">8</span>) 
   darken(<span class="hljs-number">1</span>)
 ]
 
-shade[<span class="hljs-number">4</span>] <span class="hljs-comment">// 'rgba(0, 0, 0, 0.5)'</span></pre><p>TK: margin/padding scale function</p>
-<h2 id="npm-modules"><a href="#npm-modules">Npm Modules</a></h2><p>While the function above is a fairly simple one,
+shade[<span class="hljs-number">4</span>] <span class="hljs-comment">// 'rgba(0, 0, 0, 0.5)'</span></pre><p>Another example would be creating a scale for margin and padding to help keep visual rhythm consistent.</p>
+<pre><span class="hljs-comment">// Modular powers of two scale</span>
+<span class="hljs-keyword">const</span> scale = [
+  <span class="hljs-number">0</span>,
+  <span class="hljs-number">8</span>,
+  <span class="hljs-number">16</span>,
+  <span class="hljs-number">32</span>,
+  <span class="hljs-number">64</span>
+]
+
+<span class="hljs-comment">// Functions to get partial style objects</span>
+<span class="hljs-keyword">const</span> createScaledPropertyGetter = (scale) =&gt; (prop) =&gt; (x) =&gt; {
+  <span class="hljs-keyword">return</span> (<span class="hljs-keyword">typeof</span> x === <span class="hljs-string">'number'</span> &amp;&amp; <span class="hljs-keyword">typeof</span> scale[x] === <span class="hljs-string">'number'</span>)
+    ? { [prop]: scale[x] }
+    : <span class="hljs-literal">null</span>
+}
+<span class="hljs-keyword">const</span> getScaledProperty = createScaledPropertyGetter(scale)
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getMargin = getScaledProperty(<span class="hljs-string">'margin'</span>)
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getPadding = getScaledProperty(<span class="hljs-string">'padding'</span>)</pre><pre><span class="hljs-comment">// Style function usage</span>
+<span class="hljs-keyword">const</span> Box = ({
+  m,
+  p,
+  ...props
+}) =&gt; {
+  <span class="hljs-keyword">const</span> sx = {
+    ...getMargin(m),
+    ...getPadding(p)
+  }
+
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">style</span>=<span class="hljs-value">{sx}</span> /&gt;</span>
+}</span></pre><pre><span class="hljs-comment">// Component usage</span>
+&lt;div&gt;
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Box</span> <span class="hljs-attribute">m</span>=<span class="hljs-value">{2}</span> <span class="hljs-attribute">p</span>=<span class="hljs-value">{3}</span>&gt;</span>
+    A box with 16px margin and 32px padding
+  <span class="hljs-tag">&lt;/<span class="hljs-title">Box</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span></pre><h2 id="npm-modules"><a href="#npm-modules">Npm Modules</a></h2><p>While the rgba color function above is a fairly simple one,
 sometimes more complex color transformations can be helpful when creating UI.
-Well, we&#39;re in luck, because we can use literally anything on npm.</p>
-<p>Instead of the the <code>darken</code> function above, here is an example using <a href="https://www.npmjs.com/package/chroma-js"><code>chroma-js</code></a>’s <code>alpha</code> function.</p>
+Well, we’re in luck, because we can use literally anything on <a href="https://npmjs.com">npm</a>.</p>
+<p>Instead of the <code>darken</code> function above, here is an example using <a href="https://www.npmjs.com/package/chroma-js"><code>chroma-js</code></a>’s <code>alpha</code> function.</p>
 <pre><span class="hljs-keyword">import</span> chroma <span class="hljs-keyword">from</span> <span class="hljs-string">'chroma-js'</span>
 
 const alpha = (color) =&gt; (a) =&gt; chroma(color).alpha(a).css()
@@ -530,6 +565,8 @@ const darken = alpha(<span class="hljs-string">'#000'</span>)
 
 const shade = [
   darken(0),
+  darken(1 / 8),
+  darken(1 / 4),
   // ...
 ]</pre><p>Using chroma, this function can work with any color from the style object.</p>
 <pre><span class="hljs-keyword">const</span> blueAlpha = [
@@ -540,7 +577,7 @@ const shade = [
   alpha(blue)(<span class="hljs-number">1</span>)
 ]</pre><h2 id="base-component"><a href="#base-component">Base Component</a></h2><p>Beyond just importing style values, there is a tremendous amount of flexibility when it comes to component
 composition when using React.
-Take the Button component from above, and we&#39;ll extract some of the style details to props to make it more reusable.</p>
+Take the Button component from above, and we’ll extract some of the style details to props to make it more reusable.</p>
 <pre><span class="hljs-keyword">const</span> Button = ({
   big,
   color = colors.white,
@@ -568,10 +605,10 @@ Take the Button component from above, and we&#39;ll extract some of the style de
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">style</span>=<span class="hljs-value">{sx}</span> /&gt;</span>
   )</span>
-}</pre><p>The <code>color</code> and <code>backgroundColor</code> properties have been moved up to the component&#39;s props.
-Additionally, we&#39;ve added a <code>big</code> prop to adjust the padding top and bottom.</p>
+}</pre><p>The <code>color</code> and <code>backgroundColor</code> properties have been moved up to the component’s props.
+Additionally, we’ve added a <code>big</code> prop to adjust the padding top and bottom.</p>
 <p>Now this component is fine by itself, but what if we want a secondary button style?
-Doing the following would become tedious very quickly:</p>
+Doing the following would become tedious and error prone very quickly:</p>
 <pre>&lt;Button
   color={colors.black}
   backgroundColor={colors.lightblue}
@@ -581,15 +618,101 @@ Doing the following would become tedious very quickly:</p>
 
 const ButtonSecondary = (props) =&gt; (
   &lt;Button
+    {...props}
     color={colors.black}
     backgroundColor={colors.lightblue} /&gt;
-)</pre><!--
-- Base component
-  - Button/ButtonPrimary/ButtonSecondary/ButtonOutline/IconButton
-  -->
-<h2 id="higher-order-components"><a href="#higher-order-components">Higher Order Components</a></h2><p>TK</p>
+)</pre><p>By adjusting the props API of the base Button component, an entire set of button styles can be created.</p>
+<pre><span class="hljs-keyword">const</span> ButtonBig = (props) =&gt; <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">big</span> /&gt;</span>
+const ButtonGreen = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">backgroundColor</span>=<span class="hljs-value">{colors.green}</span> /&gt;</span>
+const ButtonRed = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">backgroundColor</span>=<span class="hljs-value">{colors.red}</span> /&gt;</span>
+const ButtonOutline = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">outline</span> /&gt;</span></span></pre><p>This pattern lends itself well to layout components as well.
+Assume we have a generic Box component that accepts props for various layout styles.
+This base layout component can then be extended to grid system components and other primitives.</p>
+<pre><span class="hljs-keyword">const</span> Grid = (props) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Box</span> {<span class="hljs-attribute">...props</span>}
+    <span class="hljs-attribute">display</span>=<span class="hljs-value">'inline-block'</span>
+    <span class="hljs-attribute">verticalAlign</span>=<span class="hljs-value">'top'</span>
+    <span class="hljs-attribute">px</span>=<span class="hljs-value">{2}</span> /&gt;</span>
+)</span>
+
+<span class="hljs-keyword">const</span> Half = (props) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Grid</span> {<span class="hljs-attribute">...props</span>}
+    <span class="hljs-attribute">width</span>=<span class="hljs-value">{1</span> / <span class="hljs-attribute">2</span>} /&gt;</span>
+)</span>
+
+<span class="hljs-keyword">const</span> Third = (props) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Grid</span> {<span class="hljs-attribute">...props</span>}
+    <span class="hljs-attribute">width</span>=<span class="hljs-value">{1</span> / <span class="hljs-attribute">3</span>} /&gt;</span>
+)</span>
+
+<span class="hljs-keyword">const</span> Quarter = (props) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Grid</span> {<span class="hljs-attribute">...props</span>}
+    <span class="hljs-attribute">width</span>=<span class="hljs-value">{1</span> / <span class="hljs-attribute">4</span>} /&gt;</span>
+)</span>
+
+<span class="hljs-keyword">const</span> Flex = (props) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Box</span> {<span class="hljs-attribute">...props</span>}
+    <span class="hljs-attribute">display</span>=<span class="hljs-value">'flex'</span> /&gt;</span>
+)</span>
+
+<span class="hljs-keyword">const</span> FlexAuto = (props) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Box</span> {<span class="hljs-attribute">...props</span>}
+    <span class="hljs-attribute">flex</span>=<span class="hljs-value">'1 1 auto'</span> /&gt;</span>
+)</span></pre><p>Typography styles are another great candidate for building up with composition.
+By using a base typographic component, you can help ensure consistency and keep your styling DRY in a component-based architecture.</p>
+<pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { alternateFont, typeScale, boldFontWeight } <span class="hljs-keyword">from</span> <span class="hljs-string">'./styles'</span>
+
+const Text = ({
+  tag = <span class="hljs-string">'span'</span>,
+  size = 4,
+  alt,
+  center,
+  bold,
+  caps,
+  ...props
+}) =&gt; {
+  const Tag = tag
+  const sx = {
+    fontFamily: alt ? alternateFont : null,
+    fontSize: typeScale[size],
+    fontWeight: bold ? boldFontWeight : null,
+    textAlign: center ? <span class="hljs-string">'center'</span> : null,
+    textTransform: caps ? <span class="hljs-string">'uppercase'</span> : null
+  }
+
+  return &lt;Tag {...props} style={sx} /&gt;
+}</pre><pre><span class="hljs-keyword">const</span> LeadText = (props) =&gt; <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Text</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">size</span>=<span class="hljs-value">{3}</span> /&gt;</span>
+const Caps = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Text</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">caps</span> /&gt;</span>
+const MetaText = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Text</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">size</span>=<span class="hljs-value">{5}</span> <span class="hljs-attribute">caps</span> /&gt;</span>
+const AltParagraph = (props) =&gt; <span class="hljs-tag">&lt;<span class="hljs-title">Text</span> {<span class="hljs-attribute">...props</span>} <span class="hljs-attribute">tag</span>=<span class="hljs-value">'p'</span> <span class="hljs-attribute">alt</span> /&gt;</span>
+
+const CapsButton = ({ children, ...props }) =&gt; (
+  <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> {<span class="hljs-attribute">...props</span>}&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Caps</span>&gt;</span>
+      {children}
+    <span class="hljs-tag">&lt;/<span class="hljs-title">Caps</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">Button</span>&gt;</span>
+)</span></pre><p>Keep in mind, that these components are just a few examples and your needs will vary greatly on an app-by-app basis.</p>
+<h2 id="higher-order-components"><a href="#higher-order-components">Higher Order Components</a></h2><p>I&#39;m generally a fan of keeping most of an applications state at the top level of a react tree,
+often with something like redux,
+however, sometimes there are isolated UI components that need a minimal amount of state for interaction.</p>
+<p>One example of this is a carousel, where the state of the current slide generally doesn’t need to persist across page views.
+Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
+The higher order component will have a current slide index, accept a length prop or get the length of children, and have methods for setting position.</p>
+<pre></pre><p>Using a higher order component we can create a carousel from any number of UI elements.
+For example, a simple carousel may have only previous and next buttons,
+while a more complex one might include image thumbnails of each slide across the bottom.
+Both of these can use the same hoc to handle their state.</p>
 <!--
-- Higher order components
-  - Carousel/Cycle hoc example
-  -->
+  - Toggle example
+-->
+<!--
+Higher order components can also be used to encapsulate frequently used generic styling,
+for example margin, padding, and display.
+This is the pattern used in Reflexbox, which is an extension of an even simpler Robox component.
+
+These higher order components wrap other components and add helper props such as m, mb, p, px, etc.
+They can even be abstracted into convenient components like boxes and grid columns
+-->
 </div><noscript></noscript><div class="inline-block"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Patterns for Style Composition in React" data-via="jxnblk" data-size="large">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></div><p>Questions, Comments, Suggestions? <a href="https://github.com/jxnblk/writing/issues/new?title=Patterns for Style Composition in React" target="_blank">Open an Issue</a></p><noscript></noscript></div><footer class="sc py4"><a href="/">Made by Jxnblk</a></footer><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "UA-4603832-6", "auto"); ga("send", "pageview");</script></body></html>
