@@ -442,15 +442,127 @@ however, sometimes there are isolated UI components that need a minimal amount o
 
 One example of this is a carousel, where the state of the current slide generally doesn’t need to persist across page views.
 Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
-The higher order component will have a current slide index, accept a length prop or get the length of children, and have methods for setting position.
+The higher order component will have a current slide index, accept a length prop, and have methods for setting position.
 
 ```js
+// Higher order component
+import React from 'react'
+
+// This could be named something more generic like Counter or Cycle
+const CarouselContainer = (Comp) => {
+  class Carousel extends React.Component {
+    constructor () {
+      super()
+      this.state = {
+        index: 0
+      }
+      this.previous = () => {
+        const { index } = this.state
+        if (index > 0) {
+          this.setState({ index: index - 1})
+        }
+      }
+
+      this.next = () => {
+        const { length = Infinity } = this.props
+        const { index } = this.state
+        if (index < length - 1) {
+          this.setState({ index: index + 1 })
+        }
+      }
+    }
+
+    render () {
+      const props = { ...this.props }
+      delete props.length
+
+      return (
+        <Comp
+          {...props}
+          {...this.state}
+          previous={this.previous}
+          next={this.next} />
+      )
+    }
+  }
+
+  return Carousel
+}
+
+export default CarouselContainer
 ```
 
 Using a higher order component we can create a carousel from any number of UI elements.
 For example, a simple carousel may have only previous and next buttons,
 while a more complex one might include image thumbnails of each slide across the bottom.
 Both of these can use the same hoc to handle their state.
+
+```js
+// UI component
+const Carousel = ({ index, ...props }) => {
+  const length = props.length || props.children.length || 0
+
+  const sx = {
+    root: {
+      overflow: 'hidden'
+    },
+    inner: {
+      whiteSpace: 'nowrap',
+      height: '100%',
+      transition: 'transform .2s ease-out',
+      transform: `translateX(${index % length * -100}%)`
+    },
+    child: {
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      whiteSpace: 'normal',
+      outline: '1px solid red',
+      width: '100%',
+      height: '100%'
+    }
+  }
+
+  const children = React.Children.map(props.children, (child, i) => {
+    return (
+      <div style={sx.child}>
+        {child}
+      </div>
+    )
+  })
+
+  return (
+    <div style={sx.root}>
+      <div style={sx.inner}>
+        {children}
+      </div>
+    </div>
+  )
+}
+```
+
+```js
+// Final Carousel component
+const HeroCarousel = (props) => {
+	return (
+    <div>
+      <Carousel index={props.index}>
+        <div>Slide one</div>
+        <div>Slide two</div>
+        <div>Slide three</div>
+      </Carousel>
+      <Button
+        onClick={props.previous}
+        children='Previous' />
+      <Button
+        onClick={props.next}
+        children='Next' />
+    </div>
+	)
+}
+
+// Wrap the component with the functionality from the higher-order component
+export default CarouselContainer(HeroCarousel)
+```
 
 
 <!--
