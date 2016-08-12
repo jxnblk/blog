@@ -397,22 +397,26 @@ instead I’ll be focusing primarily on the visible and interactive parts of the
 That means routes, views, containers, forms, layouts, etc. should not have any styling or classes in them.
 Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
 sometimes referred to as <em>presentational</em> components.</p>
-<p>For example, a form component render function might look something like this:</p>
-<pre>&lt;form onSubmit={<span class="hljs-keyword">this</span>.handleSubmit}&gt;
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Heading</span> <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">Input</span>
-    <span class="hljs-attribute">name</span>=<span class="hljs-value">'username'</span>
-    <span class="hljs-attribute">value</span>=<span class="hljs-value">{username}</span>
-    <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.handleChange}</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">Input</span>
-    <span class="hljs-attribute">type</span>=<span class="hljs-value">'password'</span>
-    <span class="hljs-attribute">name</span>=<span class="hljs-value">'password'</span>
-    <span class="hljs-attribute">value</span>=<span class="hljs-value">{password}</span>
-    <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.handleChange}</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">ButtonPrimary</span>
-    <span class="hljs-attribute">type</span>=<span class="hljs-value">'submit'</span>
-    <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></span></pre><p>Notice how none of the elements have a <code>className</code> or <code>style</code> prop.
+<p>For example, a form component render method might look something like this:</p>
+<pre>render () {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">onSubmit</span>=<span class="hljs-value">{this.handleSubmit}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Heading</span> <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Input</span>
+        <span class="hljs-attribute">name</span>=<span class="hljs-value">'username'</span>
+        <span class="hljs-attribute">value</span>=<span class="hljs-value">{username}</span>
+        <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.handleChange}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Input</span>
+        <span class="hljs-attribute">type</span>=<span class="hljs-value">'password'</span>
+        <span class="hljs-attribute">name</span>=<span class="hljs-value">'password'</span>
+        <span class="hljs-attribute">value</span>=<span class="hljs-value">{password}</span>
+        <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.handleChange}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ButtonPrimary</span>
+        <span class="hljs-attribute">type</span>=<span class="hljs-value">'submit'</span>
+        <span class="hljs-attribute">children</span>=<span class="hljs-value">'Sign In'</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+  )</span>
+}</pre><p>Notice how none of the elements have a <code>className</code> or <code>style</code> prop.
 Using <code>className</code> or <code>style</code> props at this level <em>could</em> be considered a code smell.
 Each UI component used here encapsulates its own styling,
 and the styling simply becomes an implementation detail.</p>
@@ -448,7 +452,7 @@ the rest of the application doesn’t need to know anything about the Button bey
 <h2 id="styles-module"><a href="#styles-module">Styles Module</a></h2><p>You may have noticed that a few property values were hard-coded into the Button example.
 Generally, I wouldn’t recommend hard-coding things in like that.
 Any values that are likely to be used across different UI components should be split into their own module.</p>
-<p>Here is a simple example module to start with:</p>
+<p>Here is an example module to start with:</p>
 <pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> white = <span class="hljs-string">'#fff'</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> black = <span class="hljs-string">'#111'</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> blue = <span class="hljs-string">'#07c'</span>
@@ -709,7 +713,7 @@ However, sometimes there are isolated UI components that only require a minimal 
 and using them as standalone components is sufficient.</p>
 <p>One example of this is a carousel<a href="#*">*</a>, where the state of the current slide generally doesn’t need to persist across page views.
 Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
-The higher order component will have a current slide index, accept a length prop, and have methods for setting position.</p>
+The higher order component will have a current slide index and have previous and next methods.</p>
 <pre><span class="hljs-comment">// Higher order component</span>
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 
@@ -729,21 +733,15 @@ const CarouselContainer = (Comp) =&gt; {
       }
 
       this.next = () =&gt; {
-        const { length = Infinity } = this.props
         const { index } = this.state
-        if (index &lt; length - 1) {
-          this.setState({ index: index + 1 })
-        }
+        this.setState({ index: index + 1 })
       }
     }
 
     render () {
-      const props = { ...this.props }
-      delete props.length
-
       return (
         &lt;Comp
-          {...props}
+          {...this.props}
           {...this.state}
           previous={this.previous}
           next={this.next} /&gt;
@@ -757,7 +755,7 @@ const CarouselContainer = (Comp) =&gt; {
 export default CarouselContainer</pre><p>Using a higher order component we can create a carousel from any number of UI elements.
 For example, a simple carousel may have only previous and next buttons,
 while a more complex one might include image thumbnails of each slide across the bottom.
-Both of these can use the same hoc to handle their state.</p>
+Both of these can use the same higher order component to handle their state.</p>
 <pre><span class="hljs-comment">// UI component</span>
 <span class="hljs-keyword">const</span> Carousel = ({ index, ...props }) =&gt; {
   <span class="hljs-keyword">const</span> length = props.length || props.children.length || <span class="hljs-number">0</span>
@@ -816,7 +814,7 @@ Both of these can use the same hoc to handle their state.</p>
     )</span>
 }
 
-<span class="hljs-comment">// Wrap the component with the functionality from the higher-order component</span>
+<span class="hljs-comment">// Wrap the component with the functionality from the higher order component</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> CarouselContainer(HeroCarousel)</pre><p>By keeping the styling separate from the interactive state,
 any number of carousel variations can be created from these reusable parts.</p>
 <p>Just like the base component pattern above, higher order components
@@ -825,10 +823,10 @@ This is the pattern used in <a href="https://github.com/jxnblk/reflexbox">Reflex
 and similar to Rebass’s <a href="https://github.com/jxnblk/rebass/blob/master/src/Base.js">Base component</a>.</p>
 <h2 id="a-note-about-performance"><a href="#a-note-about-performance">A Note About Performance</a></h2><p>While there are many different ways to handle styling in a component-based app,
 make sure to pay close attention to the size of your bundle.
-It can be very easy to create the wrong abstractions and end up with needless bloat.
+It can be easy to create the wrong abstractions and end up with needless bloat.
 Some of the patterns in this article, when taken to their logical extreme,
 could actually harm the performance and create a degraded experience for your end users.</p>
-<p>Everything you do should be for the user’s benefit, not your own.</p>
+<p>And remember, everything related to styling that you do should be for the user’s benefit, not your own.</p>
 <h2 id="related"><a href="#related">Related</a></h2><ul>
 <li><a href="http://rauchg.com/2015/pure-ui/">Pure UI</a> by Guillermo Rauch</li>
 <li><a href="http://jxnblk.com/reflexbox">Reflexbox</a></li>

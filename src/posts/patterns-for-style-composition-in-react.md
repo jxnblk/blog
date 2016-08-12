@@ -28,24 +28,28 @@ That means routes, views, containers, forms, layouts, etc. should not have any s
 Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
 sometimes referred to as *presentational* components.
 
-For example, a form component render function might look something like this:
+For example, a form component render method might look something like this:
 
 ```js
-<form onSubmit={this.handleSubmit}>
-  <Heading children='Sign In' />
-  <Input
-    name='username'
-    value={username}
-    onChange={this.handleChange} />
-  <Input
-    type='password'
-    name='password'
-    value={password}
-    onChange={this.handleChange} />
-  <ButtonPrimary
-    type='submit'
-    children='Sign In' />
-</form>
+render () {
+  return (
+    <form onSubmit={this.handleSubmit}>
+      <Heading children='Sign In' />
+      <Input
+        name='username'
+        value={username}
+        onChange={this.handleChange} />
+      <Input
+        type='password'
+        name='password'
+        value={password}
+        onChange={this.handleChange} />
+      <ButtonPrimary
+        type='submit'
+        children='Sign In' />
+    </form>
+  )
+}
 ```
 
 Notice how none of the elements have a `className` or `style` prop.
@@ -94,7 +98,7 @@ You may have noticed that a few property values were hard-coded into the Button 
 Generally, I wouldn’t recommend hard-coding things in like that.
 Any values that are likely to be used across different UI components should be split into their own module.
 
-Here is a simple example module to start with:
+Here is an example module to start with:
 
 ```js
 export const white = '#fff'
@@ -452,7 +456,7 @@ and using them as standalone components is sufficient.
 
 One example of this is a carousel[*](#*), where the state of the current slide generally doesn’t need to persist across page views.
 Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
-The higher order component will have a current slide index, accept a length prop, and have methods for setting position.
+The higher order component will have a current slide index and have previous and next methods.
 
 ```js
 // Higher order component
@@ -474,21 +478,15 @@ const CarouselContainer = (Comp) => {
       }
 
       this.next = () => {
-        const { length = Infinity } = this.props
         const { index } = this.state
-        if (index < length - 1) {
-          this.setState({ index: index + 1 })
-        }
+        this.setState({ index: index + 1 })
       }
     }
 
     render () {
-      const props = { ...this.props }
-      delete props.length
-
       return (
         <Comp
-          {...props}
+          {...this.props}
           {...this.state}
           previous={this.previous}
           next={this.next} />
@@ -505,7 +503,7 @@ export default CarouselContainer
 Using a higher order component we can create a carousel from any number of UI elements.
 For example, a simple carousel may have only previous and next buttons,
 while a more complex one might include image thumbnails of each slide across the bottom.
-Both of these can use the same hoc to handle their state.
+Both of these can use the same higher order component to handle their state.
 
 ```js
 // UI component
@@ -570,7 +568,7 @@ const HeroCarousel = (props) => {
 	)
 }
 
-// Wrap the component with the functionality from the higher-order component
+// Wrap the component with the functionality from the higher order component
 export default CarouselContainer(HeroCarousel)
 ```
 
@@ -586,11 +584,11 @@ and similar to Rebass’s [Base component](https://github.com/jxnblk/rebass/blob
 
 While there are many different ways to handle styling in a component-based app,
 make sure to pay close attention to the size of your bundle.
-It can be very easy to create the wrong abstractions and end up with needless bloat.
+It can be easy to create the wrong abstractions and end up with needless bloat.
 Some of the patterns in this article, when taken to their logical extreme,
 could actually harm the performance and create a degraded experience for your end users.
 
-Everything you do should be for the user’s benefit, not your own.
+And remember, everything related to styling that you do should be for the user’s benefit, not your own.
 
 ## Related
 

@@ -7,7 +7,6 @@ import Pagination from './Pagination'
 class Index extends React.Component {
 
   renderPost (post, i) {
-    if (post.draft) { return false }
     return (
       <li key={'post-' + i} className='mb3'>
         <PostCard post={post} />
@@ -16,8 +15,10 @@ class Index extends React.Component {
   }
 
   render () {
+    console.log(this.props.posts.length, this.props.pageSize)
+    const publishedPosts = this.props.posts.filter(p => !p.draft)
     var params = this.props.params || false
-    var chunks = chunk(this.props.posts, this.props.pageSize)
+    var chunks = chunk(publishedPosts, this.props.pageSize)
     var page
     var index = 0
     var posts = []
@@ -32,7 +33,7 @@ class Index extends React.Component {
       if (chunks[index + 1]) {
         next = page + 1
       }
-    } else {
+    } else if (publishedPosts.length > this.props.pageSize) {
       next = 2
     }
     posts = chunks[index]
