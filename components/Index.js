@@ -32,6 +32,8 @@ class Index extends React.Component {
       if (chunks[index + 1]) {
         next = page + 1
       }
+    } else {
+      next = 2
     }
     posts = chunks[index]
     return (
