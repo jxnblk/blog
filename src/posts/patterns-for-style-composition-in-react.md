@@ -4,19 +4,26 @@ created: 8-3-2016
 draft: true
 ---
 
-<!--
-What problems does this help solve?
-- Maintainability - tracking and updating down styles, deprecating old styles, DRY
-- Ease of use - the dream of Bootstrap, but made with "real" code
-- Speed up the time it takes to create new views and flows
-- Readability - styles are encapsulated at a component-level - shared concerns
-- Composability and flexbility - create new styles
--->
-
 While React is extremely flexible in terms of how you can structure your application’s UI,
 I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.
 These aren’t hard-and-fast rules, these are simply reflections on how I’ve come to organize components in apps that I’ve worked on.
+
+I’ve gravitated towards these patterns in an effort to:
+
+- Create a well-defined visual design system
+- Help maintain visual consistency across an application
+- Only deliver the CSS/styles needed to the client for a given UI – i.e. performance
+- Increase the maintainability of visual styles
+- Make updates and iterations on styles easier
+- Make legacy styles easier to deprecate
+- Create more readable components
+- Make building out new UI easier and faster
+- Keep styles encapsulated to help prevent collisions and unwanted side effects
+- Create an easier-to-use interface for non-front-end developers
+
+Although the level of abstraction here might look like overkill for smaller projects,
+I find that this general approach has sped up my development across the board.
 
 I won’t get into approaches for state management or handling the business logic of your app,
 instead I’ll be focusing primarily on the visible and interactive parts of the UI.
@@ -27,6 +34,8 @@ Generally, I like to keep styles separated from the parts of the app that are ti
 That means routes, views, containers, forms, layouts, etc. should not have any styling or classes in them.
 Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
 sometimes referred to as *presentational* components.
+By keeping styling concerns separate from the application state,
+pieces can become more reusable and building out new views and containers can be quicker.
 
 For example, a form component render method might look something like this:
 
@@ -44,7 +53,7 @@ render () {
         name='password'
         value={password}
         onChange={this.handleChange} />
-      <ButtonPrimary
+      <Button
         type='submit'
         children='Sign In' />
     </form>
@@ -55,9 +64,10 @@ render () {
 Notice how none of the elements have a `className` or `style` prop.
 Using `className` or `style` props at this level *could* be considered a code smell.
 Each UI component used here encapsulates its own styling,
-and the styling simply becomes an implementation detail.
+and the styling simply becomes an implementation detail,
+which means a UI component can be updated or refactored without affecting anything else in the application.
 
-An example Button component might look something like the following:
+An example Button component, like the one in the form above, might look something like the following:
 
 ```js
 const Button = ({
@@ -85,6 +95,13 @@ const Button = ({
     <button {...props} style={sx} />
   )
 }
+```
+
+```js
+// Button usage
+<Button onClick={this.handleClick}>
+  Hello
+</Button>
 ```
 
 I’ve used inline styles here for readability and to help demonstrate how this works,
@@ -293,7 +310,7 @@ const blueAlpha = [
 ## Base Component
 
 Beyond just importing style values, there is a tremendous amount of flexibility when it comes to component
-composition when using React, since components are essentially just functions.
+composition when using React – since components are essentially just functions.
 Take the Button component from above, and we’ll change some of the style details to props to make it more reusable.
 
 ```js
@@ -327,6 +344,18 @@ const Button = ({
 }
 ```
 
+```js
+// Usage example
+<div>
+  <Button>
+    Blue Button
+  </Button>
+  <Button big backgroundColor={colors.red}>
+    Big Red Button
+  </Button>
+</div>
+```
+
 The `color` and `backgroundColor` properties have been moved up to the component’s props.
 Additionally, we’ve added a `big` prop to adjust the padding top and bottom.
 
@@ -352,6 +381,14 @@ const ButtonSecondary = (props) => (
     color={colors.black}
     backgroundColor={colors.lightblue} />
 )
+```
+
+```js
+// Usage example
+<div>
+  <Button>Normal Button</Button>
+  <ButtonSecondary>Secondary Button</ButtonSecondary>
+</div>
 ```
 
 By adjusting the props API of the base Button component, an entire set of button styles can be created.
@@ -401,6 +438,27 @@ const FlexAuto = (props) => (
 )
 ```
 
+```js
+// Usage example
+<div>
+  <div>
+    <Half>Half width column</Half>
+    <Half>Half width column</Half>
+  </div>
+  <div>
+    <Third>Third width column</Third>
+    <Third>Third width column</Third>
+    <Third>Third width column</Third>
+  </div>
+  <div>
+    <Quarter>Quarter width column</Quarter>
+    <Quarter>Quarter width column</Quarter>
+    <Quarter>Quarter width column</Quarter>
+    <Quarter>Quarter width column</Quarter>
+  </div>
+</div>
+```
+
 Typography styles are another great candidate for building up with composition.
 By using a base typographic component, you can help ensure consistency and keep your styling DRY in a component-based architecture.
 
@@ -431,7 +489,7 @@ const Text = ({
 ```
 
 ```js
-const LeadText = (props) => <Text {...props} size={3} />
+const LeadText = (props) => <Text {...props} tag='p' size={3} />
 const Caps = (props) => <Text {...props} caps />
 const MetaText = (props) => <Text {...props} size={5} caps />
 const AltParagraph = (props) => <Text {...props} tag='p' alt />
@@ -445,11 +503,24 @@ const CapsButton = ({ children, ...props }) => (
 )
 ```
 
+```js
+// Usage example
+<div>
+  <LeadText>
+    This is a lead with some <Caps>all caps</Caps>.
+    It has a larger font size than the default paragraph.
+  </LeadText>
+  <MetaText>
+    This is smaller text, like form helper copy.
+  </MetaText>
+</div>
+```
+
 Keep in mind, that these components are just a few examples and your needs will vary greatly on an app-by-app basis.
 
 ## Higher Order Components
 
-I'm generally a fan of keeping most of an applications state at the top level of a React tree,
+I’m generally a fan of keeping most of an applications state at the top level of a React tree,
 often using something like [Redux](https://github.com/reactjs/redux).
 However, sometimes there are isolated UI components that only require a minimal amount of state for interaction,
 and using them as standalone components is sufficient.
@@ -572,12 +643,19 @@ const HeroCarousel = (props) => {
 export default CarouselContainer(HeroCarousel)
 ```
 
+```js
+// Usage example
+<div>
+  <HeroCarousel />
+</div>
+```
+
 By keeping the styling separate from the interactive state,
 any number of carousel variations can be created from these reusable parts.
 
 Just like the base component pattern above, higher order components
 can work well for styling layout, typography and colors.
-This is the pattern used in [Reflexbox](https://github.com/jxnblk/reflexbox),
+This is the same pattern used in [Reflexbox](https://github.com/jxnblk/reflexbox),
 and similar to Rebass’s [Base component](https://github.com/jxnblk/rebass/blob/master/src/Base.js).
 
 ## A Note About Performance
@@ -593,16 +671,13 @@ And remember, everything related to styling that you do should be for the user�
 ## Related
 
 - [Pure UI](http://rauchg.com/2015/pure-ui/) by Guillermo Rauch
+- [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) by Christopher "vjeux" Chedeau
+- [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.68k59nncg) by Dan Abramov
 - [Reflexbox](http://jxnblk.com/reflexbox)
 - [Rebass](http://jxnblk.com/rebass)
 - [Robox](https://github.com/jxnblk/robox)
 - [Understyle](https://github.com/jxnblk/understyle)
 
-<small id='*'>Please don’t use carousels in your app. Users hate them.</small>
-
-<!--
-  - Toggle example
--->
-
+<small id='*'>* Please don’t use carousels in your app. Users hate them.</small>
 
 
