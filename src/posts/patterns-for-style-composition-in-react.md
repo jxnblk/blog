@@ -16,13 +16,14 @@ What problems does this help solve?
 While React is extremely flexible in terms of how you can structure your application’s UI,
 I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.
+These aren’t hard-and-fast rules, these are simply reflections on how I’ve come to organize components in apps that I’ve worked on.
 
 I won’t get into approaches for state management or handling the business logic of your app,
 instead I’ll be focusing primarily on the visible and interactive parts of the UI.
 
 ## Stateless Functional UI Components
 
-Generally, I like to keep styles separated from the parts of the app that are tied to business logic and state.
+Generally, I like to keep styles separated from the parts of the app that are tied to state.
 That means routes, views, containers, forms, layouts, etc. should not have any styling or classes in them.
 Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
 sometimes referred to as *presentational* components.
@@ -48,6 +49,7 @@ For example, a form component render function might look something like this:
 ```
 
 Notice how none of the elements have a `className` or `style` prop.
+Using `className` or `style` props at this level *could* be considered a code smell.
 Each UI component used here encapsulates its own styling,
 and the styling simply becomes an implementation detail.
 
@@ -444,10 +446,11 @@ Keep in mind, that these components are just a few examples and your needs will 
 ## Higher Order Components
 
 I'm generally a fan of keeping most of an applications state at the top level of a React tree,
-often with something like redux,
-however, sometimes there are isolated UI components that need a minimal amount of state for interaction.
+often using something like [Redux](https://github.com/reactjs/redux).
+However, sometimes there are isolated UI components that only require a minimal amount of state for interaction,
+and using them as standalone components is sufficient.
 
-One example of this is a carousel, where the state of the current slide generally doesn’t need to persist across page views.
+One example of this is a carousel[*](#*), where the state of the current slide generally doesn’t need to persist across page views.
 Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
 The higher order component will have a current slide index, accept a length prop, and have methods for setting position.
 
@@ -571,18 +574,37 @@ const HeroCarousel = (props) => {
 export default CarouselContainer(HeroCarousel)
 ```
 
+By keeping the styling separate from the interactive state,
+any number of carousel variations can be created from these reusable parts.
+
+Just like the base component pattern above, higher order components
+can work well for styling layout, typography and colors.
+This is the pattern used in [Reflexbox](https://github.com/jxnblk/reflexbox),
+and similar to Rebass’s [Base component](https://github.com/jxnblk/rebass/blob/master/src/Base.js).
+
+## A Note About Performance
+
+While there are many different ways to handle styling in a component-based app,
+make sure to pay close attention to the size of your bundle.
+It can be very easy to create the wrong abstractions and end up with needless bloat.
+Some of the patterns in this article, when taken to their logical extreme,
+could actually harm the performance and create a degraded experience for your end users.
+
+Everything you do should be for the user’s benefit, not your own.
+
+## Related
+
+- [Pure UI](http://rauchg.com/2015/pure-ui/) by Guillermo Rauch
+- [Reflexbox](http://jxnblk.com/reflexbox)
+- [Rebass](http://jxnblk.com/rebass)
+- [Robox](https://github.com/jxnblk/robox)
+- [Understyle](https://github.com/jxnblk/understyle)
+
+<small id='*'>Please don’t use carousels in your app. Users hate them.</small>
 
 <!--
   - Toggle example
 -->
 
-<!--
-Higher order components can also be used to encapsulate frequently used generic styling,
-for example margin, padding, and display.
-This is the pattern used in Reflexbox, which is an extension of an even simpler Robox component.
-
-These higher order components wrap other components and add helper props such as m, mb, p, px, etc.
-They can even be abstracted into convenient components like boxes and grid columns
--->
 
 
