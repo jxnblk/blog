@@ -15,7 +15,6 @@ class Index extends React.Component {
   }
 
   render () {
-    console.log(this.props.posts.length, this.props.pageSize)
     const publishedPosts = this.props.posts.filter(p => !p.draft)
     var params = this.props.params || false
     var chunks = chunk(publishedPosts, this.props.pageSize)
