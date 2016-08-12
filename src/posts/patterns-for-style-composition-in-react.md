@@ -42,7 +42,7 @@ I’ve gravitated towards these patterns in an effort to:
 - Create more readable components
 - Make building out new UI easier and faster
 - Keep styles encapsulated to help prevent collisions and unwanted side effects
-- Create an easier-to-use interface for non-front-end developers
+- Create an easy-to-use component API for non-front-end developers
 
 Although the level of abstraction here might look like overkill for smaller projects,
 I find that this general approach has sped up my development across the board.
@@ -483,7 +483,7 @@ const FlexAuto = (props) => (
 ```
 
 Typography styles are another great candidate for building up with composition.
-By using a base typographic component, you can help ensure consistency and keep your styling DRY in a component-based architecture.
+By using a base typographic component, you can help ensure consistency and keep your styling DRY.
 
 ```js
 import React from 'react'

@@ -403,7 +403,7 @@ These aren’t hard-and-fast rules, these are simply reflections on how I’ve c
 <li>Create more readable components</li>
 <li>Make building out new UI easier and faster</li>
 <li>Keep styles encapsulated to help prevent collisions and unwanted side effects</li>
-<li>Create an easier-to-use interface for non-front-end developers</li>
+<li>Create an easy-to-use component API for non-front-end developers</li>
 </ul>
 <p>Although the level of abstraction here might look like overkill for smaller projects,
 I find that this general approach has sped up my development across the board.</p>
@@ -723,7 +723,7 @@ This base layout component can then be used to create grid system components and
     <span class="hljs-tag">&lt;<span class="hljs-title">Quarter</span>&gt;</span>Quarter width column<span class="hljs-tag">&lt;/<span class="hljs-title">Quarter</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span></pre><p>Typography styles are another great candidate for building up with composition.
-By using a base typographic component, you can help ensure consistency and keep your styling DRY in a component-based architecture.</p>
+By using a base typographic component, you can help ensure consistency and keep your styling DRY.</p>
 <pre><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 <span class="hljs-keyword">import</span> { alternateFont, typeScale, boldFontWeight } <span class="hljs-keyword">from</span> <span class="hljs-string">'./styles'</span>
 
