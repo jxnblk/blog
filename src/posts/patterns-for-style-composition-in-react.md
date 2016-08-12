@@ -1,7 +1,29 @@
 ---
 title: Patterns for Style Composition in React
+excerpt: "While React is extremely flexible in terms of how you can structure your application’s UI, I’ve found that a few patterns for style composition have helped me keep things organized and easy to work with."
 created: 8-3-2016
 draft: true
+tags:
+  - css
+  - css-in-js
+  - design systems
+  - style guides
+  - react
+related:
+  - name: Pure UI by Guillermo Rauch
+    href: http://rauchg.com/2015/pure-ui/
+  - name: CSS in JS by Christopher "vjeux" Chedeau
+    href: https://speakerdeck.com/vjeux/react-css-in-js
+  - name: Presentational and Container Components by Dan Abramov
+    href: https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.68k59nncg
+  - name: Reflexbox
+    href: http://jxnblk.com/reflexbox
+  - name: Rebass
+    href: http://jxnblk.com/rebass
+  - name: Robox
+    href: https://github.com/jxnblk/robox
+  - name: Understyle
+    href: https://github.com/jxnblk/understyle
 ---
 
 While React is extremely flexible in terms of how you can structure your application’s UI,
@@ -36,6 +58,7 @@ Instead, these heavy-lifting components should be composed of primarily stateles
 sometimes referred to as *presentational* components.
 By keeping styling concerns separate from the application state,
 pieces can become more reusable and building out new views and containers can be quicker.
+
 
 For example, a form component render method might look something like this:
 
@@ -658,7 +681,16 @@ can work well for styling layout, typography and colors.
 This is the same pattern used in [Reflexbox](https://github.com/jxnblk/reflexbox),
 and similar to Rebass’s [Base component](https://github.com/jxnblk/rebass/blob/master/src/Base.js).
 
-## A Note About Performance
+## Further Exploration
+
+These are just a few patterns that I’ve found to be the most useful
+when it comes to styling UI in a component-based system.
+I’m curious to know if anyone else has found similar patterns that they’ve found helpful,
+and I’m sure there are even more ways to create more beautiful, more flexible, and more maintainable visual design systems.
+
+---
+
+### A Note About Performance
 
 While there are many different ways to handle styling in a component-based app,
 make sure to pay close attention to the size of your bundle.
@@ -668,15 +700,7 @@ could actually harm the performance and create a degraded experience for your en
 
 And remember, everything related to styling that you do should be for the user’s benefit, not your own.
 
-## Related
-
-- [Pure UI](http://rauchg.com/2015/pure-ui/) by Guillermo Rauch
-- [CSS in JS](https://speakerdeck.com/vjeux/react-css-in-js) by Christopher "vjeux" Chedeau
-- [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.68k59nncg) by Dan Abramov
-- [Reflexbox](http://jxnblk.com/reflexbox)
-- [Rebass](http://jxnblk.com/rebass)
-- [Robox](https://github.com/jxnblk/robox)
-- [Understyle](https://github.com/jxnblk/understyle)
+---
 
 <small id='*'>* Please don’t use carousels in your app. Users hate them.</small>
 

@@ -87,6 +87,11 @@ h2, .f2 {
   margin-bottom: 1rem;
 }
 
+h3, .f3 {
+  font-weight: 400;
+  font-style: italic;
+}
+
 h3, h4, h5 {
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -114,10 +119,10 @@ blockquote {
 
 code, pre, samp {
   font-family: 'Roboto Mono', monospace;
-  font-size: 80%;
 }
 
 pre {
+  font-size: 70%;
   padding-left: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -125,11 +130,19 @@ pre {
   border-left: 4px solid rgba(0, 0, 0, .0625);
 }
 
+hr {
+  border: 0;
+  border-bottom: 4px solid rgba(0, 0, 0, .0625);
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
 code {
-  background-size: 100% 6px;
+  font-size: 80%;
+  background-size: 100% 8px;
   background-repeat: no-repeat;
   background-position: bottom;
-  background-image: linear-gradient(transparent, transparent 4px, #ccc 4px);
+  background-image: linear-gradient(transparent 4px, rgba(0, 0, 0, .125) 4px);
 }
 
 table {
