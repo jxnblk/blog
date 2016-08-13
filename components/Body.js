@@ -7,12 +7,12 @@ class Body extends React.Component {
 
   render () {
     const { post, title, children } = this.props
-    const date = post ? new Date(post.created).toDateString() : null
+    const date = post ? new Date(post.created).toDateString() : ''
 
     const view = React.cloneElement(children, this.props)
 
     return (
-      <body className='measure mx-auto px3'>
+      <body className='measure mx-auto px2'>
         <Header {...this.props}
           title={post.title}
           description={date} />

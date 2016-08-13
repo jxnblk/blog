@@ -1,8 +1,7 @@
 ---
 title: Patterns for Style Composition in React
 excerpt: "While React is extremely flexible in terms of how you can structure your application’s UI, I’ve found that a few patterns for style composition have helped me keep things organized and easy to work with."
-created: 8-3-2016
-draft: true
+created: 8-13-2016
 tags:
   - css
   - css-in-js
