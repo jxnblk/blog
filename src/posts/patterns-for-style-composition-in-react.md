@@ -332,8 +332,8 @@ const blueAlpha = [
 
 ## Base Component
 
-Beyond just importing style values, there is a tremendous amount of flexibility when it comes to component
-composition when using React – since components are essentially just functions.
+Beyond just importing style values, there is a tremendous amount of flexibility
+when it comes to composition in React – since components are essentially just functions.
 Take the Button component from above, and we’ll change some of the style details to props to make it more reusable.
 
 ```js
