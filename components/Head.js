@@ -43,8 +43,6 @@ const Head = ({
     description = props.description
   }
 
-  const image = meta.image || 'http://jxnblk.com/avatar/avatar-640.png'
-
   return (
     <head>
       <meta charSet='utf-8' />
@@ -54,9 +52,9 @@ const Head = ({
       <meta name='keywords' content={tags.join()} />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       {twitterCard({
+        ...meta,
         title: post ? post.title : title,
-        description,
-        image
+        description
       })}
       <style dangerouslySetInnerHTML={{ __html: base }} />
       <style dangerouslySetInnerHTML={{ __html: bassLayout }} />
