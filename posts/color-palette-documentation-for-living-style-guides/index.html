@@ -1,7 +1,10 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/><title>Color Palette Documentation for Living Style Guides | Writing</title><meta name="description" content="Virtually every style guide has a color palette section in its documentation.
 Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
 This often leads to one falling out of sync with the other,
-and makes maintaining a living style guide more difficult."/><meta name="author" content="Brent Jackson"/><meta name="keywords" content="blog,writing,design,minimalism,css,color,documentation,style guide,living style guide,color contrast,accessibility,a11y"/><meta name="viewport" content="width=device-width, initial-scale=1"/><style>
+and makes maintaining a living style guide more difficult."/><meta name="author" content="Brent Jackson"/><meta name="keywords" content="blog,writing,design,minimalism,css,color,documentation,style guide,living style guide,color contrast,accessibility,a11y"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="twitter:card" content="summary"/><meta name="twitter:creator" content="@jxnblk"/><meta name="twitter:title" content="Color Palette Documentation for Living Style Guides"/><meta name="twitter:description" content="Virtually every style guide has a color palette section in its documentation.
+Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
+This often leads to one falling out of sync with the other,
+and makes maintaining a living style guide more difficult."/><meta name="twitter:image" content="http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg"/><style>
 * { box-sizing: border-box }
 
 html {
@@ -581,7 +584,7 @@ fs.writeFileSync(<span class="hljs-string">'index.html'</span>, html)</pre><p>No
   <span class="hljs-keyword">return</span> combos
 
 }</pre><p>Add the <code>parse-combos</code> module to <code>build.js</code> and pass the combos array into the template function.</p>
-<pre><span class="hljs-comment">// build.js </span>
+<pre><span class="hljs-comment">// build.js</span>
 <span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>)
 <span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
 <span class="hljs-keyword">var</span> parseColors = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/parse-colors'</span>)

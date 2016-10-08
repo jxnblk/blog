@@ -19,6 +19,9 @@ related:
     href: https://github.com/postcss/postcss
   - name: Color
     href: https://npmjs.com/package/color
+meta:
+  card: 'summary_large_image'
+  image: 'http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg'
 ---
 
 Virtually every style guide has a color palette section in its documentation.
@@ -298,7 +301,7 @@ module.exports = function(colors) {
 Add the `parse-combos` module to `build.js` and pass the combos array into the template function.
 
 ```js
-// build.js 
+// build.js
 var _ = require('lodash')
 var fs = require('fs')
 var parseColors = require('./lib/parse-colors')
