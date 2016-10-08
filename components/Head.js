@@ -15,7 +15,7 @@ const twitterCard = ({
 }) => {
   return [
     <meta name='twitter:card' content={card} />,
-    <meta name='twitter:creator' content={author} />,
+    <meta name='twitter:site' content={author} />,
     <meta name='twitter:title' content={title} />,
     <meta name='twitter:description' content={description} />,
     <meta name='twitter:image' content={image} />
