@@ -38,5 +38,4 @@ data.posts.forEach(post => {
 const xml = feed.xml()
 
 fs.writeFileSync('rss.xml', xml)
-// console.log(xml)
 
