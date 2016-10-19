@@ -16,7 +16,7 @@ const options = {
   title,
   description,
   site_url: 'http://jxnblk.com/writing',
-  // image_url: 'http://jxnblk.com/avatar/',
+  image_url: 'http://jxnblk.com/avatar/avatar-640.png'
 }
 
 const feed = new Rss(options)

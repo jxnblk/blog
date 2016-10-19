@@ -7,6 +7,7 @@
     "test": "mocha test",
     "standard": "standard",
     "medium": "babel-node medium",
+    "rss": "node rss.js",
     "build": "webpack --colors && npm run clean",
     "dev": "webpack-dev-server --progress --colors",
     "clean": "rm bundle.js",
