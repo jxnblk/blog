@@ -28,7 +28,7 @@ data.posts.forEach(post => {
     title: post.title,
     description: post.excerpt,
     date: post.created,
-    url: `http://jxnblk.com/writing/${post.slug}`,
+    url: `http://jxnblk.com/writing/posts/${post.slug}`,
     guid: post.slug,
     categories: post.tags,
     author
