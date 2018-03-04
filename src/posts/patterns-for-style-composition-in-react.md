@@ -207,11 +207,13 @@ including borders, border radii, shadows, animation duration, etc.
 You could even export more elaborate combinations of styles like the following:
 
 ```js
+/*
 export const cardStyle = {
   backgroundColor: white,
   borderRadius: 3,
   boxShadow: `0 0 4px ${shade[1]}`
 }
+*/
 ```
 
 But I’d recommend delegating combinations like these to components and using composition instead, as I’ll show below.

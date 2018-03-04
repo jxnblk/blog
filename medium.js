@@ -2,9 +2,8 @@
 
 import fs from 'fs'
 import medium from 'medium-sdk'
-import frontMatter from 'front-matter'
-import colors from 'colors'
-import open from 'open'
+import matter from 'gray-matter'
+import open from 'opn'
 import config from './config.json'
 
 const { medium: { token: TOKEN } } = config
@@ -31,14 +30,14 @@ try {
   throw new Error('Could not read file from /src/posts/' + args[0])
 }
 
-const matter = frontMatter(src)
-const { title, tags } = matter.attributes
+const { data, content } = matter(src)
+const { title, tags } = data
 const canonicalUrl = `http://jxnblk.com/writing/posts/${slug}`
 
-const content = `
+const md = `
 # ${title}
 
-${matter.body}
+${content}
 
 *Cross-posted from [jxnblk.com/writing](${canonicalUrl})*
 `
@@ -53,7 +52,7 @@ client.getUser((err, user) => {
     userId: user.id,
     title,
     tags,
-    content,
+    content: md,
     canonicalUrl,
     contentFormat: 'markdown',
     publishStatus: 'draft'
@@ -63,9 +62,7 @@ client.getUser((err, user) => {
     }
 
     console.log(
-      `Draft post "${title}" published to Medium.com`.green
-      // ,
-      // colors.blue(JSON.stringify(post, null, 2))
+      `Draft post "${title}" published to Medium.com`
     )
     open(post.url)
   })

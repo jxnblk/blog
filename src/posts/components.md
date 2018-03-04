@@ -48,6 +48,3 @@ Patterns will emerge from the primordial goop of UI that is your product,
 and by consistently thinking about a composable system you’ll probably come up with something more flexible
 and more robust than if one person dictates a dogmatic framework to work within.
 
-<!--
-* If you don’t like the word components, you can call them modules, widgets, doodads, or sneetches for all I care. Needless categorization and naming conventions only helps to slow down progress.
--->

@@ -1,9 +1,6 @@
-
 // RSS generator
-
-require('babel-register')()
 const fs = require('fs')
-const Rss = require('rss')
+const RSS = require('rss')
 const data = require('./data')
 
 const {
@@ -19,7 +16,7 @@ const options = {
   image_url: 'http://jxnblk.com/avatar/avatar-640.png'
 }
 
-const feed = new Rss(options)
+const feed = new RSS(options)
 
 console.log('Generating RSS feed for ', data.posts.length)
 

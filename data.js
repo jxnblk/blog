@@ -1,11 +1,9 @@
-
 import fs from 'fs'
 import path from 'path'
-import fm from 'front-matter'
-import marked from 'marked'
-import markedRenderer from './marked-renderer'
+import matter from 'gray-matter'
+import mdx from '@compositor/markdown'
+// import marked from 'marked'
 
-import cheerio from 'cheerio'
 import pkg from './package.json'
 
 const dir = './src/posts'
@@ -16,17 +14,15 @@ const filenames = fs.readdirSync(dir)
   })
 
 const posts = filenames.map(function (filename) {
-  var content = fs.readFileSync(path.join(dir, filename), 'utf8')
-  var matter = fm(content)
-  var html = marked(matter.body, { renderer: markedRenderer })
-  var $ = cheerio.load(html)
-  var excerpt = matter.attributes.excerpt || $('p').first().text()
-  var post = {
-    ...matter.attributes,
+  const raw = fs.readFileSync(path.join(dir, filename), 'utf8')
+  const { data, content } = matter(raw)
+  const html = mdx(content, {})
+  const post = {
+    ...data,
     slug: filename.replace(/\.md/, ''),
-    body: matter.body,
+    body: content,
     html: html,
-    excerpt: excerpt
+    // excerpt: excerpt
   }
 
   return post
@@ -43,7 +39,7 @@ routes.unshift('/')
 const pageSize = 24
 const pages = Math.ceil(posts.length / pageSize)
 
-for (var i = 0; i < pages; i++) {
+for (let i = 0; i < pages; i++) {
   routes.push('/page/' + (i + 1))
 }
 
