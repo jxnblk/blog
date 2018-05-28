@@ -1,6 +1,6 @@
 ---
 title: Components
-created: 6-17-2016
+created: 2016-06-17
 ---
 
 Everything in a UI is a component.

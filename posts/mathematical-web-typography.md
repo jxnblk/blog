@@ -1,6 +1,6 @@
 ---
 title: Mathematical Web Typography
-created: 06-23-2015
+created: 2015-06-23
 tags:
   - css
   - typography

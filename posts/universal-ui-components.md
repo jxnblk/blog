@@ -1,6 +1,6 @@
 ---
 title: Universal UI Components
-created: 07-06-2016
+created: 2016-07-06
 related:
   - name: Components
     href: http://jxnblk.com/writing/posts/components

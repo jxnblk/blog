@@ -1,7 +1,7 @@
 ---
 title: 'It’s Okay to Look the Same'
 subhead: 'Why frameworks are actually pretty great'
-created: '04-25-2014'
+created: 2014-04-25
 crossposted:
   - https://medium.com/@jxnblk/its-okay-to-look-the-same-e95e79f409b7
 ---

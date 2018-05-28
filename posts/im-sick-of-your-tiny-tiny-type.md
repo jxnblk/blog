@@ -1,6 +1,6 @@
 ---
 title: 'I’m Sick of Your Tiny, Tiny Type'
-created: '01-29-2013'
+created: 2013-01-29
 crossposted:
   - http://jxnblk.tumblr.com/post/41796724549/im-sick-of-your-tiny-tiny-type
 ---

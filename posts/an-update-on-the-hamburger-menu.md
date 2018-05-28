@@ -1,6 +1,6 @@
 ---
 title: 'An Update on the Hamburger Menu'
-created: '04-12-2014'
+created: 2014-04-12
 crossposted:
   - http://jxnblk.tumblr.com/post/82486816704/an-update-on-the-hamburger-menu
 ---
@@ -14,7 +14,7 @@ Since then, a few things have happened.
 3. Time Magazine decided to use it:
 
 > "No one understands the icon, let's add the word menu. The word is too small, let's add a pop-up calling it out." [pic.twitter.com/Jargi7gavX](http://t.co/Jargi7gavX)
-> 
+>
 > — Luke Wroblewski (@lukew) [March 11, 2014](https://twitter.com/lukew/statuses/443425041795928064)
 
 4. Personally, I think user testing the hamburger menu is good enough, but these guys A/B tested it:&nbsp;[UX designers: Side drawer navigation could be costing you half your user engagement](http://thenextweb.com/dd/2014/04/08/ux-designers-side-drawer-navigation-costing-half-user-engagement/)

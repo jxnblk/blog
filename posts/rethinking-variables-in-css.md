@@ -1,6 +1,6 @@
 ---
 title: 'Rethinking Variables in CSS'
-created: '05-08-2015'
+created: 2015-05-08
 crossposted:
   - https://medium.com/@jxnblk/rethinking-variables-in-css-2ffafda429a
 tags:

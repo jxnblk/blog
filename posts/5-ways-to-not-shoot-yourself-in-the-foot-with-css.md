@@ -1,6 +1,6 @@
 ---
 title: '5 ways to not shoot yourself in the foot with CSS'
-created: '12-30-2014'
+created: 2014-12-30
 crossposted:
   - https://medium.com/@jxnblk/5-ways-to-not-shoot-yourself-in-the-foot-with-css-8d3c84c94364
 ---

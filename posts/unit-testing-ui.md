@@ -1,6 +1,6 @@
 ---
 title: 'Unit testing UI'
-created: '6-20-2016'
+created: 2016-06-20
 ---
 
 I recently read

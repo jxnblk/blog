@@ -1,6 +1,6 @@
 ---
 title: 'Zero-Configuration React Static Site Generator'
-created: '02-15-2016'
+created: 2016-02-15
 tags:
   - react
   - static-site-generator
@@ -36,7 +36,7 @@ Add the following run script to package.json.
 }
 ```
 
-## ~~3. Configure Babel (Optional) [*](#1)~~
+## ~~3. Configure Babel (Optional) [\*](#1)~~
 
 ~~Add the following to package.json.~~
 

@@ -26,3 +26,17 @@
 ---
 
 [Made by Jxnblk](http://jxnblk.com)
+
+---
+
+## Todo
+
+- [ ] index
+- [ ] post
+- [ ] post metadata
+- [ ] crossposted
+- [ ] tweet
+- [ ] open issue
+- [ ] pagination?
+- [ ] update rss script to get posts (e.g. data.js)
+- [ ] test markdown-to-medium setup
