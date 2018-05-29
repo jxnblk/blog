@@ -26,7 +26,7 @@ export default class Post extends React.Component {
     const {
       title,
       excerpt,
-      tags
+      tags = []
     } = post || {}
     const meta = title ? getMeta({
       'twitter:title': title,
