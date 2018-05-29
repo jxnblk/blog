@@ -1,7 +1,7 @@
 {
   "name": "writing",
-  "version": "1.0.0",
-  "description": "Thoughts on Design, Minimalism, and the Web",
+  "version": "2.0.0",
+  "description": "The writing of Brent Jackson",
   "main": "index.js",
   "scripts": {
     "medium": "babel-node medium",
@@ -22,7 +22,16 @@
   "devDependencies": {},
   "x0": {
     "title": "Jxnblk Writing",
-    "basename": "/writing"
+    "basename": "/writing",
+    "meta": [
+      { "name": "description", "content": "The writing of Brent Jackson" },
+      { "name": "author", "content": "Brent Jackson" },
+      { "name": "twitter:card", "content": "summary" },
+      { "name": "twitter:site", "content": "@jxnblk" },
+      { "name": "twitter:title", "content": "Jxnblk Writing" },
+      { "name": "twitter:description", "content": "The writing of Brent Jackson" },
+      { "name": "twitter:image", "content": "https://jxnblk.com/avatar.png" }
+    ]
   },
   "dependencies": {
     "@compositor/md-loader": "^1.0.34",

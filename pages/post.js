@@ -25,11 +25,13 @@ export default class Post extends React.Component {
     const post = posts.find(post => post.path === path)
     const {
       title,
-      excerpt
+      excerpt,
+      tags
     } = post || {}
     const meta = title ? getMeta({
       'twitter:title': title,
-      'twitter:description': excerpt
+      'twitter:description': excerpt,
+      keywords: tags.join(', ')
     }) : undefined
     return {
       path: '/posts/:name',
@@ -48,13 +50,13 @@ export default class Post extends React.Component {
     const { title, Component } = post
 
     return (
-      <div>
+      <article>
         <UI.h1>{title}</UI.h1>
         <UI.pre>{post.created.toDateString()}</UI.pre>
         <Component
           scope={UI}
         />
-      </div>
+      </article>
     )
   }
 }
