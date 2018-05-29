@@ -9,7 +9,8 @@
     "build": "x0 build pages",
     "dev": "webpack-dev-server --progress --colors",
     "clean": "rm -rf dist",
-    "start": "x0 pages -o"
+    "start": "x0 pages -o",
+    "test": "echo \"hello\""
   },
   "keywords": [
     "blog",
