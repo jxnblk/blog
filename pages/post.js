@@ -43,14 +43,14 @@ export default class Post extends React.Component {
 
     const post = posts.find(post => post.name === name)
 
-    if (!name || !post) return <pre>Not found</pre>
+    if (!name || !post) return <UI.pre>Not found</UI.pre>
 
     const { title, Component } = post
 
     return (
       <div>
         <UI.h1>{title}</UI.h1>
-        <pre>{post.created.toDateString()}</pre>
+        <UI.pre>{post.created.toDateString()}</UI.pre>
         <Component
           scope={UI}
         />
