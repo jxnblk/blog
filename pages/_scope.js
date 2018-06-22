@@ -3,6 +3,7 @@ import React from 'react'
 import tag from 'clean-tag'
 import styled from 'react-emotion'
 import tags from 'html-tags'
+import { scope } from '@compositor/x0/components'
 
 const Ax = styled(tag)(props => props.css)
 tags.forEach(t => {
@@ -264,6 +265,7 @@ const Right = props =>
   />
 
 export default {
+  ...scope,
   h1,
   h2,
   h3,
@@ -273,7 +275,7 @@ export default {
   a,
   p,
   pre,
-  code,
+  // code,
   blockquote,
   ul,
   li,
