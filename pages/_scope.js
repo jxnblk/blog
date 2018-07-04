@@ -3,7 +3,7 @@ import React from 'react'
 import tag from 'clean-tag'
 import styled from 'react-emotion'
 import tags from 'html-tags'
-import { scope } from '@compositor/x0/components'
+// import { scope } from '@compositor/x0/components'
 
 const Ax = styled(tag)(props => props.css)
 tags.forEach(t => {
@@ -265,7 +265,7 @@ const Right = props =>
   />
 
 export default {
-  ...scope,
+  // ...scope,
   h1,
   h2,
   h3,

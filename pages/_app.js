@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ScopeProvider } from '@compositor/x0/components'
+import RebassMDX from '@rebass/mdx'
 import UI from './_scope'
 
 const Script = ({ src }) =>
@@ -10,8 +10,8 @@ const Script = ({ src }) =>
     }}
   />
 
-export default ({ children }) =>
-  <ScopeProvider scope={UI}>
+export default ({ children, route }) =>
+  <RebassMDX>
     <React.Fragment>
       <UI.Flex>
         <UI.Container>
@@ -27,9 +27,10 @@ export default ({ children }) =>
                   margin-top: 6em;
                 `}
               >
-                Jxnblk Writing
+                {route.props.title || 'Jxnblk Writing'}
               </UI.Heading>
             </UI.BlockLink>
+            {route.props.created && <UI.pre>{route.props.created.toDateString()}</UI.pre>}
           </header>
           <main>
             {children}
@@ -44,7 +45,7 @@ export default ({ children }) =>
       </UI.Flex>
       <Script src={ga} />
     </React.Fragment>
-  </ScopeProvider>
+  </RebassMDX>
 
 
 // <Script src={twttr} />
