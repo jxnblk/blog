@@ -43,7 +43,9 @@ export default ({ children, route }) =>
           </header>
           <main>
             {children}
-            {route.props.created && <Pre mt={4}>{route.props.created.toDateString()}</Pre>}
+            {route && route.props && route.props.created && typeof route.props.created.toDateString === 'function' && (
+              <Pre mt={4}>{route.props.created.toDateString()}</Pre>
+            )}
           </main>
           <footer>
             <Flex mt={6}>
