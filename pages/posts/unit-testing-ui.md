@@ -3,6 +3,8 @@ title: 'Unit testing UI'
 created: 2016-06-20
 ---
 
+# Unit testing UI
+
 I recently read
 [this excellent article](http://product.voxmedia.com/2016/4/20/11458814/how-designers-can-use-unit-testing-to-build-resilient-and-happy-design-systems),
 where the design team at Vox has devised a testing framework for new UI [components](/writing/posts/components) introduced into their pattern library.

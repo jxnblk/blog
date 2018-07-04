@@ -5,6 +5,8 @@ crossposted:
   - http://jxnblk.tumblr.com/post/36218805036/hamburgers-basements-why-not-to-use-left-nav
 ---
 
+# Hamburgers & Basements: Why Not to Use Left Nav Flyouts
+
 > **_"Good design makes a product understandable"_** – Dieter Rams
 
 Good navigation should do at least three things well: (1) it should allow the user to navigate; (2) it should serve as wayfinding, letting the user know where they are; and (3) it should help the user understand what the product is capable of. If your navigation is not doing these three things, something's wrong.

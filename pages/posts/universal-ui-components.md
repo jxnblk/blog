@@ -16,6 +16,8 @@ related:
     href: http://jxnblk.com/hyp
 ---
 
+# Universal UI Components
+
 For a while now, I’ve been interested in the idea of creating portable,
 interoperable functional UI components that can work in any DOM rendering library,
 whether it’s

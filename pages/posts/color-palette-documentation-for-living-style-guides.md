@@ -24,6 +24,8 @@ meta:
   image: 'http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg'
 ---
 
+# Color Palette Documentation for Living Style Guides
+
 Virtually every style guide has a color palette section in its documentation.
 Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
 This often leads to one falling out of sync with the other,

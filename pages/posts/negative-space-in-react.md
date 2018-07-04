@@ -10,6 +10,8 @@ tags:
   - margin
 ---
 
+# Negative space in react
+
 > White space is to be regarded as an active element, not a passive background.
 >
 > – Jan Tschichold
@@ -56,7 +58,17 @@ Now let's take a look at the second method, where the parent defines margins of 
 ### Space Component
 Lastly, let's explore a space component that declaratively adds space between components.
 
-<!--
+### Combined Approach
+
+We can actually devise a system that allows for all of the approaches listed above.
+To start, we need a component that manages its own margin.
+
+---
+
+- HOC for other components
+- It accepts m props
+- Next, let's create a convenience parent wrapper
+- It could work with the m prop or go lower level and apply styles
 - Box component is somewhere in between
 - Parent spacer component in rebass
 - Row, Arrange, Align,
@@ -70,18 +82,3 @@ Declarative spacer is verbose and can be cumbersome to manage efficiently. It al
 
 Parent spacer has its own limitations
 Similar to traditional CSS grid sys it doesn't allow for much flexibility
--->
-
-### Combined Approach
-
-We can actually devise a system that allows for all of the approaches listed above.
-To start, we need a component that manages its own margin.
-
-<!--
-- HOC for other components
-- It accepts m props
-- Next, let's create a convenience parent wrapper
-- It could work with the m prop or go lower level and apply styles
--->
-
-

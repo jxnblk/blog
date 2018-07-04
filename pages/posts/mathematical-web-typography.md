@@ -12,6 +12,7 @@ related:
     href: http://basscss.com
 ---
 
+# Mathematical Web Typography
 
 When it comes to designing for the Web
 I like to follow a handful of general principles.

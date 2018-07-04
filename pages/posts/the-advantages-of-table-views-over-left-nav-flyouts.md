@@ -5,6 +5,8 @@ crossposted:
   - http://jxnblk.tumblr.com/post/36972301487/the-advantages-of-table-views-over-left-nav
 ---
 
+# The Advantages of Table Views Over Left Nav Flyouts
+
 ![image](http://jxnblk.s3.amazonaws.com/assets/images/TableViewsAndBasementsIllustration.png)
 
 At first glance, these two navigation patterns seem very similar, but there are a few points that give table views[\*]() a huge leg up. When dealing with a multi-tiered hierarchy or a variable amount of navigation items – such as text messages, emails, folksonomic categories, folders, files, etc. – table views can be a great solution. Lists are generally easier to scan than tiles, and vertical scrolling is an easy interaction for touchscreen mobile devices.

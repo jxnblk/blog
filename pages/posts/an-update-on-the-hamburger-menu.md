@@ -5,6 +5,8 @@ crossposted:
   - http://jxnblk.tumblr.com/post/82486816704/an-update-on-the-hamburger-menu
 ---
 
+# An Update on the Hamburger Menu
+
 About a year ago, I wrote [Hamburgers &amp; Basements: Why Not to Use Left Nav Flyouts](http://jxnblk.tumblr.com/post/36218805036/hamburgers-basements-why-not-to-use-left-nav-flyouts).
 
 Since then, a few things have happened.

@@ -5,6 +5,8 @@ crossposted:
   - http://jxnblk.tumblr.com/post/35244863166/microbeats-is-the-best-journal-ive-ever-kept
 ---
 
+# Microbeats is the Best Journal I’ve Ever Kept
+
 I’ve been producing electronic music on my computer for about a decade now, and I don’t have a whole lot to show for it. After moving to DC from Shanghai, where I played a lot of live sets and DJ gigs, I realized there wasn’t much of a music scene in DC, and I stopped playing out. After a few years, I noticed that I generally wasn’t being inspired, and I wasn’t growing much as an artist. I also noticed that I had a tendency to never finish the tracks that I’d started. I was pretty good at creating catchy little loops, but they never evolved into anything beyond that.
 
 To try to pull myself out of this rut, I started a Tumblr called Loop A Day in early 2011. The idea was that I would spend no more than an hour each day creating a loop and posting it to this blog. I kept up with it for about a month, then I realized that the daily routine was wrecking my social life – I remember leaving parties more than once just to go home and work on music. I did like the hour limitation, but doing it every day had to stop. So, I got rid of my self-imposed quota and renamed the project Microbeats.

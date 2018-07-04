@@ -10,6 +10,8 @@ tags:
 excerpt: Why the new MacBook might just be my favorite computer ever
 ---
 
+# Mini MacBook Review
+
 ## Size
 
 Fits in my pocket.

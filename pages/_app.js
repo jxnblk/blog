@@ -1,6 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import UI from './_scope'
+import RebassMDX from '@rebass/mdx'
+import {
+  Flex,
+  Box,
+  Container,
+  Heading,
+  BlockLink,
+  Pre,
+} from 'rebass'
 
 const Script = ({ src }) =>
   <script
@@ -9,39 +17,47 @@ const Script = ({ src }) =>
     }}
   />
 
-export default ({ render }) =>
-  <React.Fragment>
-    <UI.Flex>
-      <UI.Container>
-        <header>
-          <UI.BlockLink is={Link} to='/'>
-            <UI.Heading
-              is='h1'
-              href='/'
-              css={`
-                font-size: 16px;
-                text-transform: uppercase;
-                letter-spacing: .2em;
-                margin-top: 6em;
-              `}
-            >
-              Jxnblk Writing
-            </UI.Heading>
-          </UI.BlockLink>
-        </header>
-        <main>
-          {render()}
-        </main>
-        <footer>
-          <UI.BlockLink href='https://jxnblk.com'>
-            Made by Jxnblk
-          </UI.BlockLink>
-        </footer>
-      </UI.Container>
-      <UI.Right />
-    </UI.Flex>
-    <Script src={ga} />
-  </React.Fragment>
+const Right = props =>
+  <Box
+    {...props}
+    width={[ 0, 0, 320 ]}
+  />
+
+export default ({ children, route }) =>
+  <RebassMDX>
+    <React.Fragment>
+      <Flex>
+        <Container
+          pb={6}
+          maxWidth={768}>
+          <header>
+            <BlockLink is={Link} to='/'>
+              <Heading
+                is='h1'
+                href='/'
+                mt={5}
+                mb={5}>
+                Jxnblk Writing
+              </Heading>
+            </BlockLink>
+          </header>
+          <main>
+            {children}
+            {route.props.created && <Pre mt={4}>{route.props.created.toDateString()}</Pre>}
+          </main>
+          <footer>
+            <Flex mt={6}>
+              <BlockLink href='https://jxnblk.com'>
+                Made by Jxnblk
+              </BlockLink>
+            </Flex>
+          </footer>
+        </Container>
+        <Right />
+      </Flex>
+      <Script src={ga} />
+    </React.Fragment>
+  </RebassMDX>
 
 
 // <Script src={twttr} />

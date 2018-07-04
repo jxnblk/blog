@@ -4,13 +4,11 @@
   "description": "The writing of Brent Jackson",
   "main": "index.js",
   "scripts": {
+    "start": "ok pages -o",
+    "build": "ok build pages --static",
     "medium": "babel-node medium",
     "rss": "node rss.js",
-    "build": "x0 build pages",
-    "dev": "webpack-dev-server --progress --colors",
-    "clean": "rm -rf dist",
-    "start": "x0 pages -o",
-    "test": "echo \"hello\""
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "blog",
@@ -20,33 +18,49 @@
   ],
   "author": "Brent Jackson",
   "license": "MIT",
-  "devDependencies": {},
-  "x0": {
+  "dependencies": {
+    "@rebass/mdx": "^1.0.0-1",
+    "clean-tag": "^1.0.4",
+    "jxnblk-avatar": "^1.2.1",
+    "lodash.sortby": "^4.7.0",
+    "markdown-to-medium": "^1.4.4",
+    "ok-cli": "^2.0.7",
+    "rebass": "^2.0.1",
+    "rss": "^1.2.2",
+    "styled-components": "^3.3.3"
+  },
+  "ok": {
     "title": "Jxnblk Writing",
     "basename": "/writing",
     "meta": [
-      { "name": "description", "content": "The writing of Brent Jackson" },
-      { "name": "author", "content": "Brent Jackson" },
-      { "name": "twitter:card", "content": "summary" },
-      { "name": "twitter:site", "content": "@jxnblk" },
-      { "name": "twitter:title", "content": "Jxnblk Writing" },
-      { "name": "twitter:description", "content": "The writing of Brent Jackson" },
-      { "name": "twitter:image", "content": "https://jxnblk.com/avatar.png" }
+      {
+        "name": "description",
+        "content": "The writing of Brent Jackson"
+      },
+      {
+        "name": "author",
+        "content": "Brent Jackson"
+      },
+      {
+        "name": "twitter:card",
+        "content": "summary"
+      },
+      {
+        "name": "twitter:site",
+        "content": "@jxnblk"
+      },
+      {
+        "name": "twitter:title",
+        "content": "Jxnblk Writing"
+      },
+      {
+        "name": "twitter:description",
+        "content": "The writing of Brent Jackson"
+      },
+      {
+        "name": "twitter:image",
+        "content": "https://jxnblk.com/avatar.png"
+      }
     ]
-  },
-  "dependencies": {
-    "@compositor/md-loader": "^1.0.34",
-    "@compositor/x0": "^5.0.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "clean-tag": "^1.0.4",
-    "emotion": "^9.1.3",
-    "html-tags": "^2.0.0",
-    "jxnblk-avatar": "^1.2.1",
-    "markdown-to-medium": "^1.4.4",
-    "react-emotion": "^9.1.3",
-    "rss": "^1.2.2"
   }
 }
