@@ -24,7 +24,7 @@
     "jxnblk-avatar": "^1.2.1",
     "lodash.sortby": "^4.7.0",
     "markdown-to-medium": "^1.4.4",
-    "ok-cli": "^2.0.7",
+    "ok-cli": "^2.0.8",
     "rebass": "^2.0.1",
     "rss": "^1.2.2",
     "styled-components": "^3.3.3"
