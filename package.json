@@ -58,13 +58,11 @@
   "dependencies": {
     "@rebass/mdx": "^1.0.0-1",
     "clean-tag": "^1.0.4",
-    "emotion": "^9.1.3",
     "html-tags": "^2.0.0",
     "jxnblk-avatar": "^1.2.1",
     "lodash.sortby": "^4.7.0",
     "markdown-to-medium": "^1.4.4",
     "ok-cli": "^2.0.5",
-    "react-emotion": "^9.1.3",
     "rss": "^1.2.2",
     "styled-components": "^3.3.3"
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import sortBy from 'lodash.sortby'
-import UI from './_scope'
+import { BlockLink, Heading, Text, Pre } from 'rebass'
 
 export default ({ routes = []}) => {
   const posts =
@@ -14,18 +14,18 @@ export default ({ routes = []}) => {
     .reverse()
 
   return (
-    <div>
+    <React.Fragment>
       {posts.map(post => (
-        <div key={post.name}>
-          <UI.BlockLink
-            is={Link}
-            to={post.path}>
-            <UI.Heading>{post.title}</UI.Heading>
-            {post.excerpt && <UI.p>{post.excerpt}</UI.p>}
-            <UI.pre>{new Date(post.created).toDateString()}</UI.pre>
-          </UI.BlockLink>
-        </div>
+        <BlockLink
+          key={post.name}
+          is={Link}
+          py={3}
+          to={post.path}>
+          <Heading mb={3}>{post.title}</Heading>
+          {post.excerpt && <Text is='p' mb={3}>{post.excerpt}</Text>}
+          <Pre>{new Date(post.created).toDateString()}</Pre>
+        </BlockLink>
       ))}
-    </div>
+    </React.Fragment>
   )
 }

@@ -1,7 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import RebassMDX from '@rebass/mdx'
-import UI from './_scope'
+import {
+  Flex,
+  Box,
+  Container,
+  Heading,
+  BlockLink,
+  Pre,
+} from 'rebass'
 
 const Script = ({ src }) =>
   <script
@@ -10,39 +17,44 @@ const Script = ({ src }) =>
     }}
   />
 
+const Right = props =>
+  <Box
+    {...props}
+    width={[ 0, 0, 320 ]}
+  />
+
 export default ({ children, route }) =>
   <RebassMDX>
     <React.Fragment>
-      <UI.Flex>
-        <UI.Container>
+      <Flex>
+        <Container
+          pb={6}
+          maxWidth={768}>
           <header>
-            <UI.BlockLink is={Link} to='/'>
-              <UI.Heading
+            <BlockLink is={Link} to='/'>
+              <Heading
                 is='h1'
                 href='/'
-                css={`
-                  font-size: 16px;
-                  text-transform: uppercase;
-                  letter-spacing: .2em;
-                  margin-top: 6em;
-                `}
-              >
-                {route.props.title || 'Jxnblk Writing'}
-              </UI.Heading>
-            </UI.BlockLink>
-            {route.props.created && <UI.pre>{route.props.created.toDateString()}</UI.pre>}
+                mt={5}
+                mb={4}>
+                Jxnblk Writing
+              </Heading>
+            </BlockLink>
+            {route.props.created && <Pre>{route.props.created.toDateString()}</Pre>}
           </header>
           <main>
             {children}
           </main>
           <footer>
-            <UI.BlockLink href='https://jxnblk.com'>
-              Made by Jxnblk
-            </UI.BlockLink>
+            <Flex mt={6}>
+              <BlockLink href='https://jxnblk.com'>
+                Made by Jxnblk
+              </BlockLink>
+            </Flex>
           </footer>
-        </UI.Container>
-        <UI.Right />
-      </UI.Flex>
+        </Container>
+        <Right />
+      </Flex>
       <Script src={ga} />
     </React.Fragment>
   </RebassMDX>
