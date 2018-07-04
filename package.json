@@ -8,9 +8,7 @@
     "build": "ok build pages",
     "medium": "babel-node medium",
     "rss": "node rss.js",
-    "dev": "webpack-dev-server --progress --colors",
-    "clean": "rm -rf dist",
-    "test": "echo \"hello\""
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "blog",
@@ -20,7 +18,17 @@
   ],
   "author": "Brent Jackson",
   "license": "MIT",
-  "devDependencies": {},
+  "dependencies": {
+    "@rebass/mdx": "^1.0.0-1",
+    "clean-tag": "^1.0.4",
+    "jxnblk-avatar": "^1.2.1",
+    "lodash.sortby": "^4.7.0",
+    "markdown-to-medium": "^1.4.4",
+    "ok-cli": "^2.0.6",
+    "rebass": "^2.0.1",
+    "rss": "^1.2.2",
+    "styled-components": "^3.3.3"
+  },
   "ok": {
     "title": "Jxnblk Writing",
     "basename": "/writing",
@@ -54,16 +62,5 @@
         "content": "https://jxnblk.com/avatar.png"
       }
     ]
-  },
-  "dependencies": {
-    "@rebass/mdx": "^1.0.0-1",
-    "clean-tag": "^1.0.4",
-    "html-tags": "^2.0.0",
-    "jxnblk-avatar": "^1.2.1",
-    "lodash.sortby": "^4.7.0",
-    "markdown-to-medium": "^1.4.4",
-    "ok-cli": "^2.0.5",
-    "rss": "^1.2.2",
-    "styled-components": "^3.3.3"
   }
 }

@@ -19,9 +19,9 @@ export default ({ routes = []}) => {
         <BlockLink
           key={post.name}
           is={Link}
-          py={3}
+          mb={5}
           to={post.path}>
-          <Heading mb={3}>{post.title}</Heading>
+          <Heading fontSize={[ 5, null, 6 ]} mb={3}>{post.title}</Heading>
           {post.excerpt && <Text is='p' mb={3}>{post.excerpt}</Text>}
           <Pre>{new Date(post.created).toDateString()}</Pre>
         </BlockLink>

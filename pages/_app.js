@@ -36,14 +36,14 @@ export default ({ children, route }) =>
                 is='h1'
                 href='/'
                 mt={5}
-                mb={4}>
+                mb={5}>
                 Jxnblk Writing
               </Heading>
             </BlockLink>
-            {route.props.created && <Pre>{route.props.created.toDateString()}</Pre>}
           </header>
           <main>
             {children}
+            {route.props.created && <Pre mt={4}>{route.props.created.toDateString()}</Pre>}
           </main>
           <footer>
             <Flex mt={6}>
