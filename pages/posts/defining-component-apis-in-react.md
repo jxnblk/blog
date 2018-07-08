@@ -105,7 +105,7 @@ I often see people new to React attempt to replicate what I call "[Bootstrap][]"
 that is UI components that have a visual boundary that’s not directly tied to any data structure.
 React and BEM-like CSS-based components have different concerns.
 Instead of creating a generic Card component that displays an image, heading, and link,
-and that would required a custom props API, build components for the data that you’re displaying.
+and that would require a custom props API, build components for the data that you’re displaying.
 Maybe the generic Card component should be a ProductCard component that can accept the `product` object from your database.
 
 ```jsx
@@ -125,7 +125,7 @@ Chances are, the specific styling that you need for the ProductCard isn’t all 
 and you’ll likely only have this defined in one place in your code base.
 You can follow the [Rule of Three][] in situations like this.
 If you've duplicated the exact Card component structure three times in your code base,
-then it might be worth considering abstracting it out into its own component.
+then it’s probably worth abstracting it out into its own component.
 
 
 ## Avoid Apropcalypse
@@ -181,7 +181,7 @@ it’s probably better to use composition.
 ```
 
 If you know React, you’ll already know the API for the composed version, and it shouldn’t require as much documentation as the former.
-You might wrap the composed version into another component that is tied to a piece of data in your application,
+You might wrap the composed version into another component that **is** tied to a piece of data in your application,
 but you’ll probably only need that component structure defined once in your code base.
 
 ```jsx
@@ -202,7 +202,7 @@ const PageHeader = ({
 ## Avoid boolean props for enums
 
 It might be tempting to use [boolean props][] as a convenient way to switch between variants of a component,
-but it can sometimes cause confusion about the expected outcome.
+but it can sometimes create a confusing API.
 
 Take the following example:
 
@@ -218,7 +218,7 @@ What happens in the following case?
 ```
 
 It’s impossible to know without diving into the code base or documentation.
-Instead try the following:
+Instead, try the following:
 
 ```jsx
 <Button variant='primary' />
@@ -264,7 +264,6 @@ and try [Readme Driven Development][].
 Writing React components is easy.
 Creating a library of components that works well for your team is worth the time and effort to get right.
 
----
 
 [Styled System]: https://jxnblk.com/styled-system
 [Rebass]: https://jxnblk.com/rebass
