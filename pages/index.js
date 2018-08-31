@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import sortBy from 'lodash.sortby'
 import { BlockLink, Heading, Text, Pre } from 'rebass'
 
-export default ({ routes = []}) => {
+export { Root } from './components'
+
+export default ({ routes = [] }) => {
   const posts =
     sortBy([...routes]
       .filter(r => !!r.props)
