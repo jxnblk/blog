@@ -6,11 +6,11 @@ import { BlockLink, Heading, Text, Pre } from 'rebass'
 export { Root } from './components'
 
 export default ({ routes = [] }) => {
-  const posts =
-    sortBy([...routes]
-      .filter(r => !!r.props)
-      .filter(r => r.name !== 'index'),
-      route => route.props.created)
+  const filtered = [...routes]
+    .filter(r => !!r.module.frontMatter)
+    .filter(r => r.name !== 'index')
+  const posts = sortBy(filtered, route => route.module.frontMatter.created)
+    .map(route => ({ ...route, props: route.module.frontMatter }))
     .map(route => ({ ...route, ...route.props }))
     .filter(route => !route.draft)
     .reverse()
