@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'mdx-go'
+import { Head, Link } from 'mdx-go'
 import { withRouter } from 'react-router-dom'
 import RebassMDX from '@rebass/mdx'
 import {
@@ -29,10 +29,21 @@ export const Root = withRouter(({
   ...props
 }) => {
   const route = routes.find(route => route.path === location.pathname)
+  const title = get(route, 'module.frontMatter.title', 'Jxnblk Writing')
+  const image = 'https://jxnblk.com/avatar.png'
 
   return (
     <RebassMDX>
       <React.Fragment>
+        <Head>
+          <title>{title}</title>
+          <meta name='description' content='The personal blog of Brent Jackson' />
+          <meta name='author' content='Brent Jackson' />
+          <meta name='twitter:card' content='summary' />
+          <meta name='twitter:site' content='@jxnblk' />
+          <meta name='twitter:title' content={title} />
+          <meta name='twitter:image' content={image} />
+        </Head>
         <Container pb={6}>
           <header>
             <BlockLink is={Link} href='/'>
