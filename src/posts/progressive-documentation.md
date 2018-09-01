@@ -16,8 +16,8 @@ where demos and the ability to interact with a component in the browser is immen
 
 [MDX][] was built with some of this in mind.
 It gives you the simplicity of writing markdown combined with the ability to import and use React components with JSX.
-More and more tools are adding support for MDX, which helps make it a more portable format.
-As more tools add support for MDX, using it as a documentation format becomes a no-brainer.
+More and more tools are adding support for MDX,
+making using it as a documentation format a no-brainer.
 
 ## Documentation Tools
 
@@ -41,8 +41,8 @@ but they tend to use proprietary APIs and don't scale well, still requiring sepa
   style={{ maxWidth: '100%' }}
 />
 
-[mdx-go][] is a development tool for **progressive documentation** built with MDX,
-and it's meant to be used alongside your existing tools of choice for building documentation sites.
+[mdx-go][] is a development tool for **progressive documentation**
+and is meant to be used alongside your tools of choice for building documentation sites.
 It allows you to quickly prototype, draft docs, or build simple demos outside of a larger application.
 
 mdx-go is built with the following goals in mind:
@@ -52,11 +52,11 @@ mdx-go is built with the following goals in mind:
 - Always have a dev server ready to go, even alongside your source code
 - Reduce lock-in and embrace the portability of the MDX file format
 
-# Don't boil the ocean
+## Don't boil the ocean
 
 By starting docs for a new project with mdx-go,
-you can focus on writing docs immediately and
-you won't be locked into custom APIs or build setups,
+you can focus on writing docs immediately,
+and you won't be locked into custom APIs or build setups,
 meaning that upgrading to other documentation solutions later on is easy when you're ready to.
 The related [mdx-docs][] project is one way to migrate a directory of MDX files over to using Next.js.
 
@@ -67,14 +67,16 @@ It offers static site exporting for sharing work-in-progress demos or drafts wit
 ## Choose the right tool for the job
 
 Tools like mdx-go make it easy to try things out without a lot of setup or getting locked into proprietary APIs.
-Every team is different and has different needs, but I hope mdx-go is helpful for some.
+Every team is different and has different needs, but I hope mdx-go is helpful addition to your development toolkit.
 
 To learn more [see the mdx-go docs][mdx-go].
+
+---
 
 ## Further Reading
 
 - [Initial MDX Proposal on Spectrum.chat][mdx-spectrum]
-- [MDX docs][MDX]
+- [mdxjs.com][MDX]
 - [What is MDX](http://youtu.be/d2sQiI5NFAM?a) by Kent C. Dodds
 - [x0: Making React Component Development Stupid Simple](https://compositor.io/blog/x0-making-react-component-development-stupid-simple/)
 - [Defining Component APIs in React](http://jxnblk.com/writing/posts/defining-component-apis-in-react/)
@@ -89,26 +91,3 @@ To learn more [see the mdx-go docs][mdx-go].
 [mdx-docs]: https://github.com/jxnblk/mdx-docs
 [mdx-deck]: https://github.com/jxnblk/mdx-deck
 
----
-
-````notes
-Markdown is an excellent format for writing docs for things like CLIs and packages for Node.js, and it renders nicely in a variety of tools.
-
-## Using mdx-go
-
-Install mdx-go as a global CLI by running:
-
-```sh
-npm install -g mdx-go
-```
-
-On any directory of `.mdx` files, run mdx-go to start a development server:
-
-```sh
-mdx-go docs/
-```
-
-Each file in the directory will have its own route, and you can create an `index.mdx` file to serve as the root.
-
-To learn more [see the mdx-go docs][mdx-go].
-````
