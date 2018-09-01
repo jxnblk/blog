@@ -4,8 +4,8 @@
   "description": "The writing of Brent Jackson",
   "main": "index.js",
   "scripts": {
-    "start": "ok pages -o",
-    "build": "ok build pages --static",
+    "start": "mdx-go src",
+    "build": "mdx-go build src --static --basename '/writing'",
     "medium": "babel-node medium",
     "rss": "node rss.js",
     "clean": "rm -rf dist"
@@ -19,48 +19,17 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
-    "@rebass/mdx": "^1.0.0-1",
-    "clean-tag": "^1.0.4",
+    "@rebass/mdx": "^1.0.0",
     "jxnblk-avatar": "^1.2.1",
+    "lodash.get": "^4.4.2",
     "lodash.sortby": "^4.7.0",
     "markdown-to-medium": "^1.4.4",
-    "ok-cli": "^2.0.8",
-    "rebass": "^2.0.1",
+    "mdx-fm-loader": "^1.0.0-0",
+    "rebass": "^2.1.0",
     "rss": "^1.2.2",
-    "styled-components": "^3.3.3"
+    "styled-components": "^3.4.5"
   },
-  "ok": {
-    "title": "Jxnblk Writing",
-    "basename": "/writing",
-    "meta": [
-      {
-        "name": "description",
-        "content": "The writing of Brent Jackson"
-      },
-      {
-        "name": "author",
-        "content": "Brent Jackson"
-      },
-      {
-        "name": "twitter:card",
-        "content": "summary"
-      },
-      {
-        "name": "twitter:site",
-        "content": "@jxnblk"
-      },
-      {
-        "name": "twitter:title",
-        "content": "Jxnblk Writing"
-      },
-      {
-        "name": "twitter:description",
-        "content": "The writing of Brent Jackson"
-      },
-      {
-        "name": "twitter:image",
-        "content": "https://jxnblk.com/avatar.png"
-      }
-    ]
+  "devDependencies": {
+    "mdx-go": "^1.0.10"
   }
 }

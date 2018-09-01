@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import sortBy from 'lodash.sortby'
 import { BlockLink, Heading, Text, Pre } from 'rebass'
 
-export default ({ routes = []}) => {
-  const posts =
-    sortBy([...routes]
-      .filter(r => !!r.props)
-      .filter(r => r.name !== 'index'),
-      route => route.props.created)
+export { Root } from './components'
+
+export default ({ routes = [] }) => {
+  const filtered = [...routes]
+    .filter(r => !!r.module.frontMatter)
+    .filter(r => r.name !== 'index')
+  const posts = sortBy(filtered, route => route.module.frontMatter.created)
+    .map(route => ({ ...route, props: route.module.frontMatter }))
     .map(route => ({ ...route, ...route.props }))
     .filter(route => !route.draft)
     .reverse()
@@ -19,10 +21,9 @@ export default ({ routes = []}) => {
         <BlockLink
           key={post.name}
           is={Link}
-          mb={5}
+          mb={4}
           to={post.path}>
-          <Heading fontSize={[ 5, null, 6 ]} mb={3}>{post.title}</Heading>
-          {post.excerpt && <Text is='p' mb={3}>{post.excerpt}</Text>}
+          <Heading fontSize={[ 5 ]} mb={2}>{post.title}</Heading>
           <Pre>{new Date(post.created).toDateString()}</Pre>
         </BlockLink>
       ))}
