@@ -67,7 +67,7 @@ It offers static site exporting for sharing work-in-progress demos or drafts wit
 ## Choose the right tool for the job
 
 Tools like mdx-go make it easy to try things out without a lot of setup or getting locked into proprietary APIs.
-Every team is different and has different needs, but I hope mdx-go is helpful addition to your development toolkit.
+Every team is different and has different needs, but I hope mdx-go is a helpful addition to your development toolkit.
 
 To learn more [see the mdx-go docs][mdx-go].
 
