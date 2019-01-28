@@ -16,7 +16,7 @@ export default () =>
       mt={4}
       mb={5}>
       <BasicLink to='/'>
-        Jxnblk Blog
+        Jxnblog
       </BasicLink>
     </Heading>
   </header>

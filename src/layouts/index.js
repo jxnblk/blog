@@ -61,6 +61,8 @@ const heading = (tag, style = {}) => ({ children, ...props }) => {
 const Pre = styled.pre({
   fontFamily: '"Roboto Mono", Menlo, sans-serif',
   color: '#a0a',
+  paddingLeft: '12px',
+  borderLeft: '4px solid',
 }, space, fontSize)
 
 Pre.defaultProps = {
@@ -149,7 +151,7 @@ export default props =>
       <>
         <Style />
         <Helmet>
-          <title>Jxnblk Blog</title>
+          <title>Jxnblog</title>
           <meta
             name='description'
             content='The writing of Brent Jackson'

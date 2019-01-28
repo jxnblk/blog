@@ -9,13 +9,18 @@ export default ({
     frontmatter,
   },
   ...props
-}) =>
-  <>
-    <Helmet>
-      <meta name='twitter:title' content={frontmatter.title} />
-    </Helmet>
-    {children}
-    <Timestamp my={5}>
-      Posted on {moment(frontmatter.date).format('MMMM DD, YYYY')}
-    </Timestamp>
-  </>
+}) => {
+  const title = 'Jxnblog: ' + frontmatter.title
+  return (
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name='twitter:title' content={title} />
+      </Helmet>
+      {children}
+      <Timestamp my={5}>
+        Posted on {moment(frontmatter.date).format('MMMM DD, YYYY')}
+      </Timestamp>
+    </>
+  )
+}
