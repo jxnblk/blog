@@ -1,6 +1,6 @@
 ---
 title: 'Zero-Configuration React Static Site Generator'
-created: 2016-02-15
+date: 2016-02-15
 tags:
   - react
   - static-site-generator

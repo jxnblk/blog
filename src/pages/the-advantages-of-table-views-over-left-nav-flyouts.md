@@ -1,6 +1,6 @@
 ---
 title: 'The Advantages of Table Views Over Left Nav Flyouts'
-created: 2012-12-01
+date: 2012-12-01
 crossposted:
   - http://jxnblk.tumblr.com/post/36972301487/the-advantages-of-table-views-over-left-nav
 ---

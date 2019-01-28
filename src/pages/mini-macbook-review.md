@@ -1,6 +1,6 @@
 ---
 title: Mini MacBook Review
-created: 2015-06-17
+date: 2015-06-17
 tags:
   - apple
   - macbook

@@ -1,6 +1,6 @@
 ---
 title: Static Site Generation with React and Webpack
-created: 2015-06-06
+date: 2015-06-06
 tags:
   - react
   - webpack

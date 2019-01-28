@@ -1,6 +1,6 @@
 ---
 title: 'I don’t know how to design'
-created: 2014-04-16
+date: 2014-04-16
 crossposted:
   - https://medium.com/@jxnblk/i-dont-know-how-to-design-ff8d85e2e862
 ---

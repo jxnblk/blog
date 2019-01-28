@@ -1,6 +1,6 @@
 ---
 title: Components
-created: 2016-06-17
+date: 2016-06-17
 ---
 
 # Components

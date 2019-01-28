@@ -1,9 +1,13 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import styled from 'styled-components'
+import { space } from 'styled-system'
+import Header from '../components/Header'
+import Heading from '../components/Heading'
 
 export const pageQuery = graphql`
   query {
-    allMdx {
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
           parent {
@@ -15,13 +19,50 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            created
+            date(formatString: "MMM DD, YYYY")
+            draft
           }
+          excerpt
         }
       }
     }
   }
 `
+
+const List = styled.ul({
+  listStyle: 'none',
+  padding: 0,
+})
+
+const BlockLink = styled(Link)({
+  textDecoration: 'none',
+  color: 'inherit',
+  display: 'block'
+}, space)
+
+const DateText = styled.small({
+  fontFamily: '"Roboto Mono"',
+})
+
+const PostLink = ({
+  frontmatter: {
+    title,
+    date,
+  },
+  parent: {
+    name,
+  },
+  excerpt,
+}) =>
+  <BlockLink to={'/' + name} my={4}>
+    <Heading
+      as='h3'
+      mb={0}
+      fontSize={[ 5, 6 ]}>
+      {title}
+    </Heading>
+    <DateText>{date}</DateText>
+  </BlockLink>
 
 export default ({
   data: {
@@ -29,8 +70,14 @@ export default ({
   }
 }) =>
   <>
-    <h1>blog {edges.length}</h1>
-    {edges.map(({ node }, i) => (
-      console.log(node) || <pre key={i}>{node.frontmatter.title}</pre>
-    ))}
+    <Header />
+    <List>
+      {edges
+        .filter(({ node }) => !node.frontmatter.draft)
+        .map(({ node }, i) => (
+        <li key={i}>
+          <PostLink {...node} />
+        </li>
+      ))}
+    </List>
   </>

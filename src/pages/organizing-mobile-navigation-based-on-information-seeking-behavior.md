@@ -1,6 +1,6 @@
 ---
 title: 'Organizing Mobile Navigation Based on Information-Seeking Behavior'
-created: 2013-01-16
+date: 2013-01-16
 crossposted:
   - http://jxnblk.tumblr.com/post/40693165132/organizing-mobile-navigation-based-on
 ---

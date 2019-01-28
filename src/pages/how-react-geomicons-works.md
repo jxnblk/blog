@@ -1,6 +1,6 @@
 ---
 title: How react-geomicons Works
-created: 2015-06-10
+date: 2015-06-10
 tags:
   - react
   - svg

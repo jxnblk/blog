@@ -1,6 +1,6 @@
 ---
 title: Color Palette Documentation for Living Style Guides
-created: 2015-06-15
+date: 2015-06-15
 tags:
   - css
   - color

@@ -1,6 +1,6 @@
 ---
 title: Negative space in react
-created: 2016-08-23
+date: 2016-08-23
 draft: true
 tags:
   - react

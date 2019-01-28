@@ -1,6 +1,6 @@
 ---
 title: Microbeats is the Best Journal I’ve Ever Kept
-created: 2012-11-07
+date: 2012-11-07
 crossposted:
   - http://jxnblk.tumblr.com/post/35244863166/microbeats-is-the-best-journal-ive-ever-kept
 ---
