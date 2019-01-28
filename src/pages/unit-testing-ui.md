@@ -7,7 +7,7 @@ date: 2016-06-20
 
 I recently read
 [this excellent article](http://product.voxmedia.com/2016/4/20/11458814/how-designers-can-use-unit-testing-to-build-resilient-and-happy-design-systems),
-where the design team at Vox has devised a testing framework for new UI [components](/writing/posts/components) introduced into their pattern library.
+where the design team at Vox has devised a testing framework for new UI [components](/blog/posts/components) introduced into their pattern library.
 While the methods they suggest are excellent, and what I’d consider something that should be industry-standard in our field,
 it got me thinking that this concept could be taken a step further.
 What if designers wrote actual unit tests for UI components?

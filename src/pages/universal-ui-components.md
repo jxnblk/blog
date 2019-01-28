@@ -3,7 +3,7 @@ title: Universal UI Components
 date: 2016-07-06
 related:
   - name: Components
-    href: http://jxnblk.com/writing/posts/components
+    href: http://jxnblk.com/blog/posts/components
   - name: Universal Components
     href: http://jxnblk.com/universal-components
   - name: Rebass

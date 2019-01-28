@@ -1,7 +1,7 @@
 // const mdxFeed = require('gatsby-mdx/feed')
 
 module.exports = {
-  pathPrefix: '/writing',
+  pathPrefix: '/blog',
   siteMetadata: {
     title: 'Jxnblog',
     description: 'The writing of Brent Jackson',

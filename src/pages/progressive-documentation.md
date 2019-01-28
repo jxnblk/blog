@@ -79,7 +79,7 @@ To learn more [see the mdx-go docs][mdx-go].
 - [mdxjs.com][MDX]
 - [What is MDX](http://youtu.be/d2sQiI5NFAM?a) by Kent C. Dodds
 - [x0: Making React Component Development Stupid Simple](https://compositor.io/blog/x0-making-react-component-development-stupid-simple/)
-- [Defining Component APIs in React](http://jxnblk.com/writing/posts/defining-component-apis-in-react/)
+- [Defining Component APIs in React](http://jxnblk.com/blog/posts/defining-component-apis-in-react/)
 
 [MDX]: https://mdxjs.com
 [mdx-go]: https://github.com/jxnblk/mdx-go

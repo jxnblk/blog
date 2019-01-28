@@ -7,7 +7,7 @@ tags:
   - math
 related:
   - name: Color Palette Documentation for Living Style Guides
-    href: http://jxnblk.com/writing/posts/color-palette-documentation-for-living-style-guides/
+    href: http://jxnblk.com/blog/posts/color-palette-documentation-for-living-style-guides/
   - name: Basscss
     href: http://basscss.com
 ---

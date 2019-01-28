@@ -6,7 +6,7 @@ tags:
   - static-site-generator
 related:
   - name: Static Site Generation with React and Webpack
-    href: http://jxnblk.com/writing/posts/static-site-generation-with-react-and-webpack/
+    href: http://jxnblk.com/blog/posts/static-site-generation-with-react-and-webpack/
 ---
 
 # Zero-Configuration React Static Site Generator
