@@ -99,7 +99,7 @@ Often, components should be defined by the shape of your data.
 
 > Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely.
 
-– [Thinking in React][]
+> – [Thinking in React][]
 
 I often see people new to React attempt to replicate what I call "[Bootstrap][]" components,
 that is UI components that have a visual boundary that’s not directly tied to any data structure.

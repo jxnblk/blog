@@ -1,15 +1,13 @@
-const mdxFeed = require('gatsby-mdx/feed')
+// const mdxFeed = require('gatsby-mdx/feed')
 
 module.exports = {
   siteMetadata: {
     title: 'Jxnblk Blog',
-    description: 'The writing of Brent Jackson'
+    description: 'The writing of Brent Jackson',
+    siteUrl: 'https://jxnblk.com/blog'
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-feed',
-      options: mdxFeed
-    },
+    // { resolve: 'gatsby-plugin-feed', options: mdxFeed },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-google-fonts',

@@ -1,14 +1,12 @@
 {
-  "name": "writing",
+  "private": true,
+  "name": "jxnblk-blog",
   "version": "3.0.0-0",
   "description": "The writing of Brent Jackson",
-  "main": "index.js",
   "scripts": {
     "start": "gatsby develop",
     "build": "gatsby build",
-    "medium": "babel-node medium",
-    "rss": "node rss.js",
-    "clean": "rm -rf dist"
+    "medium": "babel-node medium"
   },
   "keywords": [
     "blog",
@@ -23,24 +21,22 @@
     "@mdx-js/tag": "^0.16.8",
     "babel-plugin-styled-components": "^1.10.0",
     "core-js": "^2.6.3",
-    "gatsby": "^2.0.98",
+    "gatsby": "^2.0.102",
     "gatsby-mdx": "^0.3.5",
-    "gatsby-plugin-feed": "^2.0.11",
-    "gatsby-plugin-google-analytics": "^2.0.10",
+    "gatsby-plugin-feed": "^2.0.12",
+    "gatsby-plugin-google-analytics": "^2.0.12",
     "gatsby-plugin-google-fonts": "0.0.4",
     "gatsby-plugin-layout": "^1.0.11",
     "gatsby-plugin-react-helmet": "^3.0.5",
     "gatsby-plugin-styled-components": "^3.0.4",
-    "gatsby-source-filesystem": "^2.0.17",
+    "gatsby-source-filesystem": "^2.0.18",
     "github-slugger": "^1.2.1",
     "jxnblk-avatar": "^1.2.1",
     "markdown-to-medium": "^1.4.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-helmet": "^5.2.0",
-    "rss": "^1.2.2",
     "styled-components": "^4.1.3",
     "styled-system": "^3.2.1"
-  },
-  "devDependencies": {}
+  }
 }

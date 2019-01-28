@@ -6,7 +6,9 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { space, fontSize, fontWeight, } from 'styled-system'
 import Slugger from 'github-slugger'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Heading from '../components/Heading'
+import Link from '../components/Link'
 
 const Style = createGlobalStyle({
   '*': { boxSizing: 'border-box' },
@@ -24,6 +26,10 @@ const Style = createGlobalStyle({
 })
 
 const theme = {
+  colors: {
+    magenta: '#a0a',
+    blue: '#33e',
+  }
 }
 
 const slugger = new Slugger()
@@ -88,13 +94,6 @@ const Blockquote = props =>
     {...props}
   />
 
-const Link = styled.a({
-  color: '#33e',
-  '&:hover': {
-    color: '#a0a',
-  }
-})
-
 const Image = styled.img({
   maxWidth: '100%',
   height: 'auto',
@@ -110,17 +109,22 @@ const HR = styled.hr({
 const components = {
   h1: heading('h1', {
     fontSize: [ 5, 6 ],
-    mt: 3,
+    mt: 5,
   }),
   h2: heading('h2', {
     fontSize: [ 4, 5 ],
-    mt: 3,
+    mt: 5,
   }),
   h3: heading('h3', {
     fontSize: 4,
+    mt: 5,
   }),
-  h4: heading('h4', {}),
-  h5: heading('h5', {}),
+  h4: heading('h4', {
+    mt: 4,
+  }),
+  h5: heading('h5', {
+    mt: 4,
+  }),
   h6: heading('h6', {}),
   p: Text,
   a: Link,
@@ -150,6 +154,10 @@ export default props =>
             name='description'
             content='The writing of Brent Jackson'
           />
+          <meta name='author' content='Brent Jackson' />
+          <meta name='twitter:card' content='summary' />
+          <meta name='twitter:site' content='@jxnblk' />
+          <meta name='twitter:image' content='https://jxnblk.com/avatar.png' />
         </Helmet>
         <Container
           mx='auto'
@@ -157,6 +165,7 @@ export default props =>
           py={5}>
           <Header {...props} />
           {props.children}
+          <Footer {...props} />
         </Container>
       </>
     </MDXProvider>
