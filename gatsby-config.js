@@ -2,7 +2,7 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'Jxnblk Blog',
+    title: 'Jxnblog',
     description: 'The writing of Brent Jackson',
     siteUrl: 'https://jxnblk.com/blog'
   },
