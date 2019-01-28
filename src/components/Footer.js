@@ -12,7 +12,7 @@ const Footer = styled.footer({
   textAlign: 'center',
 })
 
-export default () => console.log('hi footer') ||
+export default () =>
   <Footer>
     <Avatar
       size={64}
