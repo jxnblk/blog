@@ -32,6 +32,7 @@
     "gatsby-plugin-react-helmet": "^3.0.5",
     "gatsby-plugin-styled-components": "^3.0.4",
     "gatsby-source-filesystem": "^2.0.17",
+    "github-slugger": "^1.2.1",
     "jxnblk-avatar": "^1.2.1",
     "markdown-to-medium": "^1.4.4",
     "react": "^16.7.0",

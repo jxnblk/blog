@@ -2,8 +2,8 @@ import React from 'react'
 import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import { space } from 'styled-system'
-import Header from '../components/Header'
 import Heading from '../components/Heading'
+import Timestamp from '../components/Timestamp'
 
 export const pageQuery = graphql`
   query {
@@ -40,10 +40,6 @@ const BlockLink = styled(Link)({
   display: 'block'
 }, space)
 
-const DateText = styled.small({
-  fontFamily: '"Roboto Mono"',
-})
-
 const PostLink = ({
   frontmatter: {
     title,
@@ -61,7 +57,7 @@ const PostLink = ({
       fontSize={[ 5, 6 ]}>
       {title}
     </Heading>
-    <DateText>{date}</DateText>
+    <Timestamp my={3}>{date}</Timestamp>
   </BlockLink>
 
 export default ({
@@ -70,7 +66,6 @@ export default ({
   }
 }) =>
   <>
-    <Header />
     <List>
       {edges
         .filter(({ node }) => !node.frontmatter.draft)

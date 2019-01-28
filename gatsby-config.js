@@ -38,7 +38,7 @@ module.exports = {
       resolve: 'gatsby-mdx',
       options: {
         extensions: [ '.mdx', '.md' ],
-        // defaultLayouts: { default: require.resolve('') }
+        defaultLayouts: { default: require.resolve('./src/layouts/post.js') }
       }
     }
   ]

@@ -1,8 +1,12 @@
 import React from 'react'
+import { Link as GLink } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { MDXProvider } from '@mdx-js/tag'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { maxWidth, space } from 'styled-system'
+import { space, fontSize, fontWeight, } from 'styled-system'
+import Slugger from 'github-slugger'
+import Header from '../components/Header'
+import Heading from '../components/Heading'
 
 const Style = createGlobalStyle({
   '*': { boxSizing: 'border-box' },
@@ -22,11 +26,117 @@ const Style = createGlobalStyle({
 const theme = {
 }
 
+const slugger = new Slugger()
+
+const UnstyledLink = styled.a({
+  textDecoration: 'none',
+  color: 'inherit',
+  '&:hover': {
+    textDecoration: 'underline'
+  }
+})
+
+const heading = (tag, style = {}) => ({ children, ...props }) => {
+  slugger.reset()
+  const id = slugger.slug(children)
+  return (
+    <Heading
+      as={tag}
+      id={id}
+      {...style}
+      {...props}>
+      <UnstyledLink href={'#' + id}>
+        {children}
+      </UnstyledLink>
+    </Heading>
+  )
+}
+
+const Pre = styled.pre({
+  fontFamily: '"Roboto Mono", Menlo, sans-serif',
+  color: '#a0a',
+}, space, fontSize)
+
+Pre.defaultProps = {
+  fontSize: 2,
+  my: 4,
+}
+
+const Code = styled.code({
+  fontFamily: '"Roboto Mono", Menlo, sans-serif',
+  fontSize: '87.5%',
+  color: '#a0a',
+})
+
+const Text = styled.p({
+  lineHeight: 1.625,
+}, space, fontSize, fontWeight)
+
+Text.defaultProps = {
+  fontSize: [ 2, 3 ],
+}
+
+const UL = props => <Text as='ul' {...props} />
+const OL = props => <Text as='ol' {...props} />
+
+const Blockquote = props =>
+  <Text
+    as='blockquote'
+    fontSize={4}
+    fontWeight='bold'
+    my={5}
+    {...props}
+  />
+
+const Link = styled.a({
+  color: '#33e',
+  '&:hover': {
+    color: '#a0a',
+  }
+})
+
+const Image = styled.img({
+  maxWidth: '100%',
+  height: 'auto',
+})
+
+const HR = styled.hr({
+  border: 0,
+  borderBottom: '1px solid',
+  marginTop: '32px',
+  marginBottom: '32px',
+})
+
 const components = {
+  h1: heading('h1', {
+    fontSize: [ 5, 6 ],
+    mt: 3,
+  }),
+  h2: heading('h2', {
+    fontSize: [ 4, 5 ],
+    mt: 3,
+  }),
+  h3: heading('h3', {
+    fontSize: 4,
+  }),
+  h4: heading('h4', {}),
+  h5: heading('h5', {}),
+  h6: heading('h6', {}),
+  p: Text,
+  a: Link,
+  ul: UL,
+  ol: OL,
+  blockquote: Blockquote,
+  img: Image,
+  pre: props => props.children,
+  code: Pre,
+  inlineCode: Code,
+  hr: HR,
 }
 
 const Container = styled.div({
-  maxWidth: '768px',
+  // maxWidth: '768px',
+  maxWidth: '832px',
 }, space)
 
 export default props =>
@@ -43,8 +153,9 @@ export default props =>
         </Helmet>
         <Container
           mx='auto'
-          px={3}
-          py={4}>
+          px={[ 3, 4 ]}
+          py={5}>
+          <Header {...props} />
           {props.children}
         </Container>
       </>
