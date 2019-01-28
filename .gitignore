@@ -1,2 +1,4 @@
 config.json
 dist
+.cache
+public
