@@ -5,7 +5,7 @@
   "description": "The writing of Brent Jackson",
   "scripts": {
     "start": "gatsby develop",
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "medium": "babel-node medium"
   },
   "keywords": [
