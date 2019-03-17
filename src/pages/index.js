@@ -19,7 +19,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            date(formatString: "MMM DD, YYYY")
+            date(formatString: "MMMM DD, YYYY")
             draft
           }
           excerpt

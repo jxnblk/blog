@@ -19,7 +19,7 @@ export default ({
       </Helmet>
       {children}
       <Timestamp my={5}>
-        Posted on {moment(frontmatter.date).format('MMMM DD, YYYY')}
+        Posted on {moment.utc(frontmatter.date).format('MMMM DD, YYYY')}
       </Timestamp>
     </>
   )

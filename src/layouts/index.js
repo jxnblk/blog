@@ -104,8 +104,16 @@ const Image = styled.img({
 const HR = styled.hr({
   border: 0,
   borderBottom: '1px solid',
-  marginTop: '32px',
-  marginBottom: '32px',
+  marginTop: '64px',
+  marginBottom: '64px',
+})
+
+const sup = styled.sup({
+  fontSize: 14,
+  fontWeight: 'bold',
+  a: {
+    padding: 8,
+  }
 })
 
 const components = {
@@ -138,6 +146,7 @@ const components = {
   code: Pre,
   inlineCode: Code,
   hr: HR,
+  sup,
 }
 
 const Container = styled.div({

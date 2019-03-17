@@ -1,7 +1,6 @@
 ---
 title: The Three Tenets of Styled System
-date: 2019-01-28
-draft: true
+date: 2019-03-17
 ---
 
 # The Three Tenets of Styled System
@@ -12,7 +11,7 @@ and has even resulted in a few copycat libraries that use some of the same conve
 Up until now, I haven't really written much about the thinking behind the library, but have relied more on my approach of *show, don't tell*[^1].
 And while this library is certainly an iteration on a theme[^2]
 (those who have followed me for years may have a clear idea what it is meant for),
-I'd like to expand on what I think makes Styled System really great.
+I'd like to expand on what I think makes Styled System a great fit for some teams.
 
 ## Three Tenets
 
@@ -41,7 +40,7 @@ and developers naturally opt-in to keeping values stored in a globally shared th
 
 ## Responding to Change
 
-Consistency is great, but I've never seen a product stabilize to the point of allowing consistency to happen on its own.
+Consistency is great, but I've never seen a product freeze feature development to devote effort into keeping things looking consistent.
 Developers are frequently working in short sprint cycles to finish tasks that likely didn't account for styling consistency when they were estimated.
 Over time this leads to technical debt and parts of the CSS code base quickly become obsolete pieces of legacy code.
 
@@ -100,7 +99,7 @@ and all the [Styled System contributors](https://github.com/styled-system/styled
 [^1]: I find some things difficult to put into words, especially when it's a newer idea, and think that, just like a picture is worth a thousand words, showing code can be a much more powerful way to express an idea in some cases.
   See also: [Show, don't tell](https://en.wikipedia.org/wiki/Show,_don%27t_tell)
 [^2]: I plan to expand on this in another post - see also [Basscss](https://github.com/basscss/basscss/), [Reflexbox](https://github.com/jxnblk/reflexbox), [Rebass](https://rebassjs.org), [Axs](https://github.com/jxnblk/axs/tree/v1.0.0)
-[^3]: Needs citation
+[^3]: [The Pit of Success](https://blogs.msdn.microsoft.com/brada/2003/10/02/the-pit-of-success/)
 [^4]: [Responsive Web Design](https://alistapart.com/article/responsive-web-design)
 
 [styled system]: https://styled-system.com
