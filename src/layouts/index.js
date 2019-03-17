@@ -161,6 +161,8 @@ export default props =>
         <Style />
         <Helmet>
           <title>Jxnblog</title>
+          <link rel='icon' type='image/png' href='https://jxnblk.com/favicon.png' />
+          <link rel='apple-touch-icon-precomposed' href='https://jxnblk.com/avatar.png' />
           <meta
             name='description'
             content='The writing of Brent Jackson'
