@@ -20,6 +20,9 @@ export default () =>
         display: 'inline-block'
       }}
     />
+    <Link href='https://github.com/jxnblk/blog'>
+      GitHub
+    </Link>
     <Link href='https://jxnblk.com'>
       Made by Jxnblk
     </Link>
