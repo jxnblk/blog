@@ -17,13 +17,6 @@ Before long, we both left the company, and I had decided to move back to the eas
 In late 2013, I'd taken some of the ideas Adam and I were talking about at the time, and some of the problems we were working on a Kickstarter (involving a 1MB+ CSS bundle), and released the first version of Basscss.
 Shortly after, Adam released Tachyons.
 
-- Parted ways
-- Created Basscss 10/2013, Tachyons 1/2014
-- Never setled differences on the API
-- Etsy, then Solid, still didn't follow the same naming convention
-- Primer, again different?
-- some years later, another different approach in Tailwind
-
 ## Why do I care?
 
 In hindsight, I wish I'd pushed forward with Tachyons naming conventions, but at the time, I don't think my team would have gone for it.
@@ -76,7 +69,7 @@ but all of them seem to be doing the same thing, in a slightly different way.
 ## A Theme Specification
 
 I suspect a lot of the tooling for styling applications would benefit from having a standard theming format for storing these values.
-Jina Anne pioneered the concept of design system [^tokens] years ago,
+Jina Anne pioneered the concept of design system *tokens* [^1] years ago,
 and a lot of teams have successfully adopted approaches like this, which I think is fantastic.
 If you're already familiar with the idea of *tokens*, you're one step closer to seeing the value in a standard theming format.
 
@@ -100,7 +93,7 @@ or by [opening an issue](https://github.com/styled-system/styled-system/issues).
 
 ---
 
-[^tokens]: Tokens are a fantastic abstraction. They try to solve the problem of sharing these values cross-platform, whereas this specification is (initially) only focused on CSS/JS development.
+[^1]: Tokens are a fantastic abstraction. They try to solve the problem of sharing these values cross-platform, whereas this specification is (initially) only focused on CSS/JS development.
 Tokens and this theme specification should be completely compatible with each other and decoupled from one another.
 
 [basscss]: https://github.com/basscss/basscss
