@@ -18,7 +18,7 @@ In late 2013, I'd taken some of the ideas Adam and I were talking about at the t
 Around the same time, Adam released Tachyons.
 We both continued to develop each library separately and never landed on a common API for the two libraries.
 
-## So what?
+## Naming things is hard
 
 In hindsight, I wish I'd pushed forward with Tachyons naming conventions, but at the time, I don't think my team would have gone for it.
 I had changed `btn` to `button` because the designers & developers I worked with prefered "human readable" naming conventions.
@@ -75,14 +75,14 @@ Jina Anne pioneered the concept of *design system tokens* [^1] years ago,
 and a lot of teams have successfully adopted approaches like this, which I think is fantastic.
 If you're already familiar with the idea of *design system tokens*, you're one step closer to seeing the value in a standard theming format.
 
-Design system tokens are meant to be flexible, which means different teams,
+Design system tokens are meant to be flexible and implementation-agnostic, which means different teams,
 different implementations, and different libraries will name things differently.
 This is where this specification would fit in.
 A lot of interoperability could be realized,
 if we all, for example, named our color palette `colors` and named the font sizes we use `fontSizes`.
 What you do beyond that and what data format you use to store these values, is up to you.
 It's trivial to convert JSON to ES modules to YAML or even TOML (if you're crazy).
-It's also just a data structure, so transforming between other data structures should also be possible.
+It's also just a data structure, so transforming between other data structures (e.g. design tools or GraphQL) should also be possible.
 This standard also wouldn't try to solve the extremely complex problems of how to name the colors themselves.
 
 ## A Theme Specification
