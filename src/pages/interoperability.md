@@ -9,15 +9,16 @@ draft: true
 Back in 2013, I was working at a small startup in San Francisco called Stitch Fix, alongside Adam Morse and a handful of others.
 We were designing and building out early versions of their marketing pages and some internal tools.
 I had the word designer in my title, and until that point in my career, I'd not shipped much production code for work.
-I learned Flash in college and taught myself CSS on the side over the years, using it for small side projects and design prototypes for user research, but hadn't ever used Git and knew next-to-nothing about JavaScript.
+I learned Flash in college and taught myself HTML and CSS on the side over the years, using it for small side projects and design prototypes for user research, but had never used Git and knew next-to-nothing about JavaScript.
 
 We were both enamored by the work that people like Nicole Sullivan and Nicolas Gallagher were doing with Object-Oriented CSS and stealing lots of ideas for what we were working on.
-Before long, we both left the company, and I had decided to move back to the east coast and work for Kickstarter.
+After we left the company, I decided to move back to the east coast and work for Kickstarter.
 
 In late 2013, I'd taken some of the ideas Adam and I were talking about at the time, and some of the problems we were working on a Kickstarter (involving a 1MB+ CSS bundle), and released the first version of Basscss.
-Shortly after, Adam released Tachyons.
+Around the same time, Adam released Tachyons.
+We both continued to develop each library separately and never landed on a common API for the two libraries.
 
-## Why do I care?
+## Why do I bring this up?
 
 In hindsight, I wish I'd pushed forward with Tachyons naming conventions, but at the time, I don't think my team would have gone for it.
 I had changed `btn` to `button` because the designers & developers I worked with prefered "human readable" naming conventions.
