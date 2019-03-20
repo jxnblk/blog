@@ -56,7 +56,7 @@ This is great thing, and it allows developers to start thinking at a higher leve
 
 Styled System is one small attempt at a higher level of abstraction on top of the current CSS-in-JS libraries.
 It's completely decoupled from Styled Components, Emotion, and even React itself.
-I don't know of anyone who is doing this, but it *could be* used to generate functional CSS utilitiies a la Tachyons if you were so inclined.
+I don't know of anyone who is doing this, but it *could be* used to generate functional CSS utilities a la Tachyons if you were so inclined.
 
 For the most part, Styled System uses CSS property names as React component props,
 which is something that other libraries do as well and doesn't require much additional learning if you already know some CSS.
@@ -81,7 +81,7 @@ This is where this specification would fit in.
 A lot of interoperability could be realized,
 if we all, for example, named our color palette `colors` and named the font sizes we use `fontSizes`.
 What you do beyond that and what data format you use to store these values, is up to you.
-It's trivial to convert JSON to ES modules to YAML or even TOML (if you're crazy).
+It's trivial to convert JSON to ES modules to YAML or even TOML, if that's your thing.
 It's also just a data structure, so transforming between other data structures (e.g. design tools or GraphQL) should also be possible.
 This standard also wouldn't try to solve the extremely complex problems of how to name the colors themselves.
 
