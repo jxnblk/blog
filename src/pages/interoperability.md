@@ -18,7 +18,7 @@ In late 2013, I'd taken some of the ideas Adam and I were talking about at the t
 Around the same time, Adam released Tachyons.
 We both continued to develop each library separately and never landed on a common API for the two libraries.
 
-## Why do I bring this up?
+## So what?
 
 In hindsight, I wish I'd pushed forward with Tachyons naming conventions, but at the time, I don't think my team would have gone for it.
 I had changed `btn` to `button` because the designers & developers I worked with prefered "human readable" naming conventions.
@@ -43,12 +43,12 @@ I don't think there are any problems left to solve in this space, and Tachyons h
 It's still a valid approach to styling an application,
 but if you're using a modern front-end stack with React,
 I wouldn't recommend using a CSS library like these to build out an application.
-Libraries like [Styled Components][] and [Emotion][] are much better tools suited to the job and will save you a lot of headache in the long run.
+Libraries like [Styled Components][] and [Emotion][] are tools much better suited to the job and will save you a lot of headache in the long run.
 
 ## Let's not do this again
 
 Why am I talking about approaches to CSS from five years ago?
-Call be naive, but I like to think that humans are capable of learning from their past mistakes.
+Call me naive, but I like to think that humans are capable of learning from their past mistakes.
 A lot of modern front-end libraries are starting to settle on more standard, more interoperable APIs that help reduce lock-in.
 Take React and Preact, or Styled Components and Emotion.
 These libraries share virtually the same API, which means teams can easily migrate from one to another in the span of an afternoon.
@@ -58,7 +58,8 @@ Styled System is one small attempt at a higher level of abstraction on top of th
 It's completely decoupled from Styled Components, Emotion, and even React itself.
 I don't know of anyone who is doing this, but it *could be* used to generate functional CSS utilitiies a la Tachyons if you were so inclined.
 
-For the most part, Styled System uses CSS property names as React component props, which is something that other libraries do as well, and doesn't require much additional learning if you already know some CSS.
+For the most part, Styled System uses CSS property names as React component props,
+which is something that other libraries do as well and doesn't require much additional learning if you already know some CSS.
 I think this is great.
 And some libraries have re-implemented the core of Styled System for various reasons, which is fine.
 
@@ -67,25 +68,35 @@ Even outside of React context-based theming, a lot of React applications will st
 Something I'm starting to notice is that there are no standard conventions for what that module contains or how its structured,
 but all of them seem to be doing the same thing, in a slightly different way.
 
-## A Theme Specification
+## Design System Tokens
 
 I suspect a lot of the tooling for styling applications would benefit from having a standard theming format for storing these values.
-Jina Anne pioneered the concept of design system *tokens* [^1] years ago,
+Jina Anne pioneered the concept of *design system tokens* [^1] years ago,
 and a lot of teams have successfully adopted approaches like this, which I think is fantastic.
-If you're already familiar with the idea of *tokens*, you're one step closer to seeing the value in a standard theming format.
+If you're already familiar with the idea of *design system tokens*, you're one step closer to seeing the value in a standard theming format.
 
-Design system tokens are meant to be flexible, which means different teams, different implementations, and different libraries will name things differently.
-This is where this specification would fit in. A lot of interoperability could be realized,
+Design system tokens are meant to be flexible, which means different teams,
+different implementations, and different libraries will name things differently.
+This is where this specification would fit in.
+A lot of interoperability could be realized,
 if we all, for example, named our color palette `colors` and named the font sizes we use `fontSizes`.
 What you do beyond that and what data format you use to store these values, is up to you.
 It's trivial to convert JSON to ES modules to YAML or even TOML (if you're crazy).
 It's also just a data structure, so transforming between other data structures should also be possible.
 This standard also wouldn't try to solve the extremely complex problems of how to name the colors themselves.
 
+## A Theme Specification
+
 If I haven't lost you by now, and if this interests you,
 I've started a rough idea of what this could look like here: [Theme Specification].
+Imagine if the entire ecosystem of open source React UI components adhered to a common naming convention for theming,
+while still allowing you to choose the CSS-in-JS library of your choice.
+Any new UI component you add to your application,
+could instantly pick up the values from your theme and mimic the look and feel of the rest of your application,
+without needing to write any custom CSS.
+I think that could be pretty cool.
 
-Ultimately this should be completely decoupled from the Styled System library,
+Ultimately this specification should be completely decoupled from the Styled System library,
 and I can move this to a more neutral location in the near future,
 but this seemed like a logical place to start this discussion.
 
@@ -94,8 +105,9 @@ or by [opening an issue](https://github.com/styled-system/styled-system/issues).
 
 ---
 
-[^1]: Tokens are a fantastic abstraction. They try to solve the problem of sharing these values cross-platform, whereas this specification is (initially) only focused on CSS/JS development.
-Tokens and this theme specification should be completely compatible with each other and decoupled from one another.
+[^1]: Design system tokens are a fantastic abstraction. They try to solve the problem of sharing a brand's core style values cross-platform,
+whereas this specification is (initially) primarily focused on CSS/JS development – i.e. a potential *output* from design tokens.
+Design system tokens and this theme specification should be completely compatible with each other and decoupled from one another.
 
 [basscss]: https://github.com/basscss/basscss
 [tachyons]: https://tachyons.io/
