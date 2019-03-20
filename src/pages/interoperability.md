@@ -33,7 +33,8 @@ Today's tools would make this a lot easier, using type checking, unit tests, and
 The **interopability** among these libraries suffered because
 *what* they did, was different from *how* they did it.
 
-As the years passed, Etsy adopted a similar approach with different naming conventions, so did BuzzFeed, and GitHub primer – and now there are other open source libraries doing the same thing with, again, new naming conventions.
+Around the same time, Etsy adopted a similar approach with different naming conventions, and as the years passed,
+so did BuzzFeed Solid and GitHub Primer – and now there are other open source libraries doing the same thing with, again, new naming conventions.
 I don't mean to call these projects out in a bad way – I think they took (what I think was) a good idea and made it work for their team.
 
 ## Learning from the past
