@@ -6,7 +6,7 @@ draft: true
 
 # Interoperability
 
-Back in 2013, I was working at a small startup in San Francisco called Stitch Fix, alongside Adam Morse and a handful of others.
+Back in early 2013, I was working at a small startup in San Francisco called Stitch Fix, alongside Adam Morse and a handful of others.
 We were designing and building out early versions of their marketing pages and some internal tools.
 I had the word designer in my title, and until that point in my career, I'd not shipped much production code for work.
 I learned Flash in college and taught myself HTML and CSS on the side over the years, using it for small side projects and design prototypes for user research, but had never used Git and knew next-to-nothing about JavaScript.
@@ -14,9 +14,9 @@ I learned Flash in college and taught myself HTML and CSS on the side over the y
 We were both enamored by the work that people like Nicole Sullivan and Nicolas Gallagher were doing with Object-Oriented CSS and stealing lots of ideas for what we were working on.
 After we left the company, I decided to move back to the east coast and work for Kickstarter.
 
-In late 2013, I'd taken some of the ideas Adam and I were talking about at the time, and some of the problems we were working on a Kickstarter (involving a 1MB+ CSS bundle), and released the first version of Basscss.
+In late 2013, I'd taken some of the ideas Adam and I were talking about at the time, and some of the problems we were working on at Kickstarter (involving a 1MB+ CSS bundle), and released the first version of Basscss.
 Around the same time, Adam released Tachyons.
-We both continued to develop each library separately and never landed on a common API for the two libraries.
+We both continued to develop each project separately and never landed on a common API for the two libraries.
 
 ## Naming things is hard
 
@@ -30,17 +30,17 @@ but then want to upgrade to something more fully-featured like Tachyons, you'll 
 Essentially, HTML templates written with either of these libraries isn't as portable as if we'd used a standard syntax, for example inline styles.
 Today's tools would make this a lot easier, using type checking, unit tests, and perhaps even AST parsing, but it would still create a barrier.
 
-The **interopability** among these libraries suffered because
+The **interopability** between these two libraries suffered because
 *what* they did, was different from *how* they did it.
 
-Around the same time, Etsy adopted a similar approach with different naming conventions, and as the years passed,
-so did BuzzFeed Solid and GitHub Primer – and now there are other open source libraries doing the same thing with, again, new naming conventions.
+Around the same time, Etsy adopted a similar approach with slightly different naming conventions, and as the years passed,
+so did BuzzFeed Solid, GitHub Primer, and Bootstrap – and now there are other open source libraries doing the same thing with, again, new naming conventions.
 I don't mean to call these projects out in a bad way – I think they took (what I think was) a good idea and made it work for their team.
 
 ## Learning from the past
 
 The paradigm of atomic/functional/utility CSS has passed.
-I don't think there are any problems left to solve in this space, and Tachyons has done the best job at it.
+I don't think there are any problems left to solve in this space, and, in my opinion, Tachyons has done the best job at it.
 It's still a valid approach to styling an application,
 but if you're using a modern front-end stack with React,
 I wouldn't recommend using a CSS library like these to build out an application.
@@ -57,14 +57,13 @@ This is great thing, and it allows developers to start thinking at a higher leve
 
 Styled System is one small attempt at a higher level of abstraction on top of the current CSS-in-JS libraries.
 It's completely decoupled from Styled Components, Emotion, and even React itself.
-I don't know of anyone who is doing this, but it *could be* used to generate functional CSS utilities a la Tachyons if you were so inclined.
-
 For the most part, Styled System uses CSS property names as React component props,
-which is something that other libraries do as well and doesn't require much additional learning if you already know some CSS.
+which is something that other libraries do as well and doesn't require much additional learning if you already know *some* CSS.
 I think this is great.
-And some libraries have re-implemented the core of Styled System for various reasons, which is fine.
+Some libraries have even re-implemented the core of Styled System for various reasons,
+which I think is fine and helps encourage exploration.
 
-Where I see differences start to arise is at the theme level.
+Where I see differences start to arise is at the theme definition level.
 Even outside of React context-based theming, a lot of React applications will store global style constants in a common module.
 Something I'm starting to notice is that there are no standard conventions for what that module contains or how its structured,
 but all of them seem to be doing the same thing, in a slightly different way.
@@ -76,14 +75,14 @@ Jina Anne pioneered the concept of *design system tokens* [^1] years ago,
 and a lot of teams have successfully adopted approaches like this, which I think is fantastic.
 If you're already familiar with the idea of *design system tokens*, you're one step closer to seeing the value in a standard theming format.
 
-Design system tokens are meant to be flexible and implementation-agnostic, which means different teams,
+Design system tokens are meant to be flexible and work cross-platform, which means different teams,
 different implementations, and different libraries will name things differently.
 This is where this specification would fit in.
 A lot of interoperability could be realized,
 if we all, for example, named our color palette `colors` and named the font sizes we use `fontSizes`.
 What you do beyond that and what data format you use to store these values, is up to you.
 It's trivial to convert JSON to ES modules to YAML or even TOML, if that's your thing.
-It's also just a data structure, so transforming between other data structures (e.g. design tools or GraphQL) should also be possible.
+It's also just a data structure, so transforming between other data structures (e.g. design tools or a GraphQL API) should also be possible.
 This standard also wouldn't try to solve the extremely complex problems of how to name the colors themselves.
 
 ## A Theme Specification
