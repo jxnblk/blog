@@ -1,37 +1,24 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { space } from 'styled-system'
 import Heading from '../components/Heading'
 import Timestamp from '../components/Timestamp'
 
-export const pageQuery = graphql`
-  query {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
-      edges {
-        node {
-          parent {
-            ... on File {
-              name
-              absolutePath
-              relativePath
-            }
-          }
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            draft
-          }
-          excerpt
-        }
-      }
-    }
-  }
-`
-
 const List = styled.ul({
   listStyle: 'none',
   padding: 0,
+})
+
+const Pagination = styled.div({
+  display: 'flex',
+  justifyContents: 'space-between',
+  paddingTop: 32,
+  paddingBottom: 32,
+})
+
+const Spacer = styled.div({
+  margin: 'auto',
 })
 
 const BlockLink = styled(Link)({
@@ -45,12 +32,13 @@ const PostLink = ({
     title,
     date,
   },
-  parent: {
-    name,
+  fields: {
+    slug,
   },
+  // parent: { name, },
   excerpt,
 }) =>
-  <BlockLink to={'/' + name} my={4}>
+  <BlockLink to={slug} my={4}>
     <Heading
       as='h3'
       mb={0}
@@ -63,7 +51,11 @@ const PostLink = ({
 export default ({
   data: {
     allMdx: { edges }
-  }
+  },
+  pageContext: {
+    previous,
+    next,
+  },
 }) =>
   <>
     <List>
@@ -75,4 +67,17 @@ export default ({
         </li>
       ))}
     </List>
+    <Pagination>
+      {previous && (
+        <BlockLink to={previous}>
+          <b>Previous</b>
+        </BlockLink>
+      )}
+      <Spacer />
+      {next && (
+        <BlockLink to={next}>
+          <b>Next</b>
+        </BlockLink>
+      )}
+    </Pagination>
   </>
