@@ -60,7 +60,6 @@ export default ({
   <>
     <List>
       {edges
-        .filter(({ node }) => !node.frontmatter.draft)
         .map(({ node }, i) => (
         <li key={i}>
           <PostLink {...node} />
