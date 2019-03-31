@@ -4,8 +4,6 @@ date: 2019-03-17
 draft: true
 ---
 
-# Iterations on a Theme
-
 - continuous iteration
 - wholescale rewrites
 - blank slate

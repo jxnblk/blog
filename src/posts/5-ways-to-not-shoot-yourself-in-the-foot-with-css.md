@@ -5,8 +5,6 @@ crossposted:
   - https://medium.com/@jxnblk/5-ways-to-not-shoot-yourself-in-the-foot-with-css-8d3c84c94364
 ---
 
-# 5 ways to not shoot yourself in the foot with CSS
-
 1. Don’t make assumptions
 2. Don’t be specific
 3. Don’t override anything

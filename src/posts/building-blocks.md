@@ -4,8 +4,6 @@ date: 2019-03-17
 draft: true
 ---
 
-# Building Blocks
-
 People like building blocks.
 
 - basscss

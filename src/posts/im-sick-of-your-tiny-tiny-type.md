@@ -5,8 +5,6 @@ crossposted:
   - http://jxnblk.tumblr.com/post/41796724549/im-sick-of-your-tiny-tiny-type
 ---
 
-# I’m Sick of Your Tiny, Tiny Type
-
 Your tiny type is hard to read – no, not hard to read, impossible to read. I carry my phone with me everywhere, but I always seem to forget my magnifying glass. I tap the Safari Reader button, but that’s not a solution to the problem. That’s a band-aid for your bad typesetting.
 
 Sometimes I’m on my computer, and Reader doesn’t work on your web app. I hit CMD + two or three times so that my dyslexic brain can make sense of the musty 14px Helvetica your servers regurgitated all over my screen. Then the layout falls apart. Words start smashing together. Ads bleed into my emails. And I find myself scrolling up, down, left, right, left, right – what in the hell is this? The Konami code? I don’t need 30 extra lives. I want to read your content.

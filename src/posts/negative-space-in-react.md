@@ -10,8 +10,6 @@ tags:
   - margin
 ---
 
-# Negative space in react
-
 > White space is to be regarded as an active element, not a passive background.
 >
 > – Jan Tschichold

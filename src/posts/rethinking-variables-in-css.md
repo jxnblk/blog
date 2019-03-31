@@ -11,8 +11,6 @@ tags:
   - postcss
 ---
 
-# Rethinking Variables in CSS
-
 CSS was first introduced as a way to reduce the complexity of using inline styles and to help separate concerns. After years of ballooning stylesheets with the same values being used over and over and losing sync, CSS preprocessors introduced variables to help keep values defined in a single place. Soon [custom properties](http://dev.w3.org/csswg/css-variables/) will be part of the CSS specification, which promises a native, more robust approach than what preprocessors can do.
 
 While variables and custom properties make updating multiple instances of the same value trivial, we often still end up with multiple instances of the same property-value definitions spread throughout a global stylesheet.

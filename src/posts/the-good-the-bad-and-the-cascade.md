@@ -4,8 +4,6 @@ date: 2019-03-17
 draft: true
 ---
 
-# The Good, The Bad, and The Cascade
-
 
 - style properties
 - Inheritance (not the cascade)

@@ -4,8 +4,6 @@ date: 2019-03-18
 draft: true
 ---
 
-# Development-Driven Design Systems
-
 <!--
 Modern front end design systems
 Modern front end tooling for design systems

@@ -3,8 +3,6 @@ title: Progressive Documentation
 date: 2018-09-01
 ---
 
-# Progressive Documentation
-
 When building out JS libraries and components, everyone knows the importance of good documentation.
 Without it, good code can end up going unused, which leads to duplication.
 

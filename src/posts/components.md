@@ -3,8 +3,6 @@ title: Components
 date: 2016-06-17
 ---
 
-# Components
-
 Everything in a UI is a component.
 This includes buttons, inputs, forms, promotional modules, pages, user flows, etc.
 I use the word *component* not only because this is how the underlying code is written in libraries like React and Ember,

@@ -15,8 +15,6 @@ related:
     href: http://antwarjs.github.io/
 ---
 
-# Static Site Generation with React and Webpack
-
 I’ve been dabbling with React for a few months now and using it in several small open source projects
 to better understand the technology.
 React’s focus on reusablility, along with the ability to install and require components via npm,

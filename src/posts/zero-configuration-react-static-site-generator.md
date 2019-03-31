@@ -9,8 +9,6 @@ related:
     href: http://jxnblk.com/blog/posts/static-site-generation-with-react-and-webpack/
 ---
 
-# Zero-Configuration React Static Site Generator
-
 React is a great way to generate static HTML with a component-based UI.
 One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going.
 I wanted to make it dead-simple to start building static pages with React
