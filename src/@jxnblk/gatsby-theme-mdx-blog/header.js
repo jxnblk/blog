@@ -16,6 +16,7 @@ const modes = [
 export default props => {
   const Styled = useComponents()
   const { mode, setMode } = useTheme()
+  if (!mode) setMode('light')
 
   const cycleMode = () => {
     const i = (modes.indexOf(mode) + 1) % modes.length
