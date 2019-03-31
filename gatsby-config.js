@@ -53,7 +53,15 @@ module.exports = {
     description: 'The writing of Brent Jackson',
     siteUrl: 'https://jxnblk.com/blog'
   },
+  __experimentalThemes: [
+    {
+      resolve: '@jxnblk/gatsby-theme-mdx-blog',
+      options: {
+      }
+    }
+  ],
   plugins: [
+    /*
     {
       resolve: 'gatsby-mdx',
       options: {
@@ -66,6 +74,17 @@ module.exports = {
       options: feedOptions
     },
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-layout',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'pages',
+        path: __dirname + '/src/pages'
+      }
+    },
+
+    */
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
@@ -78,15 +97,6 @@ module.exports = {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: 'UA-4603832-6'
-      }
-    },
-    'gatsby-plugin-styled-components',
-    'gatsby-plugin-layout',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'pages',
-        path: __dirname + '/src/pages'
       }
     },
   ]
