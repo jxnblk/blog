@@ -17,7 +17,7 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
-    "@jxnblk/gatsby-theme-mdx-blog": "0.0.6",
+    "@jxnblk/gatsby-theme-mdx-blog": "0.0.9",
     "@mdx-js/mdx": "^1.0.0-alpha.17",
     "@mdx-js/react": "^1.0.0-alpha.17",
     "babel-plugin-styled-components": "^1.10.0",
