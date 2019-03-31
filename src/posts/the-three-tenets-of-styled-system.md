@@ -3,8 +3,6 @@ title: The Three Tenets of Styled System
 date: 2019-03-17
 ---
 
-# The Three Tenets of Styled System
-
 I released [Styled System][] around a year and a half ago,
 and since then, the library has been growing steadily
 and has even resulted in a few copycat libraries that use some of the same conventions.

@@ -57,6 +57,8 @@ module.exports = {
     {
       resolve: '@jxnblk/gatsby-theme-mdx-blog',
       options: {
+        // render pages to root path
+        name: '',
       }
     }
   ],

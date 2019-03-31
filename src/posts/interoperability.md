@@ -3,8 +3,6 @@ title: Interoperability
 date: 2019-03-21
 ---
 
-# Interoperability
-
 Back in early 2013, I was working at a small startup in San Francisco called Stitch Fix, alongside Adam Morse and a handful of others.
 We were designing and building out early versions of their marketing pages and some internal tools.
 I had the word designer in my title, and until that point in my career, I'd not shipped much production code for work.
