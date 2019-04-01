@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { useComponents } from 'emotion-mdx'
-import Box from '@jxnblk/gatsby-theme-mdx-blog/src/box'
-import Container from '@jxnblk/gatsby-theme-mdx-blog/src/container'
 import {
   useTheme,
   Button,
+  Box,
+  Container,
 } from '@jxnblk/gatsby-theme-mdx-blog'
 
 const modes = [
