@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { useComponents } from 'emotion-mdx'
+import css from '@styled-system/css'
 import {
+  Styled,
   useTheme,
   Button,
   Box,
@@ -14,7 +15,6 @@ const modes = [
 ]
 
 export default props => {
-  const Styled = useComponents()
   const { mode, setMode } = useTheme()
   if (!mode) setMode('light')
 
@@ -31,8 +31,10 @@ export default props => {
           alignItems: 'center',
         }}>
         <Styled.h3
-          fontSize={6}
-          my={0}>
+          css={css({
+            fontSize: 6,
+            my: 0,
+          })}>
           <Link
             to='/'
             css={{

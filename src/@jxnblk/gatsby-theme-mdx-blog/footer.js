@@ -43,8 +43,6 @@ export default props =>
             @jxnblk/gatsby-theme-mdx-blog
           </Styled.a>
         </Box>
-        <Box mx={2}>
-        </Box>
     </Container>
   </Box>
 
