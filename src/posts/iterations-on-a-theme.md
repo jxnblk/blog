@@ -116,11 +116,12 @@ Realizing that it'd only be a matter of time until my ideal CSS-in-JS solution e
 I continued to iterate on the higher-level component APIs that I wanted to have for building UI.
 Since Rebass had matured a bit, I didn't want to rock the boat too much for people who were using the library,
 and I started another blank-slate project called [Axs][].
-Axs is probably one of my least popular libraries, but it's really where the birth of [Styled System][] happened.
+Axs is probably one of my least popular libraries, but it's really where the inception of [Styled System][] happened.
 
 The first version of Axs had a props API that looked a lot like Basscss.
-After writing responsive styles with props like `w`, `sw`, `mw`, `lw` (that's shorthand for `width`, `small-width`, `medium-width`, `large-width`)
-for a while, I realized they could be combined into a single prop as an array.
+After writing responsive styles with props like `w`, `sw`, `mw`, `lw` for a while
+(that's shorthand for `width`, `small-width`, `medium-width`, `large-width`),
+I realized they could be combined into a single prop as an array.
 This is JavaScript, after all.
 I loved this API, but wasn't sure if I'd gone too far down a rabbithole.
 I convinced some coworkers to try this approach out on some smaller projects (not the best thing to do, professionally),
@@ -146,63 +147,26 @@ taking the props API from Axs and making it available for anyone to build their 
 [styled system]: https://styled-system.com
 [aphrodite]: https://github.com/Khan/aphrodite
 [radium]: https://github.com/FormidableLabs/radium
+[styled components]: https://styled-components.com
 
 
 ## Iteration
 
 I like reflecting on these experiments because I think it goes to show how some ideas take time to form.
-As they say, *if at first you don't success, try, try again*.
+As they say, *if at first you don't succeed, try, try again*.
 I may be a little too quick to throw the baby out with the bathwater,
 but I don't think some of the libraries that I'm most proud of would have ever existed if I hadn't continually
 pushed myself to try things in new ways and get out of my comfort zone a little bit.
 
 Hopefully, this encourages you to try new things and not worry too much if your new repo doesn't make it to the front page of Hacker News.
-I know I'd love to see more experimentation and more ideas out there
+I know I'd love to see more experimentation and more ideas out there in this weird space we call open source.
 
 
 [^1]: I think the `css` prop originated in [Glamor][]
 [^2]: I might list some out, let's see how this goes...
 [^3]: There are better tools out there now, see [SVGR][]
-[^4]: I'm not talking about robots replacing designers here. The idea is that the level at which people think about UI and design products becomes a lot higher than what we do today. CSS is an extremely low-level language and software has a tendency to trend towards higher-level abstractions.
-I don't plan on learning assembly language any time soon, and the things we do today will be viewed in a similar way in the future.
+[^4]: I'm not talking about robots replacing designers here. The idea is that the level at which people think about UI and design products becomes a lot higher than what we do today. CSS is an extremely low-level language and software has a tendency to trend towards higher-level abstractions. I don't plan on learning assembly language any time soon, and the things we do today will be viewed in a similar way in the future.
 
 [glamor]: https://github.com/threepointone/glamor
 [svgr]: https://github.com/smooth-code/svgr
-
-<!--
-- continuous iteration
-- wholescale rewrites
-- blank slate
-- dev speed
-- dont make me think
-
-## Avoiding Writing CSS
-(or leaving it for the CSS experts)
-
-- Basscss
-- Reflex Box
-- Rebass
-- Axs
-- Grid Styled
-- Styled System
-
-## Avoiding Writing Config
-(or getting ideas down as fast as possible)
-
-- ssg-react blog post
-- hotdamn
-- static-react
-- x0
-- mdx-go
-
-
-## Avoiding Learning New Tools
-(or reusing existing knowledge)
-
-- RAM
-- Iso
-- colorable
-- grays
--->
-
 
