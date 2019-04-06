@@ -5,8 +5,7 @@ draft: true
 ---
 
 As my personal GitHub account rolls [over 500 repos][repos] (apparently a few of them are private), it felt like a good time to reflect on how I approach using GitHub personally.
-You might say, *whoa, buddy! that's way too many repos!* It is.
-
+You might say, *"500! Whoa, buddy, that's way too many repos!"* It is.
 There are other people, like [Sindre Sorhus](https://github.com/sindresorhus/), who do a much better job at staying organized than I do.
 But most of my repos aren't fully-baked open source projects.
 I see a lot of them as small experiments, my attempt to *[learn in public][]*, or, for many of them, **iterations on a theme**.
@@ -14,6 +13,7 @@ I see a lot of them as small experiments, my attempt to *[learn in public][]*, o
 It might look like I'm cranking new things out left and right sometimes,
 but often I get the itch to rework an old idea,
 as a complete rewrite, with no baggage attached.
+There's certainly something to be said about starting with a blank slate.
 I need to do a better job of managing expectations,
 since a lot of these aren't intended to be hard dependencies in an application,
 but serve as good starting points for forking or suggestions for features in upstream libraries.
@@ -22,7 +22,7 @@ For example, [Rebass][] didn't invent[^1] but included a [`css` prop][] until [s
 It also had an [`is` prop][], until it was adopted and renamed `as`.
 The idea with these features was never to own these concepts forever,
 but serve as a testing bed in userland to prove out ideas that might make sense in upstream libraries,
-but that weren't mature enough for a PR.
+many of which weren't mature enough for a formal PR.
 Some ideas fall on the other side of the fence, and, in hindsight, I think were better left as experiments[^2].
 
 In looking back on some of these repos, I've noticed a few overarching themes and felt like reflecting on how they've evolved over time.
@@ -37,12 +37,11 @@ In looking back on some of these repos, I've noticed a few overarching themes an
 
 ## Static Site Generators & Zero-Config
 
-Although I've been somewhat of a minimalist for most of my adult life,
-ever since learning about [Jekyll][] years ago,
+Ever since learning about [Jekyll][] years ago,
 I've been fascinated with the idea of generating simple static sites with modern tooling.
 What started as a [blog post][ssg-react] in 2015, became a [zero-config CLI][] in 2016 (appropriately named [static-react][]).
 I took the same zero-config idea and applied it to webpack with a CLI named [hotdamn][] (it even supported markdown for content).
-I was also really interested in the idea of how to make React more accessible to people who weren't JavaScript developers and made [Ejsx][]
+I was also really interested in the idea of how to make React more accessible to people who weren't JavaScript developers and made [Ejsx][].
 In 2017, working with a few others, that idea became [x0][] and a little later [mdx-go][].
 I'll also admit that I have several private repos that generate static HTML through some means or another.
 I might be a little obsessed with this idea.
@@ -75,7 +74,8 @@ Even [Colorable][], [Palx][], and [Monochrome][] are partly motivated by not wan
 
 A couple years ago, I put together a last-minute [presentation for a meetup][react-design-tooling], and like any good JavaScript developer,
 instead of reaching for Google Slides, I rolled my own React app.
-The next time I had my arm twisted to speak in front of other people, I abstracted that out into a [component library][redeck].
+The next time someone twisted my arm to speak in front of other people,
+I abstracted that out into a component library called [Redeck][].
 A little later, after [John Otander][] et al. had released [MDX][], I took that slideshow presentation library and turned it into [MDX Deck][].
 
 [repng]: https://github.com/jxnblk/repng
@@ -95,18 +95,41 @@ A little later, after [John Otander][] et al. had released [MDX][], I took that 
 A fair chunk of my professional work has been around creating UI.
 If you do that long enough, you realize there's a *ton* of ways to lower the amount of effort that requires.
 I use the term **Cheap UI** when I talk about this sort of thing,
-because I think ultimately the cost what we do today will continue to approach zero in the future.
+because I think ultimately the cost of what we do today will continue to approach zero in the future.
 In the world of A/B experimentation and constant iteration, making UI cheaper to produce, only makes sense[^4].
 
 In 2013, I released [Basscss][], which was largely based on principles from [Nicole Sullivan's][nicole sullivan] [OOCSS][],
-[Nicolas Gallagher's][] [Suit CSS][], and a lot of discussions with [Adam Morse][].
-It was my attempt at the time to make building UI as quick and cheap as possible.
+[Nicolas Gallagher's][nicolas gallagher] [Suit CSS][], and a lot of discussions with [Adam Morse][].
+It was my attempt to make building UI as quick and cheap as possible.
+That worked well for the time, and served as inspiration for other libraries, like Buzzfeed's [Solid][].
+As soon as I'd take the time to learn React, I could tell it was the next big thing,
+and I immediately tried to apply some of this same thinking in [Rebass][] and [Reflexbox][].
+Rebass continued to evolve, eventually swapping out CSS for inline styles,
+which made sharing components via npm even simpler.
 
-- Reflex Box
-- Rebass
-- Axs
-- Grid Styled
-- Styled System
+As I continued working on Rebass, I tried out the then cutting edge CSS-in-JS libraries [Aphrodite][] and [Radium][].
+For reasons I can't quite remember, neither one seemed to fit quite what I wanted.
+Around that time, I started hacking on [CXS][] to try to find a simple, lightweight API for styling React components.
+A *ton* of other similar libraries sprung up around the same time, including Glamor,
+which looked considerably better than anything I would've done.
+Realizing that it'd only be a matter of time until my ideal CSS-in-JS solution existed,
+I continued to iterate on the higher-level component APIs that I wanted to have for building UI.
+Since Rebass had matured a bit, I didn't want to rock the boat too much for people who were using the library,
+and I started another blank-slate project called [Axs][].
+Axs is probably one of my least popular libraries, but it's really where the birth of [Styled System][] happened.
+
+The first version of Axs had a props API that looked a lot like Basscss.
+After writing responsive styles with props like `w`, `sw`, `mw`, `lw` (that's shorthand for `width`, `small-width`, `medium-width`, `large-width`)
+for a while, I realized they could be combined into a single prop as an array.
+This is JavaScript, after all.
+I loved this API, but wasn't sure if I'd gone too far down a rabbithole.
+I convinced some coworkers to try this approach out on some smaller projects (not the best thing to do, professionally),
+and surprisingly, they seemed to like the API as well.
+
+A little later, [Styled Components][] was released,
+and I immediately realized it was what I wanted to use to build Rebass.
+After a little more tinkering and experimentation, I released [Styled System][],
+taking the props API from Axs and making it available for anyone to build their own version of Rebass.
 
 [Nicole Sullivan]: https://mobile.twitter.com/stubbornella/
 [Nicolas Gallagher]: https://github.com/necolas
@@ -114,11 +137,16 @@ It was my attempt at the time to make building UI as quick and cheap as possible
 [oocss]: https://github.com/stubbornella/oocss/wiki
 [suit css]: https://github.com/suitcss/suit
 [basscss]: http://basscss.com
+[solid]: https://solid.buzzfeed.com/
 [reflexbox]: https://github.com/jxnblk/reflexbox
 [rebass]: https://rebassjs.org
+[cxs]: https://github.com/cxs-css/cxs
 [axs]: https://github.com/jxnblk/axs
 [rebass grid]: https://github.com/rebassjs/grid
 [styled system]: https://styled-system.com
+[aphrodite]: https://github.com/Khan/aphrodite
+[radium]: https://github.com/FormidableLabs/radium
+
 
 ## Iteration
 
