@@ -43,7 +43,7 @@ I took the same zero-config philosophy and applied it to webpack with a CLI name
 I was also really interested in the idea of how to make React more accessible to people who weren't JavaScript developers and made [Ejsx][].
 In 2017, working with a few others, some of these ideas became [x0][] and a little later [mdx-go][].
 I'll also admit that I have several private repos that generate static HTML through some means or another.
-I might be a little obsessed with this theme.
+I might be a little obsessed with this idea.
 
 [hotdamn]: https://github.com/jxnblk/hotdamn
 [static-react]: https://github.com/jxnblk/static-react
@@ -109,7 +109,7 @@ which made sharing components via npm even simpler.
 As I continued working on Rebass, I tried out some of the cutting edge CSS-in-JS libraries of the time [Aphrodite][] and [Radium][].
 For reasons I can't quite remember, neither one seemed to fit quite what I wanted.
 So I started hacking on [CXS][] to try to find a simple, lightweight API for styling React components.
-A *ton* of other similar libraries sprung up around the same time, including Glamor,
+A *ton* of other similar libraries sprung up around the same time, including [Glamor][],
 which looked considerably better than anything I would've done.
 Realizing that it'd only be a matter of time until my ideal CSS-in-JS solution existed,
 I continued to iterate on the higher-level component APIs that I wanted to have for building UI.
