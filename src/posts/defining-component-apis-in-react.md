@@ -256,7 +256,7 @@ which ends up having a sort of **learn once, use anywhere** effect.
 
 ## Ask your teammates
 
-These are just some of my own thoughts on how to define component APIs, and they might not suite your needs.
+These are just some of my own thoughts on how to define component APIs, and they might not suit your needs.
 The best advice I can give is to talk to your teammates, create RFCs and PRs,
 and try [Readme Driven Development][].
 Writing React components is easy.
