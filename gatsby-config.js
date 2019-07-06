@@ -5,16 +5,8 @@ module.exports = {
     description: 'The writing of Brent Jackson',
     siteUrl: 'https://jxnblk.com/blog'
   },
-  __experimentalThemes: [
-    {
-      resolve: '@jxnblk/gatsby-theme-mdx-blog',
-      options: {
-        // render pages to root path
-        name: '',
-      }
-    }
-  ],
   plugins: [
+    '@jxnblk/gatsby-theme-mdx-blog',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
