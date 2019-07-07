@@ -1,13 +1,7 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, Styled, useColorMode } from 'theme-ui'
 import { Link } from 'gatsby'
-import css from '@styled-system/css'
-import {
-  Styled,
-  useTheme,
-  Button,
-  Box,
-  Container,
-} from '@jxnblk/gatsby-theme-mdx-blog'
+import { Button } from '@jxnblk/gatsby-theme-mdx-blog'
 
 const modes = [
   'light',
@@ -15,7 +9,7 @@ const modes = [
 ]
 
 export default props => {
-  const { mode, setMode } = useTheme()
+  const [ mode, setMode ] = useColorMode()
   if (!mode) setMode('light')
 
   const cycleMode = () => {
@@ -24,20 +18,25 @@ export default props => {
   }
 
   return (
-    <Box as='header' block='header'>
-      <Container
-        css={{
+    <header>
+      <div
+        sx={{
           display: 'flex',
           alignItems: 'center',
+          maxWidth: 768,
+          mx: 'auto',
+          px: 3,
+          pt: 4,
+          pb: 5,
         }}>
         <Styled.h3
-          css={css({
+          sx={{
             fontSize: 6,
             my: 0,
-          })}>
+          }}>
           <Link
             to='/'
-            css={{
+            sx={{
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -45,12 +44,12 @@ export default props => {
             Jxnblog
           </Link>
         </Styled.h3>
-        <Box mx='auto' />
+        <div sx={{ mx: 'auto' }} />
         <Button title='Change Color Mode' onClick={cycleMode}>
           {mode}
         </Button>
-      </Container>
-    </Box>
+      </div>
+    </header>
   )
 }
 

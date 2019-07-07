@@ -17,14 +17,13 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
-    "@jxnblk/gatsby-theme-mdx-blog": "0.0.14",
-    "@mdx-js/mdx": "^1.0.0-alpha.17",
-    "@mdx-js/react": "^1.0.0-alpha.17",
-    "gatsby": "^2.3.4",
-    "gatsby-mdx": "^0.5.5",
-    "gatsby-plugin-google-analytics": "^2.0.18",
-    "gatsby-plugin-google-fonts": "0.0.4",
-    "jxnblk": "^1.4.0",
+    "@jxnblk/gatsby-theme-mdx-blog": "^0.1.1",
+    "@mdx-js/mdx": "^1.0.21",
+    "@mdx-js/react": "^1.0.21",
+    "gatsby": "^2.13.6",
+    "gatsby-plugin-google-analytics": "^2.1.1",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "jxnblk": "^1.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
