@@ -6,22 +6,26 @@ date: 2019-07-11
 Design systems come in all shapes in sizes and can encompass a wide range of skillset and roles within an organization.
 As a front-end developer, I'd like to share some of the tooling that I've found beneficial for building and maintaining the components and code for design systems in modern applications.
 
-On more than one occasion, I've been asked what a blessed "Jackson Stack" (or Jxnstk for short) would look like.
-While this stack has changed and will continue to change over time,
-the following is what I consider to be best-in-class tools for building and maintaining design systems in 2019.
-This list doesn't attempt to cover every aspect, and there is always room for experimentation and exploration, so please take this as more of a starting point rather than a canonical list of tools to use.
+On more than one occasion, I've been asked what a blessed "Jackson Stack" would look like.
+This "stack" is certainly a moving target,
+but the following is a list of solid choices for 2019.
+This doesn't attempt to cover every aspect, and there is always room for experimentation and exploration, so please take this as more of a starting point rather than a definitive list of tools to use.
+Full disclosure: I've work on or with many of the tools listed in this post, and this reflects my own personal opinions.
+
+## What does *modern* mean
 
 I use the term *modern* here to reference React and related technologies.
 This is in no way meant to be exclusive, but I think it reflects some of the industry-standard, component-based approaches that many front-end developers are working within.
 If you're looking for a full-time role as a *front-end developer*, chances are you'll be working with either Angular (yes, it's still *very* widely used) or React.
-There are other roles and different types of developers, so whether you're a full-stack dev working on a Rails app, or a designer working in CSS, I hope that you can steal some ideas or gain some inspiration for the tech stack that you work with.
+There are other roles and different types of developers, so whether you're a full-stack dev working on a Rails app, or a designer working in CSS, I hope that you can take some ideas or inspiration and apply them to the tech stack that you currently work with.
 
 ## Components
 
 Modern front-end applications are built upon functional, component-based architectures, with unit tests, end-to-end tests, performance budgets and gate-checks, accessibility, A/B experimentation, and many other factors to consider.
-The component model popularized by React makes this work much easier than before, but often the visual and interaction design
-can seems like an afterthought and leaves a lot open to interpretation.
-Thankfully, userland libraries like Styled Components and Emotion have helped bring styling into a more component-based workflow.
+The component model popularized by React makes this work much easier than before,
+but often visual and interaction design can seem
+like something that lacks solid patterns and implementations vary widely across projects.
+Thankfully, userland libraries like Styled Components and Emotion have helped bring visual styling into a more component-based workflow.
 
 ## CSS-in-JS
 
@@ -45,15 +49,23 @@ Many others have written about these libraries, but at a very high level they:
 - Can be tested with the same tools the rest of your application uses
 - Have performance improvements (like critical CSS) built in, where developers don't really need to think about it
 
+Some teams attempt to create "framework-agnostic" styles and dismiss CSS-in-JS to help legitimate this ideal.
+While it is a nice concept to think about,
+*one-size-fits-all fits no one well*.
+I do think this is a case of *duplication being better than the wrong abstraction*,
+and the quality of your code base, the development speed of your team, and the end-result of the UI
+can suffer from this approach.
+Don't knock CSS-in-JS until you try it.
+
 ## Styled System
 
 As the author of [Styled System][], I can't recommend it enough.
 While Emotion and Styled Components give you a way to write, bundle, and use CSS, they mostly leave it up to you to decide how the styling should work.
-That is, this is still CSS so beware of footguns.
+This is still CSS so keep an eye out for footguns.
 
 Styled System is a fairly simple idea.
 It transforms a theme object, built with scales and design constraints in mind, into component-based styles.
-(The theme object is sort of a constraint-based schema for *design tokens*, if you will.)
+(The theme object is sort of a constraint-based schema for *design tokens* or raw style values, if you will.)
 It's meant to make doing the right thing easy, but also allow developers just enough flexibility to maintain a high development velocity.
 With Styled System, your components have easy access to colors, font sizes, negative space scales for margin and padding, and any other visual styles that you'd like to keep consistent across your application.
 
