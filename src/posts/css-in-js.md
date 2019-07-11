@@ -4,14 +4,12 @@ date: 2019-07-11
 draft: true
 ---
 
-Why I use CSS in JS
-
 I love CSS. I love JS. CSS-in-JS is like a match made in heaven.
-While others have enumerated on some of the overall reasons people have adopted cij, I wanted to share some of my personal experiences in using some of these tools over the years
 
-I like (a simultaneously horrified) to compare CIJ to Sass.
-When Syntactically awesome stylesheets first hit the scene,
-It put many people off
+While others have enumerated on some of the overall reasons people have adopted CSS-in-JS libraries, I wanted to share some of my personal experiences in using some of these tools over the years.
+
+As horrifying as it sounds, I like to compare CSS-in-JS to Sass.
+When *Syntactically Awesome StyleSheet*s first hit the scene, it put many people off.
 
 Sass was an attempt to make authoring CSS better for teams at scale. In practice, it helped some but a lot of the same problems with working with CSS on large teams still reared their ugly heads – and other new, unwelcome problems showed up as well
 
