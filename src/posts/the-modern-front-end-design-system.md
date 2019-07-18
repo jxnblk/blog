@@ -79,7 +79,7 @@ It transforms a theme object, built with scales and design constraints in mind, 
 (The theme object is sort of a constraint-based schema for groups of related *design tokens* or raw style values, if you will.)
 It's meant to make doing the right thing easy,
 while also affording
-developers just enough flexibility to maintain a high development velocity.
+developers just enough flexibility to maintain a high velocity.
 With Styled System, your components have easy access to colors, font sizes, a space scale for margin and padding, and any other visual styles that you'd like to keep consistent across your application.
 Even if you've never heard of Styled System, you've likely seen its influence in other related libraries.
 
@@ -87,17 +87,17 @@ Even if you've never heard of Styled System, you've likely seen its influence in
 
 Once you have tools to build the components themselves,
 you'll need a way to document them.
-[Gatsby][] is an excellent tool for building applications in React, and it's an excellent choice for building documentation for applications and component libraries.
+[Gatsby][] is an excellent tool for building applications in React, and it's an excellent choice for building documentation for component libraries.
 It's even used to build the official [React](https://reactjs.org) docs themselves.
 Gatsby removes a lot of the complexity involved in setting up a React application.
 And now with the official release [Gatsby themes][], you can package up virtually any functionality you'd like to reuse across multiple sites.
 I suspect people working in the design systems space will
 come up with some interesting applications for themes.
 
-Another use-case for Gatsby, that I haven't seen a lot of exploration of yet, is its potential as a prototyping tool.
+Another use case for Gatsby, that I haven't seen a lot of exploration of yet, is its potential as a prototyping tool.
 If your production application has an API, or you want to integrate with existing data sources or services,
 Gatsby has a growing ecosystem of plugins that make pulling data into your site really easy.
-With the right setup, a developer could create blank templates for different parts of an application, and allow designers to build prototypes with the components from the actual design system library,
+With the right setup, a developer could create blank templates for different parts of an application and allow designers to build prototypes with the components from the actual design system library,
 while remaining
 completely isolated from the production application.
 
@@ -107,19 +107,20 @@ Markdown is an excellent tool for developer documentation.
 [MDX][] gives markdown super powers by allowing you to import and use React components inline with other markdown content.
 You can also change what components are used to render different elements in markdown.
 Many people use this feature to build live-editable code examples
-with static code blocks in markdown.
+with fenced code blocks.
+With this level of flexibility,
 MDX seems like an obvious choice for documenting design systems.
 If you've tried out MDX in the past, but it didn't *click*, I'd highly recommend checking it out now that the stable v1 has been released.
 
-Authoring documentation in MDX means that it should be portable enough to allow you to render it in different React applications,
-even if you're torn between using Gatsby and other options like [Storybook][] or [Next.js][].
+Authoring documentation in MDX means that it should be portable enough to render in different React applications,
+even if you're torn between using Gatsby and other options like [Docz][], [Storybook][] or [Next.js][].
 Whatever you do, try to avoid locking yourself in to proprietary formats
-or bending backwards for highly library-specific APIs when it comes to documentation.
+or bending backwards for library-specific APIs when it comes to documentation.
 
 ## React Live
 
 So how do you go about building live-editable code examples? [React Live][].
-It's an excellent library on it's own, and when combined with MDX, it makes creating rich documentation for React components incredibly easy.
+It's an excellent library on its own, and when combined with MDX, it makes creating rich documentation for React components incredibly easy.
 
 ## What about Theme UI?
 
@@ -134,7 +135,7 @@ If you're willing to give it a shot, let me know how it goes.
 Hopefully this little list is helpful in some small way,
 and I hope you can take some ideas here for your own design systems work.
 
-Shoutout to the following design systems who helped serve as inspiration for this post:
+Shoutout to the people who work on the following design systems which helped serve as inspiration for this post:
 
 - [SproutSocial Seeds](https://sproutsocial.com/seeds/)
 - [Primer Components](https://primer.style/components)
@@ -147,6 +148,7 @@ Shoutout to the following design systems who helped serve as inspiration for thi
 [mdx]: https://mdxjs.com
 [gatsby themes]: https://www.gatsbyjs.org/blog/2019-07-03-announcing-stable-release-gatsby-themes/
 [react live]: https://github.com/FormidableLabs/react-live
+[docz]: https://docz.site/
 [storybook]: https://storybook.js.org/
 [next.js]: https://nextjs.org
 [theme ui]: https://theme-ui.com
