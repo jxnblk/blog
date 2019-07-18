@@ -1,36 +1,60 @@
 ---
-title: The Modern Front-End Design System
+title: The Modern Front-End Design System Stack
 date: 2019-07-11
 ---
 
-Design systems come in all shapes in sizes and can encompass a wide range of skillset and roles within an organization.
-As a front-end developer, I'd like to share some of the tooling that I've found beneficial for building and maintaining the components and code for design systems in modern applications.
+Design systems come in all shapes and sizes and can encompass a wide range of skillset and roles within an organization.
+As a front-end developer, I'd like to share some of the tooling
+that I've found to be helpful when building out the components and code portion of a design system
+in modern applications.
 
 On more than one occasion, I've been asked what a blessed "Jackson Stack" would look like.
-This "stack" is certainly a moving target,
-but the following is a list of solid choices for 2019.
-This doesn't attempt to cover every aspect, and there is always room for experimentation and exploration, so please take this as more of a starting point rather than a definitive list of tools to use.
-Full disclosure: I've work on or with many of the tools listed in this post, and this reflects my own personal opinions.
+This list is likely to change in the future,
+but the following are tools that I think are 1) stable and 2) beneficial to working in design systems in 2019.
+This doesn't attempt to cover every aspect of a design system,
+and there is always room for experimentation and exploration,
+so please take this as more of a starting point rather than a definitive list of tools to use.
+Full disclosure: I've work on or with many of the tools listed in this post, and this reflects my own *personal opinions*.
+Don't sweat it if you're not using any of these, this is merely one perspective on the matter.
 
-## What does *modern* mean
+## What do you mean by *modern*?
 
-I use the term *modern* here to reference React and related technologies.
-This is in no way meant to be exclusive, but I think it reflects some of the industry-standard, component-based approaches that many front-end developers are working within.
-If you're looking for a full-time role as a *front-end developer*, chances are you'll be working with either Angular (yes, it's still *very* widely used) or React.
-There are other roles and different types of developers, so whether you're a full-stack dev working on a Rails app, or a designer working in CSS, I hope that you can take some ideas or inspiration and apply them to the tech stack that you currently work with.
+I use the term modern here to refer to React and related technologies.
+This isn't meant to be an exclusive definition, and hopefully some of this tooling can serve as inspiration for tooling with other modern front-end libraries like Angular or Vue.js.
+
+For the sake of pragmatism and my own personal experience,
+the scope of this article will be focused on React.
+If you're a full-stack Rails developer, a designer working in CSS, or someone who doesn't touch code at all,
+**hopefully you can steal some ideas and apply them to the tech stack that you use professionally.**
+
+
+    I use the term *modern* here to reference React and related technologies.
+    An alternative title for this article could be: *A Technology Stack for Design Systems in the Modern Front-End*, but I think that is a way less interesting and wordier title.
+
+    This post is in *no way* meant to be exclusive, but I think
+    limiting the scope of this post to React
+    reflects some of the industry-standard, component-based approaches that many front-end developers are working within.
+    It also reflects my personal experience working in front-end technologies.
+    If you're looking for a full-time role as a *front-end developer*, chances are you'll be working with either Angular (yes, it's still *very* widely used) or React.
+    Many places hire *React* or *Angular* developers specifically, just like some companies hire *Rails* or *Drupal* developers.
+    It's worth mentioning that I also think
+    Vue.js is indicative of a modern front-end, and shares more similarities to React than not,
+    but I haven't used it professionally in any capacity yet.
+    There are other roles and different types of developers, so whether you're a full-stack dev working on a Rails app, or a designer working in CSS,
+    **I hope that you can take some ideas or inspiration and apply them to the tech stack that you currently work with.**
 
 ## Components
 
 Modern front-end applications are built upon functional, component-based architectures, with unit tests, end-to-end tests, performance budgets and gate-checks, accessibility, A/B experimentation, and many other factors to consider.
 The component model popularized by React makes this work much easier than before,
-but often visual and interaction design can seem
-like something that lacks solid patterns and implementations vary widely across projects.
-Thankfully, userland libraries like Styled Components and Emotion have helped bring visual styling into a more component-based workflow.
+but often design considerations take a back seat to the other aspects of front-end development.
+Thankfully, libraries like Styled Components and Emotion have helped bring visual styling into a more component-based workflow.
+Userland experimentation is great for this sort of thing.
 
 ## CSS-in-JS
 
 While some might be skeptical of the sorts of abstractions introduced by CSS-in-JS libraries, those who embrace it find it a liberating way to author styles.
-Many of the problems that you would typically encouter while working within a complex CSS codebase tend to go away when you adopt a JavaScript-based solution for managing styles.
+Many (not all) of the problems that you would typically encouter while working within a complex CSS codebase tend to go away when you adopt a JavaScript-based solution for managing styles.
 Developers no longer have to fight specificity wars,
 police pull requests for not conforming to a strict naming convention, or constantly worry about the ever-increasing size of their stylesheets.
 If there's only one thing from this list that you take away,
@@ -38,7 +62,7 @@ I hope that it's this:
 
 **If you're building an application in React, use Emotion or Styled Components for styling.**
 
-Many others have written about these libraries, but at a very high level they:
+Many others have written about these two libraries, but at a very high level they:
 
 - Allow you to author CSS that fits in perfectly with the rest of your component-based app
 - Keep styles scoped to where they are intended to be used
@@ -49,51 +73,68 @@ Many others have written about these libraries, but at a very high level they:
 - Can be tested with the same tools the rest of your application uses
 - Have performance improvements (like critical CSS) built in, where developers don't really need to think about it
 
-Some teams attempt to create "framework-agnostic" styles and dismiss CSS-in-JS to help legitimate this ideal.
-While it is a nice concept to think about,
-*one-size-fits-all fits no one well*.
-I do think this is a case of *duplication being better than the wrong abstraction*,
-and the quality of your code base, the development speed of your team, and the end-result of the UI
-can suffer from this approach.
-Don't knock CSS-in-JS until you try it.
+<!--
+From what I've seen, younger developers straight out of school have no problem working with libraries like Styled Components, and I suspect CSS-in-JS, in some ways, makes CSS **more accessible** to people who would've otherwise not spent the due diligence required to really learn the ins-and-outs of CSS.
+This is based on my own limited experience and others may observe different outcomes.
+-->
+
+### One size fits all fits no one well
+
+Some people advocate creating "framework-agnostic" styles, dismissing CSS-in-JS to help legitimate this ideal.
+While it is a nice concept in theory,
+I do think creating a pragmatic design system is a case of *duplication being better than the wrong abstraction*.
+The quality of your code base, the development speed of your team, and the end-result of the UI
+can suffer from following myopic dogma.
+There's a very good reason people don't use Sass or Less when developing iOS applications,
+and there are a lot of reasons to use a more component-based approach to styling with React.
+Don't knock CSS-in-JS until you try it with a team working on a real product.
 
 ## Styled System
 
 As the author of [Styled System][], I can't recommend it enough.
-While Emotion and Styled Components give you a way to write, bundle, and use CSS, they mostly leave it up to you to decide how the styling should work.
+While Emotion and Styled Components give you a way to write, bundle, and use CSS, they mostly leave it up to you to decide how the styling should actually work.
+
+<!--
 This is still CSS so keep an eye out for footguns.
+-->
 
 Styled System is a fairly simple idea.
 It transforms a theme object, built with scales and design constraints in mind, into component-based styles.
-(The theme object is sort of a constraint-based schema for *design tokens* or raw style values, if you will.)
-It's meant to make doing the right thing easy, but also allow developers just enough flexibility to maintain a high development velocity.
+(The theme object is sort of a constraint-based schema for groups of related *design tokens* or raw style values, if you will.)
+It's meant to make doing the right thing easy,
+while also affording
+developers just enough flexibility to maintain a high development velocity.
 With Styled System, your components have easy access to colors, font sizes, negative space scales for margin and padding, and any other visual styles that you'd like to keep consistent across your application.
 
-Even if you've never heard of Styled System, you've likely seen it's influence on other libraries
-with concepts like the `Box` component, color and other style props, or theming context that stores more than simple dark/light booleans.
-Styled System is built upon a general-purpose theme specification that other libraries can and are starting to adopt.
-This means that the more libraries that follow this basic idea, the more abstractions and tools can be built on top of it.
+Even if you've never heard of Styled System, you've likely seen its influence on other libraries.
+Styled System is built upon a general-purpose theme specification that other libraries can, and are, starting to adopt.
+The more tools and libraries that adopt this theme specification,
+the more they all can benefit from its compounding effects.
 
 ## Gatsby
 
-Now that you have tools to build the components themselves,
+Once you have tools to build the components themselves,
 you'll need a way to document them.
 [Gatsby][] is an excellent tool for building applications in React, and it's an excellent choice for building documentation for applications and component libraries.
-It's even used to build the official React docs themselves.
+It's even used to build the official [React](https://reactjs.org) docs themselves.
 Gatsby removes a lot of the complexity involved in setting up a React application, and now with [Gatsby themes][], you can package up virtually any functionality you'd like to reuse across multiple sites.
-I suspect people working in the design systems space (maybe that's you) will
+I suspect people working in the design systems space will
 come up with some interesting applications for themes.
 
 Another use-case for Gatsby, that I haven't seen a lot of exploration of yet, is its potential as a prototyping tool.
 If your production application has an API, or you want to integrate with existing data sources or services,
 Gatsby has a huge ecosystem of plugins that make pulling data into your site really easy.
-With the right setup, a developer could create blank templates for different parts of an application, and allow designers to build prototypes with the components from the actual design system library, but completely isolated from the production application.
+With the right setup, a developer could create blank templates for different parts of an application, and allow designers to build prototypes with the components from the actual design system library,
+while remaining
+completely isolated from the production application.
 
 ## MDX
 
 Markdown is an excellent tool for developer documentation.
 [MDX][] gives markdown super powers by allowing you to import and use React components inline with other markdown content.
-MDX can also be used to change what components render from markdown, which makes it super easy to build live-editable component documentation based on code blocks in your markdown.
+MDX can also be used to change what components render from markdown.
+Many people use this to build live-editable code examples
+with static code blocks in markdown.
 MDX seems like an obvious choice for documenting design systems.
 If you've tried out MDX in the past, but it didn't *click*, I'd highly recommend checking it out now that the stable v1 has been released.
 
