@@ -14,6 +14,13 @@ export default props =>
         maxWidth: 768,
         mx: 'auto',
         px: 3,
+        a: {
+          color: 'inherit',
+          textDecoration: 'none',
+          ':hover': {
+            textDecoration: 'underline',
+          }
+        }
       }}>
       <div sx={{ ml: -3 }}>
         <Avatar size={48} color='currentcolor' />
@@ -33,10 +40,6 @@ export default props =>
         {' '}
         <Styled.a href='https://gatsbyjs.org'>
           Gatsby
-        </Styled.a>
-        {' & '}
-        <Styled.a href='https://github.com/jxnblk/gatsby-theme-mdx-blog'>
-          @jxnblk/gatsby-theme-mdx-blog
         </Styled.a>
       </div>
     </div>
