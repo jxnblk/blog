@@ -13,6 +13,12 @@ export default {
       ...theme.styles.inlineCode,
       bg: 'muted',
       fontSize: '87.5%',
+    },
+    ol: {
+      fontSize: [2, 3],
+    },
+    ul: {
+      fontSize: [2, 3],
     }
   }
 }
