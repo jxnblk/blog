@@ -14,7 +14,7 @@ but the following are tools that I think are both stable and beneficial to worki
 This doesn't attempt to cover every aspect of a design system,
 and there is always room for experimentation and exploration,
 so please take this as more of a starting point rather than a definitive list of tools to use.
-Full disclosure: I've work on or with many of the tools listed in this post, and this reflects my own *personal opinions*.
+Full disclosure: I've worked on or with many of the tools listed in this post, and this reflects my own *personal opinions*.
 Don't sweat it if you're not using any of these, this is merely one perspective on the matter.
 
 ## What do you mean by *modern*?
