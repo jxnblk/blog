@@ -3,7 +3,7 @@ title: The Modern Front-End Design System Stack
 date: 2019-07-18
 ---
 
-Design systems come in all shapes and sizes and can encompass a wide range of skillset and roles within an organization.
+Design systems come in all shapes and sizes and can encompass a wide range of skillsets and roles within an organization.
 As a front-end developer, I'd like to share some of the tooling
 that I've found to be helpful when building out the components and code portion of a design system
 in modern applications.
@@ -25,10 +25,6 @@ For the sake of pragmatism and my own personal experience,
 the scope of this article will be focused on React.
 If you're a full-stack Rails developer, a designer working in CSS, or someone who doesn't touch code at all,
 **hopefully you can steal some ideas and apply them to the tech stack that you use professionally.**
-
-<!--
-An alternative title for this article could be: *A Technology Stack for Design Systems in the Modern Front-End*, but I think that is a way less interesting and wordier title.
--->
 
 ## Components
 
@@ -122,7 +118,7 @@ or bending backwards for highly library-specific APIs when it comes to documenta
 
 ## React Live
 
-So how do you go about building live-editable code examples? React Live.
+So how do you go about building live-editable code examples? [React Live][].
 It's an excellent library on it's own, and when combined with MDX, it makes creating rich documentation for React components incredibly easy.
 
 ## What about Theme UI?
@@ -136,7 +132,7 @@ If you're willing to give it a shot, let me know how it goes.
 ---
 
 Hopefully this little list is helpful in some small way,
-and I hope you can take some ideas here for your own design system work.
+and I hope you can take some ideas here for your own design systems work.
 
 Shoutout to the following design systems who helped serve as inspiration for this post:
 
@@ -144,26 +140,13 @@ Shoutout to the following design systems who helped serve as inspiration for thi
 - [Primer Components](https://primer.style/components)
 - [Artsy Palette](https://palette.artsy.net/)
 
-
-<!--
-
-## Honorable Mentions
-- Jest
-- React Testing LIbrary
-- Colorbox (Lyft tool)
-- (Cloudflare)
-- Colorable (web & npm package)
-- Contrast Swatch
-
--->
-
-
 [styled system]: https://styled-system.com
 [emotion]: https://emotion.sh
 [styled components]: https://styled-components.com
 [gatsby]: https://gatsbyjs.org
 [mdx]: https://mdxjs.com
 [gatsby themes]: https://www.gatsbyjs.org/blog/2019-07-03-announcing-stable-release-gatsby-themes/
+[react live]: https://github.com/FormidableLabs/react-live
 [storybook]: https://storybook.js.org/
 [next.js]: https://nextjs.org
 [theme ui]: https://theme-ui.com
