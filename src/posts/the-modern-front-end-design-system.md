@@ -121,6 +121,7 @@ or bending backwards for library-specific APIs when it comes to documentation.
 
 So how do you go about building live-editable code examples? [React Live][].
 It's an excellent library on its own, and when combined with MDX, it makes creating rich documentation for React components incredibly easy.
+To learn how to set this up, see the official [MDX guide](https://mdxjs.com/guides/live-code).
 
 ## What about Theme UI?
 
