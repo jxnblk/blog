@@ -4,7 +4,7 @@
   "version": "3.0.0-0",
   "description": "The writing of Brent Jackson",
   "scripts": {
-    "start": "gatsby develop --host 0.0.0.0",
+    "start": "gatsby develop",
     "build": "gatsby build --prefix-paths",
     "medium": "babel-node medium"
   },
