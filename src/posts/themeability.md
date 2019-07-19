@@ -1,13 +1,12 @@
 ---
 title: Themeability
-date: 2019-07-14
-draft: true
+date: 2019-07-19
 ---
 
 I've been interested in the idea of constraint-based design for a while.
 By reducing the number of decisions one has to make,
 new ideas and solutions can emerge beyond the initial problem space.
-If you don't need to decide whether the font size should be 22 or 24 pixels, you have more time to decide what that heading should say in the first place.
+If you don't need to decide whether a heading's font size should be 22 or 24 pixels, you have more time to decide what that heading should say in the first place.
 Design constraints can help create a distraction-free environment for creative thought.
 This is sort of a hierarchy of needs, and when you can stop spending energy on the lower-level tiers, you can start exploring higher level abstractions.
 
@@ -17,7 +16,7 @@ some of their core ideas have slowly gained traction, and now Styled System is b
 
 ## Styled System
 
-Styled System is a solution for managing the scales for design constraints within certain common visual style domains.
+Styled System is a solution for managing the scales for design constraints within certain domains of visual styles.
 By defining a typographic scale, negative space scale, color palettes, and other visual style attributes in a `theme` object,
 these values can be quickly applied to components where needed, while still allowing the flexibility to override values contextually within an application.
 At its core, it's a utility to create transform functions that take design system constraints and map them to components.
