@@ -1,8 +1,9 @@
 ---
 title: Themeability
-date: 2019-07-19
+date: 2019-07-21
 ---
 
+<!-- outline
 - constraint based design
 - solution space
 - styled system
@@ -18,29 +19,29 @@ date: 2019-07-19
 - tooling
 - generation
 - automation
+-->
 
 I've been interested in the idea of constraint-based design for a while.
-
 By constraining the solution space for a particular problem,
 new and novel ideas can emerge beyond the initial problem space.
-
-By reducing the number of decisions one has to make,
-new ideas and solutions can emerge beyond the initial problem space.
-
-In the context of UI design,
+Within the context of user interface design,
 if you don't need to decide whether a heading's font size should be 22 or 24 pixels,
 you have more time to decide what that heading should say in the first place or whether there should be a heading at all.
 Design constraints can help create a distraction-free environment for creative thought,
 much like other tools aimed at promoting creative focus.
-This can be viewed as a sort of a hierarchy of needs,
+This can be viewed as a sort of a *hierarchy of needs*,
 and when you can stop spending energy on the lower-level tiers,
 you can start exploring higher level abstractions.
 
 I've tried to distill some of this thinking into several different open source libraries over the years,
-notably Basscss, Rebass, and Styled System.
+notably [Basscss][], [Rebass][], and [Styled System][].
 While the approaches that libraries like Basscss and Rebass promoted were not openly embraced at first,
-some of their core ideas have slowly gained traction,
-and now Styled System is becoming a more-and-more common solution for applying visual constraints within component libraries and design systems.
+some of their core ideas have slowly gained traction.
+And now Styled System is becoming a more-and-more common solution for applying visual constraints within component libraries and design systems.
+
+[basscss]: https://basscss.com
+[rebass]: https://rebassjs.org
+[styled system]: https://styled-system.com
 
 ## Styled System
 
@@ -62,7 +63,14 @@ While it is possible, Styled System also doesn't provide much guidance for creat
 ## Components as Commodity
 
 If you look at modern web UI development, it's easy to see the large amount of duplicative efforts across different organizations.
+While projects like Bootstrap and Material Design have seen a non-negligible amount of adoption,
+I'm very curious as to why we, as an industry, haven't wholesale adopted off-the-shelf solutions for UI components yet.
+It seems like it's only a matter of time before we see a major shift towards commodification of the work we do today.
+I recognize that software is inheritly entropic, but it sometimes feels like we are the [Linotype operators][linotype] of the 21st century.
 
+[linotype]: https://en.wikipedia.org/wiki/Linotype_machine
+
+<!--
 - Duplicative efforts
 - Examples of standardization
   - HTTP
@@ -70,6 +78,7 @@ If you look at modern web UI development, it's easy to see the large amount of d
 - Entropy of software
 - Why haven't off-the-shelf solutions succeeded yet?
 - We are essentially the Linotype operators of the Web.
+-->
 
 ## The IKEA effect
 
@@ -79,23 +88,21 @@ One thing that Styled System does benefit from is [The IKEA Effect][].
 > The IKEA effect is a cognitive bias in which consumers place a disproportionately high value on products they partially created.
 
 By providing only part of the solution to building a component library, users can create something of their own.
-Our primate brains trick us into thinking that our special `Box` component is unique,
-when really it's not all that different from
-
-I suspect that the emergence of design systems in recent years is the result of the IKEA effect compounded with NIH syndrome.
-
-I suspect that corporate design systems are (at least partially) the result of the IKEA effect and NIH (not-invented-here) syndrome.
-We are all biased, and it's easy to believe that the problems we're solving are completely unique and require unique solutions.
-
-- social proof
-
-If you have a design-system hammer, you start to see a lot of design-system-shaped nails.
+Our monkey brains trick us into thinking that our special `Box` component is a unique snowflake.
+The IKEA effect here is certainly compounded with some amount of [*Not-Invented-Here (NIH) Syndrome*][nih],
+where organizations spend more time and energy on building an in-house solution when comparable off-the-shelf solutions exist.
+If all you have is a [design system hammer][maslows hammer], you start to see a lot of design-system-shaped nails.
 
 [the ikea effect]: https://en.wikipedia.org/wiki/IKEA_effect
 [linotype]: https://en.wikipedia.org/wiki/Linotype_machine
 [maslows hammer]: https://en.wikipedia.org/wiki/Law_of_the_instrument#Abraham_Maslow
+[nih]: https://en.wikipedia.org/wiki/Not_invented_here
 
 ## Theming
+
+<!--
+- many different attempts
+-->
 
 The idea of themeable user interfaces often flies in the face of what many corporate design systems attempt to achieve,
 		unless that company also has white-label products.
@@ -111,7 +118,7 @@ It's generally not worth the cost of developing new solutions when off-the-shelf
 The render prop pattern has become popular in recent years to allow this logic to be wrapped up into a reusable component that doesn't actually care what the end UI looks like.
 If these same components additionally offered a smart default styled version, that was completely themeable, then consumers of this component wouldn't need to build the actual rendered UI pieces at all.
 
-In 2019, it's surprising that commoditized UI components haven't taken off more than they have.
+<!-- In 2019, it's surprising that commoditized UI components haven't taken off more than they have. -->
 
 The problem with this is that every different component has its own API and all theming APIs vary from implementation to implementation.
 The only common denominator is the low-level CSS used for any web-based component, and when the entirety of CSS is available, that leads to a lot of fragmentation.
