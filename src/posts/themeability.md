@@ -3,33 +3,97 @@ title: Themeability
 date: 2019-07-19
 ---
 
+- constraint based design
+- solution space
+- styled system
+  - design system
+  - intentionality
+- components as commodity
+- ikea effect
+- MDX
+- trifecta
+- theme specification
+- interoperability
+- theme ui
+- tooling
+- generation
+- automation
+
 I've been interested in the idea of constraint-based design for a while.
+
+By constraining the solution space for a particular problem,
+new and novel ideas can emerge beyond the initial problem space.
+
 By reducing the number of decisions one has to make,
 new ideas and solutions can emerge beyond the initial problem space.
-If you don't need to decide whether a heading's font size should be 22 or 24 pixels, you have more time to decide what that heading should say in the first place.
-Design constraints can help create a distraction-free environment for creative thought.
-This is sort of a hierarchy of needs, and when you can stop spending energy on the lower-level tiers, you can start exploring higher level abstractions.
 
-I've tried to distill some of this thinking into several different libraries over the years, notably Basscss, Rebass, and Styled System.
+In the context of UI design,
+if you don't need to decide whether a heading's font size should be 22 or 24 pixels,
+you have more time to decide what that heading should say in the first place or whether there should be a heading at all.
+Design constraints can help create a distraction-free environment for creative thought,
+much like other tools aimed at promoting creative focus.
+This can be viewed as a sort of a hierarchy of needs,
+and when you can stop spending energy on the lower-level tiers,
+you can start exploring higher level abstractions.
+
+I've tried to distill some of this thinking into several different open source libraries over the years,
+notably Basscss, Rebass, and Styled System.
 While the approaches that libraries like Basscss and Rebass promoted were not openly embraced at first,
-some of their core ideas have slowly gained traction, and now Styled System is becoming a more-and-more common solution for applying visual constraints within component libraries and design systems.
+some of their core ideas have slowly gained traction,
+and now Styled System is becoming a more-and-more common solution for applying visual constraints within component libraries and design systems.
 
 ## Styled System
 
-Styled System is a solution for managing the scales for design constraints within certain domains of visual styles.
-By defining a typographic scale, negative space scale, color palettes, and other visual style attributes in a `theme` object,
-these values can be quickly applied to components where needed, while still allowing the flexibility to override values contextually within an application.
+Styled System is a solution for managing design constraint scales within certain domains of visual design.
+By defining a typographic scale, negative space scale, color palettes, and other visual attributes in a `theme` object,
+these values can be quickly applied to components where needed,
+while still allowing the flexibility to override values contextually within an application.
 At its core, it's a utility to create transform functions that take design system constraints and map them to components.
-It is component-based styling as a function of your design constraints.
+In a nutshell, it's **styling as a function of design constraints**.
 
 Styled System is a fairly mature library at this point and much of the recent development has been around utilities that expand upon this core idea.
 While Styled System is great for building design systems and component libraries, it's not an ideal solution in and of itself for creating white-labels or themeable user interfaces.
 
-Styled System is completely framework-agnostic and requires the user to create their own components that integrate with some other CSS-in-JS solution.
-It requires you to make intentional up-front decisions about the component API, which is great for organization-based design systems, but isn't neccessary for applying a design system in general-purpose UI development.
+Styled System is completely framework-agnostic and requires the user to create their own components that integrate with other CSS-in-JS libraries.
+It requires you to make intentional, up-front decisions about the component API,
+which is great for corporate design systems, but shouldn't be neccessary for applying a design system in general-purpose UI development.
 While it is possible, Styled System also doesn't provide much guidance for creating applications that are truly themeable.
 
-IKEA effect
+## Components as Commodity
+
+If you look at modern web UI development, it's easy to see the large amount of duplicative efforts across different organizations.
+
+- Duplicative efforts
+- Examples of standardization
+  - HTTP
+  - Linux
+- Entropy of software
+- Why haven't off-the-shelf solutions succeeded yet?
+- We are essentially the Linotype operators of the Web.
+
+## The IKEA effect
+
+So why are we all still spending time, energy, and money on building what is largely the same thing?
+One thing that Styled System does benefit from is [The IKEA Effect][].
+
+> The IKEA effect is a cognitive bias in which consumers place a disproportionately high value on products they partially created.
+
+By providing only part of the solution to building a component library, users can create something of their own.
+Our primate brains trick us into thinking that our special `Box` component is unique,
+when really it's not all that different from
+
+I suspect that the emergence of design systems in recent years is the result of the IKEA effect compounded with NIH syndrome.
+
+I suspect that corporate design systems are (at least partially) the result of the IKEA effect and NIH (not-invented-here) syndrome.
+We are all biased, and it's easy to believe that the problems we're solving are completely unique and require unique solutions.
+
+- social proof
+
+If you have a design-system hammer, you start to see a lot of design-system-shaped nails.
+
+[the ikea effect]: https://en.wikipedia.org/wiki/IKEA_effect
+[linotype]: https://en.wikipedia.org/wiki/Linotype_machine
+[maslows hammer]: https://en.wikipedia.org/wiki/Law_of_the_instrument#Abraham_Maslow
 
 ## Theming
 
@@ -174,4 +238,11 @@ Design systems without needing to build a design system
 
 Theme UI gives you the power of a design system, without
 
-
+<!--
+- functional fixedness
+- Maslow's hammer
+- familiarity principle https://en.wikipedia.org/wiki/Mere-exposure_effect
+- NIH syndrome
+- status quo bias
+- uniquness bias https://en.wikipedia.org/wiki/Uniqueness_bias
+-->
