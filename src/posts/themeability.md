@@ -70,16 +70,6 @@ I recognize that software is inheritly entropic, but it sometimes feels like we 
 
 [linotype]: https://en.wikipedia.org/wiki/Linotype_machine
 
-<!--
-- Duplicative efforts
-- Examples of standardization
-  - HTTP
-  - Linux
-- Entropy of software
-- Why haven't off-the-shelf solutions succeeded yet?
-- We are essentially the Linotype operators of the Web.
--->
-
 ## The IKEA effect
 
 So why are we all still spending time, energy, and money on building what is largely the same thing?
@@ -104,59 +94,71 @@ If all you have is a [design system hammer][maslows hammer], you start to see a 
 - many different attempts
 -->
 
-The idea of themeable user interfaces often flies in the face of what many corporate design systems attempt to achieve,
-		unless that company also has white-label products.
-Most design systems are developed to ensure a consistent look and feel across 100s of designers and developers spanning different teams in an organization.
-Unless that company also builds white-label products,
-the odds are that they won't prioritize making interfaces themeable – and for good reason.
-Even if theming a user interface is not a hard requirement,
-		However, even in cases where theming a user interface is not a hard requirement,
+The idea of themeable user interfaces often flies in the face of what many corporate design systems attempt to achieve.
+Most design systems are developed to ensure a consistent look and feel across hundreds of designers and developers spanning different teams in an organization.
+Unless the product is intended for white-label applications,
+the odds are that an organization won't prioritize making interfaces themeable.
+It just wouldn't be good business to spend money on such efforts.
+But, even when theming a user interface is not a hard requirement,
 developing components with this in mind can be beneficial nonetheless.
 
-More and more design systems are built using third-party, open source components that handle complex logic, such as autocomplete inputs, masked inputs, date pickers, drop downs and more.
+## Themeable Components
+
+More and more design systems are built using third-party, open source components that handle complex logic, such as autocomplete inputs, masked inputs, date pickers, and drop downs.
 It's generally not worth the cost of developing new solutions when off-the-shelf components can be leveraged instead.
-The render prop pattern has become popular in recent years to allow this logic to be wrapped up into a reusable component that doesn't actually care what the end UI looks like.
-If these same components additionally offered a smart default styled version, that was completely themeable, then consumers of this component wouldn't need to build the actual rendered UI pieces at all.
+The render prop pattern has become popular in recent years to allow this logic to be packaged into reusable components
+that aren't concerned with the way the UI looks.
+If these sorts of components could additionally offer styled versions that were completely themeable,
+the consumers of these components wouldn't need to build the rendered UI pieces at all.
 
-<!-- In 2019, it's surprising that commoditized UI components haven't taken off more than they have. -->
-
-The problem with this is that every different component has its own API and all theming APIs vary from implementation to implementation.
-The only common denominator is the low-level CSS used for any web-based component, and when the entirety of CSS is available, that leads to a lot of fragmentation.
-If library authors conformed to a common specification and standards for allowing UI components to be themed, then the whole ecosystem could benefit.
+The problem with this idea is that every different component has its own unique API,
+and all theming APIs vary from implementation to implementation.
+The only common denominator is the low-level CSS used for any web-based component,
+and when the entirety of CSS is available for styling, that doesn't really create an API for theming.
+If library authors conformed to a common specification and standards for allowing UI components to be themed,
+then the whole ecosystem could benefit.
 This is the idea being the Theme Specification.
 While it's not, nor ever will be, a complete solution for theming,
 it's meant to provide an unopinionated foundation for building and expanding on top of.
+**This theme specification is a design constraint in and of itself.**
+You can read more about this idea in my previous post on [Interoperability](/interoperability).
 
-This theme specification is a design constraint in and of itself.
-
+<!--
 The fewer decisions that you need to make at this level of abstraction,
 the more exploration you can do beyond this.
-
-You can read more about this idea in my other post *Interoperability*.
+-->
 
 ## CSS Zen Garden
 
-CSS Zen Garden was a fantastic idea at the time, but it's clear in hindsite that the underlying solution for creating themeable websites was not robust enough to allow the original vision to come true.
-CSS was a much better abstraction than its predecessors, but it doesn't operate at a high enough level to support theming in rich, modern-day web applications.
+There have been many attempts at creating themeable interfaces at the past, and this very well could be a Sisyphean task.
+One attempt from the earlier days of the web was [CSS Zen Garden][].
+It was a fantastic idea at the time, but it's clear in hindsight that
+CSS alone does not operate at a sufficiently high-enough level to support building themeable interfaces.
+CSS was a much better abstraction than its predecessors, but it wasn't really intended for theming rich, dynamic web applications.
 Theming is a *very* difficult task, and one that requires a lot of buy-in and real-world experimentation.
 
+<!--
 But like any early specification,
-
 A design-by-committee approach probably won't serve this sort of effort well.
+-->
+
+[css zen garden]: http://www.csszengarden.com/
 
 ## Material Design
 
-Google's Material Design is probably the closest to achieving this sort of themeability to date, allowing interface developers to reuse Google's UI components but apply their own theming and branding.
-Google can do this because it's a huge company with a lot of influence.
-The problem with MD is that many developers do not want their interfaces to look like Google, or they have bespoke interface widgets that do not fit in well with the overall design philosophy or interaction guidelines that Google uses.
-Material Design itself isn't an open source project.
-While some material design-based open source projects exist,
-Developers cannot easily contribute back to the core aspects of material design.
-This is for good reason, and Material Design was not originally built with themeability in mind or for the same purposes.
+Google's Material Design is probably the closest to achieving this sort of themeability to date,
+allowing interface developers to reuse Google's UI components but apply their own theming and branding.
+Google can do this because it's a massive company with a lot of resources and influence.
+One problem with Material Design is that many developers do not want their interfaces to look like Google.
+Another issue is that it is not an open source project and thus there aren't enough incentives for Google to create something truly themeable.
+Material Design was originally conceived to build consistent UI for Google products.
+It may change in the future, but I suspect the goals of Material Design are not aligned with general-purpose UI development.
+
+## Color, Typography, and Layout
 
 
-## The Visual Design Trifecta
 
+<!--
 It's amazing how much of a visual impact you can make by changing a few values
 
 Changing color, typography, and layout styles can make a huge impact on any given design.
@@ -164,12 +166,22 @@ While there are many other visual aspects that can affect the design language of
 by focusing on these three core aspects,
 by focusing on these three core aspects,
 Biggest bang for your buck
-
 The visual impact you can make on any visual
-
 Color, typography, and layout
+-->
 
-## Effortless design systems
+## Low-Effortl Design Systems
+
+While a corporate design system can easily become an expensive, long-term project,
+I think that many of the core benefits a design system provides for UI development can
+be gained with a lower amount of effort.
+There's a phrase is software development, *don't boil the ocean*,
+and I think this applies to UI development.
+Instead of setting long-term goals for a
+
+<!--
+
+Cheap UI
 
 While some may use a more exclusive definition of the term "design system",
 I think that a design system is something that can be introduced in any application, no matter how small.
@@ -177,6 +189,7 @@ A design system does not mean that you need a dedicated team or working group.
 It also doesn't mean you have to build your own bespoke tooling, or have a highly polished documentation site, or have buy-in across your entire organization to reap some of the benefits that design systems can provide.
 
 Don't boil the ocean and don't bite off more than you can chew.
+-->
 
 
 ## Theme UI
