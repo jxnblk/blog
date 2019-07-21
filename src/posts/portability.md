@@ -34,14 +34,15 @@ A lightweight abstraction for this sort of thing, however, could make these sort
 
 Unlike Markdown, I do not think this requires inventing new syntax.
 Among CSS, JavaScript, JSON, YAML, and others, there are already plenty of tools that can parse existing syntaxes.
-This does require a specific schema shape to be successful.
+This does require a specific schema shape to be successful,
+and the [Theme Specification][] is meant to be a simpler way to write styles for an application.
+While [Theme UI][] (which is built with the Theme Specification) *can* output stylesheets in the form of [Tachyons](https://theme-ui.com/css/tachyons) and other similar CSS libraries, it cannot fully replace CSS on its own.
+It does provide a level of portability for sets of colors, typographic styles,
+and other design constraints that can be applied in many different places.
+As the number of libraries that follow this Theme Specification increases,
+you will be able to reuse these styles in more and more places.
 
 
-<!--
-- markdown of css
+[theme specification]: https://system-ui.com/theme
+[theme ui]: https://theme-ui.com
 
-Markdown can be converted to HTML, which can generally be converted back into Markdown,
-but Markdown and HTML can't always be rendered in the same places.
-For example, browsers can render plain text, but do not render formatted Markdown.
-
--->
