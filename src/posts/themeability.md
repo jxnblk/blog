@@ -1,7 +1,6 @@
 ---
 title: Themeability
 date: 2019-07-21
-draft: true
 ---
 
 I've been interested in the idea of constraint-based design for a while.
