@@ -170,7 +170,7 @@ The visual impact you can make on any visual
 Color, typography, and layout
 -->
 
-## Low-Effortl Design Systems
+## Low-Effort Design Systems
 
 While a corporate design system can easily become an expensive, long-term project,
 I think that many of the core benefits a design system provides for UI development can
@@ -197,13 +197,16 @@ Don't boil the ocean and don't bite off more than you can chew.
 Theme UI is a framework for building constraint-based, themeable user interfaces and a foundation for building interoperable components.
 It provides core abstractions for design-system-driven applications, without the need to create a bespoke design system from scratch.
 
+<!--
 Theming is built in, but it's applications span wider than
 
 - Building Blocks
 - IKEA effect
+-->
 
-## Foundation for other tooling
+## Laying a Foundation
 
+<!--
 Theme UI is in its early stages and not yet at a stable v1 release.
 I hope that the core part of the library can serve as a foundation for many other design system tools and components in the future.
 I can imagine a rich suite of tools, from open source component libraries, to VS Code plugins, Chrome extensions, Figma plugins, color tools, typesetting tools, and even machine learning, built on top of this low-level abstraction, where any user interface built with this can benefit.
@@ -215,9 +218,11 @@ It's a lofty dream and it'll surely be a rough ride getting there, but I'd love 
 
 - self-imposed limitations
 - solution space
+-->
 
 ---
 
+<!--
 - Styled System
 	- Typography, colors, layout
 	- Geared towards component libraries
@@ -240,7 +245,6 @@ It's a lofty dream and it'll surely be a rough ride getting there, but I'd love 
 	- Transformers for non-standard (proprietary) theming in libraries like Material UI
 	- Interoperability baked in from the start
 
----
 
 Aspirational
 
@@ -257,6 +261,8 @@ Batteries-included design system framework
 Design systems without needing to build a design system
 
 Theme UI gives you the power of a design system, without
+
+-->
 
 <!--
 - functional fixedness
