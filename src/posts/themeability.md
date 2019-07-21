@@ -3,41 +3,25 @@ title: Themeability
 date: 2019-07-21
 ---
 
-<!-- outline
-- constraint based design
-- solution space
-- styled system
-  - design system
-  - intentionality
-- components as commodity
-- ikea effect
-- MDX
-- trifecta
-- theme specification
-- interoperability
-- theme ui
-- tooling
-- generation
-- automation
--->
-
 I've been interested in the idea of constraint-based design for a while.
 By constraining the solution space for a particular problem,
-new and novel ideas can emerge beyond the initial problem space.
-Within the context of user interface design,
-if you don't need to decide whether a heading's font size should be 22 or 24 pixels,
+new and novel ideas can emerge beyond the initial problem scope.
+In a given user interface,
+when you don't need to decide whether a heading's font size should be 22 or 24 pixels,
 you have more time to decide what that heading should say in the first place or whether there should be a heading at all.
-Design constraints can help create a distraction-free environment for creative thought,
-much like other tools aimed at promoting creative focus.
-This can be viewed as a sort of a *hierarchy of needs*,
-and when you can stop spending energy on the lower-level tiers,
-you can start exploring higher level abstractions.
+Like other tools aimed at promoting creative focus,
+design constraints can help create a distraction-free environment for creative thought.
+Design constraints can be viewed as a sort of a *[hierarchy of needs][]* –
+when you stop spending energy on lower-level problems,
+you can start exploring higher level abstractions in design.
+
+[hierarchy of needs]: https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs
 
 I've tried to distill some of this thinking into several different open source libraries over the years,
 notably [Basscss][], [Rebass][], and [Styled System][].
-While the approaches that libraries like Basscss and Rebass promoted were not openly embraced at first,
+While libraries like Basscss and Rebass were not instant hits,
 some of their core ideas have slowly gained traction.
-And now Styled System is becoming a more-and-more common solution for applying visual constraints within component libraries and design systems.
+And now Styled System is becoming a more-and-more widely-used solution for applying visual design constraints within component libraries and design systems.
 
 [basscss]: https://basscss.com
 [rebass]: https://rebassjs.org
@@ -46,42 +30,44 @@ And now Styled System is becoming a more-and-more common solution for applying v
 ## Styled System
 
 Styled System is a solution for managing design constraint scales within certain domains of visual design.
-By defining a typographic scale, negative space scale, color palettes, and other visual attributes in a `theme` object,
+By defining a typographic scale, negative space scale, color palettes, and other visual attributes in a *theme object*,
 these values can be quickly applied to components where needed,
 while still allowing the flexibility to override values contextually within an application.
-At its core, it's a utility to create transform functions that take design system constraints and map them to components.
-In a nutshell, it's **styling as a function of design constraints**.
+Styled System provides an API to make doing the right thing easy when applying consistent styles throughout an application.
+At its core, it's a suite of utilities to create functions for mapping design constraints to components.
+That is, it's **styling as a function of design constraints**.
 
 Styled System is a fairly mature library at this point and much of the recent development has been around utilities that expand upon this core idea.
 While Styled System is great for building design systems and component libraries, it's not an ideal solution in and of itself for creating white-labels or themeable user interfaces.
 
 Styled System is completely framework-agnostic and requires the user to create their own components that integrate with other CSS-in-JS libraries.
-It requires you to make intentional, up-front decisions about the component API,
-which is great for corporate design systems, but shouldn't be neccessary for applying a design system in general-purpose UI development.
-While it is possible, Styled System also doesn't provide much guidance for creating applications that are truly themeable.
+It requires you to make intentional, upfront decisions about the overall component API,
+which is great for corporate design systems, but shouldn't be neccessary for applying a design constraints in general-purpose UI development.
+And, while it is possible, Styled System doesn't provide much guidance for creating applications that are truly *themeable*.
 
 ## Components as Commodity
 
 If you look at modern web UI development, it's easy to see the large amount of duplicative efforts across different organizations.
 While projects like Bootstrap and Material Design have seen a non-negligible amount of adoption,
 I'm very curious as to why we, as an industry, haven't wholesale adopted off-the-shelf solutions for UI components yet.
-It seems like it's only a matter of time before we see a major shift towards commodification of the work we do today.
-I recognize that software is inheritly entropic, but it sometimes feels like we are the [Linotype operators][linotype] of the 21st century.
+It *seems like* it's only a matter of time before we see a major shift towards commodification of the work we do today,
+but I'm skeptical that that will ever happen.
+I believe that software is inheritly [entropic][],
+and it can sometimes feels like we are the [Linotype operators][linotype] of the 21st century.
 
+[entropic]: https://en.wikipedia.org/wiki/Software_entropy
 [linotype]: https://en.wikipedia.org/wiki/Linotype_machine
 
-## The IKEA effect
-
-So why are we all still spending time, energy, and money on building what is largely the same thing?
-One thing that Styled System does benefit from is [The IKEA Effect][].
+So why do we still spend time, energy, and money on building what is largely the same thing?
+I think that Styled System and similar libraries are impacted by what some call [The IKEA Effect][].
 
 > The IKEA effect is a cognitive bias in which consumers place a disproportionately high value on products they partially created.
 
-By providing only part of the solution to building a component library, users can create something of their own.
-Our monkey brains trick us into thinking that our special `Box` component is a unique snowflake.
-The IKEA effect here is certainly compounded with some amount of [*Not-Invented-Here (NIH) Syndrome*][nih],
+By providing only part of the solution to building a component library, Styled System allows users to create components of their own.
+I think this effect is also compounded with [*Not-Invented-Here (NIH) Syndrome*][nih],
 where organizations spend more time and energy on building an in-house solution when comparable off-the-shelf solutions exist.
-If all you have is a [design system hammer][maslows hammer], you start to see a lot of design-system-shaped nails.
+It's fair to say that off-the-shelf UI component solutions do not and will never exist,
+but if all you have is a [design system hammer][maslows hammer], you start to see a lot of design-system-shaped nails.
 
 [the ikea effect]: https://en.wikipedia.org/wiki/IKEA_effect
 [linotype]: https://en.wikipedia.org/wiki/Linotype_machine
@@ -90,185 +76,56 @@ If all you have is a [design system hammer][maslows hammer], you start to see a 
 
 ## Theming
 
-<!--
-- many different attempts
--->
-
 The idea of themeable user interfaces often flies in the face of what many corporate design systems attempt to achieve.
 Most design systems are developed to ensure a consistent look and feel across hundreds of designers and developers spanning different teams in an organization.
 Unless the product is intended for white-label applications,
-the odds are that an organization won't prioritize making interfaces themeable.
-It just wouldn't be good business to spend money on such efforts.
+organizations do not have good incentives to prioritize creating themeable interfaces.
+It just doesn't make sense to spend resources on such efforts.
 But, even when theming a user interface is not a hard requirement,
 developing components with this in mind can be beneficial nonetheless.
 
 ## Themeable Components
 
 More and more design systems are built using third-party, open source components that handle complex logic, such as autocomplete inputs, masked inputs, date pickers, and drop downs.
-It's generally not worth the cost of developing new solutions when off-the-shelf components can be leveraged instead.
-The render prop pattern has become popular in recent years to allow this logic to be packaged into reusable components
-that aren't concerned with the way the UI looks.
+These do exist today as off-the-shelf UI components,
+and it's generally not worth the cost of developing new solutions when components like these can be leveraged instead.
+The *[render props][]* pattern has become popular in recent years to allow this sort of logic to be packaged into reusable components
+that aren't concerned with the styling of the UI.
 If these sorts of components could additionally offer styled versions that were completely themeable,
 the consumers of these components wouldn't need to build the rendered UI pieces at all.
+
+[render props]: https://reactjs.org/docs/render-props.html
 
 The problem with this idea is that every different component has its own unique API,
 and all theming APIs vary from implementation to implementation.
 The only common denominator is the low-level CSS used for any web-based component,
 and when the entirety of CSS is available for styling, that doesn't really create an API for theming.
-If library authors conformed to a common specification and standards for allowing UI components to be themed,
-then the whole ecosystem could benefit.
-This is the idea being the Theme Specification.
-While it's not, nor ever will be, a complete solution for theming,
-it's meant to provide an unopinionated foundation for building and expanding on top of.
-**This theme specification is a design constraint in and of itself.**
-You can read more about this idea in my previous post on [Interoperability](/interoperability).
+What we need instead are UI components that can operate as *interchangeable parts*.
+
+If a handful of UI component libraries conformed to a common specifiation for themeable components,
+these components could be installed in many different applications without the need to add custom styles.
+This is the idea behind the [Theme Specification][],
+which is intended to be an [unopinionated foundation](/interoperability) for other libraries to be built upon.
+The success of this effort is contingent on adoption, but even with limited success,
+this idea could have compounding effects on efficiencies within UI development.
+**The theme specification itself is a design constraint**.
 
 <!--
-The fewer decisions that you need to make at this level of abstraction,
-the more exploration you can do beyond this.
+The theme specification is a design constraint in and of itself
 -->
 
-## CSS Zen Garden
-
-There have been many attempts at creating themeable interfaces at the past, and this very well could be a Sisyphean task.
-One attempt from the earlier days of the web was [CSS Zen Garden][].
-It was a fantastic idea at the time, but it's clear in hindsight that
-CSS alone does not operate at a sufficiently high-enough level to support building themeable interfaces.
-CSS was a much better abstraction than its predecessors, but it wasn't really intended for theming rich, dynamic web applications.
-Theming is a *very* difficult task, and one that requires a lot of buy-in and real-world experimentation.
-
-<!--
-But like any early specification,
-A design-by-committee approach probably won't serve this sort of effort well.
--->
-
-[css zen garden]: http://www.csszengarden.com/
-
-## Material Design
-
-Google's Material Design is probably the closest to achieving this sort of themeability to date,
-allowing interface developers to reuse Google's UI components but apply their own theming and branding.
-Google can do this because it's a massive company with a lot of resources and influence.
-One problem with Material Design is that many developers do not want their interfaces to look like Google.
-Another issue is that it is not an open source project and thus there aren't enough incentives for Google to create something truly themeable.
-Material Design was originally conceived to build consistent UI for Google products.
-It may change in the future, but I suspect the goals of Material Design are not aligned with general-purpose UI development.
-
-## Color, Typography, and Layout
-
-
-
-<!--
-It's amazing how much of a visual impact you can make by changing a few values
-
-Changing color, typography, and layout styles can make a huge impact on any given design.
-While there are many other visual aspects that can affect the design language of a site,
-by focusing on these three core aspects,
-by focusing on these three core aspects,
-Biggest bang for your buck
-The visual impact you can make on any visual
-Color, typography, and layout
--->
-
-## Low-Effort Design Systems
-
-While a corporate design system can easily become an expensive, long-term project,
-I think that many of the core benefits a design system provides for UI development can
-be gained with a lower amount of effort.
-There's a phrase is software development, *don't boil the ocean*,
-and I think this applies to UI development.
-Instead of setting long-term goals for a
-
-<!--
-
-Cheap UI
-
-While some may use a more exclusive definition of the term "design system",
-I think that a design system is something that can be introduced in any application, no matter how small.
-A design system does not mean that you need a dedicated team or working group.
-It also doesn't mean you have to build your own bespoke tooling, or have a highly polished documentation site, or have buy-in across your entire organization to reap some of the benefits that design systems can provide.
-
-Don't boil the ocean and don't bite off more than you can chew.
--->
-
+[theme specification]: https://system-ui.com/theme
 
 ## Theme UI
 
+Theme UI is a library that builds upon some of the ideas within this post.
+Like Styled System, it uses a *theme object* for applying design constraints in an application,
+but unlike Styled System it doesn't require UI components to be created upfront.
+
+
+<!--
 Theme UI is a framework for building constraint-based, themeable user interfaces and a foundation for building interoperable components.
 It provides core abstractions for design-system-driven applications, without the need to create a bespoke design system from scratch.
-
-<!--
-Theming is built in, but it's applications span wider than
-
-- Building Blocks
-- IKEA effect
 -->
 
-## Laying a Foundation
-
-<!--
-Theme UI is in its early stages and not yet at a stable v1 release.
-I hope that the core part of the library can serve as a foundation for many other design system tools and components in the future.
-I can imagine a rich suite of tools, from open source component libraries, to VS Code plugins, Chrome extensions, Figma plugins, color tools, typesetting tools, and even machine learning, built on top of this low-level abstraction, where any user interface built with this can benefit.
-It's a lofty dream and it'll surely be a rough ride getting there, but I'd love your help in building this vision and making it a reality.
-
-
-
-
-
-- self-imposed limitations
-- solution space
--->
-
----
-
-<!--
-- Styled System
-	- Typography, colors, layout
-	- Geared towards component libraries
-	- Does not provide guidance for creating themeable UI
-	- Requires creating components and deciding on an API up-front
-	- Framework-agnostic
-	- requires setup with other libraries like Styled Components or Emotion
-- Theme UI
-	- Standard theme schema
-	- Constraints
-	- Trifecta
-	- Hot-swappable themes
-	- Change the overall look and feel of UI with a single object
-	- Smart defaults
-	- batteries included
-- Basis for more tooling
-	- Chrome extension
-	- VS Code plugins
-	- Figma plugins
-	- Transformers for non-standard (proprietary) theming in libraries like Material UI
-	- Interoperability baked in from the start
-
-
-Aspirational
-
-A design system for creating consistent, constraint-based user interfaces
-
-Build better user interfaces faster
-
-
-This isn't your run-of-the-mill corporate design system.
-This is a design system in the 20th century sense.
-The Typography, Color, & Layout trifecta
-Batteries-included design system framework
-
-Design systems without needing to build a design system
-
-Theme UI gives you the power of a design system, without
-
--->
-
-<!--
-- functional fixedness
-- Maslow's hammer
-- familiarity principle https://en.wikipedia.org/wiki/Mere-exposure_effect
-- NIH syndrome
-- status quo bias
-- uniquness bias https://en.wikipedia.org/wiki/Uniqueness_bias
--->
+[interchangeable parts]: https://en.wikipedia.org/wiki/Interchangeable_parts
