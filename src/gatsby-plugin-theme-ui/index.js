@@ -7,6 +7,9 @@ export default {
     secondary: '#228',
     muted: '#f9faff',
   },
+  fontSizes: [
+    12, 14, 18, 20, 24, 32, 48, 64, 72
+  ],
   styles: {
     ...theme.styles,
     inlineCode: {
@@ -14,11 +17,5 @@ export default {
       bg: 'muted',
       fontSize: '87.5%',
     },
-    ol: {
-      fontSize: [2, 3],
-    },
-    ul: {
-      fontSize: [2, 3],
-    }
   }
 }
