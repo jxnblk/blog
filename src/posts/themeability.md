@@ -12,7 +12,7 @@ when you don't need to decide whether a heading's font size should be 22 or 24 p
 you have more time to decide what that heading should say in the first place or whether there should be a heading at all.
 Like other tools aimed at promoting creative focus,
 design constraints can help create a distraction-free environment for creative thought.
-Design constraints can be viewed as a sort of a *[hierarchy of needs][]* –
+Design constraints can be viewed as a sort of *[hierarchy of needs][]* –
 when you stop spending energy on lower-level problems,
 you can start exploring higher level abstractions in design.
 
@@ -32,10 +32,11 @@ And now, Styled System is becoming a more-and-more widely-used solution for appl
 
 Styled System is a solution for managing design constraint scales within certain domains of visual design.
 By defining a typographic scale, negative space scale, color palettes, and other visual attributes in a *theme object*,
-these values can be quickly applied to components where needed,
+these values can be systematically applied to components where needed,
 while still allowing the flexibility to override values contextually within an application.
 Styled System provides an API to make doing the right thing easy when applying consistent styles throughout an application.
-At its core, it's a suite of utilities to create functions for mapping design constraints to components.
+At its core, it's a suite of utilities to create functions for mapping design constraints to components,
+and it helps you build a UI component library with a more consistent props API.
 I like to think of it as **styling as a function of design constraints**.
 
 Styled System is a fairly mature library at this point and much of the recent development has been focused on utilities that expand upon this core idea.
@@ -50,7 +51,7 @@ And, while it is possible, Styled System doesn't provide much guidance for creat
 If you look at modern web UI development, it's easy to see the large amount of duplicative efforts across different organizations.
 While projects like Bootstrap and Material Design have seen a non-negligible amount of adoption,
 I'm very curious as to why we, as an industry, haven't wholesale adopted off-the-shelf solutions for UI components yet.
-It *seems like* it's only a matter of time before we see a major shift towards commodification of the work we do today,
+It can *seem like* it's only a matter of time before we see a major shift towards commodification of the work we do today,
 but I'm skeptical that that will ever happen.
 Sometimes it feels like we, as web developers, are the [Linotype operators][linotype] of the 21st century.
 
@@ -129,8 +130,12 @@ which means if you've created components with Styled System, they should work in
 
 The library is still fairly new, but it's intended to lay a foundation for other components, libraries, and tools to be built upon.
 The more libraries that adopt this theme specification, the more the users of these libraries will benefit.
-If you're looking for a better way to apply visual styles to your application, I'd encourage you to check it out.
+If you're looking for a better way to apply consistent visual styles,
+build themeable components,
+or leverage constraint-based design principles in your work,
+I'd encourage you to check it out.
 And, if the ideas in this post interest you, we'd love to have help building more on top of this foundation.
+Check out the [Theme UI repo](https://github.com/system-ui/theme-ui) to learn more.
 
 [theme ui]: https://theme-ui.com
 [interchangeable parts]: https://en.wikipedia.org/wiki/Interchangeable_parts
