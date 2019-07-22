@@ -1,91 +1,100 @@
 ---
 title: CSS in JS
-date: 2019-07-11
+date: 2019-07-22
 draft: true
 ---
 
-I love CSS. I love JS. CSS-in-JS is like a match made in heaven.
+I love CSS. I love JavaScript. CSS-in-JS is like a match made in heaven.
 
-While others have enumerated on some of the overall reasons people have adopted CSS-in-JS libraries, I wanted to share some of my personal experiences in using some of these tools over the years.
+While others have [enumerated][threepointone] some of the overall reasons people have adopted CSS-in-JS libraries, I wanted to share some of my personal experiences in using some of these tools over the past few years.
 
-As horrifying as it sounds, I like to compare CSS-in-JS to Sass.
+[threepointone]: https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
+
+## It's a lot like Sass
+
+As horrifying as it might sound, I like to compare CSS-in-JS to Sass.
 When *Syntactically Awesome StyleSheet*s first hit the scene, it put many people off.
+The whitespace sensitive syntax was very different from standard CSS, which ultimately made the closer-to-but-not-standard *Sassy CSS* flavor the more popular choice.
 
-Sass was an attempt to make authoring CSS better for teams at scale. In practice, it helped some but a lot of the same problems with working with CSS on large teams still reared their ugly heads – and other new, unwelcome problems showed up as well
+Sass was an attempt to make authoring CSS better for teams at scale.
+In practice, it helped some, but a lot of the same problems that have existed
+for years still exist in Sass-based projects.
+The syntax and features in Sass also made it easier to generate even larger stylesheets,
+without making it obvious to the author.
 
-After the experiment that was Sass had boiled over, CSS now has custom properties, which is a huge win for CSS (go team!)
+I believe that userland experimentation like Sass is beneficial to standards like CSS.
+Now, CSS itself has the *custom properties* feature, which was inspired by Sass variables, and I think it's a huge win for CSS.
+Some of the not-so-great features of Sass have *not* been added to CSS, which is also good.
 
-Unfortunately some of the same problems from before (global scope, snowballing CSS filesize, etc)
-we're still affecting teams of more than one person
+Unfortunately, Sass didn't solve all the problems inherit in writing CSS.
+Stylesheets are continuing to grow in size, causing performance and maintenance issues for teams,
+and the global nature of CSS can make applying styles in a larger application difficult for developers who aren't world-class CSS experts.
 
-To counteract some of this, we invented authoring methodologies like oocss, functional-utility css, BEM
+To counteract some of these problems, we invented authoring methodologies like OOCSS, Functional/Utility-Based CSS, and BEM.
+I helped invent utility-based CSS,
+but I wouldn't want to revert back to using it again after using the tools we have available today.
+CSS-in-JS helps remove a whole class of problems that we used to struggle with, and I can't imagine having to go back to working in a large application without it.
 
-I helped invent utility-based CSS and I can't in good faith recommend it to anyone at this point
+## Alright what's so great then?
 
-CSS-in-JS removes a whole class of problems that we used to struggle with and I shudder to imagine having to go back to working that way again
-
-CSS-in-JS is a disease [ref] but one I've come to live comfortably with
-More of a symbiotic parasite maybe
-
-Why do I like it so much?
+I don't want to get into all the specific features of CSS-in-JS libraries, but I think there are a few less-discussed benefits that are often overlooked.
 
 ## Typos
 
-In CSS, you can make a typo, merge a PR, and ship to production very easily
-If you write styles in JS, 9 times out of ten, it'll break if you make a mistake. And if your brave enough to write typescript, there's the excellent CSS properties type definitions to help you even more
-
-It sounds like a silly thing that something like a longer would be able to catch, but I can tell you from experience that a lot of css typos live long lives out in the wild without anyone noticing
-
-- Type checking???
+With CSS, you can make a typo, merge a PR, and ship broken code to production, without noticing.
+If you write styles in JavaScript, nine times out of ten, it'll break if you make a mistake.
+And if you're using Typescript, there are type definitions available for CSS properties to help catch even more errors.
+It sounds like a silly thing that something like a linter could catch,
+but I can tell you without a doubt that there are far more CSS syntax errors on the web than you might imagine.
 
 ## Unit testing
 
-I've used tools like Karma to try to unit test styles before, and while it did work, I never want to set something like that up again
-With CSS in JS libraries, unit testing comes so easily, you'd be silly not to write tests to ensure that clicking a button updates styles like you'd expect them to
-In component based UI development this feels like table stakes
+In the past, I've used browser-based tools to unit test styles, and while it did work, I never want to set something like that up again.
+With CSS-in-JS libraries,
+writing unit tests using the same setup you already have is an extremely elegant way to ensure that your code works as expected.
+Testing your UI in a component-based application seems like table stakes at this point.
 
-Objects
+## Objects
 
-Objects are great. In any language.
-Css rulesets are essentially objects.
-In CSS you can't merge or nest objects in quite the ways you might imagine
-Instead you'll have to brave the world that is css selectors and specificity nightmares to combine two rulesets together
-And you'll have to group all your viewport-width based styles together in another parent object instead of writing them inline where you're thinking about them
+Objects are great, in any language.
+CSS rulesets are essentially objects,
+but you can't merge, access, or nest rulesets in the same ways you can with objects in JavaScript.
+Instead you have to use global CSS selectors and think about specificity to combine two rulesets together.
+In a way, the entire stylesheet becomes a complex global object.
+With media queries, you have to nest rulesets inside of other objects, rather than adding them as nested styles within the specific ruleset you're working on.
 
-Writing styles in js object notation feels like a no brainer
-You can spread objects to merge them into others
-You can create dictionaries of objects to change styles based on props
-You can use native js math expressions as values
-Hell you can use anything and everything in the entire js ecosystem as a value
-Don't have the function you want
-Create it and publish it
+Writing styles in JS object notation feels like a no brainer to me.
+You can spread objects to merge them into others.
+You can create dictionaries of objects to change styles dynamically based on props.
+You can use native JS math expressions as values.
+You can use anything and everything available in the entire JavaScript language.
+If there's a function you'd like to use for styling,
+create it and publish it to npm for reuse.
 
-Not worrying about Selectors
+## Dynamic styles
 
-- shudders
-- I don't even wanna think about thinking about selectors so I'll just say that they are not missed at all
+If you've ever written BEM-style CSS, you'll appreciate the props-based conventions for handling *"modifiers"* with CSS-in-JS.
+Instead of shipping extra code for component variations, the styles can be generated dynamically and only loaded on pages and views that need those styles.
+This all works out-of-the-box with modern bundlers, code splitting, and async rendering,
+and with the ability to write functions in JavaScript,
+you have a lot more options for how to handle dynamic styles.
 
-Arrays
+## Colocation
 
-Functions
+Colocating styles inline with your components feels great, and it can help reduce the cognitive overhead of switching contexts between different languages.
+As a bonus, dead code elimination for CSS goes hand-in-hand with your component.
 
-Functions are great y'all
+## Not worrying about selectors
 
+The ability to style an application without thinking about selectors and specificity is huge.
+I can't describe how liberating this is, and you just need to see for yourself.
 
-- Sass isn't a language that's written anywhere else
-- It has its own bespoke syntax that is non transerable
-- If you write css in js you'll be strengthening your js skills, which should be very useful for front end devs
-- If you graduated a Bootcamp where they didn't teach you anything about css, count yourself lucky if you're using css in js, because that means the overall number of things you have to leave has been dramatically reduced
+## Give it a shot
 
----
+If you're not so much of a purist that you don't mind using tools like Sass, I'd recommend trying CSS-in-JS.
+Sass is its own proprietary language that requires its own build tools, syntax, and limited set of features.
+With JavaScript you gain a lot of the same functionality available in Sass, but in a much more widely used language with a lot more flexibility.
+If you author CSS-in-JS, you'll be strengthening your JS skills, which should be useful for all web developers.
+It can be difficult to set up for someone unfamiliar with modern JS build tools,
+but again, these are the same tools you'd use in any front-end application, and I think it's a worthwhile skillset to invest in.
 
-Links for reference:
-- Sunil Pai for snook gist
-
-
-Typos
-Type checking
-Unit testing
-Objects
-Arrays
-Functions

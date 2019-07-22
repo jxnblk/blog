@@ -7,6 +7,7 @@ draft: true
 In software development, formats help ensure that content and data are portable and can be used in many different applications.
 By adhering to HTML standards set by the WHATWG and W3C, browsers created by different organizations
 can render HTML documents created by many different people and generated in many different ways.
+That is, HTML is a portable format that can be rendered by many different clients.
 While HTML is certainly one of the most successful examples of standardization ever,
 less widely used formats can still benefit from the same idea.
 
@@ -16,9 +17,10 @@ It isn't widely used outside the field of software development,
 but there are many different engines that can render this format into HTML.
 Markdown has become a somewhat portable format.
 By writing documentation, blog posts, or wiki pages in this format,
-you can be fairly certain that there will always be tools that can render this format in the future.
+you can use many different tools to render the content in different places,
+and you can be fairly certain that there will always be tools that can render this format in the future.
 
-Markdown was intended to be *easy-to-read and easy-to-write*, and can be viewed as a simplified abstraction on top of HTML.
+Markdown was intended to be *easy-to-read and easy-to-write*, and can be viewed as a simple abstraction on top of HTML.
 A complete HTML page cannot be replaced by Markdown, but all Markdown files can be written as HTML.
 Most people find markdown simpler to read and write than raw HTML, and prefer using it for things like blog posts and documentation.
 
@@ -33,14 +35,15 @@ Simply copying a stylesheet from one website to another does not guarantee that 
 A lightweight abstraction for this sort of thing, however, could make these sorts of styles more portable.
 
 Unlike Markdown, I do not think this requires inventing new syntax.
-Among CSS, JavaScript, JSON, YAML, and others, there are already plenty of tools that can parse existing syntaxes.
-This does require a specific schema shape to be successful,
+With the existing syntaxes for CSS, JavaScript, JSON, YAML, and others, there are already plenty of tools that can handle parsing.
+This *does*, however, require a specific shape or schema to be successful,
 and the [Theme Specification][] is meant to be a simpler way to write styles for an application.
 While [Theme UI][] (which is built with the Theme Specification) *can* output stylesheets in the form of [Tachyons](https://theme-ui.com/css/tachyons) and other similar CSS libraries, it cannot fully replace CSS on its own.
 It does provide a level of portability for sets of colors, typographic styles,
 and other design constraints that can be applied in many different places.
 As the number of libraries that follow this Theme Specification increases,
-you will be able to reuse these styles in more and more places.
+you will be able to reuse these styles in more and more places,
+making it a more portable format for sharing styles.
 
 
 [theme specification]: https://system-ui.com/theme
