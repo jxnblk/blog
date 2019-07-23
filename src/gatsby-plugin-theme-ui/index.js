@@ -1,7 +1,5 @@
 import theme from '@jxnblk/gatsby-theme-mdx-blog/src/gatsby-plugin-theme-ui'
 
-console.log(theme)
-
 export default {
   ...theme,
   colors: {
