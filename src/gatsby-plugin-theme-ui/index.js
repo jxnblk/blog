@@ -1,5 +1,7 @@
 import theme from '@jxnblk/gatsby-theme-mdx-blog/src/gatsby-plugin-theme-ui'
 
+console.log(theme)
+
 export default {
   ...theme,
   colors: {
@@ -12,6 +14,13 @@ export default {
   ],
   styles: {
     ...theme.styles,
+    // todo: update
+    root: {
+      fontSize: 2,
+    },
+    p: {
+      fontSize: 2,
+    },
     inlineCode: {
       ...theme.styles.inlineCode,
       bg: 'muted',

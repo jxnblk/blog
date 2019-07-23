@@ -25,6 +25,8 @@
     "gatsby-plugin-google-fonts": "^1.0.1",
     "jxnblk": "^1.4.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-icons": "^3.7.0",
+    "react-share": "^3.0.0"
   }
 }
