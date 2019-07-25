@@ -1,22 +1,21 @@
 ---
 title: Code Literacy
-date: 2019-07-24
-draft: true
+date: 2019-07-25
 ---
 
-Ah yes, everyone loves the age old question: *should designers code?*
-As much as I'd love to write about this,
+Ah yes, everyone's favorite question: *should designers code?*
+As much as I'd love to pontificate on the matter,
 I think the framing of this question is fundamentally wrong.
 At the heart of this conversation is the idea of *code literacy*,
 that is, the level at which one can read, write, and understand software code in the form of programming languages.
 
-We never question whether or not we should teach children to read and write,
-or whether we should teach them math.
-In a modern society, these are a given in public education systems.
-While there might be problems that exist within these institutions,
+We don't question whether or not we should teach children to read and write,
+or whether we should math in school.
+In a modern public education systems, these are a given.
+While these institutions might have other problems,
 I think code literacy should be a fundamental part of any school cirriculum.
 
-What is code? Paul Ford has [already written][what is code] more that enough to cover that topic,
+What *is* code? Paul Ford has [already written][what is code] more that enough to cover that topic,
 but I'd like to step back and consider how code is not dissimilar to written language and mathematics.
 
 While spoken languages are innate, we humans invented written language somewhat recently in our own history.
@@ -27,7 +26,7 @@ It's a powerful tool that allows us to transfer knowledge over space and time in
 
 Math, too, is symbolic in nature.
 It's not entirely dependent on written language,
-but math benefits from our ability to scribble lines on paper.
+but math certainly benefits from our ability to scribble lines on paper.
 
 Code is the languages we humans use to communicate with computers.
 
@@ -62,7 +61,7 @@ Not everyone needs to be a software developer,
 but the more you know about how humans communicate with machines,
 the more benefits you'll see professionally.
 
-Imagine you work in the finance industry and figured out a way to mitigate all the billions of dollars lost on spreadsheet errors.
+Imagine you work in the finance industry and have figured out a way to mitigate all the billions of dollars lost on spreadsheet errors.
 Or imagine you're a farmer who leverages machine learning to predict crop yields.
 You *could* wait for software developers to create this for you,
 but diverse experiences applied to different technologies can result in incredible innovation.
