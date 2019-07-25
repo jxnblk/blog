@@ -1,0 +1,119 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.13.6"/><title data-react-helmet="true">Why you should definitely learn how to use CSS-in-JS</title><link data-react-helmet="true" rel="icon" type="image/png" href="https://jxnblk.com/favicon.png"/><link data-react-helmet="true" rel="apple-touch-icon-precomposed" href="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="twitter:site" content="@jxnblk"/><meta data-react-helmet="true" name="twitter:image" content="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="og:title" content="Why you should definitely learn how to use CSS-in-JS"/><meta data-react-helmet="true" name="og:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Why you should definitely learn how to use CSS-in-JS"/><meta data-react-helmet="true" name="twitter:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:creator" content="Brent Jackson"/><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml"/><link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"/><link as="script" rel="preload" href="/blog/app-4ab773ed6f5663432dfd.js"/><link as="script" rel="preload" href="/blog/webpack-runtime-ee9006925c18f9b050a6.js"/><link as="fetch" rel="preload" href="/blog/page-data/why-you-should-learn-css-in-js/page-data.json" crossorigin="use-credentials"/></head><body><script class="css-0">
+(function() {
+  try {
+    var mode = localStorage.getItem('theme-ui-color-mode');
+    if (!mode) return
+    document.body.classList.add('theme-ui-' + mode);
+  } catch (e) {}
+})();
+</script><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><style data-emotion-css="1fq9m1p">body{color:#000;background-color:#fff;}body.theme-ui-dark{color:#fff;background-color:#000;}</style><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><style data-emotion-css="14blico">.css-14blico{font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="jph4cv">.css-jph4cv{min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="1d20uir">.css-1d20uir{box-sizing:border-box;min-width:0;min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><div class="css-1d20uir"><header><style data-emotion-css="oy4s10">.css-oy4s10{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;padding-top:32px;padding-bottom:64px;}</style><div class="css-oy4s10"><style data-emotion-css="e7ac8m">.css-e7ac8m{font-size:48px;margin-top:0;margin-bottom:0;}</style><style data-emotion-css="1ossu4u">.css-1ossu4u{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:20px;font-size:48px;margin-top:0;margin-bottom:0;}</style><h3 class="css-1ossu4u"><style data-emotion-css="1unrqcp">.css-1unrqcp{color:inherit;-webkit-text-decoration:none;text-decoration:none;}</style><a class="css-1unrqcp" href="/blog/">Jxnblog</a></h3><style data-emotion-css="a9n7s9">.css-a9n7s9{margin-left:auto;margin-right:auto;}</style><div class="css-a9n7s9"></div><style data-emotion-css="12eh3gk">.css-12eh3gk{-webkit-appearance:none;-moz-appearance:none;appearance:none;font-family:inherit;font-weight:700;font-size:12px;text-transform:uppercase;-webkit-letter-spacing:0.1em;-moz-letter-spacing:0.1em;-ms-letter-spacing:0.1em;letter-spacing:0.1em;padding:12px;color:inherit;background-color:#f9faff;border:0;}.css-12eh3gk:focus{outline:2px solid;}</style><button title="Change Color Mode" class="css-12eh3gk">light</button></div></header><style data-emotion-css="11qjisw">.css-11qjisw{-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><style data-emotion-css="3url3g">.css-3url3g{box-sizing:border-box;min-width:0;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><main class="css-3url3g"><style data-emotion-css="11010fi">.css-11010fi{max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}</style><div class="css-11010fi"><style data-emotion-css="1ikkbxx">.css-1ikkbxx{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:32px;}@media screen and (min-width:40em){.css-1ikkbxx{font-size:48px;}}</style><h1 class="css-1ikkbxx">Why you should definitely learn how to use CSS-in-JS</h1><style data-emotion-css="85laxa">.css-85laxa{font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-85laxa{font-size:12px;}}</style><style data-emotion-css="1omu91t">.css-1omu91t{font-size:18px;margin:0;margin-bottom:32px;font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-1omu91t{font-size:20px;}}@media screen and (min-width:40em){.css-1omu91t{font-size:12px;}}</style><p class="css-1omu91t">July 20, 2019</p><style data-emotion-css="1bl1570">.css-1bl1570{font-size:18px;margin:0;margin-bottom:32px;}@media screen and (min-width:40em){.css-1bl1570{font-size:20px;}}</style><p class="css-1bl1570">From time to time, I&#x27;ve heard that CSS-in-JS poses a barrier to entry for some people.
+Like any new software abstraction, CSS-in-JS is <em class="css-0">intended to</em> abstract away some of the complexities from a lower level implementation, in this case CSS.
+Abstractions are neither good nor bad, but they do require learning new things.
+Using CSS-in-JS lets you style applications without needing to worry about a few of the thornier aspects of CSS,
+but it doesn&#x27;t replace CSS entirely,
+and you still need to have a solid understanding of CSS to be successful.
+You will absolutely need a solid understanding of
+CSS properties, values and types, inheritance, layout, stacking context, and the box-model to be successful with CSS-in-JS.</p><p class="css-1bl1570">CSS-in-JS isn&#x27;t a boogieman out to destroy everything you love about CSS.
+In my opinion, it can make authoring CSS far more enjoyable than any other tool I&#x27;ve used in the past,
+and I&#x27;d encourage you to give it a shot.</p><p class="css-1bl1570">If you already know JavaScript, CSS-in-JS helps remove the need to use native CSS syntax,
+or deal with context switching between different languages.
+For younger developers straight out of bootcamp,
+this can make styling an application more accessible because there are fewer new things to learn.
+I&#x27;ve seen this myself, and remember one former colleague gushing about how Styled Components was so much easier to use than what they&#x27;d learned in school.</p><p class="css-1bl1570">If you&#x27;re less familiar with JS syntax, the effect can be the total opposite,
+and it can seem like too much to learn at once.
+Don&#x27;t get discouraged.
+You can still learn how to use CSS-in-JS, and keep in mind that whatever you learn along the way will be applicable knowledge in many other situations where JS is used.
+I like to think of CSS-in-JS as a potentially low-barrier way to get started with JS.</p><p class="css-1bl1570">Despite what I&#x27;ve written here,
+it can still feel like a barrier because <style data-emotion-css="1vg6q84">.css-1vg6q84{font-weight:700;}</style><strong class="css-1vg6q84">it <em class="css-0">does</em> require learning something new</strong>,
+but one thing that I love about software development is that I&#x27;m never bored and constantly learning.</p><p class="css-1bl1570">If you&#x27;re not willing to learn something new, then you probably won&#x27;t like CSS-in-JS at all,
+but if you do have a curious mind, I hope this post helps.</p><style data-emotion-css="1d3ehct">.css-1d3ehct{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:24px;}@media screen and (min-width:40em){.css-1d3ehct{font-size:32px;}}</style><h2 id="what-does-css-in-js-do" class="css-1d3ehct"><a href="#what-does-css-in-js-do" class="css-1unrqcp">What does CSS-in-JS do?</a></h2><p class="css-1bl1570">Most libraries are designed to:</p><ul class="css-0"><li class="css-0">Let you author CSS in JavaScript syntax</li><li class="css-0">Colocate styles with components</li><li class="css-0">Take advantage of native JS syntax features</li><li class="css-0">Take advantage of anything from the JS ecosystem</li></ul><h2 id="what-does-css-in-js-not-do" class="css-1d3ehct"><a href="#what-does-css-in-js-not-do" class="css-1unrqcp">What does CSS-in-JS <em class="css-0">not</em> do?</a></h2><p class="css-1bl1570">At the end of the day, you&#x27;re still writing code that generates CSS, and the full power of the language is still available.
+CSS-in-JS <strong class="css-1vg6q84">does not</strong> get rid of the need to understand the following:</p><ul class="css-0"><li class="css-0">How styles are applied to the DOM</li><li class="css-0">How inheritance works</li><li class="css-0">How CSS properties work</li><li class="css-0">How CSS layout works</li></ul><h2 id="what-abstractions-does-css-in-js-provide" class="css-1d3ehct"><a href="#what-abstractions-does-css-in-js-provide" class="css-1unrqcp">What abstractions does CSS-in-JS provide?</a></h2><p class="css-1bl1570">CSS-in-JS libraries allow you to author styles <em class="css-0">without</em> generally having to think about:</p><ul class="css-0"><li class="css-0">The cascade (<style data-emotion-css="1o1roib">.css-1o1roib{color:#33e;}.css-1o1roib:hover{color:#228;}</style><a href="/blog/the-cascade-is-not-inheritance" class="css-1o1roib"><strong class="css-1vg6q84">not inheritance</strong></a>)</li><li class="css-0">Specificity</li><li class="css-0">Naming selectors</li><li class="css-0">Enforcing naming conventions</li><li class="css-0">Linting another language</li><li class="css-0">Enforcing file structures for another language</li><li class="css-0">Additional build tools</li></ul><h2 id="what-you-need-to-know" class="css-1d3ehct"><a href="#what-you-need-to-know" class="css-1unrqcp">What you need to know</a></h2><p class="css-1bl1570">To be effective with CSS-in-JS, you&#x27;ll need to have a good grasp of the following concepts:</p><p class="css-1bl1570">Types in JavaScript:</p><ul class="css-0"><li class="css-0">Strings</li><li class="css-0">Numbers</li><li class="css-0">Objects</li><li class="css-0">Arrays</li><li class="css-0">Boolean</li><li class="css-0">Null</li><li class="css-0">Undefined</li></ul><p class="css-1bl1570">MDN is a great resource for learning JS, and I&#x27;d highly recommend their tutorial on
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" class="css-1o1roib">JavaScript data types and data structures</a>.</p><p class="css-1bl1570">To really excell with CSS-in-JS, you&#x27;ll benefit from understanding the following:</p><ul class="css-0"><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators" class="css-1o1roib">Math operations</a></li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators" class="css-1o1roib">Logical operators</a></li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" class="css-1o1roib">Ternary operators</a></li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors" class="css-1o1roib">Dot and bracket syntax</a></li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules" class="css-1o1roib">ES Modules</a></li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" class="css-1o1roib">Object spread</a></li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" class="css-1o1roib">Destructuring</a></li></ul><h2 id="what-other-benefits-does-css-in-js-have" class="css-1d3ehct"><a href="#what-other-benefits-does-css-in-js-have" class="css-1unrqcp">What other benefits does CSS-in-JS have?</a></h2><ul class="css-0"><li class="css-0">It can make dead code elimination easier to manage</li><li class="css-0">It will throw errors to help you avoid mistakes, including syntax, type, and undefined errors</li><li class="css-0">Many libraries offer support for theming</li><li class="css-0">You can use virtually <em class="css-0">any</em> package from npm</li><li class="css-0">You can use ES modules and scope</li><li class="css-0">Most libraries offer ways to handle dynamic styling</li><li class="css-0">Styles are generally &quot;scoped&quot; to a specific component</li><li class="css-0">It&#x27;s far easier to write unit tests with CSS-in-JS</li><li class="css-0">Many libraries offer performance improvements like <em class="css-0">critical CSS</em> with no additional setup needed</li></ul><h2 id="where-do-i-start" class="css-1d3ehct"><a href="#where-do-i-start" class="css-1unrqcp">Where do I start?</a></h2><p class="css-1bl1570">There&#x27;s certainly no one-size-fits-all answer here.</p><p class="css-1bl1570">If you haven&#x27;t used React before, or have less experience with JS, I&#x27;d recommend checking out the <a href="https://www.gatsbyjs.org/tutorial/" class="css-1o1roib">Gatsby tutorial</a>.
+Once you have a good grasp of the concepts laid out in the tutorial, see the guide on using <a href="https://www.gatsbyjs.org/docs/css-in-js/" class="css-1o1roib">Using CSS-in-JS</a>.</p><p class="css-1bl1570">If you know enough React to get going on your own, I&#x27;d recommend  checking out <a href="https://styled-components.com" class="css-1o1roib">Styled Components</a>.
+Then, once you&#x27;ve got that working, definitely check out <a href="https://emotion.sh" class="css-1o1roib">Emotion</a>.
+These are the two most widely used CSS-in-JS libraries at the moment,
+and between the two of them, they cover a lot of ground.</p><p class="css-1bl1570">If you have any questions or thoughts on how to make this post better, please reach out to me on <a href="https://twitter.com/jxnblk" class="css-1o1roib">Twitter</a>.</p></div></main><style data-emotion-css="1nm38x2">.css-1nm38x2{padding-top:64px;padding-bottom:64px;}</style><footer class="css-1nm38x2"><style data-emotion-css="19e9ny0">.css-19e9ny0{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;font-weight:700;font-size:14px;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}.css-19e9ny0 a{color:inherit;-webkit-text-decoration:none;text-decoration:none;}.css-19e9ny0 a:hover{-webkit-text-decoration:underline;text-decoration:underline;}</style><div class="css-19e9ny0"><style data-emotion-css="1kuhxiq">.css-1kuhxiq{margin-left:-16px;}</style><div class="css-1kuhxiq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -24 176 176" width="48" height="48" fill="currentcolor" class="css-0" style="display:block;margin:0"><path d="
+M64 0 L64 4 L76 4 L74 6 L94 14 L92 16
+L104 20 L100 22 L106 28 L102 28 L106 56
+Q110 62 110 70 T105 84
+L96 108
+C92 116 76 128 64 128
+C52 128 36 116 32 108
+L23 84
+Q18 78 18 70 T22 56
+L22 22 L26 24 L34 12 L36 16z
+
+M72 40
+Q56 30 40 30
+Q32 34 30 48
+L30 48
+L28 74
+C28 81 37 102 38 104
+C46 118 62 121 64 121
+C66 121 82 118 90 104
+
+C91 102 100 81 100 74
+L99 52
+L94 40
+L92 42
+L84 38
+L84 42
+L74 36
+
+M44 62
+A5.5 5.5 0 0 0 44 73
+A5.5 5.5 0 0 0 44 62
+
+M84 62
+A5.5 5.5 0 0 0 84 73
+A5.5 5.5 0 0 0 84 62
+
+M57 88 H71
+A2 2 0 0 1 71 92
+H57
+A2 2 0 0 1 57 88
+
+M53 104 H75
+A2 2 0 0 1 75 108
+H53
+A2 2 0 0 1 53 104
+
+M33.3 60.4
+C34.6 57.8 37 55.9 39.7 55.2
+C43 54.4 46.8 55.3 50.4 58
+C51.3 58.6 52.5 58.4 53.2 57.5
+C53.8 56.6 53.6 55.4 52.7 54.7
+C46.8 50.5 41.8 50.5 38.7 51.3
+C34.8 52.3 31.5 54.9 29.7 58.6
+C29.2 59.6 29.6 60.8 30.6 61.3
+C30.9 61.4 31.2 61.5 31.5 61.5
+C32.2 61.5 32.9 61.1 33.3 60.4
+z
+
+M97.7 61.9
+C98.5 61.2  98.6  59.9  97.9  59.1
+C94.3 55  90.1  52.9  85.4  53
+C82 53  78.3  54.2  74.3  56.6
+C73.3 57.2  73  58.4  73.6  59.3
+C74.2 60.3  75.4  60.6  76.3  60
+C79.7 58  82.7  57  85.5  57
+C89 57  92.1  58.5  95  61.7
+C95.4 62.2  95.9  62.4  96.5  62.4
+C96.8 62.4 97.3 62.2 97.7 61.9
+z
+"></path></svg></div><style data-emotion-css="ibnnmb">.css-ibnnmb{margin-left:8px;margin-right:8px;}</style><div class="css-ibnnmb"><a href="https://jxnblk.com" class="css-1o1roib">© 2019 Jxnblk</a></div><div class="css-ibnnmb"><a href="https://github.com/jxnblk/blog" class="css-1o1roib">GitHub</a></div><div class="css-ibnnmb">Built with<!-- --> <a href="https://gatsbyjs.org" class="css-1o1roib">Gatsby</a></div></div></footer></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-4603832-6', 'auto', {});
+      
+      
+      
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/why-you-should-learn-css-in-js/";window.webpackCompilationHash="e17fc85b2ab38f68e9e9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-4ab773ed6f5663432dfd.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js-81c5771f43d2ffb1a2c2.js"]};/*]]>*/</script><script src="/blog/webpack-runtime-ee9006925c18f9b050a6.js" async=""></script><script src="/blog/app-4ab773ed6f5663432dfd.js" async=""></script><script src="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js" async=""></script></body></html>

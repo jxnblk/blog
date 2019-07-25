@@ -1,0 +1,251 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.13.6"/><title data-react-helmet="true">Defining Component APIs in React</title><link data-react-helmet="true" rel="icon" type="image/png" href="https://jxnblk.com/favicon.png"/><link data-react-helmet="true" rel="apple-touch-icon-precomposed" href="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="twitter:site" content="@jxnblk"/><meta data-react-helmet="true" name="twitter:image" content="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="og:title" content="Defining Component APIs in React"/><meta data-react-helmet="true" name="og:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Defining Component APIs in React"/><meta data-react-helmet="true" name="twitter:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:creator" content="Brent Jackson"/><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml"/><link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"/><link as="script" rel="preload" href="/blog/app-4ab773ed6f5663432dfd.js"/><link as="script" rel="preload" href="/blog/webpack-runtime-ee9006925c18f9b050a6.js"/><link as="fetch" rel="preload" href="/blog/page-data/defining-component-apis-in-react/page-data.json" crossorigin="use-credentials"/></head><body><script class="css-0">
+(function() {
+  try {
+    var mode = localStorage.getItem('theme-ui-color-mode');
+    if (!mode) return
+    document.body.classList.add('theme-ui-' + mode);
+  } catch (e) {}
+})();
+</script><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><style data-emotion-css="1fq9m1p">body{color:#000;background-color:#fff;}body.theme-ui-dark{color:#fff;background-color:#000;}</style><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><style data-emotion-css="14blico">.css-14blico{font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="jph4cv">.css-jph4cv{min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="1d20uir">.css-1d20uir{box-sizing:border-box;min-width:0;min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><div class="css-1d20uir"><header><style data-emotion-css="oy4s10">.css-oy4s10{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;padding-top:32px;padding-bottom:64px;}</style><div class="css-oy4s10"><style data-emotion-css="e7ac8m">.css-e7ac8m{font-size:48px;margin-top:0;margin-bottom:0;}</style><style data-emotion-css="1ossu4u">.css-1ossu4u{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:20px;font-size:48px;margin-top:0;margin-bottom:0;}</style><h3 class="css-1ossu4u"><style data-emotion-css="1unrqcp">.css-1unrqcp{color:inherit;-webkit-text-decoration:none;text-decoration:none;}</style><a class="css-1unrqcp" href="/blog/">Jxnblog</a></h3><style data-emotion-css="a9n7s9">.css-a9n7s9{margin-left:auto;margin-right:auto;}</style><div class="css-a9n7s9"></div><style data-emotion-css="12eh3gk">.css-12eh3gk{-webkit-appearance:none;-moz-appearance:none;appearance:none;font-family:inherit;font-weight:700;font-size:12px;text-transform:uppercase;-webkit-letter-spacing:0.1em;-moz-letter-spacing:0.1em;-ms-letter-spacing:0.1em;letter-spacing:0.1em;padding:12px;color:inherit;background-color:#f9faff;border:0;}.css-12eh3gk:focus{outline:2px solid;}</style><button title="Change Color Mode" class="css-12eh3gk">light</button></div></header><style data-emotion-css="11qjisw">.css-11qjisw{-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><style data-emotion-css="3url3g">.css-3url3g{box-sizing:border-box;min-width:0;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><main class="css-3url3g"><style data-emotion-css="11010fi">.css-11010fi{max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}</style><div class="css-11010fi"><style data-emotion-css="1ikkbxx">.css-1ikkbxx{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:32px;}@media screen and (min-width:40em){.css-1ikkbxx{font-size:48px;}}</style><h1 class="css-1ikkbxx">Defining Component APIs in React</h1><style data-emotion-css="85laxa">.css-85laxa{font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-85laxa{font-size:12px;}}</style><style data-emotion-css="1omu91t">.css-1omu91t{font-size:18px;margin:0;margin-bottom:32px;font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-1omu91t{font-size:20px;}}@media screen and (min-width:40em){.css-1omu91t{font-size:12px;}}</style><p class="css-1omu91t">July 08, 2018</p><style data-emotion-css="1bl1570">.css-1bl1570{font-size:18px;margin:0;margin-bottom:32px;}@media screen and (min-width:40em){.css-1bl1570{font-size:20px;}}</style><p class="css-1bl1570">Over the years, I’ve noticed patterns in how I tend to approach component APIs and building out applications and libraries.
+The following is a collection of thoughts, opinions, and advice for defining component APIs that are meant to be more flexible, composable, and easier to understand.
+None of these are hard-and-fast rules, but they’ve helped guide the way I think about organizing and creating components.</p><style data-emotion-css="1d3ehct">.css-1d3ehct{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:24px;}@media screen and (min-width:40em){.css-1d3ehct{font-size:32px;}}</style><h2 id="aim-for-a-small-api-surface-area" class="css-1d3ehct"><a href="#aim-for-a-small-api-surface-area" class="css-1unrqcp">Aim for a small API surface area</a></h2><p class="css-1bl1570">Just as the React library itself aims for a <style data-emotion-css="1o1roib">.css-1o1roib{color:#33e;}.css-1o1roib:hover{color:#228;}</style><a href="https://www.youtube.com/watch?v=4anAwXYqLG8" class="css-1o1roib">Minimal API Surface Area</a>,
+I recommend adopting a similar mindset when it comes to defining component APIs.
+The fewer new things you need to learn, the easier it is for others to know how to use the components
+that you create, making them more reusable.
+If someone doesn’t understand your component API, the chance that they’ll duplicate your work increases.
+This idea is at the core of how I approach creating components, and I find it helpful to keep in mind as I work.</p><h2 id="make-things-easy-to-find" class="css-1d3ehct"><a href="#make-things-easy-to-find" class="css-1unrqcp">Make things easy to find</a></h2><p class="css-1bl1570">Start with a flat directory structure and don’t prematurely organize your code base.
+Humans love to organize things, but we’re also really terrible at it.
+Naming things is hard enough, and by creating a directory structure around your component library,
+you might end up doing more work that makes it more difficult for others to find the things you’ve done.</p><p class="css-1bl1570">A single directory of components can get quite large before it becomes difficult for people to manage.
+And if all the components are in a single folder,
+you’ll get alphabetical ordering for free in most file-system tools,
+which can help provide a more complete picture of the code base for others.</p><h2 id="avoid-renderthing-methods" class="css-1d3ehct"><a href="#avoid-renderthing-methods" class="css-1unrqcp">Avoid renderThing methods</a></h2><p class="css-1bl1570">If you’ve defined a custom method in your component that starts with the word <style data-emotion-css="12ivgcj">.css-12ivgcj{font-family:Menlo,monospace;color:#228;background-color:#f9faff;font-size:87.5%;}</style><code class="css-12ivgcj">render</code>,
+chances are that should be its own component.
+As <a href="https://mobile.twitter.com/chrisbiscardi/status/1004559213320814592" class="css-1o1roib">Chris Biscardi</a> puts it, <style data-emotion-css="1vg6q84">.css-1vg6q84{font-weight:700;}</style><strong class="css-1vg6q84">“<!-- -->[It]<!-- --> effectively means there’s enough complexity to be worth breaking down”</strong>.
+React’s smart about when to render or not render a component,
+so by splitting these out into their own components, you can help React do its job better.</p><style data-emotion-css="4dinw3">.css-4dinw3{font-family:Menlo,monospace;padding:16px;color:#228;background-color:#f9faff;border-radius:4px;overflow-x:auto;}</style><pre class="css-4dinw3"><style data-emotion-css="h2uv5g">.css-h2uv5g{font-family:Menlo,monospace;}</style><code class="language-jsx css-h2uv5g">// Instead of this
+class Items extends React.Component {
+  renderItems ({ items }) {
+    return items.map(item =&gt; (
+      &lt;li key={item.id}&gt;
+        {renderItem(item)}
+      &lt;/li&gt;
+    ))
+  }
+
+  renderItem (item) {
+    return (
+      &lt;div&gt;
+        {item.name}
+      &lt;/div&gt;
+    )
+  }
+
+  render () {
+    return (
+      &lt;ul&gt;
+        {renderItems(this.props)
+      &lt;/ul&gt;
+    )
+  }
+}
+</code></pre><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// Do this
+const ItemList = ({ items }) =&gt;
+  &lt;ul&gt;
+    {items.map(item =&gt; (
+      &lt;li key={item.id}&gt;
+        &lt;Item {...item} /&gt;
+      &lt;/li&gt;
+    )}
+  &lt;/ul&gt;
+
+const Item = ({ name }) =&gt;
+  &lt;div&gt;{item.name}&lt;/div&gt;
+
+class Items extends React.Component {
+  render () {
+    const { items } = this.props
+    return &lt;ItemList items={items} /&gt;
+  }
+}
+</code></pre><h2 id="split-components-at-data-boundaries" class="css-1d3ehct"><a href="#split-components-at-data-boundaries" class="css-1unrqcp">Split components at data boundaries</a></h2><p class="css-1bl1570">Often, components should be defined by the shape of your data.</p><blockquote class="css-0"><p class="css-1bl1570">Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely.</p><p class="css-1bl1570">– <a href="https://facebook.github.io/react/docs/thinking-in-react.html" class="css-1o1roib">Thinking in React</a></p></blockquote><p class="css-1bl1570">I often see people new to React attempt to replicate what I call &quot;<a href="https://getbootstrap.com" class="css-1o1roib">Bootstrap</a>&quot; components,
+that is UI components that have a visual boundary that’s not directly tied to any data structure.
+React and BEM-like CSS-based components have different concerns.
+Instead of creating a generic Card component that displays an image, heading, and link,
+and that would require a custom props API, build components for the data that you’re displaying.
+Maybe the generic Card component should be a ProductCard component that can accept the <code class="css-12ivgcj">product</code> object from your database.</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// Instead of this
+&lt;Card
+  image={product.thumbnail}
+  title={product.name}
+  text={product.description}
+  link={product.permalink}
+/&gt;
+
+// Do this
+&lt;ProductCard {...product} /&gt;
+</code></pre><p class="css-1bl1570">Chances are, the specific styling that you need for the ProductCard isn’t all that reusable,
+and you’ll likely only have this defined in one place in your code base.
+You can follow the <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)" class="css-1o1roib">Rule of Three</a> in situations like this.
+If you&#x27;ve duplicated the exact Card component structure three times in your code base,
+then it’s probably worth abstracting it out into its own component.</p><h2 id="avoid-apropcalypse" class="css-1d3ehct"><a href="#avoid-apropcalypse" class="css-1unrqcp">Avoid Apropcalypse</a></h2><p class="css-1bl1570">As <a href="https://twitter.com/gurlcode" class="css-1o1roib">Jenn Creighton</a> calls it, avoid <a href="https://speakerdeck.com/jenncreighton/flexible-architecture-for-react-components?slide=10" class="css-1o1roib">Apropcalypse</a>.
+Don’t be afraid to create a new component rather than adding abritrary props and additional logic to a component.
+For example, a Button component might accept props for different colors, sizes, and shapes,
+but there’s not always a need to have every combination of those props available.</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// Instead of this
+&lt;Button
+  variant=&#x27;secondary&#x27;
+  size=&#x27;large&#x27;
+  outline
+  label=&#x27;Buy Now&#x27;
+  icon=&#x27;shoppingBag&#x27;
+  onClick={handleClick}
+/&gt;
+
+// Do this
+&lt;SecondaryButton
+  size=&#x27;large&#x27;
+  onClick={handleClick}&gt;
+  &lt;Icon name=&#x27;shoppingBag&#x27; /&gt;
+  Buy Now
+&lt;/SecondaryButton&gt;
+</code></pre><p class="css-1bl1570">Your needs may vary, but reducing the number of custom props that any component requires is generally helpful,
+and reducing the amount of logic in the render function can make the code base simpler and better-suited for code splitting.</p><h2 id="use-composition" class="css-1d3ehct"><a href="#use-composition" class="css-1unrqcp">Use composition</a></h2><p class="css-1bl1570">Don’t reinvent <code class="css-12ivgcj">props.children</code>.
+If you’ve defined props that take arbitrary strings of text that aren’t based on a data structure,
+it’s probably better to use composition.</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// Instead of this
+&lt;Header
+  title=&#x27;Hello&#x27;
+  subhead=&#x27;This is a header&#x27;
+  text=&#x27;And it has arbitrary props&#x27;
+/&gt;
+
+// Do this
+&lt;Header&gt;
+  &lt;Heading&gt;Hello&lt;/Heading&gt;
+  &lt;Subhead&gt;This is a header&lt;/Subhead&gt;
+  &lt;Text&gt;And it uses composition&lt;/Text&gt;
+&lt;/Header&gt;
+</code></pre><p class="css-1bl1570">If you know React, you’ll already know the API for the composed version, and it shouldn’t require as much documentation as the former.
+You might wrap the composed version into another component that <strong class="css-1vg6q84">is</strong> tied to a piece of data in your application,
+but you’ll probably only need that component structure defined once in your code base.</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// This makes sense as a component since it’s based on data
+const PageHeader = ({
+  title,
+  description
+}) =&gt;
+  &lt;Header&gt;
+    &lt;Heading&gt;{title}&lt;/Heading&gt;
+    &lt;Text&gt;{description}&lt;/Text&gt;
+  &lt;/Header&gt;
+
+// And ideally can be used like this
+&lt;PageHeader {...page} /&gt;
+</code></pre><h2 id="avoid-boolean-props-for-enums" class="css-1d3ehct"><a href="#avoid-boolean-props-for-enums" class="css-1unrqcp">Avoid boolean props for enums</a></h2><p class="css-1bl1570">It might be tempting to use <a href="https://mobile.twitter.com/satya164/status/1015206655997472768" class="css-1o1roib">boolean props</a> as a convenient way to switch between variants of a component,
+but it can sometimes create a confusing API.</p><p class="css-1bl1570">Take the following example:</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">&lt;Button primary /&gt;
+&lt;Button secondary /&gt;
+</code></pre><p class="css-1bl1570">What happens in the following case?</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">&lt;Button primary secondary /&gt;
+</code></pre><p class="css-1bl1570">It’s impossible to know without diving into the code base or documentation.
+Instead, try the following:</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">&lt;Button variant=&#x27;primary&#x27; /&gt;
+</code></pre><p class="css-1bl1570">It’s a little more typing but arguably much more readable.</p><h2 id="keep-props-apis-parallel" class="css-1d3ehct"><a href="#keep-props-apis-parallel" class="css-1unrqcp">Keep props APIs parallel</a></h2><p class="css-1bl1570">Whenever possible, resuse props from other components. For example, if you’re creating a date picker, use the same props that the native <code class="css-12ivgcj">&lt;input type=&#x27;date&#x27; /&gt;</code> expects.
+It’ll be easier to guess how it works and also easier to remember.</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// Instead of this
+&lt;DatePicker
+  date={date}
+  onSelect={handleDateChange}
+/&gt;
+
+// Do this
+&lt;DatePicker
+  value={date}
+  onChange={handleDateChange}
+/&gt;
+</code></pre><p class="css-1bl1570">The <a href="https://jxnblk.com/styled-system" class="css-1o1roib">Styled System</a> library encourages using a parallel style props API across multiple components.
+For example, the <code class="css-12ivgcj">color</code> prop works the same for all components included in <a href="https://jxnblk.com/rebass" class="css-1o1roib">Rebass</a>,
+which ends up having a sort of <strong class="css-1vg6q84">learn once, use anywhere</strong> effect.</p><pre class="css-4dinw3"><code class="language-jsx css-h2uv5g">// example from Rebass
+&lt;Box color=&#x27;tomato&#x27; /&gt;
+&lt;Heading color=&#x27;tomato&#x27; /&gt;
+</code></pre><h2 id="ask-your-teammates" class="css-1d3ehct"><a href="#ask-your-teammates" class="css-1unrqcp">Ask your teammates</a></h2><p class="css-1bl1570">These are just some of my own thoughts on how to define component APIs, and they might not suit your needs.
+The best advice I can give is to talk to your teammates, create RFCs and PRs,
+and try <a href="https://ponyfoo.com/articles/readme-driven-development" class="css-1o1roib">Readme Driven Development</a>.
+Writing React components is easy.
+Creating a library of components that works well for your team is worth the time and effort to get right.</p></div></main><style data-emotion-css="1nm38x2">.css-1nm38x2{padding-top:64px;padding-bottom:64px;}</style><footer class="css-1nm38x2"><style data-emotion-css="19e9ny0">.css-19e9ny0{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;font-weight:700;font-size:14px;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}.css-19e9ny0 a{color:inherit;-webkit-text-decoration:none;text-decoration:none;}.css-19e9ny0 a:hover{-webkit-text-decoration:underline;text-decoration:underline;}</style><div class="css-19e9ny0"><style data-emotion-css="1kuhxiq">.css-1kuhxiq{margin-left:-16px;}</style><div class="css-1kuhxiq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -24 176 176" width="48" height="48" fill="currentcolor" class="css-0" style="display:block;margin:0"><path d="
+M64 0 L64 4 L76 4 L74 6 L94 14 L92 16
+L104 20 L100 22 L106 28 L102 28 L106 56
+Q110 62 110 70 T105 84
+L96 108
+C92 116 76 128 64 128
+C52 128 36 116 32 108
+L23 84
+Q18 78 18 70 T22 56
+L22 22 L26 24 L34 12 L36 16z
+
+M72 40
+Q56 30 40 30
+Q32 34 30 48
+L30 48
+L28 74
+C28 81 37 102 38 104
+C46 118 62 121 64 121
+C66 121 82 118 90 104
+
+C91 102 100 81 100 74
+L99 52
+L94 40
+L92 42
+L84 38
+L84 42
+L74 36
+
+M44 62
+A5.5 5.5 0 0 0 44 73
+A5.5 5.5 0 0 0 44 62
+
+M84 62
+A5.5 5.5 0 0 0 84 73
+A5.5 5.5 0 0 0 84 62
+
+M57 88 H71
+A2 2 0 0 1 71 92
+H57
+A2 2 0 0 1 57 88
+
+M53 104 H75
+A2 2 0 0 1 75 108
+H53
+A2 2 0 0 1 53 104
+
+M33.3 60.4
+C34.6 57.8 37 55.9 39.7 55.2
+C43 54.4 46.8 55.3 50.4 58
+C51.3 58.6 52.5 58.4 53.2 57.5
+C53.8 56.6 53.6 55.4 52.7 54.7
+C46.8 50.5 41.8 50.5 38.7 51.3
+C34.8 52.3 31.5 54.9 29.7 58.6
+C29.2 59.6 29.6 60.8 30.6 61.3
+C30.9 61.4 31.2 61.5 31.5 61.5
+C32.2 61.5 32.9 61.1 33.3 60.4
+z
+
+M97.7 61.9
+C98.5 61.2  98.6  59.9  97.9  59.1
+C94.3 55  90.1  52.9  85.4  53
+C82 53  78.3  54.2  74.3  56.6
+C73.3 57.2  73  58.4  73.6  59.3
+C74.2 60.3  75.4  60.6  76.3  60
+C79.7 58  82.7  57  85.5  57
+C89 57  92.1  58.5  95  61.7
+C95.4 62.2  95.9  62.4  96.5  62.4
+C96.8 62.4 97.3 62.2 97.7 61.9
+z
+"></path></svg></div><style data-emotion-css="ibnnmb">.css-ibnnmb{margin-left:8px;margin-right:8px;}</style><div class="css-ibnnmb"><a href="https://jxnblk.com" class="css-1o1roib">© 2019 Jxnblk</a></div><div class="css-ibnnmb"><a href="https://github.com/jxnblk/blog" class="css-1o1roib">GitHub</a></div><div class="css-ibnnmb">Built with<!-- --> <a href="https://gatsbyjs.org" class="css-1o1roib">Gatsby</a></div></div></footer></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-4603832-6', 'auto', {});
+      
+      
+      
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/defining-component-apis-in-react/";window.webpackCompilationHash="e17fc85b2ab38f68e9e9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-4ab773ed6f5663432dfd.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js-81c5771f43d2ffb1a2c2.js"]};/*]]>*/</script><script src="/blog/webpack-runtime-ee9006925c18f9b050a6.js" async=""></script><script src="/blog/app-4ab773ed6f5663432dfd.js" async=""></script><script src="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js" async=""></script></body></html>

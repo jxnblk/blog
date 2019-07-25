@@ -1,0 +1,205 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.13.6"/><title data-react-helmet="true">Universal UI Components</title><link data-react-helmet="true" rel="icon" type="image/png" href="https://jxnblk.com/favicon.png"/><link data-react-helmet="true" rel="apple-touch-icon-precomposed" href="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="twitter:site" content="@jxnblk"/><meta data-react-helmet="true" name="twitter:image" content="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="og:title" content="Universal UI Components"/><meta data-react-helmet="true" name="og:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Universal UI Components"/><meta data-react-helmet="true" name="twitter:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:creator" content="Brent Jackson"/><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml"/><link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"/><link as="script" rel="preload" href="/blog/app-4ab773ed6f5663432dfd.js"/><link as="script" rel="preload" href="/blog/webpack-runtime-ee9006925c18f9b050a6.js"/><link as="fetch" rel="preload" href="/blog/page-data/universal-ui-components/page-data.json" crossorigin="use-credentials"/></head><body><script class="css-0">
+(function() {
+  try {
+    var mode = localStorage.getItem('theme-ui-color-mode');
+    if (!mode) return
+    document.body.classList.add('theme-ui-' + mode);
+  } catch (e) {}
+})();
+</script><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><style data-emotion-css="1fq9m1p">body{color:#000;background-color:#fff;}body.theme-ui-dark{color:#fff;background-color:#000;}</style><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><style data-emotion-css="14blico">.css-14blico{font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="jph4cv">.css-jph4cv{min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="1d20uir">.css-1d20uir{box-sizing:border-box;min-width:0;min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><div class="css-1d20uir"><header><style data-emotion-css="oy4s10">.css-oy4s10{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;padding-top:32px;padding-bottom:64px;}</style><div class="css-oy4s10"><style data-emotion-css="e7ac8m">.css-e7ac8m{font-size:48px;margin-top:0;margin-bottom:0;}</style><style data-emotion-css="1ossu4u">.css-1ossu4u{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:20px;font-size:48px;margin-top:0;margin-bottom:0;}</style><h3 class="css-1ossu4u"><style data-emotion-css="1unrqcp">.css-1unrqcp{color:inherit;-webkit-text-decoration:none;text-decoration:none;}</style><a class="css-1unrqcp" href="/blog/">Jxnblog</a></h3><style data-emotion-css="a9n7s9">.css-a9n7s9{margin-left:auto;margin-right:auto;}</style><div class="css-a9n7s9"></div><style data-emotion-css="12eh3gk">.css-12eh3gk{-webkit-appearance:none;-moz-appearance:none;appearance:none;font-family:inherit;font-weight:700;font-size:12px;text-transform:uppercase;-webkit-letter-spacing:0.1em;-moz-letter-spacing:0.1em;-ms-letter-spacing:0.1em;letter-spacing:0.1em;padding:12px;color:inherit;background-color:#f9faff;border:0;}.css-12eh3gk:focus{outline:2px solid;}</style><button title="Change Color Mode" class="css-12eh3gk">light</button></div></header><style data-emotion-css="11qjisw">.css-11qjisw{-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><style data-emotion-css="3url3g">.css-3url3g{box-sizing:border-box;min-width:0;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><main class="css-3url3g"><style data-emotion-css="11010fi">.css-11010fi{max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}</style><div class="css-11010fi"><style data-emotion-css="1ikkbxx">.css-1ikkbxx{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:32px;}@media screen and (min-width:40em){.css-1ikkbxx{font-size:48px;}}</style><h1 class="css-1ikkbxx">Universal UI Components</h1><style data-emotion-css="85laxa">.css-85laxa{font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-85laxa{font-size:12px;}}</style><style data-emotion-css="1omu91t">.css-1omu91t{font-size:18px;margin:0;margin-bottom:32px;font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-1omu91t{font-size:20px;}}@media screen and (min-width:40em){.css-1omu91t{font-size:12px;}}</style><p class="css-1omu91t">July 06, 2016</p><style data-emotion-css="1bl1570">.css-1bl1570{font-size:18px;margin:0;margin-bottom:32px;}@media screen and (min-width:40em){.css-1bl1570{font-size:20px;}}</style><p class="css-1bl1570">For a while now, I’ve been interested in the idea of creating portable,
+interoperable functional UI components that can work in any DOM rendering library,
+whether it’s
+<style data-emotion-css="1o1roib">.css-1o1roib{color:#33e;}.css-1o1roib:hover{color:#228;}</style><a href="https://facebook.github.io/react/" class="css-1o1roib">React</a>,
+<a href="https://preactjs.com" class="css-1o1roib">Preact</a>,
+<a href="https://github.com/dominictarr/hyperscript" class="css-1o1roib">hyperscript</a>,
+<a href="https://github.com/shama/bel" class="css-1o1roib">bel</a>,
+<a href="https://github.com/maxogden/yo-yo" class="css-1o1roib">yo-yo</a>,
+or some other library.</p><p class="css-1bl1570">The idea of functional UI components is a simple one: pass arguments into a function and it returns a representation of the DOM,
+usually with encapsulated styles and interactivity handled with callbacks to a global state, a la Redux.</p><p class="css-1bl1570">If you look at the currently available technology, there are predominantly three ways to create these components:</p><ul class="css-0"><li class="css-0"><a href="https://facebook.github.io/jsx/" class="css-1o1roib"><style data-emotion-css="1vg6q84">.css-1vg6q84{font-weight:700;}</style><strong class="css-1vg6q84">JSX</strong></a> (from React) - uses an XML-like syntax to call functions that return representations of DOM elements</li><li class="css-0"><a href="https://github.com/dominictarr/hyperscript" class="css-1o1roib"><strong class="css-1vg6q84">Hyperscript</strong></a> - similar to JSX, but uses standard JavaScript syntax and function calls</li><li class="css-0"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals" class="css-1o1roib"><strong class="css-1vg6q84">ES2015 tagged template literals</strong></a> - a new string type introduced to JavaScript</li></ul><p class="css-1bl1570">Each has its own pros and cons. While JSX is mostly syntactic sugar, some prefer to use standard JavaScript syntax.
+One big advantage JSX has is that it abstracts away the function used to create DOM elements.
+For example, React uses <style data-emotion-css="12ivgcj">.css-12ivgcj{font-family:Menlo,monospace;color:#228;background-color:#f9faff;font-size:87.5%;}</style><code class="css-12ivgcj">React.createElement</code> while Preact uses <code class="css-12ivgcj">Preact.h</code>.
+The pragma used in JSX is configurable by the end user.
+Hyperscript, although older than JSX, uses a similar function, but is written in standard JavaScript.
+Tagged template literals are also standard JavaScript,
+but require a little bit of extra code to change template literals into DOM elements.</p><style data-emotion-css="1d3ehct">.css-1d3ehct{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:24px;}@media screen and (min-width:40em){.css-1d3ehct{font-size:32px;}}</style><h2 id="the-same-but-different" class="css-1d3ehct"><a href="#the-same-but-different" class="css-1unrqcp">The same, but different</a></h2><p class="css-1bl1570">Assuming we pick one of the above syntaxes,
+there are relatively few differences among the implementations of components across libraries.
+For example, here is a bare-bones Button component for several different libraries.
+For brevity, styles have been left out of these examples.</p><style data-emotion-css="4dinw3">.css-4dinw3{font-family:Menlo,monospace;padding:16px;color:#228;background-color:#f9faff;border-radius:4px;overflow-x:auto;}</style><pre class="css-4dinw3"><style data-emotion-css="h2uv5g">.css-h2uv5g{font-family:Menlo,monospace;}</style><code class="language-js css-h2uv5g">// React using JSX
+import React from &#x27;react&#x27;
+
+const Button = (props) =&gt; (
+  &lt;button {...props} /&gt;
+)
+export default Button
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Preact using JSX
+import { h } from &#x27;preact&#x27;
+
+const Button = (props) =&gt; (
+  &lt;button {...props} /&gt;
+)
+export default Button
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Hyperscript
+import h from &#x27;hyperscript&#x27;
+
+const Button = (props) =&gt; (
+  h(&#x27;button&#x27;, props)
+)
+export default Button
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// yo-yo using tagged template literals
+import yo from &#x27;yo-yo&#x27;
+
+const Button = ({ text, ...props }) =&gt; (
+  yo`&lt;button ${props}&gt;${text}&lt;/button`
+)
+export default Button
+</code></pre><p class="css-1bl1570">There are still quite a few differences in syntax between JSX, hyperscript, and tagged template literals.
+For the sake of this post, I’ll focus on implementing these components in JSX.</p><p class="css-1bl1570">The first three examples are covered, but here’s what the hyperscript and yo-yo examples would look like in JSX.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Hyperscript with JSX
+import h from &#x27;hyperscript&#x27;
+
+const Button = (props) =&gt; (
+  &lt;button {...props} /&gt;
+)
+export default Button
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// bel (yo-yo) with JSX
+// yo-yo uses the bel package to create elements
+import { createElement } from &#x27;bel&#x27;
+
+const Button = (props) =&gt; (
+  &lt;button {...props} /&gt;
+)
+export default Button
+</code></pre><p class="css-1bl1570">For each of the non-React versions, JSX needs to be configured to use the appropriate pragma.
+Hyperscript and Preact both name their create element functions <code class="css-12ivgcj">h</code>.
+Here is an example <code class="css-12ivgcj">.babelrc</code> configuration.</p><pre class="css-4dinw3"><code class="language-json css-h2uv5g">{
+  &quot;presets&quot;: [
+    &quot;es2015&quot;,
+    &quot;stage-0&quot;
+  ],
+  &quot;plugins&quot;: [
+    [
+      &quot;transform-react-jsx&quot;,
+      { &quot;pragma&quot;: &quot;h&quot; }
+    ]
+  ]
+}
+</code></pre><p class="css-1bl1570">Although the other libraries name their create element functions differently,
+they can all be named <code class="css-12ivgcj">h</code> within the components for cross-library compatibility.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// React using JSX
+import { createElement as h } from &#x27;react&#x27;
+
+const Button = (props) =&gt; (
+  &lt;button {...props} /&gt;
+)
+export default Button
+</code></pre><p class="css-1bl1570">At this point, the only difference in these components across libraries is the <code class="css-12ivgcj">import</code> statement.
+Using a module bundler like webpack, even this can be abstracted out of the component module.</p><p class="css-1bl1570">Using webpack’s ProvidePlugin, the create element function can be exposed to all modules.
+This does involve having a variable in the global scope, but I think the trade-off might be worth it in some cases.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Custom create-element module
+const h = require(&#x27;preact&#x27;).h
+module.exports = h
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Example webpack configuration for Preact
+const path = require(&#x27;path&#x27;)
+const webpack = require(&#x27;webpack&#x27;)
+
+module.exports = {
+  ...,
+  plugins: [
+    new webpack.ProvidePlugin([
+      h: path.resolve(&#x27;./preact-create-element&#x27;)
+    ])
+  ]
+}
+</code></pre><p class="css-1bl1570">To avoid variable collisions, the function could be named anything (e.g. <code class="css-12ivgcj">__h</code>) as long as the <code class="css-12ivgcj">.babelrc</code> pragma matches.</p><p class="css-1bl1570">In addition to the name of the create element function, there are some slight differences in the naming conventions
+for HTML attributes (e.g. <code class="css-12ivgcj">htmlFor</code> and <code class="css-12ivgcj">className</code>) and handling child elements.
+Transforming these props could be handled in the custom function, but the implementation details have been left out of this post.</p><p class="css-1bl1570">With this configuration, the Button component can now be written like this:</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const Button = (props) =&gt; (
+  &lt;button {...props} /&gt;
+)
+export default Button
+</code></pre><p class="css-1bl1570">I’ve put up a rough demonstration of this concept, with the same two UI components being rendered to the DOM by
+React, Preact, hyperscript, and bel here: <a href="http://jxnblk.com/universal-components" class="css-1o1roib">Universal Components</a>.</p><p class="css-1bl1570">With a little bit of configuration, a whole library of UI components could be written in a manner that would allow
+the DOM rendering library to be swapped out at some point in the future,
+without the need to use a tool like <a href="https://github.com/facebook/codemod" class="css-1o1roib">Codemod</a>.
+There’s probably even a way to wrap components in an open-source library like <a href="http://jxnblk.com/rebass" class="css-1o1roib">Rebass</a>
+to make them compatible with more than one functional DOM rendering library as well.</p></div></main><style data-emotion-css="1nm38x2">.css-1nm38x2{padding-top:64px;padding-bottom:64px;}</style><footer class="css-1nm38x2"><style data-emotion-css="19e9ny0">.css-19e9ny0{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;font-weight:700;font-size:14px;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}.css-19e9ny0 a{color:inherit;-webkit-text-decoration:none;text-decoration:none;}.css-19e9ny0 a:hover{-webkit-text-decoration:underline;text-decoration:underline;}</style><div class="css-19e9ny0"><style data-emotion-css="1kuhxiq">.css-1kuhxiq{margin-left:-16px;}</style><div class="css-1kuhxiq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -24 176 176" width="48" height="48" fill="currentcolor" class="css-0" style="display:block;margin:0"><path d="
+M64 0 L64 4 L76 4 L74 6 L94 14 L92 16
+L104 20 L100 22 L106 28 L102 28 L106 56
+Q110 62 110 70 T105 84
+L96 108
+C92 116 76 128 64 128
+C52 128 36 116 32 108
+L23 84
+Q18 78 18 70 T22 56
+L22 22 L26 24 L34 12 L36 16z
+
+M72 40
+Q56 30 40 30
+Q32 34 30 48
+L30 48
+L28 74
+C28 81 37 102 38 104
+C46 118 62 121 64 121
+C66 121 82 118 90 104
+
+C91 102 100 81 100 74
+L99 52
+L94 40
+L92 42
+L84 38
+L84 42
+L74 36
+
+M44 62
+A5.5 5.5 0 0 0 44 73
+A5.5 5.5 0 0 0 44 62
+
+M84 62
+A5.5 5.5 0 0 0 84 73
+A5.5 5.5 0 0 0 84 62
+
+M57 88 H71
+A2 2 0 0 1 71 92
+H57
+A2 2 0 0 1 57 88
+
+M53 104 H75
+A2 2 0 0 1 75 108
+H53
+A2 2 0 0 1 53 104
+
+M33.3 60.4
+C34.6 57.8 37 55.9 39.7 55.2
+C43 54.4 46.8 55.3 50.4 58
+C51.3 58.6 52.5 58.4 53.2 57.5
+C53.8 56.6 53.6 55.4 52.7 54.7
+C46.8 50.5 41.8 50.5 38.7 51.3
+C34.8 52.3 31.5 54.9 29.7 58.6
+C29.2 59.6 29.6 60.8 30.6 61.3
+C30.9 61.4 31.2 61.5 31.5 61.5
+C32.2 61.5 32.9 61.1 33.3 60.4
+z
+
+M97.7 61.9
+C98.5 61.2  98.6  59.9  97.9  59.1
+C94.3 55  90.1  52.9  85.4  53
+C82 53  78.3  54.2  74.3  56.6
+C73.3 57.2  73  58.4  73.6  59.3
+C74.2 60.3  75.4  60.6  76.3  60
+C79.7 58  82.7  57  85.5  57
+C89 57  92.1  58.5  95  61.7
+C95.4 62.2  95.9  62.4  96.5  62.4
+C96.8 62.4 97.3 62.2 97.7 61.9
+z
+"></path></svg></div><style data-emotion-css="ibnnmb">.css-ibnnmb{margin-left:8px;margin-right:8px;}</style><div class="css-ibnnmb"><a href="https://jxnblk.com" class="css-1o1roib">© 2019 Jxnblk</a></div><div class="css-ibnnmb"><a href="https://github.com/jxnblk/blog" class="css-1o1roib">GitHub</a></div><div class="css-ibnnmb">Built with<!-- --> <a href="https://gatsbyjs.org" class="css-1o1roib">Gatsby</a></div></div></footer></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-4603832-6', 'auto', {});
+      
+      
+      
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/universal-ui-components/";window.webpackCompilationHash="e17fc85b2ab38f68e9e9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-4ab773ed6f5663432dfd.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js-81c5771f43d2ffb1a2c2.js"]};/*]]>*/</script><script src="/blog/webpack-runtime-ee9006925c18f9b050a6.js" async=""></script><script src="/blog/app-4ab773ed6f5663432dfd.js" async=""></script><script src="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js" async=""></script></body></html>

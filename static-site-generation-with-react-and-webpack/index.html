@@ -1,0 +1,489 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.13.6"/><title data-react-helmet="true">Static Site Generation with React and Webpack</title><link data-react-helmet="true" rel="icon" type="image/png" href="https://jxnblk.com/favicon.png"/><link data-react-helmet="true" rel="apple-touch-icon-precomposed" href="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="twitter:site" content="@jxnblk"/><meta data-react-helmet="true" name="twitter:image" content="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="og:title" content="Static Site Generation with React and Webpack"/><meta data-react-helmet="true" name="og:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Static Site Generation with React and Webpack"/><meta data-react-helmet="true" name="twitter:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:creator" content="Brent Jackson"/><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml"/><link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"/><link as="script" rel="preload" href="/blog/app-4ab773ed6f5663432dfd.js"/><link as="script" rel="preload" href="/blog/webpack-runtime-ee9006925c18f9b050a6.js"/><link as="fetch" rel="preload" href="/blog/page-data/static-site-generation-with-react-and-webpack/page-data.json" crossorigin="use-credentials"/></head><body><script class="css-0">
+(function() {
+  try {
+    var mode = localStorage.getItem('theme-ui-color-mode');
+    if (!mode) return
+    document.body.classList.add('theme-ui-' + mode);
+  } catch (e) {}
+})();
+</script><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><style data-emotion-css="1fq9m1p">body{color:#000;background-color:#fff;}body.theme-ui-dark{color:#fff;background-color:#000;}</style><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><style data-emotion-css="14blico">.css-14blico{font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="jph4cv">.css-jph4cv{min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="1d20uir">.css-1d20uir{box-sizing:border-box;min-width:0;min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><div class="css-1d20uir"><header><style data-emotion-css="oy4s10">.css-oy4s10{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;padding-top:32px;padding-bottom:64px;}</style><div class="css-oy4s10"><style data-emotion-css="e7ac8m">.css-e7ac8m{font-size:48px;margin-top:0;margin-bottom:0;}</style><style data-emotion-css="1ossu4u">.css-1ossu4u{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:20px;font-size:48px;margin-top:0;margin-bottom:0;}</style><h3 class="css-1ossu4u"><style data-emotion-css="1unrqcp">.css-1unrqcp{color:inherit;-webkit-text-decoration:none;text-decoration:none;}</style><a class="css-1unrqcp" href="/blog/">Jxnblog</a></h3><style data-emotion-css="a9n7s9">.css-a9n7s9{margin-left:auto;margin-right:auto;}</style><div class="css-a9n7s9"></div><style data-emotion-css="12eh3gk">.css-12eh3gk{-webkit-appearance:none;-moz-appearance:none;appearance:none;font-family:inherit;font-weight:700;font-size:12px;text-transform:uppercase;-webkit-letter-spacing:0.1em;-moz-letter-spacing:0.1em;-ms-letter-spacing:0.1em;letter-spacing:0.1em;padding:12px;color:inherit;background-color:#f9faff;border:0;}.css-12eh3gk:focus{outline:2px solid;}</style><button title="Change Color Mode" class="css-12eh3gk">light</button></div></header><style data-emotion-css="11qjisw">.css-11qjisw{-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><style data-emotion-css="3url3g">.css-3url3g{box-sizing:border-box;min-width:0;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><main class="css-3url3g"><style data-emotion-css="11010fi">.css-11010fi{max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}</style><div class="css-11010fi"><style data-emotion-css="1ikkbxx">.css-1ikkbxx{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:32px;}@media screen and (min-width:40em){.css-1ikkbxx{font-size:48px;}}</style><h1 class="css-1ikkbxx">Static Site Generation with React and Webpack</h1><style data-emotion-css="85laxa">.css-85laxa{font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-85laxa{font-size:12px;}}</style><style data-emotion-css="1omu91t">.css-1omu91t{font-size:18px;margin:0;margin-bottom:32px;font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-1omu91t{font-size:20px;}}@media screen and (min-width:40em){.css-1omu91t{font-size:12px;}}</style><p class="css-1omu91t">June 06, 2015</p><style data-emotion-css="1bl1570">.css-1bl1570{font-size:18px;margin:0;margin-bottom:32px;}@media screen and (min-width:40em){.css-1bl1570{font-size:20px;}}</style><p class="css-1bl1570">I’ve been dabbling with React for a few months now and using it in several small open source projects
+to better understand the technology.
+React’s focus on reusablility, along with the ability to install and require components via npm,
+provides an elegant way to rapidly build application UI in an efficient and consistent way.
+It’s also a great way to handle server-side rendering and provides high cohesion between markup and display logic.</p><p class="css-1bl1570"><style data-emotion-css="1vg6q84">.css-1vg6q84{font-weight:700;}</style><strong class="css-1vg6q84">Note: many of the packages referenced in this post have released major version, breaking updates since this was written. Some of the examples may not work with the latest npm modules, especially the react-router package, which has a much different API now.</strong></p><style data-emotion-css="1d3ehct">.css-1d3ehct{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:24px;}@media screen and (min-width:40em){.css-1d3ehct{font-size:32px;}}</style><h2 id="why" class="css-1d3ehct"><a href="#why" class="css-1unrqcp">Why</a></h2><p class="css-1bl1570">React is incredibly intuitive and flexible to work with,
+but relying solely on client side rendering
+leaves a lot to be desired in regards to percieved performance.
+With a static React site, the page loads just like any other static HTML,
+and the JavaScript kicks in whenever it’s downloaded.
+This is extremely helpful for combining documentation with interactive demonstrations,
+like <style data-emotion-css="1o1roib">.css-1o1roib{color:#33e;}.css-1o1roib:hover{color:#228;}</style><a href="http://jxnblk.com/colorable" class="css-1o1roib">Colorable</a> or <a href="http://jxnblk.com/react-icons" class="css-1o1roib">Building SVG Icons with React</a>.
+Using React with webpack also allows you to consolidate the entire build process
+in Node and take advantage of anything in the npm ecosystem.
+Last but not least, React is just fun to use.</p><h2 id="how" class="css-1d3ehct"><a href="#how" class="css-1unrqcp">How</a></h2><p class="css-1bl1570">Although there are several ways to render static sites with React,
+the following is what I’ve found to be easiest.</p><p class="css-1bl1570">First start a fresh project and initialize npm.</p><style data-emotion-css="4dinw3">.css-4dinw3{font-family:Menlo,monospace;padding:16px;color:#228;background-color:#f9faff;border-radius:4px;overflow-x:auto;}</style><pre class="css-4dinw3"><style data-emotion-css="h2uv5g">.css-h2uv5g{font-family:Menlo,monospace;}</style><code class="language-bash css-h2uv5g">mkdir react-static-site
+cd react-static-site
+npm init
+</code></pre><p class="css-1bl1570">Install the following modules.</p><pre class="css-4dinw3"><code class="language-bash css-h2uv5g">npm i --save-dev react webpack webpack-dev-server jsx-loader static-site-generator-webpack-plugin react-router
+</code></pre><p class="css-1bl1570"><a href="http://webpack.github.io/" target="_blank" class="css-1o1roib">Webpack</a> and webpack-dev-server will be used for the entire build process and can also handle assets such as CSS, images, and fonts.
+The jsx-loader is used to transpile imported jsx files. If you prefer ES6, you can use babel-loader instead of jsx-loader.
+The <a href="https://github.com/markdalgleish/static-site-generator-webpack-plugin" target="_blank" class="css-1o1roib">static-site-generator-webpack-plugin</a> module is what is used to generate static HTML.
+And <a href="http://rackt.github.io/react-router/" target="_blank" class="css-1o1roib">React Router</a> is used to handle routing. For single page static sites, React Router is not needed.</p><h2 id="set-up-webpack" class="css-1d3ehct"><a href="#set-up-webpack" class="css-1unrqcp">Set up Webpack</a></h2><p class="css-1bl1570">Webpack is a module bundler similar to Browserify, but can also replace front-end build systems like Grunt and Gulp.</p><p class="css-1bl1570">First off, you’ll need a <style data-emotion-css="12ivgcj">.css-12ivgcj{font-family:Menlo,monospace;color:#228;background-color:#f9faff;font-size:87.5%;}</style><code class="css-12ivgcj">webpack.config.js</code> file. The webpack command line interface will use this config file.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// webpack.config.js
+var StaticSiteGeneratorPlugin = require(&#x27;static-site-generator-webpack-plugin&#x27;)
+var data = require(&#x27;./data&#x27;)
+
+module.exports = {
+  entry: &#x27;./entry.js&#x27;,
+
+  output: {
+    filename: &#x27;bundle.js&#x27;,
+    path: __dirname,
+    libraryTarget: &#x27;umd&#x27;
+  },
+
+  module: {
+    loaders: [
+      { test: /\.jsx$/, loader: &#x27;jsx-loader&#x27; }
+    ]
+  },
+
+  plugins: [
+    new StaticSiteGeneratorPlugin(&#x27;bundle.js&#x27;, data.routes, data)
+  ]
+}
+</code></pre><h2 id="create-an-entry-file" class="css-1d3ehct"><a href="#create-an-entry-file" class="css-1unrqcp">Create an Entry File</a></h2><p class="css-1bl1570">The entry file is what webpack will read to build <code class="css-12ivgcj">bundle.js</code>,
+and the static-site-generator-webpack-plugin uses the bundle to generate HTML.</p><p class="css-1bl1570">For a single rendered page, you can skip React Router and create an <code class="css-12ivgcj">entry.js</code> file like the following.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// entry.js with no routing
+var React = require(&#x27;react&#x27;)
+var Root = require(&#x27;./components/Root.jsx&#x27;)
+
+module.exports = function render(locals, callback) {
+  var html = React.renderToStaticMarkup(React.createElement(Root, locals))
+  callback(null, &#x27;&lt;!DOCTYPE html&gt;&#x27; + html)
+}
+</code></pre><p class="css-1bl1570">For handling multiple routes, update the entry file using React Router and create a <code class="css-12ivgcj">Routes.jsx</code> file.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// entry.js
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var Routes = require(&#x27;./Routes.jsx&#x27;)
+
+module.exports = function render(locals, callback) {
+  Router.run(Routes, locals.path, function (Handler) {
+    var html = React.renderToStaticMarkup(React.createElement(Handler, locals))
+    callback(null, &#x27;&lt;!DOCTYPE html&gt;&#x27; + html)
+  })
+}
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Routes.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var Route = Router.Route
+var DefaultRoute = Router.DefaultRoute
+var Root = require(&#x27;./components/Root.jsx&#x27;)
+var Index = require(&#x27;./components/Index.jsx&#x27;)
+
+var Routes = (
+  &lt;Route handler={Root} path=&#x27;/&#x27;&gt;
+    &lt;DefaultRoute handler={Index} /&gt;
+  &lt;/Route&gt;
+)
+
+module.exports = Routes
+</code></pre><h2 id="create-a-data-file" class="css-1d3ehct"><a href="#create-a-data-file" class="css-1unrqcp">Create a Data File</a></h2><p class="css-1bl1570">Next create a <code class="css-12ivgcj">data.js</code> file that will include initial props passed to the Root component and routes used for the router.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// data.js
+module.exports = {
+  title: &#x27;My Static Site&#x27;,
+  routes: [
+    &#x27;/&#x27;
+  ]
+}
+</code></pre><h2 id="create-rootjsx" class="css-1d3ehct"><a href="#create-rootjsx" class="css-1unrqcp">Create Root.jsx</a></h2><p class="css-1bl1570">The Root component will include the <code class="css-12ivgcj">&lt;html&gt;</code> element, <code class="css-12ivgcj">&lt;head&gt;</code> and other code that will be shared across all pages.
+The page components themselves will be passed through the <code class="css-12ivgcj">&lt;RouteHander&gt;</code> component with React Router.
+To keep things somewhat organized, create this file in a new <code class="css-12ivgcj">components</code> directory.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Root.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var RouteHandler = Router.RouteHandler
+
+var Root = React.createClass({
+  render: function () {
+    return (
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;{this.props.title}&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;RouteHandler {...this.props} /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    )
+  }
+})
+
+module.exports = Root
+</code></pre><h2 id="create-indexjsx" class="css-1d3ehct"><a href="#create-indexjsx" class="css-1unrqcp">Create Index.jsx</a></h2><p class="css-1bl1570">The Index component will be the page rendered with <code class="css-12ivgcj">&lt;DefaultRoute&gt;</code> and should contain the content for the root <code class="css-12ivgcj">index.html</code> file.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Index.jsx
+var React = require(&#x27;react&#x27;)
+
+var Index = React.createClass({
+  render: function () {
+    return (
+      &lt;main&gt;
+        Index component
+      &lt;/main&gt;
+    )
+  }
+})
+
+module.exports = Index
+</code></pre><h2 id="package-scripts" class="css-1d3ehct"><a href="#package-scripts" class="css-1unrqcp">Package Scripts</a></h2><p class="css-1bl1570">Add the following scripts to <code class="css-12ivgcj">package.json</code> to run webpack.</p><pre class="css-4dinw3"><code class="language-json css-h2uv5g">&quot;scripts&quot;: {
+  &quot;webpack&quot;: &quot;webpack --progress --colors&quot;,
+  &quot;dev&quot;: &quot;webpack-dev-server --progress --colors&quot;,
+  &quot;start&quot;: &quot;npm run dev&quot;
+}
+</code></pre><p class="css-1bl1570">Run the start script to start a development server.</p><pre class="css-4dinw3"><code class="language-bash css-h2uv5g">npm start
+</code></pre><p class="css-1bl1570">Open <a href="http://localhost:8080" target="_blank" class="css-1o1roib"><a href="http://localhost:8080" class="css-1o1roib">http://localhost:8080</a></a> in a browser.
+You should see an unstyled page with the words <em class="css-0">Index component</em>.</p><h2 id="adding-pages" class="css-1d3ehct"><a href="#adding-pages" class="css-1unrqcp">Adding Pages</a></h2><p class="css-1bl1570">Next, add a new route for an <em class="css-0">about</em> page.
+In <code class="css-12ivgcj">data.js</code> add <code class="css-12ivgcj">/about</code> to the routes array.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// data.js
+module.exports = {
+  title: &#x27;My Static Site&#x27;,
+  routes: [
+    &#x27;/&#x27;,
+    &#x27;/about&#x27;
+  ]
+}
+</code></pre><p class="css-1bl1570">Edit the <code class="css-12ivgcj">Routes.jsx</code> file to handle the new route.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Routes.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var Route = Router.Route
+var DefaultRoute = Router.DefaultRoute
+var Root = require(&#x27;./components/Root.jsx&#x27;)
+var Index = require(&#x27;./components/Index.jsx&#x27;)
+var About = require(&#x27;./components/About.jsx&#x27;)
+
+var Routes = (
+  &lt;Route handler={Root} path=&#x27;/&#x27;&gt;
+    &lt;DefaultRoute handler={Index} /&gt;
+    &lt;Route path=&#x27;/about&#x27; handler={About} /&gt;
+  &lt;/Route&gt;
+)
+
+module.exports = Routes
+</code></pre><p class="css-1bl1570">Create a new <code class="css-12ivgcj">About.jsx</code> component.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/About.jsx
+var React = require(&#x27;react&#x27;)
+
+var About = React.createClass({
+  render: function () {
+    return (
+      &lt;main&gt;
+        About component
+      &lt;/main&gt;
+    )
+  }
+})
+
+module.exports = About
+</code></pre><p class="css-1bl1570">Stop and restart the development server and navigate to
+<a href="http://localhost:8080/about" target="_blank" class="css-1o1roib"><a href="http://localhost:8080/about" class="css-1o1roib">http://localhost:8080/about</a></a>.
+You should see a page similar to the index but with the words <em class="css-0">About component</em>.</p><p class="css-1bl1570">React-router can also handle route params such as <code class="css-12ivgcj">posts/:id</code> for dynamic routing –
+<a href="http://rackt.github.io/react-router/" target="_blank" class="css-1o1roib">View the docs</a> to learn more.</p><h2 id="render-to-static-markup" class="css-1d3ehct"><a href="#render-to-static-markup" class="css-1unrqcp">Render to Static Markup</a></h2><p class="css-1bl1570">Stop the development server and run <code class="css-12ivgcj">npm run webpack</code>. This should generate two static <code class="css-12ivgcj">index.html</code> files in the root and <code class="css-12ivgcj">about</code> directories.</p><h2 id="adding-client-side-js" class="css-1d3ehct"><a href="#adding-client-side-js" class="css-1unrqcp">Adding Client-Side JS</a></h2><p class="css-1bl1570">In order to use React for client side JavaScript, you’ll need to ensure that the props match up between the static page and the bundle.js file.</p><p class="css-1bl1570">First, edit <code class="css-12ivgcj">entry.js</code> to change the render function
+from <code class="css-12ivgcj">React.renderToStaticMarkup</code> to <code class="css-12ivgcj">React.renderToString</code>
+and add a conditional block that will only run client-side.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// entry.js
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var Routes = require(&#x27;./Routes.jsx&#x27;)
+
+if (typeof document !== &#x27;undefined&#x27;) {
+  var initialProps = JSON.parse(document.getElementById(&#x27;initial-props&#x27;).innerHTML)
+  Router.run(Routes, Router.HistoryLocation, function (Handler) {
+    React.render(React.createElement(Handler, initialProps), document)
+  })
+}
+
+module.exports = function render(locals, callback) {
+  Router.run(Routes, locals.path, function (Handler) {
+    var html = React.renderToString(React.createElement(Handler, locals))
+    callback(null, &#x27;&lt;!DOCTYPE html&gt;&#x27; + html)
+  })
+}
+</code></pre><p class="css-1bl1570">The <code class="css-12ivgcj">initialProps</code> value will come from a script tag with the id <code class="css-12ivgcj">initial-props</code>.
+Update the Root component to add this script tag, add a <code class="css-12ivgcj">safeStringify</code> function, and link to the <code class="css-12ivgcj">bundle.js</code> file.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Root.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var RouteHandler = Router.RouteHandler
+
+var Root = React.createClass({
+  render: function () {
+    var initialProps = {
+      __html: safeStringify(this.props)
+    }
+
+    return (
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;{this.props.title}&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;RouteHandler {...this.props} /&gt;
+          &lt;script
+            id=&#x27;initial-props&#x27;
+            type=&#x27;application/json&#x27;
+            dangerouslySetInnerHTML={initialProps} /&gt;
+          &lt;script src=&#x27;bundle.js&#x27; /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    )
+  }
+})
+
+function safeStringify(obj) {
+  return JSON.stringify(obj).replace(/&lt;\/script/g, &#x27;&lt;\\/script&#x27;).replace(/&lt;!--/g, &#x27;&lt;\\!--&#x27;)
+}
+
+module.exports = Root
+</code></pre><h2 id="navigation-links" class="css-1d3ehct"><a href="#navigation-links" class="css-1unrqcp">Navigation Links</a></h2><p class="css-1bl1570">To link the pages together, create a new Header component.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Header.jsx
+var React = require(&#x27;react&#x27;)
+
+var Header = React.createClass({
+  render: function () {
+    return (
+      &lt;header&gt;
+        &lt;a href=&#x27;/&#x27;&gt;Index&lt;/a&gt;
+        &lt;a href=&#x27;/about&#x27;&gt;About&lt;/a&gt;
+      &lt;/header&gt;
+    )
+  }
+})
+
+module.exports = Header
+</code></pre><p class="css-1bl1570">Add the Header to the Root component’s render function.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Root.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var RouteHandler = Router.RouteHandler
+var Header = require(&#x27;./Header.jsx&#x27;)
+
+var Root = React.createClass({
+  render: function () {
+    var initialProps = {
+      __html: safeStringify(this.props)
+    }
+
+    return (
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;{this.props.title}&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;Header /&gt;
+          &lt;RouteHandler {...this.props} /&gt;
+          &lt;script
+            id=&#x27;initial-props&#x27;
+            type=&#x27;application/json&#x27;
+            dangerouslySetInnerHTML={initialProps} /&gt;
+          &lt;script src=&#x27;bundle.js&#x27; /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    )
+  }
+})
+
+function safeStringify(obj) {
+  return JSON.stringify(obj).replace(/&lt;\/script/g, &#x27;&lt;\\/script&#x27;).replace(/&lt;!--/g, &#x27;&lt;\\!--&#x27;)
+}
+
+module.exports = Root
+</code></pre><h2 id="using-client-side-routing" class="css-1d3ehct"><a href="#using-client-side-routing" class="css-1unrqcp">Using Client-Side Routing</a></h2><p class="css-1bl1570">React router can also do client-side routing using the Link component.
+This can make transitioning pages feel faster and behaves like a fake single-page application.</p><p class="css-1bl1570">To use client-side routing, replace the anchor links in the Header with React Routers’s Link components.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Header.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var Link = Router.Link
+
+var Header = React.createClass({
+  render: function () {
+    return (
+      &lt;header&gt;
+        &lt;Link to=&#x27;/&#x27;&gt;Index&lt;/Link&gt;
+        &lt;Link to=&#x27;/about&#x27;&gt;About&lt;/Link&gt;
+      &lt;/header&gt;
+    )
+  }
+})
+
+module.exports = Header
+</code></pre><h2 id="adding-critical-css" class="css-1d3ehct"><a href="#adding-critical-css" class="css-1unrqcp">Adding Critical CSS</a></h2><p class="css-1bl1570">Although there are many different approaches to styling components in React,
+adding some critical CSS base styles to the head can help speed up performance and development time.
+You can skip this step if you prefer using inline styles or linking to a larger stylesheet.</p><p class="css-1bl1570"><em class="css-0">UPDATE: Originally, this tutorial showed how to include CSS using props.
+Using a combination of css-loader and cssnext-loader seems to be a better solution
+as it doesn&#x27;t require restarting the server when making changes to the stylesheet
+and doesn&#x27;t duplicate the CSS in the <code class="css-12ivgcj">initialProps</code> JSON object.</em></p><p class="css-1bl1570">First install <a href="http://basscss.com" target="_blank" class="css-1o1roib">Basscss</a>,
+<a href="https://github.com/webpack/css-loader" target="_blank" class="css-1o1roib">css-loader</a>,
+and <a href="https://github.com/cssnext/cssnext-loader" target="_blank" class="css-1o1roib">cssnext-loader</a>.</p><pre class="css-4dinw3"><code class="language-bash css-h2uv5g">npm i --save-dev basscss css-loader cssnext-loader
+</code></pre><p class="css-1bl1570">Add css-loader and cssnext-loader to the webpack config as well as options for cssnext.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// webpack.config.js
+var StaticSiteGeneratorPlugin = require(&#x27;static-site-generator-webpack-plugin&#x27;)
+var data = require(&#x27;./data&#x27;)
+
+module.exports = {
+  entry: &#x27;./entry.js&#x27;,
+
+  output: {
+    filename: &#x27;bundle.js&#x27;,
+    path: __dirname,
+    libraryTarget: &#x27;umd&#x27;
+  },
+
+  module: {
+    loaders: [
+      { test: /\.jsx$/, loader: &#x27;jsx-loader&#x27; },
+      { test: /\.css/, loader: &#x27;css-loader!cssnext-loader&#x27; }
+    ]
+  },
+
+  plugins: [
+    new StaticSiteGeneratorPlugin(&#x27;bundle.js&#x27;, data.routes, data)
+  ],
+
+  cssnext: {
+    compress: true,
+    features: {
+      rem: false,
+      pseudoElements: false,
+      colorRgba: false
+    }
+  }
+
+}
+</code></pre><p class="css-1bl1570">In the cssnext configuration options, the output is compressed and the rem and colorRgba postcss plugins have been disabled.</p><p class="css-1bl1570">Create a new <code class="css-12ivgcj">css</code> directory and a <code class="css-12ivgcj">base.css</code> file.
+Import Basscss and set a new value for the <code class="css-12ivgcj">--font-family</code> custom property.</p><pre class="css-4dinw3"><code class="language-css css-h2uv5g">/* css/base.css */
+@import &#x27;basscss&#x27;;
+
+:root {
+  --font-family: &#x27;Avenir Next&#x27;, &#x27;Hevletica Neue&#x27;, sans-serif;
+}
+</code></pre><p class="css-1bl1570">In the Root component, import the stylesheet, add a style tag to the head, and add some padding to the body.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// components/Root.jsx
+var React = require(&#x27;react&#x27;)
+var Router = require(&#x27;react-router&#x27;)
+var RouteHandler = Router.RouteHandler
+var Header = require(&#x27;./Header.jsx&#x27;)
+var css = require(&#x27;../css/base.css&#x27;)
+
+var Root = React.createClass({
+  render: function () {
+    var initialProps = {
+      __html: safeStringify(this.props)
+    }
+
+    return (
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;{this.props.title}&lt;/title&gt;
+          &lt;style dangerouslySetInnerHTML={{ __html: css }} /&gt;
+        &lt;/head&gt;
+        &lt;body className=&#x27;p2&#x27;&gt;
+          &lt;Header /&gt;
+          &lt;RouteHandler {...this.props} /&gt;
+          &lt;script
+            id=&#x27;initial-props&#x27;
+            type=&#x27;application/json&#x27;
+            dangerouslySetInnerHTML={initialProps} /&gt;
+          &lt;script src=&#x27;bundle.js&#x27; /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    )
+  }
+})
+
+function safeStringify(obj) {
+  return JSON.stringify(obj).replace(/&lt;\/script/g, &#x27;&lt;\\/script&#x27;).replace(/&lt;!--/g, &#x27;&lt;\\!--&#x27;)
+}
+
+module.exports = Root
+</code></pre><p class="css-1bl1570">Restart the dev server to see the changes.</p><p class="css-1bl1570">You should now have a basic static site rendered with React.
+For a complete example, see the
+<a href="https://github.com/jxnblk/react-static-site-boilerplate" target="_blank" class="css-1o1roib">Boilerplate Demo</a>
+or check out the
+<a href="https://github.com/jxnblk/blog" target="_blank" class="css-1o1roib">source for this blog</a> or
+<a href="https://github.com/basscss/basscss.github.io" target="_blank" class="css-1o1roib">the Basscss docs</a>,
+which use a very similar approach.</p><p class="css-1bl1570"><em class="css-0">Update</em> Matthew Jones has forked and created an
+<a href="https://github.com/ookk/react-static-boilerplate-ES6" target="_blank" class="css-1o1roib">ES6 boilerplate</a>
+if you&#x27;d like to learn more.</p><h2 id="other-considerations-and-improvements" class="css-1d3ehct"><a href="#other-considerations-and-improvements" class="css-1unrqcp">Other Considerations and Improvements</a></h2><p class="css-1bl1570">Since this uses webpack, there are also ways to include image assets and fonts in the bundle, but I haven’t tried this so your mileage may vary.</p><p class="css-1bl1570">The <code class="css-12ivgcj">routes</code> array is passed in as props, and navigation links could be created dynamically rather than being hard coded.
+This could make handling lots of pages easier.</p><p class="css-1bl1570">If you’re hosting the static site on gh-pages, you’ll need a way to handle the base url when using React Router’s Link component.
+I don’t know of a good way to do this yet and would love to hear suggestions on how to improve that.</p><p class="css-1bl1570"><del>Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag,
+and I’m not sure if there’s a better way to handle that.</del></p><p class="css-1bl1570">This is just one way to build static sites with React.
+If you’ve seen other ways or have any suggestions for improving on this, I’d love to hear them.</p></div></main><style data-emotion-css="1nm38x2">.css-1nm38x2{padding-top:64px;padding-bottom:64px;}</style><footer class="css-1nm38x2"><style data-emotion-css="19e9ny0">.css-19e9ny0{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;font-weight:700;font-size:14px;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}.css-19e9ny0 a{color:inherit;-webkit-text-decoration:none;text-decoration:none;}.css-19e9ny0 a:hover{-webkit-text-decoration:underline;text-decoration:underline;}</style><div class="css-19e9ny0"><style data-emotion-css="1kuhxiq">.css-1kuhxiq{margin-left:-16px;}</style><div class="css-1kuhxiq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -24 176 176" width="48" height="48" fill="currentcolor" class="css-0" style="display:block;margin:0"><path d="
+M64 0 L64 4 L76 4 L74 6 L94 14 L92 16
+L104 20 L100 22 L106 28 L102 28 L106 56
+Q110 62 110 70 T105 84
+L96 108
+C92 116 76 128 64 128
+C52 128 36 116 32 108
+L23 84
+Q18 78 18 70 T22 56
+L22 22 L26 24 L34 12 L36 16z
+
+M72 40
+Q56 30 40 30
+Q32 34 30 48
+L30 48
+L28 74
+C28 81 37 102 38 104
+C46 118 62 121 64 121
+C66 121 82 118 90 104
+
+C91 102 100 81 100 74
+L99 52
+L94 40
+L92 42
+L84 38
+L84 42
+L74 36
+
+M44 62
+A5.5 5.5 0 0 0 44 73
+A5.5 5.5 0 0 0 44 62
+
+M84 62
+A5.5 5.5 0 0 0 84 73
+A5.5 5.5 0 0 0 84 62
+
+M57 88 H71
+A2 2 0 0 1 71 92
+H57
+A2 2 0 0 1 57 88
+
+M53 104 H75
+A2 2 0 0 1 75 108
+H53
+A2 2 0 0 1 53 104
+
+M33.3 60.4
+C34.6 57.8 37 55.9 39.7 55.2
+C43 54.4 46.8 55.3 50.4 58
+C51.3 58.6 52.5 58.4 53.2 57.5
+C53.8 56.6 53.6 55.4 52.7 54.7
+C46.8 50.5 41.8 50.5 38.7 51.3
+C34.8 52.3 31.5 54.9 29.7 58.6
+C29.2 59.6 29.6 60.8 30.6 61.3
+C30.9 61.4 31.2 61.5 31.5 61.5
+C32.2 61.5 32.9 61.1 33.3 60.4
+z
+
+M97.7 61.9
+C98.5 61.2  98.6  59.9  97.9  59.1
+C94.3 55  90.1  52.9  85.4  53
+C82 53  78.3  54.2  74.3  56.6
+C73.3 57.2  73  58.4  73.6  59.3
+C74.2 60.3  75.4  60.6  76.3  60
+C79.7 58  82.7  57  85.5  57
+C89 57  92.1  58.5  95  61.7
+C95.4 62.2  95.9  62.4  96.5  62.4
+C96.8 62.4 97.3 62.2 97.7 61.9
+z
+"></path></svg></div><style data-emotion-css="ibnnmb">.css-ibnnmb{margin-left:8px;margin-right:8px;}</style><div class="css-ibnnmb"><a href="https://jxnblk.com" class="css-1o1roib">© 2019 Jxnblk</a></div><div class="css-ibnnmb"><a href="https://github.com/jxnblk/blog" class="css-1o1roib">GitHub</a></div><div class="css-ibnnmb">Built with<!-- --> <a href="https://gatsbyjs.org" class="css-1o1roib">Gatsby</a></div></div></footer></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-4603832-6', 'auto', {});
+      
+      
+      
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/static-site-generation-with-react-and-webpack/";window.webpackCompilationHash="e17fc85b2ab38f68e9e9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-4ab773ed6f5663432dfd.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js-81c5771f43d2ffb1a2c2.js"]};/*]]>*/</script><script src="/blog/webpack-runtime-ee9006925c18f9b050a6.js" async=""></script><script src="/blog/app-4ab773ed6f5663432dfd.js" async=""></script><script src="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js" async=""></script></body></html>

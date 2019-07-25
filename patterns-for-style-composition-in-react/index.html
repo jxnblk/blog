@@ -1,0 +1,578 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.13.6"/><title data-react-helmet="true">Patterns for Style Composition in React</title><link data-react-helmet="true" rel="icon" type="image/png" href="https://jxnblk.com/favicon.png"/><link data-react-helmet="true" rel="apple-touch-icon-precomposed" href="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="twitter:site" content="@jxnblk"/><meta data-react-helmet="true" name="twitter:image" content="https://jxnblk.com/avatar.png"/><meta data-react-helmet="true" name="description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="og:title" content="Patterns for Style Composition in React"/><meta data-react-helmet="true" name="og:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Patterns for Style Composition in React"/><meta data-react-helmet="true" name="twitter:description" content="The writing of Brent Jackson"/><meta data-react-helmet="true" name="twitter:creator" content="Brent Jackson"/><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml"/><link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"/><link as="script" rel="preload" href="/blog/app-4ab773ed6f5663432dfd.js"/><link as="script" rel="preload" href="/blog/webpack-runtime-ee9006925c18f9b050a6.js"/><link as="fetch" rel="preload" href="/blog/page-data/patterns-for-style-composition-in-react/page-data.json" crossorigin="use-credentials"/></head><body><script class="css-0">
+(function() {
+  try {
+    var mode = localStorage.getItem('theme-ui-color-mode');
+    if (!mode) return
+    document.body.classList.add('theme-ui-' + mode);
+  } catch (e) {}
+})();
+</script><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><style data-emotion-css="1fq9m1p">body{color:#000;background-color:#fff;}body.theme-ui-dark{color:#fff;background-color:#000;}</style><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><style data-emotion-css="14blico">.css-14blico{font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="jph4cv">.css-jph4cv{min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><style data-emotion-css="1d20uir">.css-1d20uir{box-sizing:border-box;min-width:0;min-height:100vh;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-family:system-ui,sans-serif;font-weight:400;line-height:1.5;}</style><div class="css-1d20uir"><header><style data-emotion-css="oy4s10">.css-oy4s10{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;padding-top:32px;padding-bottom:64px;}</style><div class="css-oy4s10"><style data-emotion-css="e7ac8m">.css-e7ac8m{font-size:48px;margin-top:0;margin-bottom:0;}</style><style data-emotion-css="1ossu4u">.css-1ossu4u{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:20px;font-size:48px;margin-top:0;margin-bottom:0;}</style><h3 class="css-1ossu4u"><style data-emotion-css="1unrqcp">.css-1unrqcp{color:inherit;-webkit-text-decoration:none;text-decoration:none;}</style><a class="css-1unrqcp" href="/blog/">Jxnblog</a></h3><style data-emotion-css="a9n7s9">.css-a9n7s9{margin-left:auto;margin-right:auto;}</style><div class="css-a9n7s9"></div><style data-emotion-css="12eh3gk">.css-12eh3gk{-webkit-appearance:none;-moz-appearance:none;appearance:none;font-family:inherit;font-weight:700;font-size:12px;text-transform:uppercase;-webkit-letter-spacing:0.1em;-moz-letter-spacing:0.1em;-ms-letter-spacing:0.1em;letter-spacing:0.1em;padding:12px;color:inherit;background-color:#f9faff;border:0;}.css-12eh3gk:focus{outline:2px solid;}</style><button title="Change Color Mode" class="css-12eh3gk">light</button></div></header><style data-emotion-css="11qjisw">.css-11qjisw{-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><style data-emotion-css="3url3g">.css-3url3g{box-sizing:border-box;min-width:0;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;}</style><main class="css-3url3g"><style data-emotion-css="11010fi">.css-11010fi{max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}</style><div class="css-11010fi"><style data-emotion-css="1ikkbxx">.css-1ikkbxx{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:32px;}@media screen and (min-width:40em){.css-1ikkbxx{font-size:48px;}}</style><h1 class="css-1ikkbxx">Patterns for Style Composition in React</h1><style data-emotion-css="85laxa">.css-85laxa{font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-85laxa{font-size:12px;}}</style><style data-emotion-css="1omu91t">.css-1omu91t{font-size:18px;margin:0;margin-bottom:32px;font-size:12px;font-weight:700;}@media screen and (min-width:40em){.css-1omu91t{font-size:20px;}}@media screen and (min-width:40em){.css-1omu91t{font-size:12px;}}</style><p class="css-1omu91t">August 13, 2016</p><style data-emotion-css="1bl1570">.css-1bl1570{font-size:18px;margin:0;margin-bottom:32px;}@media screen and (min-width:40em){.css-1bl1570{font-size:20px;}}</style><p class="css-1bl1570">While React is extremely flexible in terms of how you can structure your application’s UI,
+I’ve found that a few patterns for style composition have helped me keep things
+organized and easy to work with.
+These aren’t hard-and-fast rules, these are simply reflections on how I’ve come to organize components in apps that I’ve worked on.</p><p class="css-1bl1570">I’ve gravitated towards these patterns in an effort to:</p><ul class="css-0"><li class="css-0">Create a well-defined visual design system</li><li class="css-0">Help maintain visual consistency across an application</li><li class="css-0">Only deliver the CSS/styles needed to the client for a given UI – i.e. performance</li><li class="css-0">Increase the maintainability of visual styles</li><li class="css-0">Make updates and iterations on styles easier</li><li class="css-0">Make legacy styles easier to deprecate</li><li class="css-0">Create more readable components</li><li class="css-0">Make building out new UI easier and faster</li><li class="css-0">Keep styles encapsulated to help prevent collisions and unwanted side effects</li><li class="css-0">Create an easy-to-use component API for non-front-end developers</li></ul><p class="css-1bl1570">Although the level of abstraction here might look like overkill for smaller projects,
+I find that this general approach has sped up my development across the board.</p><p class="css-1bl1570">I won’t get into approaches for state management or handling the business logic of your app,
+instead I’ll be focusing primarily on the visible and interactive parts of the UI.</p><style data-emotion-css="1d3ehct">.css-1d3ehct{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:24px;}@media screen and (min-width:40em){.css-1d3ehct{font-size:32px;}}</style><h2 id="stateless-functional-ui-components" class="css-1d3ehct"><a href="#stateless-functional-ui-components" class="css-1unrqcp">Stateless Functional UI Components</a></h2><p class="css-1bl1570">Generally, I like to keep styles separated from the parts of the app that are tied to state.
+That means routes, views, containers, forms, layouts, etc. should not have any styling or classes in them.
+Instead, these heavy-lifting components should be composed of primarily stateless functional UI components,
+sometimes referred to as <em class="css-0">presentational</em> components.
+By keeping styling concerns separate from the application state,
+pieces can become more reusable and building out new views and containers can be quicker.</p><p class="css-1bl1570">For example, a form component render method might look something like this:</p><style data-emotion-css="4dinw3">.css-4dinw3{font-family:Menlo,monospace;padding:16px;color:#228;background-color:#f9faff;border-radius:4px;overflow-x:auto;}</style><pre class="css-4dinw3"><style data-emotion-css="h2uv5g">.css-h2uv5g{font-family:Menlo,monospace;}</style><code class="language-js css-h2uv5g">render () {
+  return (
+    &lt;form onSubmit={this.handleSubmit}&gt;
+      &lt;Heading children=&#x27;Sign In&#x27; /&gt;
+      &lt;Input
+        name=&#x27;username&#x27;
+        value={username}
+        onChange={this.handleChange} /&gt;
+      &lt;Input
+        type=&#x27;password&#x27;
+        name=&#x27;password&#x27;
+        value={password}
+        onChange={this.handleChange} /&gt;
+      &lt;Button
+        type=&#x27;submit&#x27;
+        children=&#x27;Sign In&#x27; /&gt;
+    &lt;/form&gt;
+  )
+}
+</code></pre><p class="css-1bl1570">Notice how none of the elements have a <style data-emotion-css="12ivgcj">.css-12ivgcj{font-family:Menlo,monospace;color:#228;background-color:#f9faff;font-size:87.5%;}</style><code class="css-12ivgcj">className</code> or <code class="css-12ivgcj">style</code> prop.
+Using <code class="css-12ivgcj">className</code> or <code class="css-12ivgcj">style</code> props at this level <em class="css-0">could</em> be considered a code smell.
+Each UI component used here encapsulates its own styling,
+and the styling simply becomes an implementation detail,
+which means a UI component can be updated or refactored without affecting anything else in the application.</p><p class="css-1bl1570">An example Button component, like the one in the form above, might look something like the following:</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const Button = ({
+  ...props
+}) =&gt; {
+  const sx = {
+    fontFamily: &#x27;inherit&#x27;,
+    fontSize: &#x27;inherit&#x27;,
+    fontWeight: &#x27;bold&#x27;,
+    textDecoration: &#x27;none&#x27;,
+    display: &#x27;inline-block&#x27;,
+    margin: 0,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+    border: 0,
+    color: &#x27;white&#x27;,
+    backgroundColor: &#x27;blue&#x27;,
+    WebkitAppearance: &#x27;none&#x27;,
+    MozAppearance: &#x27;none&#x27;
+  }
+
+  return (
+    &lt;button {...props} style={sx} /&gt;
+  )
+}
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Button usage
+&lt;Button onClick={this.handleClick}&gt;
+  Hello
+&lt;/Button&gt;
+</code></pre><p class="css-1bl1570">I’ve used inline styles here for readability and to help demonstrate how this works,
+but any CSS-in-JS solution can be used instead and won’t have any affect on the form component above.
+By keeping all styling encapsulated in this component,
+the rest of the application doesn’t need to know anything about the Button beyond its props API.</p><h2 id="styles-module" class="css-1d3ehct"><a href="#styles-module" class="css-1unrqcp">Styles Module</a></h2><p class="css-1bl1570">You may have noticed that a few property values were hard-coded into the Button example.
+Generally, I wouldn’t recommend hard-coding things in like that.
+Any values that are likely to be used across different UI components should be split into their own module.</p><p class="css-1bl1570">Here is an example module to start with:</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">export const white = &#x27;#fff&#x27;
+export const black = &#x27;#111&#x27;
+export const blue = &#x27;#07c&#x27;
+
+export const colors = {
+  white,
+  black,
+  blue
+}
+
+export const space = [
+  0,
+  8,
+  16,
+  32,
+  64
+]
+
+const styles = {
+  bold: 600,
+  space,
+  colors
+}
+
+export default styles
+</code></pre><p class="css-1bl1570">And here is what the updated Button component could look like:</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">import React from &#x27;react&#x27;
+import { bold, space, colors } from &#x27;./styles&#x27;
+
+const Button = ({
+  ...props
+}) =&gt; {
+  const sx = {
+    fontFamily: &#x27;inherit&#x27;,
+    fontSize: &#x27;inherit&#x27;,
+    fontWeight: bold,
+    textDecoration: &#x27;none&#x27;,
+    display: &#x27;inline-block&#x27;,
+    margin: 0,
+    paddingTop: space[1],
+    paddingBottom: space[1],
+    paddingLeft: space[2],
+    paddingRight: space[2],
+    border: 0,
+    color: colors.white,
+    backgroundColor: colors.blue,
+    WebkitAppearance: &#x27;none&#x27;,
+    MozAppearance: &#x27;none&#x27;
+  }
+
+  return (
+    &lt;button {...props} style={sx} /&gt;
+  )
+}
+</code></pre><p class="css-1bl1570">The style object could store anything related to styling that is shared across components,
+including borders, border radii, shadows, animation duration, etc.</p><p class="css-1bl1570">You could even export more elaborate combinations of styles like the following:</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">export const cardStyle = {
+  backgroundColor: white,
+  borderRadius: 3,
+  boxShadow: `0 0 4px ${shade[1]}`
+}
+</code></pre><p class="css-1bl1570">But I’d recommend delegating combinations like these to components and using composition instead, as I’ll show below.</p><h2 id="style-functions" class="css-1d3ehct"><a href="#style-functions" class="css-1unrqcp">Style Functions</a></h2><p class="css-1bl1570">Since we’re using JavaScript, we can also employ helper functions for styling elements.
+For example, a function to create <code class="css-12ivgcj">rgba</code> values of black can be very handy.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const darken = (n) =&gt; `rgba(0, 0, 0, ${n})`
+
+darken(1 / 8) // &#x27;rgba(0, 0, 0, 0.125)&#x27;
+</code></pre><p class="css-1bl1570">Functions like this can then be used to create a value scale array to help keep things consistent.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const shade = [
+  darken(0),
+  darken(1 / 8),
+  darken(1 / 4),
+  darken(3 / 8),
+  darken(1 / 2),
+  darken(5 / 8),
+  darken(3 / 4),
+  darken(7 / 8),
+  darken(1)
+]
+
+shade[4] // &#x27;rgba(0, 0, 0, 0.5)&#x27;
+</code></pre><p class="css-1bl1570">Another example would be creating a scale for margin and padding to help keep visual rhythm consistent.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Modular powers of two scale
+const scale = [
+  0,
+  8,
+  16,
+  32,
+  64
+]
+
+// Functions to get partial style objects
+const createScaledPropertyGetter = (scale) =&gt; (prop) =&gt; (x) =&gt; {
+  return (typeof x === &#x27;number&#x27; &amp;&amp; typeof scale[x] === &#x27;number&#x27;)
+    ? { [prop]: scale[x] }
+    : null
+}
+const getScaledProperty = createScaledPropertyGetter(scale)
+
+export const getMargin = getScaledProperty(&#x27;margin&#x27;)
+export const getPadding = getScaledProperty(&#x27;padding&#x27;)
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Style function usage
+const Box = ({
+  m,
+  p,
+  ...props
+}) =&gt; {
+  const sx = {
+    ...getMargin(m),
+    ...getPadding(p)
+  }
+
+  return &lt;div {...props} style={sx} /&gt;
+}
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Component usage
+&lt;div&gt;
+  &lt;Box m={2} p={3}&gt;
+    A box with 16px margin and 32px padding
+  &lt;/Box&gt;
+&lt;/div&gt;
+</code></pre><h2 id="npm-modules" class="css-1d3ehct"><a href="#npm-modules" class="css-1unrqcp">Npm Modules</a></h2><p class="css-1bl1570">While the rgba color function above is a fairly simple one,
+sometimes more complex color transformations can be helpful when creating UI.
+Well, we’re in luck, because we can use literally anything on <style data-emotion-css="1o1roib">.css-1o1roib{color:#33e;}.css-1o1roib:hover{color:#228;}</style><a href="https://npmjs.com" class="css-1o1roib">npm</a>.</p><p class="css-1bl1570">Instead of the <code class="css-12ivgcj">darken</code> function above, here is an example using <a href="https://www.npmjs.com/package/chroma-js" class="css-1o1roib"><code class="css-12ivgcj">chroma-js</code></a>’s <code class="css-12ivgcj">alpha</code> function.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">import chroma from &#x27;chroma-js&#x27;
+
+const alpha = (color) =&gt; (a) =&gt; chroma(color).alpha(a).css()
+
+const darken = alpha(&#x27;#000&#x27;)
+
+const shade = [
+  darken(0),
+  darken(1 / 8),
+  darken(1 / 4),
+  // ...
+]
+</code></pre><p class="css-1bl1570">Using chroma, this function can work with any color from the style object.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const blueAlpha = [
+  alpha(blue)(0),
+  alpha(blue)(1 / 4),
+  alpha(blue)(1 / 2),
+  alpha(blue)(3 / 4),
+  alpha(blue)(1)
+]
+</code></pre><h2 id="base-component" class="css-1d3ehct"><a href="#base-component" class="css-1unrqcp">Base Component</a></h2><p class="css-1bl1570">Beyond just importing style values, there is a tremendous amount of flexibility
+when it comes to composition in React – since components are essentially just functions.
+Take the Button component from above, and we’ll change some of the style details to props to make it more reusable.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const Button = ({
+  big,
+  color = colors.white,
+  backgroundColor = colors.blue,
+  ...props
+}) =&gt; {
+  const sx = {
+    fontFamily: &#x27;inherit&#x27;,
+    fontSize: &#x27;inherit&#x27;,
+    fontWeight: bold,
+    textDecoration: &#x27;none&#x27;,
+    display: &#x27;inline-block&#x27;,
+    margin: 0,
+    paddingTop: big ? space[2] : space[1],
+    paddingBottom: big ? space[2] : space[1],
+    paddingLeft: space[2],
+    paddingRight: space[2],
+    border: 0,
+    color,
+    backgroundColor,
+    WebkitAppearance: &#x27;none&#x27;,
+    MozAppearance: &#x27;none&#x27;
+  }
+
+  return (
+    &lt;button {...props} style={sx} /&gt;
+  )
+}
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Usage example
+&lt;div&gt;
+  &lt;Button&gt;
+    Blue Button
+  &lt;/Button&gt;
+  &lt;Button big backgroundColor={colors.red}&gt;
+    Big Red Button
+  &lt;/Button&gt;
+&lt;/div&gt;
+</code></pre><p class="css-1bl1570">The <code class="css-12ivgcj">color</code> and <code class="css-12ivgcj">backgroundColor</code> properties have been moved up to the component’s props.
+Additionally, we’ve added a <code class="css-12ivgcj">big</code> prop to adjust the padding top and bottom.</p><p class="css-1bl1570">Now this component is fine by itself, but what if we want a secondary button style?
+Doing the following would become tedious and error prone very quickly:</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">&lt;Button
+  color={colors.black}
+  backgroundColor={colors.lightblue}
+  children=&#x27;Secondary Button&#x27; /&gt;
+</code></pre><p class="css-1bl1570">Instead, we can create a dedicated secondary button component.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">import React from &#x27;react&#x27;
+import Button from &#x27;./Button&#x27;
+
+const ButtonSecondary = (props) =&gt; (
+  &lt;Button
+    {...props}
+    color={colors.black}
+    backgroundColor={colors.lightblue} /&gt;
+)
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Usage example
+&lt;div&gt;
+  &lt;Button&gt;Normal Button&lt;/Button&gt;
+  &lt;ButtonSecondary&gt;Secondary Button&lt;/ButtonSecondary&gt;
+&lt;/div&gt;
+</code></pre><p class="css-1bl1570">By adjusting the props API of the base Button component, an entire set of button styles can be created.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const ButtonBig = (props) =&gt; &lt;Button {...props} big /&gt;
+const ButtonGreen = (props) =&gt; &lt;Button {...props} backgroundColor={colors.green} /&gt;
+const ButtonRed = (props) =&gt; &lt;Button {...props} backgroundColor={colors.red} /&gt;
+const ButtonOutline = (props) =&gt; &lt;Button {...props} outline /&gt;
+</code></pre><p class="css-1bl1570">This pattern lends itself well to layout components as well.
+Assume we have a generic Box component that accepts props for various layout styles.
+This base layout component can then be used to create grid system components and other primitives.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const Grid = (props) =&gt; (
+  &lt;Box {...props}
+    display=&#x27;inline-block&#x27;
+    verticalAlign=&#x27;top&#x27;
+    px={2} /&gt;
+)
+
+const Half = (props) =&gt; (
+  &lt;Grid {...props}
+    width={1 / 2} /&gt;
+)
+
+const Third = (props) =&gt; (
+  &lt;Grid {...props}
+    width={1 / 3} /&gt;
+)
+
+const Quarter = (props) =&gt; (
+  &lt;Grid {...props}
+    width={1 / 4} /&gt;
+)
+
+const Flex = (props) =&gt; (
+  &lt;Box {...props}
+    display=&#x27;flex&#x27; /&gt;
+)
+
+const FlexAuto = (props) =&gt; (
+  &lt;Box {...props}
+    flex=&#x27;1 1 auto&#x27; /&gt;
+)
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Usage example
+&lt;div&gt;
+  &lt;div&gt;
+    &lt;Half&gt;Half width column&lt;/Half&gt;
+    &lt;Half&gt;Half width column&lt;/Half&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;Third&gt;Third width column&lt;/Third&gt;
+    &lt;Third&gt;Third width column&lt;/Third&gt;
+    &lt;Third&gt;Third width column&lt;/Third&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p class="css-1bl1570">Typography styles are another great candidate for building up with composition.
+By using a base typographic component, you can help ensure consistency and keep your styling DRY.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">import React from &#x27;react&#x27;
+import { alternateFont, typeScale, boldFontWeight } from &#x27;./styles&#x27;
+
+const Text = ({
+  tag = &#x27;span&#x27;,
+  size = 4,
+  alt,
+  center,
+  bold,
+  caps,
+  ...props
+}) =&gt; {
+  const Tag = tag
+  const sx = {
+    fontFamily: alt ? alternateFont : null,
+    fontSize: typeScale[size],
+    fontWeight: bold ? boldFontWeight : null,
+    textAlign: center ? &#x27;center&#x27; : null,
+    textTransform: caps ? &#x27;uppercase&#x27; : null
+  }
+
+  return &lt;Tag {...props} style={sx} /&gt;
+}
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">const LeadText = (props) =&gt; &lt;Text {...props} tag=&#x27;p&#x27; size={3} /&gt;
+const Caps = (props) =&gt; &lt;Text {...props} caps /&gt;
+const MetaText = (props) =&gt; &lt;Text {...props} size={5} caps /&gt;
+const AltParagraph = (props) =&gt; &lt;Text {...props} tag=&#x27;p&#x27; alt /&gt;
+
+const CapsButton = ({ children, ...props }) =&gt; (
+  &lt;Button {...props}&gt;
+    &lt;Caps&gt;
+      {children}
+    &lt;/Caps&gt;
+  &lt;/Button&gt;
+)
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Usage example
+&lt;div&gt;
+  &lt;LeadText&gt;
+    This is a lead with some &lt;Caps&gt;all caps&lt;/Caps&gt;.
+    It has a larger font size than the default paragraph.
+  &lt;/LeadText&gt;
+  &lt;MetaText&gt;
+    This is smaller text, like form helper copy.
+  &lt;/MetaText&gt;
+&lt;/div&gt;
+</code></pre><p class="css-1bl1570">Keep in mind, that these components are just a few examples and your needs will vary greatly on an app-by-app basis.</p><h2 id="higher-order-components" class="css-1d3ehct"><a href="#higher-order-components" class="css-1unrqcp">Higher Order Components</a></h2><p class="css-1bl1570">I’m generally a fan of keeping most of an applications state at the top level of a React tree,
+often using something like <a href="https://github.com/reactjs/redux" class="css-1o1roib">Redux</a>.
+However, sometimes there are isolated UI components that only require a minimal amount of state for interaction,
+and using them as standalone components is sufficient.</p><p class="css-1bl1570">One example of this is a carousel<a href="#*" class="css-1o1roib">*</a>, where the state of the current slide generally doesn’t need to persist across page views.
+Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
+The higher order component will have a current slide index and have previous and next methods.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Higher order component
+import React from &#x27;react&#x27;
+
+// This could be named something more generic like Counter or Cycle
+const CarouselContainer = (Comp) =&gt; {
+  class Carousel extends React.Component {
+    constructor () {
+      super()
+      this.state = {
+        index: 0
+      }
+      this.previous = () =&gt; {
+        const { index } = this.state
+        if (index &gt; 0) {
+          this.setState({ index: index - 1})
+        }
+      }
+
+      this.next = () =&gt; {
+        const { index } = this.state
+        this.setState({ index: index + 1 })
+      }
+    }
+
+    render () {
+      return (
+        &lt;Comp
+          {...this.props}
+          {...this.state}
+          previous={this.previous}
+          next={this.next} /&gt;
+      )
+    }
+  }
+
+  return Carousel
+}
+
+export default CarouselContainer
+</code></pre><p class="css-1bl1570">Using a higher order component we can create a carousel from any number of UI elements.
+For example, a simple carousel may have only previous and next buttons,
+while a more complex one might include image thumbnails of each slide across the bottom.
+Both of these can use the same higher order component to handle their state.</p><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// UI component
+const Carousel = ({ index, ...props }) =&gt; {
+  const length = props.length || props.children.length || 0
+
+  const sx = {
+    root: {
+      overflow: &#x27;hidden&#x27;
+    },
+    inner: {
+      whiteSpace: &#x27;nowrap&#x27;,
+      height: &#x27;100%&#x27;,
+      transition: &#x27;transform .2s ease-out&#x27;,
+      transform: `translateX(${index % length * -100}%)`
+    },
+    child: {
+      display: &#x27;inline-block&#x27;,
+      verticalAlign: &#x27;middle&#x27;,
+      whiteSpace: &#x27;normal&#x27;,
+      outline: &#x27;1px solid red&#x27;,
+      width: &#x27;100%&#x27;,
+      height: &#x27;100%&#x27;
+    }
+  }
+
+  const children = React.Children.map(props.children, (child, i) =&gt; {
+    return (
+      &lt;div style={sx.child}&gt;
+        {child}
+      &lt;/div&gt;
+    )
+  })
+
+  return (
+    &lt;div style={sx.root}&gt;
+      &lt;div style={sx.inner}&gt;
+        {children}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Final Carousel component
+const HeroCarousel = (props) =&gt; {
+    return (
+    &lt;div&gt;
+      &lt;Carousel index={props.index}&gt;
+        &lt;div&gt;Slide one&lt;/div&gt;
+        &lt;div&gt;Slide two&lt;/div&gt;
+        &lt;div&gt;Slide three&lt;/div&gt;
+      &lt;/Carousel&gt;
+      &lt;Button
+        onClick={props.previous}
+        children=&#x27;Previous&#x27; /&gt;
+      &lt;Button
+        onClick={props.next}
+        children=&#x27;Next&#x27; /&gt;
+    &lt;/div&gt;
+    )
+}
+
+// Wrap the component with the functionality from the higher order component
+export default CarouselContainer(HeroCarousel)
+</code></pre><pre class="css-4dinw3"><code class="language-js css-h2uv5g">// Usage example
+&lt;div&gt;
+  &lt;HeroCarousel /&gt;
+&lt;/div&gt;
+</code></pre><p class="css-1bl1570">By keeping the styling separate from the interactive state,
+any number of carousel variations can be created from these reusable parts.</p><p class="css-1bl1570">Just like the base component pattern above, higher order components
+can work well for styling layout, typography and colors.
+This is the same pattern used in <a href="https://github.com/jxnblk/reflexbox" class="css-1o1roib">Reflexbox</a>,
+and similar to Rebass’s <a href="https://github.com/jxnblk/rebass/blob/master/src/Base.js" class="css-1o1roib">Base component</a>.</p><h2 id="further-exploration" class="css-1d3ehct"><a href="#further-exploration" class="css-1unrqcp">Further Exploration</a></h2><p class="css-1bl1570">These are just a few patterns that I’ve found to be the most useful
+when it comes to styling UI in a component-based system.
+I’m curious to know if anyone else has found similar patterns that they’ve found helpful,
+and I’m sure there are even more ways to create more beautiful, more flexible, and more maintainable visual design systems.</p><style data-emotion-css="18qluqq">.css-18qluqq{margin-top:64px;margin-bottom:64px;border:0;border-bottom:1px solid;}</style><hr class="css-18qluqq"/><style data-emotion-css="1bbz37o">.css-1bbz37o{font-family:system-ui,sans-serif;font-weight:700;line-height:1.25;margin-top:32px;margin-bottom:16px;font-size:20px;}</style><h3 id="a-note-about-performance" class="css-1bbz37o"><a href="#a-note-about-performance" class="css-1unrqcp">A Note About Performance</a></h3><p class="css-1bl1570">While there are many different ways to handle styling in a component-based app,
+make sure to pay close attention to the size of your bundle.
+It can be easy to create the wrong abstractions and end up with needless bloat.
+Some of the patterns in this article, when taken to their logical extreme,
+could actually harm the performance and create a degraded experience for your end users.</p><p class="css-1bl1570">And remember, everything related to styling that you do should be for the user’s benefit, not your own.</p><hr class="css-18qluqq"/><small id="*">* Please don’t use carousels in your app. Users hate them.</small></div></main><style data-emotion-css="1nm38x2">.css-1nm38x2{padding-top:64px;padding-bottom:64px;}</style><footer class="css-1nm38x2"><style data-emotion-css="19e9ny0">.css-19e9ny0{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;font-weight:700;font-size:14px;max-width:768px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px;}.css-19e9ny0 a{color:inherit;-webkit-text-decoration:none;text-decoration:none;}.css-19e9ny0 a:hover{-webkit-text-decoration:underline;text-decoration:underline;}</style><div class="css-19e9ny0"><style data-emotion-css="1kuhxiq">.css-1kuhxiq{margin-left:-16px;}</style><div class="css-1kuhxiq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -24 176 176" width="48" height="48" fill="currentcolor" class="css-0" style="display:block;margin:0"><path d="
+M64 0 L64 4 L76 4 L74 6 L94 14 L92 16
+L104 20 L100 22 L106 28 L102 28 L106 56
+Q110 62 110 70 T105 84
+L96 108
+C92 116 76 128 64 128
+C52 128 36 116 32 108
+L23 84
+Q18 78 18 70 T22 56
+L22 22 L26 24 L34 12 L36 16z
+
+M72 40
+Q56 30 40 30
+Q32 34 30 48
+L30 48
+L28 74
+C28 81 37 102 38 104
+C46 118 62 121 64 121
+C66 121 82 118 90 104
+
+C91 102 100 81 100 74
+L99 52
+L94 40
+L92 42
+L84 38
+L84 42
+L74 36
+
+M44 62
+A5.5 5.5 0 0 0 44 73
+A5.5 5.5 0 0 0 44 62
+
+M84 62
+A5.5 5.5 0 0 0 84 73
+A5.5 5.5 0 0 0 84 62
+
+M57 88 H71
+A2 2 0 0 1 71 92
+H57
+A2 2 0 0 1 57 88
+
+M53 104 H75
+A2 2 0 0 1 75 108
+H53
+A2 2 0 0 1 53 104
+
+M33.3 60.4
+C34.6 57.8 37 55.9 39.7 55.2
+C43 54.4 46.8 55.3 50.4 58
+C51.3 58.6 52.5 58.4 53.2 57.5
+C53.8 56.6 53.6 55.4 52.7 54.7
+C46.8 50.5 41.8 50.5 38.7 51.3
+C34.8 52.3 31.5 54.9 29.7 58.6
+C29.2 59.6 29.6 60.8 30.6 61.3
+C30.9 61.4 31.2 61.5 31.5 61.5
+C32.2 61.5 32.9 61.1 33.3 60.4
+z
+
+M97.7 61.9
+C98.5 61.2  98.6  59.9  97.9  59.1
+C94.3 55  90.1  52.9  85.4  53
+C82 53  78.3  54.2  74.3  56.6
+C73.3 57.2  73  58.4  73.6  59.3
+C74.2 60.3  75.4  60.6  76.3  60
+C79.7 58  82.7  57  85.5  57
+C89 57  92.1  58.5  95  61.7
+C95.4 62.2  95.9  62.4  96.5  62.4
+C96.8 62.4 97.3 62.2 97.7 61.9
+z
+"></path></svg></div><style data-emotion-css="ibnnmb">.css-ibnnmb{margin-left:8px;margin-right:8px;}</style><div class="css-ibnnmb"><a href="https://jxnblk.com" class="css-1o1roib">© 2019 Jxnblk</a></div><div class="css-ibnnmb"><a href="https://github.com/jxnblk/blog" class="css-1o1roib">GitHub</a></div><div class="css-ibnnmb">Built with<!-- --> <a href="https://gatsbyjs.org" class="css-1o1roib">Gatsby</a></div></div></footer></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-4603832-6', 'auto', {});
+      
+      
+      
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/patterns-for-style-composition-in-react/";window.webpackCompilationHash="e17fc85b2ab38f68e9e9";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-4ab773ed6f5663432dfd.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js"],"component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js":["/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-index-js-81c5771f43d2ffb1a2c2.js"]};/*]]>*/</script><script src="/blog/webpack-runtime-ee9006925c18f9b050a6.js" async=""></script><script src="/blog/app-4ab773ed6f5663432dfd.js" async=""></script><script src="/blog/component---node-modules-jxnblk-gatsby-theme-mdx-blog-src-templates-post-js-2d5d9bbf4b28ce6c80dc.js" async=""></script></body></html>
