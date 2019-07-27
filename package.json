@@ -1,19 +1,12 @@
 {
   "private": true,
   "name": "jxnblog",
-  "version": "3.0.0-0",
+  "version": "4.0.0-0",
   "description": "The writing of Brent Jackson",
   "scripts": {
     "start": "gatsby develop",
-    "build": "gatsby build --prefix-paths",
-    "medium": "babel-node medium"
+    "build": "gatsby build"
   },
-  "keywords": [
-    "blog",
-    "writing",
-    "design",
-    "minimalism"
-  ],
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
