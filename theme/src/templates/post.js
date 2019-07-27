@@ -20,7 +20,7 @@ export const query = graphql`
   query ($id: String!) {
     post(id: { eq: $id }) {
       id
-      date
+      date(formatString: "MMMM DD, YYYY")
       title
       body
       tags

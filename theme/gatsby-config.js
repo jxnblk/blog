@@ -26,15 +26,5 @@ module.exports = {
       resolve: 'gatsby-plugin-feed',
       options: require('./feed')
     },
-    /*
-    {
-      resolve: 'gatsby-plugin-compile-es6-packages',
-      options: {
-        modules: [
-          pkg.name
-        ]
-      }
-    }
-    */
   ]
 }

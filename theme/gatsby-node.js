@@ -51,6 +51,12 @@ exports.sourceNodes = ({ actions, schema }) => {
         },
         excerpt: {
           type: 'String!',
+          args: {
+            pruneLength: {
+              type: `Int`,
+              defaultValue: 256,
+            },
+          },
           resolve: mdxResolverPassthrough('excerpt'),
         },
         body: {
@@ -140,7 +146,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (result.errors) reporter.panic(result.errors)
 
+  const filtered = await graphql(`
+    {
+      allPost(
+        sort: {
+          fields: [date, title],
+          order: DESC
+        }
+        filter: {
+          draft: { ne: true }
+        }
+        limit: 1000
+      ) {
+        edges {
+          node {
+            id
+            slug
+            title
+            date
+          }
+        }
+      }
+    }
+  `)
+
+  if (filtered.errors) reporter.panic(filtered.errors)
+
   const posts = result.data.allPost.edges.map(e => e.node)
+  const list = result.data.allPost.edges.map(e => e.node)
 
   posts.forEach(post => {
     actions.createPage({
@@ -153,7 +186,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   const limit = 16
-  const pages = Math.ceil(posts.length / limit)
+  const pages = Math.ceil(list.length / limit)
 
   Array.from({ length: pages }).forEach((n, i) => {
     const pi = i

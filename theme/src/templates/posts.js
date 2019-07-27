@@ -9,6 +9,7 @@ export default props => {
   return (
     <Posts
       {...props}
+      {...props.pageContext}
       posts={posts}
     />
   )
@@ -23,12 +24,15 @@ export const query = graphql`
       }
       limit: $limit
       skip: $skip
+      filter: {
+        draft: { ne: true }
+      }
     ) {
       edges {
         node {
           id
           slug
-          date
+          date(formatString: "MMMM DD, YYYY")
           title
           excerpt
         }
