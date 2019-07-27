@@ -6,12 +6,8 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-catch-links',
-    {
-      resolve: '@jxnblk/gatsby-theme-mdx-blog',
-      options: {
-        name: 'blog',
-      }
-    },
+    'gatsby-theme-jxnblk',
+    // '@jxnblk/gatsby-theme-mdx-blog',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {

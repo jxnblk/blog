@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled, useColorMode } from 'theme-ui'
 import { Link } from 'gatsby'
-import { Button } from '@jxnblk/gatsby-theme-mdx-blog'
 
 const modes = [
   'light',
@@ -45,9 +44,9 @@ export default props => {
           </Link>
         </Styled.h3>
         <div sx={{ mx: 'auto' }} />
-        <Button title='Change Color Mode' onClick={cycleMode}>
+        <button title='Change Color Mode' onClick={cycleMode}>
           {mode}
-        </Button>
+        </button>
       </div>
     </header>
   )
