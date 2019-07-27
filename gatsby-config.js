@@ -5,10 +5,11 @@ module.exports = {
     siteUrl: 'https://jxnblk.com'
   },
   plugins: [
+    'gatsby-plugin-catch-links',
     {
       resolve: '@jxnblk/gatsby-theme-mdx-blog',
       options: {
-        name: '/blog',
+        name: 'blog',
       }
     },
     {
