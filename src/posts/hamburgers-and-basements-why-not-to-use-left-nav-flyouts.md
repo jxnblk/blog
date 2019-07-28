@@ -19,7 +19,7 @@ Another, more obvious downside to the left nav flyout is its inefficiency: tap a
 
 Having a lot of functionality and complexity in your product is no excuse. If your navigation has more than five items at the top-level, that's just lazy information architecture. Too many choices is bad anywhere, especially on a 4-inch display.
 
-![image](http://jxnblk.s3.amazonaws.com/assets/images/HamburgersAndBasements-TabBars.png)
+![image](//jxnblk.s3.amazonaws.com/assets/images/HamburgersAndBasements-TabBars.png)
 
 Contrast this with Twitter's iPhone app. Holding the app in hand, the user knows exactly what it is. It's small enough to wrap their brain around, and it feels easy to use. The persistent tab bar quickly describes what the user can do, where they can go, and what type of content they'll see. It also – like any persistent navigation pattern – provides context about where the user has navigated and provides an easy one-tap path to the main parts of the app.
 
