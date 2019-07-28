@@ -1,18 +1,19 @@
 ---
-title: CSS in JS
-date: 2019-07-22
-draft: true
+title: CSS-in-JS is the New Sass
+date: 2019-07-29
 ---
 
-I love CSS. I love JavaScript. CSS-in-JS is like a match made in heaven.
+I *love* CSS. I *love* JavaScript. CSS-in-JS is like a match made in heaven.
 
-While others have [enumerated][threepointone] some of the overall reasons people have adopted CSS-in-JS libraries, I wanted to share some of my personal experiences in using some of these tools over the past few years.
+While others have [enumerated][threepointone] some of the overall reasons people have adopted CSS-in-JS libraries,
+I wanted to take a step back and think about why we even have CSS-in-JS in the first place.
+And, as horrifying as it might sound,
+CSS-in-JS ain't that much different from Sass.
 
 [threepointone]: https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
 
-## It's a lot like Sass
+## Syntactically... Okay
 
-As horrifying as it might sound, I like to compare CSS-in-JS to Sass.
 When *Syntactically Awesome StyleSheet*s first hit the scene, it put many people off.
 The whitespace sensitive syntax was very different from standard CSS, which ultimately made the closer-to-but-not-standard *Sassy CSS* flavor the more popular choice.
 
@@ -22,19 +23,32 @@ for years still exist in Sass-based projects.
 The syntax and features in Sass also made it easier to generate even larger stylesheets,
 without making it obvious to the author.
 
-I believe that userland experimentation like Sass is beneficial to standards like CSS.
-Now, CSS itself has the *custom properties* feature, which was inspired by Sass variables, and I think it's a huge win for CSS.
-Some of the not-so-great features of Sass have *not* been added to CSS, which is also good.
+Userland experimentation, like Sass, is generally beneficial to standards like CSS.
+Now that the innovation period in Sass has ended,
+CSS itself has the *custom properties* feature, which was inspired by Sass variables.
+I think this is a huge win for CSS.
+Meanwhile,
+some of the not-so-great features of Sass have *not* been added to CSS, which is also good.
+
+## Problems Beget Solutions
 
 Unfortunately, Sass didn't solve all the problems inherit in writing CSS.
 Stylesheets are continuing to grow in size, causing performance and maintenance issues for teams,
-and the global nature of CSS can make applying styles in a larger application difficult for developers who aren't world-class CSS experts.
+and the inherent global scope in CSS can make applying styles in a large application difficult for developers who aren't world-class CSS experts.
+
+## OOCSS/FCSS/BEM
 
 To counteract some of these problems, we invented authoring methodologies like OOCSS, Functional/Utility-Based CSS, and BEM.
+While teams might find some success in following strict rules,
+approaches like these require governance, culture, and policing to remain effective over time.
+If computers were only invented for one thing,
+automating these sorts of processes is probably it.
+
 I helped invent utility-based CSS,
 but I wouldn't want to revert back to using it again after using the tools we have available today.
 CSS-in-JS helps remove a whole class of problems that we used to struggle with, and I can't imagine having to go back to working in a large application without it.
 
+<!--
 ## Alright what's so great then?
 
 I don't want to get into all the specific features of CSS-in-JS libraries, but I think there are a few less-discussed benefits that are often overlooked.
@@ -88,6 +102,8 @@ As a bonus, dead code elimination for CSS goes hand-in-hand with your component.
 
 The ability to style an application without thinking about selectors and specificity is huge.
 I can't describe how liberating this is, and you just need to see for yourself.
+
+-->
 
 ## Give it a shot
 
