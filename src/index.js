@@ -33,7 +33,7 @@ const Page = props => {
         <meta name='twitter:creator' content='Brent Jackson' />
         <meta name='twitter:card' content='summary' />
       </Helmet>
-      <Layout>
+      <Layout {...props}>
         {props.children}
       </Layout>
     </>

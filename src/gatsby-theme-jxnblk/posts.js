@@ -11,8 +11,6 @@ export default ({
   <div
     sx={{
       maxWidth: 'container',
-      px: 3,
-      mx: 'auto',
     }}>
     <ul
       sx={{

@@ -10,8 +10,6 @@ export default ({
   <div
     sx={{
       maxWidth: 'container',
-      px: 3,
-      mx: 'auto',
     }}>
     <Styled.h1>{title}</Styled.h1>
     <div sx={{ variant: 'type.small' }}>{date}</div>

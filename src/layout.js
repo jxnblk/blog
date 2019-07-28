@@ -70,9 +70,15 @@ export default props => {
     <div
       sx={{
         variant: 'styles.root',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
       }}>
       <Global
         styles={{
+          '*': {
+            boxSizing: 'border-box',
+          },
           body: {
             margin: 0,
           }
@@ -80,8 +86,11 @@ export default props => {
       />
       <header
         sx={{
+          width: '100%',
           display: 'flex',
           alignItems: 'center',
+          maxWidth: 'wide',
+          mx: 'auto',
           px: 3,
           py: 4,
         }}>
@@ -110,13 +119,23 @@ export default props => {
           onClick={cycleMode}
         />
       </header>
-      <main>
+      <main
+        sx={{
+          width: '100%',
+          maxWidth: 'wide',
+          px: 3,
+          mx: 'auto',
+          flex: '1 1 auto',
+        }}>
         {props.children}
       </main>
       <footer
         sx={{
           px: 3,
           py: 5,
+          width: '100%',
+          maxWidth: 'wide',
+          mx: 'auto',
         }}>
         <div
           sx={{
@@ -126,6 +145,7 @@ export default props => {
           }}>
           <Avatar />
         </div>
+        <Styled.hr />
         <div
           sx={{
             display: 'flex',
@@ -150,6 +170,15 @@ export default props => {
               mr: 3,
             }}>
             Blog
+          </Styled.a>
+          <Styled.a
+            as={Link}
+            to='/about'
+            sx={{
+              variant: 'styles.navitem',
+              mr: 3,
+            }}>
+            About
           </Styled.a>
           <Styled.a
             href='https://twitter.com/jxnblk'

@@ -4,7 +4,6 @@ import { jsx } from 'theme-ui'
 export const Banner = props =>
   <div
     sx={{
-      px: 4,
       py: [4, 5, 6],
       fontWeight: 'bold',
       h1: {
@@ -25,10 +24,10 @@ export const Banner = props =>
     {props.children}
   </div>
 
-export const Container = props =>
+export const Container = ({ wide, ...props }) =>
   <div
     sx={{
-      px: 4,
+      maxWidth: wide ? 'wide' : 'container',
     }}>
     {props.children}
   </div>
@@ -42,27 +41,18 @@ export const Tiles = props =>
         m: 0,
         display: 'grid',
         gridGap: 4,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(256px, 1fr))',
       },
       h2: {
         fontSize: 2,
       },
       img: {
         display: 'block',
-        width: 192,
+        width: 128,
         maxWidth: '100%',
         height: 'auto',
         m: 'auto',
       },
-      /*
-      a: {
-        color: 'inherit',
-        textDecoration: 'none',
-        ':hover,:focus': {
-          color: 'primary',
-        }
-      },
-      */
       ...props.sx
     }}>
     {props.children}

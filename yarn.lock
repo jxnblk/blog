@@ -975,6 +975,13 @@
   resolved "https://registry.yarnpkg.com/@styled-system/css/-/css-5.0.17.tgz#aaab722fe2f30d44b32909725f426a491e79d88d"
   integrity sha512-MSKnFq3zK53fJ/Au2oAnioNiKZJ2GATi4/tGYlh+/qSbDa09YX0siOzO8kIMKYt4L2fNCZnCuKPXJS7NFcWbmA==
 
+"@theme-ui/prism@^0.2.21":
+  version "0.2.21"
+  resolved "https://registry.yarnpkg.com/@theme-ui/prism/-/prism-0.2.21.tgz#c024b2346c9da28c51be68654697ce0f6c635c47"
+  integrity sha512-utdeOYhr2VW/pYSLbwObjFwBinqeSrnx/WAdrnTAjIC66Z/1xm2YBsD6T3vWiUg67XZLYL2SM2pd6ztpZA5WfQ==
+  dependencies:
+    prism-react-renderer "^0.1.7"
+
 "@types/configstore@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@types/configstore/-/configstore-2.1.1.tgz#cd1e8553633ad3185c3f2f239ecff5d2643e92b6"
@@ -8273,6 +8280,11 @@ pretty-error@^2.1.1:
   dependencies:
     renderkid "^2.0.1"
     utila "~0.4"
+
+prism-react-renderer@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-0.1.7.tgz#dc273d0cb6e4a498ba0775094e9a8b01a3ad2eaa"
+  integrity sha512-EhnM0sYfLK103ASK0ViSv0rta//ZGB0dBA9TiFyOvA+zOj5peLmGEG01sLEDwl9sMe+gSqncInafBe1VFTCMvA==
 
 private@^0.1.6:
   version "0.1.8"
