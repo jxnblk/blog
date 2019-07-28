@@ -1,3 +1,7 @@
+/writing/* /blog/:splat
+/styled-system/* https://styled-system.com/:splat
+/rebass/* https://rebassjs.org/:splat
+
 /skullcat/  https://jxnblk.github.io/skullcat/  200
 /mdx-go https://jxnblk.github.io/mdx-go 200
 /colorable  https://jxnblk.github.io/colorable  200
