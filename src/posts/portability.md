@@ -1,7 +1,6 @@
 ---
 title: Portability
-date: 2019-07-22
-draft: true
+date: 2019-07-23
 ---
 
 In software development, formats help ensure that content and data are portable and can be used in many different applications.
