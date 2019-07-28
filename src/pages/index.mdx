@@ -1,32 +1,64 @@
-import { Avatar } from 'jxnblk'
+import { Banner, Tiles, Container, List } from '../blocks'
+import Avatar from '../avatar'
+
+<Banner>
 
 # Jxnblk <br /> Brent Jackson
 
-<Avatar size={96} />
-
-Developer and former designer.
-Currently at [Gatsby][].
+Front-end developer, currently at [Gatsby][].
 Based in Brooklyn, NY
 
 - [Blog](/blog)
 - [Twitter](https://twitter.com/jxnblk)
 - [GitHub](https://github.com/jxnblk)
 
+</Banner>
+
+<Container>
+
 ## Projects
 
-- [Theme UI](https://theme-ui.com)
-- [MDX Deck](https://github.com/jxnblk/mdx-deck)
-- [Styled System](https://styled-system.com)
-- [Rebass](https://rebassjs.org)
+<Tiles>
 
-## Past Hits
+- [![Theme UI Logo](https://contrast.now.sh/cff/40f?size=512&fontSize=2&baseline=2&fontWeight=900&radius=32&text=UI)][theme ui]
+  ## [Theme UI][]
+  Build consistent, themeable React apps based on constraint-based design principles
+- [![Spade Mascot](https://raw.githubusercontent.com/jxnblk/mdx-deck/master/docs/ace.png)][mdx deck]
+  ## [MDX Deck][]
+  React MDX-based presentation decks
+- [![Hexagon logo](https://styled-system.com/logo.png)][styled system]
+  ## [Styled System][]
+  Style props for rapid UI development
+- [![Atom logo](https://rebassjs.org/icon.png)][rebass]
+  ## [Rebass][]
+  React primitive UI components built with Styled System
 
-- [Colorable](https://colorable.jxnblk.com)
+[theme ui]: https://theme-ui.com
+[mdx deck]: https://github.com/jxnblk/mdx-deck
+[styled system]: https://styled-system.com
+[rebass]: https://rebassjs.org
+
+</Tiles>
+
+<List
+  sx={{
+    py: 5,
+  }}>
+
 - [Contrast Swatch](https://github.com/jxnblk/contrast-swatch)
+- [Colorable](https://colorable.jxnblk.com)
 - [Palx](https://palx.jxnblk.com)
 - [Hello Color](https://jxnblk.github.io/hello-color)
 - [Microicon](https://icon.now.sh)
+- [CSS Stats](https://cssstats.com/)
 - [Basscss](https://basscss.com)
+- [Repng](https://github.com/jxnblk/repng)
+- [Microbeats](http://microbeats.cc)
+- [MrsJxn](http://mrsjxn.com)
 - [Skullcat](https://jxnblk.github.io/skullcat)
+
+</List>
+
+</Container>
 
 [gatsby]: https://gatsbyjs.org

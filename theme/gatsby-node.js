@@ -196,7 +196,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     if (i > 0) {
       previous = pi === 1 ? '/blog' : join('/blog', pi)
     }
-    if (ni <= pages) {
+    if (ni < pages) {
       next = join('/blog', ni)
     }
     const slug = i === 0 ? '/blog' : join('/blog', i + 1)

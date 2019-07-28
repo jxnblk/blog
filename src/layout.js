@@ -92,6 +92,7 @@ export default props => {
             variant: 'styles.navitem',
             mr: 3,
           }}>
+          <Avatar size={32} sx={{ mr: 2 }} />
           Jxnblk
         </Styled.a>
         <Styled.a
@@ -115,7 +116,7 @@ export default props => {
       <footer
         sx={{
           px: 3,
-          py: 4,
+          py: 5,
         }}>
         <div
           sx={{
@@ -128,14 +129,33 @@ export default props => {
         <div
           sx={{
             display: 'flex',
+            flexWrap: 'wrap',
             alignItems: 'center',
             fontSize: 0,
           }}>
           <Styled.a
+            as={Link}
+            to='/'
+            sx={{
+              variant: 'styles.navitem',
+              mr: 3,
+            }}>
+            Jxnblk
+          </Styled.a>
+          <Styled.a
+            as={Link}
+            to='/blog'
+            sx={{
+              variant: 'styles.navitem',
+              mr: 3,
+            }}>
+            Blog
+          </Styled.a>
+          <Styled.a
             href='https://twitter.com/jxnblk'
             sx={{
               variant: 'styles.navitem',
-              mr: 2,
+              mr: 3,
             }}>
             Twitter
           </Styled.a>
@@ -143,7 +163,7 @@ export default props => {
             href='https://github.com/jxnblk'
             sx={{
               variant: 'styles.navitem',
-              mr: 2,
+              mr: 3,
             }}>
             GitHub
           </Styled.a>

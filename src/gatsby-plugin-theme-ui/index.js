@@ -33,7 +33,7 @@ export default {
     bold: 700,
   },
   fontSizes: [
-    14, 16, 18, 20, 24, 32, 48, 64, 72
+    14, 16, 18, 20, 24, 32, 48, 64, 72, 96
   ],
   sizes: {
     container: 768,
@@ -83,7 +83,13 @@ export default {
       variant: 'type.heading',
       fontSize: 0,
     },
+    img: {
+      maxWidth: '100%',
+      height: 'auto',
+    },
     navitem: {
+      display: 'inline-flex',
+      alignItems: 'center',
       color: 'inherit',
       textDecoration: 'none',
       fontWeight: 'bold',
