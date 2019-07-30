@@ -258,7 +258,7 @@ Now run `npm start` which should generate an HTML file with the colors parsed fr
 npm start && open index.html
 ```
 
-<img src="http://jxnblk.s3.amazonaws.com/assets/images/css-color-palette.png"
+<img src="//jxnblk.s3.amazonaws.com/assets/images/css-color-palette.png"
   alt="Color palette demo"
   width="768"
   height="496" />
@@ -346,7 +346,7 @@ Add a section to `template.html` to display the color combinations.
 
 Run the build script. You should now have a list of color combinations along with the contrast value for each pair.
 
-<img src="http://jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg"
+<img src="//jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg"
   alt="Color combination demo"
   width="768"
   height="576" />

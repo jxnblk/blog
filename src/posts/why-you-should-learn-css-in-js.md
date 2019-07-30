@@ -58,7 +58,7 @@ CSS-in-JS **does not** get rid of the need to understand the following:
 
 CSS-in-JS libraries allow you to author styles *without* generally having to think about:
 
-- The cascade ([**not inheritance**](/the-cascade-is-not-inheritance))
+- The cascade ([**not inheritance**](/blog/the-cascade-is-not-inheritance))
 - Specificity
 - Naming selectors
 - Enforcing naming conventions
