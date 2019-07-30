@@ -3,6 +3,8 @@
 /rebass/* https://rebassjs.org/:splat
 
 /skullcat/*  https://jxnblk.github.io/skullcat/:splat
+/paths/ https://jxnblk.github.io/paths/
+
 /mdx-go https://jxnblk.github.io/mdx-go 200
 /colorable  https://jxnblk.github.io/colorable  200
 /avatar https://jxnblk.github.io/avatar 200
@@ -25,7 +27,6 @@
 /geomicons-open/  https://jxnblk.github.io/geomicons-open/  200
 /shade/ https://jxnblk.github.io/shade/ 200
 /hyp/ https://jxnblk.github.io/hyp/ 200
-/paths/ https://jxnblk.github.io/paths/ 200
 /react-css-grid/  https://jxnblk.github.io/react-css-grid/  200
 /bass-component/  https://jxnblk.github.io/bass-component/  200
 /react-design-tooling/  https://jxnblk.github.io/react-design-tooling/  200
