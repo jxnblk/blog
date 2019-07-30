@@ -7,7 +7,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-catch-links',
     'gatsby-theme-jxnblk',
-    // '@jxnblk/gatsby-theme-mdx-blog',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
@@ -16,6 +15,7 @@ module.exports = {
         ]
       }
     },
+    'gatsby-plugin-twitter',
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
