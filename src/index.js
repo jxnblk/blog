@@ -7,6 +7,7 @@ const Page = props => {
   let title = 'Jxnblk'
   const postTitle = get(props.data, 'post.title')
   const description = get(props.data, 'post.excerpt')
+
   if (postTitle) {
     title = `${postTitle} | ${title}`
   }
@@ -22,6 +23,10 @@ const Page = props => {
         <link
           rel='apple-touch-icon-precomposed'
           href='https://jxnblk.com/avatar.png'
+        />
+        <link
+          rel='canonical'
+          href={props.location.href}
         />
         <meta name='twitter:site' content='@jxnblk' />
         <meta name='og:image' content='https://jxnblk.com/avatar.png' />

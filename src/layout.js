@@ -3,6 +3,10 @@ import { jsx, Styled, useColorMode } from 'theme-ui'
 import { Link } from 'gatsby'
 import { Global } from '@emotion/core'
 import Avatar from './avatar'
+import {
+  FaTwitter as Twitter,
+  FaGithub as GitHub
+} from 'react-icons/fa'
 
 const modes = [
   'light',
@@ -147,8 +151,24 @@ export default props => {
             justifyContent: 'center',
           }}>
           <Avatar />
+          <a
+            href='https://twitter.com/jxnblk'
+            title='Twitter'
+            sx={{
+              variant: 'styles.navitem',
+              mx: 3,
+            }}>
+            <Twitter size={24} />
+          </a>
+          <a
+            href='https://github.com/jxnblk'
+            title='GitHub'
+            sx={{
+              variant: 'styles.navitem',
+            }}>
+            <GitHub size={24} />
+          </a>
         </div>
-        <Styled.hr />
         <div
           sx={{
             display: 'flex',
@@ -179,28 +199,12 @@ export default props => {
             to='/about'
             sx={{
               variant: 'styles.navitem',
-              mr: 3,
+              mr: 4,
             }}>
             About
           </Styled.a>
-          <Styled.a
-            href='https://twitter.com/jxnblk'
-            sx={{
-              variant: 'styles.navitem',
-              mr: 3,
-            }}>
-            Twitter
-          </Styled.a>
-          <Styled.a
-            href='https://github.com/jxnblk'
-            sx={{
-              variant: 'styles.navitem',
-              mr: 3,
-            }}>
-            GitHub
-          </Styled.a>
           <div sx={{ mx: 'auto' }} />
-          <div>© 2019 Brent Jackson</div>
+          <div sx={{ my: 2 }}>© 2019 Brent Jackson</div>
         </div>
       </footer>
     </div>
