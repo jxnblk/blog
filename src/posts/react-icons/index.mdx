@@ -1,0 +1,316 @@
+---
+title: React Icons
+date: 2015-06-01
+---
+
+import Cog from './Cog'
+import Square from './Square'
+
+While traditional graphics applications like Adobe Illustrator work well for certain tasks,
+they fall short when used to create pixel perfect, mathematically-derived graphics.
+Anyone who’s attempted to create data visualizations with such software might have encountered these limitations.
+And while JavaScript libraries like D3 have helped out tremendously,
+certain types of illustrations and icons can still be difficult to create,
+and tools like Illustrator leave a lot of room for error.
+
+<Cog size={128} />
+
+Take a settings cog icon as an example.
+It relies on radial symmetry and is based on three concentric circles,
+where lines from each tooth must intersect at points not easily determined within a two dimensional grid.
+Creating something like this in graphics software
+would require using transformations every time an adjustment was made.
+Luckily, some basic math can help out, and JavaScript excels at making these sorts of calculations.
+
+Although most of this could be achieved with plain JavaScript and other templating engines,
+using a library like React provides high cohesion between the SVG code and the math involved,
+keeps things encapsulated into a single requirable component,
+and provides an easy way to render static markup.
+
+Note: this tutorial focuses on using React as a stand-alone exploratory design tool,
+rather than as a way to implement SVG icons within a React application.
+
+## Making a Cog Icon
+
+<figure className="center mb3">
+  <img src="http://jxnblk.s3.amazonaws.com/assets/images/cog-sketch-bw.jpg"
+    alt="Cog icon sketch"
+    width="320"
+    className="fit" />
+  <figcaption>Icon sketch made using a salt shaker, Sixpoint can, and a quarter</figcaption>
+</figure>
+
+Looking at this sketch, there are some properties that can be handled with JavaScript variables:
+
+- Overall dimensions
+- The radii for the three concentric circles
+- The number of flat-edged, splayed teeth around the outside
+- The angle of each tooth
+- Fill color for the SVG
+
+
+## Initial Setup
+
+To get started, you should have <a href="https://nodejs.org/" target="_blank">Node.js</a> installed as well as a basic understanding of using npm and JavaScript modules.
+Initialize a new npm package and install react and react-tools
+
+```sh
+npm init
+npm i --save-dev react react-tools
+```
+
+Now create a `build.js` script which will be used to render the static SVG.
+
+```
+<Highlight code={this.props.code.build1} />
+```
+
+This build script imports the Cog component, renders it to static markup,
+and saves the file in the `icons` directory.
+
+
+Go ahead and make a new directory for the icons.
+
+```
+mkdir icons
+```
+
+Next create a `src` folder and a new `Cog.jsx` file.
+
+```
+<Highlight code={this.props.code.svgComponent1} />
+```
+
+Next add some scripts to `package.json`.
+
+
+```
+<Highlight code={this.props.code.packageScripts} />
+```
+
+Run the following scripts to compile `Cog.jsx` to plain JavaScript,
+and to create an SVG named `cog-icon.svg`
+
+```
+npm run jsx
+npm run build
+```
+
+## The xmlns Attribute in React
+
+At the time of this writing, React strips the xmlns attribute from the SVG.
+When using the SVG inline in HTML, this shouldn’t be a problem,
+but when using it as an image, the attribute is needed.
+To get around this limitation, add a wrapping SVG tag in `build.js`.
+
+```
+<Highlight code={this.props.code.build2} />
+```
+
+
+After making these changes, run `npm run build` to rebuild the SVG.
+Open the SVG file in a browser to see the icon as it progresses.
+At this point, it should appear blank,
+but you can open web inspector to ensure that the SVG wrapper is there.
+
+
+## Watching Changes
+
+To watch changes as the icon is developed, run the watch:jsx command to transpile the jsx file to js.
+
+```
+npm run watch:jsx
+```
+
+For each change you’ll need to rerun the build script.
+While you can also set up watching for the build script, this is beyond the scope of the tutorial.
+
+
+## Default Props
+
+To allow for adjustments to be made from the build script, the icon will use React props.
+Define some defaults in `Cog.jsx`.
+
+```
+<Highlight code={this.props.code.defaultProps} />
+```
+
+The width and height of the square-shaped icon will be handled with the `size` prop.
+The diameters `d1`, `d2`, and `d3` represent ratios
+of the size for each concentric circle.
+The number of teeth on the cog will be handled with the `teeth` prop.
+The `splay` prop represents the angle for the side of each tooth and will be explained later.
+And the `fill` prop is set to `currentcolor` to inherit color when used inline in HTML.
+
+
+## Defining Radii and Other Values
+
+Within the render function, use these props to define other values that will be used to create the icon.
+
+```
+<Highlight code={this.props.code.renderVariables} />
+```
+
+The center of the icon is defined as `c`.
+The angle for each tooth is calculated based on the number of teeth.
+And `offset` is used to rotate the icon 90° to ensure that the first tooth is at the top.
+
+
+## Path Data
+
+The `pathData` variable will be used for the path element’s `d` attribute.
+The value for this attribute is a string of commands used to draw a line.
+Letters represent different commands and numbers represent positions in the x/y coordinate system.
+Uppercase letters are used for absolute coordinates, while lowercase is used for relative coordinates.
+This tutorial only uses absolute coordinates, so each letter must be uppercase.
+Only three commands will be used to create the icon:
+Move `M`, Line To `L`, and Arc `A`.
+To read more about the SVG path element,
+see this <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths" target="_blank">MDN tutorial</a>.
+
+The `pathData` variable is constructed with an array followed by the `.join()` method.
+This is to more easily combine path commands and numbers and ensure that the values have a space between each one.
+
+To demonstrate how the path commands work, the following should create a rectangle based on the coordinates given.
+
+<Square />
+
+```
+<Highlight code={this.props.code.pathSquare} />
+```
+
+## Building Teeth
+
+To create teeth around the outer circle based on the number given in the `teeth` prop,
+a function will be used to return the values for each point.
+To calculate the x/y coordinates for each point around the outer circle, add the following functions.
+
+```
+<Highlight code={this.props.code.rxRy} />
+```
+
+The `rad` function converts degrees to radians for convenience
+and since the `Math.cos`, `Math.sin`, and `Math.tan` functions
+all require radians.
+The `rx` and `ry` functions calculate the x and y coordinates
+respectively based on the radius and angle.
+
+```
+<figure className="center mb3">
+<CircleXY />
+<figcaption>The `rx` and `ry` functions being used to find coordinates along a circle</figcaption>
+</figure>
+```
+
+Start with a polygon to see how the `teeth` prop can be adjusted to create different numbers of points.
+
+```
+<Highlight code={this.props.code.drawPolygon} />
+```
+
+```
+<figure className="center py2">
+<Polygon />
+<Polygon teeth={7} />
+<Polygon teeth={6} />
+<Polygon teeth={5} />
+<figcaption>Polygons with 8, 7, 6, and 5 points</figcaption>
+</figure>
+```
+
+Passing the number of teeth to the `drawTeeth` function, it loops through and calculates each angle with the offset defined above.
+Using a ternary operator, it either moves to the first point or draws a line to subsequent points.
+The x and y coordinates are calculated with the `rx` and `ry` functions.
+Then each command is pushed to the `d` array, and it is return as a string.
+
+Since Math functions are calculating numbers that are being converted to strings for the `d` attribute,
+JavaScript will convert extremely small numbers to scientific notation.
+To prevent this from happening, the `num` function is used to return `0` for small numbers.
+
+
+## Shaping the Teeth
+
+Now that the function to loop through the number of teeth is set up,
+change the commands in the `line` array to draw lines to the inner circle of the cog.
+
+```
+<div className="center">
+<SunBurst />
+</div>
+<Highlight code={this.props.code.sunBurst} />
+```
+
+## The Arc Command
+
+Here the Arc `A` command is being used to draw part of the inner circle.
+The first two values in the Arc command represent the x and y radii.
+The next three values are booleans representing the `x-axis-rotation`, `large-arc-flag`, and the `sweep-flag`.
+The `sweep-flag` value is set to `1` (true) to ensure the arc curves in the right direction.
+The last two values are the x and y coordinates for where the arc should end.
+To read more about the Arc command see this <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Arcs" target="_blank">MDN tutorial</a>.
+
+Currently, this function arbitrarily adds and subtracts 6° to the angle to create the teeth.
+Add the following to the render function to calculate the angles based on the number of teeth.
+
+```
+<Highlight code={this.props.code.flatTeeth} />
+```
+
+The tooth angle `ta` is one-fourth of the angle for each tooth.
+The tooth width `tw` is based on that angle.
+The `tx` and `ty` functions are used to calculate the x and y coordinates based on angle and distance.
+These functions and values are added to the line array to offset points for the corners of the teeth and the points at which they intersect the inner circle.
+
+```
+<pre className="display-none">right triangle diagram</pre>
+<div className="center">
+<FlatTeeth />
+</div>
+```
+
+## Splayed Teeth
+
+The icon is starting to take shape, but the sides of each tooth are based on angles from the center.
+To splay the sides of the teeth in the other direction, edit the `tw` variable as shown below.
+
+```
+<Highlight code={this.props.code.splay} />
+```
+
+Splay, defined earlier in default props, represents a ratio of the tooth angle.
+Since it’s a prop, adjustments to this angle can be made from the build script.
+For the tooth width, the splay angle is subtracted from the tooth angle.
+
+For the `drawTeeth` function,
+splay is added and subtracted from the angles at which the side of the tooth should intersect the inner circle.
+
+```
+<Highlight code={this.props.code.splayDraw} />
+<div className="center">
+<Splayed />
+</div>
+```
+
+## Adding a Hole
+
+Now all that’s left is to add the hole in the center.
+To create a circle that subtracts (or punches) from the outer shape,
+use two Arc commands to draw a circle in a counterclockwise direction.
+With the path element, intersecting shapes subtract from each other when they are drawn in opposite directions.
+
+```
+<Highlight code={this.props.code.hole} />
+```
+
+Now you should have an adjustable cog icon similar to the one below.
+View the complete source code for the cog icon on <a href="https://github.com/jxnblk/react-icons/blob/master/src/Cog.jsx">GitHub</a>.
+Hopefully you can see how with just a little bit of math,
+React can be a powerful tool for creating flexible and precise SVG graphics.
+
+---
+
+*Originally posted at jxnblk.com/react-icons*
+
+<!--
+https://twitter.com/jxnblk/status/605378058175049728
+-->
