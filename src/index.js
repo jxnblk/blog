@@ -7,7 +7,7 @@ const Page = props => {
   let title = 'Jxnblk'
   const postTitle = get(props.data, 'post.title')
   const description = get(props.data, 'post.excerpt')
-  const slug = get(props.data, 'post.slug')
+
   if (postTitle) {
     title = `${postTitle} | ${title}`
   }
