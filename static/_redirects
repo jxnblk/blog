@@ -4,6 +4,7 @@
 
 /skullcat/*  https://jxnblk.github.io/skullcat/:splat
 /paths/ https://jxnblk.github.io/paths/
+/principles/  https://jxnblk.com/blog/principles/
 
 /mdx-go https://jxnblk.github.io/mdx-go 200
 /colorable  https://jxnblk.github.io/colorable  200
@@ -61,7 +62,6 @@
 /h0/  https://jxnblk.github.io/h0/  200
 /image-palette/ https://jxnblk.github.io/image-palette/ 200
 /hyperterminator/ https://jxnblk.github.io/hyperterminator/ 200
-/principles/  https://jxnblk.github.io/principles/  200
 /hypercolors/ https://jxnblk.github.io/hypercolors/ 200
 /sploot/  https://jxnblk.github.io/sploot/  200
 /react-context-router/  https://jxnblk.github.io/react-context-router/  200
