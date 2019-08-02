@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
+    "clean": "gatsby clean",
     "serve": "gatsby serve -H 0.0.0.0"
   },
   "author": "Brent Jackson",
