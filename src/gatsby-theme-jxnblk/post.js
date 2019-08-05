@@ -3,9 +3,23 @@ import { jsx, Styled } from 'theme-ui'
 import Avatar from '../avatar'
 import Tweet from '../tweet'
 
+const Draft = () => (
+  <div
+    sx={{
+      p: 3,
+      my: 4,
+      fontWeight: 'bold',
+      color: 'background',
+      bg: 'accent',
+    }}>
+    ⚠️ You are viewing an draft post, and this may not be ready for primetime.
+  </div>
+)
+
 export default ({
   title,
   date,
+  draft,
   children,
   location,
   ...props,
@@ -26,6 +40,7 @@ export default ({
         url={location.href}
       />
     </div>
+    {draft && <Draft /> }
     <article>
       {children}
     </article>

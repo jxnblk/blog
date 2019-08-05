@@ -13,9 +13,9 @@ We don't question whether or not we should teach children to read and write,
 or whether we should math in school.
 In a modern public education systems, these are a given.
 While these institutions might have other problems,
-I think code literacy should be a fundamental part of any school cirriculum.
+I think code literacy should be a fundamental part of any school curriculum.
 
-What *is* code? Paul Ford has [already written][what is code] more that enough to cover that topic,
+What *is* code? Paul Ford has [already written][what is code] more than enough to cover that topic,
 but I'd like to step back and consider how code is not dissimilar to written language and mathematics.
 
 While spoken languages are innate, we humans invented written language somewhat recently in our own history.
