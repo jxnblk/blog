@@ -2,6 +2,8 @@
 /styled-system/* https://styled-system.com/:splat
 /rebass/* https://rebassjs.org/:splat
 
+/layouts/*    https://react-layouts.netlify.com/:splat   200
+
 /skullcat/*  https://jxnblk.github.io/skullcat/:splat
 /paths/ https://jxnblk.github.io/paths/
 /principles/  https://jxnblk.com/blog/principles/
