@@ -71,6 +71,8 @@ which lends itself well to contextual style changes based on content.
 
 ## Variants
 
+*Update: the variants API in Styled System has changed since first publishing this post.*
+
 The division of responsibilities across the spectrum of global to component-based styles
 gets a little murky when considering the [variants API][] in Styled System.
 Complete style objects can be stored in the global theme object and applied to components with a simple shorthand.
