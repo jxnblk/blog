@@ -12,6 +12,7 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
+    "@styled-system/css": "^5.0.23",
     "@theme-ui/prism": "^0.2.29",
     "gatsby": "^2.13.59",
     "gatsby-plugin-catch-links": "^2.1.2",
