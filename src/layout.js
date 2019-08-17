@@ -150,7 +150,9 @@ export default props => {
             display: 'flex',
             justifyContent: 'center',
           }}>
-          <Avatar />
+          <Link to='/avatar'>
+            <Avatar />
+          </Link>
           <a
             href='https://twitter.com/jxnblk'
             title='Twitter'
