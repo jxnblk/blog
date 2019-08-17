@@ -179,15 +179,18 @@ export default {
       my: 5,
       borderLeft: '4px solid',
     },
-    navitem: {
-      display: 'inline-flex',
-      alignItems: 'center',
+    navlink: {
       color: 'inherit',
       textDecoration: 'none',
-      fontWeight: 'bold',
       ':hover,:focus': {
         color: 'primary',
       }
+    },
+    navitem: {
+      variant: 'styles.navlink',
+      display: 'inline-flex',
+      alignItems: 'center',
+      fontWeight: 'bold',
     }
   }
 }

@@ -20,6 +20,9 @@ export const Banner = props =>
       li: {
         mr: 3,
       },
+      a: {
+        variant: 'styles.navlink',
+      }
     }}>
     {props.children}
   </div>
@@ -53,6 +56,9 @@ export const Tiles = props =>
         height: 'auto',
         m: 'auto',
       },
+      a: {
+        variant: 'styles.navlink',
+      },
       ...props.sx
     }}>
     {props.children}
@@ -70,6 +76,7 @@ export const List = props =>
         gridGap: 4,
       },
       a: {
+        variant: 'styles.navlink',
         fontWeight: 'bold',
       },
       ...props.sx
