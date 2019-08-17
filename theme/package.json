@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "gatsby-theme-jxnblk",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gatsby develop",
+    "build": "gatsby build"
+  },
+  "keywords": [],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "devDependencies": {
+    "gatsby": "^2.13.41",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.14",
+    "@mdx-js/mdx": "^1.1.0",
+    "@mdx-js/react": "^1.0.27",
+    "gatsby-plugin-compile-es6-packages": "^2.1.0",
+    "gatsby-plugin-feed": "^2.3.5",
+    "gatsby-plugin-mdx": "^1.0.17",
+    "gatsby-plugin-react-helmet": "^3.1.2",
+    "gatsby-plugin-theme-ui": "^0.2.18",
+    "gatsby-source-filesystem": "^2.1.6",
+    "lodash.get": "^4.4.2",
+    "react-helmet": "^5.2.1",
+    "theme-ui": "^0.2.21"
+  }
+}

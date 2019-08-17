@@ -1,12 +1,12 @@
 module.exports = {
-  pathPrefix: '/blog',
   siteMetadata: {
-    title: 'Jxnblog',
-    description: 'The writing of Brent Jackson',
-    siteUrl: 'https://jxnblk.com/blog'
+    title: 'Jxnblk',
+    description: 'Brent Jackson',
+    siteUrl: 'https://jxnblk.com'
   },
   plugins: [
-    '@jxnblk/gatsby-theme-mdx-blog',
+    'gatsby-plugin-catch-links',
+    'gatsby-theme-jxnblk',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
@@ -15,6 +15,7 @@ module.exports = {
         ]
       }
     },
+    'gatsby-plugin-twitter',
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
