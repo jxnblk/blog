@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@theme-ui/prism": "^0.2.29",
-    "gatsby": "^2.13.83",
+    "gatsby": "^2.15.2",
     "gatsby-plugin-catch-links": "^2.1.7",
     "gatsby-plugin-google-analytics": "^2.1.13",
     "gatsby-plugin-google-fonts": "^1.0.1",
