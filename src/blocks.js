@@ -7,7 +7,7 @@ export const Banner = props =>
       py: [4, 5, 6],
       fontWeight: 'bold',
       h1: {
-        fontSize: [6, 7, 8, 9],
+        fontSize: [5, 6, 7],
       },
       p: {
       },

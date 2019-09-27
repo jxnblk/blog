@@ -90,6 +90,10 @@ export default {
       fontWeight: 'bold',
       fontSize: 0,
     },
+    caps: {
+      textTransform: 'uppercase',
+      letterSpacing: '0.2em',
+    },
   },
   prism,
   styles: {
