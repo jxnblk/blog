@@ -22,7 +22,7 @@ export default ({
   draft,
   children,
   location,
-  ...props,
+  ...props
 }) =>
   <div
     sx={{
