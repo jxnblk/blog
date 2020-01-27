@@ -1,7 +1,7 @@
 import prism from '@theme-ui/prism/presets/theme-ui'
 
 export default {
-  initialColorMode: 'light',
+  initialColorModeName: 'light',
   colors: {
     text: '#000',
     background: '#fff',
