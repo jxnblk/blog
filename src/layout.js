@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled, useColorMode } from 'theme-ui'
 import { Link } from 'gatsby'
-import { Global } from '@emotion/core'
 import Avatar from './avatar'
 import {
   FaTwitter as Twitter,
@@ -81,16 +80,6 @@ export default props => {
         display: 'flex',
         flexDirection: 'column',
       }}>
-      <Global
-        styles={{
-          '*': {
-            boxSizing: 'border-box',
-          },
-          body: {
-            margin: 0,
-          }
-        }}
-      />
       <header
         sx={{
           width: '100%',
