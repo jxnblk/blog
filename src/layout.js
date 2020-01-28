@@ -71,6 +71,8 @@ export default props => {
     const n = (i + 1) % modes.length
     setMode(modes[n])
   }
+  let title = props.pageContext?.frontmatter?.title
+  // console.log(title, props)
 
   return (
     <div
@@ -123,7 +125,17 @@ export default props => {
           mx: 'auto',
           flex: '1 1 auto',
         }}>
-        {props.children}
+        <div
+          sx={{
+            maxWidth: !!title ? 'container' : null,
+          }}>
+          {title && (
+            <Styled.h1>
+              {title}
+            </Styled.h1>
+          )}
+          {props.children}
+        </div>
       </main>
       <footer
         sx={{
@@ -140,14 +152,15 @@ export default props => {
             justifyContent: 'center',
           }}>
           <Link to='/avatar'>
-            <Avatar />
+            <Avatar size={40} />
           </Link>
           <a
             href='https://twitter.com/jxnblk'
             title='Twitter'
             sx={{
               variant: 'styles.navitem',
-              mx: 3,
+              ml: 2,
+              mr: 3,
             }}>
             <Twitter size={24} />
           </a>
