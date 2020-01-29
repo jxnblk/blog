@@ -102,6 +102,9 @@ export default {
       fontFamily: 'body',
       lineHeight: 'body',
       fontSize: 2,
+      transitionProperty: 'background-color',
+      transitionTimingFunction: 'ease-out',
+      transitionDuration: '.4s',
     },
     a: {
       color: 'primary',
