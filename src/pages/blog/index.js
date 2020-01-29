@@ -39,7 +39,6 @@ export const query = graphql`
 
 export default props => {
   const posts = props.data.pages.nodes
-  // console.log(posts)
 
   return (
     <ul
@@ -51,7 +50,7 @@ export default props => {
       }}>
       {posts.map(post => (
         <li key={post.id}>
-          <Styled.h1 as='h2'>
+          <Styled.h2 as='h2'>
             <Link
               to={post.path}
               sx={{
@@ -59,8 +58,8 @@ export default props => {
               }}>
               {post.context.frontmatter.title}
             </Link>
-          </Styled.h1>
-          <div sx={{ variant: 'type.small' }}>
+          </Styled.h2>
+          <div sx={{ variant: 'text.small', fontWeight: 'bold', }}>
             {new Date(post.context.frontmatter.date).toLocaleDateString()}
           </div>
         </li>

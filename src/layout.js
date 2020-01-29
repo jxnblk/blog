@@ -112,6 +112,7 @@ export default props => {
           to='/'
           sx={{
             variant: 'styles.navitem',
+            fontSize: 0,
             mr: 3,
           }}>
           <Avatar size={32} sx={{ mr: 2 }} />
@@ -122,6 +123,7 @@ export default props => {
           to='/blog'
           sx={{
             variant: 'styles.navitem',
+            fontSize: 0,
             mr: 3,
           }}>
           Blog
@@ -153,7 +155,8 @@ export default props => {
           {date && (
             <div
               sx={{
-                variant: 'type.small'
+                variant: 'text.small',
+                fontWeight: 'bold',
               }}>
               {date}
             </div>
@@ -232,7 +235,7 @@ export default props => {
             About
           </Styled.a>
           <div sx={{ mx: 'auto' }} />
-          <div sx={{ my: 2 }}>© 2019 Brent Jackson</div>
+          <div sx={{ my: 2 }}>© 2020 Brent Jackson</div>
         </div>
       </footer>
     </div>

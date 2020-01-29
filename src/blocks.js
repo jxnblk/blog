@@ -4,13 +4,8 @@ import { jsx } from 'theme-ui'
 export const Banner = props =>
   <div
     sx={{
-      py: [4, 5, 6],
+      pb: [4, 5, 6],
       fontWeight: 'bold',
-      h1: {
-        fontSize: [5, 6, 7],
-      },
-      p: {
-      },
       ul: {
         listStyle: 'none',
         display: 'flex',
@@ -21,7 +16,8 @@ export const Banner = props =>
         mr: 3,
       },
       a: {
-        variant: 'styles.navlink',
+        color: 'inherit',
+        textDecoration: 'none',
       }
     }}>
     {props.children}
