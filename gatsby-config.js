@@ -16,7 +16,6 @@ module.exports = {
     'gatsby-plugin-theme-ui',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
-    // 'gatsby-theme-jxnblk',
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {

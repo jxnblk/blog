@@ -20,21 +20,32 @@ module.exports = {
             siteUrl
           }
         }
-        allPost(
-          limit: 1000,
+        allSitePage(
           sort: {
-            order: DESC,
-            fields: date
+            fields: context___frontmatter___date,
+            order: DESC
           }
-          filter: { draft: { ne: true } }
+          filter: {
+            path: {
+              glob: "/blog/*"
+            },
+            context: {
+              frontmatter: {
+                draft: {
+                  ne: true
+                }
+              }
+            }
+          }
         ) {
-          edges {
-            node {
-              title
-              date
-              slug
-              excerpt
-              html
+          nodes {
+            path
+            context {
+              frontmatter {
+                title
+                date
+                draft
+              }
             }
           }
         }
