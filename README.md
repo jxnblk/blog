@@ -7,7 +7,11 @@ Personal blog with thoughts on design, development, and other things
 
 ## To do
 
-- [ ] Add H1s
-- [ ] Blog index page
-- [ ] Post layout
-- [ ] Clean up drafts
+- [x] Add H1s
+- [x] Add dates
+- [x] Blog index page
+- [x] Post layout
+- [x] Clean up drafts
+- [-] Fix OG metadata
+- [ ] Add excerpts to frontmatter?
+- [ ] New look

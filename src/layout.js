@@ -64,6 +64,19 @@ const ColorButton = ({
     </svg>
   </button>
 
+const Draft = () => (
+  <div
+    sx={{
+      p: 3,
+      my: 4,
+      fontWeight: 'bold',
+      color: 'background',
+      bg: 'accent',
+    }}>
+    ⚠️ You are viewing an draft post, and this may not be ready for primetime.
+  </div>
+)
+
 export default props => {
   const [mode, setMode] = useColorMode()
   const cycleMode = e => {
@@ -71,8 +84,10 @@ export default props => {
     const n = (i + 1) % modes.length
     setMode(modes[n])
   }
-  let title = props.pageContext?.frontmatter?.title
-  // console.log(title, props)
+  const title = props.pageContext?.frontmatter?.title
+  let date = props.pageContext?.frontmatter?.date
+  if (date) date = new Date(date).toLocaleDateString()
+  const draft = props.pageContext?.frontmatter?.draft
 
   return (
     <div
@@ -129,10 +144,19 @@ export default props => {
           sx={{
             maxWidth: !!title ? 'container' : null,
           }}>
+          {draft && <Draft />}
           {title && (
             <Styled.h1>
               {title}
             </Styled.h1>
+          )}
+          {date && (
+            <div
+              sx={{
+                variant: 'type.small'
+              }}>
+              {date}
+            </div>
           )}
           {props.children}
         </div>

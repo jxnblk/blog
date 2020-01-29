@@ -5,8 +5,12 @@ import Layout from './layout'
 
 const Page = props => {
   let title = 'Jxnblk'
-  const postTitle = get(props.data, 'post.title')
-  const description = get(props.data, 'post.excerpt')
+  const postTitle = get(props.data, 'post.title',
+    get(props, 'pageContext.frontmatter.title')
+  )
+  const description = get(props.data, 'post.excerpt',
+    get(props, 'pageContext.frontmatter.excerpt')
+  )
 
   if (postTitle) {
     title = `${postTitle} | ${title}`
