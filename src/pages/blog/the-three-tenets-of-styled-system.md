@@ -11,6 +11,8 @@ And while this library is certainly an iteration on a theme[^2]
 (those who have followed me for years may have a clear idea what it is meant for),
 I'd like to expand on what I think makes Styled System a great fit for some teams.
 
+<!---->
+
 ## Three Tenets
 
 At its core, Style System is really intended to enable developers to achieve these three things:

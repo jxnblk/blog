@@ -1,16 +1,16 @@
 module.exports = {
   feeds: [
     {
-      serialize: ({ query: { site, allPost } }) => {
-        return allPost.edges
-          .map(e => e.node)
-          .filter(post => !post.draft)
-          .map(post => ({
-            ...post.frontmatter,
-            description: post.excerpt,
-            url: site.siteMetadata.siteUrl + post.slug,
-            guid: site.siteMetadata.siteUrl + post.slug,
-            custom_elements: [{ "content:encoded": post.html }]
+      serialize: ({ query: { site, allSitePage } }) => {
+        return allSitePage.nodes
+          .map(page => ({
+            ...page.context.frontmatter,
+            description: page.context.frontmatter.excerpt,
+            url: site.siteMetadata.siteUrl + page.path,
+            guid: site.siteMetadata.siteUrl + page.path,
+            custom_elements: [{
+              "content:encoded": page.context.html
+            }]
         }))
       },
       query: `
@@ -41,10 +41,12 @@ module.exports = {
           nodes {
             path
             context {
+              html
               frontmatter {
                 title
                 date
                 draft
+                excerpt
               }
             }
           }

@@ -31,9 +31,9 @@ module.exports = {
         trackingId: 'UA-4603832-6'
       }
     },
-    // {
-    //   resolve: 'gatsby-plugin-feed',
-    //   options: require('./feed')
-    // },
+    {
+      resolve: 'gatsby-plugin-feed',
+      options: require('./feed')
+    },
   ]
 }

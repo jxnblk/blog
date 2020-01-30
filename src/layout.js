@@ -78,6 +78,7 @@ const Draft = () => (
 )
 
 export default props => {
+  console.log(props)
   const [mode, setMode] = useColorMode()
   const cycleMode = e => {
     const i = modes.indexOf(mode)
