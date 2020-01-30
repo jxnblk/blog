@@ -13,6 +13,6 @@ Personal blog with thoughts on design, development, and other things
 - [x] Post layout
 - [x] Clean up drafts
 - [x] New look
+- [x] RSS feed
 - [-] Fix OG metadata
 - [ ] Add excerpts to frontmatter?
-- [ ] RSS feed

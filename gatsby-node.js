@@ -19,26 +19,25 @@ exports.onCreatePage = async ({
   if (!page.context.frontmatter || !/^\/blog\//.test(page.path)) return
 
   const src = await readFile(page.component, 'utf8')
-  const { content, excerpt, data } = gm(src, {
+  const post = gm(src, {
     excerpt: file => {
       const [ first ] = file.content.split('\n\n')
-      console.log({ first })
       file.excerpt = first
     },
-    // excerpt_separator: '<!---->',
   })
 
   const compiler = remark()
     .use(remark.mdx)
     .use(remark.html)
 
-  const html = await compiler.process(content)
+  const html = await compiler.process(post.content)
+  const excerpt = await compiler.process(post.excerpt)
 
   const next = Object.assign({}, page, {
     context: {
       ...page.context,
       html: html.contents,
-      excerpt,
+      excerpt: excerpt.contents,
     }
   })
   actions.deletePage(page)

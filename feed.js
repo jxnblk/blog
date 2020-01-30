@@ -1,4 +1,16 @@
 module.exports = {
+  query: `
+    {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+          site_url: siteUrl
+        }
+      }
+    }
+  `,
   feeds: [
     {
       serialize: ({ query: { site, allSitePage } }) => {
