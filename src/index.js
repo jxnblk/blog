@@ -18,7 +18,10 @@ const Page = props => {
 
   return (
     <>
-      <Helmet>
+    <Helmet
+      htmlAttributes={{
+        lang: 'en-us',
+      }}>
         <link
           rel='icon'
           type='image/png'

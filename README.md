@@ -12,6 +12,7 @@ Personal blog with thoughts on design, development, and other things
 - [x] Blog index page
 - [x] Post layout
 - [x] Clean up drafts
+- [x] New look
 - [-] Fix OG metadata
 - [ ] Add excerpts to frontmatter?
-- [ ] New look
+- [ ] RSS feed

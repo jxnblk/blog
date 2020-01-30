@@ -178,7 +178,7 @@ export default props => {
             display: 'flex',
             justifyContent: 'center',
           }}>
-          <Link to='/avatar'>
+          <Link to='/avatar' title='About the avatar'>
             <Avatar size={40} />
           </Link>
           <a
