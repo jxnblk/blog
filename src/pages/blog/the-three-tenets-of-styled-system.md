@@ -1,6 +1,7 @@
 ---
 title: The Three Tenets of Styled System
 date: 2019-03-17
+excerpt: A look at some of the core ideas built into Styled System
 ---
 
 I released [Styled System][] around a year and a half ago,

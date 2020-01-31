@@ -1,6 +1,7 @@
 ---
 title: The Cascade is Not Inheritance
 date: 2019-07-20
+excerpt: On more than one occasion, I've heard people conflate the cascade feature of CSS with inheritance.
 ---
 
 On more than one occasion, I've heard people conflate the *cascade* feature of CSS with *inheritance*.

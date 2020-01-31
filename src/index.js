@@ -10,7 +10,7 @@ const Page = props => {
   )
   const description = get(props.data, 'post.excerpt',
     get(props, 'pageContext.frontmatter.excerpt')
-  )
+  ) || 'The writing of Brent Jackson'
 
   if (postTitle) {
     title = `${postTitle} | ${title}`

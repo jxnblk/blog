@@ -1,6 +1,7 @@
 ---
 title: Interoperability
 date: 2019-03-21
+excerpt: Using standards-based approaches for UI component interoperability
 ---
 
 Back in early 2013, I was working at a small startup in San Francisco called Stitch Fix, alongside Adam Morse and a handful of others.

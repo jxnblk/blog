@@ -1,6 +1,7 @@
 ---
 title: Progressive Documentation
 date: 2018-09-01
+excerpt: Attempting to make writing documentation easier and faster
 ---
 
 When building out JS libraries and components, everyone knows the importance of good documentation.

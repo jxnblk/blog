@@ -14,5 +14,5 @@ Personal blog with thoughts on design, development, and other things
 - [x] Clean up drafts
 - [x] New look
 - [x] RSS feed
+- [x] Add excerpts to frontmatter?
 - [-] Fix OG metadata
-- [ ] Add excerpts to frontmatter?
