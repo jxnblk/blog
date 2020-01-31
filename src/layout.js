@@ -64,6 +64,19 @@ const ColorButton = ({
     </svg>
   </button>
 
+const Draft = () => (
+  <div
+    sx={{
+      p: 3,
+      my: 4,
+      fontWeight: 'bold',
+      color: 'background',
+      bg: 'accent',
+    }}>
+    ⚠️ You are viewing an draft post, and this may not be ready for primetime.
+  </div>
+)
+
 export default props => {
   const [mode, setMode] = useColorMode()
   const cycleMode = e => {
@@ -71,6 +84,10 @@ export default props => {
     const n = (i + 1) % modes.length
     setMode(modes[n])
   }
+  const title = props.pageContext?.frontmatter?.title
+  let date = props.pageContext?.frontmatter?.date
+  if (date) date = new Date(date).toLocaleDateString()
+  const draft = props.pageContext?.frontmatter?.draft
 
   return (
     <div
@@ -95,6 +112,7 @@ export default props => {
           to='/'
           sx={{
             variant: 'styles.navitem',
+            fontSize: 0,
             mr: 3,
           }}>
           <Avatar size={32} sx={{ mr: 2 }} />
@@ -105,6 +123,7 @@ export default props => {
           to='/blog'
           sx={{
             variant: 'styles.navitem',
+            fontSize: 0,
             mr: 3,
           }}>
           Blog
@@ -123,7 +142,27 @@ export default props => {
           mx: 'auto',
           flex: '1 1 auto',
         }}>
-        {props.children}
+        <div
+          sx={{
+            maxWidth: !!title ? 'container' : null,
+          }}>
+          {draft && <Draft />}
+          {title && (
+            <Styled.h1>
+              {title}
+            </Styled.h1>
+          )}
+          {date && (
+            <div
+              sx={{
+                variant: 'text.small',
+                fontWeight: 'bold',
+              }}>
+              {date}
+            </div>
+          )}
+          {props.children}
+        </div>
       </main>
       <footer
         sx={{
@@ -139,15 +178,16 @@ export default props => {
             display: 'flex',
             justifyContent: 'center',
           }}>
-          <Link to='/avatar'>
-            <Avatar />
+          <Link to='/avatar' title='About the avatar'>
+            <Avatar size={40} />
           </Link>
           <a
             href='https://twitter.com/jxnblk'
             title='Twitter'
             sx={{
               variant: 'styles.navitem',
-              mx: 3,
+              ml: 2,
+              mr: 3,
             }}>
             <Twitter size={24} />
           </a>
@@ -195,7 +235,7 @@ export default props => {
             About
           </Styled.a>
           <div sx={{ mx: 'auto' }} />
-          <div sx={{ my: 2 }}>© 2019 Brent Jackson</div>
+          <div sx={{ my: 2 }}>© 2020 Brent Jackson</div>
         </div>
       </footer>
     </div>

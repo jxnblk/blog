@@ -1,6 +1,7 @@
 ---
 title: Themeability
 date: 2019-07-21
+excerpt: Using constraint-based design principles to create themeable components and UI
 ---
 
 I've been interested in the idea of constraint-based design for a while.

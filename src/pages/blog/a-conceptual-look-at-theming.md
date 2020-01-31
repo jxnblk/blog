@@ -1,6 +1,7 @@
 ---
 title: A Conceptual Look at Theming
 date: 2019-08-10
+excerpt: An exploration on the relationship between global and component-based styles and a mental model for styling applications.
 ---
 
 The word *theme* can mean a lot of different things and invoke a lot of different interpretations,

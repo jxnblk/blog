@@ -1,6 +1,7 @@
 ---
 title: The Modern Front-End Design System Stack
 date: 2019-07-18
+excerpt: Tools for building modern front-end applications in 2019
 ---
 
 Design systems come in all shapes and sizes and can encompass a wide range of skillsets and roles within an organization.

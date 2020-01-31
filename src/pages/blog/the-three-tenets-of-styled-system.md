@@ -1,6 +1,7 @@
 ---
 title: The Three Tenets of Styled System
 date: 2019-03-17
+excerpt: A look at some of the core ideas built into Styled System
 ---
 
 I released [Styled System][] around a year and a half ago,
@@ -10,6 +11,8 @@ Up until now, I haven't really written much about the thinking behind the librar
 And while this library is certainly an iteration on a theme[^2]
 (those who have followed me for years may have a clear idea what it is meant for),
 I'd like to expand on what I think makes Styled System a great fit for some teams.
+
+<!---->
 
 ## Three Tenets
 

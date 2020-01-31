@@ -1,6 +1,7 @@
 ---
 title: Why you should definitely learn how to use CSS-in-JS
 date: 2019-07-20
+excerpt: CSS-in-JS solutions provide a lot of benefits over lower-level approaches
 ---
 
 From time to time, I've heard that CSS-in-JS poses a barrier to entry for some people.

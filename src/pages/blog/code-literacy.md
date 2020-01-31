@@ -1,6 +1,7 @@
 ---
 title: Code Literacy
 date: 2019-07-25
+excerpt: Asking should designers code is asking the wrong question.
 ---
 
 Ah yes, everyone's favorite question: *should designers code?*

@@ -1,6 +1,7 @@
 ---
 title: Iterations on a Theme
 date: 2019-04-06
+excerpt: A look at common threads across over 500 GitHub repos
 ---
 
 As my personal GitHub account rolls over 500 repos (apparently a few of them are private), it felt like a good time to reflect on how I approach using GitHub personally.

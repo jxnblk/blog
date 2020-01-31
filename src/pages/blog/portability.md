@@ -1,6 +1,7 @@
 ---
 title: Portability
 date: 2019-07-23
+excerpt: Defining a portable file format for high level style information.
 ---
 
 In software development, formats help ensure that content and data are portable and can be used in many different applications.

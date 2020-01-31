@@ -79,15 +79,16 @@ export default {
     container: 768,
     wide: 1280,
   },
-  type: {
+  text: {
     heading: {
+      fontSize: 2,
       fontWeight: 'heading',
       lineHeight: 'heading',
-      mt: 4,
-      mb: 3,
+      textTransform: 'uppercase',
+      letterSpacing: '0.2em',
+      my: 2,
     },
     small: {
-      fontWeight: 'bold',
       fontSize: 0,
     },
     caps: {
@@ -101,6 +102,9 @@ export default {
       fontFamily: 'body',
       lineHeight: 'body',
       fontSize: 2,
+      transitionProperty: 'background-color',
+      transitionTimingFunction: 'ease-out',
+      transitionDuration: '.4s',
     },
     a: {
       color: 'primary',
@@ -109,28 +113,25 @@ export default {
       }
     },
     h1: {
-      variant: 'type.heading',
-      fontSize: [5, 6],
+      variant: 'text.heading',
+      my: 6,
     },
     h2: {
-      variant: 'type.heading',
-      fontSize: [4, 5],
+      variant: 'text.heading',
+      mt: 5,
+      mb: 3,
     },
     h3: {
-      variant: 'type.heading',
-      fontSize: 4,
+      variant: 'text.heading',
     },
     h4: {
-      variant: 'type.heading',
-      fontSize: 2,
+      variant: 'text.heading',
     },
     h5: {
-      variant: 'type.heading',
-      fontSize: 1,
+      variant: 'text.heading',
     },
     h6: {
-      variant: 'type.heading',
-      fontSize: 0,
+      variant: 'text.heading',
     },
     img: {
       maxWidth: '100%',
@@ -177,13 +178,18 @@ export default {
     },
     blockquote: {
       fontWeight: 'bold',
-      fontSize: 3,
       mx: 0,
       px: 3,
       my: 5,
       borderLeft: '4px solid',
     },
+    div: {
+      '&.footnotes': {
+        variant: 'text.small',
+      },
+    },
     navlink: {
+      variant: 'text.caps',
       color: 'inherit',
       textDecoration: 'none',
       ':hover,:focus': {
