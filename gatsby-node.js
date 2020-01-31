@@ -1,8 +1,5 @@
 const fs = require('fs')
 const util = require('util')
-// const mdx = require('@mdx-js/mdx')
-// const React = require('react')
-// const { renderToString } = require('react-dom/server')
 const gm = require('gray-matter')
 
 const remark = require('remark')
