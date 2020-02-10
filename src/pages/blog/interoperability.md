@@ -25,7 +25,7 @@ But there's no reason Basscss, as an open source library, had to adhere to the s
 
 The real tragedy here in the divergent naming conventions is that if you've started building an application with Basscss,
 but then want to upgrade to something more fully-featured like Tachyons, you'll have to do a lot of manual work to migrate.
-Essentially, HTML templates written with either of these libraries isn't as portable as if we'd used a standard syntax, for example inline styles.
+Essentially, HTML templates written with either of these libraries aren't as portable as if we'd used a standard syntax, for example inline styles.
 Today's tools would make this a lot easier, using type checking, unit tests, and perhaps even AST parsing, but it would still create a barrier.
 
 The **interoperability** between these two libraries suffered because
@@ -51,7 +51,7 @@ Call me naive, but I like to think that humans are capable of learning from thei
 A lot of modern front-end libraries are starting to settle on more standard, more interoperable APIs that help reduce lock-in.
 Take React and Preact, or Styled Components and Emotion.
 These libraries share virtually the same API, which means teams can easily migrate from one to another in the span of an afternoon.
-This is great thing, and it allows developers to start thinking at a higher level of abstraction.
+This is a great thing, and it allows developers to start thinking at a higher level of abstraction.
 
 Styled System is one small attempt at a higher level of abstraction on top of the current CSS-in-JS libraries.
 It's completely decoupled from Styled Components, Emotion, and even React itself.
@@ -94,12 +94,10 @@ could instantly pick up the values from your theme and mimic the look and feel o
 without needing to write any custom CSS.
 I think that could be pretty cool.
 
-Ultimately this specification should be completely decoupled from the Styled System library,
-and I can move this to a more neutral location in the near future,
-but this seemed like a logical place to start this discussion.
+~~Ultimately this specification should be completely decoupled from the Styled System library, and I can move this to a more neutral location in the near future, but this seemed like a logical place to start this discussion.~~
 
 Let me know what you think on [Twitter](https://mobile.twitter.com/jxnblk/status/1107726037805424641)
-or by [opening an issue](https://github.com/styled-system/styled-system/issues).
+or by [opening an issue](https://github.com/system-ui/theme-specification/issues).
 
 [^1]: Design system tokens are a fantastic abstraction. They try to solve the problem of sharing a brand's core style values cross-platform,
     whereas this specification is (initially) primarily focused on CSS/JS development – i.e. a potential *output* from design tokens.
@@ -108,6 +106,6 @@ or by [opening an issue](https://github.com/styled-system/styled-system/issues).
 [basscss]: https://github.com/basscss/basscss
 [tachyons]: https://tachyons.io/
 [styled system]: https://styled-system.com
-[theme specification]: https://styled-system.com/theme-specification
+[theme specification]: https://system-ui.com/theme/
 [styled components]: https://styled-components.com
 [emotion]: https://emotion.sh
