@@ -122,7 +122,8 @@ export default {
       mb: 3,
     },
     h3: {
-      variant: 'text.heading',
+      // variant: 'text.heading',
+      fontSize: 2,
     },
     h4: {
       variant: 'text.heading',
