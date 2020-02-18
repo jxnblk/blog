@@ -1,6 +1,6 @@
 ---
 title: The Design Graph
-date: 2020-02-12
+date: 2020-02-18
 draft: true
 excerpt: A constraint-based system for organizing styles in UI design
 ---

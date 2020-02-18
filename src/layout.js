@@ -86,7 +86,9 @@ export default props => {
   }
   const title = props.pageContext?.frontmatter?.title
   let date = props.pageContext?.frontmatter?.date
-  if (date) date = new Date(date).toLocaleDateString()
+  if (date) date = new Date(date).toLocaleDateString('en-US', {
+    timeZone: 'UTC',
+  })
   const draft = props.pageContext?.frontmatter?.draft
 
   return (
