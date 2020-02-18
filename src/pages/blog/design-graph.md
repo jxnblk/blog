@@ -21,7 +21,7 @@ and includes the people, organizations, and processes (among many other things),
 So, how can we talk about the implementation details of UI design in a more precise way?
 And, how can we build upon these concepts to push UI design to a higher level of abstraction?
 
-While thinking about building tools that prioritize [interoperability](/blog/interoperability), [themeability](/blog/themeability), [portability](/blog/portability), and the [concepts](/blog/a-conceptual-look-at-theming) of libraries like [Theme UI][],
+While working on tools that prioritize [interoperability](/blog/interoperability), [themeability](/blog/themeability), [portability](/blog/portability), and the [concepts](/blog/a-conceptual-look-at-theming) of libraries like [Theme UI][],
 I've started thinking about a more holistic view that I call the *Design Graph*.
 
 
@@ -29,8 +29,8 @@ I've started thinking about a more holistic view that I call the *Design Graph*.
 
 > The Design Graph is a constraint-based system for organizing styles in UI design.
 
-The Design Graph isn't an implementation, but rather a conceptual model
-that includes pairwise relationships between its parts, or *nodes*.
+The Design Graph isn't an actual implementation, but rather a conceptual model
+that includes pairwise relationships between its parts, or *nodes* to borrow a term from graph theory.
 [Theme UI][] is one implementation that attempts to adhere to this model,
 and it's a great example of how the Design Graph can become more than the sum of its parts.
 Theme UI's source code isn't particularly complex or large, and it's similar to a few other libraries out there.
@@ -77,7 +77,7 @@ I would consider this a work-in-progress, but from a high level, the Design Grap
 
 - **Scales** are limited collections of raw values that map to specific style properties.
   For example, values for `font-size` are stored in the `fontSizes` scale.
-- **Components** that use styles constrained by *scales*.
+- **Components** are elements that have styles constrained by *scales*.
 - **Variants** are partial styles that map to specific components.
   For example, a button might have *primary* and *secondary* variants, or *large* and *small* variants.
 - **Themes** are collections of *scales* (and possibly *variants*) that encapsulate a particular visual design language.
@@ -164,7 +164,7 @@ For example, you could share accessible color combinations with a badge componen
 
 ## Putting it all together
 
-As an example to demonstrate how some of these pieces fit together, typographic *scales* can be used to create a *component* that accepts multiple variants.
+As an example to demonstrate how some of these pieces fit together, a *theme* with typographic *scales* can be used to create a *component* that accepts multiple *variants*.
 
 ```js
 // example theme with typographic scales
@@ -234,7 +234,7 @@ Then these *variants* can be used in a *component*.
 Beyond a single application or site, the Design Graph is the sort of thing that can exist at a larger level across an entire organization or across multiple organizations.
 In a way, the more libraries and applications that adopt this concept, the larger the graph gets,
 and the more tooling we can share.
-If you're interested in helping build and shape this vision, join in on [GitHub](https://github.com/system-ui/theme-ui).
+If you're interested in helping build and shape this vision, join us on [GitHub](https://github.com/system-ui/theme-ui) or let me know what you think on [Twitter](https://twitter.com/jxnblk).
 
 *Thanks to John Otander for related explorations in [DesignQL][], Jina Anne for all the work on design tokens, and Diana Mounter for additional inspiration.*
 
