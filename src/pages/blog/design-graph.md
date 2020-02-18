@@ -38,6 +38,12 @@ The thing that really differentiates Theme UI is that it's meant to be built upo
 [interoperability][] across libraries.
 If you only look at what Theme UI *does*, you'll easily miss what it can *enable.*
 
+If you use Theme UI to build Gatsby themes, a component library, or a website,
+these things should all *just work* with other tools like [Blocks UI][].
+In the future, imagine if there are VS Code and Figma plugins, documentation generators, static analysis tools, and more
+that follow the same Design Graph schema so that the component library you have today gets a whole lot better over time.
+
+
 ## What is this for?
 
 The Design Graph is meant to help answer some common questions when implementing design systems, such as:
@@ -142,7 +148,7 @@ Variants are usually the parts of a component's styles that might change context
 ## Component to Variants
 
 A *component* can use multiple *variants*. Some variants can also be shared across multiple components.
-For example, you could share accessible color combinations with a badge component and alert or message component.
+For example, you could share accessible color combinations with a badge component and an alert or message component.
 
 <Graph
   nodes={[
@@ -236,97 +242,4 @@ If you're interested in helping build and shape this vision, join in on [GitHub]
 [specification]: https://theme-ui.com/theme-spec
 [interoperability]: /blog/interoperability
 [designql]: https://github.com/system-ui/designql
-
-<!--
-
-- duplicative/bespoke work
-- disconnectedness
-
-- Questions and Answers
-- Theme UI as an implementation
-- More than the sum of its parts
-- Help us define what a complete design graph could look like
-
-- What should we call this?
-- Where do we put this?
-- How do we use this?
-- Unified theory
-- Variables tend to be flat key/value pairs
-- Lacks the nuance and contextually descriptive language
-- Theme UI is an implementation
-- Theme UI is more than the sum of its parts
-- Someone could take the concept of the Design Graph, change some of the naming conventions and ruin the concept
-- The Design Graph is larger than the sum of its parts
-- Why? Interoperability
-
-- pairwise relationships
-
--->
-
-<!-- **Make this less about language and more about implementation** -->
-<!--
-Working on various websites and web apps for over a decade,
-I've accumulated certain words and phrases that I use to talk about working with design constraints and user interfaces.
-Despite the many ways people describe things,
-it often feels like there's a lack of vocabulary to accurately describe the interconnected nature of all these pieces.
-Talking about *color palettes*, using *scales* as design constraints,
-*themes* to codify the design language of a UI design system,
-or the *component API* of a particular library has often felt a little too disjointed for what I think should be a tightly woven system.
-The term *design systems* used to somewhat fill this void, however it's taken on a much larger meaning over the past few years
-and tends to imply the people, organizations, and processes (among many other things), in addition to the implementation details.
-So, how can we talk about the implementation details of UI design in a more precise way?
-And, how can we build upon these concepts to push UI design to a higher level of abstraction?
-
-What started out as an attempt to create a [specification][] for one piece of the puzzle,
-has evolved into what I've started calling *The Design Graph*.
--->
-<!--
-Working on UI design and design systems for over a decade,
-I've built up a vocabulary for describing some of the concepts and implementation details around working with design constraints.
-I've accumulated a lexicon for describing some of the concepts around designing with constraints.
--->
-
-
-<!--
-<Graph
-  nodes={[
-    [4, 12, 4, 'Theme'],
-    [12, 3, 3, 'Scale'],
-    [12, 12, 3, 'Scale'],
-    [12, 21, 3, 'Scale'],
-    [22, 4, 4, 'Variant'],
-    [22, 20, 4, 'Variant'],
-    [27, 12, 5, 'Component'],
-  ]}
-  edges={[
-    [0, 1],
-    [0, 2],
-    [0, 3],
-    [1, 4],
-    [2, 4],
-    [3, 4],
-    [1, 5],
-    [2, 5],
-    [3, 5],
-    [4, 6],
-    [5, 6],
-  ]}
-/>
-
-<Graph
-  nodes={[
-    [4, 8],
-    [6, 20],
-    [20, 14],
-    [24, 6],
-    [28, 20],
-  ]}
-  edges={[
-    [0, 1],
-    [0, 2],
-    [1, 2],
-    [2, 3],
-    [2, 4],
-  ]}
-/>
--->
+[blocks ui]: https://blocks-ui.com
