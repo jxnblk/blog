@@ -2,7 +2,7 @@
 title: The Design Graph
 date: 2020-02-12
 draft: true
-excerpt:
+excerpt: A constraint-based system for organizing styles in UI design
 ---
 
 import Graph from '../../components/graph'
@@ -22,14 +22,15 @@ So, how can we talk about the implementation details of UI design in a more prec
 And, how can we build upon these concepts to push UI design to a higher level of abstraction?
 
 While thinking about building tools that prioritize [interoperability](/blog/interoperability), [themeability](/blog/themeability), [portability](/blog/portability), and the [concepts](/blog/a-conceptual-look-at-theming) of libraries like [Theme UI][],
-I've started thinking about a larger picture view that I call the *Design Graph*.
+I've started thinking about a more holistic view that I call the *Design Graph*.
 
 
 ## What is the Design Graph?
 
 > The Design Graph is a constraint-based system for organizing styles in UI design.
 
-The Design Graph isn't an implementation, but rather a conceptual model.
+The Design Graph isn't an implementation, but rather a conceptual model
+that includes pairwise relationships between its parts, or *nodes*.
 [Theme UI][] is one implementation that attempts to adhere to this model,
 and it's a great example of how the Design Graph can become more than the sum of its parts.
 Theme UI's source code isn't particularly complex or large, and it's similar to a few other libraries out there.
@@ -52,7 +53,7 @@ By naming things in a consistent way, we get *[interoperability][]* for free.
 ### *Where should we put this?*
 
 Although people love to organize things, we're really terrible at doing so in a way that makes sense to others.
-The Design Graph doesn't try to solve this completely, but it provides guidance for where certain aspects of your UI design should live.
+The Design Graph doesn't try to completely solve this, but it provides guidance for where certain aspects of your UI design should live.
 For example, raw color values belong in the `colors` *scale*, and variations of your button styles belong in the `buttons` *variants*.
 
 ### *How do we use this?*
@@ -76,11 +77,11 @@ I would consider this a work-in-progress, but from a high level, the Design Grap
 - **Themes** are collections of *scales* (and possibly *variants*) that encapsulate a particular visual design language.
   Ideally, themes follow a common interface (or schema) and can be swapped out in different implementations.
 
-The nodes are inherently interconnected and help form the larger graph.
+These nodes are inherently interconnected and help form the larger graph.
 
 ## Themes to Scales
 
-A *theme* object is composed of multiple *scales*
+A *theme* object is composed of multiple *scales*. These scales could include fonts, font sizes, colors, and more.
 
 <Graph
   nodes={[
@@ -98,7 +99,7 @@ A *theme* object is composed of multiple *scales*
 
 ## Scales to Components
 
-A *component's* styles use *scales*
+A *component's* styles use *scales*.
 
 <Graph
   nodes={[
@@ -116,7 +117,8 @@ A *component's* styles use *scales*
 
 ## Scales to Variants
 
-*Variants* also use *scales*
+*Variants* also use *scales*.
+Variants are usually the parts of a component's styles that might change contextually or dynamically.
 
 <Graph
   nodes={[
@@ -139,7 +141,8 @@ A *component's* styles use *scales*
 
 ## Component to Variants
 
-A *component* can use multiple *variants*
+A *component* can use multiple *variants*. Some variants can also be shared across multiple components.
+For example, you could share accessible color combinations with a badge component and alert or message component.
 
 <Graph
   nodes={[
@@ -152,6 +155,73 @@ A *component* can use multiple *variants*
     [0, 2],
   ]}
 />
+
+## Putting it all together
+
+As an example to demonstrate how some of these pieces fit together, typographic *scales* can be used to create a *component* that accepts multiple variants.
+
+```js
+// example theme with typographic scales
+{
+  fonts: {
+    body: 'Helvetica',
+    heading: 'Garamond',
+  },
+  fontWeights: {
+    body: 400,
+    heading: 700,
+    bold: 700,
+  },
+  lineHeights: {
+    body: 1.625,
+    heading: 1.25,
+  },
+  fontSizes: [ 12, 14, 16, 20, 24, 32, 48 ],
+}
+```
+
+These *scales* can be used to create *variants*.
+
+```js
+// example variants
+text: {
+  heading: {
+    fontFamily: 'heading',
+    fontWeight: 'heading',
+    lineHeight: 'heading',
+    fontSize: 5,
+  },
+  title: {
+    fontFamily: 'heading',
+    fontWeight: 'heading',
+    lineHeight: 'heading',
+    fontSize: 6,
+  },
+  lead: {
+    fontFamily: 'body',
+    fontWeight: 'body',
+    lineHeight: 'body',
+    fontSize: 3,
+  },
+  small: {
+    fontFamily: 'body',
+    fontWeight: 'body',
+    lineHeight: 'body',
+    fontSize: 0,
+  },
+}
+```
+
+Then these *variants* can be used in a *component*.
+
+```jsx
+<Text as='h1' variant='heading'>
+  Hello
+</Text>
+<Text variant='lead'>
+  This component has variants.
+</Text>
+```
 
 ## More than the sum of its parts
 
