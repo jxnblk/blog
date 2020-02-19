@@ -51,7 +51,9 @@ export default ({
           x={x}
           y={y + 1/2}
           textAnchor='middle'
-          fill='white'>
+          sx={{
+            fill: 'background',
+          }}>
           {label}
         </text>
       )}
