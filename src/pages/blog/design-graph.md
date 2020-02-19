@@ -42,11 +42,13 @@ If you use Theme UI to build Gatsby themes, a component library, or a website,
 these things should all *just work* with other tools like [Blocks UI][].
 In the future, imagine if there are VS Code and Figma plugins, documentation generators, static analysis tools, and more
 that follow the same Design Graph schema so that the component library you have today gets a whole lot better over time.
+I want this imaginary future.
 
 
 ## What is this for?
 
-The Design Graph is meant to help answer some common questions when implementing design systems, such as:
+Beyond a larger ecosystem effect,
+the Design Graph is meant to help answer some practical questions when implementing design systems, such as:
 
 ### *What should we call this?*
 
@@ -54,7 +56,7 @@ Naming things is hard.
 The fewer things you need to name, the more time and energy you can spend solving more important problems for your product.
 With a standard interface and naming conventions for storing raw values in your UI,
 more and more tools and abstractions can be built on top of this lower-level framework.
-By naming things in a consistent way, we get *[interoperability][]* for free.
+By naming things in a consistent way, we get *interoperability* for free.
 
 ### *Where should we put this?*
 
@@ -234,9 +236,14 @@ Then these *variants* can be used in a *component*.
 Beyond a single application or site, the Design Graph is the sort of thing that can exist at a larger level across an entire organization or across multiple organizations.
 In a way, the more libraries and applications that adopt this concept, the larger the graph gets,
 and the more tooling we can share.
+Imagine installing a component from npm, and it's already compatible with your design system.
+Or imagine reusing a core set of components with variants across multiple clients with drastically different visual designs.
+Imagine all these components can be visually tweaked from your design tool using a plugin
+and the changes are reflected back in your text editor.
 If you're interested in helping build and shape this vision, join us on [GitHub](https://github.com/system-ui/theme-ui) or let me know what you think on [Twitter](https://twitter.com/jxnblk).
 
-*Thanks to John Otander for related explorations in [DesignQL][], Jina Anne for all the work on design tokens, and Diana Mounter for additional inspiration.*
+
+*Thanks to John Otander for related explorations in [DesignQL][], Jina Anne for all the work on design tokens, and Diana Mounter for infinite inspiration.*
 
 [theme ui]: https://theme-ui.com
 [specification]: https://theme-ui.com/theme-spec
