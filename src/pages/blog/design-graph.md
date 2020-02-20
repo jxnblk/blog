@@ -1,7 +1,6 @@
 ---
 title: The Design Graph
 date: 2020-02-18
-draft: true
 excerpt: A constraint-based system for organizing styles in UI design
 ---
 
@@ -36,7 +35,7 @@ and it's a great example of how the Design Graph can become more than the sum of
 Theme UI's source code isn't particularly complex or large, and it's similar to a few other libraries out there.
 The thing that really differentiates Theme UI is that it's meant to be built upon, hacked on, and iterated on to enable a higher level of
 [interoperability][] across libraries.
-If you only look at what Theme UI *does*, you'll easily miss what it can *enable.*
+**If you only look at what Theme UI *does*, you'll easily miss what it can *enable.***
 
 If you use Theme UI to build Gatsby themes, a component library, or a website,
 these things should all *just work* with other tools like [Blocks UI][].
