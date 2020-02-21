@@ -36,6 +36,7 @@ export default ({
   ],
   strokeWidth = 1,
   grid,
+  title,
 }) => {
   const ratio = height / width
   const y = 32 * ratio
@@ -84,6 +85,7 @@ export default ({
         height: 'auto',
       }}
     >
+      {title && <title children={title} />}
       {grid && (
         <rect
           width={32}

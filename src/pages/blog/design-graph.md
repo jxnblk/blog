@@ -91,6 +91,7 @@ These nodes are inherently interconnected and help form the larger graph.
 A *theme* object is composed of multiple *scales*. These scales could include fonts, font sizes, colors, and more.
 
 <Graph
+  title='Illustration of theme and scale nodes'
   nodes={[
     [8, 12, 6, 'Theme'],
     [18, 4, , 'Fonts'],
@@ -109,6 +110,7 @@ A *theme* object is composed of multiple *scales*. These scales could include fo
 A *component's* styles use *scales*.
 
 <Graph
+  title='Illustration of scale and component nodes'
   nodes={[
     [26, 14, 6, 'Component'],
     [8, 4, , 'Fonts'],
@@ -128,6 +130,7 @@ A *component's* styles use *scales*.
 Variants are usually the parts of a component's styles that might change contextually or dynamically.
 
 <Graph
+  title='Illustration of scale and variant nodes'
   nodes={[
     [24, 5, 5, 'Variant'],
     [24, 18, 5, 'Variant'],
@@ -152,6 +155,7 @@ A *component* can use multiple *variants*. Some variants can also be shared acro
 For example, you could share accessible color combinations with a badge component and an alert or message component.
 
 <Graph
+  title='Illustration of component and variant nodes'
   nodes={[
     [26, 14, 6, 'Button'],
     [8, 6, 4, 'Primary'],
