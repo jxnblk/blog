@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
-    "@mdx-js/react": "^1.5.5",
+    "@mdx-js/react": "^1.5.7",
     "@theme-ui/prism": "^0.3.0",
     "gatsby": "^2.19.17",
     "gatsby-plugin-catch-links": "^2.1.26",
