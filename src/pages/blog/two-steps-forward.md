@@ -1,7 +1,7 @@
 ---
 title: Two Steps Forward, One Step Back
 date: 2020-03-05
-excerpt: TK
+excerpt: Building UI with design constraints from utlity CSS to CSS-in-JS
 draft: true
 ---
 
@@ -115,7 +115,7 @@ These help teams efficiently build UI with consistent branding and a common desi
 [seeds]: https://seeds.sproutsocial.com/
 [radix]: https://radix.modulz.app/
 
-## Consistency
+## Outside the `<Box />`
 
 Styled System is great for teams that have the time and resources to build out a custom component library,
 but it does require some effort to start using.
@@ -144,13 +144,15 @@ Theme-based values can be applied to common CSS properties for things like typog
 **Utility CSS creates a subset of CSS, with a custom syntax.
 The `sx` prop is a superset of CSS that uses standard syntax.**
 
+## Stop naming things
+
 Naming things is hard, and the `sx` prop lets you style any application without needing to name things like class selectors and components. As my friend and colleague John Otander puts it,
 *"Fuck naming shit when you don’t have to."*
 
 
 ## Don't take my word for it
 
-Tons of people are already taking advantage of the design graph with Theme UI.
+Tons of people are already taking advantage of the *Design Graph* with Theme UI.
 
 - [Docz][] uses Theme UI to let you customize the styles for your documentation site.
 - [Flex][] is a markdown/MDX based page builder that uses Theme UI for theming.
@@ -164,6 +166,15 @@ Tons of people are already taking advantage of the design graph with Theme UI.
 
 If you've built something with Theme UI, [I'd love to hear about it](https://mobile.twitter.com/jxnblk/status/1235658542306246657).
 
+## We don't need roads
+
+What does the future of styling with the *Design Graph* look like?
+I hope to see more sophisticated tooling and an expanding ecosystem of interoperable libraries.
+Though the promise of CSS-in-JS is huge, there are still tons of improvements we can make on top of a common format.
+Things like built-in background-aware color contrast checks,
+generative functions to create themes,
+...
+
 <!--
 Outro
 - recap of things theme-ui keeps
@@ -171,6 +182,11 @@ Outro
 -->
 
 ---
+
+<!--
+Utility CSS was probably a step up a short ladder of abstraction.
+CSS-in-JS represents a step up the ladder of abstraction.
+-->
 
 
 <!--
