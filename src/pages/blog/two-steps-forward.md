@@ -43,6 +43,9 @@ Whatever your opinion on this methodology was, it tended to help with a few comm
 - It avoided some of the pitfalls of "specificity wars" incurred by the cascade.
 - Although it had a learning curve, once you had internalized one of the many implementations, it could increase your development velocity.
 
+We also started working on [CSS Stats][] around the same time, which helped validate some of our hypotheses about CSS filesize and front-end performance.
+Applying this methodology to production web applications at the time helped shave of hundreds of kilobytes of CSS that was being shipped to end users.
+
 ## What did it fail to do?
 
 Despite Tachyons' popularity, no single library ever took over
@@ -50,26 +53,24 @@ the industry at a level that would negate the steep learning curve involved.
 This meant that not only did developers have to learn a new methodology, but also an inevitably large custom classname API.
 
 CSS is a powerful and nuanced language, but utility CSS can never fully replace it.
-Inevitably, you'll need to add one-off styles that just aren't covered by the library you're using, and there isn't always a clear way to extend what you're working with.
+Eventually, you'll need to add one-off styles that just aren't covered by the library you're using, and there isn't always a clear way to extend what you're working with.
 Without a clear way to handle things like this, developers
 tend to add inconsistent hacks and append-only styles.
 
-As a utility-based CSS library grew, so did the size of the CSS you shipped to your users,
-leaving you reliant on more build tools to remove styles that weren't in use.
+As any utility-based CSS library grows, so does the amount of CSS you ship to your users,
+leaving you reliant on more build tools to remove styles that you were never going to use anyway.
 While it was generally better than other methodologies with regard to CSS filesize, it still wasn't ideal.
-
-## What new problems did it create?
 
 ## Components
 
 With the introduction of component-based UI libraries like React,
 the promise of a better way to handle authoring CSS at scale was on the horizon.
-After Christopher "Vjeux" Chedeau gave a talk titled [CSS in your JS][] in 2015, the React community began exploring the possibilities with combining styles with components, which resulted in a cornucopia of new libraries for authoring CSS in JavaScript.
-For an excellent writeup of why you would want this, see [Sunil Pai's response to Jonathan Snook][sunil gist].
+After Christopher "Vjeux" Chedeau gave a talk titled [CSS in your JS][] in 2015, the React community began exploring the possibilities of combining styles with components, which resulted in a cornucopia of new libraries for authoring CSS in JavaScript.
+For an excellent writeup of why you would want to do this, see [Sunil Pai's response to Jonathan Snook][sunil gist].
 
 ## Two steps forward
 
-CSS-in-JS libraries help solve a lot of the same issues Utility-based CSS methodologies were focused on (and more) in a much better way.
+CSS-in-JS libraries help solve a lot of the same issues Utility-based CSS methodologies were focused on (and more) in a *much* better way.
 They connect styles directly to elements without needing to name things or create abstractions in class selectors.
 They avoid append-only stylesheets with encapsulation and hashed classnames.
 These libraries work with existing build tools, allowing for code splitting, lazy loading, and dead code elimination with virtually zero effort,
@@ -95,16 +96,24 @@ With the new ecosystem of CSS-in-JS libraries, I began exploring
 ways to incorporate design constraints in components.
 This resulted in [Rebass][] in 2015, then [Styled System][] in 2017.
 Rebass introduced the notion of using style props that mapped to commonly used CSS properties and was an early attempt at recreating some of the developer ergonomics from Basscss.
-Styled System abstracted these styles props into utility functions for use in libraries like [Styled Components][],
+Styled System abstracted these style props into utility functions for use in libraries like [Styled Components][],
 allowing you to create your own Rebass-like components.
+Rather than applying a mixed bag of classnames to a component, Styled System promotes *styles as a function of props* with a sort of *learn-once-use-everywhere* API.
 
 Many teams use libraries like Styled System to create component libraries and design systems to great success.
-GitHub's *Primer Components*,
-Artsy's *Palette*,
-SproutSocial's *Seeds*,
-and Modulz's *Radix*
+*[Chakra UI][]*,
+GitHub's *[Primer Components][]*,
+Artsy's *[Palette][]*,
+SproutSocial's *[Seeds][]*,
+and Modulz's *[Radix][]*
 all use Styled System to create components that use styles defined in *themes* with a common props API.
-These help teams create UI with consistent branding and design language quickly and efficiently.
+These help teams efficiently build UI with consistent branding and a common design language.
+
+[chakra ui]: https://chakra-ui.com
+[primer components]: https://primer.style/components/
+[palette]: https://palette.artsy.net/
+[seeds]: https://seeds.sproutsocial.com/
+[radix]: https://radix.modulz.app/
 
 ## Consistency
 
@@ -113,12 +122,55 @@ but it does require some effort to start using.
 Instead of *one `<Box />` to rule them all,*
 many of these component libraries have their own custom versions
 that require documentation, and limit [interoperability](/blog/interoperability).
+How can the concepts encoded in libraries like Styled System and the component libraries it powers be extended to designers and developers without the resources to build a custom component library,
+while making it even easier for large teams to take advantage of network effects in the ecosystem?
+No one wants another off-the-shelf component library, do they?
 
+## The Design Graph
 
----
+Instead of building *yet another* component library, what would a framework for styling modern component-based applications look like?
+Leveraging the concepts of a [*Design Graph*](/blog/design-graph), design constraints, and a standard [theme specification][] for other library authors to follow,
+[Theme UI][] is the next step in this years-long evolution.
+<!--
+TK: high-level what is theme ui and why is it good
+If you like the idea of using constraint-based design principles for styling UI and are using React, you should check it out.
+-->
+
+## A superset of CSS-in-JS
+
+Rather than memorizing hundreds of class selectors that only represent a subset of the CSS language, or a handful of style props, Theme UI gives you a superset of CSS that can be applied to any element with its `sx` prop.
+Theme-based values can be applied to common CSS properties for things like typography, color, and layout, and any bespoke, one-off styles can be added where needed, serving as an *escape hatch*.
 
 **Utility CSS creates a subset of CSS, with a custom syntax.
-Theme UI's `sx` prop is a superset of CSS that uses standard syntax.**
+The `sx` prop is a superset of CSS that uses standard syntax.**
+
+Naming things is hard, and the `sx` prop lets you style any application without needing to name things like class selectors and components. As my friend and colleague John Otander puts it,
+*"Fuck naming shit when you don’t have to."*
+
+
+## Don't take my word for it
+
+Tons of people are already taking advantage of the design graph with Theme UI.
+
+- [Docz][] uses Theme UI to let you customize the styles for your documentation site.
+- [Flex][] is a markdown/MDX based page builder that uses Theme UI for theming.
+- [Novela][] is a beautiful Gatsby theme for blogging, built with Theme UI.
+- [Hack Club][] connects you to high school hackathons and is styled with Theme UI.
+
+[docz]: https://docz.site
+[flex]: https://flex.arshad.io/
+[novela]: https://novela.narative.co/
+[hack club]: https://hackathons.hackclub.com/
+
+If you've built something with Theme UI, [I'd love to hear about it](https://mobile.twitter.com/jxnblk/status/1235658542306246657).
+
+<!--
+Outro
+- recap of things theme-ui keeps
+- iteration on a theme
+-->
+
+---
 
 
 <!--
@@ -175,10 +227,40 @@ Theme UI's `sx` prop is a superset of CSS that uses standard syntax.**
 - Atomic/Functional/Utility CSS is a *subset* of CSS with a custom syntax
 - The sx prop is a *superset* of CSS with a standard syntax
 
-  - Reference:
-    - http://mrmrs.cc/writing/scalable-css/
-    - https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
+- chakra-ui
+- Reference:
+  - http://mrmrs.cc/writing/scalable-css/
+  - https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
+  - https://mobile.twitter.com/chantastic/status/1227262007469981703
+- From Johno
+  - tech debt was measurable in CSS Stats -- data-driven
+  - theming is an afterthought in most css-in-js libs
+  - style as a function of props (not a mix of classnames)
+  - theme-ui avoids the need to name things (selectors, components)
+  - "Fuck naming shit when you don’t have to"
+- Theme UI things
+  - https://mobile.twitter.com/samjbmason/status/1235537136335622145
+  - https://theme-ui-gallery.netlify.com/
+  - https://mobile.twitter.com/gill_kyle/status/1212508600007938048
+  - https://mobile.twitter.com/PaulieScanlon/status/1234434804885655554
+  - https://mobile.twitter.com/dandenney/status/1233123707654148096
+  - https://gatsby-theme-terminal.netlify.com/
+  - https://mobile.twitter.com/atav1k/status/1230780663047036928
+  - https://mobile.twitter.com/atav1k/status/1228481206813020161
+  - Docz
+  - Narative Novela
+  - Flex: https://flex.arshad.io/
+  - https://mobile.twitter.com/tuistio/status/1235658946540601345
 -->
+
+---
+
+Related reading:
+
+- [CSS and Scalability](http://mrmrs.cc/writing/scalable-css/)
+- [Patterns for Style Composition in React](/blog/patterns-for-style-composition-in-react/)
+
+*Thanks to John Otander*
 
 [adam morse]: https://twitter.com/mrmrs_
 [nicole sullivan]: https://mobile.twitter.com/stubbornella/
@@ -194,3 +276,5 @@ Theme UI's `sx` prop is a superset of CSS that uses standard syntax.**
 [styled system]: https://styled-system.com
 [theme ui]: https://theme-ui.com
 [styled components]: https://styled-components.com
+[css stats]: https://cssstats.com
+[theme specification]: https://theme-ui.com/theme-spec
