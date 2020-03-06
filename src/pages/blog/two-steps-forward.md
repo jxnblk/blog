@@ -1,6 +1,6 @@
 ---
 title: Two Steps Forward, One Step Back
-date: 2020-03-05
+date: 2020-03-06
 excerpt: Building UI with design constraints from utlity CSS to CSS-in-JS
 draft: true
 ---
@@ -27,7 +27,7 @@ If you've ever seen code that looks like this, you're welcome:
 
 Back in 2013, [Adam Morse][] and I were following along the incredible work that [Nicole Sullivan][] and others like [Nicolas Gallagher][] were doing with Object-Oriented CSS (OOCSS).
 Our explorations around working with CSS-related tech-debt led to the creation of [Basscss][] and [Tachyons][] and the birth of "Atomic CSS".
-These libraries inspired other design systems such as Buzzfeed's [Solid][], GitHub's [Primer CSS][], and even [Bootstrap][] eventually added more utility-centric styles.
+These libraries inspired other design systems such as Buzzfeed's [Solid][] and GitHub's [Primer CSS][]. Even [Bootstrap][] eventually added more utility-centric styles.
 
 This methodology became known by many names, including *Atomic CSS*, *Functional CSS*, and *Utlity CSS*,
 but I've started referring to it as *Atomic/Functional/Utility CSS* or AFUCSS.
@@ -58,8 +58,12 @@ Without a clear way to handle things like this, developers
 tend to add inconsistent hacks and append-only styles.
 
 As any utility-based CSS library grows, so does the amount of CSS you ship to your users,
-leaving you reliant on more build tools to remove styles that you were never going to use anyway.
-While it was generally better than other methodologies with regard to CSS filesize, it still wasn't ideal.
+leaving you reliant on more build tools to remove styles that you were never going to use in the first place.
+While it was generally better than other methodologies at the time with regard to CSS filesize, it still wasn't ideal.
+
+It's also worth noting that this methodology was created before React was released
+and was intended for use in template-based user interfaces, including Rails and PHP.
+It was never designed for functional component-based UI and doesn't take advantage of this new paradigm.
 
 ## Components
 
@@ -98,7 +102,7 @@ This resulted in [Rebass][] in 2015, then [Styled System][] in 2017.
 Rebass introduced the notion of using style props that mapped to commonly used CSS properties and was an early attempt at recreating some of the developer ergonomics from Basscss.
 Styled System abstracted these style props into utility functions for use in libraries like [Styled Components][],
 allowing you to create your own Rebass-like components.
-Rather than applying a mixed bag of classnames to a component, Styled System promotes *styles as a function of props* with a sort of *learn-once-use-everywhere* API.
+Rather than applying a mixed bag of classnames to a component, Styled System promotes *style as a function of props* with a sort of *learn-once-use-everywhere* API.
 
 Many teams use libraries like Styled System to create component libraries and design systems to great success.
 *[Chakra UI][]*,
@@ -130,11 +134,13 @@ No one wants another off-the-shelf component library, do they?
 
 Instead of building *yet another* component library, what would a framework for styling modern component-based applications look like?
 Leveraging the concepts of a [*Design Graph*](/blog/design-graph), design constraints, and a standard [theme specification][] for other library authors to follow,
-[Theme UI][] is the next step in this years-long evolution.
-<!--
-TK: high-level what is theme ui and why is it good
-If you like the idea of using constraint-based design principles for styling UI and are using React, you should check it out.
--->
+[Theme UI][]
+is the next step up this ladder of abstraction.
+
+Although it's loosely based on similar concepts from utility CSS methodologies,
+Theme UI gets rid of the cryptic, non-standard APIs and syntax, the lack of interoperability, the need for separate build tools, and the steep learning curve found in libraries like Tachyons.
+It keeps the coupling of styles to elements, readability, developer ergonomics of making changes in situ,
+and adds a more powerful constraint-based system for managing styles.
 
 ## A superset of CSS-in-JS
 
@@ -144,112 +150,75 @@ Theme-based values can be applied to common CSS properties for things like typog
 **Utility CSS creates a subset of CSS, with a custom syntax.
 The `sx` prop is a superset of CSS that uses standard syntax.**
 
-## Stop naming things
-
-Naming things is hard, and the `sx` prop lets you style any application without needing to name things like class selectors and components. As my friend and colleague John Otander puts it,
+Naming things is hard, and the `sx` prop lets you style any application without needing to name things like class selectors and components. As my friend and colleague [John Otander][] puts it,
 *"Fuck naming shit when you don’t have to."*
 
 
 ## Don't take my word for it
 
-Tons of people are already taking advantage of the *Design Graph* with Theme UI.
+Tons of people are already taking advantage of the *Design Graph* with Theme UI
+to build themes, applications, and other tools.
 
 - [Docz][] uses Theme UI to let you customize the styles for your documentation site.
 - [Flex][] is a markdown/MDX based page builder that uses Theme UI for theming.
 - [Novela][] is a beautiful Gatsby theme for blogging, built with Theme UI.
 - [Hack Club][] connects you to high school hackathons and is styled with Theme UI.
+- Plus a [whole lot more][tweet]
+
+If you've built something with Theme UI, I'd love to hear about it.
 
 [docz]: https://docz.site
 [flex]: https://flex.arshad.io/
 [novela]: https://novela.narative.co/
 [hack club]: https://hackathons.hackclub.com/
+[tweet]: https://twitter.com/jxnblk/status/1235658542306246657
 
-If you've built something with Theme UI, [I'd love to hear about it](https://mobile.twitter.com/jxnblk/status/1235658542306246657).
+## Demand better
 
-## We don't need roads
-
-What does the future of styling with the *Design Graph* look like?
-I hope to see more sophisticated tooling and an expanding ecosystem of interoperable libraries.
-Though the promise of CSS-in-JS is huge, there are still tons of improvements we can make on top of a common format.
-Things like built-in background-aware color contrast checks,
-generative functions to create themes,
-...
-
-<!--
-Outro
-- recap of things theme-ui keeps
-- iteration on a theme
--->
+If you're building an application with React in 2020,
+don't settle for CSS methologies from 2013.
+Demand more for your team,
+and help me build the future of styling for the Web.
 
 ---
 
-<!--
-Utility CSS was probably a step up a short ladder of abstraction.
-CSS-in-JS represents a step up the ladder of abstraction.
--->
+**Further reading:**
+
+- [CSS and Scalability](http://mrmrs.cc/writing/scalable-css/)
+- [Patterns for Style Composition in React](/blog/patterns-for-style-composition-in-react/)
+- [Functional Programming, CSS, and your sanity](https://jon.gold/2015/07/functional-css/)
+- [Styling themes](https://johno.com/styling-themes/)
+- [Guessable](https://johno.com/guessable/)
+
+*Thanks to [John Otander][] and [Diana Mounter][]*
+
+[adam morse]: https://twitter.com/mrmrs_
+[nicole sullivan]: https://mobile.twitter.com/stubbornella/
+[nicolas gallagher]: https://github.com/necolas
+[basscss]: https://basscss.com
+[tachyons]: https://tachyons.io
+[solid]: https://solid.buzzfeed.com/
+[primer css]: https://primer.style/css/
+[bootstrap]: https://getbootstrap.com
+[sunil gist]: https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
+[css in your js]: https://vimeo.com/116209150
+[rebass]: https://rebassjs.org
+[styled system]: https://styled-system.com
+[theme ui]: https://theme-ui.com
+[styled components]: https://styled-components.com
+[css stats]: https://cssstats.com
+[theme specification]: https://theme-ui.com/theme-spec
+[john otander]: https://twitter.com/4lpine
+[diana mounter]: https://twitter.com/broccolini
 
 
 <!--
-
-- Two Steps Forward, One Step Back
-- I'm sorry; you're welcome examples
-- Origins of atomic css
-- Goes by many names: Atomic/Functional/Utility CSS
-  - I've started calling it AFU CSS
-  - Sounds like, "Hey, F You" CSS, which is most peoples initial reaction
-  - What problems did it solve
-  - Connecting elements directly to styles (avoiding selector abstractions)
-  - Design Graph like constraints
-  - "Readable" inline styles
-  - Mitigated append-only stylesheets
-- Criticism/bashing
-- What it fails to do
-- What new problems it creates
-- How are people succeeding with Theme UI?
-- A step up the ladder of abstraction
-- Preventing leaks
-- New Game: CSS-in-JS
-  - Code splitting
-  - Lazy loading
-  - Single tool chain
-  - Encapsulation
-  - Components
-  - Runtime analysis
-  - Escape hatch
-  - Constraints in styles, not on the CSS language
-  - CSS allows for nuanced use-cases
-  - "Strict mode"
-  - Things kept from Atomic CSS:
-    - Readability
-    - In situ editing
-  - Things removed:
-    - Cryptic/non-standard APIs & syntax
-    - Lack of interoperability
-    - Separate build tooling (Sass, PostCSS, etc)
-    - Learning curve
-- Theme UI helps people succeed
-  - Design Graph questions
-  - More sophisticated tooling/ecosystem
-  - Target for generative styles
-  - Interoperability
-  - Install and go plug-and-play
-  - Don't worry about build configuration
-  - Thinking in components > thinking in styles
-  - Living system > static config
-  - Grows with your product
-  - Contextually aware styles can enable richer styling abilities
-  - Styles linked to components and elements
-  - Accessible color contrast checks - need the background & foreground colors for an element
-- Atomic/Functional/Utility CSS is a *subset* of CSS with a custom syntax
-- The sx prop is a *superset* of CSS with a standard syntax
-
-- chakra-ui
 - Reference:
   - http://mrmrs.cc/writing/scalable-css/
   - https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
   - https://mobile.twitter.com/chantastic/status/1227262007469981703
 - From Johno
-  - tech debt was measurable in CSS Stats -- data-driven
+  - tech debt was measurable in CSS Stats - data-driven
   - theming is an afterthought in most css-in-js libs
   - style as a function of props (not a mix of classnames)
   - theme-ui avoids the need to name things (selectors, components)
@@ -268,29 +237,3 @@ CSS-in-JS represents a step up the ladder of abstraction.
   - Flex: https://flex.arshad.io/
   - https://mobile.twitter.com/tuistio/status/1235658946540601345
 -->
-
----
-
-Related reading:
-
-- [CSS and Scalability](http://mrmrs.cc/writing/scalable-css/)
-- [Patterns for Style Composition in React](/blog/patterns-for-style-composition-in-react/)
-
-*Thanks to John Otander*
-
-[adam morse]: https://twitter.com/mrmrs_
-[nicole sullivan]: https://mobile.twitter.com/stubbornella/
-[nicolas gallagher]: https://github.com/necolas
-[basscss]: https://basscss.com
-[tachyons]: https://tachyons.io
-[solid]: https://solid.buzzfeed.com/
-[primer css]: https://primer.style/css/
-[bootstrap]: https://getbootstrap.com
-[sunil gist]: https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
-[css in your js]: https://vimeo.com/116209150
-[rebass]: https://rebassjs.org
-[styled system]: https://styled-system.com
-[theme ui]: https://theme-ui.com
-[styled components]: https://styled-components.com
-[css stats]: https://cssstats.com
-[theme specification]: https://theme-ui.com/theme-spec
