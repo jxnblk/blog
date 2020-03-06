@@ -26,7 +26,7 @@ If you've ever seen code that looks like this, you're welcome:
 ```
 
 Back in 2013, [Adam Morse][] and I were following along the incredible work that [Nicole Sullivan][] and others like [Nicolas Gallagher][] were doing with Object-Oriented CSS (OOCSS).
-Our explorations around working with CSS-related tech-debt led to the creation of [Basscss][] and [Tachyons][] and the birth of "Atomic CSS".
+Our explorations around working with CSS-related tech-debt led to the creation of [Basscss][] and [Tachyons][] and the birth of "Utility CSS".
 These libraries inspired other design systems such as Buzzfeed's [Solid][] and GitHub's [Primer CSS][]. Even [Bootstrap][] eventually added more utility-centric styles.
 
 This methodology became known by many names, including *Atomic CSS*, *Functional CSS*, and *Utlity CSS*,
@@ -43,7 +43,8 @@ Whatever your opinion on this methodology was, it tended to help with a few comm
 - It avoided some of the pitfalls of "specificity wars" incurred by the cascade.
 - Although it had a learning curve, once you had internalized one of the many implementations, it could increase your development velocity.
 
-We also started working on [CSS Stats][] around the same time, which helped validate some of our hypotheses about CSS filesize and front-end performance.
+Around the same time, we started working on [CSS Stats][],
+which helped validate some of our hypotheses about CSS filesize and front-end performance.
 Applying this methodology to production web applications at the time helped shave of hundreds of kilobytes of CSS that was being shipped to end users.
 
 ## What did it fail to do?
