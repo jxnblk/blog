@@ -151,9 +151,24 @@ Theme-based values can be applied to common CSS properties for things like typog
 **Utility CSS creates a subset of CSS, with a custom syntax.
 The `sx` prop is a superset of CSS that uses standard syntax.**
 
-Naming things is hard, and the `sx` prop lets you style any application without needing to name things like class selectors and components. As my friend and colleague [John Otander][] puts it,
+Naming things is hard, and the `sx` prop lets you style any application
+without needing to name things like class selectors and components.
+As my friend and colleague [John Otander][] puts it,
 *"Fuck naming shit when you don’t have to."*
 
+Theme UI's `sx` prop is intended to help maintain a minimal API surface area.
+Most properties used in this prop are the same as standard CSS,
+with optional, additional ways to use values for these properties.
+Instead of each component having its own custom set of style props, *every* element can be styled with the same `sx` prop.
+Component variants are also written in the same format.
+Writing styles in JS object notation might be somewhat new, but if you know JavaScript, you likely already know the syntax.
+
+<!--
+- superset of css
+- naming things
+- collocated styles + readability
+- minimal API surface area
+-->
 
 ## Don't take my word for it
 
