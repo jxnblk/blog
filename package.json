@@ -14,7 +14,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
     "@mdx-js/react": "^1.5.7",
-    "@theme-ui/prism": "^0.3.0",
+    "@theme-ui/prism": "^0.4.0-alpha.0",
     "gatsby": "^2.19.32",
     "gatsby-plugin-catch-links": "^2.1.27",
     "gatsby-plugin-feed": "^2.3.28",
@@ -22,7 +22,7 @@
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-mdx": "^1.0.77",
     "gatsby-plugin-react-helmet": "^3.1.23",
-    "gatsby-plugin-theme-ui": "^0.3.0",
+    "gatsby-plugin-theme-ui": "^0.4.0-alpha.0",
     "gatsby-plugin-twitter": "^2.1.20",
     "jxnblk": "^1.4.1",
     "lodash.get": "^4.4.2",
@@ -32,6 +32,6 @@
     "react-icons": "^3.9.0",
     "remark": "^11.0.2",
     "remark-html": "^10.0.0",
-    "theme-ui": "^0.3.1"
+    "theme-ui": "^0.4.0-alpha.0"
   }
 }
