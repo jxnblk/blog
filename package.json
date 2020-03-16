@@ -20,7 +20,7 @@
     "gatsby-plugin-feed": "^2.3.29",
     "gatsby-plugin-google-analytics": "^2.1.38",
     "gatsby-plugin-google-fonts": "^1.0.1",
-    "gatsby-plugin-mdx": "^1.0.77",
+    "gatsby-plugin-mdx": "^1.0.83",
     "gatsby-plugin-react-helmet": "^3.1.24",
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-plugin-twitter": "^2.1.21",
