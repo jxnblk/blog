@@ -23,7 +23,7 @@
     "gatsby-plugin-mdx": "^1.0.77",
     "gatsby-plugin-react-helmet": "^3.1.23",
     "gatsby-plugin-theme-ui": "^0.3.0",
-    "gatsby-plugin-twitter": "^2.1.20",
+    "gatsby-plugin-twitter": "^2.1.21",
     "jxnblk": "^1.4.1",
     "lodash.get": "^4.4.2",
     "react": "^16.13.0",
