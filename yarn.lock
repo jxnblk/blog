@@ -5135,10 +5135,10 @@ gatsby-plugin-google-fonts@^1.0.1:
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-fonts/-/gatsby-plugin-google-fonts-1.0.1.tgz#d71054f7bf207b9a8da227380369e18e6f4e0201"
   integrity sha512-p1NVkn27GUnDA5qHM+Z4cCcLCJIardzZXMon3640sT4xuL/AZJbsx3HEt2KY/5oZu0UXIkytkxzV2Da4rQeUIg==
 
-gatsby-plugin-mdx@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.1.2.tgz#d0019400bfe9167c70c0c19a2ff29500a99736da"
-  integrity sha512-S/4UUJnqbLHwvhqViK2SJqiBX76xR+ngRW5qNP0HPmfFa7qXKse4qE33J0I8YN1bfgD0kk2df9JA/UrxCpTVOg==
+gatsby-plugin-mdx@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.1.4.tgz#1f3e9773bfc1fd4806ceacab7a130441f3e19b0d"
+  integrity sha512-id2/LALN7eseTGN05v1n16XCYggrl2UTzWOJOQME9rh25jNK+KT5ywaPY6vNYimeAW7wWdad3rl6hORpv4L6yw==
   dependencies:
     "@babel/core" "^7.8.7"
     "@babel/generator" "^7.8.8"
