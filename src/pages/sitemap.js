@@ -16,23 +16,45 @@ query {
 }
 `
 
+const getImage = (path = '') => {
+  if (path === '/') return '/pages/home.png'
+  const name = path
+    .replace(/^\//, '')
+    .replace(/\/$/, '')
+    .replace(/\//, '-')
+  return '/pages/' + name + '.png'
+}
+
 export default props => {
   const pages = props.data.pages.nodes
 
   return (
     <div>
-      <pre>sitemap | {pages.length} pages</pre>
+      <h1>Sitemap | {pages.length} pages</h1>
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
+          marginLeft: -16,
+          marginRight: -16,
         }}>
         {pages.map(page => (
           <div key={page.id}
             style={{
-              padding: 32,
+              width: '25%',
+              padding: 16,
             }}>
-            {true && (
+            <img
+              src={getImage(page.path)}
+              alt={page.path}
+              style={{
+                display: 'block',
+                maxWidth: '100%',
+                height: 'auto',
+                border: '1px solid lightgray',
+              }}
+            />
+            {false && (
             <iframe
               src={page.path}
               loading='lazy'
@@ -47,7 +69,12 @@ export default props => {
             />
             )}
             <div>
-              <Link to={page.path}>
+              <Link
+                to={page.path}
+                style={{
+                  fontFamily: '"Roboto Mono", Menlo, monospace',
+                  fontSize: 12,
+                }}>
                 {page.path}
               </Link>
             </div>

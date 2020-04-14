@@ -35,5 +35,11 @@ module.exports = {
       resolve: 'gatsby-plugin-feed',
       options: require('./feed')
     },
+    {
+      resolve: 'gatsby-plugin-screenshot',
+      options: {
+        dir: './static/pages',
+      },
+    },
   ]
 }
