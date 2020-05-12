@@ -12,7 +12,7 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
-    "@mdx-js/mdx": "^1.5.8",
+    "@mdx-js/mdx": "^1.6.1",
     "@mdx-js/react": "^1.6.1",
     "@theme-ui/prism": "^0.3.0",
     "gatsby": "^2.20.20",
