@@ -13,7 +13,12 @@ module.exports = {
         ],
       }
     },
-    'gatsby-plugin-theme-ui',
+    {
+      resolve: 'gatsby-plugin-theme-ui',
+      options: {
+        prismPreset: 'nightOwl',
+      }
+    },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
     {

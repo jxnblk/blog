@@ -1,4 +1,4 @@
-import prism from '@theme-ui/prism/presets/theme-ui'
+// import prism from '@theme-ui/prism/presets/theme-ui'
 
 export default {
   initialColorModeName: 'light',
@@ -96,7 +96,7 @@ export default {
       letterSpacing: '0.2em',
     },
   },
-  prism,
+  // prism,
   styles: {
     root: {
       fontFamily: 'body',
@@ -145,11 +145,13 @@ export default {
       p: 3,
       borderRadius: 8,
       overflowX: 'auto',
-      variant: 'prism',
+      // variant: 'prism',
+      // variant: 'prism',
     },
     code: {
       fontFamily: 'monospace',
       color: 'secondary',
+      // variant: 'prism',
     },
     inlineCode: {
       fontFamily: 'monospace',
