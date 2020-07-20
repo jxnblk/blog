@@ -2,13 +2,13 @@ const fs = require('fs')
 const util = require('util')
 const gm = require('gray-matter')
 
-const remark = require('remark')
-
-remark.mdx = require('remark-mdx')
-remark.html = require('remark-html')
+// const remark = require('remark')
+// remark.mdx = require('remark-mdx')
+// remark.html = require('remark-html')
 
 const readFile = util.promisify(fs.readFile)
 
+/*
 exports.onCreatePage = async ({
   page,
   actions
@@ -23,20 +23,22 @@ exports.onCreatePage = async ({
     },
   })
 
-  const compiler = remark()
-    .use(remark.mdx)
-    .use(remark.html)
+  // const compiler = remark()
+  //   .use(remark.mdx)
+  //   .use(remark.html)
 
-  const html = await compiler.process(post.content)
-  const excerpt = await compiler.process(post.excerpt)
+  // const html = await compiler.process(post.content)
+  // const excerpt = await compiler.process(post.excerpt)
 
   const next = Object.assign({}, page, {
     context: {
       ...page.context,
-      html: html.contents,
-      excerpt: excerpt.contents,
+      // html: html.contents,
+      // excerpt: excerpt.contents,
+      excerpt: post.excerpt,
     }
   })
   actions.deletePage(page)
   actions.createPage(next)
 }
+*/

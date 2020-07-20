@@ -73,7 +73,7 @@ export default {
     bold: 700,
   },
   fontSizes: [
-    14, 16, 18, 20, 24, 32, 48, 64, 72, 96
+    12, 14, 16, 18, 20, 24, 32, 48, 64, 72, 96
   ],
   sizes: {
     container: 768,
@@ -84,8 +84,8 @@ export default {
       fontSize: 2,
       fontWeight: 'heading',
       lineHeight: 'heading',
-      textTransform: 'uppercase',
-      letterSpacing: '0.2em',
+      // textTransform: 'uppercase',
+      // letterSpacing: '0.2em',
       my: 2,
     },
     small: {
@@ -99,18 +99,12 @@ export default {
   // prism,
   styles: {
     root: {
-      fontFamily: 'body',
+      fontFamily: 'monospace',
       lineHeight: 'body',
       fontSize: 2,
       transitionProperty: 'background-color',
       transitionTimingFunction: 'ease-out',
       transitionDuration: '.4s',
-    },
-    a: {
-      color: 'primary',
-      ':hover,:focus': {
-        color: 'secondary',
-      }
     },
     h1: {
       variant: 'text.heading',
@@ -122,8 +116,7 @@ export default {
       mb: 3,
     },
     h3: {
-      // variant: 'text.heading',
-      fontSize: 2,
+      variant: 'text.heading',
     },
     h4: {
       variant: 'text.heading',
@@ -133,6 +126,22 @@ export default {
     },
     h6: {
       variant: 'text.heading',
+    },
+  },
+  __styles: {
+    root: {
+      fontFamily: 'monospace',
+      lineHeight: 'body',
+      fontSize: 2,
+      transitionProperty: 'background-color',
+      transitionTimingFunction: 'ease-out',
+      transitionDuration: '.4s',
+    },
+    a: {
+      color: 'primary',
+      ':hover,:focus': {
+        color: 'secondary',
+      }
     },
     img: {
       maxWidth: '100%',

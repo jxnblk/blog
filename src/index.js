@@ -119,10 +119,15 @@ const Layout = props => {
             variant: 'styles.navitem',
             fontSize: 0,
             mr: 3,
+            color: 'inherit',
           }}>
           <Avatar
             size={32}
-            sx={{ mr: 2 }}
+            color='currentcolor'
+            sx={{
+              mr: 2,
+              color: 'inherit',
+            }}
           />
           Jxnblk
         </Styled.a>
@@ -180,6 +185,7 @@ const Layout = props => {
           maxWidth: 'wide',
           mx: 'auto',
         }}>
+        {/*
         <div
           sx={{
             py: 4,
@@ -208,6 +214,7 @@ const Layout = props => {
             <GitHub size={24} />
           </a>
         </div>
+        */}
         <div
           sx={{
             display: 'flex',
@@ -291,6 +298,10 @@ const Page = props => {
           <meta name='twitter:description' content={description} />
           <meta name='twitter:creator' content='Brent Jackson' />
           <meta name='twitter:card' content='summary' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap'
+          />
         </Helmet>
         <Layout {...props}>
           {props.children}
