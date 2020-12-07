@@ -1510,10 +1510,10 @@
     unist-builder "2.0.3"
     unist-util-visit "2.0.2"
 
-"@mdx-js/react@^1.0.0", "@mdx-js/react@^1.5.2", "@mdx-js/react@^1.6.5":
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.5.tgz#70380f25209b62ef69349b7eef09fad7e1103824"
-  integrity sha512-y1Yu9baw3KokFrs7g5RxHpJNSU4e1zk/5bAJX94yVATglG5HyAL0lYMySU8YzebXNE+fJJMCx9CuiQHy2ezoew==
+"@mdx-js/react@^1.0.0", "@mdx-js/react@^1.5.2", "@mdx-js/react@^1.6.22", "@mdx-js/react@^1.6.5":
+  version "1.6.22"
+  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.6.22.tgz#ae09b4744fddc74714ee9f9d6f17a66e77c43573"
+  integrity sha512-TDoPum4SHdfPiGSAaRBw7ECyI8VaHpK8GJugbJIJuqyh6kzw9ZLJZW3HGL3NNrJGxcAixUvqROm+YuQOo5eXtg==
 
 "@mdx-js/runtime@^1.6.5":
   version "1.6.5"
