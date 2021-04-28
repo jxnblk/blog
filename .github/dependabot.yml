@@ -1,0 +1,55 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "10:00"
+    timezone: US/Eastern
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: gatsby-plugin-mdx
+    versions:
+    - 1.10.0
+    - 1.10.1
+    - 1.9.0
+    - 2.0.0
+    - 2.0.1
+    - 2.1.0
+    - 2.2.0
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+  - dependency-name: gatsby
+    versions:
+    - 2.31.1
+    - 2.32.10
+    - 2.32.11
+    - 2.32.3
+    - 2.32.4
+    - 2.32.8
+  - dependency-name: gatsby-plugin-feed
+    versions:
+    - 2.12.0
+    - 2.13.0
+  - dependency-name: gatsby-plugin-catch-links
+    versions:
+    - 2.10.0
+    - 2.9.0
+  - dependency-name: gatsby-plugin-react-helmet
+    versions:
+    - 3.10.0
+    - 3.9.0
+  - dependency-name: gatsby-plugin-twitter
+    versions:
+    - 2.10.0
+    - 2.9.0
+  - dependency-name: gatsby-plugin-google-analytics
+    versions:
+    - 2.10.0
+  - dependency-name: bl
+    versions:
+    - 4.0.3
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
