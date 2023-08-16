@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>How react-geomicons Works</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>How react-geomicons Works</h1><div>6/9/2015</div><main><p><a href="http://geomicons.com">Geomicons Open</a> is an SVG icon set completely hand-coded using the Path element.
+The first version’s source was built in complete SVG, but I soon realized that the wrapping SVG and Path elements were the exact same for each icon.
+In an effort to DRY things up, I set up a rudimentary build process that would take source code containing only the Path elements’ <code>d</code> attribute value and create valid SVG code.</p>
+<p>I also built a rough icon injection script...</p>
+<ul>
+<li>geomicons-open as npm module</li>
+<li>paths object</li>
+<li>react-geomicons dependency</li>
+<li>wrapping dumb component</li>
+</ul>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

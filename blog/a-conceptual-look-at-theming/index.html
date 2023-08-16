@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>A Conceptual Look at Theming</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>A Conceptual Look at Theming</h1><div>8/9/2019</div><main><p>The word <em>theme</em> can mean a lot of different things and invoke a lot of different interpretations,
+which can be both a blessing and a curse.
+In user interface design, the term <em>theming</em> is used for various purposes, including end-user customization, white labels, customizable UI components, and color variations such as dark and light modes.
+Here, I'd like to step back and look at some of the foundational concepts that libraries like <a href="https://theme-ui.com">Theme UI</a>, <a href="https://styled-system.com">Styled System</a>, <a href="https://rebassjs.org">Rebass</a>, and <a href="https://basscss.com">Basscss</a> have been driven by.
+I've tried to codify some of these concepts in different implementations and APIs in various open source projects dating back to 2013,
+but many of these projects are aimed at a similar problem space.
+This isn't meant to be an exhaustive analysis of theming in general, but more of a framework for how to think about UI design and design systems,
+and how you can apply some of this thinking to your own work.</p>
+<h2>Spectrum</h2>
+<pre><code>Global &#x3C;--> Component
+</code></pre>
+<p>When it comes to styling, there is a dichotomy between styles that are global and styles that are scoped to individual components.
+Generally speaking, CSS tends towards the former and libraries like <a href="https://styled-components.com">Styled Components</a> tend towards the latter.
+When using any technology, how decoupled versus how scoped you choose to create your styles varies from application to application,
+and each approach has its merits.
+Considering the spectrum spanning from global to component-based styles can be
+a good yardstick for making decisions about styling responsibility when constructing a design system.</p>
+<h2>Stylesheets</h2>
+<p>In the pure ideal that is <a href="http://www.csszengarden.com/">CSS Zen Garden</a>, styles are completely decoupled from components,
+allowing the components to remain the same while the styles are swapped out one-by-one.
+In practice, this is virtually impossible to achieve in a real world application with tens, hundreds, or thousands of contributors,
+and in situations that have devolved into <em>append-only stylesheets</em>.
+The global stylesheet can be thought of as a large object composed of many nested style objects that are intended for other components.
+CSS rulesets are mapped to components via CSS selectors,
+which is effectively a language-specific function
+that takes stylesheets and full HTML element trees as inputs, and applies styles to element trees.</p>
+<p>With this sort of approach, <a href="https://en.wikipedia.org/wiki/Dead_code_elimination">dead code elimination</a>, <a href="https://en.wikipedia.org/wiki/Tree_shaking">tree shaking</a>, and dynamic <a href="https://webpack.js.org/guides/code-splitting/">code splitting</a> of the styles is extremely difficult,
+but styles are available <em>anywhere and everywhere</em> they <em>might</em> be needed.
+For small sites and smaller teams, this approach can sometimes be the quickest and cheapest approach.</p>
+<h2>Components</h2>
+<p>With a component-based approach, the default is complete isolation of styles.
+This gives you dead code elimination of styles for free.
+It also lends itself well to tree shaking and dynamic code splitting,
+which can create huge performance improvements, especially in larger applications.
+This also, inevitably, leads to duplication of styles.
+While libraries like Styled Components offer a theming context,
+the tendency is to use that as a simple mode switch rather than a store for shared styles.</p>
+<h2>Scales</h2>
+<blockquote>
+<p><em>scale</em>: a graduated series of musical tones ascending or descending in order of pitch according to a specified scheme of their intervals</p>
+</blockquote>
+<p>Styled System leverages the theming context in libraries like this to provide sets of style values in the form of <em>scales</em> that create the larger <em>theme object</em>.
+<strong>These scales create design constraints for specific style properties that help teams realize a consistent visual design language throughout an application's user interface.</strong>
+These scales become inputs to functional components.
+In component-based UI development, the resulting interface is a function of data and/or state.
+When styling interfaces, the theme object can be thought of as a part of state,
+where each component's styles becomes a function of the theme object, component-based styles, and component props.</p>
+<h2>Responsibilities</h2>
+<p>With the abstraction provided by the theme object, different styling responsibilities can be put in different places.
+Color definitions, typographic styles, space scales, and other commonly used style values become the responsibility of the theme object.
+Dynamic styles, such as responsive styles based on viewport width, become the responsibility of the component,
+which lends itself well to contextual style changes based on content.</p>
+<h2>Variants</h2>
+<p><em>Update: the variants API in Styled System has changed since first publishing this post.</em></p>
+<p>The division of responsibilities across the spectrum of global to component-based styles
+gets a little murky when considering the <a href="https://styled-system.com/variants">variants API</a> in Styled System.
+Complete style objects can be stored in the global theme object and applied to components with a simple shorthand.
+For example, a <code>Button</code> component can switch between stylistic variants by setting the <code>variant</code> prop, which pulls in values from the theme.</p>
+<pre><code>&#x3C;Button variant='primary'>Beep&#x3C;/Button>
+&#x3C;Button variant='secondary'>Boop&#x3C;/Button>
+</code></pre>
+<p>While this can be good for developer ergonomics, it flies in the face of tree-shakeability and code splitting.
+Styles that would have otherwise been scoped to the component's module are now globally available.
+For commonly used styles like typography, this can make more sense, but it still blurs the lines of where this sort of responsibility should lie.</p>
+<h2>MDX Styles</h2>
+<p>In <a href="https://theme-ui.com">Theme UI</a>, markdown and MDX content can be styled using a <a href="https://theme-ui.com/styling-mdx"><code>theme.styles</code></a> object that uses base-level theme scales to style headings, paragraphs, lists, blockquotes, and other markdown elements.
+This API too introduces a bit of ambiguity to the concept of theming, but it allows for near-complete typographic styles to be reused and shared across many different MDX documents.
+In a way, the <code>theme.styles</code> object <em>is</em> a component in a more abstract and conceptual sense.</p>
+<h2>The Right Way</h2>
+<p>I'm often asked which way is <em>the right way</em> to handle things like this.
+The short answer is, there are no wrong or right ways,
+but I think considering the implications of storing stylistic values in different places
+across the spectrum of global to component-based styles can be a useful framework
+for defining the API of a design system.
+All roads lead to Rome, so don't be afraid to explore new territory or wander off the beaten path from time to time.</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

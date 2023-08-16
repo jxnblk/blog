@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>The Three Tenets of Styled System</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>The Three Tenets of Styled System</h1><div>3/16/2019</div><main><p>I released <a href="https://styled-system.com">Styled System</a> around a year and a half ago,
+and since then, the library has been growing steadily
+and has even resulted in a few copycat libraries that use some of the same conventions.
+Up until now, I haven't really written much about the thinking behind the library, but have relied more on my approach of <em>show, don't tell</em>[^1].
+And while this library is certainly an iteration on a theme[^2]
+(those who have followed me for years may have a clear idea what it is meant for),
+I'd like to expand on what I think makes Styled System a great fit for some teams.</p>
+<h2>Three Tenets</h2>
+<p>At its core, Style System is really intended to enable developers to achieve these three things:</p>
+<ol>
+<li>Style consistently with a global theme</li>
+<li>Respond to changing requirements quickly</li>
+<li>Create mobile-first responsive layouts with ease</li>
+</ol>
+<p>It's not meant to solve every styling problem out there,
+but it is focused on some of the issues I've noticed over the years for diverse teams working on codebases where developers and designers may have varying levels of expertise with CSS and other technologies.
+I have a huge amount of respect for developers who focus on CSS and who strive to understand the intricacies of an ever-growing specification, but in my experience, it's far more likely that developers are focused on other parts of the Web stack and generally know just enough CSS to be dangerous.
+I don't think that means that CSS should be completely abstracted away,
+but I do think there is opportunity for creating powerful abstractions that <em>make it easy to do the right thing</em>[^3]. Styled System is meant to be just one such abstraction.</p>
+<h2>Consistency</h2>
+<p>Consistency is the bedrock of any constraint-based design or design system effort.
+It goes hand-in-hand with software development principles like <em>Don't Repeat Yourself</em> (DRY)
+and the general idea of abstraction.
+With modern tooling like CSS-in-JS it's never been easier to ensure that values are type safe and that styles are consistent to a certain degree.</p>
+<p>Styled System takes advantage of some of these capabilities and attempts to help teams bake this consistency in by default.
+A hard-coded font size or color value in a code review is easy to smell,
+and developers naturally opt-in to keeping values stored in a globally shared theme object.</p>
+<h2>Responding to Change</h2>
+<p>Consistency is great, but I've never seen a product freeze feature development to devote effort into keeping things looking consistent.
+Developers are frequently working in short sprint cycles to finish tasks that likely didn't account for styling consistency when they were estimated.
+Over time this leads to technical debt and parts of the CSS code base quickly become obsolete pieces of legacy code.</p>
+<p>Styled System tries to balance the consistency provided by the core theme object with the reality that developers will constantly need to make one-off changes to ship features.
+By putting <em>some</em> of the styling control into a component's props,
+developers can keep these one-off changes isolated to the parts of the code base where they are used.
+If a message component <em>really</em> needs to have a 13px font size, you can put that magic number directly in the component that needs it, and when that component is deleted, the magic number is gone as well.</p>
+<h2>Mobile-First</h2>
+<p>While Responsive Web Design[^4] is nearly a decade old, and we've been designing for mobile devices for some time now, there still aren't clear best practices for how developers should approach these design concepts.
+Styled System includes an opinionated syntax for how to style things responsively that's meant to
+help shape the way people think about designing for mobile devices.
+Instead of burying conditionals for a single CSS property across multiple media query blocks,
+Styled System uses an <a href="https://styled-system.com/responsive-styles">array syntax</a> to force developers into thinking how a singular dimension, such as font size or width, should change from one breakpoint to the next.
+This syntax is probably the most contentious part of Styled System, and I've been pleasantly surprised at how quickly I've seen people pick this up and how popular it's become.</p>
+<pre><code>/* example in CSS */
+.thing {
+  font-size: 16px;
+  width: 100%;
+}
+@media screen and (min-width: 40em) {
+  font-size: 20px;
+  width: 50%;
+}
+@media screen and (min-width: 52em) {
+  font-size: 24px;
+}
+</code></pre>
+<pre><code>// example with Styled System
+&#x3C;Thing
+  fontSize={[ 16, 20, 24 ]}
+  width={[1, 1/2]}
+/>
+</code></pre>
+<p>A year and a half later,
+Styled System has turned out to be far more well received than I ever would have expected,
+and I've learned a tremendous amount from seeing how other people have taken the core concepts within it in different directions.
+It may not be a good fit for every team out there, but I hope to see more explorations
+into how we can build more powerful abstractions on top of CSS to keep pushing the Web platform forward.</p>
+<hr>
+<p>A lot of the ideas within Styled System come from the people I've learned from over the years.
+Thanks to:
+Nicole Sullivan, Nicolas Gallagher, Jonathan Snook, Adam Morse, John Otander, Diana Mounter,
+Jon Gold, Anh-Thư Huỳnh, Alex Mykyta, John Polacek,
+and all the <a href="https://github.com/styled-system/styled-system/graphs/contributors">Styled System contributors</a> and users.</p>
+<p>[^1]: I find some things difficult to put into words, especially when it's a newer idea, and think that, just like a picture is worth a thousand words, showing code can be a much more powerful way to express an idea in some cases.
+See also: <a href="https://en.wikipedia.org/wiki/Show,_don%27t_tell">Show, don't tell</a>
+[^2]: I plan to expand on this in another post - see also <a href="https://github.com/basscss/basscss/">Basscss</a>, <a href="https://github.com/jxnblk/reflexbox">Reflexbox</a>, <a href="https://rebassjs.org">Rebass</a>, <a href="https://github.com/jxnblk/axs/tree/v1.0.0">Axs</a>
+[^3]: <a href="https://blogs.msdn.microsoft.com/brada/2003/10/02/the-pit-of-success/">The Pit of Success</a>
+[^4]: <a href="https://alistapart.com/article/responsive-web-design">Responsive Web Design</a></p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

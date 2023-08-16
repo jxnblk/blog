@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Portability</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Portability</h1><div>7/22/2019</div><main><p>In software development, formats help ensure that content and data are portable and can be used in many different applications.
+By adhering to HTML standards set by the WHATWG and W3C, browsers created by different organizations
+can render HTML documents created by many different people and generated in many different ways.
+That is, HTML is a portable format that can be rendered by many different clients.
+While HTML is certainly one of the most successful examples of standardization ever,
+less widely used formats can still benefit from the same idea.</p>
+<p>Take Markdown as an example.
+It was created in 2004 by John Gruber and Aaron Swartz, and today is the de facto format for writing software documentation.
+It isn't widely used outside the field of software development,
+but there are many different engines that can render this format into HTML.
+Markdown has become a somewhat portable format.
+By writing documentation, blog posts, or wiki pages in this format,
+you can use many different tools to render the content in different places,
+and you can be fairly certain that there will always be tools that can render this format in the future.</p>
+<p>Markdown was intended to be <em>easy-to-read and easy-to-write</em>, and can be viewed as a simple abstraction on top of HTML.
+A complete HTML page cannot be replaced by Markdown, but all Markdown files can be written as HTML.
+Most people find markdown simpler to read and write than raw HTML, and prefer using it for things like blog posts and documentation.</p>
+<p>In the same way that Markdown has found a niche in certain contexts for authoring HTML,
+I'm very interested in taking this idea and applying it to CSS.
+<em>"But, CSS is already easy to read and write,"</em> you might say.
+Sure, but when I'm considering which styles differ the most across different interfaces and which styles make the biggest impact,
+I'm mostly concerned with three things: <em>color</em>, <em>typography</em>, and <em>layout</em>.
+Authoring an entire stylesheet to apply styles like this can require some effort,
+and the end result isn't as portable as you might think.
+Simply copying a stylesheet from one website to another does not guarantee that the styles will be applied the way you intend them to be.
+A lightweight abstraction for this sort of thing, however, could make these sorts of styles more portable.</p>
+<p>Unlike Markdown, I do not think this requires inventing new syntax.
+With the existing syntaxes for CSS, JavaScript, JSON, YAML, and others, there are already plenty of tools that can handle parsing.
+This <em>does</em>, however, require a specific shape or schema to be successful,
+and the <a href="https://system-ui.com/theme">Theme Specification</a> is meant to be a simpler way to write styles for an application.
+While <a href="https://theme-ui.com">Theme UI</a> (which is built with the Theme Specification) <em>can</em> output stylesheets in the form of <a href="https://theme-ui.com/css/tachyons">Tachyons</a> and other similar CSS libraries, it cannot fully replace CSS on its own.
+It does provide a level of portability for sets of colors, typographic styles,
+and other design constraints that can be applied in many different places.
+As the number of libraries that follow this Theme Specification increases,
+you will be able to reuse these styles in more and more places,
+making it a more portable format for sharing styles.</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

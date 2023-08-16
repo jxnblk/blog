@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Progressive Documentation</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Progressive Documentation</h1><div>8/31/2018</div><main><p>When building out JS libraries and components, everyone knows the importance of good documentation.
+Without it, good code can end up going unused, which leads to duplication.</p>
+<p>For many libraries, markdown is an excellent format for writing docs since it's based on HTML and renders nicely in a variety of tools like <a href="https://github.com">GitHub.com</a>.
+But markdown can fall a little short when documenting front-end UI components,
+where demos and the ability to interact with a component in the browser is immensely helpful.</p>
+<h2>MDX</h2>
+<p><a href="https://mdxjs.com">MDX</a> was built with some of this in mind.
+It gives you the simplicity of writing markdown combined with the ability to import and use React components with JSX.
+More and more tools are adding support for MDX,
+making using it as a documentation format a no-brainer.</p>
+<h2>Documentation Tools</h2>
+<p>While there are several great tools out there for creating high-quality documentation sites,
+such as <a href="https://github.com/zeit/next.js/">Next.js</a>, <a href="https://github.com/gatsbyjs/gatsby">Gatsby</a>, <a href="https://github.com/facebook/Docusaurus">Docusaurus</a>, and <a href="https://github.com/pedronauck/docz">Docz</a>,
+many of these tools require custom setup and configuration outside of your source code
+and can be a distraction if you're trying to quickly create documentation for something new.</p>
+<p>Additionally, these tools don't always make it easy to set up documentation to serve as a development tool while working on the source code.
+There are other tools out there for quickly developing components in isolation,
+but they tend to use proprietary APIs and don't scale well, still requiring separate documentation as a project grows.</p>
+<h2>Introducing mdx-go</h2>
+<p>&#x3C;video
+src='https://s3.amazonaws.com/jxnblk/mdx-go-24.mp4'
+playsInline
+autoPlay
+loop
+muted
+style={{ maxWidth: '100%' }}
+/></p>
+<p><a href="https://github.com/jxnblk/mdx-go">mdx-go</a> is a development tool for <strong>progressive documentation</strong>
+and is meant to be used alongside your tools of choice for building documentation sites.
+It allows you to quickly prototype, draft docs, or build simple demos outside of a larger application.</p>
+<p>mdx-go is built with the following goals in mind:</p>
+<ul>
+<li>Make it easy to focus on writing docs, not setting up an application</li>
+<li>View and interact with components with zero setup or configuration</li>
+<li>Always have a dev server ready to go, even alongside your source code</li>
+<li>Reduce lock-in and embrace the portability of the MDX file format</li>
+</ul>
+<h2>Don't boil the ocean</h2>
+<p>By starting docs for a new project with mdx-go,
+you can focus on writing docs immediately,
+and you won't be locked into custom APIs or build setups,
+meaning that upgrading to other documentation solutions later on is easy when you're ready to.
+The related <a href="https://github.com/jxnblk/mdx-docs">mdx-docs</a> project is one way to migrate a directory of MDX files over to using Next.js.</p>
+<p>mdx-go also works well as a local sandbox development environment, and you can continue to use it alongside other documentation tools.
+It offers static site exporting for sharing work-in-progress demos or drafts with others.</p>
+<h2>Choose the right tool for the job</h2>
+<p>Tools like mdx-go make it easy to try things out without a lot of setup or getting locked into proprietary APIs.
+Every team is different and has different needs, but I hope mdx-go is a helpful addition to your development toolkit.</p>
+<p>To learn more <a href="https://github.com/jxnblk/mdx-go">see the mdx-go docs</a>.</p>
+<hr>
+<h2>Further Reading</h2>
+<ul>
+<li><a href="https://spectrum.chat/thread/1021be59-2738-4511-aceb-c66921050b9a">Initial MDX Proposal on Spectrum.chat</a></li>
+<li><a href="https://mdxjs.com">mdxjs.com</a></li>
+<li><a href="http://youtu.be/d2sQiI5NFAM?a">What is MDX</a> by Kent C. Dodds</li>
+<li><a href="https://compositor.io/blog/x0-making-react-component-development-stupid-simple/">x0: Making React Component Development Stupid Simple</a></li>
+<li><a href="http://jxnblk.com/blog/posts/defining-component-apis-in-react/">Defining Component APIs in React</a></li>
+</ul>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

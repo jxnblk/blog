@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>The Cascade is Not Inheritance</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>The Cascade is Not Inheritance</h1><div>7/19/2019</div><main><p>On more than one occasion, I've heard people conflate the <em>cascade</em> feature of CSS with <em>inheritance</em>.
+While it's an understandable thing to mix up because they are, in fact, related,
+I think it's important to use the correct terms when talking about technology like this.</p>
+<h2>Inheritance</h2>
+<p><em>Inheritance</em> is when a child element inherits styles from one of its parent elements.
+Some (not all) CSS properties will automatically apply as a <em>default value</em> for child elements.
+This allows you to set a font family and color at the top level of a page
+and have all elements within that page use the same styles.
+Very cool.</p>
+<h2>The Cascade</h2>
+<p>The <em>Cascade</em> is the set of rules that a browser uses to determine which particular styles should apply to a given element,
+when there are conflicting rules.
+This is, in my mind, the trickiest part of the CSS language and it trips people up all the time.</p>
+<p>The algorithm specified in CSS takes the following into consideration when applying styles:</p>
+<ul>
+<li><a href="https://www.w3.org/TR/css-cascade-3/#cascade-origin">Origin and Importance</a>, which includes author, user agent, and user stylesheets
+<ol>
+<li>Transition declarations</li>
+<li>Important user agent declarations</li>
+<li>Important user declarations</li>
+<li>Important author declarations</li>
+<li>Animation declarations</li>
+<li>Normal author declarations</li>
+<li>Normal user declarations</li>
+<li>Normal user agent declarations</li>
+</ol>
+</li>
+<li><a href="https://www.w3.org/TR/css-cascade-3/#cascade-specificity">Specificity</a>, which is <a href="https://www.w3.org/TR/selectors/#specificity-rules">calculated based on selectors</a></li>
+<li><a href="https://www.w3.org/TR/css-cascade-3/#cascade-order">Order of Appearance</a>, which means the last declared rule wins</li>
+</ul>
+<p>This quote from <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Cascade_and_inheritance">MDN's Introduction to CSS: Cascade and Inheritance</a> sums it up pretty well:</p>
+<blockquote>
+<p>If you didn't fully understand the cascade, specificity, and inheritance, then don't worry! This is definitely the most complicated thing we've covered so far in the course, and is something that even professional web developers sometimes find tricky.</p>
+</blockquote>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

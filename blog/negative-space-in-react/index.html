@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Negative space in react</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Negative space in react</h1><div>8/22/2016</div><main><blockquote>
+<p>White space is to be regarded as an active element, not a passive background.</p>
+<p>– Jan Tschichold</p>
+</blockquote>
+<p>Negative space is arguably the most important part of a visual composition.</p>
+<p>Just as in music, the rests, breathing room, and headspace are the key players in rhythm.
+Without them, you just have noise.
+Similarly, negative space in design helps create the rhythm, contrast, and motion in a visual composition.</p>
+<p>When creating visual rhythm on the web, margin and padding is the abstraction we use most commonly for negative space.
+Despite its importance in the overall composition, margin isn't usually treated as a declarative equal in component based architectures.
+And, because of this, it's difficult to determine whether white space belongs to the child component or the parent.</p>
+<h2>Personal bubbles</h2>
+<p>I sometimes like to think of an element’s whitespace as it's <em>personal bubble</em>.
+That is, different societies of humans have different distances at which they consider normal to keep when having a conversation.
+Some cultures have much smaller personal bubbles than Americans,
+and when people from these cultures visit or immigrate to the US,
+americans may feel uncomfortable with how close the other person is standing to them and unconsciously back away.
+Similarly, when Americans visit cultures with larger personal bubbles, the American is the one forcing others to back away.</p>
+<p>Components obviously aren't people but they too can differ in the amount of whitespace they need,
+and create interesting dynamics among the different parts of a UI.</p>
+<h2>Approaches</h2>
+<p>There are two predominant ways of handling whitespace in component based systems.
+The first involves components defining their own margins, which is how
+<a href="http://jxnblk.com/rebass">Rebass</a> and <a href="http://jxnblk.com/reflexbox">Reflexbox</a> provide margin props.
+The second involves a parent component wrapping child components with padded containers, similar to
+Hugo Bessa’s <a href="http://hugobessa.com.br/2016/07/20/composable-components/#layout-components">Spacing component</a>.
+A third, but less common approach is <a href="http://jxnblk.com/rebass">Rebass‘s</a> Space component,
+which declaratively creates space between other elements.</p>
+<h3>Margin Props</h3>
+<p>Let's explore the first method where a component defines its own margins.</p>
+<h3>Parent Layout Component</h3>
+<p>Now let's take a look at the second method, where the parent defines margins of its children.</p>
+<h3>Space Component</h3>
+<p>Lastly, let's explore a space component that declaratively adds space between components.</p>
+<h3>Combined Approach</h3>
+<p>We can actually devise a system that allows for all of the approaches listed above.
+To start, we need a component that manages its own margin.</p>
+<hr>
+<ul>
+<li>HOC for other components</li>
+<li>It accepts m props</li>
+<li>Next, let's create a convenience parent wrapper</li>
+<li>It could work with the m prop or go lower level and apply styles</li>
+<li>Box component is somewhere in between</li>
+<li>Parent spacer component in rebass</li>
+<li>Row, Arrange, Align,</li>
+</ul>
+<p>Each has its trade offs</p>
+<p>Declarative spacer is verbose and can be cumbersome to manage efficiently. It also destroys a convenient aspect of CSS: margin collapsing</p>
+<ul>
+<li>two elements before and after an item</li>
+<li>Changes based on context: inline vs block</li>
+<li>Desire lines from other devs, nbsp &#x26; br</li>
+</ul>
+<p>Parent spacer has its own limitations
+Similar to traditional CSS grid sys it doesn't allow for much flexibility</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

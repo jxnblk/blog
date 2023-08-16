@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>The Design Graph</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>The Design Graph</h1><div>2/17/2020</div><main><p>import Graph from '../../components/graph'</p>
+<p>Working on various websites and web apps for over a decade,
+I've gravitated around certain words and phrases to talk about design constraints in user interfaces.
+Despite the rich vocabulary for talking about visual design,
+it feels like there isn't a great way to accurately describe the interconnected nature of working with design constraints.
+Talking about <em>color palettes</em>, using <em>typographic scales</em>,
+<em>themes</em> to codify the <em>design language</em>,
+or the <em>component API</em> of a particular library has often felt a little too disjointed for what I think should be a tightly woven system.</p>
+<p>The term <em>design systems</em> used to somewhat fill this void, however it's taken on a much larger meaning over the past few years
+and includes the people, organizations, and processes (among many other things), in addition to the implementation details.
+So, how can we talk about the implementation details of UI design in a more precise way?
+And, how can we build upon these concepts to push UI design to a higher level of abstraction?</p>
+<p>While working on tools that prioritize <a href="/blog/interoperability">interoperability</a>, <a href="/blog/themeability">themeability</a>, <a href="/blog/portability">portability</a>, and the <a href="/blog/a-conceptual-look-at-theming">concepts</a> of libraries like <a href="https://theme-ui.com">Theme UI</a>,
+I've started thinking about a more holistic view that I call the <em>Design Graph</em>.</p>
+<h2>What is the Design Graph?</h2>
+<blockquote>
+<p>The Design Graph is a constraint-based system for organizing styles in UI design.</p>
+</blockquote>
+<p>The Design Graph isn't an actual implementation, but rather a conceptual model
+that includes pairwise relationships between its parts, or <em>nodes</em> to borrow a term from graph theory.
+<a href="https://theme-ui.com">Theme UI</a> is one implementation that attempts to adhere to this model,
+and it's a great example of how the Design Graph can become more than the sum of its parts.
+Theme UI's source code isn't particularly complex or large, and it's similar to a few other libraries out there.
+The thing that really differentiates Theme UI is that it's meant to be built upon, hacked on, and iterated on to enable a higher level of
+<a href="/blog/interoperability">interoperability</a> across libraries.
+<strong>If you only look at what Theme UI <em>does</em>, you'll easily miss what it can <em>enable.</em></strong></p>
+<p>If you use Theme UI to build Gatsby themes, a component library, or a website,
+these things should all <em>just work</em> with other tools like <a href="https://blocks-ui.com">Blocks UI</a>.
+In the future, imagine if there are VS Code and Figma plugins, documentation generators, static analysis tools, and more
+that follow the same Design Graph schema so that the component library you have today gets a whole lot better over time.
+I want this imaginary future.</p>
+<h2>What is this for?</h2>
+<p>Beyond a larger ecosystem effect,
+the Design Graph is meant to help answer some practical questions when implementing design systems, such as:</p>
+<h3><em>What should we call this?</em></h3>
+<p>Naming things is hard.
+The fewer things you need to name, the more time and energy you can spend solving more important problems for your product.
+With a standard interface and naming conventions for storing raw values in your UI,
+more and more tools and abstractions can be built on top of this lower-level framework.
+By naming things in a consistent way, we get <em>interoperability</em> for free.</p>
+<h3><em>Where should we put this?</em></h3>
+<p>Although people love to organize things, we're really terrible at doing so in a way that makes sense to others.
+The Design Graph doesn't try to completely solve this, but it provides guidance for where certain aspects of your UI design should live.
+For example, raw color values belong in the <code>colors</code> <em>scale</em>, and variations of your button styles belong in the <code>buttons</code> <em>variants</em>.</p>
+<h3><em>How do we use this?</em></h3>
+<p>Creating sensible but flexible component APIs is hard.
+When building out a library of components, it's generally beneficial to reuse props APIs across multiple components whenever possible.
+This helps maintain a <em>minimum API surface area</em> and allows for a <em>learn once, use anywhere</em> effect.
+With Theme UI,
+contextual component styles can be set with the <code>variant</code> prop, and can be augmented or overridden with the <code>sx</code> prop, which acts as a sort of escape hatch.</p>
+<h2>What does it look like?</h2>
+<p>I would consider this a work-in-progress, but from a high level, the Design Graph includes the following core <em>nodes</em>:</p>
+<ul>
+<li><strong>Scales</strong> are limited collections of raw values that map to specific style properties.
+For example, values for <code>font-size</code> are stored in the <code>fontSizes</code> scale.</li>
+<li><strong>Components</strong> are elements that have styles constrained by <em>scales</em>.</li>
+<li><strong>Variants</strong> are partial styles that map to specific components.
+For example, a button might have <em>primary</em> and <em>secondary</em> variants, or <em>large</em> and <em>small</em> variants.</li>
+<li><strong>Themes</strong> are collections of <em>scales</em> (and possibly <em>variants</em>) that encapsulate a particular visual design language.
+Ideally, themes follow a common interface (or schema) and can be swapped out in different implementations.</li>
+</ul>
+<p>These nodes are inherently interconnected and help form the larger graph.</p>
+<h2>Themes to Scales</h2>
+<p>A <em>theme</em> object is composed of multiple <em>scales</em>. These scales could include fonts, font sizes, colors, and more.</p>
+<p>&#x3C;Graph
+title='Illustration of theme and scale nodes'
+nodes={[
+[8, 12, 6, 'Theme'],
+[18, 4, , 'Fonts'],
+[28, 10, , 'Colors'],
+[23, 20, , 'Space'],
+]}
+edges={[
+[0, 1],
+[0, 2],
+[0, 3],
+]}
+/></p>
+<h2>Scales to Components</h2>
+<p>A <em>component's</em> styles use <em>scales</em>.</p>
+<p>&#x3C;Graph
+title='Illustration of scale and component nodes'
+nodes={[
+[26, 14, 6, 'Component'],
+[8, 4, , 'Fonts'],
+[4, 12, , 'Colors'],
+[10, 20, , 'Space'],
+]}
+edges={[
+[0, 1],
+[0, 2],
+[0, 3],
+]}
+/></p>
+<h2>Scales to Variants</h2>
+<p><em>Variants</em> also use <em>scales</em>.
+Variants are usually the parts of a component's styles that might change contextually or dynamically.</p>
+<p>&#x3C;Graph
+title='Illustration of scale and variant nodes'
+nodes={[
+[24, 5, 5, 'Variant'],
+[24, 18, 5, 'Variant'],
+[10, 4, , 'Fonts'],
+[4, 12, , 'Colors'],
+[10, 20, , 'Space'],
+]}
+edges={[
+[0, 2],
+[0, 3],
+[0, 4],
+[1, 2],
+[1, 3],
+[1, 4],
+]}
+/></p>
+<h2>Component to Variants</h2>
+<p>A <em>component</em> can use multiple <em>variants</em>. Some variants can also be shared across multiple components.
+For example, you could share accessible color combinations with a badge component and an alert or message component.</p>
+<p>&#x3C;Graph
+title='Illustration of component and variant nodes'
+nodes={[
+[26, 14, 6, 'Button'],
+[8, 6, 4, 'Primary'],
+[4, 20, 4, 'Secondary'],
+]}
+edges={[
+[0, 1],
+[0, 2],
+]}
+/></p>
+<h2>Putting it all together</h2>
+<p>As an example to demonstrate how some of these pieces fit together, a <em>theme</em> with typographic <em>scales</em> can be used to create a <em>component</em> that accepts multiple <em>variants</em>.</p>
+<pre><code>// example theme with typographic scales
+{
+  fonts: {
+    body: 'Helvetica',
+    heading: 'Garamond',
+  },
+  fontWeights: {
+    body: 400,
+    heading: 700,
+    bold: 700,
+  },
+  lineHeights: {
+    body: 1.625,
+    heading: 1.25,
+  },
+  fontSizes: [ 12, 14, 16, 20, 24, 32, 48 ],
+}
+</code></pre>
+<p>These <em>scales</em> can be used to create <em>variants</em>.</p>
+<pre><code>// example variants
+text: {
+  heading: {
+    fontFamily: 'heading',
+    fontWeight: 'heading',
+    lineHeight: 'heading',
+    fontSize: 5,
+  },
+  title: {
+    fontFamily: 'heading',
+    fontWeight: 'heading',
+    lineHeight: 'heading',
+    fontSize: 6,
+  },
+  lead: {
+    fontFamily: 'body',
+    fontWeight: 'body',
+    lineHeight: 'body',
+    fontSize: 3,
+  },
+  small: {
+    fontFamily: 'body',
+    fontWeight: 'body',
+    lineHeight: 'body',
+    fontSize: 0,
+  },
+}
+</code></pre>
+<p>Then these <em>variants</em> can be used in a <em>component</em>.</p>
+<pre><code>&#x3C;Text as='h1' variant='heading'>
+  Hello
+&#x3C;/Text>
+&#x3C;Text variant='lead'>
+  This component has variants.
+&#x3C;/Text>
+</code></pre>
+<h2>More than the sum of its parts</h2>
+<p>Beyond a single application or site, the Design Graph is the sort of thing that can exist at a larger level across an entire organization or across multiple organizations.
+In a way, the more libraries and applications that adopt this concept, the larger the graph gets,
+and the more tooling we can share.
+Imagine installing a component from npm, and it's already compatible with your design system.
+Or imagine reusing a core set of components with variants across multiple clients with drastically different visual designs.
+Imagine all these components can be visually tweaked from your design tool using a plugin
+and the changes are reflected back in your text editor.
+If you're interested in helping build and shape this vision, join us on <a href="https://github.com/system-ui/theme-ui">GitHub</a> or let me know what you think on <a href="https://twitter.com/jxnblk">Twitter</a>.</p>
+<p><em>Thanks to John Otander for related explorations in <a href="https://github.com/system-ui/designql">DesignQL</a>, Jina Anne for all the work on design tokens, and Diana Mounter for infinite inspiration.</em></p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

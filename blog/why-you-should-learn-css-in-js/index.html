@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Why you should definitely learn how to use CSS-in-JS</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Why you should definitely learn how to use CSS-in-JS</h1><div>7/19/2019</div><main><p>From time to time, I've heard that CSS-in-JS poses a barrier to entry for some people.
+Like any new software abstraction, CSS-in-JS is <em>intended to</em> abstract away some of the complexities from a lower level implementation, in this case CSS.
+Abstractions are neither good nor bad, but they do require learning new things.
+Using CSS-in-JS lets you style applications without needing to worry about a few of the thornier aspects of CSS,
+but it doesn't replace CSS entirely,
+and you still need to have a solid understanding of CSS to be successful.
+You will absolutely need a solid understanding of
+CSS properties, values and types, inheritance, layout, stacking context, and the box-model to be successful with CSS-in-JS.</p>
+<p>CSS-in-JS isn't a boogieman out to destroy everything you love about CSS.
+In my opinion, it can make authoring CSS far more enjoyable than any other tool I've used in the past,
+and I'd encourage you to give it a shot.</p>
+<p>If you already know JavaScript, CSS-in-JS helps remove the need to use native CSS syntax,
+or deal with context switching between different languages.
+For younger developers straight out of bootcamp,
+this can make styling an application more accessible because there are fewer new things to learn.
+I've seen this myself, and remember one former colleague gushing about how Styled Components was so much easier to use than what they'd learned in school.</p>
+<p>If you're less familiar with JS syntax, the effect can be the total opposite,
+and it can seem like too much to learn at once.
+Don't get discouraged.
+You can still learn how to use CSS-in-JS, and keep in mind that whatever you learn along the way will be applicable knowledge in many other situations where JS is used.
+I like to think of CSS-in-JS as a potentially low-barrier way to get started with JS.</p>
+<p>Despite what I've written here,
+it can still feel like a barrier because <strong>it <em>does</em> require learning something new</strong>,
+but one thing that I love about software development is that I'm never bored and constantly learning.</p>
+<p>If you're not willing to learn something new, then you probably won't like CSS-in-JS at all,
+but if you do have a curious mind, I hope this post helps.</p>
+<h2>What does CSS-in-JS do?</h2>
+<p>Most libraries are designed to:</p>
+<ul>
+<li>Let you author CSS in JavaScript syntax</li>
+<li>Colocate styles with components</li>
+<li>Take advantage of native JS syntax features</li>
+<li>Take advantage of anything from the JS ecosystem</li>
+</ul>
+<h2>What does CSS-in-JS <em>not</em> do?</h2>
+<p>At the end of the day, you're still writing code that generates CSS, and the full power of the language is still available.
+CSS-in-JS <strong>does not</strong> get rid of the need to understand the following:</p>
+<ul>
+<li>How styles are applied to the DOM</li>
+<li>How inheritance works</li>
+<li>How CSS properties work</li>
+<li>How CSS layout works</li>
+</ul>
+<h2>What abstractions does CSS-in-JS provide?</h2>
+<p>CSS-in-JS libraries allow you to author styles <em>without</em> generally having to think about:</p>
+<ul>
+<li>The cascade (<a href="/blog/the-cascade-is-not-inheritance"><strong>not inheritance</strong></a>)</li>
+<li>Specificity</li>
+<li>Naming selectors</li>
+<li>Enforcing naming conventions</li>
+<li>Linting another language</li>
+<li>Enforcing file structures for another language</li>
+<li>Additional build tools</li>
+</ul>
+<h2>What you need to know</h2>
+<p>To be effective with CSS-in-JS, you'll need to have a good grasp of the following concepts:</p>
+<p>Types in JavaScript:</p>
+<ul>
+<li>Strings</li>
+<li>Numbers</li>
+<li>Objects</li>
+<li>Arrays</li>
+<li>Boolean</li>
+<li>Null</li>
+<li>Undefined</li>
+</ul>
+<p>MDN is a great resource for learning JS, and I'd highly recommend their tutorial on
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">JavaScript data types and data structures</a>.</p>
+<p>To really excell with CSS-in-JS, you'll benefit from understanding the following:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators">Math operations</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators">Logical operators</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">Ternary operators</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors">Dot and bracket syntax</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">ES Modules</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Object spread</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring</a></li>
+</ul>
+<h2>What other benefits does CSS-in-JS have?</h2>
+<ul>
+<li>It can make dead code elimination easier to manage</li>
+<li>It will throw errors to help you avoid mistakes, including syntax, type, and undefined errors</li>
+<li>Many libraries offer support for theming</li>
+<li>You can use virtually <em>any</em> package from npm</li>
+<li>You can use ES modules and scope</li>
+<li>Most libraries offer ways to handle dynamic styling</li>
+<li>Styles are generally "scoped" to a specific component</li>
+<li>It's far easier to write unit tests with CSS-in-JS</li>
+<li>Many libraries offer performance improvements like <em>critical CSS</em> with no additional setup needed</li>
+</ul>
+<h2>Where do I start?</h2>
+<p>There's certainly no one-size-fits-all answer here.</p>
+<p>If you haven't used React before, or have less experience with JS, I'd recommend checking out the <a href="https://www.gatsbyjs.org/tutorial/">Gatsby tutorial</a>.
+Once you have a good grasp of the concepts laid out in the tutorial, see the guide on using <a href="https://www.gatsbyjs.org/docs/css-in-js/">Using CSS-in-JS</a>.</p>
+<p>If you know enough React to get going on your own, I'd recommend  checking out <a href="https://styled-components.com">Styled Components</a>.
+Then, once you've got that working, definitely check out <a href="https://emotion.sh">Emotion</a>.
+These are the two most widely used CSS-in-JS libraries at the moment,
+and between the two of them, they cover a lot of ground.</p>
+<p>If you have any questions or thoughts on how to make this post better, please reach out to me on <a href="https://twitter.com/jxnblk">Twitter</a>.</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

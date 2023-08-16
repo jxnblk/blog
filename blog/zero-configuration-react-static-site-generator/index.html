@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Zero-Configuration React Static Site Generator</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Zero-Configuration React Static Site Generator</h1><div>2/14/2016</div><main><p>React is a great way to generate static HTML with a component-based UI.
+One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going.
+I wanted to make it dead-simple to start building static pages with React
+and without the need to install tons of npm modules and configure webpack.</p>
+<p>That’s where <a href="https://github.com/jxnblk/static-react">static-react</a> comes in. Here’s out to get started.</p>
+<p><em>Update: As of version 3.2.0, static-react includes Babel presets and they do not need to be installed separately. This post has been updated to reflect those changes.</em></p>
+<h2>1. Install Dependencies</h2>
+<pre><code>npm i -D react static-react
+</code></pre>
+<p>~~The Babel presets are optional, but make working with React much nicer, in my opinion.~~</p>
+<h2>2. Add a Run Script</h2>
+<p>Add the following run script to package.json.</p>
+<pre><code>"scripts": {
+  "start": "static-react components/Root.js > index.html"
+}
+</code></pre>
+<h2>~~3. Configure Babel (Optional) <a href="#1">*</a>~~</h2>
+<p>~~Add the following to package.json.~~</p>
+<h2>4. Add Components</h2>
+<p>Create a <code>components</code> directory and a <code>Root.js</code> React component.</p>
+<pre><code>// Root.js
+import React from 'react'
+
+class Root extends React.Component {
+  render () {
+    return &#x3C;h1>Hello&#x3C;/h1>
+  }
+}
+
+export default Root
+</code></pre>
+<h2>5. Build</h2>
+<pre><code>npm start
+</code></pre>
+<p>Open <code>index.html</code> and you should see the rendered Root component.</p>
+<h2>Building Out a Page</h2>
+<p>You'll certainly want more than just a heading in the final page.
+Build out some more components and run <code>npm start</code> to rebuild.</p>
+<p>Here is an example set of starter components:</p>
+<pre><code>// Root.js
+import React from 'react'
+import Head from './Head'
+import Header from './Header'
+import Main from './Main'
+import Footer from './Footer'
+
+class Root extends React.Component {
+  render () {
+    return (
+      &#x3C;html>
+        &#x3C;Head title='Static React Demo' />
+        &#x3C;body className='px3'>
+          &#x3C;Header title='Hello' />
+          &#x3C;Main />
+          &#x3C;Footer />
+        &#x3C;/body>
+      &#x3C;/html>
+    )
+  }
+}
+
+export default Root
+</code></pre>
+<pre><code>// Head.js
+import React from 'react'
+
+const Head = ({ title }) => (
+  &#x3C;head>
+    &#x3C;meta charSet='utf-8' />
+    &#x3C;title>{title}&#x3C;/title>
+    &#x3C;link href='https://npmcdn.com/basscss-basic@1.0.0/index.css' rel='stylesheet' />
+    &#x3C;link href='https://npmcdn.com/basscss@8.0.0/css/basscss.min.css' rel='stylesheet' />
+    &#x3C;meta name='viewport' content='width=device-width, initial-scale=1' />
+  &#x3C;/head>
+)
+
+export default Head
+</code></pre>
+<pre><code>// Header.js
+import React from 'react'
+
+const Header = ({ title }) => (
+  &#x3C;header className='py3'>
+    &#x3C;h1>{title}&#x3C;/h1>
+  &#x3C;/header>
+)
+
+export default Header
+</code></pre>
+<pre><code>// Main.js
+import React from 'react'
+
+const Main = () => (
+  &#x3C;main className='py4'>
+    &#x3C;img src='http://lorempixel.com/256/256/cats/'
+      alt='Kitten' />
+  &#x3C;/main>
+)
+
+export default Main
+</code></pre>
+<pre><code>// Footer.js
+import React from 'react'
+
+const Footer = () => (
+  &#x3C;footer className='py3'>
+    &#x3C;p>© 2016 Brent Jackson&#x3C;/p>
+  &#x3C;/footer>
+)
+
+export default Footer
+</code></pre>
+<p>If you have any thoughts on or issues with the static-react module, please check out the repo on <a href="https://github.com/jxnblk/static-react">GitHub</a>.</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

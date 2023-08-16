@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Universal UI Components</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Universal UI Components</h1><div>7/5/2016</div><main><p>For a while now, I’ve been interested in the idea of creating portable,
+interoperable functional UI components that can work in any DOM rendering library,
+whether it’s
+<a href="https://facebook.github.io/react/">React</a>,
+<a href="https://preactjs.com">Preact</a>,
+<a href="https://github.com/dominictarr/hyperscript">hyperscript</a>,
+<a href="https://github.com/shama/bel">bel</a>,
+<a href="https://github.com/maxogden/yo-yo">yo-yo</a>,
+or some other library.</p>
+<p>The idea of functional UI components is a simple one: pass arguments into a function and it returns a representation of the DOM,
+usually with encapsulated styles and interactivity handled with callbacks to a global state, a la Redux.</p>
+<p>If you look at the currently available technology, there are predominantly three ways to create these components:</p>
+<ul>
+<li><a href="https://facebook.github.io/jsx/"><strong>JSX</strong></a> (from React) - uses an XML-like syntax to call functions that return representations of DOM elements</li>
+<li><a href="https://github.com/dominictarr/hyperscript"><strong>Hyperscript</strong></a> - similar to JSX, but uses standard JavaScript syntax and function calls</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals"><strong>ES2015 tagged template literals</strong></a> - a new string type introduced to JavaScript</li>
+</ul>
+<p>Each has its own pros and cons. While JSX is mostly syntactic sugar, some prefer to use standard JavaScript syntax.
+One big advantage JSX has is that it abstracts away the function used to create DOM elements.
+For example, React uses <code>React.createElement</code> while Preact uses <code>Preact.h</code>.
+The pragma used in JSX is configurable by the end user.
+Hyperscript, although older than JSX, uses a similar function, but is written in standard JavaScript.
+Tagged template literals are also standard JavaScript,
+but require a little bit of extra code to change template literals into DOM elements.</p>
+<h2>The same, but different</h2>
+<p>Assuming we pick one of the above syntaxes,
+there are relatively few differences among the implementations of components across libraries.
+For example, here is a bare-bones Button component for several different libraries.
+For brevity, styles have been left out of these examples.</p>
+<pre><code>// React using JSX
+import React from 'react'
+
+const Button = (props) => (
+  &#x3C;button {...props} />
+)
+export default Button
+</code></pre>
+<pre><code>// Preact using JSX
+import { h } from 'preact'
+
+const Button = (props) => (
+  &#x3C;button {...props} />
+)
+export default Button
+</code></pre>
+<pre><code>// Hyperscript
+import h from 'hyperscript'
+
+const Button = (props) => (
+  h('button', props)
+)
+export default Button
+</code></pre>
+<pre><code>// yo-yo using tagged template literals
+import yo from 'yo-yo'
+
+const Button = ({ text, ...props }) => (
+  yo`&#x3C;button ${props}>${text}&#x3C;/button`
+)
+export default Button
+</code></pre>
+<p>There are still quite a few differences in syntax between JSX, hyperscript, and tagged template literals.
+For the sake of this post, I’ll focus on implementing these components in JSX.</p>
+<p>The first three examples are covered, but here’s what the hyperscript and yo-yo examples would look like in JSX.</p>
+<pre><code>// Hyperscript with JSX
+import h from 'hyperscript'
+
+const Button = (props) => (
+  &#x3C;button {...props} />
+)
+export default Button
+</code></pre>
+<pre><code>// bel (yo-yo) with JSX
+// yo-yo uses the bel package to create elements
+import { createElement } from 'bel'
+
+const Button = (props) => (
+  &#x3C;button {...props} />
+)
+export default Button
+</code></pre>
+<p>For each of the non-React versions, JSX needs to be configured to use the appropriate pragma.
+Hyperscript and Preact both name their create element functions <code>h</code>.
+Here is an example <code>.babelrc</code> configuration.</p>
+<pre><code>{
+  "presets": [
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [
+    [
+      "transform-react-jsx",
+      { "pragma": "h" }
+    ]
+  ]
+}
+</code></pre>
+<p>Although the other libraries name their create element functions differently,
+they can all be named <code>h</code> within the components for cross-library compatibility.</p>
+<pre><code>// React using JSX
+import { createElement as h } from 'react'
+
+const Button = (props) => (
+  &#x3C;button {...props} />
+)
+export default Button
+</code></pre>
+<p>At this point, the only difference in these components across libraries is the <code>import</code> statement.
+Using a module bundler like webpack, even this can be abstracted out of the component module.</p>
+<p>Using webpack’s ProvidePlugin, the create element function can be exposed to all modules.
+This does involve having a variable in the global scope, but I think the trade-off might be worth it in some cases.</p>
+<pre><code>// Custom create-element module
+const h = require('preact').h
+module.exports = h
+</code></pre>
+<pre><code>// Example webpack configuration for Preact
+const path = require('path')
+const webpack = require('webpack')
+
+module.exports = {
+  ...,
+  plugins: [
+    new webpack.ProvidePlugin([
+      h: path.resolve('./preact-create-element')
+    ])
+  ]
+}
+</code></pre>
+<p>To avoid variable collisions, the function could be named anything (e.g. <code>__h</code>) as long as the <code>.babelrc</code> pragma matches.</p>
+<p>In addition to the name of the create element function, there are some slight differences in the naming conventions
+for HTML attributes (e.g. <code>htmlFor</code> and <code>className</code>) and handling child elements.
+Transforming these props could be handled in the custom function, but the implementation details have been left out of this post.</p>
+<p>With this configuration, the Button component can now be written like this:</p>
+<pre><code>const Button = (props) => (
+  &#x3C;button {...props} />
+)
+export default Button
+</code></pre>
+<p>I’ve put up a rough demonstration of this concept, with the same two UI components being rendered to the DOM by
+React, Preact, hyperscript, and bel here: <a href="http://jxnblk.com/universal-components">Universal Components</a>.</p>
+<p>With a little bit of configuration, a whole library of UI components could be written in a manner that would allow
+the DOM rendering library to be swapped out at some point in the future,
+without the need to use a tool like <a href="https://github.com/facebook/codemod">Codemod</a>.
+There’s probably even a way to wrap components in an open-source library like <a href="http://jxnblk.com/rebass">Rebass</a>
+to make them compatible with more than one functional DOM rendering library as well.</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

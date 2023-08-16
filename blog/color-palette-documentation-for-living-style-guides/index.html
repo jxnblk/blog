@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Color Palette Documentation for Living Style Guides</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Color Palette Documentation for Living Style Guides</h1><div>6/14/2015</div><main><p>Virtually every style guide has a color palette section in its documentation.
+Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
+This often leads to one falling out of sync with the other,
+and makes maintaining a living style guide more difficult.</p>
+<p>The problem with this approach is that the values are being defined in two different places.
+For a true living style guide, the code should serve as the single source of truth.
+Extracting color values from CSS can help keep documentation in sync,
+expose outdated colors, and point out opportunities for normalizing designs.</p>
+<p>The following will show how to use Node.js to build source-code-derived documentation for color palettes
+and present color contrast values for each possible pairing as a guide for usage.</p>
+<h2>Initial Setup</h2>
+<p>If you’re already using Node.js in your build system,
+you can integrate this directly into your project.
+For the purposes of this tutorial, create a new sandboxed project to experiment with.</p>
+<pre><code>mkdir color-documentation
+cd color-documentation
+npm init
+</code></pre>
+<p>Install the following modules.</p>
+<pre><code>npm i --save-dev postcss color colorable lodash
+</code></pre>
+<p>The <a href="https://github.com/postcss/postcss">PostCSS</a> module will be used to transform the source CSS into an
+AST
+for manipulation with JavaScript.
+<a href="https://www.npmjs.com/package/color">Color</a> will be used to convert the values found in the stylesheet to hexidecimal.
+<a href="http://jxnblk.com/colorable">Colorable</a> will be used to get color contrast values and
+<a href="http://www.w3.org/TR/WCAG20/#visual-audio-contrast">WCAG</a>
+scores for every possible pairing of colors.
+And <a href="https://lodash.com/docs">lodash</a> will be used to find unique color values and
+to render templates to HTML.</p>
+<p>Copy a CSS file into the project to use as a source for the color values.
+This tutorial will use <a href="http://www.basscss.com/docs/">Basscss</a> as an example.</p>
+<h2>Build Script</h2>
+<p>Create a new <code>build.js</code> file that will be used to read the CSS file and eventually to generate an HTML page.</p>
+<pre><code>// build.js
+var fs = require('fs')
+
+// Read the contents of basscss.css
+var css = fs.readFileSync('basscss.css', 'utf8')
+
+console.log(css)
+</code></pre>
+<p>For now, this script just logs the stylesheet.</p>
+<h2>Package Scripts</h2>
+<p>Add a script to <code>package.json</code> for the build script.</p>
+<pre><code>// package.json
+"scripts": {
+  "start": "node build"
+}
+</code></pre>
+<p>Run the script to make sure everything is working.</p>
+<pre><code>npm start
+</code></pre>
+<h2>Parsing CSS</h2>
+<p>Create a new <code>lib/parse-colors.js</code> file for parsing the CSS.</p>
+<pre><code>// lib/parse-colors.js
+var _ = require('lodash')
+var postcss = require('postcss')
+var Color = require('color')
+
+module.exports = function(css) {
+  // Array of colors to return
+  var colors = []
+
+  // Parse the CSS file and get the AST
+  var root = postcss.parse(css)
+
+  // Iterate through each declaration and log the property
+  root.eachDecl(function(decl) {
+    console.log(decl.prop)
+  })
+
+  return colors
+}
+</code></pre>
+<p>Use this module in <code>build.js</code>.</p>
+<pre><code>// build.js
+var fs = require('fs')
+var parseColors = require('./lib/parse-colors')
+
+// Read the contents of basscss.css
+var css = fs.readFileSync('basscss.css', 'utf8')
+var colors = parseColors(css)
+</code></pre>
+<p>The <code>parse-colors</code> module takes raw CSS and transforms it into an AST that can be iterated over.
+For now, this just logs all the properties found in the stylesheet.</p>
+<h2>Filtering Colors</h2>
+<p>Next update the parse module to filter out everything but <code>color</code> and <code>background-color</code> properties,
+convert the values to hex, and remove duplicates.
+While color values can be used in other properties including the <code>background</code> shorthand,
+handling that would add complexity and will be omitted from this tutorial.</p>
+<pre><code>// lib/parse-colors.js
+var _ = require('lodash')
+var postcss = require('postcss')
+var Color = require('color')
+
+module.exports = function(css) {
+
+  var colors = []
+  var root = postcss.parse(css)
+
+  // Iterate through each color and background-color declaration
+  root.eachDecl(/(color|background\-color)/, function(decl) {
+    // Add each color value to the colors array
+    colors.push(decl.value)
+  })
+
+  // Convert all color values to hex strings
+  colors = colors.map(function(color) {
+    var hex
+    try {
+      hex = Color(color).hexString()
+      return hex
+    } catch(e) {
+      // Handle color values like inherit and currentcolor
+      return false
+    }
+  })
+  .filter(function(value) {
+    // Remove false values
+    return value
+  })
+
+  // Remove duplicate values
+  colors = _.uniq(colors)
+
+  return colors
+
+}
+</code></pre>
+<p>The first argument in <code>root.eachDecl</code> is a regular expression to filter declarations for either <code>color</code> or <code>background-color</code>.
+See the <a href="https://github.com/postcss/postcss/blob/master/docs/api.md#containereachdeclpropfilter-callback">PostCSS documentation</a> for more details.
+The <code>Color().hexString()</code> method converts any valid color value to hex format. The lodash <code>_.uniq</code> method removes duplicate values from an array.</p>
+<h2>HTML Template</h2>
+<p>Next, create a <code>template.html</code> file for displaying the colors.
+This tutorial uses lodash templates, but any JavaScript templating language would work.
+Note: if you’re using a stylesheet other than Basscss, the classes applied below may differ.</p>
+<pre><code>&#x3C;!DOCTYPE html>
+&#x3C;!-- template.html -->
+&#x3C;html>
+&#x3C;head>
+  &#x3C;meta charset="utf-8">
+  &#x3C;title>Color Palette Docs Demo&#x3C;/title>
+  &#x3C;link rel="stylesheet" href="basscss.css">
+&#x3C;/head>
+&#x3C;body class="px3">
+  &#x3C;header class="py3">
+    &#x3C;h1>Color Palette Docs Demo&#x3C;/h1>
+  &#x3C;/header>
+  &#x3C;ul class="list-reset flex flex-wrap flex-justify mxn2">
+    &#x3C;% colors.map(renderColor) %>
+  &#x3C;/ul>
+  &#x3C;% function renderColor(color) { %>
+    &#x3C;li class="m2">
+      &#x3C;div style="background-color:&#x3C;%= color %>"
+        class="p4">&#x3C;/div>
+      &#x3C;%= color %>
+    &#x3C;/li>
+  &#x3C;% } %>
+&#x3C;/body>
+&#x3C;/html>
+</code></pre>
+<p>Inside the <code>&#x3C;ul></code> the <code>.map()</code> method is used to iterate over the <code>colors</code> array and passes the <code>renderColor</code> function as a callback.
+The <code>renderColor</code> function then renders an <code>&#x3C;li></code> for each color with a div that has its background color set to that value.</p>
+<p>Edit <code>build.js</code> to read the template and generate an HTML file.</p>
+<pre><code>// build.js
+var _ = require('lodash')
+var fs = require('fs')
+var parseColors = require('./lib/parse-colors')
+
+var css = fs.readFileSync('basscss.css', 'utf8')
+// Read the template string
+var template = fs.readFileSync('template.html', 'utf8')
+// Create a lodash template function
+var tpl = _.template(template)
+var colors = parseColors(css)
+
+// Render the template function to an HTML string
+var html = tpl({ colors: colors })
+
+// Write an HTML file to disk
+fs.writeFileSync('index.html', html)
+</code></pre>
+<p>Now run <code>npm start</code> which should generate an HTML file with the colors parsed from the stylesheet.</p>
+<pre><code>npm start &#x26;&#x26; open index.html
+</code></pre>
+<p></p>
+<h2>Readable Color Combinations</h2>
+<p>The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and can’t be used for text.</p>
+<p>Create a new <code>lib/parse-combos.js</code> file.</p>
+<pre><code>// lib/parse-combos.js
+var colorable = require('colorable')
+
+module.exports = function(colors) {
+
+  var combos = []
+  // Get the Colorable array
+  var arr = colorable(colors)
+
+  // Flatten the array and combine the foreground and background colors
+  arr.forEach(function(color) {
+    var pairing = color.hex
+    color.combinations.forEach(function(combo) {
+      combo.pairing = pairing
+      combos.push(combo)
+    })
+  })
+
+  // Sort the array by contrast from high to low
+  combos.sort(function(a, b) {
+    return b.contrast - a.contrast
+  })
+
+  return combos
+
+}
+</code></pre>
+<p>Add the <code>parse-combos</code> module to <code>build.js</code> and pass the combos array into the template function.</p>
+<pre><code>// build.js
+var _ = require('lodash')
+var fs = require('fs')
+var parseColors = require('./lib/parse-colors')
+var parseCombos = require('./lib/parse-combos')
+
+var css = fs.readFileSync('basscss.css', 'utf8')
+var template = fs.readFileSync('template.html', 'utf8')
+var tpl = _.template(template)
+var colors = parseColors(css)
+var combos = parseCombos(colors)
+
+var html = tpl({
+  colors: colors,
+  combos: combos
+})
+fs.writeFileSync('index.html', html)
+</code></pre>
+<p>Add a section to <code>template.html</code> to display the color combinations.</p>
+<pre><code>  &#x3C;h2>Combinations&#x3C;/h2>
+  &#x3C;ul class="list-reset flex flex-wrap">
+    &#x3C;% combos.map(renderCombo) %>
+  &#x3C;/ul>
+  &#x3C;% function renderCombo(combo) { %>
+    &#x3C;li class="py2 col-6 sm-col-4 md-col-3 lg-col-2"
+      style="color:&#x3C;%= combo.pairing %>;background-color:&#x3C;%= combo.hex %>">
+      &#x3C;div class="h1 bold px2">
+        Aa
+      &#x3C;/div>
+      &#x3C;div class="h5 px2">
+        &#x3C;%= combo.pairing %>
+        &#x3C;br>
+        &#x3C;%= combo.hex %>
+        &#x3C;br>
+        &#x3C;%= combo.contrast.toFixed(2) %>
+      &#x3C;/div>
+    &#x3C;/li>
+  &#x3C;% } %>
+</code></pre>
+<p>Run the build script. You should now have a list of color combinations along with the contrast value for each pair.</p>
+<p></p>
+<p>While seeing combinations that don’t have high enough contrast might be useful,
+for this tutorial set Colorable’s <code>threshold</code> option to 3
+to only show combinations that pass the WCAG minimum for large text.</p>
+<pre><code>// lib/parse-combos.js
+  // ...
+  var combos = []
+  var arr = colorable(colors, { threshold: 3 })
+  // ...
+</code></pre>
+<p>Run the build script again. Now you should only see color combinations with a contrast value of 3 or above.</p>
+<p>At this point, feel free to edit the styles of the rendered template and explore different ways of showing this information.
+You can also swap <code>basscss.css</code> out for another framework or stylesheet to test things out.</p>
+<h2>Expanding Upon This Idea</h2>
+<p>In addition to displaying raw color values and contrast ratios,
+other aspects of color can be extracted from a stylesheet,
+such as the selectors used for each color or the number of times each color is used in a stylesheet.
+You could also show colors sorted by similarity to help expose
+inconsistencies and opportunities to normalize the design.</p>
+<p>While this is not a complete replacement for human written documentation,
+and creating guidelines around color usage requires carefully considered writing,
+using automated tooling to generate source-code-derived documentation
+for things like color values can help create better living style guides.</p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Two Steps Forward, One Step Back</title><meta name="description"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap"/></head><body><header class="container"><div class="flex mb2 mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p3 caps flex rev ml2 angl angl-sm">v512.16.0</div></div><h1 class="caps h3 mb3"><span class="h0 t2">Jxnblk</span><br/>Brent Jackson</h1><hr class="bar barl"/><nav><a href="/blog" class="caps">Blog</a></nav></header><div class="container"><h1>Two Steps Forward, One Step Back</h1><div>3/5/2020</div><main><p>If you've ever seen code that looks like this, I'm sorry:</p>
+<pre><code>&#x3C;div class="p3 bold white bg-blue">
+  I'm sorry
+&#x3C;/div>
+</code></pre>
+<p>If you've ever seen code that looks like this, you're welcome:</p>
+<pre><code>&#x3C;Box
+  padding={3}
+  fontWeight='bold'
+  color='white'
+  bg='blue'>
+  Hello
+&#x3C;/Box>
+</code></pre>
+<p>Back in 2013, <a href="https://twitter.com/mrmrs_">Adam Morse</a> and I were following along the incredible work that <a href="https://mobile.twitter.com/stubbornella/">Nicole Sullivan</a> and others like <a href="https://github.com/necolas">Nicolas Gallagher</a> were doing with Object-Oriented CSS (OOCSS).
+Our explorations around working with CSS-related tech-debt led to the creation of <a href="https://basscss.com">Basscss</a> and <a href="https://tachyons.io">Tachyons</a> and the birth of "Utility CSS".
+These libraries inspired other design systems such as Buzzfeed's <a href="https://solid.buzzfeed.com/">Solid</a> and GitHub's <a href="https://primer.style/css/">Primer CSS</a>. Even <a href="https://getbootstrap.com">Bootstrap</a> eventually added more utility-centric styles.</p>
+<p>This methodology became known by many names, including <em>Atomic CSS</em>, <em>Functional CSS</em>, and <em>Utlity CSS</em>,
+but I've started referring to it as <em>Atomic/Functional/Utility CSS</em> or AFUCSS.
+This sort of sounds like <em>Hey, F you!</em>, which is a pretty <a href="https://medium.com/buzzfeed-design/how-i-learned-to-stop-worrying-and-love-the-atomic-class-98d6ccc45781#.yqnsfkbx2">typical response</a> when most people first encounter this flavor of CSS.</p>
+<h2>What problems did this solve?</h2>
+<p>Whatever your opinion on this methodology was, it tended to help with a few common problems of working with CSS at scale.</p>
+<ul>
+<li>It connected elements directly to styles, avoiding selector abstractions and the need to name things.</li>
+<li>It encouraged designers and developers to use scales and constraints on margin, padding, font sizes, colors, and other properties.</li>
+<li>It helped mitigate "append-only" stylesheets by reusing styles.</li>
+<li>It avoided some of the pitfalls of "specificity wars" incurred by the cascade.</li>
+<li>Although it had a learning curve, once you had internalized one of the many implementations, it could increase your development velocity.</li>
+</ul>
+<p>Around the same time, we started working on <a href="https://cssstats.com">CSS Stats</a>,
+which helped validate some of our hypotheses about CSS filesize and front-end performance.
+Applying this methodology to production web applications at the time helped shave of hundreds of kilobytes of CSS that was being shipped to end users.</p>
+<h2>What did it fail to do?</h2>
+<p>Despite Tachyons' popularity, no single library ever took over
+the industry at a level that would negate the steep learning curve involved.
+This meant that not only did developers have to learn a new methodology, but also an inevitably large custom classname API.</p>
+<p>CSS is a powerful and nuanced language, but utility CSS can never fully replace it.
+Eventually, you'll need to add one-off styles that just aren't covered by the library you're using, and there isn't always a clear way to extend what you're working with.
+Without a clear way to handle things like this, developers
+tend to add inconsistent hacks and append-only styles.</p>
+<p>As any utility-based CSS library grows, so does the amount of CSS you ship to your users,
+leaving you reliant on more build tools to remove styles that you were never going to use in the first place.
+While it was generally better than other methodologies at the time with regard to CSS filesize, it still wasn't ideal.</p>
+<p>It's also worth noting that this methodology was created before React was released
+and was intended for use in template-based user interfaces, including Rails and PHP.
+It was never designed for functional component-based UI and doesn't take advantage of this new paradigm.</p>
+<h2>Components</h2>
+<p>With the introduction of component-based UI libraries like React,
+the promise of a better way to handle authoring CSS at scale was on the horizon.
+After Christopher "Vjeux" Chedeau gave a talk titled <a href="https://vimeo.com/116209150">CSS in your JS</a> in 2015, the React community began exploring the possibilities of combining styles with components, which resulted in a cornucopia of new libraries for authoring CSS in JavaScript.
+For an excellent writeup of why you would want to do this, see <a href="https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d">Sunil Pai's response to Jonathan Snook</a>.</p>
+<h2>Two steps forward</h2>
+<p>CSS-in-JS libraries help solve a lot of the same issues Utility-based CSS methodologies were focused on (and more) in a <em>much</em> better way.
+They connect styles directly to elements without needing to name things or create abstractions in class selectors.
+They avoid append-only stylesheets with encapsulation and hashed classnames.
+These libraries work with existing build tools, allowing for code splitting, lazy loading, and dead code elimination with virtually zero effort,
+and they don't require additional tools like Sass or PostCSS.
+Many libraries also include CSS performance optimizations, such as <em>critical CSS</em>, enabled by default so that developers don't need additional tooling or even need to think about them.</p>
+<p>No wonder people have been raving about this.</p>
+<p>Another great thing about CSS-in-JS libraries, is that they're based on standard CSS syntax, properties, and values.
+They remove the need for cryptic, non-standard APIs and dramatically reduce the barrier to entry when compared to utility-based CSS.</p>
+<h2>One step back</h2>
+<p>While CSS-in-JS libraries help with a lot of issues,
+some of the key benefits to libraries like Basscss and Tachyons
+got lost in the mix.
+Instead of using design constraints to define styles, developers are left with open-ended tools that tend to encourage one-off styles.
+The learning curve was reduced, but developers were left with more choices to make.</p>
+<h2>A new system</h2>
+<p>With the new ecosystem of CSS-in-JS libraries, I began exploring
+ways to incorporate design constraints in components.
+This resulted in <a href="https://rebassjs.org">Rebass</a> in 2015, then <a href="https://styled-system.com">Styled System</a> in 2017.
+Rebass introduced the notion of using style props that mapped to commonly used CSS properties and was an early attempt at recreating some of the developer ergonomics from Basscss.
+Styled System abstracted these style props into utility functions for use in libraries like <a href="https://styled-components.com">Styled Components</a>,
+allowing you to create your own Rebass-like components.
+Rather than applying a mixed bag of classnames to a component, Styled System promotes <em>style as a function of props</em> with a sort of <em>learn-once-use-everywhere</em> API.</p>
+<p>Many teams use libraries like Styled System to create component libraries and design systems to great success.
+<em><a href="https://chakra-ui.com">Chakra UI</a></em>,
+GitHub's <em><a href="https://primer.style/components/">Primer Components</a></em>,
+Artsy's <em><a href="https://palette.artsy.net/">Palette</a></em>,
+SproutSocial's <em><a href="https://seeds.sproutsocial.com/">Seeds</a></em>,
+and Modulz's <em><a href="https://radix.modulz.app/">Radix</a></em>
+all use Styled System to create components that use styles defined in <em>themes</em> with a common props API.
+These help teams efficiently build UI with consistent branding and a common design language.</p>
+<h2>Outside the <code>&#x3C;Box /></code></h2>
+<p>Styled System is great for teams that have the time and resources to build out a custom component library,
+but it does require some effort to start using.
+Instead of <em>one <code>&#x3C;Box /></code> to rule them all,</em>
+many of these component libraries have their own custom versions
+that require documentation, and limit <a href="/blog/interoperability">interoperability</a>.
+How can the concepts encoded in libraries like Styled System and the component libraries it powers be extended to designers and developers without the resources to build a custom component library,
+while making it even easier for large teams to take advantage of network effects in the ecosystem?
+No one wants another off-the-shelf component library, do they?</p>
+<h2>The Design Graph</h2>
+<p>Instead of building <em>yet another</em> component library, what would a framework for styling modern component-based applications look like?
+Leveraging the concepts of a <a href="/blog/design-graph"><em>Design Graph</em></a>, design constraints, and a standard <a href="https://theme-ui.com/theme-spec">theme specification</a> for other library authors to follow,
+<a href="https://theme-ui.com">Theme UI</a>
+is the next step up this ladder of abstraction.</p>
+<p>Although it's loosely based on similar concepts from utility CSS methodologies,
+Theme UI gets rid of the cryptic, non-standard APIs and syntax, the lack of interoperability, the need for separate build tools, and the steep learning curve found in libraries like Tachyons.
+It keeps the coupling of styles to elements, readability, developer ergonomics of making changes in situ,
+and adds a more powerful constraint-based system for managing styles.</p>
+<h2>A superset of CSS-in-JS</h2>
+<p>Rather than memorizing hundreds of class selectors that only represent a subset of the CSS language, or a handful of style props, Theme UI gives you a superset of CSS that can be applied to any element with its <code>sx</code> prop.
+Theme-based values can be applied to common CSS properties for things like typography, color, and layout, and any bespoke, one-off styles can be added where needed, serving as an <em>escape hatch</em>.</p>
+<p><strong>Utility CSS creates a subset of CSS, with a custom syntax.
+The <code>sx</code> prop is a superset of CSS that uses standard syntax.</strong></p>
+<p>Naming things is hard, and the <code>sx</code> prop lets you style any application
+without needing to name things like class selectors and components.
+As my friend and colleague <a href="https://twitter.com/4lpine">John Otander</a> puts it,
+<em>"Fuck naming shit when you don’t have to."</em></p>
+<p>Theme UI's <code>sx</code> prop is intended to help maintain a minimal API surface area.
+Most properties used in this prop are the same as standard CSS,
+with optional, additional ways to use values for these properties.
+Instead of each component having its own custom set of style props, <em>every</em> element can be styled with the same <code>sx</code> prop.
+Component variants are also written in the same format.
+Writing styles in JS object notation might be somewhat new, but if you know JavaScript, you likely already know the syntax.</p>
+<h2>Don't take my word for it</h2>
+<p>Tons of people are already taking advantage of the <em>Design Graph</em> with Theme UI
+to build themes, applications, and other tools.</p>
+<ul>
+<li><a href="https://docz.site">Docz</a> uses Theme UI to let you customize the styles for your documentation site.</li>
+<li><a href="https://flex.arshad.io/">Flex</a> is a markdown/MDX based page builder that uses Theme UI for theming.</li>
+<li><a href="https://novela.narative.co/">Novela</a> is a beautiful Gatsby theme for blogging, built with Theme UI.</li>
+<li><a href="https://hackathons.hackclub.com/">Hack Club</a> connects you to high school hackathons and is styled with Theme UI.</li>
+<li>Plus a <a href="https://twitter.com/jxnblk/status/1235658542306246657">whole lot more</a></li>
+</ul>
+<p>If you've built something with Theme UI, I'd love to hear about it.</p>
+<h2>Demand better</h2>
+<p>If you're building an application with React in 2020,
+don't settle for CSS methologies from 2013.
+Demand more for your team,
+and help me build the future of styling for the Web.</p>
+<hr>
+<p><strong>Further reading:</strong></p>
+<ul>
+<li><a href="http://mrmrs.cc/writing/scalable-css/">CSS and Scalability</a></li>
+<li><a href="/blog/patterns-for-style-composition-in-react/">Patterns for Style Composition in React</a></li>
+<li><a href="https://jon.gold/2015/07/functional-css/">Functional Programming, CSS, and your sanity</a></li>
+<li><a href="https://johno.com/styling-themes/">Styling themes</a></li>
+<li><a href="https://johno.com/guessable/">Guessable</a></li>
+</ul>
+<p><em>Thanks to <a href="https://twitter.com/4lpine">John Otander</a> and <a href="https://twitter.com/broccolini">Diana Mounter</a></em></p>
+</main></div><footer class="container mt4 mb2"><div class="bg-warning" style="min-height:160px"></div><div class="flex caps"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar"/><div class="p4">Jxnblk<br/>MMXXIII</div><div class="p4">256.1024</div><div class="p4"><img src="/images/bot-term.svg"/></div></div><div class="h5">© 2023 Brent Jackson. All rights reserved.</div></footer></body></html>
