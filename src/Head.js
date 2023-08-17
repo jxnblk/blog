@@ -1,11 +1,14 @@
 import * as React from 'react';
 
 export default function Head (props) {
+  const image = 'https://jxnblk.com/images/avatar.png';
+
   return (
     <head>
       <title>{props.title}</title>
       <meta name='description' content={props.description} />
       <meta name='viewport' content='width=device-width' />
+      <link rel="icon" type="image/png" href="/favicon.png" />
       <link rel='stylesheet' href='/style.css' />
       <link rel='preconnect' href='https://fonts.googleapis.com' />
       <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
@@ -20,6 +23,13 @@ export default function Head (props) {
           __html: ga,
         }}
       />
+      <meta name='twitter:card' content='summary' />
+      <meta name='twitter:site' content='@jxnblk' />
+      <meta name='twitter:creator' content='@jxnblk' />
+      <meta property='og:url' content={`https://jxnblk.com/${props.path}`} />
+      <meta property='og:title' content={props.title} />
+      <meta property='og:description' content={props.description} />
+      <meta property='og:image' content={image} />
     </head>
   );
 };
