@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Nav from './Nav.js';
+import ColorModeButton from './ColorModeButton.js';
 
 export default function Header (props) {
   return (
@@ -9,6 +10,7 @@ export default function Header (props) {
         <div className='h5 p1 caps flex rev ml2 angl angl-sm'>
           v512.16.0
         </div>
+        <ColorModeButton />
       </div>
       <div className='h0 t3 caps'>
         <a href='/'>

@@ -4,8 +4,33 @@ body {
   margin: 0;
   font-family: 'Lexend', system-ui, sans-serif;
   line-height: 1.875;
-  color: white;
-  background-color: black;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -96,6 +121,19 @@ pre, code {
 .flex-none { flex: none; min-width: 0 }
 .flex-wrap { flex-wrap: wrap }
 
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
 .pad { padding: 4px }
 .p1 { padding: 16px }
 .p2 { padding: 32px }
@@ -151,8 +189,8 @@ pre, code {
   font-size: 12px;
   text-decoration: none;
   border-radius: 3px;
-  color: black;
-  background-color: white;
+  color: var(--bg);
+  background-color: var(--text);
   padding: 16px;
   min-height: 64px;
   transition-property: transform;
@@ -188,8 +226,8 @@ pre, code {
 }
 
 .btn-black {
-  color: white;
-  background-color: black;
+  color: var(--text);
+  background-color: var(--bg);
 }
 
 .list {
