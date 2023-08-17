@@ -14,7 +14,7 @@ export default function Footer () {
       />
       <div className='flex caps oh'>
         <div className='ma' />
-        <img src='/images/avatar-dark.svg' alt='avatar' />
+        <img src='/images/avatar-dark.svg' alt='avatar' loading='lazy' />
         <div className='p2'>
           Jxnblk<br />
           MMXXIII
@@ -23,7 +23,7 @@ export default function Footer () {
           256.1024
         </div>
         <div className='p2 flex-none'>
-          <img src='/images/bot-term.svg' />
+          <img aria-hidden src='/images/bot-term.svg' loading='lazy' />
         </div>
       </div>
       <hr className='bar mb2' />
@@ -34,6 +34,7 @@ export default function Footer () {
           src='/images/vantom.svg'
           width='32'
           height='32'
+          loading='lazy'
         />
         <div className='ma' />
         <div>

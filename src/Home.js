@@ -82,6 +82,7 @@ function Devlog () {
           <img
             src='/images/arrow-box.svg'
             className='ml2'
+            loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
@@ -89,6 +90,7 @@ function Devlog () {
             style={{
               transform: 'rotate(180deg)',
             }}
+            loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
@@ -96,6 +98,7 @@ function Devlog () {
             style={{
               transform: 'rotate(-90deg)',
             }}
+            loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
@@ -103,6 +106,7 @@ function Devlog () {
             style={{
               transform: 'rotate(-90deg)',
             }}
+            loading='lazy'
           />
         </div>
       </div>
@@ -134,15 +138,18 @@ function Autoforma () {
       <div className='flex oh'>
         <img
           src='/images/autoforma.svg'
+          loading='lazy'
         />
         <img
           src='/images/double-helix.svg'
           className='ml2 sm-hide'
+          loading='lazy'
         />
         <div className='ma' />
         <img
           src='/images/conveyor.svg'
           className='ml1'
+          loading='lazy'
         />
       </div>
     </div>
@@ -166,6 +173,7 @@ function PastProjects () {
           <img
             src='/images/arrow-box.svg'
             className='ml2'
+            loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
@@ -173,6 +181,7 @@ function PastProjects () {
             style={{
               transform: 'rotate(90deg)',
             }}
+            loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
@@ -180,6 +189,7 @@ function PastProjects () {
             style={{
               transform: 'rotate(-90deg)',
             }}
+            loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
@@ -187,6 +197,7 @@ function PastProjects () {
             style={{
               transform: 'rotate(180deg)',
             }}
+            loading='lazy'
           />
         </div>
       </div>
@@ -205,6 +216,7 @@ function PastProjects () {
           width='64'
           height='64'
           aria-hidden
+          loading='lazy'
         />
       </div>
       <div className='p1 bg-stripe' />
@@ -238,7 +250,7 @@ function Laser () {
   return (
     <div aria-hidden className='container mb3'>
       <div className='border'>
-        <img src='/images/laser.svg' />
+        <img src='/images/laser.svg' loading='lazy' />
       </div>
     </div>
   );
