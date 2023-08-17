@@ -8,9 +8,16 @@ body {
   background-color: black;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
+  font-weight: 700;
 }
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -24,21 +31,27 @@ a {
 }
 a:hover {
   color: cyan;
-  background-color: rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.2);
-  /* glow */
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
   text-shadow:
     0 0 4px #fff,
     0 0 8px #fff,
     0 0 16px #0ff;
   ;
+  */
 }
 
-.h0 { font-size: 9vw }
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
 .h1 { font-size: 24px }
 .h2 { font-size: 20px }
 .h3, .h4 { font-size: 16px }
-.h5 { font-size: 12px }
+.h5, .h6 { font-size: 12px }
 
 .container {
   padding-left: 32px;
@@ -52,12 +65,20 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.4em;
 }
-.t2 { letter-spacing: 0.8em }
-.t3 { letter-spacing: 1.6em }
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
 
 .rev {
   color: black;
   background-color: white;
+}
+
+.border {
+  border: 2px solid white;
 }
 
 .flex {
@@ -66,15 +87,21 @@ a:hover {
 }
 
 .flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
 
-.p1 { padding: 4px }
-.p2 { padding: 8px }
-.p3 { padding: 16px }
-.p4 { padding: 32px }
-.p5 { padding: 64px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
 
 .m0 { margin: 0 }
 .ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
 
 .mt1 { margin-top: 16px }
 .mt2 { margin-top: 32px }
@@ -86,6 +113,11 @@ a:hover {
 .mb3 { margin-bottom: 64px }
 .mb4 { margin-bottom: 128px }
 
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
 .mr1 { margin-right: 16px }
 .mr2 { margin-right: 32px }
 .mr3 { margin-right: 64px }
@@ -96,6 +128,62 @@ a:hover {
 .ml3 { margin-left: 64px }
 .ml4 { margin-left: 128px }
 
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: black;
+  background-color: white;
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: white;
+  background-color: black;
+}
 
 /* angled boxes */
 .angr,
@@ -145,6 +233,12 @@ a:hover {
   left: -16px;
 }
 
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
 .bar {
   border: 0;
   height: 4px;
@@ -179,3 +273,33 @@ a:hover {
   background-repeat: repeat;
 }
 
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
