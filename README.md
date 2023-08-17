@@ -1,6 +1,6 @@
 
-# https://jxnblk.com/blog
+# https://jxnblk.com
 
-Personal blog with thoughts on design, development, and other things
+Personal site and blog with thoughts on design, development, and other things
 
 
