@@ -11,16 +11,19 @@ body {
   transition-duration: 0.2s;
   --text: white;
   --bg: black;
+  --hi: cyan;
 }
 
 .lite {
   --text: black;
   --bg: #eef6f6;
+  --hi: blue;
 }
 
 .pink {
   --text: #2e050c;
   --bg: #ffccd5;
+  --hi: #f50;
 }
 
 .orange {
@@ -55,7 +58,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: cyan;
+  color: var(--hi, cyan);
   background-color: rgba(0, 255, 255, 0.1);
   box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
   /* glow
@@ -345,7 +348,7 @@ pre, code {
   margin-bottom: 32px;
 }
 .prose pre {
-  color: cyan;
+  color: var(--hi, cyan);
 }
 .prose h1,
 .prose h2,
