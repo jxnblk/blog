@@ -5,7 +5,7 @@ export default function Head (props) {
     <head>
       <title>{props.title}</title>
       <meta name='description' content={props.description} />
-      <meta name='viewport' content='width=640' />
+      <meta name='viewport' content='width=device-width' />
       <link rel='stylesheet' href='/style.css' />
       <link rel='preconnect' href='https://fonts.googleapis.com' />
       <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />

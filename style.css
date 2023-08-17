@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Lexend', system-ui, sans-serif;
-  line-height: 1.75;
+  line-height: 1.875;
   color: white;
   background-color: black;
 }
@@ -40,6 +40,11 @@ a:hover {
     0 0 16px #0ff;
   ;
   */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
 }
 
 .nav {
@@ -85,11 +90,13 @@ a:hover {
   display: flex;
   align-items: center;
 }
+.oh { overflow: hidden }
 
 .flex-grow { flex-grow: 1 }
 .flex-none { flex: none; min-width: 0 }
 .flex-wrap { flex-wrap: wrap }
 
+.pad { padding: 4px }
 .p1 { padding: 16px }
 .p2 { padding: 32px }
 .p3 { padding: 64px }
@@ -183,6 +190,13 @@ a:hover {
 .btn-black {
   color: white;
   background-color: black;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
 }
 
 /* angled boxes */
@@ -283,6 +297,41 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: cyan;
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 64em) {

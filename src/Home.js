@@ -46,7 +46,7 @@ function Novantica () {
             Wishlist on Steam
           </a>
         </div>
-        <div className='flex flex-none'>
+        <div className='flex flex-none oh'>
           <img
             aria-hidden
             src='/images/double-helix.svg'
@@ -131,7 +131,7 @@ function Autoforma () {
           x64
         </div>
       </div>
-      <div className='flex'>
+      <div className='flex oh'>
         <img
           src='/images/autoforma.svg'
         />

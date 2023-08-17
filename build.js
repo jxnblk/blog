@@ -17,6 +17,8 @@ import remarkHTML from 'remark-html';
 
 import Html from './src/Html.js';
 import Home from './src/Home.js';
+import NotFound from './src/404.js';
+import Blog from './src/Blog.js';
 import Post from './src/Post.js';
 
 const config = {
@@ -48,9 +50,18 @@ async function getPages () {
   const pages = await Promise.all(promises);
 
   pages.push({
+    path: 'blog',
+    content: Blog({ posts: pages }),
+  });
+
+  pages.push({
     path: '',
     content: Home(),
   });
+  pages.push({
+    path: '404',
+    content: NotFound(),
+  })
 
   return pages;
 };
@@ -60,7 +71,10 @@ console.log(pages.length);
 
 pages.forEach(page => {
   if (page.path) ensureDirSync(page.path);
-  const filename = join(page.path, 'index.html');
+  let filename = join(page.path, 'index.html');
+  if (page.path == '404') {
+    filename = '404.html';
+  };
   const write = createWriteStream(filename);
   const stream = renderToStaticNodeStream(x(Html, page));
 

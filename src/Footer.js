@@ -12,7 +12,7 @@ export default function Footer () {
           marginBottom: -96,
         }}
       />
-      <div className='flex caps'>
+      <div className='flex caps oh'>
         <div className='ma' />
         <img src='/images/avatar-dark.svg' alt='avatar' />
         <div className='p2'>

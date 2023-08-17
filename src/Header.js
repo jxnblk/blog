@@ -11,7 +11,9 @@ export default function Header (props) {
         </div>
       </div>
       <div className='h0 t3 caps'>
-        Jxnblk
+        <a href='/'>
+          Jxnblk
+        </a>
       </div>
       <hr className='line' />
       <div className='flex flex-break mb2'>
@@ -39,7 +41,7 @@ export default function Header (props) {
           </div>
           <div className='rev flex-none my1'>
             <img
-              src='images/avatar.svg'
+              src='/images/avatar.svg'
               alt='Avatar'
               width='128'
               height='128'
