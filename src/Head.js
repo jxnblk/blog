@@ -17,7 +17,7 @@ export default function Head (props) {
       <link
         rel='stylesheet'
         href='https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&display=swap'
-        crossOrigin
+        crossOrigin='true'
       />
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script>
       <script

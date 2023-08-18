@@ -204,6 +204,7 @@ function PastProjects () {
       <div className='columns mt2 mb2 rel'>
         {projects.map(p => (
           <a
+            key={p.name}
             href={p.href}
             className='caps'
           >

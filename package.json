@@ -5,7 +5,7 @@
   "description": "The writing of Brent Jackson",
   "type": "module",
   "scripts": {
-    "start": "nodemon --loader=import-jsx ./build.js",
+    "start": "nodemon -e js,md,json --loader=import-jsx ./build.js",
     "build": "node --loader=import-jsx ./build.js",
     "serve": "http-server -c-1",
     "test": "node --loader=import-jsx ./build.js"
