@@ -28,13 +28,40 @@ export default function Post (props) {
           ))}
         </div>
         <main
-          className='prose'
+          className='prose mb3'
           dangerouslySetInnerHTML={{
             __html: props.html,
           }}
         />
+        <Promo />
       </div>
       <Footer />
     </>
+  );
+};
+
+function Promo () {
+  return (
+    <div className=''>
+      <a
+        href='https://store.steampowered.com/app/2437530/Novantica/'
+        className=''>
+        <img
+          src='/images/novantica-promo.jpg'
+          alt='Novantica game screenshot with protagonist on hoverboard'
+        />
+      </a>
+      <div className='p2 rev flex flex-wrap'>
+        <p className=''>
+          I'm currently working on Novantica, a sci-fi adventure game.
+        </p>
+        <div className='ma' />
+        <a
+          href='https://store.steampowered.com/app/2437530/Novantica/'
+          className='btn btn-black'>
+          Wishlist on Steam
+        </a>
+      </div>
+    </div>
   );
 };

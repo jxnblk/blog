@@ -1,6 +1,6 @@
 ---
 title: Making Sourdough & Learning Unity
-date: 2023-08-20
+date: 2023-08-19
 tags:
   - devlog
   - unity
@@ -25,14 +25,14 @@ When I was in elementary school in the 1980s, my neighbor and childhood best fri
 We were all familiar with the Apple IIes at school, but this thing was a completely different beast.
 It had one of those green and black displays (high tech compared to printers),
 and flipping the power switch on the back made it sound like an airplane was taking off inside my neighbor's basement.
-At that time, it was certainly not a new computer – we called it "The Dinosaur."
+Event at that time, it was not a new computer – we affectionately called it "The Dinosaur."
 
 Other than drawing awesome pictures with LOGO at school, this was probably my first introduction to programming languages.
 We learned how to do a few things in BASIC, then immediately started to plan out how to build our own video game.
 I sketched out a bunch of characters and sprites on graph paper, but we never finished our Bomber Man clone.
 
 A few years later, this same friend introduced me to a ray tracing program, that I used to render my first 3D models.
-I remember saying to my friend, can you imagine when computers are powerful enough to do this in real time and even simulate sound waves for audio?
+I remember saying to my friend, _can you imagine when computers are powerful enough to do this in real time? And maybe even simulate sound waves for audio?_
 He told me that it'd probably be a while before they'd be able to do that.
 
 I continued to play a lot of games through high school and was blown away by this thing called the Internet, but never really tinkered with the idea of game development again for years.
@@ -42,13 +42,13 @@ Then, some time into my career as a web developer, I realized that JavaScript li
 I built a few prototypes for music-based, education-focused games using Web Audio APIs, but never saw any of these to completion.
 
 Fast forward to 2020. I'm reading Unity docs and watching Unity tutorials on YouTube at 2x speed, thinking to myself: this all looks a lot more accessible than I thought.
-Coming from a web development background, C# feels like what TypeScript wants to be – one day, when it grows up – and although the Unity desktop application takes a while to learn the ropes, it's not as quirky as some other professional level applications I've used in the past.
+Coming from a web development background, C# feels like what TypeScript wants to be – one day, when it grows up – and although the Unity desktop application takes a while to learn the ropes, it's not as quirky as some other professional-level applications that I've used in the past.
 _If you're curious about learning Unity, I'd highly recommend one of their tutorial game starters.
 They have a lot of things set up for you, and it only takes a few hours to go from nothing to a playable prototype._
 
-As I continued to learn Unity, I toyed around with a few different rough prototypes, but always kept coming back around to the idea of building an adventure game.
+As I continued to learn Unity, I toyed around with a few different prototypes, but always kept coming back to the idea of building an adventure game.
 I loved adventure and RPG games like Zelda, Earth Bound, and FF VII when I was younger, and it's one of the genres I still really enjoy as an adult.
-I figured it might be a good way to keep the game mechanics focused and keep a narrow scope for the project, without having to worry about the physics of things flying around – _I'll write more about the Hoverboard later._
+I also thought it might be a good way to keep the game mechanics focused and keep a narrow scope for the project, without having to worry about the physics of things flying around – _I'll write more about the Hoverboard later._
 
 Like many other sci-fi fans, I had started writing notes for an interactive time travel novel about 15 years ago.
 Since I'm nowhere near turning that into a story of its own, I decided to rework the story into a game format.

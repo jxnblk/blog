@@ -35,7 +35,7 @@ export default function Blog (props) {
 export function BlogPostCard (props) {
   return (
     <>
-      <h2 className='caps h1'>
+      <h2 className='caps h2'>
         <a href={'/' + props.path}>
           {props.title}
         </a>
@@ -63,7 +63,7 @@ export function BlogPostCard (props) {
           <a
             href={'/' + props.path}
             className='caps h6 pad rev'>
-            Read more >>
+            Read more <span aria-hidden>>></span>
           </a>
         </>
       )}
