@@ -7,6 +7,8 @@ crossposted:
 
 Your tiny type is hard to read – no, not hard to read, impossible to read. I carry my phone with me everywhere, but I always seem to forget my magnifying glass. I tap the Safari Reader button, but that’s not a solution to the problem. That’s a band-aid for your bad typesetting.
 
+<!-- more -->
+
 Sometimes I’m on my computer, and Reader doesn’t work on your web app. I hit CMD + two or three times so that my dyslexic brain can make sense of the musty 14px Helvetica your servers regurgitated all over my screen. Then the layout falls apart. Words start smashing together. Ads bleed into my emails. And I find myself scrolling up, down, left, right, left, right – what in the hell is this? The Konami code? I don’t need 30 extra lives. I want to read your content.
 
 And I know I’m not the only one who hates your tiny type. How many times have I heard users complain about fonts being too small? More times than I’ve heard them complain about fonts being too large – wait, I’ve never heard a user complain about that. Your users aren’t asking for a faster horse – they’re struggling to read your content. Surely that isn’t what you’re going for, and surely that isn’t a good experience.

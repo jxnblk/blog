@@ -9,6 +9,8 @@ About a year ago, I wrote [Hamburgers &amp; Basements: Why Not to Use Left Nav F
 
 Since then, a few things have happened.
 
+<!-- more -->
+
 1. Facebook has discontinued using the hamburger menu in their iOS app.
 2. A few desktop websites have replaced their persistent navigation with the hamburger menu – who knows if they're actually testing it or how they're interpreting the results.
 3. Time Magazine decided to use it:

@@ -14,6 +14,8 @@ One of the biggest hurdles to working with React is the amount of boilerplate an
 I wanted to make it dead-simple to start building static pages with React
 and without the need to install tons of npm modules and configure webpack.
 
+<!-- more -->
+
 That’s where [static-react](https://github.com/jxnblk/static-react) comes in. Here’s out to get started.
 
 *Update: As of version 3.2.0, static-react includes Babel presets and they do not need to be installed separately. This post has been updated to reflect those changes.*

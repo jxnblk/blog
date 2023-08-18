@@ -11,6 +11,8 @@ it got me thinking that this concept could be taken a step further.
 What if designers wrote actual unit tests for UI components?
 What if those tests were actually applied in user acceptance testing, A/B tests, and tested against performance metrics?
 
+<!-- more -->
+
 ## What would a unit test look like?
 
 This is a really contrived example of what a UI unit test could look like:

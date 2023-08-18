@@ -9,6 +9,8 @@ crossposted:
 
 Good navigation should do at least three things well: (1) it should allow the user to navigate; (2) it should serve as wayfinding, letting the user know where they are; and (3) it should help the user understand what the product is capable of. If your navigation is not doing these three things, something's wrong.
 
+<!-- more -->
+
 For the iPhone, Apple conjured up three fairly solid navigation patterns: the tab bar, the table view (e.g. Messages &amp; Mail), and the card stack (e.g. Weather). All three work fairly well if used as intended, but there's always room for experimentation and evolution in UI design – and always room for designers and developers to screw it up.
 
 Path and Facebook's mobile left nav flyout pattern is one such experimentation that should be avoided. [Mark Kawano](https://twitter.com/markkawano/status/256848377260679168) calls it the "hamburger icon that slides open the basement." Why call it the basement? Because it's hidden, dark, there's a ton of crap in it, and, frankly, it's scary and no one wants to go down there. Hiding the navigation allows Path to present itself in a more immersive, content-centric way but also tells the user that there's nothing much else to the app beyond its stream view.

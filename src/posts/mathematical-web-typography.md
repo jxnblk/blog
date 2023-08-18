@@ -24,6 +24,8 @@ And last, design with [modular scales](http://alistapart.com/article/more-meanin
 Things built on the Web should be fluid and infinitely scalable.
 Using modular scales in a design compliments that idea and keeps things organized in the face of growing complexity.
 
+<!-- more -->
+
 ## Handling Complexity
 
 Often when looking at how different sites have handled typography, I see similar problems arise.

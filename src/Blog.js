@@ -22,33 +22,51 @@ export default function Blog (props) {
             <li
               key={post.path}
               className='mb3'>
-              <h2 className='caps h1'>
-                <a href={'/' + post.path}>
-                  {post.title}
-                </a>
-              </h2>
-              <div className='flex flex-wrap'>
-                <div className='h6 mr2'>
-                  {post.date?.toLocaleDateString()}
-                </div>
-                {post.tags?.map(tag => (
-                  <div
-                    key={tag}
-                    className='h6 lh1 caps mr1 rev pad'>
-                    #{tag}
-                  </div>
-                ))}
-              </div>
-              {post.excerpt && (
-                <p>
-                  {post.excerpt}
-                </p>
-              )}
+              <BlogPostCard {...post} />
             </li>
           ))}
         </ul>
       </div>
       <Footer />
+    </>
+  );
+};
+
+export function BlogPostCard (props) {
+  return (
+    <>
+      <h2 className='caps h1'>
+        <a href={'/' + props.path}>
+          {props.title}
+        </a>
+      </h2>
+      <div className='flex flex-wrap'>
+        <div className='h6 mr2'>
+          {props.date?.toLocaleDateString()}
+        </div>
+        {props.tags?.map(tag => (
+          <div
+            key={tag}
+            className='h6 lh1 caps mr1 rev pad'>
+            #{tag}
+          </div>
+        ))}
+      </div>
+      {props.excerpt && (
+        <>
+          <div
+            className='prose mt1'
+            dangerouslySetInnerHTML={{
+              __html: props.excerpt,
+            }}
+          />
+          <a
+            href={'/' + props.path}
+            className='caps h6 pad rev'>
+            Read more >>
+          </a>
+        </>
+      )}
     </>
   );
 };

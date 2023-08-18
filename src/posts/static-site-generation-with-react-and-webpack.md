@@ -21,6 +21,8 @@ React’s focus on reusablility, along with the ability to install and require c
 provides an elegant way to rapidly build application UI in an efficient and consistent way.
 It’s also a great way to handle server-side rendering and provides high cohesion between markup and display logic.
 
+<!-- more -->
+
 **Note: many of the packages referenced in this post have released major version, breaking updates since this was written. Some of the examples may not work with the latest npm modules, especially the react-router package, which has a much different API now.**
 
 ## Why

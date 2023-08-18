@@ -5,12 +5,15 @@ tags:
   - devlog
   - unity
   - life
+description: How I started teaching myself Unity development and why I'm building a game
 ---
 
 In March 2020, I remember the former mayor one day saying that everyone should go out for dinner and see and show – and the next day hearing that it wasn't safe to get within six feet of another person. If you haven't been to New York before, it's not easy to walk around outside without being within six feet of another person. In hindsight, it was relatively safe to be outdoors, but at the time, we were afraid to step outside the door for a few weeks.
 
 I also remember a lot of people thinking that the whole thing would blow over in a month or two, but everything that I had been reading made me suspect that was far too optimistic.
 As someone who walks to get to 99% of the places I'm going and thoroughly enjoys it, I realized that I would have to pick up a few new hobbies to keep my sanity.
+
+<!-- more -->
 
 Like so many others suddenly given more time to pursue domestic endeavors, I started trying to cook things that I'd never tried before.
 After a few loaves of bread and even more cleaning than I usually do, I realized that I'd need more creative outlets to occupy my time.

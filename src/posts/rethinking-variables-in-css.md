@@ -15,6 +15,8 @@ CSS was first introduced as a way to reduce the complexity of using inline style
 
 While variables and custom properties make updating multiple instances of the same value trivial, we often still end up with multiple instances of the same property-value definitions spread throughout a global stylesheet.
 
+<!-- more -->
+
 _Bear with me for a second and consider this a thought experiment…_
 
 What if instead of repeating these definitions in our stylesheets, we treated CSS rulesets as variables? That is, instead of defining something like a color across many styles, it’s only defined once, and is used by applying classes to HTML elements —i.e. .green instead of $green. We could vastly DRY up our stylesheets while making only a minimal impact on HTML size. If you apply this idea widely enough, the entire stylesheet can become so-called critical CSS.

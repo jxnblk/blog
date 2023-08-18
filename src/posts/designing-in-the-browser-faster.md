@@ -7,6 +7,8 @@ crossposted:
 
 I’ve been dabbling with HTML and CSS for years—building small websites for myself and friends and building prototypes to test designs. And, while I’ve been fascinated with the idea of designing in the browser for a long time, it wasn’t until recently that it’s become much, much faster for me than using traditional design software.
 
+<!-- more -->
+
 ## Getting faster
 Practice has certainly helped, but what really sped up my ability to design and iterate in code was an approach called Object Oriented CSS, or OOCSS. My friend and colleague sent me down this scary-sounding path over a year ago, and I haven’t looked back since. He gave me a ton of reading material, coached me with code reviews, and constantly challenged me. Most of the articles on OOCSS focus on front-end performance, code maintenance benefits, and things like naming conventions. What most people don’t tell you is how much faster it can make designing in code.
 

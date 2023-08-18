@@ -8,6 +8,8 @@ crossposted:
 
 Every once in a while I hear someone complain about the visual homogenization of the web, and front-end frameworks often get the brunt of the attack. This visual sameness isn’t necessarily a bad thing.
 
+<!-- more -->
+
 ## Visual design is easy
 Visual design is one of the easiest parts of web design to get right. Beautiful looking sites are often perceived as being easier to use, but that’s a low hurdle to clear. Using clean typography, a good color palette, solid visual hierarchy, and consistency will get you most of the way there.
 

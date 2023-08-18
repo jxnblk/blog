@@ -8,6 +8,8 @@ This includes buttons, inputs, forms, promotional modules, pages, user flows, et
 I use the word *component* not only because this is how the underlying code is written in libraries like React and Ember,
 but also because pieces of a well-designed UI system should be [composable](https://en.wikipedia.org/wiki/Composability).
 
+<!-- more -->
+
 
 From the [Wikipedia page on Composability](https://en.wikipedia.org/wiki/Composability):
 

@@ -7,6 +7,8 @@ crossposted:
 
 When opening an application, a user should be able to understand its functionality, see relevant content, and get to where they want to go. Applications that obscure navigation with the intent of focusing on content can make finding specific information difficult. On the other hand, skewing towards too much navigation can overwhelm the user. Mobile apps should balance navigation for users with different information needs.
 
+<!-- more -->
+
 An application's IA should be based on solid user research and mental models, but navigation should take the user context and design constraints of the platform into consideration. With desktop apps, the ample screen real estate allows for high information density and complex top-level navigation. Mobile apps require different approaches to map navigation to the product's IA. One approach is to organize navigation based on three common [information seeking behaviors](http://boxesandarrows.com/four-modes-of-seeking-information-and-how-to-design-for-them/): _known-item seeking_, _exploratory seeking_, and _discovery_.
 
 ## What is Known-item Seeking?

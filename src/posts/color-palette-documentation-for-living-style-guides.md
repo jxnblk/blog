@@ -34,6 +34,8 @@ For a true living style guide, the code should serve as the single source of tru
 Extracting color values from CSS can help keep documentation in sync,
 expose outdated colors, and point out opportunities for normalizing designs.
 
+<!-- more -->
+
 The following will show how to use Node.js to build source-code-derived documentation for color palettes
 and present color contrast values for each possible pairing as a guide for usage.
 

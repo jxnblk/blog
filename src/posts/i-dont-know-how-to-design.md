@@ -7,6 +7,8 @@ crossposted:
 
 I’ll admit it.
 
+<!-- more -->
+
 ## I don’t know how to design without research.
 Without upfront research, you’re not designing things, you’re just building things that might or might not meet your users’ needs or fit their mental models. Chances are, they won’t. User acceptance testing and A/B testing are important, but won’t give you the insights you’ll need to start off on the right foot.
 

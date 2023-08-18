@@ -29,6 +29,8 @@ or some other library.
 The idea of functional UI components is a simple one: pass arguments into a function and it returns a representation of the DOM,
 usually with encapsulated styles and interactivity handled with callbacks to a global state, a la Redux.
 
+<!-- more -->
+
 If you look at the currently available technology, there are predominantly three ways to create these components:
 - [**JSX**](https://facebook.github.io/jsx/) (from React) - uses an XML-like syntax to call functions that return representations of DOM elements
 - [**Hyperscript**](https://github.com/dominictarr/hyperscript) - similar to JSX, but uses standard JavaScript syntax and function calls

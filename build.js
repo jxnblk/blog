@@ -14,6 +14,7 @@ import { renderToStaticNodeStream } from 'react-dom/server';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkHTML from 'remark-html';
+import remarkExcerpt from 'remark-excerpt';
 
 import Html from './src/Html.js';
 import Home from './src/Home.js';
@@ -36,27 +37,36 @@ async function getPages () {
       .use(remarkHTML)
       .process(content);
     const html = String(vf);
+    const evf = await remark()
+      .use(remarkExcerpt)
+      .use(remarkHTML)
+      .process(content);
+    const excerpt = String(evf);
 
     return {
       filename,
       path,
       raw,
       html,
+      excerpt,
+      description: data.description || data.excerpt || null,
       ...data,
       content: Post({ ...data, html })
     };
   });
   // console.log(`Found ${mds.length} blog posts`);
-  const pages = await Promise.all(promises);
+  const posts = await Promise.all(promises);
+
+  const pages = [ ...posts ];
 
   pages.push({
     path: 'blog',
-    content: Blog({ posts: pages }),
+    content: Blog({ posts }),
   });
 
   pages.push({
     path: '',
-    content: Home(),
+    content: Home({ posts }),
   });
   pages.push({
     path: '404',

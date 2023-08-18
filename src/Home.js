@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Header from './Header.js';
 import Footer from './Footer.js';
+import Devlog from './Devlog.js';
 
-export default function Home () {
+export default function Home (props) {
   return (
     <>
       <Header />
       <Novantica />
-      <Devlog />
+      <Devlog {...props} />
       <Autoforma />
       <PastProjects />
       <Laser />
@@ -64,57 +65,6 @@ function Novantica () {
           />
         </div>
       </div>
-    </section>
-  );
-};
-
-function Devlog () {
-  return (
-    <section id='devlog' className='container mb4'>
-      <div className='flex mb2'>
-        <div className='flex-grow flex p2 mr2 rev angr angr-up'>
-          <h2 className='h4 caps'>
-            <span aria-hidden>>$ </span>
-            Devlog
-          </h2>
-        </div>
-        <div aria-hidden className='flex sm-hide'>
-          <img
-            src='/images/arrow-box.svg'
-            className='ml2'
-            loading='lazy'
-          />
-          <img
-            src='/images/arrow-box.svg'
-            className='ml1'
-            style={{
-              transform: 'rotate(180deg)',
-            }}
-            loading='lazy'
-          />
-          <img
-            src='/images/arrow-box.svg'
-            className='ml1'
-            style={{
-              transform: 'rotate(-90deg)',
-            }}
-            loading='lazy'
-          />
-          <img
-            src='/images/arrow-box.svg'
-            className='ml1'
-            style={{
-              transform: 'rotate(-90deg)',
-            }}
-            loading='lazy'
-          />
-        </div>
-      </div>
-      <hr className='bar mb2' />
-      <p className='h6 caps mb2'>
-        Coming soon
-      </p>
-      <div className='p1 bg-stripe' />
     </section>
   );
 };
