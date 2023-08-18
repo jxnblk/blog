@@ -243,7 +243,7 @@ const projects = [
   { name: 'Spectral', href: 'https://jxnblk.github.io/Spectral/' },
   { name: 'Microbeats', href: 'https://microbeats.cc/' },
   { name: 'MrsJxn', href: 'http://mrsjxn.com/' },
-  { name: 'Scullcat', href: 'https://jxnblk.github.io/skullcat' },
+  { name: 'Skullcat', href: 'https://jxnblk.github.io/skullcat' },
 ]
 
 function Laser () {
