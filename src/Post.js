@@ -12,7 +12,10 @@ export default function Post (props) {
             Draft
           </div>
         )}
-        <h1 className='caps mb3'>
+        <div className='inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm'>
+          Blog <span aria-hidden>//</span>
+        </div>
+        <h1 className='h2 caps mb3'>
           {props.title}
         </h1>
         <div className='flex flex-wrap mb2'>
@@ -52,10 +55,10 @@ function Promo () {
         />
       </a>
       <div className='p2 rev flex flex-wrap'>
-        <p className=''>
+        <p className='my1'>
           I'm currently working on Novantica, a sci-fi adventure game.
         </p>
-        <div className='ma' />
+        <div className='ma sm-hide' />
         <a
           href='https://store.steampowered.com/app/2437530/Novantica/'
           className='btn btn-black'>

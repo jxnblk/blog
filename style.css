@@ -118,6 +118,13 @@ pre, code {
   display: flex;
   align-items: center;
 }
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
 .oh { overflow: hidden }
 
 .flex-grow { flex-grow: 1 }

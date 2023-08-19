@@ -6,7 +6,7 @@ import Devlog from './Devlog.js';
 export default function Home (props) {
   return (
     <>
-      <Header />
+      <Header home />
       <Novantica />
       <Devlog {...props} />
       <Autoforma />
