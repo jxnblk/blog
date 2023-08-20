@@ -20,7 +20,7 @@ export default function Header (props) {
       {props.home && (
         <>
           <hr className='line' />
-          <div className='flex flex-break mb2'>
+          <div className='flex flex-break'>
             <h1 className='lh1'>
               <span className='h3 caps'>
                 Brent Jackson
@@ -56,7 +56,7 @@ export default function Header (props) {
           </div>
         </>
       )}
-      <hr className='bar barl mb2' />
+      <hr className='bar barl mt2 mb2' />
       <Nav />
     </header>
   );

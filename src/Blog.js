@@ -16,7 +16,7 @@ export default function Blog (props) {
         <h1 className='caps h1 mb2'>
           Blog
         </h1>
-        <hr className='bar mb3' />
+        <div className='p1 bg-stripe mb3' />
         <ul className='list'>
           {posts?.map(post => (
             <li

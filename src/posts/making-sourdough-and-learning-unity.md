@@ -8,7 +8,7 @@ tags:
 description: How I started teaching myself Unity development and why I'm building a game
 ---
 
-In March 2020, I remember the former mayor one day saying that everyone should go out for dinner and see and show – and the next day hearing that it wasn't safe to get within six feet of another person. If you haven't been to New York before, it's not easy to walk around outside without being within six feet of another person. In hindsight, it was relatively safe to be outdoors, but at the time, we were afraid to step outside the door for a few weeks.
+In March 2020, I remember the former mayor one day telling people to go out for dinner and see a show – and the next day hearing that it wasn't safe to get within six feet of another person. If you haven't been to New York before, it's not easy to walk around outside and not get within six feet of another person. In hindsight, it was relatively safe to be outdoors, but at the time, we were afraid to step outside the door for a few weeks.
 
 I also remember a lot of people thinking that the whole thing would blow over in a month or two, but everything that I had been reading made me suspect that was far too optimistic.
 As someone who walks to get to 99% of the places I'm going and thoroughly enjoys it, I realized that I would have to pick up a few new hobbies to keep my sanity.
@@ -20,7 +20,7 @@ After a few loaves of bread and even more cleaning than I usually do, I realized
 I also found myself playing an unhealthy dose of games like Animal Crossing, which sparked an itch that I've had ever since I was a child.
 
 That summer, Unity started offering all its online learning courses for free, and I started to dive in.
-This wouldn't be my first foray into thinking about developing video games.
+This wouldn't be the first time I thought about developing video games.
 When I was in elementary school in the 1980s, my neighbor and childhood best friend's dad had brought home an IBM PC.
 We were all familiar with the Apple IIes at school, but this thing was a completely different beast.
 It had one of those green and black displays (high tech compared to printers),
@@ -31,17 +31,17 @@ Other than drawing awesome pictures with LOGO at school, this was probably my fi
 We learned how to do a few things in BASIC, then immediately started to plan out how to build our own video game.
 I sketched out a bunch of characters and sprites on graph paper, but we never finished our _Bomber Man_ clone.
 
-A few years later, this same friend introduced me to a ray tracing program, that I used to render my first 3D models.
+A few years later, this same friend introduced me to a ray tracing program that I used to render my first 3D models.
 I remember saying to my friend, _can you imagine when computers are powerful enough to do this in real time? And maybe even simulate sound waves for audio?_
 He told me that it'd probably be a while before they'd be able to do that.
 
-I continued to play a lot of games through high school and was blown away by this thing called the Internet, but never really tinkered with the idea of game development again for years.
+I continued to play video games through high school and was blown away by this thing called the Internet, but never really tinkered with the idea of game development again for years.
 I learned Flash in college and made a few experimental, interactive art sort of things, but nothing that would clearly be considered a "game."
 
 Then, some time into my career as a web developer, I realized that JavaScript libraries and browser capabilities had reached a point where you could feasibly make a game using Web technology.
 I built a few prototypes for music-based, education-focused games using Web Audio APIs, but never saw any of these to completion.
 
-Fast forward to 2020. I'm reading Unity docs and watching tutorials on YouTube at 2x speed, thinking to myself: this all looks a lot more accessible than I thought.
+Fast forward to 2020. I'm reading Unity docs and watching tutorials on YouTube at 2x speed, thinking to myself: _this all looks a lot more accessible than I thought._
 Coming from a web development background, C# feels like what TypeScript wants to be – one day, when it grows up – and although the Unity desktop application takes a while to learn the ropes, it's not as quirky as some other professional-level applications that I've used in the past.
 _If you're curious about learning Unity, I'd highly recommend one of their tutorial game starters.
 They have a lot of things set up for you, and it only takes a few hours to go from nothing to a playable prototype._
