@@ -42,7 +42,7 @@ export function BlogPostCard (props) {
       </h2>
       <div className='flex flex-wrap'>
         <div className='h6 mr2'>
-          {props.date?.toLocaleDateString()}
+          {props.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
         </div>
         {props.tags?.map(tag => (
           <div

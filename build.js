@@ -34,12 +34,12 @@ async function getPages () {
     const raw = readFileSync(join('src', 'posts', filename));
     const { content, data } = matter(raw);
     const vf = await remark()
-      .use(remarkHTML)
+      .use(remarkHTML, { sanitize: false })
       .process(content);
     const html = String(vf);
     const evf = await remark()
       .use(remarkExcerpt)
-      .use(remarkHTML)
+      .use(remarkHTML, { sanitize: false })
       .process(content);
     const excerpt = String(evf);
 

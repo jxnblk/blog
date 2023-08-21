@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>The Mystery of the Mustard People</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/the-mystery-of-the-mustard-people"/><meta property="og:title" content="The Mystery of the Mustard People"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">The Mystery of the Mustard People</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">8/21/2023</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->devlog</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->unity</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->materials</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->shaders</div></div><main class="prose mb3"><p>One of the more perplexing bugs I encountered working on <a href="https://novanticagame.com">Novantica</a> so far was when all the NPC extras in the game suddenly turned a greenish-yellow color.
+I had just swapped out URP materials for ones using a new shader, so I suspected that change made this happen,
+but I didn't want to revert back to the old materials.
+To add icing to the cake, this issue was only happening in builds, not in the editor.
+I started to dig in, but didn't realize it would take so long to track down.</p>
+<!-- more -->
+<p><img src="/images/mustard/pizza.jpg" alt="Screenshot showing yellow colored NPCs"></p>
+<p>At first, since I didn't know how to reproduce the issue in the editor,
+I tried swapping different materials and shaders on one of the character models to see if it was related to any prefabs used to spawn the extras.
+No luck, the character was still yellow.
+After a bit of fruitless searching on the Unity forums,
+I tried moving the model to different scenes and sometimes the material worked and other times not.
+I also noticed that the NPCs that were loaded from additive scenes didn't suffer the same ailment, as seen in the screenshot above.
+Those scenes were <a href="https://docs.unity3d.com/2021.3/Documentation/Manual/com.unity.addressables.html">Addressables</a>, so I started to suspect it was something related to how I'd set up shared materials across scenes with the Addressables system.</p>
+<figure>
+  <img src='/images/mustard/addressables.png' alt='Screenshot of Unity Addressables editor options' />
+  <figcaption>
+    Changing this option to <em>Use Existing Build</em> made the issue reproducible in the editor
+  </figcaption>
+</figure>
+<p>I switched the Unity Addressables <em>Play Mode Script</em> option to <em>Use Existing Build</em> and was able to start reproducing the issue in the editor.
+It felt like I was onto something.</p>
+<p><img src="/images/mustard/hotel.jpg" alt=""></p>
+<p>The next thing I tried was adding all the game's materials and textures to a new Addressables group.
+This seemed to fix the yellow people problem, but now the materials were missing from some of the additively loaded Addressable scenes.
+If you're familiar with Unity, the magenta colored objects in the screenshot above mean that the materials are missing.
+I tried a few different ways of grouping the materials in Addressables, but still wasn't able to get everything working as expected.</p>
+<p>At this point, I went outside to take a walk and clear my head.
+<em>Why were the characters turning yellow?</em>
+<em>They should be rendering in magenta if the material was missing.</em>
+<em>The shader looked like it was supposed to but only the color was off...</em></p>
+<p>Then it dawned on me.
+When I got back to the computer, I swapped the texture on the character material to confirm my suspicion.
+The material <em>was</em>, in fact, working, but the UV maps were wrong.
+But why?</p>
+<figure>
+  <img src='/images/mustard/character-texture.png' alt='The texture used to color the low poly character models' />
+  <figcaption>
+    The texture used to color the low poly character models.
+  </figcaption>
+</figure>
+<p>This time, I found some <a href="https://forum.unity.com/threads/warning-to-all-my-friends-beware-optimise-mesh-data.544735/">useful hints</a> from the forums.
+It turns out the default <em>Optimize Mesh Data</em> setting on the imported character models was causing the UV map to get lost somewhere along the way.
+As you can see in the texture above, the UV map controls how the low poly models are colored.
+For some reason, the UV map was only set for one of these colors.</p>
+<figure>
+  <img
+    src='/images/mustard/optimize-mesh.png'
+    alt='Screenshot of the Optimize Mesh option for the imported model'
+  />
+  <figcaption>
+    The default setting for Optimize Mesh was the culprit all along
+  </figcaption>
+</figure>
+<p>After disabling this on all the imported FBX models, everything was rendering as expected again.
+Case closed.</p>
+<p>If you've run into similar issues with Unity, I hope this post was helpful,
+but if you know of another or better way to avoid this issue, please let me know.</p>
+<p><em>Alternative titles considered for this post:</em></p>
+<ul>
+<li>What is up with all these wasabi people?</li>
+<li>Perplexed by the pea soup people</li>
+<li>The curious case of caper colored characters</li>
+</ul>
+</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
+const modes = [
+  '',
+  'orange',
+  'gray',
+  'pink',
+  'lite',
+];
+
+let index = 0;
+
+const cn = localStorage.getItem('color');
+document.body.className = cn;
+
+if (cn) index = modes.indexOf(cn);
+
+function cycle () {
+  index = (index + 1) % modes.length;
+  const next = modes[index];
+  document.body.className = next;
+  localStorage.setItem('color', next);
+};
+
+const el = document.querySelector('#color-button');
+if (el != null) el.addEventListener('click', cycle);
+</script></body></html>

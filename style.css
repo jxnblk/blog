@@ -75,6 +75,15 @@ pre, code {
   font-size: 14px;
 }
 
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
 .nav {
   display: inline-block;
   padding: 4px;
@@ -380,6 +389,7 @@ pre, code {
 
 .prose a {
   text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
 }
 
 @media screen and (max-width: 64em) {

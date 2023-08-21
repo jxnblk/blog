@@ -3,19 +3,20 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/zero-configuration-react-static-site-generator"/><meta property="og:title" content="Zero-Configuration React Static Site Generator"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Zero-Configuration React Static Site Generator</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">2/14/2016</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->react</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->static-site-generator</div></div><main class="prose mb3"><p>React is a great way to generate static HTML with a component-based UI.
+gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/zero-configuration-react-static-site-generator"/><meta property="og:title" content="Zero-Configuration React Static Site Generator"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Zero-Configuration React Static Site Generator</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">2/15/2016</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->react</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->static-site-generator</div></div><main class="prose mb3"><p>React is a great way to generate static HTML with a component-based UI.
 One of the biggest hurdles to working with React is the amount of boilerplate and build configuration it takes to get going.
 I wanted to make it dead-simple to start building static pages with React
 and without the need to install tons of npm modules and configure webpack.</p>
+<!-- more -->
 <p>That’s where <a href="https://github.com/jxnblk/static-react">static-react</a> comes in. Here’s out to get started.</p>
 <p><em>Update: As of version 3.2.0, static-react includes Babel presets and they do not need to be installed separately. This post has been updated to reflect those changes.</em></p>
 <h2>1. Install Dependencies</h2>
-<pre><code>npm i -D react static-react
+<pre><code class="language-sh">npm i -D react static-react
 </code></pre>
 <p>~~The Babel presets are optional, but make working with React much nicer, in my opinion.~~</p>
 <h2>2. Add a Run Script</h2>
 <p>Add the following run script to package.json.</p>
-<pre><code>"scripts": {
+<pre><code class="language-json">"scripts": {
   "start": "static-react components/Root.js > index.html"
 }
 </code></pre>
@@ -23,7 +24,7 @@ and without the need to install tons of npm modules and configure webpack.</p>
 <p>~~Add the following to package.json.~~</p>
 <h2>4. Add Components</h2>
 <p>Create a <code>components</code> directory and a <code>Root.js</code> React component.</p>
-<pre><code>// Root.js
+<pre><code class="language-js">// Root.js
 import React from 'react'
 
 class Root extends React.Component {
@@ -35,14 +36,14 @@ class Root extends React.Component {
 export default Root
 </code></pre>
 <h2>5. Build</h2>
-<pre><code>npm start
+<pre><code class="language-sh">npm start
 </code></pre>
 <p>Open <code>index.html</code> and you should see the rendered Root component.</p>
 <h2>Building Out a Page</h2>
 <p>You'll certainly want more than just a heading in the final page.
 Build out some more components and run <code>npm start</code> to rebuild.</p>
 <p>Here is an example set of starter components:</p>
-<pre><code>// Root.js
+<pre><code class="language-js">// Root.js
 import React from 'react'
 import Head from './Head'
 import Header from './Header'
@@ -66,7 +67,7 @@ class Root extends React.Component {
 
 export default Root
 </code></pre>
-<pre><code>// Head.js
+<pre><code class="language-js">// Head.js
 import React from 'react'
 
 const Head = ({ title }) => (
@@ -81,7 +82,7 @@ const Head = ({ title }) => (
 
 export default Head
 </code></pre>
-<pre><code>// Header.js
+<pre><code class="language-js">// Header.js
 import React from 'react'
 
 const Header = ({ title }) => (
@@ -92,7 +93,7 @@ const Header = ({ title }) => (
 
 export default Header
 </code></pre>
-<pre><code>// Main.js
+<pre><code class="language-js">// Main.js
 import React from 'react'
 
 const Main = () => (
@@ -104,7 +105,7 @@ const Main = () => (
 
 export default Main
 </code></pre>
-<pre><code>// Footer.js
+<pre><code class="language-js">// Footer.js
 import React from 'react'
 
 const Footer = () => (
@@ -116,6 +117,9 @@ const Footer = () => (
 export default Footer
 </code></pre>
 <p>If you have any thoughts on or issues with the static-react module, please check out the repo on <a href="https://github.com/jxnblk/static-react">GitHub</a>.</p>
+<p id="1" class="mt3 italic">
+  <del>* Technically, I guess this post should be titled <b>Near-Zero-Configuration</b>, but using Babel is completely optional.</del>
+</p>
 </main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
 const modes = [
   '',

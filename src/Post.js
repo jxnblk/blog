@@ -20,7 +20,7 @@ export default function Post (props) {
         </h1>
         <div className='flex flex-wrap mb2'>
           <div className='caps h6 mr1'>
-            {props.date?.toLocaleDateString()}
+            {props.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
           </div>
           {props.tags?.map(tag => (
             <div
