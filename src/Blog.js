@@ -37,6 +37,12 @@ export function BlogPostCard (props) {
     <>
       <h2 className='caps h2'>
         <a href={'/' + props.path}>
+          {props.devlog && (
+            <div className='h6'>
+              Devlog {pad(props.devlog)}
+              <br />
+            </div>
+          )}
           {props.title}
         </a>
       </h2>
@@ -70,3 +76,5 @@ export function BlogPostCard (props) {
     </>
   );
 };
+
+export const pad = n => ('00' + n).slice(-2);

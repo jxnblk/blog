@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Header from './Header.js';
 import Footer from './Footer.js';
+import { pad } from './Blog.js';
 
 export default function Post (props) {
   return (
@@ -13,7 +14,15 @@ export default function Post (props) {
           </div>
         )}
         <div className='inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm'>
-          Blog <span aria-hidden>//</span>
+          {props.devlog ? (
+            <>
+              Devlog {pad(props.devlog)}
+            </>
+          ) : (
+            <>
+              Blog <span aria-hidden>//</span>
+            </>
+          )}
         </div>
         <h1 className='h2 caps mb3'>
           {props.title}
