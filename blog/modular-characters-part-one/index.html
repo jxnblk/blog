@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Modular Characters Part I</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/modular-characters-part-one"/><meta property="og:title" content="Modular Characters Part I"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Devlog <!-- -->03</div><h1 class="h2 caps mb3">Modular Characters Part I</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">10/15/2023</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->devlog</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->unity</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->blender</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->character design</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->mixamo</div></div><main class="prose mb3"><p><img
+src='/images/modular-npcs/in-game-crowd.jpg'
+alt='Screenshot from Novantica with NPC crowd walking in the street'
+/></p>
+<p>Since <a href="https://novanticagame.com">Novantica</a> is set in a futuristic city, I always wanted to make sure the game had a certain level of city life – people walking around, bots zooming by, drones buzzing, trams gliding, and bikes rolling along.
+I hadn't done much 3D modeling before learning Unity, and, while modeling props, buildings, and other blockish things didn't seem to difficult, I struggled with creating humanoid characters.
+I knew that I wanted something low-poly, simple, and a bit cartoonish for the game's characters, but I'll admit that character design is probably not my strong suit.</p>
+<!-- more -->
+<figure>
+  <img
+    src='/images/modular-npcs/early-sketches.jpg'
+    alt='Rough character sketches'
+  />
+  <figcaption>
+    Early character sketches
+  </figcaption>
+</figure>
+<p>I watched a lot of video tutorials and studied characters from other games, and I settled on a general style that I felt was good enough, but wanted to polish the character artwork before releasing the game.
+I also wanted to improve upon the diversity and variety, while giving the NPCs just a little bit more personality.</p>
+<figure>
+  <img
+    src='/images/modular-npcs/early-aries.jpg'
+    alt='Screenshot of low poly character standing in the street'
+  />
+  <figcaption>
+    A very early, prototype version of the main character Aries
+  </figcaption>
+</figure>
+<figure>
+  <img
+    src='/images/modular-npcs/old-extras.jpg'
+    alt='Screenshot of the earlier versions of the NPC extras'
+  />
+  <figcaption>
+    The first version of NPC extras
+  </figcaption>
+</figure>
+<p>The existing NPCs were just a set of different models, with different hair styles, body shapes, and clothing. As you walked through the city, you'd inevitably encounter the same model over and over again.
+I could explain it away in the game by saying that the story involves time travel, but I wanted more random variety of the NPCs populating the city.
+The best way I could think of achieving this was by modularizing the characters so that I could randomly generate any number of NPCs using primitive parts and different color palettes.</p>
+<figure>
+  <img
+    src='/images/modular-npcs/main-characters-before-after.jpg'
+    alt='Screenshot of the main characters, before and after'
+  />
+  <figcaption>
+    Main characters, before and after
+  </figcaption>
+</figure>
+<p>I started with rebuilding the core characters in Blender to try to nail down an approach and style that fit better with the feel of the game.
+Once I was happy with the general look and feel, I started building out modular characters based on this style.
+Starting with a base body type, I added multiple different models for hair styles, tops, bottoms, shoes, and accessories like sunglasses and hats.</p>
+<figure>
+  <img
+    src='/images/modular-npcs/blender-parts.jpg'
+    alt='Screenshot of the model in Blender'
+  />
+  <figcaption>
+    The first body type with all modular parts shown and an example of only showing one set of the modular parts
+  </figcaption>
+</figure>
+<p>For coloring the models, I created several new textures that are UV mapped based on skin, hair, and colors for the tops, bottoms, shoes, and accessories.
+This way I could swap the texture on the model to change the complexion and colors of the outfits independent from the parts.</p>
+<figure>
+  <img
+    src='/images/modular-npcs/textures.jpg'
+    alt='Screenshot of the model in Blender'
+  />
+  <figcaption>
+    Some of the textures used to color the modular characters
+  </figcaption>
+</figure>
+<p>Once I had a decent number of parts, I exported all the parts together as a single FBX file, which I uploaded to Mixamo to rig for the game.</p>
+<figure>
+  <img
+    src='/images/modular-npcs/mixamo-rigging.jpg'
+    alt='Screenshot of rigging the character in Mixamo'
+  />
+  <figcaption>
+    Rigging the model with all modular parts together
+  </figcaption>
+</figure>
+<p>I brought the rigged model into Unity and created a material for the new textures.
+In Unity, each modular part is a separate game object within the model, and I wrote a script to randomize the different part shown for each section of the model, i.e. hair, top, bottom, shoes, and accessory.</p>
+<figure>
+  <img
+    src='/images/modular-npcs/game-objects.jpg'
+    alt='Screenshot of the models hierarchy in Unity'
+  />
+  <figcaption>
+    The modular parts are all separate game objects in Unity
+  </figcaption>
+</figure>
+<figure>
+  <img
+    src='/images/modular-npcs/unity-scripts.jpg'
+    alt='Screenshot of the modular character scripts inspectors'
+  />
+  <figcaption>
+    The Unity script allows for an array of named sections, each with an array of possible parts to render
+  </figcaption>
+</figure>
+<p>The <code>ModularCharacter</code> script randomizes which part to show for each section, and the <code>ModularColors</code> script randomizes which texture to use for the whole model.</p>
+<script src="https://gist.github.com/jxnblk/3e21f2494863b4e13a79c783bb05f248.js"></script>
+<p>Although I ended up not using it, I also had an array of rules to ensure that specific tops would always match their bottoms for things like aprons and suits.</p>
+<p>By randomizing the parts of each section along with the colors used in the textures and the scale of the model, this gave me a huge variety of different possibilities for each NPC's prefab instance.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Modular NPC extras – WIP <a href="https://t.co/Oo70RK4w8d">pic.twitter.com/Oo70RK4w8d</a></p>&mdash; Brent Jackson (@jxnblk) <a href="https://twitter.com/jxnblk/status/1697718113041551800?ref_src=twsrc%5Etfw">September 1, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/5eJseDIDUi">pic.twitter.com/5eJseDIDUi</a></p>&mdash; Brent Jackson (@jxnblk) <a href="https://twitter.com/jxnblk/status/1713916006962192648?ref_src=twsrc%5Etfw">October 16, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>At this point, I was quite pleased with the results.
+I continued by adding another body shape and adding blend shapes to the models and scripts and started replacing the prefabs used in the <code>Crowd</code> script that randomly places the NPCs near the character and gives them a destination to walk to.</p>
+<p>The results felt a lot better in the game, and it was much more difficult to spot "clones" of other characters with this much variety.</p>
+<blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/0hzGEAWZpt">pic.twitter.com/0hzGEAWZpt</a></p>&mdash; Brent Jackson (@jxnblk) <a href="https://twitter.com/jxnblk/status/1713932201975300490?ref_src=twsrc%5Etfw">October 16, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>At this point, and if you know much about Unity, you can probably guess what happened next: the FPS tanked.
+Rendering a crowd of animated NPCs can already be taxing, and with this new modular character approach, each prefab now had multiple Skinned Mesh Renderers to draw which caused the CPU usage to spike.</p>
+<p>I was still happy with the look of these new characters and wasn't about to roll back all these changes, so I started experimenting with ways to make this work in the game without killing the performance.
+I'll explain what I did in the next devlog post, so stay tuned...</p>
+</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
+const modes = [
+  '',
+  'orange',
+  'gray',
+  'pink',
+  'lite',
+];
+
+let index = 0;
+
+const cn = localStorage.getItem('color');
+document.body.className = cn;
+
+if (cn) index = modes.indexOf(cn);
+
+function cycle () {
+  index = (index + 1) % modes.length;
+  const next = modes[index];
+  document.body.className = next;
+  localStorage.setItem('color', next);
+};
+
+const el = document.querySelector('#color-button');
+if (el != null) el.addEventListener('click', cycle);
+</script></body></html>

@@ -4,6 +4,13 @@ draft: true
 
 # Notes
 
+## Devlog
+
+- [ ] Modular NPC Character models
+- [ ] Low poly procedural ivy generation
+
+---
+
 - Building Blocks
 - Iterations on a Theme
 - The Good, The Bad, and The Cascade

@@ -2,7 +2,8 @@ import * as React from 'react';
 import { BlogPostCard } from './Blog.js';
 
 export default function Devlog (props) {
-  const posts = props.posts?.filter(p => p.tags?.includes('devlog'));
+  const posts = props.posts?.filter(p => p.tags?.includes('devlog'))
+    .filter(p => !p.draft);
 
   return (
     <section id='devlog' className='container mb4'>
