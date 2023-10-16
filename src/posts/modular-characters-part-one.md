@@ -1,6 +1,6 @@
 ---
 title: Modular Characters Part I
-date: 2023-10-15
+date: 2023-10-16
 devlog: 3
 tags:
   - devlog
