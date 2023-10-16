@@ -2,6 +2,7 @@
 title: Modular Characters Part I
 date: 2023-10-16
 devlog: 3
+image: https://jxnblk.com/images/modular-npcs/modular-characters.jpg
 tags:
   - devlog
   - unity

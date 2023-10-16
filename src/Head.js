@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export default function Head (props) {
-  const image = 'https://jxnblk.com/images/avatar.png';
+  const image = props.image || 'https://jxnblk.com/images/avatar.png';
   const title = props.title || 'Jxnblk | Brent Jackson';
   const desc = props.description || 'Aspiring indie game developer, software engineer, and proud cat parent';
 
