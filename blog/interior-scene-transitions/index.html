@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><title>Interior Scene Transitions in Unity</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/interior-scene-transitions"/><meta property="og:title" content="Interior Scene Transitions in Unity"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Devlog <!-- -->04</div><h1 class="h2 caps mb3">Interior Scene Transitions in Unity</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">10/19/2023</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->devlog</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->unity</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->scene management</div></div><main class="prose mb3"><p><a href="https://novanticagame.com">Novantica</a> is set in an open world environment with various interior scenes that asynchronously load in when the player is nearby.
+When I started developing the game, I was originally planning to use a top-down third-person perspective, like many of my favorite old adventure games.
+Because it was set in an urban environment, I also wanted the player to be able to look up towards the sky and get a sense of the urban architecture.
+I tried a few different approaches to shifting the camera based on how the player was moving, but never quite achieved what I'd hoped to.
+Eventually I decide to make the camera work like many third-person perspective games and allow the user to move the camera using the right stick on a controller.</p>
+<p>This approach worked really well for the open outdoor areas, but made the interior scenes feel cramped and awkward.
+Many other games just leave things to the player to figure out, but I've never really liked how games did that.
+I can't tell you how many times I would stop in the middle of a cave in <em>Tears of the Kingdom</em> just to look around and try to understand where, exactly, Link was in relation to the cave.
+This free camera movement also made some of the puzzle mechanics in the Novantica awkward – e.g. making it difficult to see where a box needed to be pushed.</p>
+<p>Then, I had an idea I wanted to test out...</p>
+<blockquote class="reddit-embed-bq" style="height:500px" data-embed-height="500"><a href="https://www.reddit.com/r/Unity3D/comments/17at2r7/interior_scene_transition_what_do_you_think/">Interior scene transition - what do you think?</a><br> by<a href="https://www.reddit.com/user/vantomgames/">u/vantomgames</a> in<a href="https://www.reddit.com/r/Unity3D/">Unity3D</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
+<br />
+<!-- more -->
+<p>In the video above, I tested out a simple way to make the world fade away and draw focus on the interior scene when entering.
+This felt like it gave the puzzles in these scenes a bit more breathing room and allows the player to position the camera in a top-down way without feeling claustrophobic.
+I really liked the general effect, but the implementation needed some work.</p>
+<p>This first version uses a URP <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/camera-stacking.html">Camera Stack</a> with the culling mask rendering the <em>Interior</em> layer, along with some of the other mechanic-related layers.
+The world is faded out using <em>Post Exposure</em> in Post Processing's <em>Color Adjustments</em>, and the interior camera is enabled.
+This made it so that the background color had to be black (or a dimmed world) and so that the interior would suddenly pop into view without a smooth transition.</p>
+<p>To be able to cross-fade between the two, I decided to use a RenderTexture to render the interior camera (with the interior-specific layers) and add that RenderTexture to a RawImage component that the main camera could render.
+By controlling the alpha channel of the RawImage component, the interior scene could be faded in and out over top of the main camera's view.
+This also gave me control of the background color used when showing this isolated interior view.
+I could render any solid background color or even be transparent to allow other objects to cover up the main camera's view.</p>
+<p>I tried using a blur effect on the view from the main camera as a background, which looked kind of cool, but felt disorienting and distracting when moving the camera around. So, I decided to stick with a solid color.</p>
+<p>Most of the logic needed for this effect is handled by a single script attached to the new interior camera.
+This script uses a reference to the interior camera itself, a RenderTexture for the output of this camera, and a RawImage that will display the RenderTexture.
+I use LeanTween for the transition and expose the duration and timing functions for customization.
+I also have a boolean for detecting whether the interior view is active or not.</p>
+<pre><code class="language-cs">using UnityEngine;
+using UnityEngine.UI;
+
+public class InteriorCamera : MonoBehaviour {
+  public Camera cam; // Interior layer w/ culling
+  public RenderTexture texture;
+  public RawImage output; // UI layer + UI Camera Stack
+  public float duration = 0.5f;
+  public LeanTweenType easeIn = LeanTweenType.easeInCubic;
+  public LeanTweenType easeOut = LeanTweenType.easeOutCubic;
+
+  [Header("State")]
+  public bool active = false;
+}
+</code></pre>
+<p>For the method to fade into the isolated interior view, I check whether the isolated view is already active and return early if needed.
+The interior camera and RawImage are both enabled, then I use <code>LeanTween.value</code> to pass a float to the <code>UpdateFade</code> method.
+The <code>UpdateFade</code> method changes the alpha value of a private <code>color</code> field.
+If I decide to transition something else in addition to the RawImage, it can be handled in <code>UpdateFade</code>.</p>
+<pre><code class="language-cs">  Color color = Color.white;
+
+  public void FadeIn () {
+    if (active) return;
+    cam.enabled = true;
+    output.enabled = true;
+    LeanTween.value(gameObject, UpdateFade, 0f, 1f, duration)
+      .setEase(easeIn)
+      .setOnComplete(() => {
+        Debug.Log($"[InteriorCamera] FadeIn");
+      });
+    active = true;
+  }
+
+  void UpdateFade (float n) {
+    color.a = n;
+    output.color = color;
+  }
+</code></pre>
+<p>For the method to fade out, it's the same thing in reverse, but I make use of LeanTween's <code>setOnComplete</code> method to disable the camera and RawImage after the transition is complete.</p>
+<pre><code class="language-cs">  public void FadeOut () {
+    if (!active) return;
+    LeanTween.value(gameObject, UpdateFade, 1f, 0f, duration)
+      .setEase(easeOut)
+      .setOnComplete(() => {
+        Debug.Log($"[InteriorCamera] FadeOut");
+        cam.enabled = false;
+        output.enabled = false;
+      });
+    active = false;
+  }
+</code></pre>
+<p>You can see what this looks like in the screenshots below.</p>
+<figure>
+  <img
+    src='/images/isolated-interior/isolated-interior-outside.jpg'
+    alt='Screenshot of player standing outside building'
+  />
+  <figcaption>
+    The default view in the game, where the whole world is visible
+  </figcaption>
+</figure>
+<figure>
+  <img
+    src='/images/isolated-interior/isolated-interior-inside.jpg'
+    alt='Screenshot of player standing inside building'
+  />
+  <figcaption>
+    The isolated interior view when the player enters
+  </figcaption>
+</figure>
+<p>Because <a href="https://novanticagame.com">Novantica</a> supports multiple resolutions, this effect doesn't work when the resolution of the game isn't 4K.
+To handle different resolutions and changing the resolution while playing, I added a method to set the RenderTexture to match the main camera resolution and use <code>LateUpdate</code> to check when it has changed.</p>
+<pre><code class="language-cs">  float aspect = 1f;
+  int width = 3840;
+  int height = 2160;
+
+  void Start () {
+    Init();
+  }
+
+  void Init () {
+    aspect = Camera.main.aspect;
+    width = Camera.main.pixelWidth;
+    height = Camera.main.pixelHeight;
+    texture = new RenderTexture(width, height, 32);
+    cam.targetTexture = texture;
+    output.texture = texture;
+  }
+
+  void LateUpdate () {
+    if (!active) return;
+    if (Camera.main.aspect != aspect || Camera.main.pixelWidth != width) {
+      Init();
+    }
+  }
+</code></pre>
+<p>To use this script, I have an <code>InteriorTrigger</code> script that uses trigger colliders to detect when the player is inside a building.
+I use a singleton pattern in this <code>InteriorCamera</code> script to allow the trigger components to enable and disable the interior camera across different scenes (each interior is a separate Addressable scene in the game).</p>
+<p>You can use whatever makes sense for your game's architecture to enable and disable the interior camera, but the singleton setup looks something like this:</p>
+<pre><code class="language-cs">  public static InteriorCamera instance;
+
+  void Awake () {
+    if (instance == null) instance = this;
+    else Destroy(this.gameObject);
+  }
+</code></pre>
+<p>The end result:</p>
+<blockquote class="reddit-embed-bq" style="height:500px" data-embed-height="500"><a href="https://www.reddit.com/r/Unity3D/comments/17bkh8g/interior_scene_transition_take_two/">Interior scene transition - take two</a><br> by<a href="https://www.reddit.com/user/vantomgames/">u/vantomgames</a> in<a href="https://www.reddit.com/r/Unity3D/">Unity3D</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
+<br />
+<p>If you'd like to set up something similar in your project, here is the full source code for the component:</p>
+<script src="https://gist.github.com/jxnblk/296850435694b95569ff09347756ce9e.js"></script>
+<!--
+
+- approach
+- code
+- results
+- tweaks/adjustments
+
+-->
+</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
+const modes = [
+  '',
+  'orange',
+  'gray',
+  'pink',
+  'lite',
+];
+
+let index = 0;
+
+const cn = localStorage.getItem('color');
+document.body.className = cn;
+
+if (cn) index = modes.indexOf(cn);
+
+function cycle () {
+  index = (index + 1) % modes.length;
+  const next = modes[index];
+  document.body.className = next;
+  localStorage.setItem('color', next);
+};
+
+const el = document.querySelector('#color-button');
+if (el != null) el.addEventListener('click', cycle);
+</script></body></html>

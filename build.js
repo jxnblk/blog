@@ -28,10 +28,17 @@ const config = {
 };
 
 async function getPages () {
-  const mds = readdirSync('src/posts').filter(f => extname(f) == '.md');
+  const mds = [
+    ...readdirSync('src/posts')
+      .filter(f => extname(f) == '.md')
+      .map(f => join('src', 'posts', f)),
+    ...readdirSync('src/devlog')
+      .filter(f => extname(f) == '.md')
+      .map(f => join('src', 'devlog', f)),
+  ];
   const promises = mds.map(async filename => {
     const path = 'blog/' + basename(filename, '.md');
-    const raw = readFileSync(join('src', 'posts', filename));
+    const raw = readFileSync(filename); // join('src', 'posts', filename));
     const { content, data } = matter(raw);
     const vf = await remark()
       .use(remarkHTML, { sanitize: false })
