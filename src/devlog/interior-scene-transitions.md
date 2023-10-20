@@ -2,7 +2,7 @@
 title: Interior Scene Transitions in Unity
 date: 2023-10-19
 devlog: 4
-# image:
+image: https://jxnblk.com/images/isolated-interior/isolated-interior-inside.jpg
 tags:
   - devlog
   - unity

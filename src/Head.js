@@ -25,13 +25,18 @@ export default function Head (props) {
           __html: ga,
         }}
       />
-      <meta name='twitter:card' content='summary' />
+      {props.image ? (
+        <meta name='twitter:card' content='summary_large_image' />
+      ) : (
+        <meta name='twitter:card' content='summary' />
+      )}
       <meta name='twitter:site' content='@jxnblk' />
       <meta name='twitter:creator' content='@jxnblk' />
       <meta property='og:url' content={`https://jxnblk.com/${props.path}`} />
       <meta property='og:title' content={title} />
       <meta property='og:description' content={desc} />
       <meta property='og:image' content={image} />
+      <meta name='twitter:image' content={image} />
     </head>
   );
 };
