@@ -6,7 +6,8 @@ import {
 import {
   readdirSync,
   readFileSync,
-  createWriteStream
+  createWriteStream,
+  writeFileSync,
 } from 'node:fs';
 import { ensureDirSync } from 'fs-extra';
 import { createElement as x } from 'react';
@@ -102,3 +103,35 @@ pages.forEach(page => {
     console.log(page.path);
   });
 });
+
+// api
+
+const exclude = ["", "blog", "404", "blog/notes"];
+const posts = pages.filter(p => !exclude.includes(p.path))
+  .map(p => ({
+    path: p.path,
+    title: p.title,
+    date: p.date,
+    excerpt: p.excerpt,
+    html: p.html,
+  }))
+  .sort((a, b) => b.date - a.date);
+
+const index = posts.map(p => ({
+  path: p.path,
+  title: p.title,
+  date: p.date,
+  excerpt: p.excerpt,
+}));
+
+const indexJSON = JSON.stringify(index);
+
+writeFileSync(join('api', 'index.json'), indexJSON);
+
+posts.forEach(post => {
+  ensureDirSync(join('api', post.path));
+  const json = JSON.stringify(post);
+  writeFileSync(join('api', post.path, 'index.json'), json);
+});
+
+
