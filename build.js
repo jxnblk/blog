@@ -28,6 +28,32 @@ const config = {
   description: 'Aspiring indie game developer, software engineer, and proud cat parent – he/him',
 };
 
+async function parseFile (filename) {
+  const path = 'blog/' + basename(filename, '.md');
+  const raw = readFileSync(filename); // join('src', 'posts', filename));
+  const { content, data } = matter(raw);
+  const vf = await remark()
+    .use(remarkHTML, { sanitize: false })
+    .process(content);
+  const html = String(vf);
+  const evf = await remark()
+    .use(remarkExcerpt)
+    .use(remarkHTML, { sanitize: false })
+    .process(content);
+  const excerpt = String(evf);
+
+  return {
+    filename,
+    path,
+    raw,
+    html,
+    excerpt,
+    description: data.description || data.excerpt || null,
+    ...data,
+    content: Post({ ...data, html })
+  };
+}
+
 async function getPages () {
   const mds = [
     ...readdirSync('src/posts')
@@ -37,31 +63,7 @@ async function getPages () {
       .filter(f => extname(f) == '.md')
       .map(f => join('src', 'devlog', f)),
   ];
-  const promises = mds.map(async filename => {
-    const path = 'blog/' + basename(filename, '.md');
-    const raw = readFileSync(filename); // join('src', 'posts', filename));
-    const { content, data } = matter(raw);
-    const vf = await remark()
-      .use(remarkHTML, { sanitize: false })
-      .process(content);
-    const html = String(vf);
-    const evf = await remark()
-      .use(remarkExcerpt)
-      .use(remarkHTML, { sanitize: false })
-      .process(content);
-    const excerpt = String(evf);
-
-    return {
-      filename,
-      path,
-      raw,
-      html,
-      excerpt,
-      description: data.description || data.excerpt || null,
-      ...data,
-      content: Post({ ...data, html })
-    };
-  });
+  const promises = mds.map(parseFile);
   // console.log(`Found ${mds.length} blog posts`);
   const posts = await Promise.all(promises);
 
@@ -105,16 +107,26 @@ pages.forEach(page => {
 });
 
 // api
+//
+function pageToData ({
+  path,
+  title,
+  date,
+  excerpt,
+  html,
+}) {
+  return {
+    path,
+    title,
+    date,
+    excerpt,
+    html,
+  };
+}
 
 const exclude = ["", "blog", "404", "blog/notes"];
 const posts = pages.filter(p => !exclude.includes(p.path))
-  .map(p => ({
-    path: p.path,
-    title: p.title,
-    date: p.date,
-    excerpt: p.excerpt,
-    html: p.html,
-  }))
+  .map(pageToData)
   .sort((a, b) => b.date - a.date);
 
 const index = posts.map(p => ({
@@ -124,9 +136,18 @@ const index = posts.map(p => ({
   excerpt: p.excerpt,
 }));
 
+const about = pageToData(await parseFile("about.md"));
+
+const all = {
+  posts: index,
+  about
+}
+
 const indexJSON = JSON.stringify(index);
+const allJSON = JSON.stringify(all);
 
 writeFileSync(join('api', 'index.json'), indexJSON);
+writeFileSync(join('api', 'all.json'), allJSON);
 
 posts.forEach(post => {
   ensureDirSync(join('api', post.path));
