@@ -136,7 +136,6 @@ const index = posts.map(p => ({
   excerpt: p.excerpt,
 }));
 
-// const aboutFile = readFileSync("about.md");
 const about = pageToData(await parseFile("about.md"));
 
 const all = {
