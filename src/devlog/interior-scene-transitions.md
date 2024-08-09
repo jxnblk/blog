@@ -184,8 +184,19 @@ You can use whatever makes sense for your game's architecture to enable and disa
 
 The end result:
 
-<blockquote class="reddit-embed-bq" style="height:500px" data-embed-height="500"><a href="https://www.reddit.com/r/Unity3D/comments/17bkh8g/interior_scene_transition_take_two/">Interior scene transition - take two</a><br> by<a href="https://www.reddit.com/user/vantomgames/">u/vantomgames</a> in<a href="https://www.reddit.com/r/Unity3D/">Unity3D</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
+<iframe
+  title="Screencap of Novantica game interior camera transition"
+  src="https://jxnblk-redditembed2.web.val.run?id=17bkh8g&sub=Unity3D"
+  width="960"
+  style="width:100%;aspect-ratio:16/10;border:none"
+></iframe>
+
+<!--
+<blockquote class="reddit-embed-bq" style="height:500px" data-embed-height="500">
+<a href="https://www.reddit.com/r/Unity3D/comments/17bkh8g/interior_scene_transition_take_two/">Interior scene transition - take two </a>
+<br> by <a href="https://www.reddit.com/user/vantomgames/">u/vantomgames</a> in<a href="https://www.reddit.com/r/Unity3D/">Unity3D</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
 <br />
+-->
 
 If you'd like to set up something similar in your project, here is the full source code for the component:
 
