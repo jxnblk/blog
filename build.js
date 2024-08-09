@@ -150,7 +150,7 @@ const index = posts.map(p => ({
 const about = pageToData(await parseFile("about.md"));
 
 const all = {
-  posts: index,
+  posts,
   about
 }
 
