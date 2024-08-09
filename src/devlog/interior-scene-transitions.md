@@ -120,7 +120,7 @@ You can see what this looks like in the screenshots below.
 
 <figure>
   <img
-    src='/images/isolated-interior/isolated-interior-outside.jpg'
+    src='https://jxnblk.com/images/isolated-interior/isolated-interior-outside.jpg'
     alt='Screenshot of player standing outside building'
   />
   <figcaption>
@@ -130,7 +130,7 @@ You can see what this looks like in the screenshots below.
 
 <figure>
   <img
-    src='/images/isolated-interior/isolated-interior-inside.jpg'
+    src='https://jxnblk.com/images/isolated-interior/isolated-interior-inside.jpg'
     alt='Screenshot of player standing inside building'
   />
   <figcaption>

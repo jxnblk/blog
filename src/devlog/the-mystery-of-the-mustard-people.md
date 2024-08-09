@@ -19,7 +19,7 @@ I started to dig in, but didn't realize it would take so long to track down.
 
 <!-- more -->
 
-![Screenshot showing yellow colored NPCs](/images/mustard/pizza.jpg)
+![Screenshot showing yellow colored NPCs](https://jxnblk.com/images/mustard/pizza.jpg)
 
 At first, since I didn't know how to reproduce the issue in the editor,
 I tried swapping different materials and shaders on one of the character models to see if it was related to any prefabs used to spawn the extras.
@@ -32,7 +32,7 @@ Those scenes were [Addressables][], so I started to suspect it was something rel
 [addressables]: https://docs.unity3d.com/2021.3/Documentation/Manual/com.unity.addressables.html
 
 <figure>
-  <img src='/images/mustard/addressables.png' alt='Screenshot of Unity Addressables editor options' />
+  <img src='https://jxnblk.com/images/mustard/addressables.png' alt='Screenshot of Unity Addressables editor options' />
   <figcaption>
     Changing this option to <em>Use Existing Build</em> made the issue reproducible in the editor
   </figcaption>
@@ -41,7 +41,7 @@ Those scenes were [Addressables][], so I started to suspect it was something rel
 I switched the Unity Addressables _Play Mode Script_ option to _Use Existing Build_ and was able to start reproducing the issue in the editor.
 It felt like I was onto something.
 
-![](/images/mustard/hotel.jpg)
+![](https://jxnblk.com/images/mustard/hotel.jpg)
 
 The next thing I tried was adding all the game's materials and textures to a new Addressables group.
 This seemed to fix the yellow people problem, but now the materials were missing from some of the additively loaded Addressable scenes.
@@ -59,7 +59,7 @@ The material _was_, in fact, working, but the UV maps were wrong.
 But why?
 
 <figure>
-  <img src='/images/mustard/character-texture.png' alt='The texture used to color the low poly character models' />
+  <img src='https://jxnblk.com/images/mustard/character-texture.png' alt='The texture used to color the low poly character models' />
   <figcaption>
     The texture used to color the low poly character models.
   </figcaption>
@@ -72,7 +72,7 @@ For some reason, the UV map was only set for one of these colors.
 
 <figure>
   <img
-    src='/images/mustard/optimize-mesh.png'
+    src='https://jxnblk.com/images/mustard/optimize-mesh.png'
     alt='Screenshot of the Optimize Mesh option for the imported model'
   />
   <figcaption>
