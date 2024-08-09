@@ -12,7 +12,7 @@ tags:
 ---
 
 <img
-  src='https://jxnblk.com/images/modular-npcs/in-game-crowd.jpg'
+  src='https://jxnblk.com/images/modular-npcs/in-game-crowd.webp'
   alt='Screenshot from Novantica with NPC crowd walking in the street'
 />
 
