@@ -29,7 +29,8 @@ const config = {
 };
 
 async function parseFile (filename) {
-  const path = 'blog/' + basename(filename, '.md');
+  const slug = basename(filename, ".md");
+  const path = 'blog/' + slug;
   const raw = readFileSync(filename); // join('src', 'posts', filename));
   const { content, data } = matter(raw);
   const vf = await remark()
@@ -45,6 +46,7 @@ async function parseFile (filename) {
   return {
     filename,
     path,
+    slug,
     raw,
     html,
     excerpt,
@@ -110,6 +112,7 @@ pages.forEach(page => {
 //
 function pageToData ({
   path,
+  slug,
   title,
   date,
   excerpt,
@@ -119,6 +122,7 @@ function pageToData ({
 }) {
   return {
     path,
+    slug,
     title,
     date,
     excerpt,
@@ -135,6 +139,7 @@ const posts = pages.filter(p => !exclude.includes(p.path))
 
 const index = posts.map(p => ({
   path: p.path,
+  slug: p.slug,
   title: p.title,
   date: p.date,
   excerpt: p.excerpt,
