@@ -27,6 +27,7 @@ Then, I had an idea I wanted to test out...
 <iframe
   title="Screencap of Novantica game interior camera transition"
   src="https://jxnblk-redditembed2.web.val.run?id=17at2r7&sub=Unity3D"
+  width="960"
 ></iframe>
 
 <!--
