@@ -114,6 +114,8 @@ function pageToData ({
   date,
   excerpt,
   html,
+  draft,
+  tags,
 }) {
   return {
     path,
@@ -121,6 +123,8 @@ function pageToData ({
     date,
     excerpt,
     html,
+    draft,
+    tags,
   };
 }
 
