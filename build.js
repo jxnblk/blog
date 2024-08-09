@@ -138,6 +138,8 @@ const index = posts.map(p => ({
   title: p.title,
   date: p.date,
   excerpt: p.excerpt,
+  draft: p.draft,
+  tags: p.tags,
 }));
 
 const about = pageToData(await parseFile("about.md"));
