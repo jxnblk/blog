@@ -114,21 +114,25 @@ function pageToData ({
   path,
   slug,
   title,
+  description,
   date,
   excerpt,
   html,
   draft,
   tags,
+  image,
 }) {
   return {
     path,
     slug,
     title,
+    description,
     date,
     excerpt,
     html,
     draft,
     tags,
+    image,
   };
 }
 
