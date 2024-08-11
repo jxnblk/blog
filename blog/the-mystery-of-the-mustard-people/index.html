@@ -9,7 +9,7 @@ but I didn't want to revert back to the old materials.
 To add icing to the cake, this issue was only happening in builds, not in the editor.
 I started to dig in, but didn't realize it would take so long to track down.</p>
 <!-- more -->
-<p><img src="https://jxnblk.com/images/mustard/pizza.jpg" alt="Screenshot showing yellow colored NPCs"></p>
+<p><img src="https://blog.jxnblk.com/images/mustard/pizza.jpg" alt="Screenshot showing yellow colored NPCs"></p>
 <p>At first, since I didn't know how to reproduce the issue in the editor,
 I tried swapping different materials and shaders on one of the character models to see if it was related to any prefabs used to spawn the extras.
 No luck, the character was still yellow.
@@ -18,14 +18,14 @@ I tried moving the model to different scenes and sometimes the material worked a
 I also noticed that the NPCs that were loaded from additive scenes didn't suffer the same ailment, as seen in the screenshot above.
 Those scenes were <a href="https://docs.unity3d.com/2021.3/Documentation/Manual/com.unity.addressables.html">Addressables</a>, so I started to suspect it was something related to how I'd set up shared materials across scenes with the Addressables system.</p>
 <figure>
-  <img src='https://jxnblk.com/images/mustard/addressables.png' alt='Screenshot of Unity Addressables editor options' />
+  <img src='https://blog.jxnblk.com/images/mustard/addressables.png' alt='Screenshot of Unity Addressables editor options' />
   <figcaption>
     Changing this option to <em>Use Existing Build</em> made the issue reproducible in the editor
   </figcaption>
 </figure>
 <p>I switched the Unity Addressables <em>Play Mode Script</em> option to <em>Use Existing Build</em> and was able to start reproducing the issue in the editor.
 It felt like I was onto something.</p>
-<p><img src="https://jxnblk.com/images/mustard/hotel.jpg" alt=""></p>
+<p><img src="https://blog.jxnblk.com/images/mustard/hotel.jpg" alt=""></p>
 <p>The next thing I tried was adding all the game's materials and textures to a new Addressables group.
 This seemed to fix the yellow people problem, but now the materials were missing from some of the additively loaded Addressable scenes.
 If you're familiar with Unity, the magenta colored objects in the screenshot above mean that the materials are missing.
@@ -39,7 +39,7 @@ When I got back to the computer, I swapped the texture on the character material
 The material <em>was</em>, in fact, working, but the UV maps were wrong.
 But why?</p>
 <figure>
-  <img src='https://jxnblk.com/images/mustard/character-texture.png' alt='The texture used to color the low poly character models' />
+  <img src='https://blog.jxnblk.com/images/mustard/character-texture.png' alt='The texture used to color the low poly character models' />
   <figcaption>
     The texture used to color the low poly character models.
   </figcaption>
@@ -50,7 +50,7 @@ As you can see in the texture above, the UV map controls how the low poly models
 For some reason, the UV map was only set for one of these colors.</p>
 <figure>
   <img
-    src='https://jxnblk.com/images/mustard/optimize-mesh.png'
+    src='https://blog.jxnblk.com/images/mustard/optimize-mesh.png'
     alt='Screenshot of the Optimize Mesh option for the imported model'
   />
   <figcaption>

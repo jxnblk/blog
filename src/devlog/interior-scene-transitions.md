@@ -2,7 +2,7 @@
 title: Interior Scene Transitions in Unity
 date: 2023-10-19
 devlog: 4
-image: https://jxnblk.com/images/isolated-interior/devlog-04.jpg
+image: https://blog.jxnblk.com/images/isolated-interior/devlog-04.jpg
 tags:
   - devlog
   - unity
@@ -121,7 +121,7 @@ You can see what this looks like in the screenshots below.
 
 <figure>
   <img
-    src='https://jxnblk.com/images/isolated-interior/isolated-interior-outside.jpg'
+    src='https://blog.jxnblk.com/images/isolated-interior/isolated-interior-outside.jpg'
     alt='Screenshot of player standing outside building'
   />
   <figcaption>
@@ -131,7 +131,7 @@ You can see what this looks like in the screenshots below.
 
 <figure>
   <img
-    src='https://jxnblk.com/images/isolated-interior/isolated-interior-inside.jpg'
+    src='https://blog.jxnblk.com/images/isolated-interior/isolated-interior-inside.jpg'
     alt='Screenshot of player standing inside building'
   />
   <figcaption>

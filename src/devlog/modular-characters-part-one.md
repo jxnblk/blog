@@ -2,7 +2,7 @@
 title: Modular Characters Part I
 date: 2023-10-16
 devlog: 3
-image: https://jxnblk.com/images/modular-npcs/modular-characters.jpg
+image: https://blog.jxnblk.com/images/modular-npcs/modular-characters.jpg
 tags:
   - devlog
   - unity
@@ -12,7 +12,7 @@ tags:
 ---
 
 <img
-  src='https://jxnblk.com/images/modular-npcs/in-game-crowd.webp'
+  src='https://blog.jxnblk.com/images/modular-npcs/in-game-crowd.webp'
   alt='Screenshot from Novantica with NPC crowd walking in the street'
 />
 
@@ -26,7 +26,7 @@ I knew that I wanted something low-poly, simple, and a bit cartoonish for the ga
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/early-sketches.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/early-sketches.jpg'
     alt='Rough character sketches'
   />
   <figcaption>
@@ -39,7 +39,7 @@ I also wanted to improve upon the diversity and variety, while giving the NPCs j
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/early-aries.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/early-aries.jpg'
     alt='Screenshot of low poly character standing in the street'
   />
   <figcaption>
@@ -49,7 +49,7 @@ I also wanted to improve upon the diversity and variety, while giving the NPCs j
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/old-extras.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/old-extras.jpg'
     alt='Screenshot of the earlier versions of the NPC extras'
   />
   <figcaption>
@@ -63,7 +63,7 @@ The best way I could think of achieving this was by modularizing the characters 
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/main-characters-before-after.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/main-characters-before-after.jpg'
     alt='Screenshot of the main characters, before and after'
   />
   <figcaption>
@@ -77,7 +77,7 @@ Starting with a base body type, I added multiple different models for hair style
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/blender-parts.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/blender-parts.jpg'
     alt='Screenshot of the model in Blender'
   />
   <figcaption>
@@ -90,7 +90,7 @@ This way I could swap the texture on the model to change the complexion and colo
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/textures.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/textures.jpg'
     alt='Screenshot of the model in Blender'
   />
   <figcaption>
@@ -102,7 +102,7 @@ Once I had a decent number of parts, I exported all the parts together as a sing
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/mixamo-rigging.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/mixamo-rigging.jpg'
     alt='Screenshot of rigging the character in Mixamo'
   />
   <figcaption>
@@ -115,7 +115,7 @@ In Unity, each modular part is a separate game object within the model, and I wr
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/game-objects.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/game-objects.jpg'
     alt='Screenshot of the models hierarchy in Unity'
   />
   <figcaption>
@@ -125,7 +125,7 @@ In Unity, each modular part is a separate game object within the model, and I wr
 
 <figure>
   <img
-    src='https://jxnblk.com/images/modular-npcs/unity-scripts.jpg'
+    src='https://blog.jxnblk.com/images/modular-npcs/unity-scripts.jpg'
     alt='Screenshot of the modular character scripts inspectors'
   />
   <figcaption>
