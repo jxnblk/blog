@@ -45,20 +45,20 @@ I studied sociology, Japanese language, and graphic design at Marshall Universit
 [mdx]: https://mdxjs.com/community/about/
 [colorable]: https://colorable.jxnblk.com/
 [palx]: https://github.com/jxnblk/palx
-[spectral]: https://jxnblk.github.io/Spectral/
-[hello color]: https://jxnblk.github.io/hello-color
+[spectral]: https://jxnblk.io/Spectral/
+[hello color]: https://jxnblk.io/hello-color
 
 [geomicons]: https://github.com/jxnblk/geomicons-wired
-[loading]: https://jxnblk.github.io/loading/
-[paths]: https://jxnblk.github.io/paths/
-[reline]: https://jxnblk.github.io/reline/
+[loading]: https://jxnblk.io/loading/
+[paths]: https://jxnblk.io/paths/
+[reline]: https://jxnblk.io/reline/
 
 [rebass-hn]: https://news.ycombinator.com/item?id=14704552
 
 [microbeats]: https://microbeats.cc/
 [mrsjxn]: https://soundcloud.com/mrsjxn
 [soundcloud]: https://soundcloud.com/jxnblk
-[skullcat]: https://jxnblk.github.io/skullcat/
+[skullcat]: https://jxnblk.io/skullcat/
 [novantica]: https://novanticagame.com
 [novantica-steam]: https://store.steampowered.com/app/2437530/Novantica/
 
