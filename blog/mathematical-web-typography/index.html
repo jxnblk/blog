@@ -42,14 +42,54 @@ but I also think that the different constraints and capabilities of screens warr
 <p>The browser defaults for font sizes provide a great starting point for developing a robust typographic system.
 Since some of the values result in non-integer pixel values,
 I tend to normalize and round the numbers to make them more scalable and easier to work with.</p>
-<p>Default | Pixels   | Normalized | Normalized Rem
---------|----------|------------|--------
-0.67em  | 10.72px  | 12px       | .75rem
-0.83em  | 13.28px  | 14px       | .875rem
-inherit | 16px     | 16px       | 1rem
-1.17em  | 18.72px  | 20px       | 1.25rem
-1.5em   | 24px     | 24px       | 1.5rem
-2em     | 32px     | 32px       | 2rem</p>
+<table>
+<thead>
+<tr>
+<th>Default</th>
+<th>Pixels</th>
+<th>Normalized</th>
+<th>Normalized Rem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.67em</td>
+<td>10.72px</td>
+<td>12px</td>
+<td>.75rem</td>
+</tr>
+<tr>
+<td>0.83em</td>
+<td>13.28px</td>
+<td>14px</td>
+<td>.875rem</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>16px</td>
+<td>16px</td>
+<td>1rem</td>
+</tr>
+<tr>
+<td>1.17em</td>
+<td>18.72px</td>
+<td>20px</td>
+<td>1.25rem</td>
+</tr>
+<tr>
+<td>1.5em</td>
+<td>24px</td>
+<td>24px</td>
+<td>1.5rem</td>
+</tr>
+<tr>
+<td>2em</td>
+<td>32px</td>
+<td>32px</td>
+<td>2rem</td>
+</tr>
+</tbody>
+</table>
 <h2>Powers of Two</h2>
 <p>Taking a look at the numbers used in screen-based media, there are a lot of powers of two.
 The default font size for most browsers is 16px, which is 2<sup>4</sup>.
@@ -62,21 +102,74 @@ display standard is 1024×768px, which converted to rems (or divided by 16) is 6
 <p>Working with numbers based on powers of two can result in an entire system of sensible numbers – often integers.
 The normalized scale above starts with 16px (1rem) as a base, and multiplies each by specific factors to create integers.
 Taking this normalized scale and setting a line-height of either 1.25 or 1.5 yields the following pixel values.</p>
-<p>Font Size | 1.25 Line Height | 1.5 Line Height
-----------|------------------|----------------
-12px      | 15px             | 18px
-14px      | 17.5px           | 21px
-16px      | 20px             | 24px
-20px      | 25px             | 30px
-24px      | 30px             | 36px
-32px      | 40px             | 48px</p>
+<table>
+<thead>
+<tr>
+<th>Font Size</th>
+<th>1.25 Line Height</th>
+<th>1.5 Line Height</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12px</td>
+<td>15px</td>
+<td>18px</td>
+</tr>
+<tr>
+<td>14px</td>
+<td>17.5px</td>
+<td>21px</td>
+</tr>
+<tr>
+<td>16px</td>
+<td>20px</td>
+<td>24px</td>
+</tr>
+<tr>
+<td>20px</td>
+<td>25px</td>
+<td>30px</td>
+</tr>
+<tr>
+<td>24px</td>
+<td>30px</td>
+<td>36px</td>
+</tr>
+<tr>
+<td>32px</td>
+<td>40px</td>
+<td>48px</td>
+</tr>
+</tbody>
+</table>
 <p>These factors are all based on fractions with a power of two denominator – or based on halves and doubles.</p>
-<p>Fraction | Decimal
----------|--------
-1/2      | 0.5
-1/4      | 0.25
-1/8      | 0.125
-1/16     | 0.0625</p>
+<table>
+<thead>
+<tr>
+<th>Fraction</th>
+<th>Decimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1/2</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>1/4</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>1/8</td>
+<td>0.125</td>
+</tr>
+<tr>
+<td>1/16</td>
+<td>0.0625</td>
+</tr>
+</tbody>
+</table>
 <p>This is similar to how units of time in Western music are divided.
 While evolution gave us ten fingers, and base 10 number systems arised from that,
 working with powers of two can be a more suitable convention for digital media.</p>
@@ -130,12 +223,32 @@ For many of the same reasons listed above, and to stick to a content-out approac
 I tend to base margin and padding values on numbers derived from the same typographic system
 and use a modular scale.</p>
 <p>For example, <a href="http://basscss.com">Basscss</a> uses the following scale for margin and padding declarations.</p>
-<p>Step | Value
------|------
-1    | .5rem
-2    | 1rem
-3    | 2rem
-4    | 4rem</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>.5rem</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1rem</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2rem</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4rem</td>
+</tr>
+</tbody>
+</table>
 <p>Each one of these values can be derived from either halving or doubling the 1rem base
 and is related to the other values used for typography.</p>
 <h2>Building Better Systems</h2>

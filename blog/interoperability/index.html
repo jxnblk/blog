@@ -53,7 +53,7 @@ Something I'm starting to notice is that there are no standard conventions for w
 but all of them seem to be doing the same thing, in a slightly different way.</p>
 <h2>Design System Tokens</h2>
 <p>I suspect a lot of the tooling for styling applications would benefit from having a standard theming format for storing these values.
-Jina Anne pioneered the concept of <em>design system tokens</em> [^1] years ago,
+Jina Anne pioneered the concept of <em>design system tokens</em> <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref aria-describedby="footnote-label">1</a></sup> years ago,
 and a lot of teams have successfully adopted approaches like this, which I think is fantastic.
 If you're already familiar with the idea of <em>design system tokens</em>, you're one step closer to seeing the value in a standard theming format.</p>
 <p>Design system tokens are meant to be flexible and work cross-platform, which means different teams,
@@ -74,12 +74,18 @@ Any new UI component you add to your application,
 could instantly pick up the values from your theme and mimic the look and feel of the rest of your application,
 without needing to write any custom CSS.
 I think that could be pretty cool.</p>
-<p>~~Ultimately this specification should be completely decoupled from the Styled System library, and I can move this to a more neutral location in the near future, but this seemed like a logical place to start this discussion.~~</p>
+<p><del>Ultimately this specification should be completely decoupled from the Styled System library, and I can move this to a more neutral location in the near future, but this seemed like a logical place to start this discussion.</del></p>
 <p>Let me know what you think on <a href="https://mobile.twitter.com/jxnblk/status/1107726037805424641">Twitter</a>
 or by <a href="https://github.com/system-ui/theme-specification/issues">opening an issue</a>.</p>
-<p>[^1]: Design system tokens are a fantastic abstraction. They try to solve the problem of sharing a brand's core style values cross-platform,
+<section data-footnotes class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1">
+<p>Design system tokens are a fantastic abstraction. They try to solve the problem of sharing a brand's core style values cross-platform,
 whereas this specification is (initially) primarily focused on CSS/JS development – i.e. a potential <em>output</em> from design tokens.
-Design system tokens and this theme specification should be completely compatible with each other and decoupled from one another.</p>
+Design system tokens and this theme specification should be completely compatible with each other and decoupled from one another. <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
 </main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
 const modes = [
   '',

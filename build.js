@@ -16,6 +16,7 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkHTML from 'remark-html';
 import remarkExcerpt from 'remark-excerpt';
+import remarkGFM from "remark-gfm";
 
 import Html from './src/Html.js';
 import Home from './src/Home.js';
@@ -34,10 +35,12 @@ async function parseFile (filename) {
   const raw = readFileSync(filename); // join('src', 'posts', filename));
   const { content, data } = matter(raw);
   const vf = await remark()
+    .use(remarkGFM)
     .use(remarkHTML, { sanitize: false })
     .process(content);
   const html = String(vf);
   const evf = await remark()
+    // .use(remarkGFM)
     .use(remarkExcerpt)
     .use(remarkHTML, { sanitize: false })
     .process(content);

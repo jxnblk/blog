@@ -169,7 +169,7 @@ module.exports = Index
 <p>Run the start script to start a development server.</p>
 <pre><code class="language-bash">npm start
 </code></pre>
-<p>Open <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> in a browser.
+<p>Open <a href="http://localhost:8080" target="_blank"><a href="http://localhost:8080">http://localhost:8080</a></a> in a browser.
 You should see an unstyled page with the words <em>Index component</em>.</p>
 <h2>Adding Pages</h2>
 <p>Next, add a new route for an <em>about</em> page.
@@ -219,7 +219,7 @@ var About = React.createClass({
 module.exports = About
 </code></pre>
 <p>Stop and restart the development server and navigate to
-<a href="http://localhost:8080/about" target="_blank">http://localhost:8080/about</a>.
+<a href="http://localhost:8080/about" target="_blank"><a href="http://localhost:8080/about">http://localhost:8080/about</a></a>.
 You should see a page similar to the index but with the words <em>About component</em>.</p>
 <p>React-router can also handle route params such as <code>posts/:id</code> for dynamic routing –
 <a href="http://rackt.github.io/react-router/" target="_blank">View the docs</a> to learn more.</p>
@@ -480,8 +480,8 @@ if you'd like to learn more.</p>
 This could make handling lots of pages easier.</p>
 <p>If you’re hosting the static site on gh-pages, you’ll need a way to handle the base url when using React Router’s Link component.
 I don’t know of a good way to do this yet and would love to hear suggestions on how to improve that.</p>
-<p>~~Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag,
-and I’m not sure if there’s a better way to handle that.~~</p>
+<p><del>Handling the CSS as shown above can lead to a fairly large chunk of JSON being inserted into the initial-props script tag,
+and I’m not sure if there’s a better way to handle that.</del></p>
 <p>This is just one way to build static sites with React.
 If you’ve seen other ways or have any suggestions for improving on this, I’d love to hear them.</p>
 </main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
