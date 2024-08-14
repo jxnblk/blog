@@ -4,7 +4,9 @@ date: 2020-02-18
 excerpt: A constraint-based system for organizing styles in UI design
 ---
 
+<!--
 import Graph from '../../components/graph'
+-->
 
 
 Working on various websites and web apps for over a decade,
@@ -90,6 +92,8 @@ These nodes are inherently interconnected and help form the larger graph.
 
 A *theme* object is composed of multiple *scales*. These scales could include fonts, font sizes, colors, and more.
 
+![Illustration of theme and scale nodes](https://blog.jxnblk.com/images/design-graph-1.webp)
+<!--
 <Graph
   title='Illustration of theme and scale nodes'
   nodes={[
@@ -104,11 +108,15 @@ A *theme* object is composed of multiple *scales*. These scales could include fo
     [0, 3],
   ]}
 />
+-->
 
 ## Scales to Components
 
 A *component's* styles use *scales*.
 
+![Illustration of scale and component nodes](https://blog.jxnblk.com/images/design-graph-2.webp)
+
+<!--
 <Graph
   title='Illustration of scale and component nodes'
   nodes={[
@@ -123,12 +131,16 @@ A *component's* styles use *scales*.
     [0, 3],
   ]}
 />
+-->
 
 ## Scales to Variants
 
 *Variants* also use *scales*.
 Variants are usually the parts of a component's styles that might change contextually or dynamically.
 
+![Illustration of scale and variant nodes](https://blog.jxnblk.com/images/design-graph-3.webp)
+
+<!--
 <Graph
   title='Illustration of scale and variant nodes'
   nodes={[
@@ -147,6 +159,7 @@ Variants are usually the parts of a component's styles that might change context
     [1, 4],
   ]}
 />
+-->
 
 
 ## Component to Variants
@@ -154,6 +167,9 @@ Variants are usually the parts of a component's styles that might change context
 A *component* can use multiple *variants*. Some variants can also be shared across multiple components.
 For example, you could share accessible color combinations with a badge component and an alert or message component.
 
+![Illustration of component and variant nodes](https://blog.jxnblk.com/images/design-graph-4.webp)
+
+<!--
 <Graph
   title='Illustration of component and variant nodes'
   nodes={[
@@ -166,6 +182,7 @@ For example, you could share accessible color combinations with a badge componen
     [0, 2],
   ]}
 />
+-->
 
 ## Putting it all together
 
