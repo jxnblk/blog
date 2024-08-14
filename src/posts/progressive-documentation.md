@@ -33,11 +33,11 @@ but they tend to use proprietary APIs and don't scale well, still requiring sepa
 
 <video
   src='https://s3.amazonaws.com/jxnblk/mdx-go-24.mp4'
-  playsInline
-  autoPlay
+  playsinline
+  autoplay
   loop
   muted
-  style={{ maxWidth: '100%' }}
+  style="max-width:100%"
 />
 
 [mdx-go][] is a development tool for **progressive documentation**
