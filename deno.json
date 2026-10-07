@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "build": "deno run -RWE build.js",
+    "start": "deno run -RWE --watch=src/ build.js",
+    "serve": "deno run -RN jsx:@std/http/file-server"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
