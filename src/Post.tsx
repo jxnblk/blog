@@ -1,3 +1,4 @@
+import HTML from "./HTML";
 import Header from './Header';
 import Footer from './Footer';
 import { pad } from './Blog';
@@ -5,8 +6,14 @@ import { pad } from './Blog';
 import type { PostData } from "./types";
 
 export default function Post (props: PostData & {}) {
+  console.log(`POST ${props.data.title}`);
+  if (!props.data.date) {
+    console.error("NO DATE FOR POST " + JSON.stringify(props.data, null, 2));
+    return null;
+  }
+
   return (
-    <>
+    <HTML {...props}>
       <Header />
       <div className='container mb4'>
         {props.data.draft && (
@@ -46,7 +53,7 @@ export default function Post (props: PostData & {}) {
         {/* <Promo /> */}
       </div>
       <Footer />
-    </>
+    </HTML>
   );
 };
 

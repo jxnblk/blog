@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Nav from './Nav.js';
 import ColorModeButton from './ColorModeButton.js';
 

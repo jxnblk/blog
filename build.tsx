@@ -19,7 +19,7 @@ import rehypeReact from "rehype-react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import HTML from "./src/HTML";
+// import HTML from "./src/HTML";
 import Post from "./src/Post";
 
 import type { Page, PostData, Metadata } from "./src/types";
@@ -68,19 +68,10 @@ async function readPosts (): Promise<PostData[]> {
   return posts;
 }
 
-function PostPage ({ post }: {
-  post: PostData,
-}) {
-  return (
-    <HTML {...post}>
-      {post.tree}
-    </HTML>
-  );
-}
-
 function createPostPage (post: PostData): Page {
-  const el = <PostPage post={post} />;
+  const el = <Post {...post} />;
   const html = renderToStaticMarkup(el);
+  console.log("HTML", html.length);
   return {
     path: post.path,
     html,

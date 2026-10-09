@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export default function Nav () {
   return (
     <nav className='flex flex-wrap caps h5'>
