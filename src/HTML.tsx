@@ -1,15 +1,17 @@
-// import * as React from 'react';
 import Head from './Head';
-import type { PostData } from "./types";
+import type { Metadata } from "./types";
 
-export default function HTML (props: PostData & {
+export default function HTML (props: {
+  data?: Partial<Metadata>;
+  path: string;
+  children: React.ReactNode;
   // TODO
 }) {
   return (
     <html lang="en-us">
-      <Head {...props} />
+      <Head {...props.data} path={props.path} />
       <body>
-        {props.tree}
+        {props.children}
       </body>
     </html>
   );

@@ -20,6 +20,9 @@ import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import Post from "./src/Post";
+import Home from "./src/Home";
+import Blog from "./src/Blog";
+import NotFound from "./src/404";
 
 import type { Page, PostData, Metadata } from "./src/types";
 
@@ -80,17 +83,20 @@ function createPostPage (post: PostData): Page {
 
 async function getPages (posts: PostData[]): Promise<Page[]> {
   const pages = posts.map(createPostPage);
+  const home = <Home posts={posts} />
   pages.push({
     path: "",
-    html: "<html>TODO</html>",
+    html: renderToStaticMarkup(home),
   });
+  const blog = <Blog posts={posts} />;
   pages.push({
     path: "blog",
-    html: "<html>TODO</html>",
+    html: renderToStaticMarkup(blog),
   });
+  const notfound = <NotFound />;
   pages.push({
     path: "404",
-    html: "<html>TODO</html>",
+    html: renderToStaticMarkup(notfound),
   });
   return pages;
 }

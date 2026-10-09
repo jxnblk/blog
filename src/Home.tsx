@@ -1,11 +1,14 @@
-import * as React from 'react';
-import Header from './Header.js';
-import Footer from './Footer.js';
-import Devlog from './Devlog.js';
+import HTML from "./HTML";
+import Header from './Header';
+import Footer from './Footer';
+import Devlog from './Devlog';
+import type { PostData } from "./types";
 
-export default function Home (props) {
+export default function Home (props: {
+  posts: PostData[];
+}) {
   return (
-    <>
+    <HTML path="">
       <Header home />
       <Novantica />
       <Devlog {...props} />
@@ -13,7 +16,7 @@ export default function Home (props) {
       <PastProjects />
       <Laser />
       <Footer />
-    </>
+    </HTML>
   );
 };
 

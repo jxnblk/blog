@@ -1,16 +1,18 @@
-import * as React from 'react';
 import { BlogPostCard } from './Blog.js';
+import type { PostData } from "./types";
 
-export default function Devlog (props) {
-  const posts = props.posts?.filter(p => p.tags?.includes('devlog'))
-    .filter(p => !p.draft);
+export default function Devlog (props: {
+  posts: PostData[];
+}) {
+  const posts = props.posts?.filter(p => p.data.tags?.includes('devlog'))
+    .filter(p => !p.data.draft);
 
   return (
     <section id='devlog' className='container mb4'>
       <div className='flex mb2'>
         <div className='flex-grow flex p2 mr2 rev angr angr-up'>
           <h2 className='h4 caps'>
-            <span aria-hidden>>$ </span>
+            <span aria-hidden>{">$"} </span>
             Devlog
           </h2>
         </div>

@@ -1,3 +1,4 @@
+import HTML from "./HTML";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -13,7 +14,13 @@ export default function Blog (props: {
   }).filter(p => !p.data.draft);
 
   return (
-    <>
+    <HTML
+      path="blog"
+      data={{
+        title: "Blog",
+        // title: "Blog",
+      }}
+    >
       <Header />
       <div className='container mb4'>
         <h1 className='caps h1 mb2'>
@@ -31,7 +38,7 @@ export default function Blog (props: {
         </ul>
       </div>
       <Footer />
-    </>
+    </HTML>
   );
 };
 

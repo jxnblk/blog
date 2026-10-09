@@ -12,7 +12,7 @@ export default function Post (props: PostData & {}) {
   }
 
   return (
-    <HTML {...props}>
+    <HTML path={props.path} data={props.data}>
       <Header />
       <div className='container mb4'>
         {props.data.draft && (
