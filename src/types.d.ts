@@ -16,7 +16,7 @@ export type Metadata = {
   title: string;
   date: Date; // |string;
   draft?: boolean;
-  devlog?: boolean;
+  devlog?: number;
   tags?: string[];
 };
 
@@ -28,4 +28,6 @@ export type PostData = {
   content: string;
   data: Metadata; // Record<string, string>;
   tree: React.ReactElement;
+  // TODO
+  excerpt?: string;
 };

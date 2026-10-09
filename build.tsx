@@ -19,10 +19,11 @@ import rehypeReact from "rehype-react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
-// import HTML from "./src/HTML";
 import Post from "./src/Post";
 
 import type { Page, PostData, Metadata } from "./src/types";
+
+const BASE_URL = "https://jxnblk.com";
 
 function parseFile (filename: string) {
   const slug = basename(filename, ".md");
@@ -71,15 +72,13 @@ async function readPosts (): Promise<PostData[]> {
 function createPostPage (post: PostData): Page {
   const el = <Post {...post} />;
   const html = renderToStaticMarkup(el);
-  console.log("HTML", html.length);
   return {
     path: post.path,
     html,
   };
 }
 
-async function getPages (): Promise<Page[]> {
-  const posts = await readPosts();
+async function getPages (posts: PostData[]): Promise<Page[]> {
   const pages = posts.map(createPostPage);
   pages.push({
     path: "",
@@ -106,12 +105,28 @@ async function generateHTML (pages: Page[]) {
   console.log(`Generated ${pages.length} pages`);
 }
 
+function postToJSON (post: PostData) {
+  return {
+    path: post.path,
+    slug: post.slug,
+    url: BASE_URL + post.path,
+    content: post.content,
+    data: post.data,
+  };
+}
+
+async function generateJSON (posts: PostData[]) {
+  const indexJSON = JSON.stringify(posts.map(postToJSON));
+  await writeFile("api/index.json", indexJSON);
+}
+
 async function build () {
   // ?? clear existing HTML or just manual delete if needed?
-  const pages = await getPages();
+  const posts = await readPosts();
+  const pages = await getPages(posts);
   await Promise.all([
     generateHTML(pages),
-    // generateJSON(pages),
+    generateJSON(posts),
     // generateMD(pages),
   ]);
   console.log(`Build ${pages.length} pages`);

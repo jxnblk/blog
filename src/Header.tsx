@@ -1,7 +1,9 @@
-import Nav from './Nav.js';
+import Nav from './Nav';
 import ColorModeButton from './ColorModeButton.js';
 
-export default function Header (props) {
+export default function Header (props: {
+  home?: boolean;
+}) {
   return (
     <header className='container mb3'>
       <div className='flex mt2'>

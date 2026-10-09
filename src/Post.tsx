@@ -6,7 +6,6 @@ import { pad } from './Blog';
 import type { PostData } from "./types";
 
 export default function Post (props: PostData & {}) {
-  console.log(`POST ${props.data.title}`);
   if (!props.data.date) {
     console.error("NO DATE FOR POST " + JSON.stringify(props.data, null, 2));
     return null;

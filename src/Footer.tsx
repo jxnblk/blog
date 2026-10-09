@@ -1,4 +1,4 @@
-import Nav from './Nav.js';
+import Nav from './Nav';
 
 export default function Footer () {
   return (

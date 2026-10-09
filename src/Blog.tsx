@@ -1,13 +1,16 @@
-import * as React from 'react';
-import Header from './Header.js';
-import Footer from './Footer.js';
+import Header from "./Header";
+import Footer from "./Footer";
 
-export default function Blog (props) {
+import type { PostData } from "./types";
+
+export default function Blog (props: {
+  posts: PostData[];
+}) {
   const posts = props.posts?.sort((a, b) => {
-    if (a.date < b.date) return 1;
-    else if (a.date > b.date) return -1;
+    if (a.data.date < b.data.date) return 1;
+    else if (a.data.date > b.data.date) return -1;
     else return 0;
-  }).filter(p => !p.draft);
+  }).filter(p => !p.data.draft);
 
   return (
     <>
@@ -32,25 +35,25 @@ export default function Blog (props) {
   );
 };
 
-export function BlogPostCard (props) {
+export function BlogPostCard (props: PostData) {
   return (
     <>
       <h2 className='caps h2'>
         <a href={'/' + props.path}>
-          {props.devlog && (
+          {props.data.devlog && (
             <div className='h6'>
-              Devlog {pad(props.devlog)}
+              Devlog {pad(props.data.devlog)}
               <br />
             </div>
           )}
-          {props.title}
+          {props.data.title}
         </a>
       </h2>
       <div className='flex flex-wrap'>
         <div className='h6 mr2'>
-          {props.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
+          {props.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
         </div>
-        {props.tags?.map(tag => (
+        {props.data.tags?.map(tag => (
           <div
             key={tag}
             className='h6 lh1 caps mr1 rev pad'>
@@ -69,7 +72,7 @@ export function BlogPostCard (props) {
           <a
             href={'/' + props.path}
             className='caps h6 pad rev'>
-            Read more <span aria-hidden>>></span>
+            Read more <span aria-hidden>{">>"}</span>
           </a>
         </>
       )}
@@ -77,4 +80,4 @@ export function BlogPostCard (props) {
   );
 };
 
-export const pad = n => ('00' + n).slice(-2);
+export const pad = (n: number) => ('00' + n).slice(-2);
