@@ -1,11 +1,24 @@
 {
   "tasks": {
-    "build": "deno run -RWE build.js",
-    "start": "deno run -RWE --watch=src/ build.js",
+    "build": "deno run -RWE build.tsx",
+    "start": "deno run -RWE --watch=src/ build.tsx",
     "serve": "deno run -RN jsx:@std/http/file-server"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react"
+  },
+  "imports": {
+    "@types/react": "npm:@types/react@^19.3.0",
+    "gray-matter": "npm:gray-matter@^4.0.3",
+    "react": "npm:react@^19.3.0",
+    "react-dom": "npm:react-dom@^19.3.0",
+    "rehype-raw": "npm:rehype-raw@^7.0.0",
+    "rehype-react": "npm:rehype-react@^8.0.0",
+    "remark-gfm": "npm:remark-gfm@^4.0.1",
+    "remark-parse": "npm:remark-parse@^11.0.0",
+    "remark-rehype": "npm:remark-rehype@^11.1.2",
+    "unified": "npm:unified@^11.0.5"
   }
 }
