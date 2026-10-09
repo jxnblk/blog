@@ -12,12 +12,20 @@ export type Page = {
   html: string;
 };
 
-export type Post = {
+export type Metadata = {
+  title: string;
+  date: Date; // |string;
+  draft?: boolean;
+  devlog?: boolean;
+  tags?: string[];
+};
+
+export type PostData = {
   filename: string;
   slug: string;
   path: string;
   raw: string;
   content: string;
-  data: Record<string, string>;
+  data: Metadata; // Record<string, string>;
   tree: React.ReactElement;
 };

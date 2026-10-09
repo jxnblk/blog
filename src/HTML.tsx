@@ -1,8 +1,8 @@
 // import * as React from 'react';
 import Head from './Head';
-import type { Post } from "./types";
+import type { PostData } from "./types";
 
-export default function HTML (props: Post & {
+export default function HTML (props: PostData & {
   // TODO
 }) {
   return (

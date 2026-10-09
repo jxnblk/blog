@@ -20,8 +20,9 @@ import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import HTML from "./src/HTML";
+import Post from "./src/Post";
 
-import type { Page, Post } from "./src/types";
+import type { Page, PostData, Metadata } from "./src/types";
 
 function parseFile (filename: string) {
   const slug = basename(filename, ".md");
@@ -34,11 +35,11 @@ function parseFile (filename: string) {
     path,
     raw: String(raw),
     content: fm.content,
-    data: fm.data,
+    data: fm.data as Metadata,
   };
 }
 
-async function parseMarkdown (post: Partial<Post>) {
+async function parseMarkdown (post: Partial<PostData>) {
   const proc = unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -50,10 +51,10 @@ async function parseMarkdown (post: Partial<Post>) {
   return {
     ...post,
     tree: tree.result,
-  } as Post;
+  } as PostData;
 }
 
-async function readPosts (): Promise<Post[]> {
+async function readPosts (): Promise<PostData[]> {
   const filenames = readdirSync("src/posts")
     .filter(f => extname(f) === ".md")
     .map(f => join("src", "posts", f));
@@ -68,7 +69,7 @@ async function readPosts (): Promise<Post[]> {
 }
 
 function PostPage ({ post }: {
-  post: Post,
+  post: PostData,
 }) {
   return (
     <HTML {...post}>
@@ -77,7 +78,7 @@ function PostPage ({ post }: {
   );
 }
 
-function createPostPage (post: Post): Page {
+function createPostPage (post: PostData): Page {
   const el = <PostPage post={post} />;
   const html = renderToStaticMarkup(el);
   return {

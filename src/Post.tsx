@@ -1,22 +1,23 @@
-import * as React from 'react';
-import Header from './Header.js';
-import Footer from './Footer.js';
-import { pad } from './Blog.js';
+import Header from './Header';
+import Footer from './Footer';
+import { pad } from './Blog';
 
-export default function Post (props) {
+import type { PostData } from "./types";
+
+export default function Post (props: PostData & {}) {
   return (
     <>
       <Header />
       <div className='container mb4'>
-        {props.draft && (
+        {props.data.draft && (
           <div className='p1 caps rev angr mr4'>
             Draft
           </div>
         )}
         <div className='inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm'>
-          {props.devlog ? (
+          {props.data.devlog ? (
             <>
-              Devlog {pad(props.devlog)}
+              Devlog {pad(props.data.devlog)}
             </>
           ) : (
             <>
@@ -25,13 +26,13 @@ export default function Post (props) {
           )}
         </div>
         <h1 className='h2 caps mb3'>
-          {props.title}
+          {props.data.title}
         </h1>
         <div className='flex flex-wrap mb2'>
           <div className='caps h6 mr1'>
-            {props.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
+            {props.data.date.toLocaleDateString('en-US', { timeZone: 'UTC' })}
           </div>
-          {props.tags?.map(tag => (
+          {props.data.tags?.map(tag => (
             <div
               key={tag}
               className='caps h6 lh1 rev pad mr1'>
@@ -39,19 +40,17 @@ export default function Post (props) {
             </div>
           ))}
         </div>
-        <main
-          className='prose mb3'
-          dangerouslySetInnerHTML={{
-            __html: props.html,
-          }}
-        />
-        <Promo />
+        <main className="prose mb3">
+          {props.tree}
+        </main>
+        {/* <Promo /> */}
       </div>
       <Footer />
     </>
   );
 };
 
+/*
 function Promo () {
   return (
     <div className=''>
@@ -77,3 +76,4 @@ function Promo () {
     </div>
   );
 };
+*/
