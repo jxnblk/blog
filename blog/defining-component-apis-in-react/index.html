@@ -1,9 +1,416 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Defining Component APIs in React</title><meta name="description" content="Over the years, I’ve noticed patterns in how I tend to approach component APIs and building out applications and libraries. The following is a collection of thoughts, opinions, and advice for defining component APIs that are meant to be more flexible, composable, and easier to understand. None of these are hard-and-fast rules, but they’ve helped guide the way I think about organizing and creating components."/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/defining-component-apis-in-react"/><meta property="og:title" content="Defining Component APIs in React"/><meta property="og:description" content="Over the years, I’ve noticed patterns in how I tend to approach component APIs and building out applications and libraries. The following is a collection of thoughts, opinions, and advice for defining component APIs that are meant to be more flexible, composable, and easier to understand. None of these are hard-and-fast rules, but they’ve helped guide the way I think about organizing and creating components."/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Defining Component APIs in React</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">7/8/2018</div></div><main class="prose mb3"><p>Over the years, I’ve noticed patterns in how I tend to approach component APIs and building out applications and libraries.
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/defining-component-apis-in-react"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>Over the years, I’ve noticed patterns in how I tend to approach component APIs and building out applications and libraries.
 The following is a collection of thoughts, opinions, and advice for defining component APIs that are meant to be more flexible, composable, and easier to understand.
 None of these are hard-and-fast rules, but they’ve helped guide the way I think about organizing and creating components.</p>
 <h2>Aim for a small API surface area</h2>
@@ -31,47 +438,47 @@ so by splitting these out into their own components, you can help React do its j
 <pre><code class="language-jsx">// Instead of this
 class Items extends React.Component {
   renderItems ({ items }) {
-    return items.map(item => (
-      &#x3C;li key={item.id}>
+    return items.map(item =&gt; (
+      &lt;li key={item.id}&gt;
         {renderItem(item)}
-      &#x3C;/li>
+      &lt;/li&gt;
     ))
   }
 
   renderItem (item) {
     return (
-      &#x3C;div>
+      &lt;div&gt;
         {item.name}
-      &#x3C;/div>
+      &lt;/div&gt;
     )
   }
 
   render () {
     return (
-      &#x3C;ul>
+      &lt;ul&gt;
         {renderItems(this.props)
-      &#x3C;/ul>
+      &lt;/ul&gt;
     )
   }
 }
 </code></pre>
 <pre><code class="language-jsx">// Do this
-const ItemList = ({ items }) =>
-  &#x3C;ul>
-    {items.map(item => (
-      &#x3C;li key={item.id}>
-        &#x3C;Item {...item} />
-      &#x3C;/li>
+const ItemList = ({ items }) =&gt;
+  &lt;ul&gt;
+    {items.map(item =&gt; (
+      &lt;li key={item.id}&gt;
+        &lt;Item {...item} /&gt;
+      &lt;/li&gt;
     )}
-  &#x3C;/ul>
+  &lt;/ul&gt;
 
-const Item = ({ name }) =>
-  &#x3C;div>{item.name}&#x3C;/div>
+const Item = ({ name }) =&gt;
+  &lt;div&gt;{item.name}&lt;/div&gt;
 
 class Items extends React.Component {
   render () {
     const { items } = this.props
-    return &#x3C;ItemList items={items} />
+    return &lt;ItemList items={items} /&gt;
   }
 }
 </code></pre>
@@ -83,27 +490,27 @@ class Items extends React.Component {
 <blockquote>
 <p>– <a href="https://facebook.github.io/react/docs/thinking-in-react.html">Thinking in React</a></p>
 </blockquote>
-<p>I often see people new to React attempt to replicate what I call "<a href="https://getbootstrap.com">Bootstrap</a>" components,
+<p>I often see people new to React attempt to replicate what I call &quot;<a href="https://getbootstrap.com">Bootstrap</a>&quot; components,
 that is UI components that have a visual boundary that’s not directly tied to any data structure.
 React and BEM-like CSS-based components have different concerns.
 Instead of creating a generic Card component that displays an image, heading, and link,
 and that would require a custom props API, build components for the data that you’re displaying.
 Maybe the generic Card component should be a ProductCard component that can accept the <code>product</code> object from your database.</p>
 <pre><code class="language-jsx">// Instead of this
-&#x3C;Card
+&lt;Card
   image={product.thumbnail}
   title={product.name}
   text={product.description}
   link={product.permalink}
-/>
+/&gt;
 
 // Do this
-&#x3C;ProductCard {...product} />
+&lt;ProductCard {...product} /&gt;
 </code></pre>
 <p>Chances are, the specific styling that you need for the ProductCard isn’t all that reusable,
 and you’ll likely only have this defined in one place in your code base.
 You can follow the <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">Rule of Three</a> in situations like this.
-If you've duplicated the exact Card component structure three times in your code base,
+If you&#x27;ve duplicated the exact Card component structure three times in your code base,
 then it’s probably worth abstracting it out into its own component.</p>
 <h2>Avoid Apropcalypse</h2>
 <p>As <a href="https://twitter.com/gurlcode">Jenn Creighton</a> calls it, avoid <a href="https://speakerdeck.com/jenncreighton/flexible-architecture-for-react-components?slide=10">Apropcalypse</a>.
@@ -111,22 +518,22 @@ Don’t be afraid to create a new component rather than adding abritrary props a
 For example, a Button component might accept props for different colors, sizes, and shapes,
 but there’s not always a need to have every combination of those props available.</p>
 <pre><code class="language-jsx">// Instead of this
-&#x3C;Button
-  variant='secondary'
-  size='large'
+&lt;Button
+  variant=&#x27;secondary&#x27;
+  size=&#x27;large&#x27;
   outline
-  label='Buy Now'
-  icon='shoppingBag'
+  label=&#x27;Buy Now&#x27;
+  icon=&#x27;shoppingBag&#x27;
   onClick={handleClick}
-/>
+/&gt;
 
 // Do this
-&#x3C;SecondaryButton
-  size='large'
-  onClick={handleClick}>
-  &#x3C;Icon name='shoppingBag' />
+&lt;SecondaryButton
+  size=&#x27;large&#x27;
+  onClick={handleClick}&gt;
+  &lt;Icon name=&#x27;shoppingBag&#x27; /&gt;
   Buy Now
-&#x3C;/SecondaryButton>
+&lt;/SecondaryButton&gt;
 </code></pre>
 <p>Your needs may vary, but reducing the number of custom props that any component requires is generally helpful,
 and reducing the amount of logic in the render function can make the code base simpler and better-suited for code splitting.</p>
@@ -135,18 +542,18 @@ and reducing the amount of logic in the render function can make the code base s
 If you’ve defined props that take arbitrary strings of text that aren’t based on a data structure,
 it’s probably better to use composition.</p>
 <pre><code class="language-jsx">// Instead of this
-&#x3C;Header
-  title='Hello'
-  subhead='This is a header'
-  text='And it has arbitrary props'
-/>
+&lt;Header
+  title=&#x27;Hello&#x27;
+  subhead=&#x27;This is a header&#x27;
+  text=&#x27;And it has arbitrary props&#x27;
+/&gt;
 
 // Do this
-&#x3C;Header>
-  &#x3C;Heading>Hello&#x3C;/Heading>
-  &#x3C;Subhead>This is a header&#x3C;/Subhead>
-  &#x3C;Text>And it uses composition&#x3C;/Text>
-&#x3C;/Header>
+&lt;Header&gt;
+  &lt;Heading&gt;Hello&lt;/Heading&gt;
+  &lt;Subhead&gt;This is a header&lt;/Subhead&gt;
+  &lt;Text&gt;And it uses composition&lt;/Text&gt;
+&lt;/Header&gt;
 </code></pre>
 <p>If you know React, you’ll already know the API for the composed version, and it shouldn’t require as much documentation as the former.
 You might wrap the composed version into another component that <strong>is</strong> tied to a piece of data in your application,
@@ -155,81 +562,55 @@ but you’ll probably only need that component structure defined once in your co
 const PageHeader = ({
   title,
   description
-}) =>
-  &#x3C;Header>
-    &#x3C;Heading>{title}&#x3C;/Heading>
-    &#x3C;Text>{description}&#x3C;/Text>
-  &#x3C;/Header>
+}) =&gt;
+  &lt;Header&gt;
+    &lt;Heading&gt;{title}&lt;/Heading&gt;
+    &lt;Text&gt;{description}&lt;/Text&gt;
+  &lt;/Header&gt;
 
 // And ideally can be used like this
-&#x3C;PageHeader {...page} />
+&lt;PageHeader {...page} /&gt;
 </code></pre>
 <h2>Avoid boolean props for enums</h2>
 <p>It might be tempting to use <a href="https://mobile.twitter.com/satya164/status/1015206655997472768">boolean props</a> as a convenient way to switch between variants of a component,
 but it can sometimes create a confusing API.</p>
 <p>Take the following example:</p>
-<pre><code class="language-jsx">&#x3C;Button primary />
-&#x3C;Button secondary />
+<pre><code class="language-jsx">&lt;Button primary /&gt;
+&lt;Button secondary /&gt;
 </code></pre>
 <p>What happens in the following case?</p>
-<pre><code class="language-jsx">&#x3C;Button primary secondary />
+<pre><code class="language-jsx">&lt;Button primary secondary /&gt;
 </code></pre>
 <p>It’s impossible to know without diving into the code base or documentation.
 Instead, try the following:</p>
-<pre><code class="language-jsx">&#x3C;Button variant='primary' />
+<pre><code class="language-jsx">&lt;Button variant=&#x27;primary&#x27; /&gt;
 </code></pre>
 <p>It’s a little more typing but arguably much more readable.</p>
 <h2>Keep props APIs parallel</h2>
-<p>Whenever possible, resuse props from other components. For example, if you’re creating a date picker, use the same props that the native <code>&#x3C;input type='date' /></code> expects.
+<p>Whenever possible, resuse props from other components. For example, if you’re creating a date picker, use the same props that the native <code>&lt;input type=&#x27;date&#x27; /&gt;</code> expects.
 It’ll be easier to guess how it works and also easier to remember.</p>
 <pre><code class="language-jsx">// Instead of this
-&#x3C;DatePicker
+&lt;DatePicker
   date={date}
   onSelect={handleDateChange}
-/>
+/&gt;
 
 // Do this
-&#x3C;DatePicker
+&lt;DatePicker
   value={date}
   onChange={handleDateChange}
-/>
+/&gt;
 </code></pre>
 <p>The <a href="https://jxnblk.com/styled-system">Styled System</a> library encourages using a parallel style props API across multiple components.
 For example, the <code>color</code> prop works the same for all components included in <a href="https://jxnblk.com/rebass">Rebass</a>,
 which ends up having a sort of <strong>learn once, use anywhere</strong> effect.</p>
 <pre><code class="language-jsx">// example from Rebass
-&#x3C;Box color='tomato' />
-&#x3C;Heading color='tomato' />
+&lt;Box color=&#x27;tomato&#x27; /&gt;
+&lt;Heading color=&#x27;tomato&#x27; /&gt;
 </code></pre>
 <h2>Ask your teammates</h2>
 <p>These are just some of my own thoughts on how to define component APIs, and they might not suit your needs.
 The best advice I can give is to talk to your teammates, create RFCs and PRs,
 and try <a href="https://ponyfoo.com/articles/readme-driven-development">Readme Driven Development</a>.
 Writing React components is easy.
-Creating a library of components that works well for your team is worth the time and effort to get right.</p>
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+Creating a library of components that works well for your team is worth the time and effort to get right.</p></body></html>

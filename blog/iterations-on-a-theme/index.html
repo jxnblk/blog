@@ -1,84 +1,484 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Iterations on a Theme</title><meta name="description" content="A look at common threads across over 500 GitHub repos"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/iterations-on-a-theme"/><meta property="og:title" content="Iterations on a Theme"/><meta property="og:description" content="A look at common threads across over 500 GitHub repos"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Iterations on a Theme</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">4/6/2019</div></div><main class="prose mb3"><p>As my personal GitHub account rolls over 500 repos (apparently a few of them are private), it felt like a good time to reflect on how I approach using GitHub personally.
-You might say, <em>"500! Whoa, buddy, that's way too many repos!"</em> Believe me, it is.
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/iterations-on-a-theme"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>As my personal GitHub account rolls over 500 repos (apparently a few of them are private), it felt like a good time to reflect on how I approach using GitHub personally.
+You might say, <em>&quot;500! Whoa, buddy, that&#x27;s way too many repos!&quot;</em> Believe me, it is.
 There are other people who do a much better job at staying organized than I do.
-But most of my repos aren't fully-baked open source projects.
+But most of my repos aren&#x27;t fully-baked open source projects.
 I see a lot of them as small experiments, my attempt to <em><a href="https://gist.github.com/sw-yx/9720bd4a30606ca3ffb8d407113c0fe5">learn in public</a></em>, or, for many of them, <strong>iterations on a theme</strong>.</p>
-<p>It might look like I'm cranking out new things left and right sometimes,
+<p>It might look like I&#x27;m cranking out new things left and right sometimes,
 but often I get the itch to rework an old idea,
 as a complete rewrite, with no baggage attached.
-There's certainly something to be said about starting with a blank slate.
+There&#x27;s certainly something to be said about starting with a blank slate.
 I need to do a better job of managing expectations,
-since a lot of these aren't intended to be hard dependencies in an application,
+since a lot of these aren&#x27;t intended to be hard dependencies in an application,
 but serve as good starting points for forking or suggestions for features in upstream libraries.</p>
-<p>For example, <a href="https://rebassjs.org">Rebass</a> (didn't invent but) included a <a href="https://github.com/jxnblk/axs/commit/b54d8527e6e19ec1177cb8894af9870a84a16962"><code>css</code> prop</a> until <a href="https://styled-components.com">styled-components</a> included one as well <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref aria-describedby="footnote-label">1</a></sup>.
+<p>For example, <a href="https://rebassjs.org">Rebass</a> (didn&#x27;t invent but) included a <a href="https://github.com/jxnblk/axs/commit/b54d8527e6e19ec1177cb8894af9870a84a16962"><code>css</code> prop</a> until <a href="https://styled-components.com">styled-components</a> included one as well <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup>.
 It also had an <a href="https://github.com/rebassjs/rebass/commit/3201fd119313214c0a16b167b81e4ae9a71c2e98"><code>is</code> prop</a>, until it was adopted and renamed <code>as</code>.
 The idea with these features was never to own these concepts forever,
 but to serve as a testing bed in userland and prove out APIs that might make sense in upstream libraries,
-many of which weren't mature enough for a formal PR.
+many of which weren&#x27;t mature enough for a formal PR.
 Some repos and ideas fall on the other side of the fence, not being all that great, and I think were better left as experiments.</p>
-<p>In looking back on some of these repos, I started thinking about how they've evolved over time and noticed a few overarching themes.</p>
-<h2>Static Site Generators &#x26; Zero-Config</h2>
+<p>In looking back on some of these repos, I started thinking about how they&#x27;ve evolved over time and noticed a few overarching themes.</p>
+<h2>Static Site Generators &amp; Zero-Config</h2>
 <p>Ever since learning about <a href="https://github.com/jekyll/jekyll">Jekyll</a> years ago,
-I've been fascinated with the idea of generating simple static sites with modern tooling.
+I&#x27;ve been fascinated with the idea of generating simple static sites with modern tooling.
 What started as a <a href="https://jxnblk.com/blog/static-site-generation-with-react-and-webpack">blog post</a> about static site generation in 2015, became a <a href="https://jxnblk.com/blog/zero-configuration-react-static-site-generator/">zero-config CLI</a> in 2016 (appropriately named <a href="https://github.com/jxnblk/static-react">static-react</a>).
 I took the same zero-config philosophy and applied it to webpack with a CLI named <a href="https://github.com/jxnblk/hotdamn">hotdamn</a> (it even supported markdown for content).
-I was also really interested in the idea of how to make React more accessible to people who weren't JavaScript developers and made <a href="https://github.com/jxnblk/ejsx">Ejsx</a>.
+I was also really interested in the idea of how to make React more accessible to people who weren&#x27;t JavaScript developers and made <a href="https://github.com/jxnblk/ejsx">Ejsx</a>.
 In 2017, working with a few others, some of these ideas became <a href="https://github.com/c8r/x0">x0</a> and a little later <a href="https://github.com/jxnblk/mdx-go">mdx-go</a>.
-I'll also admit that I have several private repos that generate static HTML through some means or another.
+I&#x27;ll also admit that I have several private repos that generate static HTML through some means or another.
 I might be a little obsessed with this idea.</p>
-<!--
-How to I loop this in without clumping it in?
-
-I might be a little obsessed with the idea of making performant websites and making that easier,
-but I guess it's only appropriate that I've ended up at a place like [Gatsby][].
-(which, by the way, is *so* much more than a static site generator)
--->
 <h2>Avoiding Learning Tools</h2>
-<p>Another related theme I've pick up on, is my reluctance to use existing tools for the job at hand.
+<p>Another related theme I&#x27;ve pick up on, is my reluctance to use existing tools for the job at hand.
 Instead of firing up Adobe Illustrator to create yet another Twitter card image or favicon,
 I made <a href="https://github.com/jxnblk/repng">Repng</a> so that I could create images with React components.
-I put together <a href="https://github.com/c8r/pixo">Pixo</a> so that I could avoid manually converting SVG icons into React<sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref aria-describedby="footnote-label">2</a></sup>.
+I put together <a href="https://github.com/c8r/pixo">Pixo</a> so that I could avoid manually converting SVG icons into React<sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref="" aria-describedby="footnote-label">2</a></sup>.
 Even <a href="https://colorable.jxnblk.com">Colorable</a>, <a href="https://palx.jxnblk.com">Palx</a>, and <a href="https://monochrome.jxnblk.com">Monochrome</a> are partly motivated by not wanting to fire up a graphics application.</p>
 <p>A couple years ago, I put together a last-minute <a href="https://github.com/jxnblk/react-design-tooling">presentation for a meetup</a>, and like any good JavaScript developer,
 instead of reaching for Google Slides, I rolled my own React app.
 The next time someone twisted my arm to speak in front of other people,
 I abstracted that out into a component library called <a href="https://github.com/jxnblk/redeck">Redeck</a>.
 A little later, after <a href="https://github.com/johno">John Otander</a> et al. had released <a href="https://mdxjs.com">MDX</a>, I took that slideshow presentation library and turned it into <a href="https://github.com/jxnblk/mdx-deck">MDX Deck</a>.</p>
-<h2>Styling &#x26; Cheap UI</h2>
+<h2>Styling &amp; Cheap UI</h2>
 <p>A fair chunk of my professional work has been around creating UI.
-If you do that long enough, you realize there's a <em>ton</em> of ways to lower the amount of effort that requires.
+If you do that long enough, you realize there&#x27;s a <em>ton</em> of ways to lower the amount of effort that requires.
 I use the term <strong>Cheap UI</strong> when I talk about this sort of thing,
 because I think ultimately the cost of what we do today will continue to approach zero in the future.
-In the world of A/B experimentation and constant iteration, making UI cheaper to produce, only makes sense<sup><a href="#user-content-fn-3" id="user-content-fnref-3" data-footnote-ref aria-describedby="footnote-label">3</a></sup>.</p>
-<p>In 2013, I released <a href="http://basscss.com">Basscss</a>, which was largely based on principles from <a href="https://mobile.twitter.com/stubbornella/">Nicole Sullivan's</a> <a href="https://github.com/stubbornella/oocss/wiki">OOCSS</a>,
-<a href="https://github.com/necolas">Nicolas Gallagher's</a> <a href="https://github.com/suitcss/suit">Suit CSS</a>, and a lot of discussions with <a href="https://github.com/mrmrs">Adam Morse</a>.
+In the world of A/B experimentation and constant iteration, making UI cheaper to produce, only makes sense<sup><a href="#user-content-fn-3" id="user-content-fnref-3" data-footnote-ref="" aria-describedby="footnote-label">3</a></sup>.</p>
+<p>In 2013, I released <a href="http://basscss.com">Basscss</a>, which was largely based on principles from <a href="https://mobile.twitter.com/stubbornella/">Nicole Sullivan&#x27;s</a> <a href="https://github.com/stubbornella/oocss/wiki">OOCSS</a>,
+<a href="https://github.com/necolas">Nicolas Gallagher&#x27;s</a> <a href="https://github.com/suitcss/suit">Suit CSS</a>, and a lot of discussions with <a href="https://github.com/mrmrs">Adam Morse</a>.
 It was my attempt to make building UI as quick and cheap as possible.
-That worked well for the time, and served as inspiration for other libraries, like Buzzfeed's <a href="https://solid.buzzfeed.com/">Solid</a>.
-As soon as I'd taken the time to learn React, I could tell it was the next big thing,
+That worked well for the time, and served as inspiration for other libraries, like Buzzfeed&#x27;s <a href="https://solid.buzzfeed.com/">Solid</a>.
+As soon as I&#x27;d taken the time to learn React, I could tell it was the next big thing,
 and I immediately tried to apply some of this same thinking in <a href="https://rebassjs.org">Rebass</a> and <a href="https://github.com/jxnblk/reflexbox">Reflexbox</a>.
 Rebass continued to evolve, eventually swapping out CSS for inline styles,
 which made sharing components via npm even simpler.</p>
 <p>As I continued working on Rebass, I tried out some of the cutting edge CSS-in-JS libraries of the time <a href="https://github.com/Khan/aphrodite">Aphrodite</a> and <a href="https://github.com/FormidableLabs/radium">Radium</a>.
-For reasons I can't quite remember, neither one seemed to fit quite what I wanted.
+For reasons I can&#x27;t quite remember, neither one seemed to fit quite what I wanted.
 So I started hacking on <a href="https://github.com/cxs-css/cxs">CXS</a> to try to find a simple, lightweight API for styling React components.
 A <em>ton</em> of other similar libraries sprung up around the same time, including <a href="https://github.com/threepointone/glamor">Glamor</a>,
-which looked considerably better than anything I would've done.
-Realizing that it'd only be a matter of time until my ideal CSS-in-JS solution existed,
+which looked considerably better than anything I would&#x27;ve done.
+Realizing that it&#x27;d only be a matter of time until my ideal CSS-in-JS solution existed,
 I continued to iterate on the higher-level component APIs that I wanted to have for building UI.
-Since Rebass had matured a bit, I didn't want to rock the boat too much for people who were using the library,
+Since Rebass had matured a bit, I didn&#x27;t want to rock the boat too much for people who were using the library,
 and I started another blank-slate project called <a href="https://github.com/jxnblk/axs">Axs</a>.
-Axs is probably one of my least popular libraries, but it's really where the inception of <a href="https://styled-system.com">Styled System</a> happened.</p>
+Axs is probably one of my least popular libraries, but it&#x27;s really where the inception of <a href="https://styled-system.com">Styled System</a> happened.</p>
 <p>The first version of Axs had a props API that looked a lot like Basscss.
 After writing responsive styles with props like <code>w={1} sw={1/2} mw={1/3} lw={1/4}</code> for a while
-(that's shorthand for <code>width</code>, <code>small-width</code>, <code>medium-width</code>, <code>large-width</code>),
+(that&#x27;s shorthand for <code>width</code>, <code>small-width</code>, <code>medium-width</code>, <code>large-width</code>),
 I realized they could be combined into a single prop as an array, making it <code>width={[ 1, 1/2, 1/3, 1/4 ]}</code>.
 This is JavaScript, after all.
-I loved this API, but wasn't sure if I'd gone too far down a rabbithole.
+I loved this API, but wasn&#x27;t sure if I&#x27;d gone too far down a rabbithole.
 I convinced some coworkers to try this approach out on some smaller projects (not the best thing to do, professionally),
 and surprisingly, they seemed to like the API as well.</p>
 <p>A little later, <a href="https://styled-components.com">Styled Components</a> was released,
@@ -87,13 +487,13 @@ After a little more tinkering and experimentation, I released <a href="https://s
 taking the props API from Axs and making it available for anyone to build their own version of Rebass.</p>
 <h2>Iteration</h2>
 <p>I like reflecting on these experiments because I think it goes to show how some ideas take time to form.
-As they say, <em>if at first you don't succeed, try, try again</em>.
+As they say, <em>if at first you don&#x27;t succeed, try, try again</em>.
 I may be a little too quick to throw the baby out with the bathwater sometimes,
-but I don't think some of the libraries that I'm most proud of would have ever existed if I hadn't continually
+but I don&#x27;t think some of the libraries that I&#x27;m most proud of would have ever existed if I hadn&#x27;t continually
 pushed myself to try things in new ways and get out of my comfort zone a little bit.</p>
-<p>Hopefully, this encourages you to try new things and not worry too much if your new repo doesn't make it to the front page of Hacker News.
-I know I'd love to see more experimentation and more ideas out there in this weird space we call open source.</p>
-<section data-footnotes class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<p>Hopefully, this encourages you to try new things and not worry too much if your new repo doesn&#x27;t make it to the front page of Hacker News.
+I know I&#x27;d love to see more experimentation and more ideas out there in this weird space we call open source.</p>
+<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
 <ol>
 <li id="user-content-fn-1">
 <p>I think the <code>css</code> prop originated in <a href="https://github.com/threepointone/glamor">Glamor</a>, but I could be wrong. <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
@@ -102,33 +502,7 @@ I know I'd love to see more experimentation and more ideas out there in this wei
 <p>There are better tools for SVGs now, see <a href="https://github.com/smooth-code/svgr">SVGR</a>. <a href="#user-content-fnref-2" data-footnote-backref="" aria-label="Back to reference 2" class="data-footnote-backref">↩</a></p>
 </li>
 <li id="user-content-fn-3">
-<p>I'm not talking about robots replacing designers here. The idea here is that the level at which people think about UI and design products becomes a lot higher than what we do today. Software has a tendency to trend towards higher-level abstractions. I don't plan on learning assembly language any time soon, and the things we do today will be viewed in a similar way in the future. <a href="#user-content-fnref-3" data-footnote-backref="" aria-label="Back to reference 3" class="data-footnote-backref">↩</a></p>
+<p>I&#x27;m not talking about robots replacing designers here. The idea here is that the level at which people think about UI and design products becomes a lot higher than what we do today. Software has a tendency to trend towards higher-level abstractions. I don&#x27;t plan on learning assembly language any time soon, and the things we do today will be viewed in a similar way in the future. <a href="#user-content-fnref-3" data-footnote-backref="" aria-label="Back to reference 3" class="data-footnote-backref">↩</a></p>
 </li>
 </ol>
-</section>
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+</section></body></html>

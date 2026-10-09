@@ -1,8 +1,8 @@
-// new deno build script
 import {
   readdirSync,
   readFileSync,
 } from "node:fs";
+import { mkdir, writeFile } from "node:fs/promises";
 import {
   join,
   extname,
@@ -19,20 +19,9 @@ import rehypeReact from "rehype-react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
-type Page = {
-  path: string;
-  html: string;
-};
+import HTML from "./src/HTML";
 
-type Post = {
-  filename: string;
-  slug: string;
-  path: string;
-  raw: string;
-  content: string;
-  data: Record<string, string>;
-  tree: React.ReactElement;
-};
+import type { Page, Post } from "./src/types";
 
 function parseFile (filename: string) {
   const slug = basename(filename, ".md");
@@ -82,9 +71,9 @@ function PostPage ({ post }: {
   post: Post,
 }) {
   return (
-    <div>
+    <HTML {...post}>
       {post.tree}
-    </div>
+    </HTML>
   );
 }
 
@@ -117,10 +106,12 @@ async function getPages (): Promise<Page[]> {
 
 async function generateHTML (pages: Page[]) {
   for (const page of pages) {
-    // if (page.path) ensureDirSync(page.path);
+    if (page.path) await mkdir(page.path, { recursive: true });
     let filename = join(page.path, "index.html");
     if (page.path === "404") filename = "404.html";
+    await writeFile(filename, page.html, "utf8");
   }
+  console.log(`Generated ${pages.length} pages`);
 }
 
 async function build () {

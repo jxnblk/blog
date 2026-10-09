@@ -1,68 +1,475 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Two Steps Forward, One Step Back</title><meta name="description" content="Building UI with design constraints from utlity CSS to CSS-in-JS"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/two-steps-forward"/><meta property="og:title" content="Two Steps Forward, One Step Back"/><meta property="og:description" content="Building UI with design constraints from utlity CSS to CSS-in-JS"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Two Steps Forward, One Step Back</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">3/6/2020</div></div><main class="prose mb3"><p>If you've ever seen code that looks like this, I'm sorry:</p>
-<pre><code class="language-html">&#x3C;div class="p3 bold white bg-blue">
-  I'm sorry
-&#x3C;/div>
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/two-steps-forward"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>If you&#x27;ve ever seen code that looks like this, I&#x27;m sorry:</p>
+<pre><code class="language-html">&lt;div class=&quot;p3 bold white bg-blue&quot;&gt;
+  I&#x27;m sorry
+&lt;/div&gt;
 </code></pre>
-<p>If you've ever seen code that looks like this, you're welcome:</p>
-<pre><code class="language-jsx">&#x3C;Box
+<p>If you&#x27;ve ever seen code that looks like this, you&#x27;re welcome:</p>
+<pre><code class="language-jsx">&lt;Box
   padding={3}
-  fontWeight='bold'
-  color='white'
-  bg='blue'>
+  fontWeight=&#x27;bold&#x27;
+  color=&#x27;white&#x27;
+  bg=&#x27;blue&#x27;&gt;
   Hello
-&#x3C;/Box>
+&lt;/Box&gt;
 </code></pre>
 <p>Back in 2013, <a href="https://twitter.com/mrmrs_">Adam Morse</a> and I were following along the incredible work that <a href="https://mobile.twitter.com/stubbornella/">Nicole Sullivan</a> and others like <a href="https://github.com/necolas">Nicolas Gallagher</a> were doing with Object-Oriented CSS (OOCSS).
-Our explorations around working with CSS-related tech-debt led to the creation of <a href="https://basscss.com">Basscss</a> and <a href="https://tachyons.io">Tachyons</a> and the birth of "Utility CSS".
-These libraries inspired other design systems such as Buzzfeed's <a href="https://solid.buzzfeed.com/">Solid</a> and GitHub's <a href="https://primer.style/css/">Primer CSS</a>. Even <a href="https://getbootstrap.com">Bootstrap</a> eventually added more utility-centric styles.</p>
+Our explorations around working with CSS-related tech-debt led to the creation of <a href="https://basscss.com">Basscss</a> and <a href="https://tachyons.io">Tachyons</a> and the birth of &quot;Utility CSS&quot;.
+These libraries inspired other design systems such as Buzzfeed&#x27;s <a href="https://solid.buzzfeed.com/">Solid</a> and GitHub&#x27;s <a href="https://primer.style/css/">Primer CSS</a>. Even <a href="https://getbootstrap.com">Bootstrap</a> eventually added more utility-centric styles.</p>
 <p>This methodology became known by many names, including <em>Atomic CSS</em>, <em>Functional CSS</em>, and <em>Utlity CSS</em>,
-but I've started referring to it as <em>Atomic/Functional/Utility CSS</em> or AFUCSS.
+but I&#x27;ve started referring to it as <em>Atomic/Functional/Utility CSS</em> or AFUCSS.
 This sort of sounds like <em>Hey, F you!</em>, which is a pretty <a href="https://medium.com/buzzfeed-design/how-i-learned-to-stop-worrying-and-love-the-atomic-class-98d6ccc45781#.yqnsfkbx2">typical response</a> when most people first encounter this flavor of CSS.</p>
 <h2>What problems did this solve?</h2>
 <p>Whatever your opinion on this methodology was, it tended to help with a few common problems of working with CSS at scale.</p>
 <ul>
 <li>It connected elements directly to styles, avoiding selector abstractions and the need to name things.</li>
 <li>It encouraged designers and developers to use scales and constraints on margin, padding, font sizes, colors, and other properties.</li>
-<li>It helped mitigate "append-only" stylesheets by reusing styles.</li>
-<li>It avoided some of the pitfalls of "specificity wars" incurred by the cascade.</li>
+<li>It helped mitigate &quot;append-only&quot; stylesheets by reusing styles.</li>
+<li>It avoided some of the pitfalls of &quot;specificity wars&quot; incurred by the cascade.</li>
 <li>Although it had a learning curve, once you had internalized one of the many implementations, it could increase your development velocity.</li>
 </ul>
 <p>Around the same time, we started working on <a href="https://cssstats.com">CSS Stats</a>,
 which helped validate some of our hypotheses about CSS filesize and front-end performance.
 Applying this methodology to production web applications at the time helped shave of hundreds of kilobytes of CSS that was being shipped to end users.</p>
 <h2>What did it fail to do?</h2>
-<p>Despite Tachyons' popularity, no single library ever took over
+<p>Despite Tachyons&#x27; popularity, no single library ever took over
 the industry at a level that would negate the steep learning curve involved.
 This meant that not only did developers have to learn a new methodology, but also an inevitably large custom classname API.</p>
 <p>CSS is a powerful and nuanced language, but utility CSS can never fully replace it.
-Eventually, you'll need to add one-off styles that just aren't covered by the library you're using, and there isn't always a clear way to extend what you're working with.
+Eventually, you&#x27;ll need to add one-off styles that just aren&#x27;t covered by the library you&#x27;re using, and there isn&#x27;t always a clear way to extend what you&#x27;re working with.
 Without a clear way to handle things like this, developers
 tend to add inconsistent hacks and append-only styles.</p>
 <p>As any utility-based CSS library grows, so does the amount of CSS you ship to your users,
 leaving you reliant on more build tools to remove styles that you were never going to use in the first place.
-While it was generally better than other methodologies at the time with regard to CSS filesize, it still wasn't ideal.</p>
-<p>It's also worth noting that this methodology was created before React was released
+While it was generally better than other methodologies at the time with regard to CSS filesize, it still wasn&#x27;t ideal.</p>
+<p>It&#x27;s also worth noting that this methodology was created before React was released
 and was intended for use in template-based user interfaces, including Rails and PHP.
-It was never designed for functional component-based UI and doesn't take advantage of this new paradigm.</p>
+It was never designed for functional component-based UI and doesn&#x27;t take advantage of this new paradigm.</p>
 <h2>Components</h2>
 <p>With the introduction of component-based UI libraries like React,
 the promise of a better way to handle authoring CSS at scale was on the horizon.
-After Christopher "Vjeux" Chedeau gave a talk titled <a href="https://vimeo.com/116209150">CSS in your JS</a> in 2015, the React community began exploring the possibilities of combining styles with components, which resulted in a cornucopia of new libraries for authoring CSS in JavaScript.
-For an excellent writeup of why you would want to do this, see <a href="https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d">Sunil Pai's response to Jonathan Snook</a>.</p>
+After Christopher &quot;Vjeux&quot; Chedeau gave a talk titled <a href="https://vimeo.com/116209150">CSS in your JS</a> in 2015, the React community began exploring the possibilities of combining styles with components, which resulted in a cornucopia of new libraries for authoring CSS in JavaScript.
+For an excellent writeup of why you would want to do this, see <a href="https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d">Sunil Pai&#x27;s response to Jonathan Snook</a>.</p>
 <h2>Two steps forward</h2>
 <p>CSS-in-JS libraries help solve a lot of the same issues Utility-based CSS methodologies were focused on (and more) in a <em>much</em> better way.
 They connect styles directly to elements without needing to name things or create abstractions in class selectors.
 They avoid append-only stylesheets with encapsulation and hashed classnames.
 These libraries work with existing build tools, allowing for code splitting, lazy loading, and dead code elimination with virtually zero effort,
-and they don't require additional tools like Sass or PostCSS.
-Many libraries also include CSS performance optimizations, such as <em>critical CSS</em>, enabled by default so that developers don't need additional tooling or even need to think about them.</p>
+and they don&#x27;t require additional tools like Sass or PostCSS.
+Many libraries also include CSS performance optimizations, such as <em>critical CSS</em>, enabled by default so that developers don&#x27;t need additional tooling or even need to think about them.</p>
 <p>No wonder people have been raving about this.</p>
-<p>Another great thing about CSS-in-JS libraries, is that they're based on standard CSS syntax, properties, and values.
+<p>Another great thing about CSS-in-JS libraries, is that they&#x27;re based on standard CSS syntax, properties, and values.
 They remove the need for cryptic, non-standard APIs and dramatically reduce the barrier to entry when compared to utility-based CSS.</p>
 <h2>One step back</h2>
 <p>While CSS-in-JS libraries help with a lot of issues,
@@ -80,16 +487,16 @@ allowing you to create your own Rebass-like components.
 Rather than applying a mixed bag of classnames to a component, Styled System promotes <em>style as a function of props</em> with a sort of <em>learn-once-use-everywhere</em> API.</p>
 <p>Many teams use libraries like Styled System to create component libraries and design systems to great success.
 <em><a href="https://chakra-ui.com">Chakra UI</a></em>,
-GitHub's <em><a href="https://primer.style/components/">Primer Components</a></em>,
-Artsy's <em><a href="https://palette.artsy.net/">Palette</a></em>,
-SproutSocial's <em><a href="https://seeds.sproutsocial.com/">Seeds</a></em>,
-and Modulz's <em><a href="https://radix.modulz.app/">Radix</a></em>
+GitHub&#x27;s <em><a href="https://primer.style/components/">Primer Components</a></em>,
+Artsy&#x27;s <em><a href="https://palette.artsy.net/">Palette</a></em>,
+SproutSocial&#x27;s <em><a href="https://seeds.sproutsocial.com/">Seeds</a></em>,
+and Modulz&#x27;s <em><a href="https://radix.modulz.app/">Radix</a></em>
 all use Styled System to create components that use styles defined in <em>themes</em> with a common props API.
 These help teams efficiently build UI with consistent branding and a common design language.</p>
-<h2>Outside the <code>&#x3C;Box /></code></h2>
+<h2>Outside the <code>&lt;Box /&gt;</code></h2>
 <p>Styled System is great for teams that have the time and resources to build out a custom component library,
 but it does require some effort to start using.
-Instead of <em>one <code>&#x3C;Box /></code> to rule them all,</em>
+Instead of <em>one <code>&lt;Box /&gt;</code> to rule them all,</em>
 many of these component libraries have their own custom versions
 that require documentation, and limit <a href="/blog/interoperability">interoperability</a>.
 How can the concepts encoded in libraries like Styled System and the component libraries it powers be extended to designers and developers without the resources to build a custom component library,
@@ -100,7 +507,7 @@ No one wants another off-the-shelf component library, do they?</p>
 Leveraging the concepts of a <a href="/blog/design-graph"><em>Design Graph</em></a>, design constraints, and a standard <a href="https://theme-ui.com/theme-spec">theme specification</a> for other library authors to follow,
 <a href="https://theme-ui.com">Theme UI</a>
 is the next step up this ladder of abstraction.</p>
-<p>Although it's loosely based on similar concepts from utility CSS methodologies,
+<p>Although it&#x27;s loosely based on similar concepts from utility CSS methodologies,
 Theme UI gets rid of the cryptic, non-standard APIs and syntax, the lack of interoperability, the need for separate build tools, and the steep learning curve found in libraries like Tachyons.
 It keeps the coupling of styles to elements, readability, developer ergonomics of making changes in situ,
 and adds a more powerful constraint-based system for managing styles.</p>
@@ -112,20 +519,14 @@ The <code>sx</code> prop is a superset of CSS that uses standard syntax.</strong
 <p>Naming things is hard, and the <code>sx</code> prop lets you style any application
 without needing to name things like class selectors and components.
 As my friend and colleague <a href="https://twitter.com/4lpine">John Otander</a> puts it,
-<em>"Fuck naming shit when you don’t have to."</em></p>
-<p>Theme UI's <code>sx</code> prop is intended to help maintain a minimal API surface area.
+<em>&quot;Fuck naming shit when you don’t have to.&quot;</em></p>
+<p>Theme UI&#x27;s <code>sx</code> prop is intended to help maintain a minimal API surface area.
 Most properties used in this prop are the same as standard CSS,
 with optional, additional ways to use values for these properties.
 Instead of each component having its own custom set of style props, <em>every</em> element can be styled with the same <code>sx</code> prop.
 Component variants are also written in the same format.
 Writing styles in JS object notation might be somewhat new, but if you know JavaScript, you likely already know the syntax.</p>
-<!--
-- superset of css
-- naming things
-- collocated styles + readability
-- minimal API surface area
--->
-<h2>Don't take my word for it</h2>
+<h2>Don&#x27;t take my word for it</h2>
 <p>Tons of people are already taking advantage of the <em>Design Graph</em> with Theme UI
 to build themes, applications, and other tools.</p>
 <ul>
@@ -135,13 +536,13 @@ to build themes, applications, and other tools.</p>
 <li><a href="https://hackathons.hackclub.com/">Hack Club</a> connects you to high school hackathons and is styled with Theme UI.</li>
 <li>Plus a <a href="https://twitter.com/jxnblk/status/1235658542306246657">whole lot more</a></li>
 </ul>
-<p>If you've built something with Theme UI, I'd love to hear about it.</p>
+<p>If you&#x27;ve built something with Theme UI, I&#x27;d love to hear about it.</p>
 <h2>Demand better</h2>
-<p>If you're building an application with React in 2020,
-don't settle for CSS methologies from 2013.
+<p>If you&#x27;re building an application with React in 2020,
+don&#x27;t settle for CSS methologies from 2013.
 Demand more for your team,
 and help me build the future of styling for the Web.</p>
-<hr>
+<hr/>
 <p><strong>Further reading:</strong></p>
 <ul>
 <li><a href="http://mrmrs.cc/writing/scalable-css/">CSS and Scalability</a></li>
@@ -150,55 +551,4 @@ and help me build the future of styling for the Web.</p>
 <li><a href="https://johno.com/styling-themes/">Styling themes</a></li>
 <li><a href="https://johno.com/guessable/">Guessable</a></li>
 </ul>
-<p><em>Thanks to <a href="https://twitter.com/4lpine">John Otander</a> and <a href="https://twitter.com/broccolini">Diana Mounter</a></em></p>
-<!--
-- Reference:
-  - http://mrmrs.cc/writing/scalable-css/
-  - https://gist.github.com/threepointone/731b0c47e78d8350ae4e105c1a83867d
-  - https://mobile.twitter.com/chantastic/status/1227262007469981703
-- From Johno
-  - tech debt was measurable in CSS Stats - data-driven
-  - theming is an afterthought in most css-in-js libs
-  - style as a function of props (not a mix of classnames)
-  - theme-ui avoids the need to name things (selectors, components)
-  - "Fuck naming shit when you don’t have to"
-- Theme UI things
-  - https://mobile.twitter.com/samjbmason/status/1235537136335622145
-  - https://theme-ui-gallery.netlify.com/
-  - https://mobile.twitter.com/gill_kyle/status/1212508600007938048
-  - https://mobile.twitter.com/PaulieScanlon/status/1234434804885655554
-  - https://mobile.twitter.com/dandenney/status/1233123707654148096
-  - https://gatsby-theme-terminal.netlify.com/
-  - https://mobile.twitter.com/atav1k/status/1230780663047036928
-  - https://mobile.twitter.com/atav1k/status/1228481206813020161
-  - Docz
-  - Narative Novela
-  - Flex: https://flex.arshad.io/
-  - https://mobile.twitter.com/tuistio/status/1235658946540601345
--->
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+<p><em>Thanks to <a href="https://twitter.com/4lpine">John Otander</a> and <a href="https://twitter.com/broccolini">Diana Mounter</a></em></p></body></html>

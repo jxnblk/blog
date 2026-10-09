@@ -1,13 +1,416 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Development-Driven Design Systems</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/development-driven-design-systems"/><meta property="og:title" content="Development-Driven Design Systems"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="p1 caps rev angr mr4">Draft</div><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Development-Driven Design Systems</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">3/18/2019</div></div><main class="prose mb3"><!--
-Modern front end design systems
-Modern front end tooling for design systems
--->
-<p>Intro</p>
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/development-driven-design-systems"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>Intro</p>
 <ul>
 <li>
 <p>Basscss, CSS Stats, Rebass, styled system</p>
@@ -22,7 +425,7 @@ Modern front end tooling for design systems
 <p>Tools we use</p>
 </li>
 <li>
-<p>What's next</p>
+<p>What&#x27;s next</p>
 </li>
 <li>
 <p>Future</p>
@@ -49,8 +452,8 @@ Modern front end tooling for design systems
 <p>Background</p>
 <ul>
 <li>Hackathon</li>
-<li>Siloed teams &#x26; separate apps</li>
-<li>"Common Components"</li>
+<li>Siloed teams &amp; separate apps</li>
+<li>&quot;Common Components&quot;</li>
 <li>No open source</li>
 <li>React, styled components, npm</li>
 <li>Catering to Developer problems</li>
@@ -61,7 +464,7 @@ Modern front end tooling for design systems
 </ul>
 </li>
 <li>Make it so good people want to use it</li>
-<li>"Make it go viral"</li>
+<li>&quot;Make it go viral&quot;</li>
 </ul>
 </li>
 <li>
@@ -71,11 +474,11 @@ Modern front end tooling for design systems
 <li>SC</li>
 <li>Jest</li>
 <li>styled-system</li>
-<li>PRs &#x26; Issues</li>
+<li>PRs &amp; Issues</li>
 <li>Travis CI</li>
 <li>Slack</li>
-<li>Meetings &#x26; zoom</li>
-<li>Redline specs &#x26; QA</li>
+<li>Meetings &amp; zoom</li>
+<li>Redline specs &amp; QA</li>
 <li>Storybook</li>
 </ul>
 </li>
@@ -87,7 +490,7 @@ Modern front end tooling for design systems
 </ul>
 </li>
 <li>
-<p>What's next</p>
+<p>What&#x27;s next</p>
 <ul>
 <li>Documentation site
 <ul>
@@ -105,11 +508,11 @@ Modern front end tooling for design systems
 <ul>
 <li>Written language and math are incredible tools</li>
 <li>We teach children fractions</li>
-<li>But don't expect them to become PHDs</li>
+<li>But don&#x27;t expect them to become PHDs</li>
 <li>Bicycle of the mind</li>
 <li>Code is how you ride the bike</li>
 <li>Code is about layers of abstraction</li>
-<li>Abstractions on top of HTML, CSS, &#x26; JavaScript</li>
+<li>Abstractions on top of HTML, CSS, &amp; JavaScript</li>
 <li>Current tooling has not kept up with front end development</li>
 <li>Browser inspector is too low level</li>
 <li>React, ES6, Graphql</li>
@@ -132,18 +535,18 @@ Modern front end tooling for design systems
 <p>References</p>
 </li>
 </ul>
-<hr>
+<hr/>
 <p>Styled System</p>
 <ul>
 <li>SC and other CSS-in-JS</li>
 <li>Components as an abstraction on top of CSS</li>
 <li>Can still drop back into low-level CSS when needed</li>
-<li>Consumers of the components don't need to think about CSS implementation</li>
+<li>Consumers of the components don&#x27;t need to think about CSS implementation</li>
 <li>Dynamic/functional styles</li>
 <li>Authoring with s2</li>
 <li>Consuming s2 components</li>
 </ul>
-<hr>
+<hr/>
 <p>Cheap UI</p>
 <ul>
 <li>iron triangle</li>
@@ -205,7 +608,7 @@ Modern front end tooling for design systems
 <p>Open Source</p>
 </li>
 <li>
-<p>Consumed but didn't contribute</p>
+<p>Consumed but didn&#x27;t contribute</p>
 </li>
 <li>
 <p>Open source from the start</p>
@@ -220,7 +623,7 @@ Modern front end tooling for design systems
 <p>Great professional experience for developers</p>
 </li>
 <li>
-<p>don't enforce it</p>
+<p>don&#x27;t enforce it</p>
 </li>
 <li>
 <p>Make it so good people want to use it</p>
@@ -229,7 +632,7 @@ Modern front end tooling for design systems
 <p>Make it so that teams can make it work for them</p>
 </li>
 <li>
-<p>"Make it go viral"</p>
+<p>&quot;Make it go viral&quot;</p>
 </li>
 <li>
 <p>Styled system</p>
@@ -238,17 +641,10 @@ Modern front end tooling for design systems
 <p>By the time the designers asked for it, we already had it in place</p>
 </li>
 </ul>
-<!--
-- Next
-	- Docs site
-	- Chromatic
-	- Sketchapp html
-	- Compositor
--->
 <p>What makes React hard?</p>
 <ul>
 <li>
-<p>today's web is built on a layer of abstraction where design tools have not kept up</p>
+<p>today&#x27;s web is built on a layer of abstraction where design tools have not kept up</p>
 </li>
 <li>
 <p>Browser inspectors and debuggers are too low level</p>
@@ -275,7 +671,7 @@ Modern front end tooling for design systems
 <p>Faster dev velocity</p>
 </li>
 <li>
-<p>"Cheap UI"</p>
+<p>&quot;Cheap UI&quot;</p>
 </li>
 <li>
 <p>Devs hate redline specs and extra QA cycles</p>
@@ -355,43 +751,4 @@ Modern front end tooling for design systems
 <li>
 <p>Standard Components</p>
 </li>
-</ul>
-<!--
-
-https://mobile.twitter.com/markdalgleish/status/923287092704055296?ref_src=twcamp%5Eshare%7Ctwsrc%5Eios%7Ctwgr%5Eother%7Ctwcon%5E7100%7Ctwterm%5E0
-
-https://mobile.twitter.com/markdalgleish/status/931692003405864960?ref_src=twcamp%5Eshare%7Ctwsrc%5Eios%7Ctwgr%5Eother%7Ctwcon%5E7100%7Ctwterm%5E0
-
-
-I love tooling. I love talking about tooling.
-So much so that I was once called a tool.
-
-http://blog.jess3.com/2015/03/jxnblk-an-essential-design-tool.html
-
--->
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+</ul></body></html>

@@ -1,23 +1,4 @@
-import * as React from 'react';
-import Head from './Head.js';
-
-export default function Html (props) {
-  return (
-    <html lang='en-us'>
-      <Head {...props} />
-      <body className=''>
-        {props.content}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: script,
-          }}
-        />
-      </body>
-    </html>
-  );
-};
-
-const script = `
+// backup color modes script
 const modes = [
   '',
   'orange',
@@ -42,4 +23,3 @@ function cycle () {
 
 const el = document.querySelector('#color-button');
 if (el != null) el.addEventListener('click', cycle);
-`;

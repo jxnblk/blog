@@ -1,9 +1,416 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Patterns for Style Composition in React</title><meta name="description" content="While React is extremely flexible in terms of how you can structure your application’s UI, I’ve found that a few patterns for style composition have helped me keep things organized and easy to work with."/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/patterns-for-style-composition-in-react"/><meta property="og:title" content="Patterns for Style Composition in React"/><meta property="og:description" content="While React is extremely flexible in terms of how you can structure your application’s UI, I’ve found that a few patterns for style composition have helped me keep things organized and easy to work with."/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Patterns for Style Composition in React</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">8/13/2016</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->css</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->css-in-js</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->design systems</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->style guides</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->react</div></div><main class="prose mb3"><p>While React is extremely flexible in terms of how you can structure your application’s UI,
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/patterns-for-style-composition-in-react"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>While React is extremely flexible in terms of how you can structure your application’s UI,
 I’ve found that a few patterns for style composition have helped me keep things
 organized and easy to work with.
 These aren’t hard-and-fast rules, these are simply reflections on how I’ve come to organize components in apps that I’ve worked on.</p>
@@ -34,21 +441,21 @@ pieces can become more reusable and building out new views and containers can be
 <p>For example, a form component render method might look something like this:</p>
 <pre><code class="language-js">render () {
   return (
-    &#x3C;form onSubmit={this.handleSubmit}>
-      &#x3C;Heading children='Sign In' />
-      &#x3C;Input
-        name='username'
+    &lt;form onSubmit={this.handleSubmit}&gt;
+      &lt;Heading children=&#x27;Sign In&#x27; /&gt;
+      &lt;Input
+        name=&#x27;username&#x27;
         value={username}
-        onChange={this.handleChange} />
-      &#x3C;Input
-        type='password'
-        name='password'
+        onChange={this.handleChange} /&gt;
+      &lt;Input
+        type=&#x27;password&#x27;
+        name=&#x27;password&#x27;
         value={password}
-        onChange={this.handleChange} />
-      &#x3C;Button
-        type='submit'
-        children='Sign In' />
-    &#x3C;/form>
+        onChange={this.handleChange} /&gt;
+      &lt;Button
+        type=&#x27;submit&#x27;
+        children=&#x27;Sign In&#x27; /&gt;
+    &lt;/form&gt;
   )
 }
 </code></pre>
@@ -60,34 +467,34 @@ which means a UI component can be updated or refactored without affecting anythi
 <p>An example Button component, like the one in the form above, might look something like the following:</p>
 <pre><code class="language-js">const Button = ({
   ...props
-}) => {
+}) =&gt; {
   const sx = {
-    fontFamily: 'inherit',
-    fontSize: 'inherit',
-    fontWeight: 'bold',
-    textDecoration: 'none',
-    display: 'inline-block',
+    fontFamily: &#x27;inherit&#x27;,
+    fontSize: &#x27;inherit&#x27;,
+    fontWeight: &#x27;bold&#x27;,
+    textDecoration: &#x27;none&#x27;,
+    display: &#x27;inline-block&#x27;,
     margin: 0,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 16,
     paddingRight: 16,
     border: 0,
-    color: 'white',
-    backgroundColor: 'blue',
-    WebkitAppearance: 'none',
-    MozAppearance: 'none'
+    color: &#x27;white&#x27;,
+    backgroundColor: &#x27;blue&#x27;,
+    WebkitAppearance: &#x27;none&#x27;,
+    MozAppearance: &#x27;none&#x27;
   }
 
   return (
-    &#x3C;button {...props} style={sx} />
+    &lt;button {...props} style={sx} /&gt;
   )
 }
 </code></pre>
 <pre><code class="language-js">// Button usage
-&#x3C;Button onClick={this.handleClick}>
+&lt;Button onClick={this.handleClick}&gt;
   Hello
-&#x3C;/Button>
+&lt;/Button&gt;
 </code></pre>
 <p>I’ve used inline styles here for readability and to help demonstrate how this works,
 but any CSS-in-JS solution can be used instead and won’t have any affect on the form component above.
@@ -98,9 +505,9 @@ the rest of the application doesn’t need to know anything about the Button bey
 Generally, I wouldn’t recommend hard-coding things in like that.
 Any values that are likely to be used across different UI components should be split into their own module.</p>
 <p>Here is an example module to start with:</p>
-<pre><code class="language-js">export const white = '#fff'
-export const black = '#111'
-export const blue = '#07c'
+<pre><code class="language-js">export const white = &#x27;#fff&#x27;
+export const black = &#x27;#111&#x27;
+export const blue = &#x27;#07c&#x27;
 
 export const colors = {
   white,
@@ -125,18 +532,18 @@ const styles = {
 export default styles
 </code></pre>
 <p>And here is what the updated Button component could look like:</p>
-<pre><code class="language-js">import React from 'react'
-import { bold, space, colors } from './styles'
+<pre><code class="language-js">import React from &#x27;react&#x27;
+import { bold, space, colors } from &#x27;./styles&#x27;
 
 const Button = ({
   ...props
-}) => {
+}) =&gt; {
   const sx = {
-    fontFamily: 'inherit',
-    fontSize: 'inherit',
+    fontFamily: &#x27;inherit&#x27;,
+    fontSize: &#x27;inherit&#x27;,
     fontWeight: bold,
-    textDecoration: 'none',
-    display: 'inline-block',
+    textDecoration: &#x27;none&#x27;,
+    display: &#x27;inline-block&#x27;,
     margin: 0,
     paddingTop: space[1],
     paddingBottom: space[1],
@@ -145,12 +552,12 @@ const Button = ({
     border: 0,
     color: colors.white,
     backgroundColor: colors.blue,
-    WebkitAppearance: 'none',
-    MozAppearance: 'none'
+    WebkitAppearance: &#x27;none&#x27;,
+    MozAppearance: &#x27;none&#x27;
   }
 
   return (
-    &#x3C;button {...props} style={sx} />
+    &lt;button {...props} style={sx} /&gt;
   )
 }
 </code></pre>
@@ -167,9 +574,9 @@ including borders, border radii, shadows, animation duration, etc.</p>
 <h2>Style Functions</h2>
 <p>Since we’re using JavaScript, we can also employ helper functions for styling elements.
 For example, a function to create <code>rgba</code> values of black can be very handy.</p>
-<pre><code class="language-js">const darken = (n) => `rgba(0, 0, 0, ${n})`
+<pre><code class="language-js">const darken = (n) =&gt; `rgba(0, 0, 0, ${n})`
 
-darken(1 / 8) // 'rgba(0, 0, 0, 0.125)'
+darken(1 / 8) // &#x27;rgba(0, 0, 0, 0.125)&#x27;
 </code></pre>
 <p>Functions like this can then be used to create a value scale array to help keep things consistent.</p>
 <pre><code class="language-js">const shade = [
@@ -184,7 +591,7 @@ darken(1 / 8) // 'rgba(0, 0, 0, 0.125)'
   darken(1)
 ]
 
-shade[4] // 'rgba(0, 0, 0, 0.5)'
+shade[4] // &#x27;rgba(0, 0, 0, 0.5)&#x27;
 </code></pre>
 <p>Another example would be creating a scale for margin and padding to help keep visual rhythm consistent.</p>
 <pre><code class="language-js">// Modular powers of two scale
@@ -197,47 +604,47 @@ const scale = [
 ]
 
 // Functions to get partial style objects
-const createScaledPropertyGetter = (scale) => (prop) => (x) => {
-  return (typeof x === 'number' &#x26;&#x26; typeof scale[x] === 'number')
+const createScaledPropertyGetter = (scale) =&gt; (prop) =&gt; (x) =&gt; {
+  return (typeof x === &#x27;number&#x27; &amp;&amp; typeof scale[x] === &#x27;number&#x27;)
     ? { [prop]: scale[x] }
     : null
 }
 const getScaledProperty = createScaledPropertyGetter(scale)
 
-export const getMargin = getScaledProperty('margin')
-export const getPadding = getScaledProperty('padding')
+export const getMargin = getScaledProperty(&#x27;margin&#x27;)
+export const getPadding = getScaledProperty(&#x27;padding&#x27;)
 </code></pre>
 <pre><code class="language-js">// Style function usage
 const Box = ({
   m,
   p,
   ...props
-}) => {
+}) =&gt; {
   const sx = {
     ...getMargin(m),
     ...getPadding(p)
   }
 
-  return &#x3C;div {...props} style={sx} />
+  return &lt;div {...props} style={sx} /&gt;
 }
 </code></pre>
 <pre><code class="language-js">// Component usage
-&#x3C;div>
-  &#x3C;Box m={2} p={3}>
+&lt;div&gt;
+  &lt;Box m={2} p={3}&gt;
     A box with 16px margin and 32px padding
-  &#x3C;/Box>
-&#x3C;/div>
+  &lt;/Box&gt;
+&lt;/div&gt;
 </code></pre>
 <h2>Npm Modules</h2>
 <p>While the rgba color function above is a fairly simple one,
 sometimes more complex color transformations can be helpful when creating UI.
 Well, we’re in luck, because we can use literally anything on <a href="https://npmjs.com">npm</a>.</p>
 <p>Instead of the <code>darken</code> function above, here is an example using <a href="https://www.npmjs.com/package/chroma-js"><code>chroma-js</code></a>’s <code>alpha</code> function.</p>
-<pre><code class="language-js">import chroma from 'chroma-js'
+<pre><code class="language-js">import chroma from &#x27;chroma-js&#x27;
 
-const alpha = (color) => (a) => chroma(color).alpha(a).css()
+const alpha = (color) =&gt; (a) =&gt; chroma(color).alpha(a).css()
 
-const darken = alpha('#000')
+const darken = alpha(&#x27;#000&#x27;)
 
 const shade = [
   darken(0),
@@ -264,13 +671,13 @@ Take the Button component from above, and we’ll change some of the style detai
   color = colors.white,
   backgroundColor = colors.blue,
   ...props
-}) => {
+}) =&gt; {
   const sx = {
-    fontFamily: 'inherit',
-    fontSize: 'inherit',
+    fontFamily: &#x27;inherit&#x27;,
+    fontSize: &#x27;inherit&#x27;,
     fontWeight: bold,
-    textDecoration: 'none',
-    display: 'inline-block',
+    textDecoration: &#x27;none&#x27;,
+    display: &#x27;inline-block&#x27;,
     margin: 0,
     paddingTop: big ? space[2] : space[1],
     paddingBottom: big ? space[2] : space[1],
@@ -279,160 +686,160 @@ Take the Button component from above, and we’ll change some of the style detai
     border: 0,
     color,
     backgroundColor,
-    WebkitAppearance: 'none',
-    MozAppearance: 'none'
+    WebkitAppearance: &#x27;none&#x27;,
+    MozAppearance: &#x27;none&#x27;
   }
 
   return (
-    &#x3C;button {...props} style={sx} />
+    &lt;button {...props} style={sx} /&gt;
   )
 }
 </code></pre>
 <pre><code class="language-js">// Usage example
-&#x3C;div>
-  &#x3C;Button>
+&lt;div&gt;
+  &lt;Button&gt;
     Blue Button
-  &#x3C;/Button>
-  &#x3C;Button big backgroundColor={colors.red}>
+  &lt;/Button&gt;
+  &lt;Button big backgroundColor={colors.red}&gt;
     Big Red Button
-  &#x3C;/Button>
-&#x3C;/div>
+  &lt;/Button&gt;
+&lt;/div&gt;
 </code></pre>
 <p>The <code>color</code> and <code>backgroundColor</code> properties have been moved up to the component’s props.
 Additionally, we’ve added a <code>big</code> prop to adjust the padding top and bottom.</p>
 <p>Now this component is fine by itself, but what if we want a secondary button style?
 Doing the following would become tedious and error prone very quickly:</p>
-<pre><code class="language-js">&#x3C;Button
+<pre><code class="language-js">&lt;Button
   color={colors.black}
   backgroundColor={colors.lightblue}
-  children='Secondary Button' />
+  children=&#x27;Secondary Button&#x27; /&gt;
 </code></pre>
 <p>Instead, we can create a dedicated secondary button component.</p>
-<pre><code class="language-js">import React from 'react'
-import Button from './Button'
+<pre><code class="language-js">import React from &#x27;react&#x27;
+import Button from &#x27;./Button&#x27;
 
-const ButtonSecondary = (props) => (
-  &#x3C;Button
+const ButtonSecondary = (props) =&gt; (
+  &lt;Button
     {...props}
     color={colors.black}
-    backgroundColor={colors.lightblue} />
+    backgroundColor={colors.lightblue} /&gt;
 )
 </code></pre>
 <pre><code class="language-js">// Usage example
-&#x3C;div>
-  &#x3C;Button>Normal Button&#x3C;/Button>
-  &#x3C;ButtonSecondary>Secondary Button&#x3C;/ButtonSecondary>
-&#x3C;/div>
+&lt;div&gt;
+  &lt;Button&gt;Normal Button&lt;/Button&gt;
+  &lt;ButtonSecondary&gt;Secondary Button&lt;/ButtonSecondary&gt;
+&lt;/div&gt;
 </code></pre>
 <p>By adjusting the props API of the base Button component, an entire set of button styles can be created.</p>
-<pre><code class="language-js">const ButtonBig = (props) => &#x3C;Button {...props} big />
-const ButtonGreen = (props) => &#x3C;Button {...props} backgroundColor={colors.green} />
-const ButtonRed = (props) => &#x3C;Button {...props} backgroundColor={colors.red} />
-const ButtonOutline = (props) => &#x3C;Button {...props} outline />
+<pre><code class="language-js">const ButtonBig = (props) =&gt; &lt;Button {...props} big /&gt;
+const ButtonGreen = (props) =&gt; &lt;Button {...props} backgroundColor={colors.green} /&gt;
+const ButtonRed = (props) =&gt; &lt;Button {...props} backgroundColor={colors.red} /&gt;
+const ButtonOutline = (props) =&gt; &lt;Button {...props} outline /&gt;
 </code></pre>
 <p>This pattern lends itself well to layout components as well.
 Assume we have a generic Box component that accepts props for various layout styles.
 This base layout component can then be used to create grid system components and other primitives.</p>
-<pre><code class="language-js">const Grid = (props) => (
-  &#x3C;Box {...props}
-    display='inline-block'
-    verticalAlign='top'
-    px={2} />
+<pre><code class="language-js">const Grid = (props) =&gt; (
+  &lt;Box {...props}
+    display=&#x27;inline-block&#x27;
+    verticalAlign=&#x27;top&#x27;
+    px={2} /&gt;
 )
 
-const Half = (props) => (
-  &#x3C;Grid {...props}
-    width={1 / 2} />
+const Half = (props) =&gt; (
+  &lt;Grid {...props}
+    width={1 / 2} /&gt;
 )
 
-const Third = (props) => (
-  &#x3C;Grid {...props}
-    width={1 / 3} />
+const Third = (props) =&gt; (
+  &lt;Grid {...props}
+    width={1 / 3} /&gt;
 )
 
-const Quarter = (props) => (
-  &#x3C;Grid {...props}
-    width={1 / 4} />
+const Quarter = (props) =&gt; (
+  &lt;Grid {...props}
+    width={1 / 4} /&gt;
 )
 
-const Flex = (props) => (
-  &#x3C;Box {...props}
-    display='flex' />
+const Flex = (props) =&gt; (
+  &lt;Box {...props}
+    display=&#x27;flex&#x27; /&gt;
 )
 
-const FlexAuto = (props) => (
-  &#x3C;Box {...props}
-    flex='1 1 auto' />
+const FlexAuto = (props) =&gt; (
+  &lt;Box {...props}
+    flex=&#x27;1 1 auto&#x27; /&gt;
 )
 </code></pre>
 <pre><code class="language-js">// Usage example
-&#x3C;div>
-  &#x3C;div>
-    &#x3C;Half>Half width column&#x3C;/Half>
-    &#x3C;Half>Half width column&#x3C;/Half>
-  &#x3C;/div>
-  &#x3C;div>
-    &#x3C;Third>Third width column&#x3C;/Third>
-    &#x3C;Third>Third width column&#x3C;/Third>
-    &#x3C;Third>Third width column&#x3C;/Third>
-  &#x3C;/div>
-  &#x3C;div>
-    &#x3C;Quarter>Quarter width column&#x3C;/Quarter>
-    &#x3C;Quarter>Quarter width column&#x3C;/Quarter>
-    &#x3C;Quarter>Quarter width column&#x3C;/Quarter>
-    &#x3C;Quarter>Quarter width column&#x3C;/Quarter>
-  &#x3C;/div>
-&#x3C;/div>
+&lt;div&gt;
+  &lt;div&gt;
+    &lt;Half&gt;Half width column&lt;/Half&gt;
+    &lt;Half&gt;Half width column&lt;/Half&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;Third&gt;Third width column&lt;/Third&gt;
+    &lt;Third&gt;Third width column&lt;/Third&gt;
+    &lt;Third&gt;Third width column&lt;/Third&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+    &lt;Quarter&gt;Quarter width column&lt;/Quarter&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 <p>Typography styles are another great candidate for building up with composition.
 By using a base typographic component, you can help ensure consistency and keep your styling DRY.</p>
-<pre><code class="language-js">import React from 'react'
-import { alternateFont, typeScale, boldFontWeight } from './styles'
+<pre><code class="language-js">import React from &#x27;react&#x27;
+import { alternateFont, typeScale, boldFontWeight } from &#x27;./styles&#x27;
 
 const Text = ({
-  tag = 'span',
+  tag = &#x27;span&#x27;,
   size = 4,
   alt,
   center,
   bold,
   caps,
   ...props
-}) => {
+}) =&gt; {
   const Tag = tag
   const sx = {
     fontFamily: alt ? alternateFont : null,
     fontSize: typeScale[size],
     fontWeight: bold ? boldFontWeight : null,
-    textAlign: center ? 'center' : null,
-    textTransform: caps ? 'uppercase' : null
+    textAlign: center ? &#x27;center&#x27; : null,
+    textTransform: caps ? &#x27;uppercase&#x27; : null
   }
 
-  return &#x3C;Tag {...props} style={sx} />
+  return &lt;Tag {...props} style={sx} /&gt;
 }
 </code></pre>
-<pre><code class="language-js">const LeadText = (props) => &#x3C;Text {...props} tag='p' size={3} />
-const Caps = (props) => &#x3C;Text {...props} caps />
-const MetaText = (props) => &#x3C;Text {...props} size={5} caps />
-const AltParagraph = (props) => &#x3C;Text {...props} tag='p' alt />
+<pre><code class="language-js">const LeadText = (props) =&gt; &lt;Text {...props} tag=&#x27;p&#x27; size={3} /&gt;
+const Caps = (props) =&gt; &lt;Text {...props} caps /&gt;
+const MetaText = (props) =&gt; &lt;Text {...props} size={5} caps /&gt;
+const AltParagraph = (props) =&gt; &lt;Text {...props} tag=&#x27;p&#x27; alt /&gt;
 
-const CapsButton = ({ children, ...props }) => (
-  &#x3C;Button {...props}>
-    &#x3C;Caps>
+const CapsButton = ({ children, ...props }) =&gt; (
+  &lt;Button {...props}&gt;
+    &lt;Caps&gt;
       {children}
-    &#x3C;/Caps>
-  &#x3C;/Button>
+    &lt;/Caps&gt;
+  &lt;/Button&gt;
 )
 </code></pre>
 <pre><code class="language-js">// Usage example
-&#x3C;div>
-  &#x3C;LeadText>
-    This is a lead with some &#x3C;Caps>all caps&#x3C;/Caps>.
+&lt;div&gt;
+  &lt;LeadText&gt;
+    This is a lead with some &lt;Caps&gt;all caps&lt;/Caps&gt;.
     It has a larger font size than the default paragraph.
-  &#x3C;/LeadText>
-  &#x3C;MetaText>
+  &lt;/LeadText&gt;
+  &lt;MetaText&gt;
     This is smaller text, like form helper copy.
-  &#x3C;/MetaText>
-&#x3C;/div>
+  &lt;/MetaText&gt;
+&lt;/div&gt;
 </code></pre>
 <p>Keep in mind, that these components are just a few examples and your needs will vary greatly on an app-by-app basis.</p>
 <h2>Higher Order Components</h2>
@@ -444,24 +851,24 @@ and using them as standalone components is sufficient.</p>
 Instead of combining the state of the carousel with its UI, we can create a higher order component for better reusability.
 The higher order component will have a current slide index and have previous and next methods.</p>
 <pre><code class="language-js">// Higher order component
-import React from 'react'
+import React from &#x27;react&#x27;
 
 // This could be named something more generic like Counter or Cycle
-const CarouselContainer = (Comp) => {
+const CarouselContainer = (Comp) =&gt; {
   class Carousel extends React.Component {
     constructor () {
       super()
       this.state = {
         index: 0
       }
-      this.previous = () => {
+      this.previous = () =&gt; {
         const { index } = this.state
-        if (index > 0) {
+        if (index &gt; 0) {
           this.setState({ index: index - 1})
         }
       }
 
-      this.next = () => {
+      this.next = () =&gt; {
         const { index } = this.state
         this.setState({ index: index + 1 })
       }
@@ -469,11 +876,11 @@ const CarouselContainer = (Comp) => {
 
     render () {
       return (
-        &#x3C;Comp
+        &lt;Comp
           {...this.props}
           {...this.state}
           previous={this.previous}
-          next={this.next} />
+          next={this.next} /&gt;
       )
     }
   }
@@ -488,62 +895,62 @@ For example, a simple carousel may have only previous and next buttons,
 while a more complex one might include image thumbnails of each slide across the bottom.
 Both of these can use the same higher order component to handle their state.</p>
 <pre><code class="language-js">// UI component
-const Carousel = ({ index, ...props }) => {
+const Carousel = ({ index, ...props }) =&gt; {
   const length = props.length || props.children.length || 0
 
   const sx = {
     root: {
-      overflow: 'hidden'
+      overflow: &#x27;hidden&#x27;
     },
     inner: {
-      whiteSpace: 'nowrap',
-      height: '100%',
-      transition: 'transform .2s ease-out',
+      whiteSpace: &#x27;nowrap&#x27;,
+      height: &#x27;100%&#x27;,
+      transition: &#x27;transform .2s ease-out&#x27;,
       transform: `translateX(${index % length * -100}%)`
     },
     child: {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      whiteSpace: 'normal',
-      outline: '1px solid red',
-      width: '100%',
-      height: '100%'
+      display: &#x27;inline-block&#x27;,
+      verticalAlign: &#x27;middle&#x27;,
+      whiteSpace: &#x27;normal&#x27;,
+      outline: &#x27;1px solid red&#x27;,
+      width: &#x27;100%&#x27;,
+      height: &#x27;100%&#x27;
     }
   }
 
-  const children = React.Children.map(props.children, (child, i) => {
+  const children = React.Children.map(props.children, (child, i) =&gt; {
     return (
-      &#x3C;div style={sx.child}>
+      &lt;div style={sx.child}&gt;
         {child}
-      &#x3C;/div>
+      &lt;/div&gt;
     )
   })
 
   return (
-    &#x3C;div style={sx.root}>
-      &#x3C;div style={sx.inner}>
+    &lt;div style={sx.root}&gt;
+      &lt;div style={sx.inner}&gt;
         {children}
-      &#x3C;/div>
-    &#x3C;/div>
+      &lt;/div&gt;
+    &lt;/div&gt;
   )
 }
 </code></pre>
 <pre><code class="language-js">// Final Carousel component
-const HeroCarousel = (props) => {
+const HeroCarousel = (props) =&gt; {
 	return (
-    &#x3C;div>
-      &#x3C;Carousel index={props.index}>
-        &#x3C;div>Slide one&#x3C;/div>
-        &#x3C;div>Slide two&#x3C;/div>
-        &#x3C;div>Slide three&#x3C;/div>
-      &#x3C;/Carousel>
-      &#x3C;Button
+    &lt;div&gt;
+      &lt;Carousel index={props.index}&gt;
+        &lt;div&gt;Slide one&lt;/div&gt;
+        &lt;div&gt;Slide two&lt;/div&gt;
+        &lt;div&gt;Slide three&lt;/div&gt;
+      &lt;/Carousel&gt;
+      &lt;Button
         onClick={props.previous}
-        children='Previous' />
-      &#x3C;Button
+        children=&#x27;Previous&#x27; /&gt;
+      &lt;Button
         onClick={props.next}
-        children='Next' />
-    &#x3C;/div>
+        children=&#x27;Next&#x27; /&gt;
+    &lt;/div&gt;
 	)
 }
 
@@ -551,9 +958,9 @@ const HeroCarousel = (props) => {
 export default CarouselContainer(HeroCarousel)
 </code></pre>
 <pre><code class="language-js">// Usage example
-&#x3C;div>
-  &#x3C;HeroCarousel />
-&#x3C;/div>
+&lt;div&gt;
+  &lt;HeroCarousel /&gt;
+&lt;/div&gt;
 </code></pre>
 <p>By keeping the styling separate from the interactive state,
 any number of carousel variations can be created from these reusable parts.</p>
@@ -566,7 +973,7 @@ and similar to Rebass’s <a href="https://github.com/jxnblk/rebass/blob/master/
 when it comes to styling UI in a component-based system.
 I’m curious to know if anyone else has found similar patterns that they’ve found helpful,
 and I’m sure there are even more ways to create more beautiful, more flexible, and more maintainable visual design systems.</p>
-<hr>
+<hr/>
 <h3>A Note About Performance</h3>
 <p>While there are many different ways to handle styling in a component-based app,
 make sure to pay close attention to the size of your bundle.
@@ -574,31 +981,5 @@ It can be easy to create the wrong abstractions and end up with needless bloat.
 Some of the patterns in this article, when taken to their logical extreme,
 could actually harm the performance and create a degraded experience for your end users.</p>
 <p>And remember, everything related to styling that you do should be for the user’s benefit, not your own.</p>
-<hr>
-<p><small id='*'>* Please don’t use carousels in your app. Users hate them.</small></p>
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+<hr/>
+<p>* Please don’t use carousels in your app. Users hate them.</p></body></html>

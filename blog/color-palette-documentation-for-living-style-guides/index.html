@@ -1,9 +1,416 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Color Palette Documentation for Living Style Guides</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/color-palette-documentation-for-living-style-guides"/><meta property="og:title" content="Color Palette Documentation for Living Style Guides"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Color Palette Documentation for Living Style Guides</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">6/15/2015</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->css</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->color</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->documentation</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->style guide</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->living style guide</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->color contrast</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->accessibility</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->a11y</div></div><main class="prose mb3"><p>Virtually every style guide has a color palette section in its documentation.
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/color-palette-documentation-for-living-style-guides"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>Virtually every style guide has a color palette section in its documentation.
 Many times I’ve seen this documentation created manually, where every change to a color requires updating the values in two places – the stylesheet and the style guide.
 This often leads to one falling out of sync with the other,
 and makes maintaining a living style guide more difficult.</p>
@@ -11,7 +418,6 @@ and makes maintaining a living style guide more difficult.</p>
 For a true living style guide, the code should serve as the single source of truth.
 Extracting color values from CSS can help keep documentation in sync,
 expose outdated colors, and point out opportunities for normalizing designs.</p>
-<!-- more -->
 <p>The following will show how to use Node.js to build source-code-derived documentation for color palettes
 and present color contrast values for each possible pairing as a guide for usage.</p>
 <h2>Initial Setup</h2>
@@ -26,7 +432,7 @@ npm init
 <pre><code class="language-bash">npm i --save-dev postcss color colorable lodash
 </code></pre>
 <p>The <a href="https://github.com/postcss/postcss">PostCSS</a> module will be used to transform the source CSS into an
-<a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"><abbr title="Abstract Syntax Tree">AST</abbr></a>
+AST
 for manipulation with JavaScript.
 <a href="https://www.npmjs.com/package/color">Color</a> will be used to convert the values found in the stylesheet to hexidecimal.
 <a href="http://jxnblk.com/colorable">Colorable</a> will be used to get color contrast values and
@@ -39,10 +445,10 @@ This tutorial will use <a href="http://www.basscss.com/docs/">Basscss</a> as an 
 <h2>Build Script</h2>
 <p>Create a new <code>build.js</code> file that will be used to read the CSS file and eventually to generate an HTML page.</p>
 <pre><code class="language-js">// build.js
-var fs = require('fs')
+var fs = require(&#x27;fs&#x27;)
 
 // Read the contents of basscss.css
-var css = fs.readFileSync('basscss.css', 'utf8')
+var css = fs.readFileSync(&#x27;basscss.css&#x27;, &#x27;utf8&#x27;)
 
 console.log(css)
 </code></pre>
@@ -50,8 +456,8 @@ console.log(css)
 <h2>Package Scripts</h2>
 <p>Add a script to <code>package.json</code> for the build script.</p>
 <pre><code class="language-json">// package.json
-"scripts": {
-  "start": "node build"
+&quot;scripts&quot;: {
+  &quot;start&quot;: &quot;node build&quot;
 }
 </code></pre>
 <p>Run the script to make sure everything is working.</p>
@@ -60,9 +466,9 @@ console.log(css)
 <h2>Parsing CSS</h2>
 <p>Create a new <code>lib/parse-colors.js</code> file for parsing the CSS.</p>
 <pre><code class="language-js">// lib/parse-colors.js
-var _ = require('lodash')
-var postcss = require('postcss')
-var Color = require('color')
+var _ = require(&#x27;lodash&#x27;)
+var postcss = require(&#x27;postcss&#x27;)
+var Color = require(&#x27;color&#x27;)
 
 module.exports = function(css) {
   // Array of colors to return
@@ -81,11 +487,11 @@ module.exports = function(css) {
 </code></pre>
 <p>Use this module in <code>build.js</code>.</p>
 <pre><code class="language-js">// build.js
-var fs = require('fs')
-var parseColors = require('./lib/parse-colors')
+var fs = require(&#x27;fs&#x27;)
+var parseColors = require(&#x27;./lib/parse-colors&#x27;)
 
 // Read the contents of basscss.css
-var css = fs.readFileSync('basscss.css', 'utf8')
+var css = fs.readFileSync(&#x27;basscss.css&#x27;, &#x27;utf8&#x27;)
 var colors = parseColors(css)
 </code></pre>
 <p>The <code>parse-colors</code> module takes raw CSS and transforms it into an AST that can be iterated over.
@@ -96,9 +502,9 @@ convert the values to hex, and remove duplicates.
 While color values can be used in other properties including the <code>background</code> shorthand,
 handling that would add complexity and will be omitted from this tutorial.</p>
 <pre><code class="language-js">// lib/parse-colors.js
-var _ = require('lodash')
-var postcss = require('postcss')
-var Color = require('color')
+var _ = require(&#x27;lodash&#x27;)
+var postcss = require(&#x27;postcss&#x27;)
+var Color = require(&#x27;color&#x27;)
 
 module.exports = function(css) {
 
@@ -141,42 +547,42 @@ The <code>Color().hexString()</code> method converts any valid color value to he
 <p>Next, create a <code>template.html</code> file for displaying the colors.
 This tutorial uses lodash templates, but any JavaScript templating language would work.
 Note: if you’re using a stylesheet other than Basscss, the classes applied below may differ.</p>
-<pre><code class="language-html">&#x3C;!DOCTYPE html>
-&#x3C;!-- template.html -->
-&#x3C;html>
-&#x3C;head>
-  &#x3C;meta charset="utf-8">
-  &#x3C;title>Color Palette Docs Demo&#x3C;/title>
-  &#x3C;link rel="stylesheet" href="basscss.css">
-&#x3C;/head>
-&#x3C;body class="px3">
-  &#x3C;header class="py3">
-    &#x3C;h1>Color Palette Docs Demo&#x3C;/h1>
-  &#x3C;/header>
-  &#x3C;ul class="list-reset flex flex-wrap flex-justify mxn2">
-    &#x3C;% colors.map(renderColor) %>
-  &#x3C;/ul>
-  &#x3C;% function renderColor(color) { %>
-    &#x3C;li class="m2">
-      &#x3C;div style="background-color:&#x3C;%= color %>"
-        class="p4">&#x3C;/div>
-      &#x3C;%= color %>
-    &#x3C;/li>
-  &#x3C;% } %>
-&#x3C;/body>
-&#x3C;/html>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;!-- template.html --&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Color Palette Docs Demo&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;basscss.css&quot;&gt;
+&lt;/head&gt;
+&lt;body class=&quot;px3&quot;&gt;
+  &lt;header class=&quot;py3&quot;&gt;
+    &lt;h1&gt;Color Palette Docs Demo&lt;/h1&gt;
+  &lt;/header&gt;
+  &lt;ul class=&quot;list-reset flex flex-wrap flex-justify mxn2&quot;&gt;
+    &lt;% colors.map(renderColor) %&gt;
+  &lt;/ul&gt;
+  &lt;% function renderColor(color) { %&gt;
+    &lt;li class=&quot;m2&quot;&gt;
+      &lt;div style=&quot;background-color:&lt;%= color %&gt;&quot;
+        class=&quot;p4&quot;&gt;&lt;/div&gt;
+      &lt;%= color %&gt;
+    &lt;/li&gt;
+  &lt;% } %&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
-<p>Inside the <code>&#x3C;ul></code> the <code>.map()</code> method is used to iterate over the <code>colors</code> array and passes the <code>renderColor</code> function as a callback.
-The <code>renderColor</code> function then renders an <code>&#x3C;li></code> for each color with a div that has its background color set to that value.</p>
+<p>Inside the <code>&lt;ul&gt;</code> the <code>.map()</code> method is used to iterate over the <code>colors</code> array and passes the <code>renderColor</code> function as a callback.
+The <code>renderColor</code> function then renders an <code>&lt;li&gt;</code> for each color with a div that has its background color set to that value.</p>
 <p>Edit <code>build.js</code> to read the template and generate an HTML file.</p>
 <pre><code class="language-js">// build.js
-var _ = require('lodash')
-var fs = require('fs')
-var parseColors = require('./lib/parse-colors')
+var _ = require(&#x27;lodash&#x27;)
+var fs = require(&#x27;fs&#x27;)
+var parseColors = require(&#x27;./lib/parse-colors&#x27;)
 
-var css = fs.readFileSync('basscss.css', 'utf8')
+var css = fs.readFileSync(&#x27;basscss.css&#x27;, &#x27;utf8&#x27;)
 // Read the template string
-var template = fs.readFileSync('template.html', 'utf8')
+var template = fs.readFileSync(&#x27;template.html&#x27;, &#x27;utf8&#x27;)
 // Create a lodash template function
 var tpl = _.template(template)
 var colors = parseColors(css)
@@ -185,20 +591,17 @@ var colors = parseColors(css)
 var html = tpl({ colors: colors })
 
 // Write an HTML file to disk
-fs.writeFileSync('index.html', html)
+fs.writeFileSync(&#x27;index.html&#x27;, html)
 </code></pre>
 <p>Now run <code>npm start</code> which should generate an HTML file with the colors parsed from the stylesheet.</p>
-<pre><code class="language-bash">npm start &#x26;&#x26; open index.html
+<pre><code class="language-bash">npm start &amp;&amp; open index.html
 </code></pre>
-<p><img src="//jxnblk.s3.amazonaws.com/assets/images/css-color-palette.png"
-alt="Color palette demo"
-width="768"
-height="496" /></p>
+<p></p>
 <h2>Readable Color Combinations</h2>
 <p>The Colorable module takes an array of colors and returns a nested array of color combinations, along with their contrast values to test for readability. This can be useful for seeing what foreground-background pairs can and can’t be used for text.</p>
 <p>Create a new <code>lib/parse-combos.js</code> file.</p>
 <pre><code class="language-js">// lib/parse-combos.js
-var colorable = require('colorable')
+var colorable = require(&#x27;colorable&#x27;)
 
 module.exports = function(colors) {
 
@@ -226,13 +629,13 @@ module.exports = function(colors) {
 </code></pre>
 <p>Add the <code>parse-combos</code> module to <code>build.js</code> and pass the combos array into the template function.</p>
 <pre><code class="language-js">// build.js
-var _ = require('lodash')
-var fs = require('fs')
-var parseColors = require('./lib/parse-colors')
-var parseCombos = require('./lib/parse-combos')
+var _ = require(&#x27;lodash&#x27;)
+var fs = require(&#x27;fs&#x27;)
+var parseColors = require(&#x27;./lib/parse-colors&#x27;)
+var parseCombos = require(&#x27;./lib/parse-combos&#x27;)
 
-var css = fs.readFileSync('basscss.css', 'utf8')
-var template = fs.readFileSync('template.html', 'utf8')
+var css = fs.readFileSync(&#x27;basscss.css&#x27;, &#x27;utf8&#x27;)
+var template = fs.readFileSync(&#x27;template.html&#x27;, &#x27;utf8&#x27;)
 var tpl = _.template(template)
 var colors = parseColors(css)
 var combos = parseCombos(colors)
@@ -241,34 +644,31 @@ var html = tpl({
   colors: colors,
   combos: combos
 })
-fs.writeFileSync('index.html', html)
+fs.writeFileSync(&#x27;index.html&#x27;, html)
 </code></pre>
 <p>Add a section to <code>template.html</code> to display the color combinations.</p>
-<pre><code class="language-html">  &#x3C;h2>Combinations&#x3C;/h2>
-  &#x3C;ul class="list-reset flex flex-wrap">
-    &#x3C;% combos.map(renderCombo) %>
-  &#x3C;/ul>
-  &#x3C;% function renderCombo(combo) { %>
-    &#x3C;li class="py2 col-6 sm-col-4 md-col-3 lg-col-2"
-      style="color:&#x3C;%= combo.pairing %>;background-color:&#x3C;%= combo.hex %>">
-      &#x3C;div class="h1 bold px2">
+<pre><code class="language-html">  &lt;h2&gt;Combinations&lt;/h2&gt;
+  &lt;ul class=&quot;list-reset flex flex-wrap&quot;&gt;
+    &lt;% combos.map(renderCombo) %&gt;
+  &lt;/ul&gt;
+  &lt;% function renderCombo(combo) { %&gt;
+    &lt;li class=&quot;py2 col-6 sm-col-4 md-col-3 lg-col-2&quot;
+      style=&quot;color:&lt;%= combo.pairing %&gt;;background-color:&lt;%= combo.hex %&gt;&quot;&gt;
+      &lt;div class=&quot;h1 bold px2&quot;&gt;
         Aa
-      &#x3C;/div>
-      &#x3C;div class="h5 px2">
-        &#x3C;%= combo.pairing %>
-        &#x3C;br>
-        &#x3C;%= combo.hex %>
-        &#x3C;br>
-        &#x3C;%= combo.contrast.toFixed(2) %>
-      &#x3C;/div>
-    &#x3C;/li>
-  &#x3C;% } %>
+      &lt;/div&gt;
+      &lt;div class=&quot;h5 px2&quot;&gt;
+        &lt;%= combo.pairing %&gt;
+        &lt;br&gt;
+        &lt;%= combo.hex %&gt;
+        &lt;br&gt;
+        &lt;%= combo.contrast.toFixed(2) %&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  &lt;% } %&gt;
 </code></pre>
 <p>Run the build script. You should now have a list of color combinations along with the contrast value for each pair.</p>
-<p><img src="//jxnblk.s3.amazonaws.com/assets/images/css-color-combos.jpg"
-alt="Color combination demo"
-width="768"
-height="576" /></p>
+<p></p>
 <p>While seeing combinations that don’t have high enough contrast might be useful,
 for this tutorial set Colorable’s <code>threshold</code> option to 3
 to only show combinations that pass the WCAG minimum for large text.</p>
@@ -290,30 +690,4 @@ inconsistencies and opportunities to normalize the design.</p>
 <p>While this is not a complete replacement for human written documentation,
 and creating guidelines around color usage requires carefully considered writing,
 using automated tooling to generate source-code-derived documentation
-for things like color values can help create better living style guides.</p>
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+for things like color values can help create better living style guides.</p></body></html>

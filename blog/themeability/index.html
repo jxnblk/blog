@@ -1,20 +1,427 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Themeability</title><meta name="description" content="Using constraint-based design principles to create themeable components and UI"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/themeability"/><meta property="og:title" content="Themeability"/><meta property="og:description" content="Using constraint-based design principles to create themeable components and UI"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">Themeability</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">7/21/2019</div></div><main class="prose mb3"><p>I've been interested in the idea of constraint-based design for a while.
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/themeability"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>I&#x27;ve been interested in the idea of constraint-based design for a while.
 By constraining the solution space for a particular problem,
-new and novel ideas can emerge beyond the initial problem's scope.
+new and novel ideas can emerge beyond the initial problem&#x27;s scope.
 In the context of UI design,
-when you don't need to decide whether a heading's font size should be 22 or 24 pixels,
+when you don&#x27;t need to decide whether a heading&#x27;s font size should be 22 or 24 pixels,
 you have more time to decide what that heading should say in the first place or whether there should be a heading at all.
 Like other tools aimed at promoting creative focus,
 design constraints can help create a distraction-free environment for creative thought.
 Design constraints can be viewed as a sort of <em><a href="https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs">hierarchy of needs</a></em> –
 when you stop spending energy on lower-level problems,
 you can start exploring higher level abstractions in design.</p>
-<p>I've tried to distill some of this thinking into several different open source libraries over the years,
+<p>I&#x27;ve tried to distill some of this thinking into several different open source libraries over the years,
 notably <a href="https://basscss.com">Basscss</a>, <a href="https://rebassjs.org">Rebass</a>, and <a href="https://styled-system.com">Styled System</a>.
 While libraries like Basscss and Rebass were certainly not instant hits,
 some of their core ideas have slowly gained traction.
@@ -25,21 +432,21 @@ By defining a typographic scale, negative space scale, color palettes, and other
 these values can be systematically applied to components where needed,
 while still allowing the flexibility to override values contextually within an application.
 Styled System provides an API to make doing the right thing easy when applying consistent styles throughout an application.
-At its core, it's a suite of utilities to create functions for mapping design constraints to components,
+At its core, it&#x27;s a suite of utilities to create functions for mapping design constraints to components,
 and it helps you build a UI component library with a more consistent props API.
 I like to think of it as <strong>styling as a function of design constraints</strong>.</p>
 <p>Styled System is a fairly mature library at this point and much of the recent development has been focused on utilities that expand upon this core idea.
-While Styled System is great for building design systems and component libraries, it's not an ideal solution in and of itself for creating white-labels or themeable user interfaces.
+While Styled System is great for building design systems and component libraries, it&#x27;s not an ideal solution in and of itself for creating white-labels or themeable user interfaces.
 Styled System is completely framework-agnostic and requires the user to create their own components that integrate with other CSS-in-JS libraries.
 It requires you to make intentional, upfront decisions about the overall component API,
-which is great for corporate design systems, but shouldn't be neccessary for applying a design constraints in general-purpose UI development.
-And, while it is possible, Styled System doesn't provide much guidance for creating applications that are truly <em>themeable</em>.</p>
+which is great for corporate design systems, but shouldn&#x27;t be neccessary for applying a design constraints in general-purpose UI development.
+And, while it is possible, Styled System doesn&#x27;t provide much guidance for creating applications that are truly <em>themeable</em>.</p>
 <h2>Components as Commodity</h2>
-<p>If you look at modern web UI development, it's easy to see the large amount of duplicative efforts across different organizations.
+<p>If you look at modern web UI development, it&#x27;s easy to see the large amount of duplicative efforts across different organizations.
 While projects like Bootstrap and Material Design have seen a non-negligible amount of adoption,
-I'm very curious as to why we, as an industry, haven't wholesale adopted off-the-shelf solutions for UI components yet.
-It can <em>seem like</em> it's only a matter of time before we see a major shift towards commodification of the work we do today,
-but I'm skeptical that that will ever happen.
+I&#x27;m very curious as to why we, as an industry, haven&#x27;t wholesale adopted off-the-shelf solutions for UI components yet.
+It can <em>seem like</em> it&#x27;s only a matter of time before we see a major shift towards commodification of the work we do today,
+but I&#x27;m skeptical that that will ever happen.
 Sometimes it feels like we, as web developers, are the <a href="https://en.wikipedia.org/wiki/Linotype_machine">Linotype operators</a> of the 21st century.</p>
 <p>So why do we still spend time, energy, and money on building what is largely the same thing?
 I think that Styled System and similar libraries are impacted by what is often called <a href="https://en.wikipedia.org/wiki/IKEA_effect">The IKEA Effect</a>.</p>
@@ -50,7 +457,7 @@ I think that Styled System and similar libraries are impacted by what is often c
 Styled System allows users to create custom components of their own.
 I think this effect is sometimes compounded with <a href="https://en.wikipedia.org/wiki/Not_invented_here"><em>Not-Invented-Here (NIH) Syndrome</em></a>,
 where organizations spend more time and energy on building an in-house solution when comparable off-the-shelf solutions exist.
-It's fair to say that off-the-shelf UI component solutions do not and will never exist,
+It&#x27;s fair to say that off-the-shelf UI component solutions do not and will never exist,
 but if all you have is a <a href="https://en.wikipedia.org/wiki/Law_of_the_instrument#Abraham_Maslow">design system hammer</a>, you start to see a lot of design-system-shaped nails.
 I suspect it will take a bit of effort to move to a higher level of abstraction.</p>
 <h2>Theming</h2>
@@ -60,24 +467,24 @@ and they often make assumptions about the flexibility of their outward APIs that
 in an effort to enforce this consistency.
 Unless the product is intended for white-label applications,
 organizations do not have good incentives to prioritize creating themeable interfaces.
-It just doesn't make sense to spend resources on such efforts.
+It just doesn&#x27;t make sense to spend resources on such efforts.
 But, even when theming a user interface is not a hard requirement,
 developing components with themeability in mind can be beneficial nonetheless.</p>
 <h2>Themeable Components</h2>
 <p>More and more design systems are built using third-party, open source components that handle complex logic, such as autocomplete inputs, masked inputs, date pickers, and drop downs.
 Components like these are available today as off-the-shelf UI components,
-and it's generally not worth the cost of developing new solutions when these components can be leveraged instead.
+and it&#x27;s generally not worth the cost of developing new solutions when these components can be leveraged instead.
 The <em><a href="https://reactjs.org/docs/render-props.html">render props</a></em> pattern has become popular in recent years to allow this sort of logic to be packaged into reusable components
-that aren't concerned with the styling of the UI.
+that aren&#x27;t concerned with the styling of the UI.
 If these sorts of components included default, styled versions that were completely themeable,
-the consumers of these components wouldn't need to build the rendered UI pieces at all.</p>
+the consumers of these components wouldn&#x27;t need to build the rendered UI pieces at all.</p>
 <p>The problem with this idea is that every component has its own unique API,
 and all theming APIs vary from implementation to implementation.
 The only common denominator is the low-level CSS used for any web-based component,
 and when the entirety of CSS is available for styling,
 that still leaves a huge amount of room for interpretation.
 Without a standard API for theming components,
-we'll never have UI components that can truly operate as <em>interchangeable parts</em>.</p>
+we&#x27;ll never have UI components that can truly operate as <em>interchangeable parts</em>.</p>
 <p>If even a handful of UI component libraries conformed to a common specifiation for themeable components,
 these components could be installed in many different applications without the need to add custom styles.
 This is the idea behind the <a href="https://system-ui.com/theme">Theme Specification</a>,
@@ -87,43 +494,17 @@ this idea could have compounding effects on efficiencies within UI development.
 <strong>The theme specification itself is a design constraint</strong>.</p>
 <h2>Theme UI</h2>
 <p><a href="https://theme-ui.com">Theme UI</a> is a library that builds upon some of the ideas within this post.
-It's a framework for building themeable and interoperable UI components based on visual design constraints.
+It&#x27;s a framework for building themeable and interoperable UI components based on visual design constraints.
 It provides out-of-the-box visual design consistency without the need to build an entire UI component library upfront.
 Like Styled System, it uses a <em>theme object</em> for applying design constraints in an application,
-but unlike Styled System it doesn't require custom UI components to apply these styles.
+but unlike Styled System it doesn&#x27;t require custom UI components to apply these styles.
 Both Theme UI and Styled System use the same underlying theme specification,
-which means if you've created components with Styled System, they should work in applications that are built with Theme UI.</p>
-<p>The library is still fairly new, but it's intended to lay a foundation for other components, libraries, and tools to be built upon.
+which means if you&#x27;ve created components with Styled System, they should work in applications that are built with Theme UI.</p>
+<p>The library is still fairly new, but it&#x27;s intended to lay a foundation for other components, libraries, and tools to be built upon.
 The more libraries that adopt this theme specification, the more the users of these libraries will benefit.
-If you're looking for a better way to apply consistent visual styles,
+If you&#x27;re looking for a better way to apply consistent visual styles,
 build themeable components,
 or leverage constraint-based design principles in your work,
-I'd encourage you to check it out.
-And, if the ideas in this post interest you, we'd love to have help building more on top of this foundation.
-Check out the <a href="https://github.com/system-ui/theme-ui">Theme UI repo</a> to learn more.</p>
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+I&#x27;d encourage you to check it out.
+And, if the ideas in this post interest you, we&#x27;d love to have help building more on top of this foundation.
+Check out the <a href="https://github.com/system-ui/theme-ui">Theme UI repo</a> to learn more.</p></body></html>

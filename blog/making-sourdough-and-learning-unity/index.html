@@ -1,87 +1,455 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>Making Sourdough &amp; Learning Unity</title><meta name="description" content="How I started teaching myself Unity development and why I&#x27;m building a game"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/making-sourdough-and-learning-unity"/><meta property="og:title" content="Making Sourdough &amp; Learning Unity"/><meta property="og:description" content="How I started teaching myself Unity development and why I&#x27;m building a game"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Devlog <!-- -->01</div><h1 class="h2 caps mb3">Making Sourdough &amp; Learning Unity</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">8/19/2023</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->devlog</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->unity</div><div class="caps h6 lh1 rev pad mr1">#<!-- -->life</div></div><main class="prose mb3"><p>In March 2020, I remember the former mayor one day telling people to go out for dinner and see a show – and the next day hearing that it wasn't safe to get within six feet of another person. If you haven't been to New York before, it's not easy to walk around outside and not get within six feet of another person. In hindsight, it was relatively safe to be outdoors, but at the time, we were afraid to step outside the door for a few weeks.</p>
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/making-sourdough-and-learning-unity"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>In March 2020, I remember the former mayor one day telling people to go out for dinner and see a show – and the next day hearing that it wasn&#x27;t safe to get within six feet of another person. If you haven&#x27;t been to New York before, it&#x27;s not easy to walk around outside and not get within six feet of another person. In hindsight, it was relatively safe to be outdoors, but at the time, we were afraid to step outside the door for a few weeks.</p>
 <p>I also remember a lot of people thinking that the whole thing would blow over in a month or two, but everything that I had been reading made me suspect that was far too optimistic.
-As someone who walks to get to 99% of the places I'm going and thoroughly enjoys it, I realized that I would have to pick up a few new hobbies to keep my sanity.</p>
-<!-- more -->
-<p>Like so many others suddenly given more time to pursue domestic endeavors, I started trying to cook things that I'd never tried before.
-After a few loaves of bread and even more cleaning than I usually do, I realized that I'd need more creative outlets to occupy my time.
-I also found myself playing an unhealthy dose of games like Animal Crossing, which sparked an itch that I've had ever since I was a child.</p>
+As someone who walks to get to 99% of the places I&#x27;m going and thoroughly enjoys it, I realized that I would have to pick up a few new hobbies to keep my sanity.</p>
+<p>Like so many others suddenly given more time to pursue domestic endeavors, I started trying to cook things that I&#x27;d never tried before.
+After a few loaves of bread and even more cleaning than I usually do, I realized that I&#x27;d need more creative outlets to occupy my time.
+I also found myself playing an unhealthy dose of games like Animal Crossing, which sparked an itch that I&#x27;ve had ever since I was a child.</p>
 <p>That summer, Unity started offering all its online learning courses for free, and I started to dive in.
-This wouldn't be the first time I thought about developing video games.
-When I was in elementary school in the 1980s, my neighbor and childhood best friend's dad had brought home an IBM PC.
+This wouldn&#x27;t be the first time I thought about developing video games.
+When I was in elementary school in the 1980s, my neighbor and childhood best friend&#x27;s dad had brought home an IBM PC.
 We were all familiar with the Apple IIes at school, but this thing was a completely different beast.
 It had one of those green and black displays (high tech compared to printers),
-and flipping the power switch on the back made it sound like an airplane was taking off inside my neighbor's basement.
-Even at that time, it was not a new computer – we affectionately called it "The Dinosaur."</p>
+and flipping the power switch on the back made it sound like an airplane was taking off inside my neighbor&#x27;s basement.
+Even at that time, it was not a new computer – we affectionately called it &quot;The Dinosaur.&quot;</p>
 <p>Other than drawing awesome pictures with LOGO at school, this was probably my first introduction to programming languages.
 We learned how to do a few things in BASIC, then immediately started to plan out how to build our own video game.
 I sketched out a bunch of characters and sprites on graph paper, but we never finished our <em>Bomber Man</em> clone.</p>
 <p>A few years later, this same friend introduced me to a ray tracing program that I used to render my first 3D models.
 I remember saying to my friend, <em>can you imagine when computers are powerful enough to do this in real time? And maybe even simulate sound waves for audio?</em>
-He told me that it'd probably be a while before they'd be able to do that.</p>
+He told me that it&#x27;d probably be a while before they&#x27;d be able to do that.</p>
 <p>I continued to play video games through high school and was blown away by this thing called the Internet, but never really tinkered with the idea of game development again for years.
-I learned Flash in college and made a few experimental, interactive art sort of things, but nothing that would clearly be considered a "game."</p>
+I learned Flash in college and made a few experimental, interactive art sort of things, but nothing that would clearly be considered a &quot;game.&quot;</p>
 <p>Then, some time into my career as a web developer, I realized that JavaScript libraries and browser capabilities had reached a point where you could feasibly make a game using Web technology.
 I built a few prototypes for music-based, education-focused games using Web Audio APIs, but never saw any of these to completion.</p>
-<p>Fast forward to 2020. I'm reading Unity docs and watching tutorials on YouTube at 2x speed, thinking to myself: <em>this all looks a lot more accessible than I thought.</em>
-Coming from a web development background, C# feels like what TypeScript wants to be – one day, when it grows up – and although the Unity desktop application takes a while to learn the ropes, it's not as quirky as some other professional-level applications that I've used in the past.
-<em>If you're curious about learning Unity, I'd highly recommend one of their tutorial game starters.
+<p>Fast forward to 2020. I&#x27;m reading Unity docs and watching tutorials on YouTube at 2x speed, thinking to myself: <em>this all looks a lot more accessible than I thought.</em>
+Coming from a web development background, C# feels like what TypeScript wants to be – one day, when it grows up – and although the Unity desktop application takes a while to learn the ropes, it&#x27;s not as quirky as some other professional-level applications that I&#x27;ve used in the past.
+<em>If you&#x27;re curious about learning Unity, I&#x27;d highly recommend one of their tutorial game starters.
 They have a lot of things set up for you, and it only takes a few hours to go from nothing to a playable prototype.</em></p>
 <p>As I continued to learn Unity, I toyed around with a few different prototypes, but always kept coming back to the idea of building an adventure game.
-I loved adventure and RPG games like <em>Zelda</em>, <em>Earth Bound</em>, and <em>Final Fantasy VII</em> when I was younger, and it's one of the genres I still really enjoy as an adult.
-I also thought it might be a good way to keep the game mechanics focused and keep a narrow scope for the project, without having to worry about the physics of things flying around – <em>I'll write more about the Hoverboard later.</em></p>
+I loved adventure and RPG games like <em>Zelda</em>, <em>Earth Bound</em>, and <em>Final Fantasy VII</em> when I was younger, and it&#x27;s one of the genres I still really enjoy as an adult.
+I also thought it might be a good way to keep the game mechanics focused and keep a narrow scope for the project, without having to worry about the physics of things flying around – <em>I&#x27;ll write more about the Hoverboard later.</em></p>
 <p>Like many other sci-fi fans, I had started writing notes for an interactive time travel novel about 15 years ago.
-Since I'm nowhere near turning that into a story of its own, I decided to rework the story into a game format.
+Since I&#x27;m nowhere near turning that into a story of its own, I decided to rework the story into a game format.
 One of the biggest changes from the original story was that I wanted to make a game that both teenagers and adults could enjoy.
-The original story was too dark and wouldn't lend itself to some of the themes I started aiming for.
-I didn't want to fall into the ludonarrative dissonance trap of having a young protagonist living a double life as a mass murderer, so I started to build out mechanics that could work in a completely non-violent game.
+The original story was too dark and wouldn&#x27;t lend itself to some of the themes I started aiming for.
+I didn&#x27;t want to fall into the ludonarrative dissonance trap of having a young protagonist living a double life as a mass murderer, so I started to build out mechanics that could work in a completely non-violent game.
 I also wanted to avoid the apocalyptic sci-fi trope that so many games adopt.
 While it can make for beautiful looking art, I wanted this game to paint a positive outlook on the future, as well as try to capture some of the beauty of urban life and all the people and social connections you make in a city.
-We'll see how well I can pull this off.</p>
+We&#x27;ll see how well I can pull this off.</p>
 <p>Fast forward to today.
-Coming from knowing next to nothing about Unity, three years later I'm preparing to publish my first game on Steam.
-There's still a lot of work to be done to take it to the finish line, and I'm planning on writing more on this blog as I progress.
-The next posts will likely be more development-related as I try to share what I've learned so far and the hurdles and challenges I'll encounter in the future.
-Thanks for reading, and I hope you'll follow along!</p>
-<!--
-- continuing
-- sci-fi novel
-- adapting for young adults
-- themes
-  - non-violent – ludonarrative dissonance
-  - adventure + puzzles
-  - story driven
-  - not post-apocalyptic / positive vibes
-  - late capitalism
-  - time travel
--->
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+Coming from knowing next to nothing about Unity, three years later I&#x27;m preparing to publish my first game on Steam.
+There&#x27;s still a lot of work to be done to take it to the finish line, and I&#x27;m planning on writing more on this blog as I progress.
+The next posts will likely be more development-related as I try to share what I&#x27;ve learned so far and the hurdles and challenges I&#x27;ll encounter in the future.
+Thanks for reading, and I hope you&#x27;ll follow along!</p></body></html>

@@ -1,36 +1,440 @@
-<!DOCTYPE html>
-<html lang="en-us"><head><title>The Design Graph</title><meta name="description" content="A constraint-based system for organizing styles in UI design"/><meta name="viewport" content="width=device-width"/><link rel="icon" type="image/png" href="/favicon.png"/><link rel="stylesheet" href="/style.css"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&amp;display=swap" crossorigin="true"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HFKR2KM1HK');</script><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/design-graph"/><meta property="og:title" content="The Design Graph"/><meta property="og:description" content="A constraint-based system for organizing styles in UI design"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/></head><body class=""><header class="container mb3"><div class="flex mt2"><div class="flex rev angr angr-sm mr2 flex-grow"></div><div class="h5 p1 caps flex rev ml2 angl angl-sm">v512.16.0</div><button id="color-button" title="Change color mode" class="colormode ml1"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C22.3431 0 20.7255 0.167893 19.1632 0.487595C10.8718 2.18425 4.13795 8.15644 1.36564 16C0.481233 18.5022 0 21.1949 0 24C0 37.2548 10.7452 48 24 48ZM42 24C42 33.9411 33.9411 42 24 42V6C33.9411 6 42 14.0589 42 24Z" fill="currentColor"></path></svg></button></div><div class="h0 t3 caps"><a href="/">Jxnblk</a></div><hr class="bar barl mt2 mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav></header><div class="container mb4"><div class="inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm">Blog <span aria-hidden="true">//</span></div><h1 class="h2 caps mb3">The Design Graph</h1><div class="flex flex-wrap mb2"><div class="caps h6 mr1">2/18/2020</div></div><main class="prose mb3"><!--
-import Graph from '../../components/graph'
--->
-<p>Working on various websites and web apps for over a decade,
-I've gravitated around certain words and phrases to talk about design constraints in user interfaces.
+<html lang="en-us"><head><meta name="viewport" content="width=device-width"/><link rel="preload" as="image" href="https://blog.jxnblk.com/images/design-graph-1.webp"/><link rel="preload" as="image" href="https://blog.jxnblk.com/images/design-graph-2.webp"/><link rel="preload" as="image" href="https://blog.jxnblk.com/images/design-graph-3.webp"/><link rel="preload" as="image" href="https://blog.jxnblk.com/images/design-graph-4.webp"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script><title>Jxnblk | Brent Jackson</title><meta name="description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><link rel="icon" type="image/png" href="/favicon.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@jxnblk"/><meta name="twitter:creator" content="@jxnblk"/><meta property="og:url" content="https://jxnblk.com/blog/design-graph"/><meta property="og:title" content="Jxnblk | Brent Jackson"/><meta property="og:description" content="Aspiring indie game developer, software engineer, and proud cat parent"/><meta property="og:image" content="https://jxnblk.com/images/avatar.png"/><meta name="twitter:image" content="https://jxnblk.com/images/avatar.png"/><link rel="stylesheet" href="/style.css"/><style>* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: 'Lexend', system-ui, sans-serif;
+  line-height: 1.875;
+  color: var(--text, white);
+  background-color: var(--bg, black);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  --text: white;
+  --bg: black;
+  --hi: cyan;
+}
+
+.lite {
+  --text: black;
+  --bg: #eef6f6;
+  --hi: blue;
+}
+
+.pink {
+  --text: #2e050c;
+  --bg: #ffccd5;
+  --hi: #f50;
+}
+
+.orange {
+  --text: #f60;
+  --bg: #210;
+}
+
+.gray {
+  --text: #eee;
+  --bg: #444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  font-weight: 500;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--hi, cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
+  /* glow
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px #fff,
+    0 0 16px #0ff;
+  ;
+  */
+}
+
+pre, code {
+  font-family: Menlo, monospace;
+  font-size: 14px;
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+figcaption {
+  font-size: 12px;
+}
+
+.nav {
+  display: inline-block;
+  padding: 4px;
+}
+
+.h0 { font-size: 6vw }
+.h1 { font-size: 24px }
+.h2 { font-size: 20px }
+.h3, .h4 { font-size: 16px }
+.h5, .h6 { font-size: 12px }
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.t2 { letter-spacing: 0.6em }
+.t3 { letter-spacing: 1.2em }
+.lh1 { line-height: 1 }
+.bold { font-weight: 700 }
+.medium { font-weight: 500 }
+.right { text-align: right }
+
+.rev {
+  color: black;
+  background-color: white;
+}
+
+.border {
+  border: 2px solid white;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
+.block { display: block }
+.inline-block { display: inline-block }
+
+.oh { overflow: hidden }
+
+.flex-grow { flex-grow: 1 }
+.flex-none { flex: none; min-width: 0 }
+.flex-wrap { flex-wrap: wrap }
+
+.colormode {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin: 0;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pad { padding: 4px }
+.p1 { padding: 16px }
+.p2 { padding: 32px }
+.p3 { padding: 64px }
+.p4 { padding: 128px }
+
+.m0 { margin: 0 }
+.ma { margin: auto }
+
+.my1 { margin-top: 16px; margin-bottom: 16px; }
+.my2 { margin-top: 32px; margin-bottom: 32px; }
+.my3 { margin-top: 64px; margin-bottom: 64px; }
+.my4 { margin-top: 128px; margin-bottom: 128px; }
+
+.mt1 { margin-top: 16px }
+.mt2 { margin-top: 32px }
+.mt3 { margin-top: 64px }
+.mt4 { margin-top: 128px }
+
+.mb1 { margin-bottom: 16px }
+.mb2 { margin-bottom: 32px }
+.mb3 { margin-bottom: 64px }
+.mb4 { margin-bottom: 128px }
+
+.mx1 { margin-left: 16px; margin-right: 16px; }
+.mx2 { margin-left: 32px; margin-right: 32px; }
+.mx3 { margin-left: 64px; margin-right: 64px; }
+.mx4 { margin-left: 128px; margin-right: 128px; }
+
+.mr1 { margin-right: 16px }
+.mr2 { margin-right: 32px }
+.mr3 { margin-right: 64px }
+.mr4 { margin-right: 128px }
+
+.ml1 { margin-left: 16px }
+.ml2 { margin-left: 32px }
+.ml3 { margin-left: 64px }
+.ml4 { margin-left: 128px }
+
+.rel { position: relative }
+.abs-se {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 3px;
+  color: var(--bg);
+  background-color: var(--text);
+  padding: 16px;
+  min-height: 64px;
+  transition-property: transform;
+  transition-duration: 0.05s;
+  transition-timing-function: ease-out;
+}
+.btn:hover {
+  color: black;
+  background-color: cyan;
+  box-shadow: 0 0 16px 16px rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  animation-name: pulsate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+    transform: scale(1.05);
+    /*
+    */
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.btn-black {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+.list li {
+}
+
+/* angled boxes */
+.angr,
+.angl {
+  position: relative;
+  height: 64px;
+}
+.angr::after,
+.angl::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 64px;
+  width: 32px;
+}
+
+.angr::after {
+  right: -32px;
+  /* angle down */
+  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
+}
+.angl::after {
+  left: -32px;
+  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
+}
+.angr-up::after {
+  /* angle up */
+  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
+}
+.angl-up::after {
+  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
+}
+.angr-sm, .angl-sm {
+  height: 32px;
+}
+.angr-sm::after,
+.angl-sm::after {
+  height: 32px;
+  width: 16px;
+}
+.angr-sm::after {
+  right: -16px;
+}
+.angl-sm::after {
+  left: -16px;
+}
+
+.line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+
+.bar {
+  border: 0;
+  height: 4px;
+  background-color: white;
+  position: relative;
+  overflow: visible;
+}
+.bar::after {
+  content: '';
+  display: block;
+  width: 128px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
+  background-image: linear-gradient(45deg, transparent 32px, white 32px);
+}
+.barl::before {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(44deg, white 64px, transparent 64px);
+}
+
+.bg-warning {
+  background-image: url(images/warning-stripes.svg);
+  background-repeat: repeat;
+}
+
+.bg-stripe {
+  background-image: url(images/stripe.svg);
+  background-repeat: repeat;
+  background-size: 16px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prose {
+  max-width: 48em;
+}
+.prose p {
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.prose pre {
+  color: var(--hi, cyan);
+}
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+.prose h2 { font-size: 20px }
+.prose h3 { font-size: 16px }
+.prose h4 { font-size: 12px }
+.prose h5, .prose h6 { font-size: 10px }
+
+.prose blockquote {
+  border-left-style: solid;
+  border-left-width: 2px;
+  padding-left: 32px;
+  margin-left: 0;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--hi, cyan);
+}
+
+@media screen and (max-width: 64em) {
+  .flex-break {
+    flex-direction: column;
+  }
+  .sm-hide {
+    display: none;
+  }
+  .columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.debug {
+  outline: 2px solid rgba(0, 255, 255, 0.5);
+}
+.debug * {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+</style></head><body><p>Working on various websites and web apps for over a decade,
+I&#x27;ve gravitated around certain words and phrases to talk about design constraints in user interfaces.
 Despite the rich vocabulary for talking about visual design,
-it feels like there isn't a great way to accurately describe the interconnected nature of working with design constraints.
+it feels like there isn&#x27;t a great way to accurately describe the interconnected nature of working with design constraints.
 Talking about <em>color palettes</em>, using <em>typographic scales</em>,
 <em>themes</em> to codify the <em>design language</em>,
 or the <em>component API</em> of a particular library has often felt a little too disjointed for what I think should be a tightly woven system.</p>
-<p>The term <em>design systems</em> used to somewhat fill this void, however it's taken on a much larger meaning over the past few years
+<p>The term <em>design systems</em> used to somewhat fill this void, however it&#x27;s taken on a much larger meaning over the past few years
 and includes the people, organizations, and processes (among many other things), in addition to the implementation details.
 So, how can we talk about the implementation details of UI design in a more precise way?
 And, how can we build upon these concepts to push UI design to a higher level of abstraction?</p>
 <p>While working on tools that prioritize <a href="/blog/interoperability">interoperability</a>, <a href="/blog/themeability">themeability</a>, <a href="/blog/portability">portability</a>, and the <a href="/blog/a-conceptual-look-at-theming">concepts</a> of libraries like <a href="https://theme-ui.com">Theme UI</a>,
-I've started thinking about a more holistic view that I call the <em>Design Graph</em>.</p>
+I&#x27;ve started thinking about a more holistic view that I call the <em>Design Graph</em>.</p>
 <h2>What is the Design Graph?</h2>
 <blockquote>
 <p>The Design Graph is a constraint-based system for organizing styles in UI design.</p>
 </blockquote>
-<p>The Design Graph isn't an actual implementation, but rather a conceptual model
+<p>The Design Graph isn&#x27;t an actual implementation, but rather a conceptual model
 that includes pairwise relationships between its parts, or <em>nodes</em> to borrow a term from graph theory.
 <a href="https://theme-ui.com">Theme UI</a> is one implementation that attempts to adhere to this model,
-and it's a great example of how the Design Graph can become more than the sum of its parts.
-Theme UI's source code isn't particularly complex or large, and it's similar to a few other libraries out there.
-The thing that really differentiates Theme UI is that it's meant to be built upon, hacked on, and iterated on to enable a higher level of
+and it&#x27;s a great example of how the Design Graph can become more than the sum of its parts.
+Theme UI&#x27;s source code isn&#x27;t particularly complex or large, and it&#x27;s similar to a few other libraries out there.
+The thing that really differentiates Theme UI is that it&#x27;s meant to be built upon, hacked on, and iterated on to enable a higher level of
 <a href="/blog/interoperability">interoperability</a> across libraries.
-<strong>If you only look at what Theme UI <em>does</em>, you'll easily miss what it can <em>enable.</em></strong></p>
+<strong>If you only look at what Theme UI <em>does</em>, you&#x27;ll easily miss what it can <em>enable.</em></strong></p>
 <p>If you use Theme UI to build Gatsby themes, a component library, or a website,
 these things should all <em>just work</em> with other tools like <a href="https://blocks-ui.com">Blocks UI</a>.
 In the future, imagine if there are VS Code and Figma plugins, documentation generators, static analysis tools, and more
@@ -46,12 +450,12 @@ With a standard interface and naming conventions for storing raw values in your 
 more and more tools and abstractions can be built on top of this lower-level framework.
 By naming things in a consistent way, we get <em>interoperability</em> for free.</p>
 <h3><em>Where should we put this?</em></h3>
-<p>Although people love to organize things, we're really terrible at doing so in a way that makes sense to others.
-The Design Graph doesn't try to completely solve this, but it provides guidance for where certain aspects of your UI design should live.
+<p>Although people love to organize things, we&#x27;re really terrible at doing so in a way that makes sense to others.
+The Design Graph doesn&#x27;t try to completely solve this, but it provides guidance for where certain aspects of your UI design should live.
 For example, raw color values belong in the <code>colors</code> <em>scale</em>, and variations of your button styles belong in the <code>buttons</code> <em>variants</em>.</p>
 <h3><em>How do we use this?</em></h3>
 <p>Creating sensible but flexible component APIs is hard.
-When building out a library of components, it's generally beneficial to reuse props APIs across multiple components whenever possible.
+When building out a library of components, it&#x27;s generally beneficial to reuse props APIs across multiple components whenever possible.
 This helps maintain a <em>minimum API surface area</em> and allows for a <em>learn once, use anywhere</em> effect.
 With Theme UI,
 contextual component styles can be set with the <code>variant</code> prop, and can be augmented or overridden with the <code>sx</code> prop, which acts as a sort of escape hatch.</p>
@@ -69,91 +473,25 @@ Ideally, themes follow a common interface (or schema) and can be swapped out in 
 <p>These nodes are inherently interconnected and help form the larger graph.</p>
 <h2>Themes to Scales</h2>
 <p>A <em>theme</em> object is composed of multiple <em>scales</em>. These scales could include fonts, font sizes, colors, and more.</p>
-<p><img src="https://blog.jxnblk.com/images/design-graph-1.webp" alt="Illustration of theme and scale nodes"></p>
-<!--
-<Graph
-  title='Illustration of theme and scale nodes'
-  nodes={[
-    [8, 12, 6, 'Theme'],
-    [18, 4, , 'Fonts'],
-    [28, 10, , 'Colors'],
-    [23, 20, , 'Space'],
-  ]}
-  edges={[
-    [0, 1],
-    [0, 2],
-    [0, 3],
-  ]}
-/>
--->
+<p><img src="https://blog.jxnblk.com/images/design-graph-1.webp" alt="Illustration of theme and scale nodes"/></p>
 <h2>Scales to Components</h2>
-<p>A <em>component's</em> styles use <em>scales</em>.</p>
-<p><img src="https://blog.jxnblk.com/images/design-graph-2.webp" alt="Illustration of scale and component nodes"></p>
-<!--
-<Graph
-  title='Illustration of scale and component nodes'
-  nodes={[
-    [26, 14, 6, 'Component'],
-    [8, 4, , 'Fonts'],
-    [4, 12, , 'Colors'],
-    [10, 20, , 'Space'],
-  ]}
-  edges={[
-    [0, 1],
-    [0, 2],
-    [0, 3],
-  ]}
-/>
--->
+<p>A <em>component&#x27;s</em> styles use <em>scales</em>.</p>
+<p><img src="https://blog.jxnblk.com/images/design-graph-2.webp" alt="Illustration of scale and component nodes"/></p>
 <h2>Scales to Variants</h2>
 <p><em>Variants</em> also use <em>scales</em>.
-Variants are usually the parts of a component's styles that might change contextually or dynamically.</p>
-<p><img src="https://blog.jxnblk.com/images/design-graph-3.webp" alt="Illustration of scale and variant nodes"></p>
-<!--
-<Graph
-  title='Illustration of scale and variant nodes'
-  nodes={[
-    [24, 5, 5, 'Variant'],
-    [24, 18, 5, 'Variant'],
-    [10, 4, , 'Fonts'],
-    [4, 12, , 'Colors'],
-    [10, 20, , 'Space'],
-  ]}
-  edges={[
-    [0, 2],
-    [0, 3],
-    [0, 4],
-    [1, 2],
-    [1, 3],
-    [1, 4],
-  ]}
-/>
--->
+Variants are usually the parts of a component&#x27;s styles that might change contextually or dynamically.</p>
+<p><img src="https://blog.jxnblk.com/images/design-graph-3.webp" alt="Illustration of scale and variant nodes"/></p>
 <h2>Component to Variants</h2>
 <p>A <em>component</em> can use multiple <em>variants</em>. Some variants can also be shared across multiple components.
 For example, you could share accessible color combinations with a badge component and an alert or message component.</p>
-<p><img src="https://blog.jxnblk.com/images/design-graph-4.webp" alt="Illustration of component and variant nodes"></p>
-<!--
-<Graph
-  title='Illustration of component and variant nodes'
-  nodes={[
-    [26, 14, 6, 'Button'],
-    [8, 6, 4, 'Primary'],
-    [4, 20, 4, 'Secondary'],
-  ]}
-  edges={[
-    [0, 1],
-    [0, 2],
-  ]}
-/>
--->
+<p><img src="https://blog.jxnblk.com/images/design-graph-4.webp" alt="Illustration of component and variant nodes"/></p>
 <h2>Putting it all together</h2>
 <p>As an example to demonstrate how some of these pieces fit together, a <em>theme</em> with typographic <em>scales</em> can be used to create a <em>component</em> that accepts multiple <em>variants</em>.</p>
 <pre><code class="language-js">// example theme with typographic scales
 {
   fonts: {
-    body: 'Helvetica',
-    heading: 'Garamond',
+    body: &#x27;Helvetica&#x27;,
+    heading: &#x27;Garamond&#x27;,
   },
   fontWeights: {
     body: 400,
@@ -171,72 +509,46 @@ For example, you could share accessible color combinations with a badge componen
 <pre><code class="language-js">// example variants
 text: {
   heading: {
-    fontFamily: 'heading',
-    fontWeight: 'heading',
-    lineHeight: 'heading',
+    fontFamily: &#x27;heading&#x27;,
+    fontWeight: &#x27;heading&#x27;,
+    lineHeight: &#x27;heading&#x27;,
     fontSize: 5,
   },
   title: {
-    fontFamily: 'heading',
-    fontWeight: 'heading',
-    lineHeight: 'heading',
+    fontFamily: &#x27;heading&#x27;,
+    fontWeight: &#x27;heading&#x27;,
+    lineHeight: &#x27;heading&#x27;,
     fontSize: 6,
   },
   lead: {
-    fontFamily: 'body',
-    fontWeight: 'body',
-    lineHeight: 'body',
+    fontFamily: &#x27;body&#x27;,
+    fontWeight: &#x27;body&#x27;,
+    lineHeight: &#x27;body&#x27;,
     fontSize: 3,
   },
   small: {
-    fontFamily: 'body',
-    fontWeight: 'body',
-    lineHeight: 'body',
+    fontFamily: &#x27;body&#x27;,
+    fontWeight: &#x27;body&#x27;,
+    lineHeight: &#x27;body&#x27;,
     fontSize: 0,
   },
 }
 </code></pre>
 <p>Then these <em>variants</em> can be used in a <em>component</em>.</p>
-<pre><code class="language-jsx">&#x3C;Text as='h1' variant='heading'>
+<pre><code class="language-jsx">&lt;Text as=&#x27;h1&#x27; variant=&#x27;heading&#x27;&gt;
   Hello
-&#x3C;/Text>
-&#x3C;Text variant='lead'>
+&lt;/Text&gt;
+&lt;Text variant=&#x27;lead&#x27;&gt;
   This component has variants.
-&#x3C;/Text>
+&lt;/Text&gt;
 </code></pre>
 <h2>More than the sum of its parts</h2>
 <p>Beyond a single application or site, the Design Graph is the sort of thing that can exist at a larger level across an entire organization or across multiple organizations.
 In a way, the more libraries and applications that adopt this concept, the larger the graph gets,
 and the more tooling we can share.
-Imagine installing a component from npm, and it's already compatible with your design system.
+Imagine installing a component from npm, and it&#x27;s already compatible with your design system.
 Or imagine reusing a core set of components with variants across multiple clients with drastically different visual designs.
 Imagine all these components can be visually tweaked from your design tool using a plugin
 and the changes are reflected back in your text editor.
-If you're interested in helping build and shape this vision, join us on <a href="https://github.com/system-ui/theme-ui">GitHub</a> or let me know what you think on <a href="https://twitter.com/jxnblk">Twitter</a>.</p>
-<p><em>Thanks to John Otander for related explorations in <a href="https://github.com/system-ui/designql">DesignQL</a>, Jina Anne for all the work on design tokens, and Diana Mounter for infinite inspiration.</em></p>
-</main><div class=""><a href="https://store.steampowered.com/app/2437530/Novantica/" class=""><img src="/images/novantica-promo.jpg" alt="Novantica game screenshot with protagonist on hoverboard"/></a><div class="p2 rev flex flex-wrap"><p class="my1">I&#x27;m currently working on Novantica, a sci-fi adventure game.</p><div class="ma sm-hide"></div><a href="https://store.steampowered.com/app/2437530/Novantica/" class="btn btn-black">Wishlist on Steam</a></div></div></div><footer class="container mb3"><div class="bg-warning" style="height:256px;clip-path:polygon(evenodd, 0 0, 100% 0, 100% 128px, 30% 128px, 30% 256px, 0 256px);margin-bottom:-96px"></div><div class="flex caps oh"><div class="ma"></div><img src="/images/avatar-dark.svg" alt="avatar" loading="lazy"/><div class="p2">Jxnblk<br/>MMXXIII</div><div class="p2 sm-hide">256.1024</div><div class="p2 flex-none"><img aria-hidden="true" src="/images/bot-term.svg" loading="lazy"/></div></div><hr class="bar mb2"/><nav class="flex flex-wrap caps h5"><div class="mr2" aria-hidden="true">//</div><a href="/blog" class="nav">Blog</a><div class="mr2"></div><a href="https://twitter.com/jxnblk" target="_blank" class="nav"><span aria-hidden="true">x(</span>Twitter<span aria-hidden="true">)</span></a><div class="mr2"></div><a href="https://github.com/jxnblk" target="_blank" class="nav">GitHub<span aria-hidden="true">.{}</span></a><div class="mr2"></div><a href="https://threads.net/@jxnblk" target="_blank" class="nav">Threads<span aria-hidden="true">[]</span></a></nav><div class="h5 mt3 flex"><img aria-hidden="true" src="/images/vantom.svg" width="32" height="32" loading="lazy"/><div class="ma"></div><div>© 2023 Brent Jackson. All rights reserved.</div></div></footer><script>
-const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
-];
-
-let index = 0;
-
-const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
-
-function cycle () {
-  index = (index + 1) % modes.length;
-  const next = modes[index];
-  document.body.className = next;
-  localStorage.setItem('color', next);
-};
-
-const el = document.querySelector('#color-button');
-if (el != null) el.addEventListener('click', cycle);
-</script></body></html>
+If you&#x27;re interested in helping build and shape this vision, join us on <a href="https://github.com/system-ui/theme-ui">GitHub</a> or let me know what you think on <a href="https://twitter.com/jxnblk">Twitter</a>.</p>
+<p><em>Thanks to John Otander for related explorations in <a href="https://github.com/system-ui/designql">DesignQL</a>, Jina Anne for all the work on design tokens, and Diana Mounter for infinite inspiration.</em></p></body></html>
