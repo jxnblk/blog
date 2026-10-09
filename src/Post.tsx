@@ -5,14 +5,16 @@ import { pad } from './Blog';
 
 import type { PostData } from "./types";
 
-export default function Post (props: PostData & {}) {
+export default function Post (props: PostData & {
+  css: string;
+}) {
   if (!props.data.date) {
     console.error("NO DATE FOR POST " + JSON.stringify(props.data, null, 2));
     return null;
   }
 
   return (
-    <HTML path={props.path} data={props.data}>
+    <HTML path={props.path} data={props.data} css={props.css}>
       <Header />
       <div className='container mb4'>
         {props.data.draft && (

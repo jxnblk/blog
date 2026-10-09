@@ -28,6 +28,15 @@ import type { Page, PostData, Metadata } from "./src/types";
 
 const BASE_URL = "https://jxnblk.com";
 
+const bundle = await Bun.build({
+  entrypoints: ["./src/style.css"],
+  minify: true,
+  external: [
+    "images/*",
+  ],
+});
+const css = await bundle.outputs[0].text();
+
 function parseFile (filename: string) {
   const slug = basename(filename, ".md");
   const path = "blog/" + slug;
@@ -73,7 +82,7 @@ async function readPosts (): Promise<PostData[]> {
 }
 
 function createPostPage (post: PostData): Page {
-  const el = <Post {...post} />;
+  const el = <Post {...post} css={css} />;
   const html = renderToStaticMarkup(el);
   return {
     path: post.path,
@@ -83,17 +92,17 @@ function createPostPage (post: PostData): Page {
 
 async function getPages (posts: PostData[]): Promise<Page[]> {
   const pages = posts.map(createPostPage);
-  const home = <Home posts={posts} />
+  const home = <Home posts={posts} css={css} />
   pages.push({
     path: "",
     html: renderToStaticMarkup(home),
   });
-  const blog = <Blog posts={posts} />;
+  const blog = <Blog posts={posts} css={css} />;
   pages.push({
     path: "blog",
     html: renderToStaticMarkup(blog),
   });
-  const notfound = <NotFound />;
+  const notfound = <NotFound css={css} />;
   pages.push({
     path: "404",
     html: renderToStaticMarkup(notfound),

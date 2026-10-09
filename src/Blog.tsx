@@ -6,6 +6,7 @@ import type { PostData } from "./types";
 
 export default function Blog (props: {
   posts: PostData[];
+  css: string;
 }) {
   const posts = props.posts?.sort((a, b) => {
     if (a.data.date < b.data.date) return 1;
@@ -16,6 +17,7 @@ export default function Blog (props: {
   return (
     <HTML
       path="blog"
+      css={props.css}
       data={{
         title: "Blog",
         // title: "Blog",

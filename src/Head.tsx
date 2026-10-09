@@ -1,10 +1,9 @@
-import css from "./style.css" with { type: "text" };
-
 export default function Head (props: {
   image?: string;
   title?: string;
   description?: string;
   path: string;
+  css: string;
 }) {
   const image = props.image || 'https://jxnblk.com/images/avatar.png';
   const title = props.title || 'Jxnblk | Brent Jackson';
@@ -31,7 +30,7 @@ export default function Head (props: {
       <meta property='og:description' content={desc} />
       <meta property='og:image' content={image} />
       <meta name='twitter:image' content={image} />
-      <style dangerouslySetInnerHTML={{ __html: css }} />
+      <style dangerouslySetInnerHTML={{ __html: props.css }} />
     </head>
   );
 };
