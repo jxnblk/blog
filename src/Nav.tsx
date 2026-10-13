@@ -1,31 +1,28 @@
 export default function Nav () {
   return (
-    <nav className='flex flex-wrap caps h5'>
-      <div className='mr2' aria-hidden>
+    <nav>
+      <div aria-hidden>
         //
       </div>
-      <a href='/blog' className='nav'>
+      <a href='/blog'>
         Blog
       </a>
-      <div className='mr2' />
+      <div />
       <a
         href='https://twitter.com/jxnblk'
-        target='_blank'
-        className='nav'>
+        target='_blank'>
         <span aria-hidden>x(</span>Twitter<span aria-hidden>)</span>
       </a>
-      <div className='mr2' />
+      <div />
       <a
         href='https://github.com/jxnblk'
-        target='_blank'
-        className='nav'>
+        target='_blank'>
         GitHub<span aria-hidden>{'.{}'}</span>
       </a>
-      <div className='mr2' />
+      <div />
       <a
         href='https://threads.net/@jxnblk'
-        target='_blank'
-        className='nav'>
+        target='_blank'>
         Threads<span aria-hidden>[]</span>
       </a>
     </nav>

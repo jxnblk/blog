@@ -16,13 +16,13 @@ export default function Post (props: PostData & {
   return (
     <HTML path={props.path} data={props.data} css={props.css}>
       <Header />
-      <div className='container mb4'>
+      <div>
         {props.data.draft && (
-          <div className='p1 caps rev angr mr4'>
+          <div>
             Draft
           </div>
         )}
-        <div className='inline-flex p1 mb1 h6 caps rev angr angr-up angr-sm'>
+        <div>
           {props.data.devlog ? (
             <>
               Devlog {pad(props.data.devlog)}
@@ -33,22 +33,21 @@ export default function Post (props: PostData & {
             </>
           )}
         </div>
-        <h1 className='h2 caps mb3'>
+        <h1>
           {props.data.title}
         </h1>
-        <div className='flex flex-wrap mb2'>
-          <div className='caps h6 mr1'>
+        <div>
+          <div>
             {props.data.date.toLocaleDateString('en-US', { timeZone: 'UTC' })}
           </div>
           {props.data.tags?.map(tag => (
             <div
-              key={tag}
-              className='caps h6 lh1 rev pad mr1'>
+              key={tag}>
               #{tag}
             </div>
           ))}
         </div>
-        <main className="prose mb3">
+        <main>
           {props.tree}
         </main>
       </div>

@@ -8,8 +8,8 @@ export default function (props: {
   return (
     <HTML path="" css={props.css}>
       <Header />
-      <div className='container mt4 mb4'>
-        <div className='h0 caps bold'>
+      <div>
+        <div>
           ERR 404
         </div>
       </div>

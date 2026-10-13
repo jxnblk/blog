@@ -8,23 +8,21 @@ export default function Devlog (props: {
     .filter(p => !p.data.draft);
 
   return (
-    <section id='devlog' className='container mb4'>
-      <div className='flex mb2'>
-        <div className='flex-grow flex p2 mr2 rev angr angr-up'>
-          <h2 className='h4 caps'>
+    <section id='devlog'>
+      <div>
+        <div>
+          <h2>
             <span aria-hidden>{">$"} </span>
             Devlog
           </h2>
         </div>
-        <div aria-hidden className='flex sm-hide'>
+        <div aria-hidden>
           <img
             src='/images/arrow-box.svg'
-            className='ml2'
             loading='lazy'
           />
           <img
             src='/images/arrow-box.svg'
-            className='ml1'
             style={{
               transform: 'rotate(180deg)',
             }}
@@ -32,7 +30,6 @@ export default function Devlog (props: {
           />
           <img
             src='/images/arrow-box.svg'
-            className='ml1'
             style={{
               transform: 'rotate(-90deg)',
             }}
@@ -40,7 +37,6 @@ export default function Devlog (props: {
           />
           <img
             src='/images/arrow-box.svg'
-            className='ml1'
             style={{
               transform: 'rotate(-90deg)',
             }}
@@ -48,17 +44,16 @@ export default function Devlog (props: {
           />
         </div>
       </div>
-      <hr className='bar mb2' />
-      <ul className='list'>
+      <hr />
+      <ul>
         {posts.map(post => (
           <li
-            key={post.path}
-            className='mb3'>
+            key={post.path}>
             <BlogPostCard {...post} />
           </li>
         ))}
       </ul>
-      <div className='p1 bg-stripe' />
+      <div />
     </section>
   );
 };

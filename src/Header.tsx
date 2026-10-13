@@ -5,59 +5,58 @@ export default function Header (props: {
   home?: boolean;
 }) {
   return (
-    <header className='container mb3'>
-      <div className='flex mt2'>
-        <div className='flex rev angr angr-sm mr2 flex-grow'></div>
-        <div className='h5 p1 caps flex rev ml2 angl angl-sm'>
+    <header>
+      <div>
+        <div></div>
+        <div>
           v512.16.0
         </div>
         <ColorModeButton />
       </div>
-      <div className='h0 t3 caps'>
+      <div>
         <a href='/'>
           Jxnblk
         </a>
       </div>
       {props.home && (
         <>
-          <hr className='line' />
-          <div className='flex flex-break'>
-            <h1 className='lh1'>
-              <span className='h3 caps'>
+          <hr />
+          <div>
+            <h1>
+              <span>
                 Brent Jackson
               </span>
               <br />
-              <span className='h4 medium'>
+              <span>
                 Aspiring indie game developer, software engineer, and proud cat parent
                 <br />
                 Based in Brooklyn, NY
               </span>
             </h1>
-            <div className='ma' />
-            <div className='flex flex-none'>
-              <div className='flex flex-none rev mx1 my1 caps h2'
+            <div />
+            <div>
+              <div
                 style={{
                   width: 128,
                   height: 128,
                 }}>
-                <div className='ma'>
+                <div>
                   2023
                 </div>
               </div>
-              <div className='rev flex-none my1'>
+              <div>
                 <img
                   src='/images/avatar.svg'
                   alt='Avatar'
                   width='128'
                   height='128'
-                  className=''
                 />
               </div>
             </div>
           </div>
         </>
       )}
-      <hr className='bar barl mt2 mb2' />
+      <hr />
       <Nav />
     </header>
   );

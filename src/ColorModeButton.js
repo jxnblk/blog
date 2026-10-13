@@ -4,8 +4,7 @@ export default function ColorModeButton () {
   return (
     <button
       id='color-button'
-      title='Change color mode'
-      className='colormode ml1'>
+      title='Change color mode'>
       <svg
         width="24"
         height="24"
