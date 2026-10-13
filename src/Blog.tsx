@@ -20,7 +20,6 @@ export default function Blog (props: {
       css={props.css}
       data={{
         title: "Blog",
-        // title: "Blog",
       }}
     >
       <Header />
