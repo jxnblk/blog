@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: system-ui, sans-serif;
   line-height: 1.875;
   color: var(--text, white);
   background-color: var(--bg, black);
@@ -61,13 +61,6 @@ a:hover {
   color: var(--hi, cyan);
   background-color: rgba(0, 255, 255, 0.1);
   box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.1);
-  /* glow
-  text-shadow:
-    0 0 4px #fff,
-    0 0 8px #fff,
-    0 0 16px #0ff;
-  ;
-  */
 }
 
 pre, code {
@@ -115,8 +108,8 @@ figcaption {
 .right { text-align: right }
 
 .rev {
-  color: black;
-  background-color: white;
+  color: var(--bg);
+  background-color: var(--text);
 }
 
 .border {
@@ -256,100 +249,6 @@ figcaption {
 .list li {
 }
 
-/* angled boxes */
-.angr,
-.angl {
-  position: relative;
-  height: 64px;
-}
-.angr::after,
-.angl::after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  content: '';
-  display: block;
-  height: 64px;
-  width: 32px;
-}
-
-.angr::after {
-  right: -32px;
-  /* angle down */
-  background-image: linear-gradient(63.43deg, white 50%, transparent 50%);
-}
-.angl::after {
-  left: -32px;
-  background-image: linear-gradient(243.43deg, white 50%, transparent 50%);
-}
-.angr-up::after {
-  /* angle up */
-  background-image: linear-gradient(116.565deg, white 50%, transparent 50%);
-}
-.angl-up::after {
-  background-image: linear-gradient(-63.435deg, white 50%, transparent 50%);
-}
-.angr-sm, .angl-sm {
-  height: 32px;
-}
-.angr-sm::after,
-.angl-sm::after {
-  height: 32px;
-  width: 16px;
-}
-.angr-sm::after {
-  right: -16px;
-}
-.angl-sm::after {
-  left: -16px;
-}
-
-.line {
-  border: 0;
-  height: 2px;
-  background-color: white;
-}
-
-.bar {
-  border: 0;
-  height: 4px;
-  background-color: white;
-  position: relative;
-  overflow: visible;
-}
-.bar::after {
-  content: '';
-  display: block;
-  width: 128px;
-  height: 32px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  /* background-image: linear-gradient(63.43deg, transparent 16px, white 16px); */
-  background-image: linear-gradient(45deg, transparent 32px, white 32px);
-}
-.barl::before {
-  content: '';
-  display: block;
-  width: 96px;
-  height: 32px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background-image: linear-gradient(44deg, white 64px, transparent 64px);
-}
-
-.bg-warning {
-  background-image: url(images/warning-stripes.svg);
-  background-repeat: repeat;
-}
-
-.bg-stripe {
-  background-image: url(images/stripe.svg);
-  background-repeat: repeat;
-  background-size: 16px;
-}
-
 .columns {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -393,9 +292,6 @@ figcaption {
 }
 
 @media screen and (max-width: 64em) {
-  .flex-break {
-    flex-direction: column;
-  }
   .sm-hide {
     display: none;
   }
