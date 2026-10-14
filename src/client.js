@@ -1,10 +1,10 @@
 // backup color modes script
 const modes = [
-  '',
-  'orange',
-  'gray',
-  'pink',
-  'lite',
+  'light',
+  'foliage',
+  'paper',
+  'amber',
+  'tomato',
 ];
 
 let index = 0;
@@ -16,6 +16,7 @@ if (cn) index = modes.indexOf(cn);
 
 function cycle () {
   index = (index + 1) % modes.length;
+  console.log("cycle", index);
   const next = modes[index];
   document.body.className = next;
   localStorage.setItem('color', next);

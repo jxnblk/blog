@@ -24,11 +24,14 @@ import Home from "./src/Home";
 import Blog from "./src/Blog";
 import NotFound from "./src/404";
 
-import type { Page, PostData, Metadata } from "./src/types";
+import css from "./src/style.css" with { type: "text" };
+
+import type { Page, Context, PostData, Metadata } from "./src/types";
 
 const BASE_URL = "https://jxnblk.com";
 const OUT_DIR = "build";
-// static files copied to the output directory as-is
+const ABOUT = "src/about.md";
+
 const STATIC = [
   "images",
   "favicon.png",
@@ -36,6 +39,7 @@ const STATIC = [
   ".nojekyll",
 ];
 
+/*
 const bundle = await Bun.build({
   entrypoints: ["./src/style.css"],
   minify: true,
@@ -44,6 +48,16 @@ const bundle = await Bun.build({
   ],
 });
 const css = await bundle.outputs[0].text();
+*/
+
+async function getAbout () {
+  const raw = readFileSync(ABOUT, "utf8");
+  const data = {
+    content: raw,
+  };
+  const md = await parseMarkdown(data);
+  return md.tree;
+}
 
 function parseFile (filename: string) {
   const slug = basename(filename, ".md");
@@ -89,8 +103,13 @@ async function readPosts (): Promise<PostData[]> {
   return posts;
 }
 
+const ctx: Context = {
+  css,
+  about: await getAbout(),
+};
+
 function createPostPage (post: PostData): Page {
-  const el = <Post {...post} css={css} />;
+  const el = <Post {...post} {...ctx} />;
   const html = renderToStaticMarkup(el);
   return {
     path: post.path,
@@ -98,19 +117,20 @@ function createPostPage (post: PostData): Page {
   };
 }
 
+
 async function getPages (posts: PostData[]): Promise<Page[]> {
   const pages = posts.map(createPostPage);
-  const home = <Home posts={posts} css={css} />
+  const home = <Home posts={posts} {...ctx} />
   pages.push({
     path: "",
     html: renderToStaticMarkup(home),
   });
-  const blog = <Blog posts={posts} css={css} />;
+  const blog = <Blog posts={posts} {...ctx} />;
   pages.push({
     path: "blog",
     html: renderToStaticMarkup(blog),
   });
-  const notfound = <NotFound css={css} />;
+  const notfound = <NotFound {...ctx} />;
   pages.push({
     path: "404",
     html: renderToStaticMarkup(notfound),

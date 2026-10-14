@@ -15,13 +15,7 @@ export default function Footer () {
         <img src='/images/avatar-dark.svg' alt='avatar' loading='lazy' />
         <div>
           Jxnblk<br />
-          MMXXIII
-        </div>
-        <div>
-          256.1024
-        </div>
-        <div>
-          <img aria-hidden src='/images/bot-term.svg' loading='lazy' />
+          MMXXVI
         </div>
       </div>
       <hr />

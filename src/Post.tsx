@@ -1,7 +1,6 @@
 import HTML from "./HTML";
 import Header from './Header';
 import Footer from './Footer';
-import { pad } from './Blog';
 
 import type { PostData } from "./types";
 
@@ -22,17 +21,6 @@ export default function Post (props: PostData & {
             Draft
           </div>
         )}
-        <div>
-          {props.data.devlog ? (
-            <>
-              Devlog {pad(props.data.devlog)}
-            </>
-          ) : (
-            <>
-              Blog <span aria-hidden>//</span>
-            </>
-          )}
-        </div>
         <h1>
           {props.data.title}
         </h1>
@@ -47,7 +35,7 @@ export default function Post (props: PostData & {
             </div>
           ))}
         </div>
-        <main>
+        <main className="prose">
           {props.tree}
         </main>
       </div>

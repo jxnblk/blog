@@ -1,4 +1,5 @@
 import Head from './Head';
+import clientJS from "./client.js" with { type: "text" };
 import type { Metadata } from "./types";
 
 export default function HTML (props: {
@@ -13,6 +14,7 @@ export default function HTML (props: {
       <Head {...props.data} path={props.path} css={props.css} />
       <body>
         {props.children}
+        <script dangerouslySetInnerHTML={{ __html: clientJS }} />
       </body>
     </html>
   );

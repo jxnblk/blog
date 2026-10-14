@@ -12,6 +12,11 @@ export type Page = {
   html: string;
 };
 
+export type Context = {
+  css: string;
+  about: React.ReactElement;
+};
+
 export type Metadata = {
   title: string;
   date: Date; // |string;
