@@ -13,13 +13,20 @@ export default function Footer () {
         }}
       />
       <div>
-        <div />
-        <img src='/images/avatar-dark.svg' alt='avatar' loading='lazy' />
-        <div>
-          Jxnblk
-        </div>
+        <img
+          src='/images/avatar.svg'
+          width="96"
+          height="96"
+          alt='avatar'
+          loading='lazy'
+        />
+        <img
+          src='/images/avatar-dark.svg'
+          // width="96" height="96"
+          alt='avatar'
+          loading='lazy'
+        />
       </div>
-      <hr />
       <Nav />
       <div>
         <img
@@ -29,7 +36,6 @@ export default function Footer () {
           height='32'
           loading='lazy'
         />
-        <div />
         <div>
           © {YEAR} Brent Jackson. All rights reserved.
         </div>

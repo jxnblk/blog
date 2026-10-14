@@ -2,7 +2,10 @@ import ColorMode from "./ColorModeButton.tsx";
 
 export default function Nav () {
   return (
-    <nav>
+    <nav className="nav">
+      <a href='/'>
+        Jxnblk
+      </a>
       <a href='/blog'>
         Blog
       </a>
