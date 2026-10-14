@@ -70,66 +70,111 @@ img {
 .nav a:active {
 }
 
-/** Layout */
+/** Layout
+ * Fixed square modules. Columns are powers of 2: 4 / 8 / 16.
+ * Spans are authored against 16 columns and scaled down (÷2, ÷4)
+ * at smaller breakpoints so layouts transform mechanically.
+ */
+:root {
+  --module: 64px;
+  /* fixed baseline: 4 per 64px module, 5 per 80px module */
+  --baseline: 16px;
+  --columns: 4;
+  --scale: 4; /* 16 / --columns */
+}
+@media screen and (min-width: 512px) {
+  :root { --columns: 8; --scale: 2 }
+}
+@media screen and (min-width: 1024px) {
+  :root { --columns: 16; --scale: 1 }
+}
+@media screen and (min-width: 640px) and (max-width: 1023px) {
+  :root { --module: 80px }
+}
+@media screen and (min-width: 1280px) {
+  :root { --module: 80px }
+}
+/* below 512px, the module is fluid until mobile gets its own pass */
+@media screen and (max-width: 511px) {
+  /* leaves a 16px margin on each side; .main is centered with auto margins */
+  :root { --module: calc((100vw - 32px) / 4) }
+}
+
 .main {
-  padding: 0;
-  max-width: 1280px;
+  width: calc(var(--columns) * var(--module));
   margin-left: auto;
   margin-right: auto;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(8, minmax(64px, 1fr));
-  /*
-  grid-template-rows: repeat(auto-fill, minmax(128px, 1fr));
-  */
+  grid-template-columns: repeat(var(--columns), var(--module));
+  /* rows are one module tall, or grow to fit content */
+  grid-auto-rows: minmax(var(--module), min-content);
+  grid-auto-flow: row dense;
+}
+.grid > * {
+  min-width: 0;
+  /* span on the end line so .start-* classes can set the start line */
+  grid-column-end: span max(1, calc(var(--span, 1) / var(--scale)));
+  grid-row: span var(--rows, 1);
 }
 
-.span-1 {  grid-column: span 1 }
-.span-2 {  grid-column: span 1 }
-.span-3 {  grid-column: span 2 }
-.span-4 {  grid-column: span 2 }
-.span-5 {  grid-column: span 3 }
-.span-6 {  grid-column: span 3 }
-.span-7 {  grid-column: span 4 }
-.span-8 {  grid-column: span 4 }
-.span-9 {  grid-column: span 4 }
-.span-10 { grid-column: span 5 }
-.span-11 { grid-column: span 5 }
-.span-12 { grid-column: span 6 }
-.span-13 { grid-column: span 6 }
-.span-14 { grid-column: span 7 }
-.span-15 { grid-column: span 7 }
-.span-16 { grid-column: span 8 }
-
-@media screen and (min-width: 640px) {
+.span-1  { --span: 1 }
+.span-2  { --span: 2 }
+.span-4  { --span: 4 }
+.span-8  { --span: 8 }
+.span-16 { --span: 16 }
+.rows-1  { --rows: 1 }
+.rows-2  { --rows: 2 }
+.rows-4  { --rows: 4 }
+.rows-8  { --rows: 8 }
+/* Square blocks: rows match the scaled column span, and the box
+ * stays square even when a neighboring text block grows the row */
+.square {
+  grid-row-end: span max(1, calc(var(--span, 1) / var(--scale)));
+  aspect-ratio: 1;
+  align-self: start;
 }
 
-@media screen and (min-width: 1280px) {
-  .grid {
-    grid-template-columns: repeat(16, minmax(64px, 1fr));
-  }
-  .span-1 {}
-  .span-2 {  grid-column: span 2 }
-  .span-3 {  grid-column: span 3 }
-  .span-4 {  grid-column: span 4 }
-  .span-5 {  grid-column: span 5 }
-  .span-6 {  grid-column: span 6 }
-  .span-7 {  grid-column: span 7 }
-  .span-8 {  grid-column: span 8 }
-  .span-9 {  grid-column: span 9 }
-  .span-10 { grid-column: span 10 }
-  .span-11 { grid-column: span 11 }
-  .span-12 { grid-column: span 12 }
-  .span-13 { grid-column: span 13 }
-  .span-14 { grid-column: span 14 }
-  .span-15 { grid-column: span 15 }
-  .span-16 { grid-column: span 16 }
+.start-1  { grid-column-start: 1 }
+.start-5  { grid-column-start: calc(4 / var(--scale) + 1) }
+.start-9  { grid-column-start: calc(8 / var(--scale) + 1) }
+.start-13 { grid-column-start: calc(12 / var(--scale) + 1) }
+
+/* Text block: fixed width (8 of 16 columns) for content, sits on the baseline */
+.text-block {
+  --span: 8;
+  font-size: 16px;
+  line-height: calc(var(--baseline) * 2);
+}
+.text-block > * { margin: 0 0 calc(var(--baseline) * 2) }
+@media screen and (max-width: 1023px) {
+  .text-block { --span: 16 }
 }
 
+/* Headings stay small for now: one or two baselines */
+.heading {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: calc(var(--baseline) * 2);
+}
 
+.fill { background-color: var(--primary) }
+.fill-greeble { background-color: var(--greeble) }
 
+/* Debug overlay: toggle with the "g" key */
+.show-grid .grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 0, 0, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 0, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 160, 255, 0.15) 1px, transparent 1px);
+  background-size:
+    var(--module) var(--module),
+    var(--module) var(--module),
+    100% var(--baseline);
+}
 
 .debug {
   outline: 2px solid rgba(0, 255, 255, 0.5);
