@@ -24,7 +24,7 @@ import Home from "./src/Home";
 import Blog from "./src/Blog";
 import NotFound from "./src/404";
 
-import css from "./src/style.css" with { type: "text" };
+import cssFile from "./src/style.css" with { type: "file" };
 
 import type { Page, Context, PostData, Metadata } from "./src/types";
 
@@ -39,16 +39,17 @@ const STATIC = [
   ".nojekyll",
 ];
 
-/*
 const bundle = await Bun.build({
-  entrypoints: ["./src/style.css"],
+  entrypoints: [cssFile],
   minify: true,
+  // publicPath: "/",
   external: [
     "images/*",
+    "*.woff2",
+    "*.woff",
   ],
 });
-const css = await bundle.outputs[0].text();
-*/
+const css = (await bundle.outputs[0].text()).replaceAll("./files/", "/fonts/");
 
 async function getAbout () {
   const raw = readFileSync(ABOUT, "utf8");
@@ -165,6 +166,7 @@ async function generateJSON (posts: PostData[]) {
 }
 
 async function copyStatic () {
+  await cp("node_modules/@fontsource/ia-writer-quattro/files", join(OUT_DIR, "fonts"), { recursive: true });
   for (const name of STATIC) {
     await cp(name, join(OUT_DIR, name), { recursive: true });
   }

@@ -1,3 +1,6 @@
+@import "@fontsource/ia-writer-quattro/400.css";
+@import "@fontsource/ia-writer-quattro/700.css";
+
 * { box-sizing: border-box }
 
 :root {
@@ -38,7 +41,7 @@
 
 body {
   margin: 0;
-  font-family: "iA Writer Mono", Menlo, ui-monospace, monospace;
+  font-family: "iA Writer Quattro", Menlo, ui-monospace, monospace;
   font-size: 16px;
   line-height: 1.875;
   color: var(--text, black);

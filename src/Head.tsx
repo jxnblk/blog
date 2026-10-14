@@ -9,8 +9,6 @@ export default function Head (props: {
   const title = props.title || 'Jxnblk | Brent Jackson';
   const desc = props.description || 'Aspiring indie game developer, software engineer, and proud cat parent';
 
-  // TODO: new fonts
-  // TODO: GA
   return (
     <head>
       <title>{title}</title>

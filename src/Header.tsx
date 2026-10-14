@@ -1,5 +1,4 @@
 import Nav from './Nav';
-import ColorModeButton from './ColorModeButton.js';
 
 export default function Header () {
   return (
@@ -7,7 +6,6 @@ export default function Header () {
       <a href='/'>
         Jxnblk
       </a>
-      <ColorModeButton />
       <Nav />
     </header>
   );

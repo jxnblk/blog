@@ -1,3 +1,5 @@
+import ColorMode from "./ColorModeButton.tsx";
+
 export default function Nav () {
   return (
     <nav>
@@ -14,6 +16,7 @@ export default function Nav () {
         target='_blank'>
         Twitter
       </a>
+      <ColorMode />
     </nav>
   );
 };
