@@ -1,5 +1,7 @@
 import Nav from './Nav';
 
+const YEAR = new Date().getFullYear();
+
 export default function Footer () {
   return (
     <footer>
@@ -14,8 +16,7 @@ export default function Footer () {
         <div />
         <img src='/images/avatar-dark.svg' alt='avatar' loading='lazy' />
         <div>
-          Jxnblk<br />
-          MMXXVI
+          Jxnblk
         </div>
       </div>
       <hr />
@@ -30,7 +31,7 @@ export default function Footer () {
         />
         <div />
         <div>
-          © 2023 Brent Jackson. All rights reserved.
+          © {YEAR} Brent Jackson. All rights reserved.
         </div>
       </div>
     </footer>

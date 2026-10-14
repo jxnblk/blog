@@ -12,7 +12,7 @@ export default function Nav () {
       <a
         href='https://twitter.com/jxnblk'
         target='_blank'>
-        <span aria-hidden>x(</span>Twitter<span aria-hidden>)</span>
+        Twitter
       </a>
     </nav>
   );
