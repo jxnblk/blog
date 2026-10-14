@@ -2,7 +2,7 @@ import {
   readdirSync,
   readFileSync,
 } from "node:fs";
-import { mkdir, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import {
   join,
   extname,
@@ -27,6 +27,14 @@ import NotFound from "./src/404";
 import type { Page, PostData, Metadata } from "./src/types";
 
 const BASE_URL = "https://jxnblk.com";
+const OUT_DIR = "build";
+// static files copied to the output directory as-is
+const STATIC = [
+  "images",
+  "favicon.png",
+  "CNAME",
+  ".nojekyll",
+];
 
 const bundle = await Bun.build({
   entrypoints: ["./src/style.css"],
@@ -112,9 +120,9 @@ async function getPages (posts: PostData[]): Promise<Page[]> {
 
 async function generateHTML (pages: Page[]) {
   for (const page of pages) {
-    if (page.path) await mkdir(page.path, { recursive: true });
-    let filename = join(page.path, "index.html");
-    if (page.path === "404") filename = "404.html";
+    let filename = join(OUT_DIR, page.path, "index.html");
+    if (page.path === "404") filename = join(OUT_DIR, "404.html");
+    else await mkdir(join(OUT_DIR, page.path), { recursive: true });
     await writeFile(filename, page.html, "utf8");
   }
   console.log(`Generated ${pages.length} pages`);
@@ -132,16 +140,25 @@ function postToJSON (post: PostData) {
 
 async function generateJSON (posts: PostData[]) {
   const indexJSON = JSON.stringify(posts.map(postToJSON));
-  await writeFile("api/index.json", indexJSON);
+  await mkdir(join(OUT_DIR, "api"), { recursive: true });
+  await writeFile(join(OUT_DIR, "api", "index.json"), indexJSON);
+}
+
+async function copyStatic () {
+  for (const name of STATIC) {
+    await cp(name, join(OUT_DIR, name), { recursive: true });
+  }
 }
 
 async function build () {
-  // ?? clear existing HTML or just manual delete if needed?
+  await rm(OUT_DIR, { recursive: true, force: true });
+  await mkdir(OUT_DIR, { recursive: true });
   const posts = await readPosts();
   const pages = await getPages(posts);
   await Promise.all([
     generateHTML(pages),
     generateJSON(posts),
+    copyStatic(),
     // generateMD(pages),
   ]);
   console.log(`Build ${pages.length} pages`);
