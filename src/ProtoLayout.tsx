@@ -12,7 +12,7 @@ export default function ProtoLayout (props: {
       <div className="main">
         {/* Title */}
         <div className="grid">
-          <h1 className="heading text-block">
+          <h1 className="text-block">
             Grid Prototype
           </h1>
           <div className="span-4 square fill" />
@@ -47,7 +47,7 @@ export default function ProtoLayout (props: {
           <div className="span-4 square fill" />
           <div className="span-4 square" />
           <div className="text-block start-9">
-            <h2 className="heading">Section</h2>
+            <h2>Section</h2>
             <p>
               The next section moves to the right half. At 8 columns, prose
               spans the full width and spans halve, and at 4 columns they

@@ -29,21 +29,21 @@ export default function ProtoFlourish (props: {
       <Header />
       <div className="main">
         <div className="grid">
-          <h1 className="heading text-block">Flourishes</h1>
+          <h1 className="text-block">Flourishes</h1>
         </div>
 
         <div className="grid">
-          <h2 className="heading span-16">4 × 4</h2>
+          <h2 className="span-16">4 × 4</h2>
           <Gallery seeds={SEEDS} span={4} />
         </div>
 
         <div className="grid">
-          <h2 className="heading span-16">2 × 2</h2>
+          <h2 className="span-16">2 × 2</h2>
           <Gallery seeds={SEEDS} span={2} />
         </div>
 
         <div className="grid">
-          <h2 className="heading span-16">8 × 8</h2>
+          <h2 className="span-16">8 × 8</h2>
           <Gallery seeds={SEEDS.slice(0, 8)} span={8} />
         </div>
       </div>

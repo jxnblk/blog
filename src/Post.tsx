@@ -15,9 +15,9 @@ export default function Post (props: PostData & {
   return (
     <HTML path={props.path} data={props.data} css={props.css}>
       <Header />
-      <main className="main grid post">
+      <main className="main grid">
         <header className="post-header">
-          <h1 className="heading post-title">
+          <h1 className="post-title">
             {props.data.title}
           </h1>
           <div className="post-meta">
@@ -34,7 +34,9 @@ export default function Post (props: PostData & {
         </header>
         <div className="spacer spacer-section" />
         {/* blocks and spacers come from rehypeSections */}
-        {props.tree}
+        <div className="post-body">
+          {props.tree}
+        </div>
       </main>
       <Footer />
     </HTML>

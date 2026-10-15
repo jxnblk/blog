@@ -1,18 +1,22 @@
 @import "@fontsource/ia-writer-quattro/400.css";
 @import "@fontsource/ia-writer-quattro/700.css";
 
-* { box-sizing: border-box }
+/** Stylesheet order
+ * 1. Tokens: color and layout custom properties
+ * 2. Base: bare elements only, so every rule is (0,0,1) or close to it
+ * 3. Layout: grid, placement, and box sizing. No type or color here
+ * 4. Type & color: fonts, color, and decoration. No layout here
+ * 5. Debug
+ *
+ * Classes don't nest, and rules don't repeat what the base already sets.
+ */
 
+/* Tokens: color
+ * :root is the light mode, so the .light class needs no rule */
 :root {
   --text: #000;
   --background: #fff;
   --primary: #4c4cb1;
-  --greeble: #bbb;
-}
-
-.light  {
-  --text: #000;
-  --background: #fff;
   --greeble: #bbb;
 }
 .foliage {
@@ -21,13 +25,14 @@
   --greeble: #a2c185;
   --primary: #5f8e33;
 }
-.paper  {
+.paper {
   --text: #4d4019;
   --background: #faefd0;
   --greeble: #ccc09d;
   --primary: #8e5200;
 }
-.amber  { --text: #422c00;
+.amber {
+  --text: #422c00;
   --background: #e5b656;
   --greeble: #c3a058;
   --primary: #541c00;
@@ -38,54 +43,146 @@
   --greeble: #f05200;
   --primary: #003c5b;
 }
+/* tints of --primary, mixed toward the background. On body so they
+ * follow the color mode class set there */
+body {
+  --primary-3: color-mix(in srgb, var(--primary) 50%, var(--background));
+  --primary-2: color-mix(in srgb, var(--primary) 25%, var(--background));
+  --primary-1: color-mix(in srgb, var(--primary) 12%, var(--background));
+  --primary-0: color-mix(in srgb, var(--primary) 6%, var(--background));
+  --primary-dark: color-mix(in srgb, var(--primary) 50%, var(--text));
+}
+
+/* Tokens: layout
+ * Fixed square modules. Columns are powers of 2: 4 / 8 / 16.
+ * Spans are authored against 16 columns and scaled down (÷2, ÷4)
+ * at smaller breakpoints so layouts transform mechanically.
+ * Below 512px the module is fluid, leaving a 16px margin on each side,
+ * until mobile gets its own pass.
+ */
+:root {
+  /* fixed baseline: 4 per 64px module, 5 per 80px module */
+  --baseline: 16px;
+  --module: calc((100vw - 32px) / 4);
+  --columns: 4;
+  --scale: 4; /* 16 / --columns */
+}
+@media screen and (min-width: 512px) {
+  :root { --module: 64px; --columns: 8; --scale: 2 }
+}
+@media screen and (min-width: 640px) {
+  :root { --module: 80px }
+}
+@media screen and (min-width: 1024px) {
+  :root { --module: 64px; --columns: 16; --scale: 1 }
+}
+@media screen and (min-width: 1280px) {
+  :root { --module: 80px }
+}
+
+/* Base
+ * Type sits on the baseline: every line is two baselines tall, and
+ * headings stay at body size and rely on weight, as in the old site */
+* { box-sizing: border-box }
 
 body {
   margin: 0;
   font-family: "iA Writer Quattro", Menlo, ui-monospace, monospace;
   font-size: 16px;
-  line-height: 1.875;
-  color: var(--text, black);
-  background-color: var(--background, white);
+  line-height: calc(var(--baseline) * 2);
+  color: var(--text);
+  background-color: var(--background);
   transition-property: background-color;
   transition-timing-function: ease-out;
   transition-duration: 0.2s;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+h1, h2, h3, h4, h5 { font-size: 16px }
+h6 { font-size: 12px }
+
+p, ul, ol, blockquote, pre, table, figure { margin: 0 }
+/* flow content is spaced by what follows it, so nothing trails at the
+ * end of a box */
+:is(p, ul, ol, blockquote, pre, table, figure):not(:last-child) {
+  margin-bottom: calc(var(--baseline) * 2);
+}
+
+/* bullets hang outside the text column */
+ul { padding: 0 }
+
+/* :where keeps the hover state at element specificity, so any class
+ * can restyle a link without matching it */
+a {
+  color: var(--primary);
+  text-decoration-color: var(--primary-2);
+  transition-property: color, background-color, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+a:where(:hover) {
+  background-color: var(--primary-0);
+  text-decoration-color: var(--primary);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
 img {
   max-width: 100%;
   height: auto;
 }
 
-
-/** Layout
- * Fixed square modules. Columns are powers of 2: 4 / 8 / 16.
- * Spans are authored against 16 columns and scaled down (÷2, ÷4)
- * at smaller breakpoints so layouts transform mechanically.
- */
-:root {
-  --module: 64px;
-  /* fixed baseline: 4 per 64px module, 5 per 80px module */
-  --baseline: 16px;
-  --columns: 4;
-  --scale: 4; /* 16 / --columns */
+code { font-size: 14px }
+/* inline code only, so code inside pre needs no reset */
+:not(pre) > code {
+  padding: 2px 4px;
+  color: var(--primary);
+  background-color: var(--primary-0);
+  border-radius: 3px;
 }
-@media screen and (min-width: 512px) {
-  :root { --columns: 8; --scale: 2 }
-}
-@media screen and (min-width: 1024px) {
-  :root { --columns: 16; --scale: 1 }
-}
-@media screen and (min-width: 640px) and (max-width: 1023px) {
-  :root { --module: 80px }
-}
-@media screen and (min-width: 1280px) {
-  :root { --module: 80px }
-}
-/* below 512px, the module is fluid until mobile gets its own pass */
-@media screen and (max-width: 511px) {
-  /* leaves a 16px margin on each side; .main is centered with auto margins */
-  :root { --module: calc((100vw - 32px) / 4) }
+/* 14px code on a two-baseline line, with one baseline of padding,
+ * so the block's height stays a multiple of the baseline */
+pre {
+  overflow: auto;
+  padding: var(--baseline);
+  font-size: 14px;
+  color: var(--primary);
+  background-color: var(--primary-0);
+  border-radius: 4px;
 }
 
+blockquote {
+  padding-left: var(--baseline);
+  border-left: 4px solid var(--primary);
+}
+
+table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+/* rules are inset shadows, not borders, so each row stays two baselines */
+th, td {
+  padding: 0 var(--baseline) 0 0;
+  text-align: left;
+  vertical-align: top;
+}
+th { box-shadow: inset 0 -2px 0 currentColor }
+td { box-shadow: inset 0 -1px 0 var(--primary-1) }
+
+/* Layout */
 .main {
   width: calc(var(--columns) * var(--module));
   margin-left: auto;
@@ -99,7 +196,10 @@ img {
   grid-auto-rows: minmax(var(--module), min-content);
   grid-auto-flow: row dense;
 }
-.grid > * {
+/* Grid item defaults. :where keeps them at zero specificity, so any
+ * single class can place an item. .post-body is display: contents,
+ * so its children are grid items too */
+:where(.grid, .post-body) > * {
   min-width: 0;
   /* span on the end line so .start-* classes can set the start line */
   grid-column-end: span max(1, calc(var(--span, 1) / var(--scale)));
@@ -128,23 +228,17 @@ img {
 .start-9  { grid-column-start: calc(8 / var(--scale) + 1) }
 .start-13 { grid-column-start: calc(12 / var(--scale) + 1) }
 
-/* Text block: fixed width (8 of 16 columns) for content, sits on the baseline */
-.text-block {
-  --span: 8;
-  font-size: 16px;
-  line-height: calc(var(--baseline) * 2);
-}
-.text-block > * { margin: 0 0 calc(var(--baseline) * 2) }
-@media screen and (max-width: 1023px) {
-  .text-block { --span: 16 }
-}
-
-/* Headings stay small for now: one or two baselines */
-.heading {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: calc(var(--baseline) * 2);
+/* Content spans are full width until 16 columns, where they narrow
+ * to a fixed measure */
+.text-block,
+.block { --span: 16 }
+@media screen and (min-width: 1024px) {
+  .text-block,
+  .block-heading,
+  .block-prose,
+  .block-blockquote { --span: 8 }
+  .block-code,
+  .block-table { --span: 12 }
 }
 
 /* Header & footer
@@ -152,18 +246,13 @@ img {
  * first module), and the nav's 1-column items end at the right edge.
  * At 4 columns the nav drops to its own row.
  */
-.site-header,
-.site-footer { font-size: 14px }
 .site-footer { margin-top: var(--module) }
 
-.grid > .home-link {
+.home-link {
   grid-column: 1 / span 2;
   display: grid;
   grid-template-columns: var(--module) auto;
   align-items: center;
-  font-weight: 700;
-  color: inherit;
-  text-decoration: none;
 }
 .home-link img {
   display: block;
@@ -171,37 +260,22 @@ img {
   height: var(--module);
 }
 
-.grid > .nav {
+.nav {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: subgrid;
   grid-auto-rows: var(--module);
 }
 @media screen and (min-width: 512px) {
-  .grid > .nav { grid-column: span 4 / -1 }
+  .nav { grid-column: span 4 / -1 }
 }
 .nav > * {
   display: flex;
   align-items: center;
-  font-weight: 700;
-  color: inherit;
 }
-.nav > *:hover {
-  color: var(--primary);
-}
-.nav a { text-decoration: none }
-.nav a:hover { text-decoration: underline }
-.nav button {
-  font: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  justify-content: center;
-}
+.nav > button { justify-content: center }
 
-.grid > .copyright {
+.copyright {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
@@ -209,7 +283,7 @@ img {
 
 /* Post
  * One grid for the whole post. rehypeSections outputs blocks as direct
- * grid items with spacers between them. Every item starts on column 1
+ * grid items with spacers between them. Every block starts on column 1
  * so they stack in source order (dense flow would otherwise pull a
  * block up beside a heading). One fixed placement per block type for
  * now; variants come later.
@@ -230,60 +304,39 @@ img {
   flex-wrap: wrap;
   align-items: center;
   gap: 0 var(--baseline);
-  font-size: 14px;
 }
 
-.post > .block { grid-column-start: 1 }
+/* wraps the markdown without adding a box, so blocks and spacers
+ * stay items of the post grid */
+.post-body { display: contents }
+
+.block { grid-column-start: 1 }
 /* an empty spacer fills one full-width module row */
-.post > .spacer { grid-column: 1 / -1 }
-
-.block-heading,
-.block-prose,
-.block-blockquote {
-  --span: 8;
-  line-height: calc(var(--baseline) * 2);
-}
-.block-code,
-.block-table { --span: 12 }
-.block-image { --span: 16 }
-@media screen and (max-width: 1023px) {
-  .block { --span: 16 }
-}
-
-.block > * { margin: 0 0 calc(var(--baseline) * 2) }
-.block > :last-child { margin-bottom: 0 }
+.spacer { grid-column: 1 / -1 }
 
 /* headings sit on the bottom edge of their module row */
 .block-heading { align-self: end }
-.block-heading > * {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: calc(var(--baseline) * 2);
-}
-.block-heading > h1 { font-size: 24px }
-.block-heading > :is(h4, h5, h6) { font-size: 16px }
-
-.block-code pre,
-.block-table {
-  overflow-x: auto;
-  font-size: 14px;
-}
-.block-table table { border-collapse: collapse }
-.block-table :is(th, td) {
-  padding: 0 var(--baseline) 0 0;
-  text-align: left;
-}
-
+.block-table { overflow-x: auto }
 .block-image :is(img, video, iframe) {
   display: block;
   width: 100%;
 }
-.block-image figure { margin: 0 }
 
-.block-blockquote blockquote {
-  margin: 0;
-  padding-left: var(--baseline);
-  border-left: 4px solid var(--primary);
+/* Type & color */
+.site-header,
+.site-footer,
+.post-meta { font-size: 14px }
+
+.home-link,
+.nav > * {
+  font-weight: 700;
+  color: inherit;
+  text-decoration: none;
+  background: none;
+}
+.nav > :hover {
+  color: var(--primary);
+  text-decoration: underline;
 }
 
 /* placeholder for the flourish band that will mark an hr */
