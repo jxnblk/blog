@@ -4,8 +4,8 @@ export default function HomeLink () {
     <a href='/' className="home-link">
       <img
         src='/images/avatar.svg'
-        width="64"
-        height="64"
+        width="48"
+        height="48"
         alt=''
       />
       Jxnblk

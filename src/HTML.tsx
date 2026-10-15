@@ -1,5 +1,6 @@
 import Head from './Head';
 import clientJS from "./client.js" with { type: "text" };
+import windGLJS from "./wind-gl.js" with { type: "text" };
 import type { Metadata } from "./types";
 
 export default function HTML (props: {
@@ -15,6 +16,7 @@ export default function HTML (props: {
       <body>
         {props.children}
         <script dangerouslySetInnerHTML={{ __html: clientJS }} />
+        <script dangerouslySetInnerHTML={{ __html: windGLJS }} />
       </body>
     </html>
   );

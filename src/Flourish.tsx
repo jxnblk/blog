@@ -66,6 +66,7 @@ type Leaf = {
   w: number;
   h: number;
   fill: string;
+  hsl: HSL;
 };
 
 // chance to keep splitting, falling off relative to the max depth
@@ -88,20 +89,20 @@ function subdivide (
 ) {
   const side = vertical ? w / 2 : h / 2;
   if (depth >= max || side < MIN || !r.chance(splitChance(depth, max))) {
-    out.push({ x, y, w, h, fill: css(color) });
+    out.push({ x, y, w, h, fill: css(color), hsl: color });
     return;
   }
   if (vertical) {
     const hw = w / 2;
     const next = shift(r, color);
     const [fx, nx] = corner.right ? [x, x + hw] : [x + hw, x];
-    out.push({ x: fx, y, w: hw, h, fill: css(color) });
+    out.push({ x: fx, y, w: hw, h, fill: css(color), hsl: color });
     subdivide(r, nx, y, hw, h, false, corner, depth + 1, max, next, out);
   } else {
     const hh = h / 2;
     const next = shift(r, color);
     const [fy, ny] = corner.bottom ? [y, y + hh] : [y + hh, y];
-    out.push({ x, y: fy, w, h: hh, fill: css(color) });
+    out.push({ x, y: fy, w, h: hh, fill: css(color), hsl: color });
     subdivide(r, x, ny, w, hh, true, corner, depth + 1, max, next, out);
   }
 }
@@ -139,6 +140,8 @@ export default function Flourish ({
           width={leaf.w}
           height={leaf.h}
           style={{ fill: leaf.fill }}
+          // base color for the client's wind animation
+          data-hsl={leaf.hsl.map(n => n.toFixed(1)).join(" ")}
         />
       ))}
     </svg>
