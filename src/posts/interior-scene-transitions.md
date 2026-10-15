@@ -24,12 +24,19 @@ Then, I had an idea I wanted to test out...
 
 [Novantica]: https://novanticagame.com
 
-<iframe
-  title="Screencap of Novantica game interior camera transition"
-  src="https://jxnblk-redditembed2.web.val.run?id=17at2r7&sub=Unity3D"
-  width="960"
-  style="width:100%;aspect-ratio:16/10;border:none"
-></iframe>
+<figure>
+  <video
+    controls
+    playsinline
+    preload="metadata"
+    aria-label="Screencap of Novantica game interior camera transition"
+    src="https://v.redd.it/vwzjkami8zub1/DASH_1080.mp4?source=fallback"
+    style="width:100%"
+  ></video>
+  <figcaption>
+    <a href="https://www.reddit.com/r/Unity3D/comments/17at2r7/interior_scene_transition_what_do_you_think/">Interior scene transition - what do you think?</a> on Reddit
+  </figcaption>
+</figure>
 
 <!--
 <blockquote class="reddit-embed-bq" style="height:500px" data-embed-height="500"><a href="https://www.reddit.com/r/Unity3D/comments/17at2r7/interior_scene_transition_what_do_you_think/">Interior scene transition - what do you think?</a><br> by<a href="https://www.reddit.com/user/vantomgames/">u/vantomgames</a> in<a href="https://www.reddit.com/r/Unity3D/">Unity3D</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
@@ -184,12 +191,19 @@ You can use whatever makes sense for your game's architecture to enable and disa
 
 The end result:
 
-<iframe
-  title="Screencap of Novantica game interior camera transition"
-  src="https://jxnblk-redditembed2.web.val.run?id=17bkh8g&sub=Unity3D"
-  width="960"
-  style="width:100%;aspect-ratio:16/10;border:none"
-></iframe>
+<figure>
+  <video
+    controls
+    playsinline
+    preload="metadata"
+    aria-label="Screencap of Novantica game interior camera transition"
+    src="https://v.redd.it/b6q8zhzt56vb1/DASH_1080.mp4?source=fallback"
+    style="width:100%"
+  ></video>
+  <figcaption>
+    <a href="https://www.reddit.com/r/Unity3D/comments/17bkh8g/interior_scene_transition_take_two/">Interior scene transition - take two</a> on Reddit
+  </figcaption>
+</figure>
 
 <!--
 <blockquote class="reddit-embed-bq" style="height:500px" data-embed-height="500">
