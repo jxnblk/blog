@@ -11,14 +11,23 @@
  * Classes don't nest, and rules don't repeat what the base already sets.
  */
 
-/* Tokens: color
- * :root is the light mode, so the .light class needs no rule */
+/* Tokens
+ * Keep a single top-level :root rule: Bun's minifier (1.4.2) drops all
+ * but the last one, even when they set different properties */
 :root {
+  /* color: :root is the light mode, so .light needs no rule */
   --text: #000;
   --background: #fff;
   --primary: #4c4cb1;
   --greeble: #bbb;
+  /* layout: see Tokens: layout below */
+  --baseline: 16px;
+  --module: calc((100vw - 32px) / 4);
+  --columns: 4;
+  --scale: 4; /* 16 / --columns */
 }
+
+/* Tokens: color */
 .foliage {
   --text: #3a6c0b;
   --background: #f0f4ec;
@@ -59,14 +68,8 @@ body {
  * at smaller breakpoints so layouts transform mechanically.
  * Below 512px the module is fluid, leaving a 16px margin on each side,
  * until mobile gets its own pass.
+ * The fixed 16px baseline fits 4 per 64px module and 5 per 80px module.
  */
-:root {
-  /* fixed baseline: 4 per 64px module, 5 per 80px module */
-  --baseline: 16px;
-  --module: calc((100vw - 32px) / 4);
-  --columns: 4;
-  --scale: 4; /* 16 / --columns */
-}
 @media screen and (min-width: 512px) {
   :root { --module: 64px; --columns: 8; --scale: 2 }
 }
