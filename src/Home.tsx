@@ -11,35 +11,29 @@ export default function Home (props: {
   return (
     <HTML css={props.css} path="">
       <Header />
-      <div>
-          <div>
-            <h1>
-              <span>
-                Brent Jackson
-              </span>
-              <span>
-                {" "}
-                is a design engineer, aspiring indie game developer, and proud cat parent.
-                Based in Brooklyn, NY
-              </span>
-            </h1>
-            <div />
-            <div>
-              <div>
-                <img
-                  src='/images/avatar.svg'
-                  alt='Avatar'
-                  width='128'
-                  height='128'
-                />
-              </div>
-            </div>
+      <main className="main grid">
+        <header className="post-header home-header">
+          <div className="home-avatar">
+            <img
+              src='/images/avatar.svg'
+              alt='Avatar'
+              width='128'
+              height='128'
+            />
           </div>
-
-      </div>
-      <div>
-        {props.about}
-      </div>
+          <h1 className="home-title">
+            Brent Jackson
+            {" "}
+            is a design engineer, aspiring indie game developer, and proud cat parent.
+            Based in Brooklyn, NY
+          </h1>
+        </header>
+        <div className="spacer spacer-section" />
+        {/* blocks, spacers, and margins come from rehypeSections */}
+        <div className="post-body">
+          {props.about}
+        </div>
+      </main>
       <Footer />
     </HTML>
   );

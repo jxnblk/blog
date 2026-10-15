@@ -56,10 +56,12 @@ const css = (await bundle.outputs[0].text()).replaceAll("./files/", "/fonts/");
 
 async function getAbout () {
   const raw = readFileSync(ABOUT, "utf8");
+  // laid out like a post, seeded by the "home" slug
   const data = {
+    slug: "home",
     content: raw,
   };
-  const md = await parseMarkdown(data);
+  const md = await parseMarkdown(data, { sections: true });
   return md.tree;
 }
 
