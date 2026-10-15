@@ -23,11 +23,13 @@
  * that ends up past its margin or touching content.
  *
  * Columns are authored against 16 columns: below that, CSS stacks the
- * blocks full width and hides the margins.
+ * blocks full width and hides the margins. Instead, some section
+ * spacers grow into bands of tiles, packed separately for 8 and 4
+ * columns, and CSS shows the set that matches the grid.
  */
 import type { Root, RootContent, Element, ElementContent } from "hast";
 import { rng, type Random } from "./rng";
-import { createGrid, occupy, place, type Region } from "./pack";
+import { createGrid, occupy, place, type Tile } from "./pack";
 import { perlin, smoothstep } from "./noise";
 
 export type BlockType =
@@ -55,6 +57,11 @@ const BAND = 2;
 const NOISE_SCALE = 1 / 6;
 const DENSITY_LOW = 0;
 const DENSITY_HIGH = 0.5;
+// narrow bands: the chance a section spacer becomes a band is
+// NARROW_CHANCE × (0.5 + density), never twice in a row, and its tile
+// rows are picked from the sizes for that column count
+const NARROW_CHANCE = 0.7;
+const NARROW_ROWS: Record<number, number[]> = { 8: [1, 2, 2, 4], 4: [1, 2] };
 
 const isElement = (node: RootContent): node is Element =>
   node.type === "element";
@@ -214,6 +221,8 @@ type Row = {
   // columns holding content
   content?: Span;
   band?: boolean;
+  // a spacer between sections
+  boundary?: boolean;
 };
 
 type Run = Span & { row: number; rows: number; y: number; modules: number };
@@ -286,9 +295,11 @@ export default function rehypeSections ({ seed }: { seed: string }) {
             el: element("div", "spacer spacer-section spacer-break", ""),
             modules: BAND + 2,
             band: true,
+            boundary: true,
           });
         } else if (i > 0) {
           spacer("spacer spacer-section");
+          rows[rows.length - 1].boundary = true;
         }
         if (!section.blocks.length) return;
 
@@ -323,16 +334,18 @@ export default function rehypeSections ({ seed }: { seed: string }) {
 
     // 3. place tiles in margins and bands, top to bottom
     let count = 0;
-    const tiles = (region: Region, top: number) =>
-      place(flourish, grid, region, density).map(tile =>
-        element("div", "tile",
-          `grid-area:${tile.y + region.y - top + 1} / ${tile.x + 1} / span ${tile.size} / span ${tile.size}`, [
-          element("flourish-tile", "", "", [], {
-            seed: `${seed}:flourish:${count++}`,
-            size: tile.size,
-          }),
-        ])
-      );
+    const toElements = (tiles: Tile[], top = 0) => tiles.map(tile =>
+      element("div", "tile",
+        `grid-area:${tile.y + top + 1} / ${tile.x + 1} / span ${tile.size} / span ${tile.size}`, [
+        element("flourish-tile", "", "", [], {
+          seed: `${seed}:flourish:${count++}`,
+          size: tile.size,
+        }),
+      ])
+    );
+    // a band's tiles, for one column count, with an empty row around them
+    const band = (columns: number, rows: number, tiles: Tile[]) =>
+      element("div", `band band-${columns}`, `--rows:${rows + 2}`, toElements(tiles, 1));
 
     const regions = [
       ...runs(placed).map(run => ({ run, y: run.y })),
@@ -342,15 +355,34 @@ export default function rehypeSections ({ seed }: { seed: string }) {
     const margins: Element[] = [];
     for (const region of regions) {
       if ("band" in region && region.band) {
-        const { band } = region;
-        band.el.children = tiles({ x: 0, y: band.y + 1, w: COLUMNS, h: BAND }, band.y);
+        const { y } = region.band;
+        const tiles = place(flourish, grid, { x: 0, y: y + 1, w: COLUMNS, h: BAND }, density);
+        region.band.el.children.push(band(COLUMNS, BAND, tiles));
       } else if ("run" in region && region.run) {
         const { run } = region;
-        const children = tiles({ x: run.start - 1, y: run.y, w: run.width, h: run.modules }, run.y);
-        if (!children.length) continue;
+        const tiles = place(flourish, grid, { x: run.start - 1, y: run.y, w: run.width, h: run.modules }, density);
+        if (!tiles.length) continue;
         margins.push(element("div", "margin",
           `grid-row:${run.row} / span ${run.rows};--start:${run.start};--span:${run.width}`,
-          children));
+          toElements(tiles)));
+      }
+    }
+
+    // 4. below 16 columns, some section spacers become bands
+    const narrow = random("narrow");
+    let previous = false;
+    for (const row of placed) {
+      if (!row.boundary) continue;
+      const chance = NARROW_CHANCE * (0.5 + density(COLUMNS / 2, row.y));
+      previous = !previous && narrow.next() < chance;
+      if (!previous) continue;
+      for (const columns of [8, 4]) {
+        const rows = narrow.pick(NARROW_ROWS[columns]);
+        const region = { x: 0, y: 0, w: columns, h: rows };
+        const tiles = place(narrow, createGrid(columns, rows), region, () => 1);
+        // every band shows at least one tile
+        if (!tiles.length) tiles.push({ x: narrow.int(columns - rows + 1), y: 0, size: rows });
+        row.el.children.push(band(columns, rows, tiles));
       }
     }
 
