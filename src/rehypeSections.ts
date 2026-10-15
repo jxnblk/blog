@@ -258,6 +258,37 @@ export function densityField (seed: string) {
     smoothstep(DENSITY_LOW, DENSITY_HIGH, noise(x * NOISE_SCALE, y * NOISE_SCALE));
 }
 
+// Band tiles for one column count. Packing passes repeat on the same
+// grid until there are min tiles, raising the density floor a little
+// each pass, so a band where the field is empty still fills. Tiles
+// past max are dropped, last placed first, which never brings two
+// tiles edge to edge
+export function fillBand (
+  r: Random,
+  density: (x: number, y: number) => number,
+  columns: number, rows: number, top: number, min: number, max = Infinity,
+) {
+  const grid = createGrid(columns, rows);
+  const region = { x: 0, y: 0, w: columns, h: rows };
+  const scale = COLUMNS / columns;
+  const tiles: Tile[] = [];
+  for (let i = 0; i < 20 && tiles.length < min; i++) {
+    tiles.push(...place(r, grid, region, (x, y) =>
+      Math.max(i / 10, density(x * scale, top + 1 + y))));
+  }
+  return tiles.slice(0, max);
+}
+
+// the band after the content, at every column count, from row top
+export const endBands = (
+  r: Random,
+  density: (x: number, y: number) => number,
+  top: number,
+) => [COLUMNS, 8, 4].map(columns => {
+  const rows = END_ROWS[columns];
+  return { columns, rows, tiles: fillBand(r, density, columns, rows, top, ...END_TILES[columns]) };
+});
+
 export default function rehypeSections ({ seed }: { seed: string }) {
   return (tree: Root) => {
     const sections: Section[] = [{ isBreak: false, blocks: [] }];
@@ -381,23 +412,10 @@ export default function rehypeSections ({ seed }: { seed: string }) {
 
     // 4. below 16 columns, some section spacers become bands. Band
     // tiles follow the density field at the band's place on the page,
-    // with x scaled to 16 columns. Packing passes repeat on the same
-    // grid until there are enough tiles, raising the density floor a
-    // little each pass, so a band where the field is empty still fills
+    // with x scaled to 16 columns (see fillBand)
     const narrow = random("narrow");
-    // tiles past max are dropped, last placed first, which never brings
-    // two tiles edge to edge
-    const fill = (columns: number, rows: number, top: number, min: number, max = Infinity) => {
-      const grid = createGrid(columns, rows);
-      const region = { x: 0, y: 0, w: columns, h: rows };
-      const scale = COLUMNS / columns;
-      const tiles: Tile[] = [];
-      for (let i = 0; i < 20 && tiles.length < min; i++) {
-        tiles.push(...place(narrow, grid, region, (x, y) =>
-          Math.max(i / 10, density(x * scale, top + 1 + y))));
-      }
-      return tiles.slice(0, max);
-    };
+    const fill = (columns: number, rows: number, top: number, min: number, max = Infinity) =>
+      fillBand(narrow, density, columns, rows, top, min, max);
     let previous = false;
     for (const row of placed) {
       if (!row.boundary) continue;
@@ -414,9 +432,8 @@ export default function rehypeSections ({ seed }: { seed: string }) {
 
     // 5. a band after the content, at every column count
     const end = element("div", "spacer spacer-end", "");
-    for (const columns of [COLUMNS, 8, 4]) {
-      const rows = END_ROWS[columns];
-      end.children.push(band(columns, rows, fill(columns, rows, y, ...END_TILES[columns])));
+    for (const { columns, rows, tiles } of endBands(narrow, density, y)) {
+      end.children.push(band(columns, rows, tiles));
     }
 
     tree.children = [
