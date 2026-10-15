@@ -1,8 +1,6 @@
 import HTML from "./HTML";
 import Header from './Header';
 import Footer from './Footer';
-import Flourish from './Flourish';
-import { rng } from './rng';
 
 import type { PostData } from "./types";
 
@@ -13,10 +11,6 @@ export default function Post (props: PostData & {
     console.error("NO DATE FOR POST " + JSON.stringify(props.data, null, 2));
     return null;
   }
-
-  // a 4×4 flourish in the header's negative space, beside the title
-  const seed = props.data.seed ?? props.slug;
-  const start = rng(seed)("header").pick([9, 13]);
 
   return (
     <HTML path={props.path} data={props.data} css={props.css}>
@@ -36,9 +30,6 @@ export default function Post (props: PostData & {
                 #{tag}
               </span>
             ))}
-          </div>
-          <div className="post-flourish" style={{ "--start": start } as React.CSSProperties}>
-            <Flourish seed={`${seed}:header`} size={4} />
           </div>
         </header>
         <div className="spacer spacer-section" />
