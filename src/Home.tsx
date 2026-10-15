@@ -1,6 +1,9 @@
 import HTML from "./HTML";
 import Header from './Header';
 import Footer from './Footer';
+import Flourish from "./Flourish";
+import { densityField, fillBand } from "./rehypeSections";
+import { rng } from "./rng";
 import type { PostData } from "./types";
 
 export default function Home (props: {
@@ -12,23 +15,14 @@ export default function Home (props: {
     <HTML css={props.css} path="">
       <Header />
       <main className="main grid">
+        <TitleBands position="above" />
         <header className="post-header home-header">
-          <div className="home-avatar">
-            <img
-              src='/images/avatar.svg'
-              alt='Avatar'
-              width='128'
-              height='128'
-            />
-          </div>
           <h1 className="home-title">
-            Brent Jackson
-            {" "}
-            is a design engineer, aspiring indie game developer, and proud cat parent.
+            Brent Jackson is a design engineer, aspiring indie game developer, and proud cat parent.
             Based in Brooklyn, NY
           </h1>
         </header>
-        <div className="spacer spacer-section" />
+        <TitleBands position="below" />
         {/* blocks, spacers, and margins come from rehypeSections */}
         <div className="post-body">
           {props.about}
@@ -39,3 +33,46 @@ export default function Home (props: {
   );
 };
 
+/** Bands of tiles above and below the title
+ * The same bands as a post's section breaks, one per column count, with
+ * an empty row around the tiles, so the title gets space on either
+ * side. Seeded apart from the about text, which also uses "home"
+ */
+const SEED = "home:title";
+// tile rows, and the fewest and most tiles, by column count
+const BANDS: { columns: number; rows: number; tiles: [number, number] }[] = [
+  { columns: 16, rows: 2, tiles: [2, 4] },
+  { columns: 8, rows: 2, tiles: [1, 3] },
+  { columns: 4, rows: 1, tiles: [1, 2] },
+];
+
+function TitleBands ({ position }: { position: "above" | "below" }) {
+  const seed = `${SEED}:${position}`;
+  const random = rng(seed)("tiles");
+  const density = densityField(seed);
+  return (
+    <div className="spacer spacer-section">
+      {BANDS.map(({ columns, rows, tiles: [min, max] }) => {
+        const tiles = fillBand(random, density, columns, rows, 0, min, max);
+        return (
+          <div
+            key={columns}
+            className={`band band-${columns}`}
+            style={{ "--rows": rows + 2 } as React.CSSProperties}>
+            {tiles.map((tile, i) => (
+              <div
+                key={i}
+                className="tile"
+                style={{
+                  // an empty row above the tiles
+                  gridArea: `${tile.y + 2} / ${tile.x + 1} / span ${tile.size} / span ${tile.size}`,
+                }}>
+                <Flourish seed={`${seed}:${columns}:${i}`} size={tile.size} />
+              </div>
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
