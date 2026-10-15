@@ -25,7 +25,8 @@
  * Columns are authored against 16 columns: below that, CSS stacks the
  * blocks full width and hides the margins. Instead, some section
  * spacers grow into bands of tiles, packed separately for 8 and 4
- * columns, and CSS shows the set that matches the grid.
+ * columns, and CSS shows the set that matches the grid. A last band
+ * after the content always holds a few tiles.
  */
 import type { Root, RootContent, Element, ElementContent } from "hast";
 import { rng, type Random } from "./rng";
@@ -62,6 +63,10 @@ const DENSITY_HIGH = 0.5;
 // rows are picked from the sizes for that column count
 const NARROW_CHANCE = 0.7;
 const NARROW_ROWS: Record<number, number[]> = { 8: [1, 2, 2, 4], 4: [1, 2] };
+// the band after the content: tile rows, and the fewest and most
+// tiles it shows, by column count
+const END_ROWS: Record<number, number> = { 16: 4, 8: 2, 4: 2 };
+const END_TILES: Record<number, [number, number]> = { 16: [1, 3], 8: [3, 3], 4: [2, 2] };
 
 const isElement = (node: RootContent): node is Element =>
   node.type === "element";
@@ -368,8 +373,25 @@ export default function rehypeSections ({ seed }: { seed: string }) {
       }
     }
 
-    // 4. below 16 columns, some section spacers become bands
+    // 4. below 16 columns, some section spacers become bands. Band
+    // tiles follow the density field at the band's place on the page,
+    // with x scaled to 16 columns. Packing passes repeat on the same
+    // grid until there are enough tiles, raising the density floor a
+    // little each pass, so a band where the field is empty still fills
     const narrow = random("narrow");
+    // tiles past max are dropped, last placed first, which never brings
+    // two tiles edge to edge
+    const fill = (columns: number, rows: number, top: number, min: number, max = Infinity) => {
+      const grid = createGrid(columns, rows);
+      const region = { x: 0, y: 0, w: columns, h: rows };
+      const scale = COLUMNS / columns;
+      const tiles: Tile[] = [];
+      for (let i = 0; i < 20 && tiles.length < min; i++) {
+        tiles.push(...place(narrow, grid, region, (x, y) =>
+          Math.max(i / 10, density(x * scale, top + 1 + y))));
+      }
+      return tiles.slice(0, max);
+    };
     let previous = false;
     for (const row of placed) {
       if (!row.boundary) continue;
@@ -378,16 +400,21 @@ export default function rehypeSections ({ seed }: { seed: string }) {
       if (!previous) continue;
       for (const columns of [8, 4]) {
         const rows = narrow.pick(NARROW_ROWS[columns]);
-        const region = { x: 0, y: 0, w: columns, h: rows };
-        const tiles = place(narrow, createGrid(columns, rows), region, () => 1);
-        // every band shows at least one tile
+        const tiles = fill(columns, rows, row.y, 1);
         if (!tiles.length) tiles.push({ x: narrow.int(columns - rows + 1), y: 0, size: rows });
         row.el.children.push(band(columns, rows, tiles));
       }
     }
 
+    // 5. a band after the content, at every column count
+    const end = element("div", "spacer spacer-end", "");
+    for (const columns of [COLUMNS, 8, 4]) {
+      const rows = END_ROWS[columns];
+      end.children.push(band(columns, rows, fill(columns, rows, y, ...END_TILES[columns])));
+    }
+
     tree.children = [
-      ...placed.map((row, i) => {
+      ...[...placed, { el: end }].map((row, i) => {
         row.el.properties.style = `grid-row:${i + 1};${row.el.properties.style || ""}`;
         return row.el;
       }),
