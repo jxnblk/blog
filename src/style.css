@@ -55,20 +55,6 @@ img {
   height: auto;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-.nav a {
-  font-weight: bold;
-  color: inherit;
-}
-.nav a:hover {
-  color: var(--primary);
-}
-.nav a:active {
-}
 
 /** Layout
  * Fixed square modules. Columns are powers of 2: 4 / 8 / 16.
@@ -159,6 +145,66 @@ img {
   font-size: 20px;
   font-weight: 700;
   line-height: calc(var(--baseline) * 2);
+}
+
+/* Header & footer
+ * One row of modules: the home link spans 2 columns (avatar in the
+ * first module), and the nav's 1-column items end at the right edge.
+ * At 4 columns the nav drops to its own row.
+ */
+.site-header,
+.site-footer { font-size: 14px }
+.site-footer { margin-top: var(--module) }
+
+.grid > .home-link {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: var(--module) auto;
+  align-items: center;
+  font-weight: 700;
+  color: inherit;
+  text-decoration: none;
+}
+.home-link img {
+  display: block;
+  width: var(--module);
+  height: var(--module);
+}
+
+.grid > .nav {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-auto-rows: var(--module);
+}
+@media screen and (min-width: 512px) {
+  .grid > .nav { grid-column: span 4 / -1 }
+}
+.nav > * {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: inherit;
+}
+.nav > *:hover {
+  color: var(--primary);
+}
+.nav a { text-decoration: none }
+.nav a:hover { text-decoration: underline }
+.nav button {
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.grid > .copyright {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
 }
 
 .fill { background-color: var(--primary) }
