@@ -207,6 +207,88 @@ img {
   align-items: center;
 }
 
+/* Post
+ * One grid for the whole post. rehypeSections outputs blocks as direct
+ * grid items with spacers between them. Every item starts on column 1
+ * so they stack in source order (dense flow would otherwise pull a
+ * block up beside a heading). One fixed placement per block type for
+ * now; variants come later.
+ */
+.post-header {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-auto-rows: minmax(var(--module), min-content);
+}
+.post-title {
+  grid-column: 1 / span calc(8 / var(--scale));
+  align-self: end;
+}
+.post-meta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--baseline);
+  font-size: 14px;
+}
+
+.post > .block { grid-column-start: 1 }
+/* an empty spacer fills one full-width module row */
+.post > .spacer { grid-column: 1 / -1 }
+
+.block-heading,
+.block-prose,
+.block-blockquote {
+  --span: 8;
+  line-height: calc(var(--baseline) * 2);
+}
+.block-code,
+.block-table { --span: 12 }
+.block-image { --span: 16 }
+@media screen and (max-width: 1023px) {
+  .block { --span: 16 }
+}
+
+.block > * { margin: 0 0 calc(var(--baseline) * 2) }
+.block > :last-child { margin-bottom: 0 }
+
+/* headings sit on the bottom edge of their module row */
+.block-heading { align-self: end }
+.block-heading > * {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: calc(var(--baseline) * 2);
+}
+.block-heading > h1 { font-size: 24px }
+.block-heading > :is(h4, h5, h6) { font-size: 16px }
+
+.block-code pre,
+.block-table {
+  overflow-x: auto;
+  font-size: 14px;
+}
+.block-table table { border-collapse: collapse }
+.block-table :is(th, td) {
+  padding: 0 var(--baseline) 0 0;
+  text-align: left;
+}
+
+.block-image :is(img, video, iframe) {
+  display: block;
+  width: 100%;
+}
+.block-image figure { margin: 0 }
+
+.block-blockquote blockquote {
+  margin: 0;
+  padding-left: var(--baseline);
+  border-left: 4px solid var(--primary);
+}
+
+/* placeholder for the flourish band that will mark an hr */
+.spacer-break { background-color: var(--greeble) }
+
 .fill { background-color: var(--primary) }
 .fill-greeble { background-color: var(--greeble) }
 

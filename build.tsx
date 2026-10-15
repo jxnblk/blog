@@ -16,6 +16,7 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeReact from "rehype-react";
+import rehypeSections from "./src/rehypeSections";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -76,12 +77,13 @@ function parseFile (filename: string) {
   };
 }
 
-async function parseMarkdown (post: Partial<PostData>) {
+async function parseMarkdown (post: Partial<PostData>, { sections = false } = {}) {
   const proc = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeRaw)
+    .use(sections ? rehypeSections : [])
     .use(rehypeReact, { Fragment, jsx, jsxs })
   const tree = await proc.process(post.content);
 
@@ -97,7 +99,7 @@ async function readPosts (): Promise<PostData[]> {
     .map(f => join("src", "posts", f));
   const posts = await Promise.all(filenames
     .map(parseFile)
-    .map(parseMarkdown)
+    .map(post => parseMarkdown(post, { sections: true }))
   );
 
   console.log(posts.length);

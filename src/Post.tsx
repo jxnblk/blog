@@ -15,30 +15,27 @@ export default function Post (props: PostData & {
   return (
     <HTML path={props.path} data={props.data} css={props.css}>
       <Header />
-      <div>
-        {props.data.draft && (
-          <div>
-            Draft
+      <main className="main grid post">
+        <header className="post-header">
+          <h1 className="heading post-title">
+            {props.data.title}
+          </h1>
+          <div className="post-meta">
+            {props.data.draft && <span>Draft</span>}
+            <span>
+              {props.data.date.toLocaleDateString('en-US', { timeZone: 'UTC' })}
+            </span>
+            {props.data.tags?.map(tag => (
+              <span key={tag}>
+                #{tag}
+              </span>
+            ))}
           </div>
-        )}
-        <h1>
-          {props.data.title}
-        </h1>
-        <div>
-          <div>
-            {props.data.date.toLocaleDateString('en-US', { timeZone: 'UTC' })}
-          </div>
-          {props.data.tags?.map(tag => (
-            <div
-              key={tag}>
-              #{tag}
-            </div>
-          ))}
-        </div>
-        <main className="prose">
-          {props.tree}
-        </main>
-      </div>
+        </header>
+        <div className="spacer spacer-section" />
+        {/* blocks and spacers come from rehypeSections */}
+        {props.tree}
+      </main>
       <Footer />
     </HTML>
   );
