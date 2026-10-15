@@ -84,7 +84,7 @@ async function parseMarkdown (post: Partial<PostData>, { sections = false } = {}
   const proc = unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(sections ? [[rehypeSections, { seed: post.data?.seed ?? post.slug }]] : [])
     .use(rehypeReact, {
