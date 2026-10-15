@@ -236,12 +236,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 .text-block,
 .block { --span: 16 }
 @media screen and (min-width: 1024px) {
-  .text-block,
-  .block-heading,
-  .block-prose,
-  .block-blockquote { --span: 8 }
-  .block-code,
-  .block-table { --span: 12 }
+  .text-block { --span: 8 }
 }
 
 /* Header & footer
@@ -272,7 +267,8 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 @media screen and (min-width: 512px) {
   .nav { grid-column: span 4 / -1 }
 }
-.nav > * {
+.nav > *,
+.flex {
   display: flex;
   align-items: center;
 }
@@ -287,7 +283,9 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 /* Post
  * The post body is a subgrid of the main grid. rehypeSections gives
  * every block, spacer, and margin an explicit row, and a --start
- * column in 16-column units. Below 16 columns, blocks stack full width
+ * column in 16-column units. Blocks also get their width, --w, so the
+ * columns here always match the occupancy grid flourishes are placed
+ * against. Below 16 columns, blocks stack full width
  * on column 1 and the margins hide. The header is 4 modules tall at 16
  * columns, with a flourish beside the title.
  */
@@ -341,7 +339,8 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   align-content: start;
   overflow: hidden;
 }
-.spacer-break { height: calc(2 * var(--module)) }
+/* two rows of tiles, with an empty row above and below */
+.spacer-break { height: calc(4 * var(--module)) }
 .margin {
   display: none;
   position: relative;
@@ -360,7 +359,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
     grid-column: var(--start) / span 4;
     grid-row: 1 / span 4;
   }
-  .block { grid-column-start: var(--start, 1) }
+  .block { grid-column: var(--start, 1) / span var(--w, 8) }
   .margin {
     display: grid;
     grid-column-start: var(--start);

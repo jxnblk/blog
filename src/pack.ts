@@ -1,50 +1,92 @@
 import type { Random } from "./rng";
 
-// Packs flourish tiles into a free grid region (DESIGN.md §5.4).
-// The region is cut into the largest square cells that fit (4, 2, or 1
-// modules). Each cell is left empty, filled with one flourish, or split
-// into four quadrants that choose again. Most cells stay empty, so the
-// prose keeps its negative space. Units are modules.
+// Flourish placement on an occupancy grid (DESIGN.md §5.4). Units are
+// modules, and the grid covers the whole post body, 16 columns wide.
+//
+// Content and placed tiles both occupy their cells plus every cell
+// sharing an edge with them, so a tile is never edge to edge with
+// content or with another tile. Diagonal neighbors are fine.
+//
+// Tiles are placed largest first. Every free position for a size is
+// tried in a shuffled order, and kept with a chance scaled by the
+// density field, so tiles cluster where the density is high.
 
 export type Tile = { x: number; y: number; size: number };
+export type Region = { x: number; y: number; w: number; h: number };
+export type Grid = { w: number; h: number; cells: Uint8Array };
 
-// chance to fill or split a cell, by cell size
-const CHANCES: Record<number, { fill: number; split: number }> = {
-  4: { fill: 0.25, split: 0.25 },
-  2: { fill: 0.3, split: 0.15 },
-  1: { fill: 0.25, split: 0 },
+const SIZES = [4, 2, 1];
+// chance to keep a free position at full density, by tile size
+const CHANCES: Record<number, number> = {
+  4: 0.25,
+  2: 0.15,
+  1: 0.06,
 };
 
-const pow2floor = (n: number) => 2 ** Math.floor(Math.log2(n));
+export const createGrid = (w: number, h: number): Grid => ({
+  w,
+  h,
+  cells: new Uint8Array(w * h),
+});
 
-function cell (r: Random, x: number, y: number, size: number, density: number, out: Tile[]) {
-  const { fill, split } = CHANCES[size];
-  const n = r.next();
-  if (n < fill * density) {
-    out.push({ x, y, size });
-  } else if (n < (fill + split) * density) {
-    const half = size / 2;
-    cell(r, x, y, half, density, out);
-    cell(r, x + half, y, half, density, out);
-    cell(r, x, y + half, half, density, out);
-    cell(r, x + half, y + half, half, density, out);
+const inside = (g: Grid, x: number, y: number) =>
+  x >= 0 && y >= 0 && x < g.w && y < g.h;
+
+function mark (g: Grid, x: number, y: number) {
+  if (inside(g, x, y)) g.cells[y * g.w + x] = 1;
+}
+
+// marks a rectangle and the ring of cells sharing an edge with it
+export function occupy (g: Grid, x: number, y: number, w: number, h: number) {
+  for (let j = y; j < y + h; j++) {
+    mark(g, x - 1, j);
+    mark(g, x + w, j);
+    for (let i = x; i < x + w; i++) mark(g, i, j);
+  }
+  for (let i = x; i < x + w; i++) {
+    mark(g, i, y - 1);
+    mark(g, i, y + h);
   }
 }
 
-// density scales the fill and split chances: 1 is the default restraint
-export function pack (r: Random, w: number, h: number, density = 1, x = 0, y = 0): Tile[] {
-  const out: Tile[] = [];
-  if (w < 1 || h < 1) return out;
-  const size = Math.min(4, pow2floor(Math.min(w, h)));
-  const cols = Math.floor(w / size);
-  const rows = Math.floor(h / size);
-  for (let j = 0; j < rows; j++) {
-    for (let i = 0; i < cols; i++) {
-      cell(r, x + i * size, y + j * size, size, density, out);
+function fits (g: Grid, x: number, y: number, size: number) {
+  for (let j = y; j < y + size; j++) {
+    for (let i = x; i < x + size; i++) {
+      if (!inside(g, i, j) || g.cells[j * g.w + i]) return false;
     }
   }
-  // leftover strips on the right and bottom take smaller cells
-  out.push(...pack(r, w - cols * size, h, density, x + cols * size, y));
-  out.push(...pack(r, cols * size, h - rows * size, density, x, y + rows * size));
+  return true;
+}
+
+function shuffle<T> (r: Random, list: T[]) {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = r.int(i + 1);
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
+}
+
+// places tiles inside a region; tile positions are relative to it
+export function place (
+  r: Random,
+  g: Grid,
+  region: Region,
+  density: (x: number, y: number) => number,
+): Tile[] {
+  const out: Tile[] = [];
+  for (const size of SIZES) {
+    const candidates: [number, number][] = [];
+    for (let y = region.y; y + size <= region.y + region.h; y++) {
+      for (let x = region.x; x + size <= region.x + region.w; x++) {
+        if (fits(g, x, y, size)) candidates.push([x, y]);
+      }
+    }
+    for (const [x, y] of shuffle(r, candidates)) {
+      if (!fits(g, x, y, size)) continue;
+      if (r.next() >= CHANCES[size] * density(x + size / 2, y + size / 2)) continue;
+      occupy(g, x, y, size, size);
+      out.push({ x: x - region.x, y: y - region.y, size });
+    }
+  }
   return out;
 }

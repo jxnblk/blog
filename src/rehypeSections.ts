@@ -14,17 +14,21 @@
  *
  * Placement is a greedy row-by-row pass. Every item takes one row of
  * the grid (rows grow to fit), and each section moves its prose to a
- * column chosen by rng('layout'). Runs of rows that share the same free
- * columns get a margin item, filled with flourish tiles. The margin's
- * height is estimated here in modules, and the client hides any tile
- * that ends up past the content.
+ * column chosen by rng('layout'). Block heights are estimated in
+ * modules, and the content is marked on an occupancy grid for the
+ * whole body. Runs of rows that share the same free columns get a
+ * margin item, and tiles are placed in margins and bands against that
+ * grid (see pack.ts), so they never sit edge to edge with content or
+ * each other. The estimates can be off, so the client hides any tile
+ * that ends up past its margin or touching content.
  *
  * Columns are authored against 16 columns: below that, CSS stacks the
  * blocks full width and hides the margins.
  */
 import type { Root, RootContent, Element, ElementContent } from "hast";
 import { rng, type Random } from "./rng";
-import { pack } from "./pack";
+import { createGrid, occupy, place, type Region } from "./pack";
+import { perlin, smoothstep } from "./noise";
 
 export type BlockType =
   | "heading"
@@ -40,16 +44,17 @@ const MEDIA = new Set(["img", "figure", "iframe", "video"]);
 const COLUMNS = 16;
 // prose column starts; the prose column is 8 wide
 const OFFSETS = [1, 5, 9];
-const WIDTHS: Record<BlockType, number> = {
-  heading: 8,
-  prose: 8,
-  blockquote: 8,
-  image: 8,
-  code: 12,
-  table: 12,
-};
-// section break bands, in modules
+const PROSE = 8;
+const WIDE = 12;
+// images are one or two columns wider than the prose
+const IMAGE_EXTRA = [1, 2];
+// section break bands: tile rows, plus an empty row above and below
 const BAND = 2;
+// density field: noise is sampled at modules × NOISE_SCALE, and
+// eases from empty at DENSITY_LOW to full at DENSITY_HIGH
+const NOISE_SCALE = 1 / 6;
+const DENSITY_LOW = 0;
+const DENSITY_HIGH = 0.5;
 
 const isElement = (node: RootContent): node is Element =>
   node.type === "element";
@@ -96,8 +101,9 @@ const element = (
  */
 const MODULE = 64;
 const LINE = 32;
-const CHARS_PER_LINE = Math.floor((8 * MODULE) / (16 * 0.6));
-const IMAGE_MODULES = 4;
+const CHARS_PER_LINE = Math.floor((PROSE * MODULE) / (16 * 0.6));
+// image aspect ratio when the markup doesn't give a width and height
+const IMAGE_RATIO = 9 / 16;
 
 function toText (node: RootContent | ElementContent): string {
   if (node.type === "text") return node.value;
@@ -122,9 +128,26 @@ function estimateLines (node: RootContent): number {
   return lines(toText(node));
 }
 
-function estimate (type: BlockType, nodes: RootContent[]): number {
+function findMedia (node: RootContent | ElementContent): Element | undefined {
+  if (node.type !== "element") return;
+  if (MEDIA.has(node.tagName)) return node;
+  for (const child of node.children) {
+    const media = findMedia(child);
+    if (media) return media;
+  }
+}
+
+function imageRatio (nodes: RootContent[]) {
+  const media = nodes.map(findMedia).find(Boolean);
+  const width = Number(media?.properties.width);
+  const height = Number(media?.properties.height);
+  return width && height ? height / width : IMAGE_RATIO;
+}
+
+function estimate (block: Block, width: number): number {
+  const { type, nodes } = block;
   if (type === "heading") return 1;
-  if (type === "image") return IMAGE_MODULES;
+  if (type === "image") return Math.max(1, Math.round(width * imageRatio(nodes)));
   // a blank line between nodes
   const total = nodes.reduce((n, node) => n + estimateLines(node), 0) + nodes.length - 1;
   return Math.max(1, Math.ceil((total * LINE) / MODULE));
@@ -137,40 +160,72 @@ type Section = {
   blocks: Block[];
 };
 
-// a free run of columns, inclusive start, in 16-column units
+// a run of columns, 1-based start, in 16-column units
 type Span = { start: number; width: number };
 const key = (span: Span) => `${span.start}/${span.width}`;
 
-// the columns an occupied range leaves free on either side
-function free (start: number, width: number): Span[] {
+// the columns a span leaves free on either side
+function free (span?: Span): Span[] {
+  if (!span) return [{ start: 1, width: COLUMNS }];
   const spans: Span[] = [];
-  if (start > 1) spans.push({ start: 1, width: start - 1 });
-  const end = start + width;
+  if (span.start > 1) spans.push({ start: 1, width: span.start - 1 });
+  const end = span.start + span.width;
   if (end <= COLUMNS) spans.push({ start: end, width: COLUMNS + 1 - end });
   return spans;
 }
 
-function blockStart (type: BlockType, offset: number) {
-  // wider blocks shift left to stay inside the grid
-  return Math.min(offset, COLUMNS + 1 - WIDTHS[type]);
+// the smallest span covering both
+function hull (a?: Span, b?: Span): Span | undefined {
+  if (!a || !b) return a || b;
+  const start = Math.min(a.start, b.start);
+  const end = Math.max(a.start + a.width, b.start + b.width);
+  return { start, width: end - start };
+}
+
+const fit = (start: number, width: number) =>
+  Math.max(1, Math.min(start, COLUMNS + 1 - width));
+
+// a block's columns, given its section's prose offset
+function columns (r: Random, type: BlockType, offset: number): Span {
+  if (type === "code" || type === "table") {
+    // wider blocks shift left to stay inside the grid
+    return { start: fit(offset, WIDE), width: WIDE };
+  }
+  if (type === "image") {
+    // wider than the prose: flush with its left or right edge, or centered
+    const width = PROSE + r.pick(IMAGE_EXTRA);
+    const extra = width - PROSE;
+    const starts = [offset, offset - extra, offset - extra / 2]
+      .filter(n => Number.isInteger(n))
+      .map(n => fit(n, width));
+    return { start: r.pick([...new Set(starts)]), width };
+  }
+  return { start: offset, width: PROSE };
 }
 
 function pickOffset (r: Random, previous?: number) {
   return r.pick(OFFSETS.filter(n => n !== previous));
 }
 
-type Row = { free: Span[]; modules: number };
+type Row = {
+  el: Element;
+  // estimated height in modules
+  modules: number;
+  // columns holding content
+  content?: Span;
+  band?: boolean;
+};
 
-type Run = Span & { row: number; rows: number; modules: number };
+type Run = Span & { row: number; rows: number; y: number; modules: number };
 
 // merges consecutive rows with the same free span into one run
-function runs (rows: Row[], first: number): Run[] {
+function runs (rows: (Row & { y: number; free: Span[] })[]): Run[] {
   const done: Run[] = [];
   let open = new Map<string, Run>();
   rows.forEach((row, i) => {
     const next = new Map<string, Run>();
     for (const span of row.free) {
-      const run = open.get(key(span)) || { ...span, row: first + i, rows: 0, modules: 0 };
+      const run = open.get(key(span)) || { ...span, row: i + 1, rows: 0, y: row.y, modules: 0 };
       run.rows++;
       run.modules += row.modules;
       next.set(key(span), run);
@@ -179,17 +234,6 @@ function runs (rows: Row[], first: number): Run[] {
     open = next;
   });
   return [...done, ...open.values()];
-}
-
-function tiles (r: Random, seed: string, w: number, h: number, density: number, count: { n: number }) {
-  return pack(r, w, h, density).map(tile =>
-    element("div", "tile", `grid-area:${tile.y + 1} / ${tile.x + 1} / span ${tile.size} / span ${tile.size}`, [
-      element("flourish-tile", "", "", [], {
-        seed: `${seed}:flourish:${count.n++}`,
-        size: tile.size,
-      }),
-    ])
-  );
 }
 
 export default function rehypeSections ({ seed }: { seed: string }) {
@@ -224,57 +268,98 @@ export default function rehypeSections ({ seed }: { seed: string }) {
     const random = rng(seed);
     const layout = random("layout");
     const flourish = random("flourish");
-    const count = { n: 0 };
+    const noise = perlin(random("noise"));
+    const density = (x: number, y: number) =>
+      smoothstep(DENSITY_LOW, DENSITY_HIGH, noise(x * NOISE_SCALE, y * NOISE_SCALE));
 
-    const children: Element[] = [];
-    const margins: Element[] = [];
-    let row = 0;
+    // 1. lay out the rows
+    const rows: Row[] = [];
+    const spacer = (className = "spacer") =>
+      rows.push({ el: element("div", className, ""), modules: 1 });
     let offset: number | undefined;
-
-    const push = (el: Element) => {
-      row++;
-      el.properties.style = `grid-row:${row};${el.properties.style || ""}`;
-      children.push(el);
-    };
 
     sections
       .filter(section => section.blocks.length || section.isBreak)
       .forEach((section, i) => {
         if (section.isBreak) {
-          push(element("div", "spacer spacer-section spacer-break", "",
-            tiles(flourish, seed, COLUMNS, BAND, 2, count)));
+          rows.push({
+            el: element("div", "spacer spacer-section spacer-break", ""),
+            modules: BAND + 2,
+            band: true,
+          });
         } else if (i > 0) {
-          push(element("div", "spacer spacer-section", ""));
+          spacer("spacer spacer-section");
         }
         if (!section.blocks.length) return;
 
         offset = pickOffset(layout, offset);
-        const first = row + 1;
-        const rows: Row[] = [];
-
         section.blocks.forEach((block, j) => {
           // a heading stays attached to the block it introduces
-          if (j > 0 && section.blocks[j - 1].type !== "heading") {
-            push(element("div", "spacer", ""));
-            rows.push({ free: free(offset!, WIDTHS.prose), modules: 1 });
-          }
-          const start = blockStart(block.type, offset!);
-          push(element("div", `block block-${block.type}`, `--start:${start}`, block.nodes));
+          if (j > 0 && section.blocks[j - 1].type !== "heading") spacer();
+          const span = columns(layout, block.type, offset!);
           rows.push({
-            free: free(start, WIDTHS[block.type]),
-            modules: estimate(block.type, block.nodes),
+            el: element("div", `block block-${block.type}`,
+              `--start:${span.start};--w:${span.width}`, block.nodes),
+            modules: estimate(block, span.width),
+            content: span,
           });
         });
-
-        for (const run of runs(rows, first)) {
-          const children = tiles(flourish, seed, run.width, run.modules, 1, count);
-          if (!children.length) continue;
-          margins.push(element("div", "margin",
-            `grid-row:${run.row} / span ${run.rows};--start:${run.start};--span:${run.width}`,
-            children));
-        }
       });
 
-    tree.children = [...children, ...margins];
+    // 2. mark the content on the occupancy grid
+    let y = 0;
+    const placed = rows.map((row, i) => {
+      const spans = row.band ? [] : free(row.content
+        // a spacer's margins stay clear of the blocks on either side
+        ?? hull(rows[i - 1]?.content, rows[i + 1]?.content));
+      const out = { ...row, y, free: spans };
+      y += row.modules;
+      return out;
+    });
+    const grid = createGrid(COLUMNS, y);
+    for (const row of placed) {
+      if (row.content) occupy(grid, row.content.start - 1, row.y, row.content.width, row.modules);
+    }
+
+    // 3. place tiles in margins and bands, top to bottom
+    let count = 0;
+    const tiles = (region: Region, top: number) =>
+      place(flourish, grid, region, density).map(tile =>
+        element("div", "tile",
+          `grid-area:${tile.y + region.y - top + 1} / ${tile.x + 1} / span ${tile.size} / span ${tile.size}`, [
+          element("flourish-tile", "", "", [], {
+            seed: `${seed}:flourish:${count++}`,
+            size: tile.size,
+          }),
+        ])
+      );
+
+    const regions = [
+      ...runs(placed).map(run => ({ run, y: run.y })),
+      ...placed.filter(row => row.band).map(row => ({ band: row, y: row.y })),
+    ].sort((a, b) => a.y - b.y);
+
+    const margins: Element[] = [];
+    for (const region of regions) {
+      if ("band" in region && region.band) {
+        const { band } = region;
+        band.el.children = tiles({ x: 0, y: band.y + 1, w: COLUMNS, h: BAND }, band.y);
+      } else if ("run" in region && region.run) {
+        const { run } = region;
+        const children = tiles({ x: run.start - 1, y: run.y, w: run.width, h: run.modules }, run.y);
+        if (!children.length) continue;
+        margins.push(element("div", "margin",
+          `grid-row:${run.row} / span ${run.rows};--start:${run.start};--span:${run.width}`,
+          children));
+      }
+    }
+
+    tree.children = [
+      ...placed.map((row, i) => {
+        row.el.properties.style = `grid-row:${i + 1};${row.el.properties.style || ""}`;
+        return row.el;
+      }),
+      ...margins,
+    ];
   };
 }

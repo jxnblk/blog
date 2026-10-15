@@ -47,16 +47,10 @@ export function BlogPostCard (props: PostData) {
     <>
       <h2>
         <a href={'/' + props.path}>
-          {props.data.devlog && (
-            <div>
-              Devlog {pad(props.data.devlog)}
-              <br />
-            </div>
-          )}
           {props.data.title}
         </a>
       </h2>
-      <div>
+      <div className="flex gap-1">
         <div>
           {props.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
         </div>
