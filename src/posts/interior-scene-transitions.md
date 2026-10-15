@@ -200,7 +200,74 @@ The end result:
 
 If you'd like to set up something similar in your project, here is the full source code for the component:
 
-<script src="https://gist.github.com/jxnblk/296850435694b95569ff09347756ce9e.js"></script>
+```cs
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InteriorCamera : MonoBehaviour {
+  public Camera cam; // Interior layer w/ culling
+  public RenderTexture texture;
+  public RawImage output; // UI layer + UI Camera Stack
+  public float duration = 0.5f;
+  public LeanTweenType easeIn = LeanTweenType.easeInCubic;
+  public LeanTweenType easeOut = LeanTweenType.easeOutCubic;
+
+  [Header("State")]
+  public bool active = false;
+
+  float aspect = 1f;
+  int width = 3840;
+  int height = 2160;
+  Color color = Color.white;
+
+  void Start () {
+    Init();
+  }
+
+  void Init () {
+    aspect = Camera.main.aspect;
+    width = Camera.main.pixelWidth;
+    height = Camera.main.pixelHeight;
+    texture = new RenderTexture(width, height, 32);
+    cam.targetTexture = texture;
+    output.texture = texture;
+  }
+
+  void LateUpdate () {
+    if (!active) return;
+    if (Camera.main.aspect != aspect || Camera.main.pixelWidth != width) {
+      Init();
+    }
+  }
+
+  [ContextMenu("Fade In")]
+  public void FadeIn () {
+    if (active) return;
+    cam.enabled = true;
+    output.enabled = true;
+    LeanTween.value(gameObject, UpdateFade, 0f, 1f, duration)
+      .setEase(easeIn);
+    active = true;
+  }
+
+  [ContextMenu("Fade Out")]
+  public void FadeOut () {
+    if (!active) return;
+    LeanTween.value(gameObject, UpdateFade, 1f, 0f, duration)
+      .setEase(easeOut)
+      .setOnComplete(() => {
+        cam.enabled = false;
+        output.enabled = false;
+      });
+    active = false;
+  }
+
+  void UpdateFade (float n) {
+    color.a = n;
+    output.color = color;
+  }
+}
+```
 
 [Camera Stack]: https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/camera-stacking.html
 

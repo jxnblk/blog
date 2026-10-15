@@ -135,7 +135,113 @@ In Unity, each modular part is a separate game object within the model, and I wr
 
 The `ModularCharacter` script randomizes which part to show for each section, and the `ModularColors` script randomizes which texture to use for the whole model.
 
-<script src="https://gist.github.com/jxnblk/3e21f2494863b4e13a79c783bb05f248.js"></script>
+`ModularCharacter.cs`
+
+```cs
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ModularCharacter : MonoBehaviour {
+  [System.Serializable]
+  public class Section {
+    public string name;
+    public List<GameObject> parts = new List<GameObject>();
+    public int index = 0;
+  }
+
+  public List<Section> sections = new List<Section>();
+  public ModularColors colors;
+
+  public float minScale = 0.9f;
+  public float maxScale = 1.1f;
+  public bool autorando = false;
+
+  Renderer[] meshes;
+
+  void Start () {
+    meshes = GetComponentsInChildren<Renderer>();
+    Render();
+  }
+
+  void OnEnable () {
+    if (autorando) Randomize();
+  }
+
+  void Render () {
+    foreach (Section section in sections) {
+      RenderSection(section);
+    }
+  }
+
+  void RenderSection (Section section) {
+    if (section.parts.Count < 1) return;
+    foreach (GameObject go in section.parts) {
+      go.SetActive(false);
+    }
+    GameObject part = section.parts[section.index];
+    part.SetActive(true);
+  }
+
+  [ContextMenu("Randomize")]
+  public void Randomize () {
+    foreach (Section section in sections) {
+      RandomizeSection(section);
+    }
+    colors.Randomize();
+    float s = Random.Range(minScale, maxScale);
+    transform.localScale = new Vector3(s, s, s);
+  }
+
+  public void RandomizeSection (Section section) {
+    int n = Random.Range(0, section.parts.Count);
+    section.index = n;
+    RenderSection(section);
+  }
+}
+```
+
+`ModularColors.cs`
+
+```cs
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ModularColors : MonoBehaviour {
+  public List<Texture> textures = new List<Texture>();
+  public int index = 0;
+
+  public bool autorando = false;
+
+  Renderer[] meshes = new Renderer[0];
+
+  void OnEnable () {
+    if (autorando) {
+      Randomize();
+    } else {
+      Render();
+    }
+  }
+
+  [ContextMenu("Render")]
+  public void Render () {
+    if (textures.Count < 1) {
+      Debug.LogWarning($"[ModularColors] {name}: missing textures");
+      return;
+    }
+    meshes = GetComponentsInChildren<Renderer>();
+    Texture tex = textures[index];
+    foreach (Renderer mesh in meshes) {
+      mesh.material.mainTexture = tex;
+    }
+  }
+
+  [ContextMenu("Randomize")]
+  public void Randomize () {
+    index = Random.Range(0, textures.Count);
+    Render();
+  }
+}
+```
 
 Although I ended up not using it, I also had an array of rules to ensure that specific tops would always match their bottoms for things like aprons and suits.
 
