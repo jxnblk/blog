@@ -250,6 +250,14 @@ function runs (rows: (Row & { y: number; free: Span[] })[]): Run[] {
   return [...done, ...open.values()];
 }
 
+// the density field tiles are placed against, in 16-column modules,
+// shared with the blog index
+export function densityField (seed: string) {
+  const noise = perlin(rng(seed)("noise"));
+  return (x: number, y: number) =>
+    smoothstep(DENSITY_LOW, DENSITY_HIGH, noise(x * NOISE_SCALE, y * NOISE_SCALE));
+}
+
 export default function rehypeSections ({ seed }: { seed: string }) {
   return (tree: Root) => {
     const sections: Section[] = [{ isBreak: false, blocks: [] }];
@@ -282,9 +290,7 @@ export default function rehypeSections ({ seed }: { seed: string }) {
     const random = rng(seed);
     const layout = random("layout");
     const flourish = random("flourish");
-    const noise = perlin(random("noise"));
-    const density = (x: number, y: number) =>
-      smoothstep(DENSITY_LOW, DENSITY_HIGH, noise(x * NOISE_SCALE, y * NOISE_SCALE));
+    const density = densityField(seed);
 
     // 1. lay out the rows
     const rows: Row[] = [];

@@ -240,8 +240,9 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 }
 
 /* Header & footer
- * One row of modules: the home link spans 2 columns (avatar in the
- * first module), and the nav's 1-column items end at the right edge.
+ * One row of modules: the home link spans 2 columns (a fixed 64px
+ * avatar centered in the first module), and the nav's 1-column items
+ * end at the right edge.
  * At 4 columns the nav drops to its own row.
  */
 .site-footer { margin-top: var(--module) }
@@ -254,8 +255,9 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 }
 .home-link img {
   display: block;
-  width: var(--module);
-  height: var(--module);
+  width: 64px;
+  height: 64px;
+  justify-self: center;
 }
 
 .nav {
@@ -273,6 +275,8 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   align-items: center;
 }
 .nav > button { justify-content: center }
+.gap-1 { gap: 0 var(--baseline) }
+.wrap { flex-wrap: wrap }
 
 .copyright {
   grid-column: 1 / -1;
@@ -323,6 +327,12 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   height: 100%;
 }
 .home-title { grid-column: 1 / -1 }
+
+/* Blog
+ * The same header and body as a post: each card is a block in the
+ * left 8 columns, one row each, with a margin of tiles beside them */
+.blog-list { list-style: none }
+.block-card { --w: 8 }
 
 .post-body {
   grid-column: 1 / -1;

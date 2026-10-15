@@ -132,26 +132,31 @@ function createPostPage (post: PostData): Page {
 
 async function getPages (posts: PostData[]): Promise<Page[]> {
   const pages = posts.map(createPostPage);
+
   const home = <Home posts={posts} {...ctx} />
   pages.push({
     path: "",
     html: renderToStaticMarkup(home),
   });
+
   const blog = <Blog posts={posts} {...ctx} />;
   pages.push({
     path: "blog",
     html: renderToStaticMarkup(blog),
   });
+
   const notfound = <NotFound {...ctx} />;
   pages.push({
     path: "404",
     html: renderToStaticMarkup(notfound),
   });
+
   const protoLayout = <ProtoLayout {...ctx} />;
   pages.push({
     path: "layout",
     html: renderToStaticMarkup(protoLayout),
   });
+
   const protoFlourish = <ProtoFlourish {...ctx} />;
   pages.push({
     path: "flourish",
