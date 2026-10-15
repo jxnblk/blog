@@ -144,3 +144,9 @@ export default function Flourish ({
     </svg>
   );
 }
+
+// rehype-react maps <flourish-tile> from rehypeSections here, where
+// hast properties arrive as strings
+export function FlourishTile ({ seed, size }: { seed: string; size: string | number }) {
+  return <Flourish seed={seed} size={Number(size)} />;
+}

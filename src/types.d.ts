@@ -23,6 +23,8 @@ export type Metadata = {
   draft?: boolean;
   devlog?: number;
   tags?: string[];
+  // pins or re-rolls the generated design; defaults to the slug
+  seed?: string;
 };
 
 export type PostData = {

@@ -26,6 +26,7 @@ import Blog from "./src/Blog";
 import NotFound from "./src/404";
 import ProtoLayout from "./src/ProtoLayout";
 import ProtoFlourish from "./src/ProtoFlourish";
+import { FlourishTile } from "./src/Flourish";
 
 import cssFile from "./src/style.css" with { type: "file" };
 
@@ -83,8 +84,13 @@ async function parseMarkdown (post: Partial<PostData>, { sections = false } = {}
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeRaw)
-    .use(sections ? rehypeSections : [])
-    .use(rehypeReact, { Fragment, jsx, jsxs })
+    .use(sections ? [[rehypeSections, { seed: post.data?.seed ?? post.slug }]] : [])
+    .use(rehypeReact, {
+      Fragment,
+      jsx,
+      jsxs,
+      components: { "flourish-tile": FlourishTile },
+    } as any)
   const tree = await proc.process(post.content);
 
   return {
