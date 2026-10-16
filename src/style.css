@@ -132,6 +132,9 @@ body {
   --primary-1: color-mix(in srgb, var(--primary) 12%, var(--background));
   --primary-0: color-mix(in srgb, var(--primary) 6%, var(--background));
   --primary-dark: color-mix(in srgb, var(--primary) 50%, var(--text));
+  /* pressed links and buttons: --primary a step darker in every mode,
+   * dark ones included, so a click reads as pushing in */
+  --active: color-mix(in srgb, var(--primary) 75%, #000);
   /* code background: a tint of --code, like --primary-0 */
   --code-0: color-mix(in srgb, var(--code) 6%, var(--background));
   /* the dot grid: a shade off the background, darker on module lines.
@@ -213,6 +216,12 @@ a {
 a:where(:hover) {
   background-color: var(--primary-0);
   text-decoration-color: var(--primary);
+}
+/* pressing switches at once; releasing fades back with the rest */
+a:where(:active) {
+  color: var(--active);
+  text-decoration-color: var(--active);
+  transition-duration: 0s;
 }
 
 button {
@@ -540,6 +549,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   text-decoration: underline;
   background: none;
 }
+.card-title a:active { color: var(--active) }
 
 /* the negative margin takes back the spacing after the last letter */
 .caps {
@@ -560,16 +570,17 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   color: var(--primary);
   text-decoration: underline;
 }
+.nav > a:active { color: var(--active) }
 
 /* The nav buttons: drawn in --text (the G knocks out to --background),
  * switching to --primary on hover with the same fade as links */
-#color-button,
+.color-button,
 .grid-button {
   transition-property: color, background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
 }
-#color-button:hover { color: var(--primary) }
+.color-button:hover { color: var(--primary) }
 .grid-button {
   font-size: 12px;
   line-height: 1;
@@ -587,6 +598,17 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   color: var(--primary);
   background-color: transparent;
 }
+/* pressed: --active straight away, no fade */
+.color-button:active,
+.grid-button[aria-pressed="true"]:active {
+  color: var(--active);
+  transition-duration: 0s;
+}
+.grid-button:active {
+  background-color: var(--active);
+  transition-duration: 0s;
+}
+.grid-button[aria-pressed="true"]:active { background-color: transparent }
 
 .fill { background-color: var(--primary) }
 .fill-greeble { background-color: var(--greeble) }
