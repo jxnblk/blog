@@ -15,33 +15,41 @@ function maxDepth (size: number) {
 
 // Color: each flourish takes a base HSL color, mostly foliage greens,
 // sometimes a floral hue. Each division shifts slightly from its parent.
-type HSL = [number, number, number];
+export type HSL = [number, number, number];
+type Range = [number, number];
+export type Family = "foliage" | "poppy" | "marigold" | "peony" | "violet";
 
-const FOLIAGE_CHANCE = 0.8;
-const FOLIAGE: { hue: [number, number]; sat: [number, number]; light: [number, number] } =
+export const FOLIAGE_CHANCE = 0.8;
+export const FOLIAGE: { hue: Range; sat: Range; light: Range } =
   { hue: [85, 160], sat: [25, 50], light: [22, 50] };
-const FLORAL_HUES: [number, number][] = [
-  [0, 12],    // poppy
-  [36, 46],   // marigold
-  [325, 345], // peony
-  [265, 280], // violet
+// order matters: the seeded pick indexes into this list
+export const FLORAL_HUES: { family: Family; hue: Range }[] = [
+  { family: "poppy", hue: [0, 12] },
+  { family: "marigold", hue: [36, 46] },
+  { family: "peony", hue: [325, 345] },
+  { family: "violet", hue: [265, 280] },
 ];
-const FLORAL = { sat: [60, 80] as [number, number], light: [50, 64] as [number, number] };
+export const FLORAL = { sat: [60, 80] as Range, light: [50, 64] as Range };
 
 // max shift per division
 const SHIFT: HSL = [10, 8, 10];
 const MIN_LIGHT_SHIFT = 4; // keeps neighboring pieces distinguishable
 
-function range (r: Random, [min, max]: [number, number]) {
+function range (r: Random, [min, max]: Range) {
   return min + r.next() * (max - min);
 }
 
-function baseColor (r: Random): HSL {
+function baseColor (r: Random): { family: Family; hsl: HSL } {
   if (r.chance(FOLIAGE_CHANCE)) {
-    return [range(r, FOLIAGE.hue), range(r, FOLIAGE.sat), range(r, FOLIAGE.light)];
+    return { family: "foliage", hsl: [range(r, FOLIAGE.hue), range(r, FOLIAGE.sat), range(r, FOLIAGE.light)] };
   }
-  return [range(r, r.pick(FLORAL_HUES)), range(r, FLORAL.sat), range(r, FLORAL.light)];
+  const { family, hue } = r.pick(FLORAL_HUES);
+  return { family, hsl: [range(r, hue), range(r, FLORAL.sat), range(r, FLORAL.light)] };
 }
+
+// overrides the base color after it's drawn, so the seed's draws (and
+// the tile's shape) stay the same. Used by the dev palette app
+export type BaseOverride = (family: Family, hsl: HSL) => HSL;
 
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));
 const signed = (r: Random) => r.next() * 2 - 1;
@@ -107,12 +115,15 @@ function subdivide (
   }
 }
 
-export function layout (seed: string, size: number) {
+export function layout (seed: string, size: number, override?: BaseOverride) {
   const r = createRandom(seed);
   const leaves: Leaf[] = [];
   const corner = { right: r.chance(0.5), bottom: r.chance(0.5) };
-  subdivide(r, 0, 0, size, size, r.chance(0.5), corner, 0, maxDepth(size), baseColor(r), leaves);
-  return leaves;
+  const vertical = r.chance(0.5);
+  const base = baseColor(r);
+  const color = override ? override(base.family, base.hsl) : base.hsl;
+  subdivide(r, 0, 0, size, size, vertical, corner, 0, maxDepth(size), color, leaves);
+  return { family: base.family, leaves };
 }
 
 export default function Flourish ({
@@ -124,7 +135,7 @@ export default function Flourish ({
   size?: number; // modules
   className?: string;
 }) {
-  const leaves = layout(seed, size);
+  const { leaves } = layout(seed, size);
   return (
     <svg
       viewBox={`0 0 ${size} ${size}`}
