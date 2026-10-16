@@ -110,9 +110,9 @@ const element = (
 });
 
 /** Block heights (see measure.ts)
- * Measured in modules for each grid from 512px up. Below 1024px every
+ * Measured in modules for each grid from 576px up. Below 1088px every
  * block spans the full 8 columns, and from there its own width. Below
- * 512px the module is fluid, so rows end on the baseline instead.
+ * 576px the module is fluid, so rows end on the baseline instead.
  */
 type Size = "sm" | "md" | "lg" | "xl";
 const SIZES: { size: Size; module: number; columns: number }[] = [

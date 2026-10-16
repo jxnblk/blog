@@ -148,20 +148,20 @@ body {
  * Fixed square modules. Columns are powers of 2: 4 / 8 / 16.
  * Spans are authored against 16 columns and scaled down (÷2, ÷4)
  * at smaller breakpoints so layouts transform mechanically.
- * Below 512px the module is fluid, leaving a 16px margin on each side,
+ * Below 576px the module is fluid, leaving a 16px margin on each side,
  * until mobile gets its own pass.
  * The fixed 16px baseline fits 4 per 64px module and 5 per 80px module.
  */
-@media screen and (min-width: 512px) {
+@media screen and (min-width: 576px) {
   :root { --module: 64px; --columns: 8; --scale: 2 }
 }
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 704px) {
   :root { --module: 80px }
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1088px) {
   :root { --module: 64px; --columns: 16; --scale: 1 }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1344px) {
   :root { --module: 80px }
 }
 
@@ -331,7 +331,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
  * to a fixed measure */
 .text-block,
 .block { --span: 16 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1088px) {
   .text-block { --span: 8 }
 }
 
@@ -362,7 +362,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   gap: calc(var(--baseline) * 2);
   height: var(--module);
 }
-@media screen and (min-width: 512px) {
+@media screen and (min-width: 576px) {
   .nav {
     grid-column: 3 / -1;
     justify-content: flex-end;
@@ -442,21 +442,21 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 
 /* Blocks, and the home title, hold their rows to the height in modules
  * the build measured for each grid (--h-sm to --h-xl), so every row
- * ends on a module line. Below 512px the module is fluid, and rows grow to fit */
+ * ends on a module line. Below 576px the module is fluid, and rows grow to fit */
 .block {
   grid-column-start: 1;
   min-height: calc(var(--h, 1) * var(--module));
 }
-@media screen and (512px <= width < 640px) {
+@media screen and (576px <= width < 704px) {
   :is(.block, .home-title) { --h: var(--h-sm) }
 }
-@media screen and (640px <= width < 1024px) {
+@media screen and (704px <= width < 1088px) {
   :is(.block, .home-title) { --h: var(--h-md) }
 }
-@media screen and (1024px <= width < 1280px) {
+@media screen and (1088px <= width < 1344px) {
   :is(.block, .home-title) { --h: var(--h-lg) }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1344px) {
   :is(.block, .home-title) { --h: var(--h-xl) }
 }
 /* an empty spacer fills one full-width module row */
@@ -499,34 +499,34 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 }
 .tile svg { display: block }
 
-@media screen and (width < 512px) {
+@media screen and (width < 576px) {
   .band-4 { display: grid }
 }
-@media screen and (512px <= width < 1024px) {
+@media screen and (576px <= width < 1088px) {
   .band-8 { display: grid }
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1088px) {
   .band-16 { display: grid }
 }
 /* margins and a post's 16-column bands come in one set per module size */
-@media screen and (1024px <= width < 1280px) {
+@media screen and (1088px <= width < 1344px) {
   .band-xl { display: none }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1344px) {
   .band-lg { display: none }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1088px) {
   .post-title { grid-row: 1 / span 3 }
   .home-title { grid-column: 1 / span 12 }
   .post-meta { grid-row: 4 }
   .block { grid-column: var(--start, 1) / span var(--w, 8) }
   .margin { grid-column-start: var(--start) }
 }
-@media screen and (1024px <= width < 1280px) {
+@media screen and (1088px <= width < 1344px) {
   .margin-lg { display: grid }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1344px) {
   .margin-xl { display: grid }
 }
 
