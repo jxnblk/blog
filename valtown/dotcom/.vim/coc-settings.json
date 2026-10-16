@@ -1,8 +1,0 @@
-{
-  "suggest.enable": false,
-  "diagnostic.enable": false,
-  "codeLens.enable": false,
-  "hover.enable": false,
-  "signature.enable": false,
-  "tsserver.enable": false
-}
