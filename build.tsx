@@ -19,6 +19,7 @@ import rehypeReact from "rehype-react";
 import rehypeSections from "./src/rehypeSections";
 import rehypeExcerpt from "./src/rehypeExcerpt";
 import { toJsxRuntime } from "hast-util-to-jsx-runtime";
+import { toHtml } from "hast-util-to-html";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -62,8 +63,7 @@ async function getAbout () {
     slug: "home",
     content: raw,
   };
-  const md = await parseMarkdown(data, { sections: true });
-  return md.tree;
+  return parseMarkdown(data, { sections: true });
 }
 
 function parseFile (filename: string) {
@@ -83,12 +83,24 @@ function parseFile (filename: string) {
 
 const components = { "flourish-tile": FlourishTile };
 
+declare module "vfile" {
+  interface DataMap {
+    hast: import("hast").Root;
+  }
+}
+
+// the plain post markup, before rehypeSections lays it out, for api/all.json
+const rehypeCopy = () => (tree: import("hast").Root, file: import("vfile").VFile) => {
+  file.data.hast = structuredClone(tree);
+};
+
 async function parseMarkdown (post: Partial<PostData>, { sections = false } = {}) {
   const proc = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
+    .use(rehypeCopy)
     .use(rehypeExcerpt)
     .use(sections ? [[rehypeSections, { seed: post.data?.seed ?? post.slug }]] : [])
     .use(rehypeReact, {
@@ -103,6 +115,7 @@ async function parseMarkdown (post: Partial<PostData>, { sections = false } = {}
   return {
     ...post,
     tree: file.result,
+    hast: file.data.hast,
     excerpt: hast?.children.length ? {
       hast,
       tree: toJsxRuntime(hast, { Fragment, jsx, jsxs, components } as any),
@@ -124,9 +137,11 @@ async function readPosts (): Promise<PostData[]> {
   return posts;
 }
 
+const about = await getAbout();
+
 const ctx: Context = {
   css,
-  about: await getAbout(),
+  about: about.tree,
 };
 
 function createPostPage (post: PostData): Page {
@@ -176,7 +191,7 @@ function postToJSON (post: PostData) {
   return {
     path: post.path,
     slug: post.slug,
-    url: BASE_URL + post.path,
+    url: BASE_URL + "/" + post.path,
     content: post.content,
     data: post.data,
   };
@@ -186,6 +201,34 @@ async function generateJSON (posts: PostData[]) {
   const indexJSON = JSON.stringify(posts.map(postToJSON));
   await mkdir(join(OUT_DIR, "api"), { recursive: true });
   await writeFile(join(OUT_DIR, "api", "index.json"), indexJSON);
+}
+
+/** api/all.json, in the shape the old build wrote, which the live site
+ * still reads. Kept for the migration */
+function postToLegacyJSON (post: Partial<PostData>) {
+  return {
+    path: post.path,
+    slug: post.slug,
+    title: post.data?.title,
+    description: post.data?.description || null,
+    date: post.data?.date,
+    excerpt: post.excerpt ? toHtml(post.excerpt.hast) : "",
+    html: post.hast ? toHtml(post.hast) : "",
+    tags: post.data?.tags,
+    image: post.data?.image,
+  };
+}
+
+async function generateAllJSON (posts: PostData[]) {
+  const all = {
+    posts: posts
+      .filter(post => !post.data.draft)
+      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+      .map(postToLegacyJSON),
+    about: postToLegacyJSON({ ...about, path: "blog/about", slug: "about" }),
+  };
+  await mkdir(join(OUT_DIR, "api"), { recursive: true });
+  await writeFile(join(OUT_DIR, "api", "all.json"), JSON.stringify(all));
 }
 
 async function generateFeed (posts: PostData[]) {
@@ -216,6 +259,7 @@ async function build () {
   await Promise.all([
     generateHTML(pages),
     generateJSON(posts),
+    generateAllJSON(posts),
     generateFeed(posts),
     copyStatic(),
     // generateMD(pages),
