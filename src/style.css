@@ -471,6 +471,29 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 /* 24px on the two-baseline line, measured in measure.ts */
 .block-heading :is(h1, h2, h3, h4, h5) { font-size: 24px }
 .block-table { overflow-x: auto }
+/* pull quotes: display-size paragraphs, measured in measure.ts, in a
+ * square beside the prose at 16 columns. Border and padding add up to
+ * one baseline, so the text stays on the baseline grid */
+.block-pullquote {
+  padding: calc(var(--baseline) - 4px);
+  border: 4px solid var(--primary);
+}
+.block-pullquote blockquote {
+  padding: 0;
+  border: 0;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+/* bullets hang inside the box, one em in */
+.block-pullquote ul { padding-left: 1em }
+.block-pullquote .attribution {
+  font-family: "iA Writer Quattro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+}
 .block-image :is(img, video, iframe) {
   display: block;
   width: 100%;

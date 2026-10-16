@@ -305,6 +305,31 @@ export function measureBlock (nodes: RootContent[], width: number): Box {
   return flow(nodes as ElementContent[], width, BODY);
 }
 
+/** Pull quotes (see rehypeSections): blockquotes in the heading face
+ * at display size, except an attribution, a paragraph starting with a
+ * dash, which stays at body size. The box has a 4px border and 12px
+ * of padding, so its text sits one baseline in from every edge. Lists
+ * are indented one em for their bullets */
+const QUOTE_SIZE = 24;
+const PULL: Style = { bold: true, italic: false, size: QUOTE_SIZE, family: "heading" };
+const PULL_INSET = BASELINE;
+const PULL_LIST_INSET = QUOTE_SIZE;
+const ATTRIBUTION = /^\s*[-–—]/;
+export const isAttribution = (node: Element) =>
+  node.tagName === "p" && ATTRIBUTION.test(toText(node));
+
+export function measureQuote (nodes: RootContent[], width: number): Box {
+  const children = nodes.filter(isElement).flatMap(quote => quote.children.filter(isElement));
+  const inner = width - PULL_INSET * 2;
+  const box = sum(children.flatMap((child, i) => {
+    const box = isAttribution(child) ? block(child, inner, BODY)
+      : child.tagName === "ul" ? block(child, inner - PULL_LIST_INSET, PULL)
+      : block(child, inner, PULL);
+    return i ? [{ height: LINE, risky: false }, box] : [box];
+  }));
+  return { ...box, height: box.height + PULL_INSET * 2 };
+}
+
 /** A flex row that wraps: items keep their own width, with a gap
  * between them, at body size by default */
 export function measureWrap (items: string[], width: number, size = SIZE, gap = BASELINE): Box {

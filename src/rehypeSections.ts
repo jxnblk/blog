@@ -34,7 +34,7 @@ import type { Root, RootContent, Element, ElementContent } from "hast";
 import { rng, type Random } from "./rng";
 import { createGrid, occupy, place, type Tile } from "./pack";
 import { perlin, smoothstep } from "./noise";
-import { measureBlock, modules } from "./measure";
+import { measureBlock, measureQuote, isAttribution, modules } from "./measure";
 
 export type BlockType =
   | "heading"
@@ -42,7 +42,9 @@ export type BlockType =
   | "image"
   | "code"
   | "table"
-  | "blockquote";
+  | "blockquote"
+  // a blockquote moved into the negative space (see pullQuote)
+  | "pullquote";
 
 const HEADINGS = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
 const MEDIA = new Set(["img", "figure", "iframe", "video"]);
@@ -54,6 +56,8 @@ const PROSE = 8;
 const WIDE = 12;
 // images are one or two columns wider than the prose
 const IMAGE_EXTRA = [1, 2];
+// pull quote widths at 16 columns, in modules
+const QUOTE_WIDTHS = [4, 5, 6, 7, 8];
 // section break bands: tile rows, plus an empty row above and below
 const BAND = 2;
 // density field: noise is sampled at modules × NOISE_SCALE, and
@@ -186,6 +190,61 @@ function columns (r: Random, type: BlockType, offset: number): Span {
   return { start: offset, width: PROSE };
 }
 
+/** Pull quotes (DESIGN.md §5)
+ * Every blockquote but an embed becomes a pull quote: a bordered box
+ * in the heading face. At 16 columns it's a rectangle of whole
+ * modules, as tall as its text at each module size, and never taller
+ * than it is wide. Of the widths that fit, it takes the one that
+ * leaves the least empty area below the text, summed over both module
+ * sizes. The box leaves the prose column for the free columns beside
+ * it, flush with either edge of a side wide enough, or else stays
+ * flush with an edge of the column on its own row. A quote too long
+ * for any box keeps the column's width. Below 16 columns it stacks
+ * like any block, at its measured height */
+const hasClass = (node: Element, name: string) =>
+  ([] as unknown[]).concat(node.properties.className ?? []).includes(name);
+
+const isQuote = (node: RootContent) =>
+  isElement(node) &&
+  node.tagName === "blockquote" &&
+  !hasClass(node, "twitter-tweet");
+
+function pullQuote (r: Random, block: Block, offset: number) {
+  if (!block.nodes.every(isQuote)) return;
+  for (const quote of block.nodes as Element[]) {
+    for (const child of quote.children) {
+      if (child.type === "element" && isAttribution(child)) child.properties.className = ["attribution"];
+    }
+  }
+  // heights in modules at a width, and the empty area they leave, in
+  // square modules, at the 16-column grids
+  const shape = (width: number) => {
+    const heights = uniform(1);
+    let waste = 0;
+    for (const { size, module, columns } of SIZES) {
+      const w = columns === COLUMNS ? width : PROSE;
+      const box = measureQuote(block.nodes, w * module);
+      heights[size] = modules(box, module);
+      if (columns === COLUMNS) waste += w * (heights[size] - box.height / module);
+    }
+    return { width, heights, waste };
+  };
+  const column = { start: offset, width: PROSE };
+  const sides = free(column);
+  const shapes = QUOTE_WIDTHS.map(shape)
+    .filter(({ width, heights }) => MARGIN_SIZES.every(size => heights[size] <= width));
+  const beside = shapes.filter(({ width }) => sides.some(side => side.width >= width));
+  const best = (beside.length ? beside : shapes).sort((a, b) => a.waste - b.waste)[0];
+  if (!best) return { span: column, heights: shape(PROSE).heights };
+  const { width, heights } = best;
+  const starts = beside.length
+    ? sides
+      .filter(side => side.width >= width)
+      .flatMap(side => [side.start, side.start + side.width - width])
+    : [offset, offset + PROSE - width];
+  return { span: { start: r.pick([...new Set(starts)]), width }, heights };
+}
+
 function pickOffset (r: Random, previous?: number) {
   return r.pick(OFFSETS.filter(n => n !== previous));
 }
@@ -281,8 +340,9 @@ export default function rehypeSections ({ seed }: { seed: string }) {
       const type = classify(node);
       const { blocks } = current();
       const last = blocks[blocks.length - 1];
-      // consecutive prose nodes merge into one run
-      if (type === "prose" && last?.type === "prose") {
+      // consecutive prose nodes merge into one run, and so do
+      // blockquotes, which often hold the attribution in their own
+      if ((type === "prose" || type === "blockquote") && last?.type === type) {
         last.nodes.push(node);
       } else {
         blocks.push({ type, nodes: [node] });
@@ -291,6 +351,8 @@ export default function rehypeSections ({ seed }: { seed: string }) {
 
     const random = rng(seed);
     const layout = random("layout");
+    // its own stream, so pull quotes don't reshuffle the layout
+    const quotes = random("quote");
     const density = densityField(seed);
 
     // 1. lay out the rows
@@ -319,10 +381,11 @@ export default function rehypeSections ({ seed }: { seed: string }) {
         section.blocks.forEach((block, j) => {
           // a heading stays attached to the block it introduces
           if (j > 0 && section.blocks[j - 1].type !== "heading") spacer();
-          const span = columns(layout, block.type, offset!);
-          const h = heights(block, span);
+          const pull = block.type === "blockquote" ? pullQuote(quotes, block, offset!) : undefined;
+          const span = pull?.span ?? columns(layout, block.type, offset!);
+          const h = pull?.heights ?? heights(block, span);
           rows.push({
-            el: element("div", `block block-${block.type}`,
+            el: element("div", `block block-${pull ? "pullquote" : block.type}`,
               `--start:${span.start};--w:${span.width};` +
               SIZES.map(({ size }) => `--h-${size}:${h[size]}`).join(";"),
               block.nodes),

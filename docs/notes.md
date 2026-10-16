@@ -6,8 +6,10 @@
 - x RSS
 - x color button ID bug
 - x Color schemes
+- x More shimmery shader
 
-- More shimmery shader
+- blockquotes
+
 - clean up old color modes
 - Cleanup unused dev routes
   - dev/palette
