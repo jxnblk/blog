@@ -156,6 +156,38 @@ Hydrangea links sit directly opposite (4° + 180°).
 | `code`       | `#5f1b6a` | 292° 60% 26% | 7.10:1; 6.45:1 on its tint |
 | `grid`       | `#c32d22` | 4° 70% 45%   | dots 1.20:1 / 1.67:1 |
 
+## White
+
+Pure white background with pure black text. The accents are the paper
+ones from `:root`, which have a little more contrast on white.
+
+| Token        | Value     | HSL          | Contrast on bg |
+| ------------ | --------- | ------------ | -------------- |
+| `background` | `#ffffff` | —            | —              |
+| `text`       | `#000000` | —            | 21:1           |
+| `primary`    | `#146b71` | from paper   | 6.23:1         |
+| `code`       | `#7d238b` | from paper   | 8.45:1         |
+| `grid`       | `#b88114` | from paper   | 3.39:1 (dots are mixed down to ~15–40%) |
+
+## Black
+
+The only dark mode: White inverted. The accents are lighter versions of
+the paper hues. The tints (`primary-0..3`, `code-0`, the dots) mix
+toward the background, so on black they come out as dark shades without
+any extra rules.
+
+| Token        | Value     | HSL          | Contrast on bg |
+| ------------ | --------- | ------------ | -------------- |
+| `background` | `#000000` | —            | —              |
+| `text`       | `#ffffff` | —            | 21:1           |
+| `primary`    | `#47c8d1` | 184° 60% 55% | 10.45:1; 9.83:1 on its tint |
+| `code`       | `#d78de2` | 292° 60% 72% | 8.80:1; 8.31:1 on its tint |
+| `grid`       | `#e6a219` | 40° 80% 50%  | dots 1.20:1, module dots 2.22:1 |
+
+The module dots are stronger than on the light modes (about 1.65:1);
+dark backgrounds need more contrast to read the same, but this may want
+tuning.
+
 ## Open questions
 
 - Should the other modes each be built around one family (a foliage mode, a

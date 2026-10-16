@@ -7,6 +7,8 @@ const modes = [
   'brown',
   'yellow',
   'red',
+  'white',
+  'black',
 ];
 
 let index = 0;

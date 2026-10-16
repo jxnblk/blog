@@ -65,6 +65,23 @@
   --code: #5f1b6a; /* violet, hsl(292 60% 26%), 7.10:1 */
   --grid: #c32d22; /* poppy, hsl(4 70% 45%) */
 }
+/* plain white and black; the paper accents carry over from :root
+ * (hydrangea 6.23:1, violet 8.45:1 on white) */
+.white {
+  --text: #000;
+  --background: #fff;
+}
+/* the only dark mode: .white inverted. The accents are light
+ * versions of the paper ones, and the tints still mix toward the
+ * background, so they come out as dark shades here */
+.black {
+  --text: #fff;
+  --background: #000;
+  --primary: #47c8d1; /* hydrangea, hsl(184 60% 55%), 10.45:1 */
+  --code: #d78de2; /* violet, hsl(292 60% 72%), 8.80:1 */
+  --grid: #e6a219; /* marigold, hsl(40 80% 50%) */
+  color-scheme: dark;
+}
 /* The modes below are the old set, kept for reference but no longer
  * in the cycle in client.js */
 .light {
