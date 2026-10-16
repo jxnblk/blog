@@ -19,10 +19,8 @@ export default function Nav () {
         target='_blank'>
         Twitter
       </a>
-      <div className="nav-buttons">
-        <ColorMode />
-        <GridButton />
-      </div>
+      <ColorMode />
+      <GridButton />
     </nav>
   );
 };
