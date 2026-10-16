@@ -93,7 +93,7 @@ body {
 
 body {
   margin: 0;
-  font-family: "iA Writer Quattro", Menlo, ui-monospace, monospace;
+  font-family: "iA Writer Quattro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: calc(var(--baseline) * 2);
   color: var(--text);
