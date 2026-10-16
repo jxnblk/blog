@@ -1,0 +1,577 @@
+@import "@fontsource/ia-writer-quattro/400.css";
+@import "@fontsource/ia-writer-quattro/700.css";
+@import "@fontsource/ia-writer-mono/400.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+
+/** Stylesheet order
+ * 1. Tokens: color and layout custom properties
+ * 2. Base: bare elements only, so every rule is (0,0,1) or close to it
+ * 3. Layout: grid, placement, and box sizing. No type or color here
+ * 4. Type & color: fonts, color, and decoration. No layout here
+ * 5. Debug
+ *
+ * Classes don't nest, and rules don't repeat what the base already sets.
+ */
+
+/* Tokens
+ * Keep a single top-level :root rule: Bun's minifier (1.4.2) drops all
+ * but the last one, even when they set different properties */
+:root {
+  /* color: :root is the default paper mode. --primary is the
+   * hydrangea hue (184°) */
+  --text: #120d03;
+  --background: #fcf6e8;
+  --primary: #146b71; /* hsl(184 70% 26%), 5.78:1 on the background */
+  --code: #7d238b; /* violet, hsl(292 60% 34%), 7.84:1 on the background */
+  --grid: #b88114; /* marigold, hsl(40 80% 40%), for the dot grid */
+  /* layout: see Tokens: layout below */
+  --baseline: 16px;
+  --module: calc((100vw - 32px) / 4);
+  --columns: 4;
+  --scale: 4; /* 16 / --columns */
+}
+
+/* Tokens: color
+ * New modes set only what differs from the :root paper mode */
+.green {
+  --text: #176b0b; /* hsl(112 82% 23%), 6.01:1 on the background */
+  --background: #ebf6ea; /* hsl(112 40% 94%) */
+}
+/* kraft paper: a mid-tone background, so the accents are darker
+ * versions of the paper ones to keep their contrast */
+.brown {
+  --text: #402607; /* hsl(32 80% 14%), 8.09:1 on the background */
+  --background: #d7c2a2; /* hsl(36 40% 74%) */
+  --primary: #084549; /* hydrangea, hsl(184 80% 16%), 6.19:1 */
+  --code: #51165a; /* violet, hsl(292 60% 22%), 7.52:1 */
+  --grid: #73510d; /* marigold, hsl(40 80% 25%) */
+}
+/* a bit lighter than the marigold tiles (40° 70% 57%). Same accents as
+ * .brown for now, kept separate so each can be tuned */
+.yellow {
+  --text: #402607; /* hsl(32 80% 14%), 8.19:1 on the background */
+  --background: #eebf63; /* hsl(40 80% 66%) */
+  --primary: #084549; /* hydrangea, hsl(184 80% 16%), 6.27:1 */
+  --code: #51165a; /* violet, hsl(292 60% 22%), 7.61:1 */
+  --grid: #73510d; /* marigold, hsl(40 80% 25%) */
+}
+/* rose: the poppy hue (4°), light enough that the accents can be
+ * a step lighter than on .yellow */
+.red {
+  --text: #790e06; /* hsl(4 90% 25%), 7.00:1 on the background */
+  --background: #f5c0bc; /* hsl(4 75% 85%) */
+  --primary: #0a565c; /* hydrangea, hsl(184 80% 20%), 5.26:1 */
+  --code: #5f1b6a; /* violet, hsl(292 60% 26%), 7.10:1 */
+  --grid: #c32d22; /* poppy, hsl(4 70% 45%) */
+}
+/* plain white and black; the paper accents carry over from :root
+ * (hydrangea 6.23:1, violet 8.45:1 on white) */
+.white {
+  --text: #000;
+  --background: #fff;
+}
+/* the only dark mode: .white inverted. The accents are light
+ * versions of the paper ones, and the tints still mix toward the
+ * background, so they come out as dark shades here */
+.black {
+  --text: #fff;
+  --background: #000;
+  --primary: #47c8d1; /* hydrangea, hsl(184 60% 55%), 10.45:1 */
+  --code: #d78de2; /* violet, hsl(292 60% 72%), 8.80:1 */
+  --grid: #e6a219; /* marigold, hsl(40 80% 50%) */
+  color-scheme: dark;
+}
+/* tints of --primary, mixed toward the background. On body so they
+ * follow the color mode class set there */
+body {
+  --primary-2: color-mix(in srgb, var(--primary) 25%, var(--background));
+  --primary-1: color-mix(in srgb, var(--primary) 12%, var(--background));
+  --primary-0: color-mix(in srgb, var(--primary) 6%, var(--background));
+  /* pressed links and buttons: --primary a step darker in every mode,
+   * dark ones included, so a click reads as pushing in */
+  --active: color-mix(in srgb, var(--primary) 75%, #000);
+  /* code background: a tint of --code, like --primary-0 */
+  --code-0: color-mix(in srgb, var(--code) 6%, var(--background));
+  /* the dot grid: a shade off the background, darker on module lines */
+  --dot: color-mix(in srgb, var(--grid) 15%, var(--background));
+  --dot-module: color-mix(in srgb, var(--grid) 40%, var(--background));
+}
+
+/* Tokens: layout
+ * Fixed square modules. Columns are powers of 2: 4 / 8 / 16.
+ * Spans are authored against 16 columns and scaled down (÷2, ÷4)
+ * at smaller breakpoints so layouts transform mechanically.
+ * Below 576px the module is fluid, leaving a 16px margin on each side,
+ * until mobile gets its own pass.
+ * The fixed 16px baseline fits 4 per 64px module and 5 per 80px module.
+ */
+@media screen and (min-width: 576px) {
+  :root { --module: 64px; --columns: 8; --scale: 2 }
+}
+@media screen and (min-width: 704px) {
+  :root { --module: 80px }
+}
+@media screen and (min-width: 1088px) {
+  :root { --module: 64px; --columns: 16; --scale: 1 }
+}
+@media screen and (min-width: 1344px) {
+  :root { --module: 80px }
+}
+
+/* Base
+ * Type sits on the baseline: every line is two baselines tall, and
+ * headings stay at body size and rely on weight, as in the old site */
+* { box-sizing: border-box }
+
+body {
+  margin: 0;
+  font-family: "iA Writer Quattro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: calc(var(--baseline) * 2);
+  color: var(--text);
+  background-color: var(--background);
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}
+h1, h2, h3, h4, h5, h6,
+.home-link,
+.nav > * {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+h1, h2, h3, h4, h5 { font-size: 16px }
+h6 { font-size: 12px }
+
+p, ul, ol, blockquote, pre, table, figure { margin: 0 }
+/* flow content is spaced by what follows it, so nothing trails at the
+ * end of a box */
+:is(p, ul, ol, blockquote, pre, table, figure):not(:last-child) {
+  margin-bottom: calc(var(--baseline) * 2);
+}
+
+/* bullets hang outside the text column */
+ul { padding: 0 }
+
+/* :where keeps the hover state at element specificity, so any class
+ * can restyle a link without matching it */
+a {
+  color: var(--primary);
+  text-decoration-color: var(--primary-2);
+  transition-property: color, background-color, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+a:where(:hover) {
+  background-color: var(--primary-0);
+  text-decoration-color: var(--primary);
+}
+/* pressing switches at once; releasing fades back with the rest */
+a:where(:active) {
+  color: var(--active);
+  text-decoration-color: var(--active);
+  transition-duration: 0s;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+code, pre {
+  font-family: "iA Writer Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 14px;
+}
+/* inline code only, so code inside pre needs no reset */
+:not(pre) > code {
+  padding: 2px 4px;
+  color: var(--code);
+  background-color: var(--code-0);
+  border-radius: 3px;
+}
+/* 14px code on a two-baseline line, with one baseline of padding,
+ * so the block's height stays a multiple of the baseline */
+pre {
+  overflow: auto;
+  padding: var(--baseline);
+  font-size: 14px;
+  color: var(--code);
+  background-color: var(--code-0);
+  border-radius: 4px;
+}
+
+blockquote {
+  padding-left: var(--baseline);
+  border-left: 4px solid var(--primary);
+}
+
+table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+/* rules are inset shadows, not borders, so each row stays two baselines */
+th, td {
+  padding: 0 var(--baseline) 0 0;
+  text-align: left;
+  vertical-align: top;
+}
+th { box-shadow: inset 0 -2px 0 currentColor }
+td { box-shadow: inset 0 -1px 0 var(--primary-1) }
+
+/* Layout */
+.main {
+  width: calc(var(--columns) * var(--module));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), var(--module));
+  /* rows are one module tall, or grow to fit content */
+  grid-auto-rows: minmax(var(--module), min-content);
+  grid-auto-flow: row dense;
+}
+/* Grid item defaults. :where keeps them at zero specificity, so any
+ * single class can place an item. .post-body is a subgrid,
+ * so its children are grid items too */
+:where(.grid, .post-body) > * {
+  min-width: 0;
+  grid-column-end: span max(1, calc(var(--span, 1) / var(--scale)));
+  grid-row: span var(--rows, 1);
+}
+
+/* Content spans are full width until 16 columns, where the layout
+ * sets each block's own columns */
+.block { --span: 16 }
+
+/* Header & footer
+ * One row of modules: the home link spans 2 columns (a fixed 64px
+ * avatar centered in the first module), and the nav takes the rest of
+ * the row, with its items in a flex row a fixed gap apart, ending at the right
+ * edge.
+ * At 4 columns the nav drops to its own row, starting at the left.
+ */
+.site-footer { padding-top: var(--module) }
+
+.home-link {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: var(--module) auto;
+  align-items: center;
+}
+.home-link svg {
+  display: block;
+  justify-self: center;
+}
+
+.nav {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--baseline) * 2);
+  height: var(--module);
+}
+@media screen and (min-width: 576px) {
+  .nav {
+    grid-column: 3 / -1;
+    justify-content: flex-end;
+  }
+}
+.nav > *,
+.flex {
+  display: flex;
+  align-items: center;
+}
+.grid-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.gap-1 { gap: 0 var(--baseline) }
+.wrap { flex-wrap: wrap }
+
+.copyright {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+}
+
+/* Post
+ * The post body is a subgrid of the main grid. rehypeSections gives
+ * every block, spacer, and margin an explicit row, and a --start
+ * column in 16-column units. Blocks also get their width, --w, so the
+ * columns here always match the occupancy grid flourishes are placed
+ * against. Below 16 columns, blocks stack full width
+ * on column 1, the margins hide, and some section spacers show a band
+ * of tiles instead. The header is 4 modules tall at 16
+ * columns, with the title across the full width.
+ */
+.post-header {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-auto-rows: minmax(var(--module), min-content);
+}
+.post-title {
+  grid-column: 1 / -1;
+  align-self: end;
+}
+.post-meta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--baseline);
+}
+
+.home-title {
+  font-size: 32px;
+  line-height: 1.5;
+  grid-column: 1 / -1;
+  /* measured like a block (see Home.tsx) */
+  min-height: calc(var(--h, 1) * var(--module));
+}
+
+/* Blog
+ * The same header and body as a post: each card is a block in the
+ * left 8 columns, one row each, with a margin of tiles beside them.
+ * Cards are at least 2 modules tall, including below 576px */
+.blog-list { list-style: none }
+.block-card { --w: 8; --h: 2 }
+
+.post-body {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-auto-rows: minmax(var(--module), min-content);
+}
+
+/* Blocks, and the home title, hold their rows to the height in modules
+ * the build measured for each grid (--h-sm to --h-xl), so every row
+ * ends on a module line. Below 576px the module is fluid, and rows grow to fit */
+.block {
+  grid-column-start: 1;
+  min-height: calc(var(--h, 1) * var(--module));
+}
+@media screen and (576px <= width < 704px) {
+  :is(.block, .home-title) { --h: var(--h-sm) }
+}
+@media screen and (704px <= width < 1088px) {
+  :is(.block, .home-title) { --h: var(--h-md) }
+}
+@media screen and (1088px <= width < 1344px) {
+  :is(.block, .home-title) { --h: var(--h-lg) }
+}
+@media screen and (min-width: 1344px) {
+  :is(.block, .home-title) { --h: var(--h-xl) }
+}
+/* an empty spacer fills one full-width module row */
+.spacer { grid-column: 1 / -1 }
+
+/* headings sit on the bottom edge of their rows */
+.block-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+/* 24px on the two-baseline line, measured in measure.ts */
+.block-heading :is(h1, h2, h3, h4, h5) { font-size: 24px }
+.block-table { overflow-x: auto }
+/* pull quotes: display-size paragraphs, measured in measure.ts, in a
+ * rectangle beside the prose at 16 columns. Border and padding add up to
+ * one baseline, so the text stays on the baseline grid */
+.block-pullquote {
+  padding: calc(var(--baseline) - 4px);
+  border: 4px solid var(--primary);
+}
+.block-pullquote blockquote {
+  padding: 0;
+  border: 0;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+/* bullets hang inside the box, one em in */
+.block-pullquote ul { padding-left: 1em }
+.block-pullquote .attribution {
+  font-family: "iA Writer Quattro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+}
+.block-image :is(img, video, iframe) {
+  display: block;
+  width: 100%;
+}
+
+/* Flourish tiles sit on a module grid inside margins and bands.
+ * Margins are size-contained so they never grow a row: they stretch
+ * to the rows beside them and clip. A band holds its tiles with an empty row
+ * above and below, and section spacers carry one band per column
+ * count, so only the one matching the grid shows */
+.margin,
+.band {
+  grid-template-columns: repeat(var(--span, var(--columns)), var(--module));
+  grid-auto-rows: var(--module);
+  align-content: start;
+  overflow: hidden;
+}
+.band {
+  display: none;
+  height: calc(var(--rows) * var(--module));
+}
+.margin {
+  display: none;
+  position: relative;
+  contain: size;
+}
+.tile svg { display: block }
+
+@media screen and (width < 576px) {
+  .band-4 { display: grid }
+}
+@media screen and (576px <= width < 1088px) {
+  .band-8 { display: grid }
+}
+@media screen and (min-width: 1088px) {
+  .band-16 { display: grid }
+}
+/* margins and a post's 16-column bands come in one set per module size */
+@media screen and (1088px <= width < 1344px) {
+  .band-xl { display: none }
+}
+@media screen and (min-width: 1344px) {
+  .band-lg { display: none }
+}
+
+@media screen and (min-width: 1088px) {
+  .post-title { grid-row: 1 / span 3 }
+  .home-title { grid-column: 1 / span 12 }
+  .post-meta { grid-row: 4 }
+  .block { grid-column: var(--start, 1) / span var(--w, 8) }
+  .margin { grid-column-start: var(--start) }
+}
+@media screen and (1088px <= width < 1344px) {
+  .margin-lg { display: grid }
+}
+@media screen and (min-width: 1344px) {
+  .margin-xl { display: grid }
+}
+
+/* Type & color */
+.site-header,
+.site-footer,
+.post-meta,
+.card-meta { font-size: 14px }
+
+/* measured at this size on the blog index (see Blog.tsx) */
+.post-title,
+.card-title {
+  font-size: 32px;
+  line-height: 1.5;
+}
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.card-title a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  background: none;
+}
+.card-title a:active { color: var(--active) }
+
+/* the negative margin takes back the spacing after the last letter */
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-right: -0.2em;
+}
+
+.home-link,
+.nav > * {
+  font-size: 12px;
+  font-weight: 700;
+  color: inherit;
+  text-decoration: none;
+  background: none;
+}
+.nav > a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.nav > a:active { color: var(--active) }
+
+/* The nav buttons: drawn in --text (the G knocks out to --background),
+ * switching to --primary on hover with the same fade as links */
+.color-button,
+.grid-button {
+  transition-property: color, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.color-button:hover { color: var(--primary) }
+.grid-button {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--background);
+  background-color: var(--text);
+}
+.grid-button:hover { background-color: var(--primary) }
+/* on: an outline instead of a fill, so it keeps the --text color */
+.grid-button[aria-pressed="true"] {
+  color: var(--text);
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+.grid-button[aria-pressed="true"]:hover {
+  color: var(--primary);
+  background-color: transparent;
+}
+/* pressed: --active straight away, no fade */
+.color-button:active,
+.grid-button[aria-pressed="true"]:active {
+  color: var(--active);
+  transition-duration: 0s;
+}
+.grid-button:active {
+  background-color: var(--active);
+  transition-duration: 0s;
+}
+.grid-button[aria-pressed="true"]:active { background-color: transparent }
+
+/* Dot grid: toggled with the "g" key or the G button. A dot on every
+ * baseline in both directions, and a darker one where module lines
+ * cross. Dots sit on the top-left corner of each step, so they line up
+ * with the grid's columns and rows */
+.show-grid .grid {
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--dot-module) 1px, transparent 1.5px),
+    radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 1.5px);
+  background-size:
+    var(--module) var(--module),
+    var(--baseline) var(--baseline);
+}
+
