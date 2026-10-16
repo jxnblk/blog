@@ -128,7 +128,7 @@ function words (nodes: ElementContent[], style: Style): Word[] {
   return out;
 }
 
-function lines (nodes: ElementContent[], width: number, style: Style): Box {
+function lines (nodes: ElementContent[], width: number, style: Style, line = LINE): Box {
   const list = words(nodes, style);
   if (!list.length) return { height: 0, risky: false };
   let count = 1;
@@ -149,7 +149,7 @@ function lines (nodes: ElementContent[], width: number, style: Style): Box {
       x = word.width;
     }
   }
-  return { height: count * LINE, risky };
+  return { height: count * line, risky };
 }
 
 /* Block layout
@@ -315,5 +315,6 @@ export function measureWrap (items: string[], width: number, gap = BASELINE): Bo
   return { height: count * LINE, risky };
 }
 
-export const measureHeading = (text: string, width: number): Box =>
-  lines([{ type: "text", value: text }], width, { ...BODY, bold: true });
+/** Bold text at a size and line height, body size by default */
+export const measureHeading = (text: string, width: number, size = SIZE, line = LINE): Box =>
+  lines([{ type: "text", value: text }], width, { ...BODY, bold: true, size }, line);

@@ -245,7 +245,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
  * end at the right edge.
  * At 4 columns the nav drops to its own row.
  */
-.site-footer { margin-top: var(--module) }
+.site-footer { padding-top: var(--module) }
 
 .home-link {
   grid-column: 1 / span 2;
@@ -314,6 +314,8 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   font-size: 32px;
   line-height: 1.5;
   grid-column: 1 / -1;
+  /* measured like a block (see Home.tsx) */
+  min-height: calc(var(--h, 1) * var(--module));
 }
 
 /* Blog
@@ -329,24 +331,24 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   grid-auto-rows: minmax(var(--module), min-content);
 }
 
-/* Blocks hold their rows to the height in modules the build measured
- * for each grid (--h-sm to --h-xl), so every row ends on a module
- * line. Below 512px the module is fluid, and rows grow to fit */
+/* Blocks, and the home title, hold their rows to the height in modules
+ * the build measured for each grid (--h-sm to --h-xl), so every row
+ * ends on a module line. Below 512px the module is fluid, and rows grow to fit */
 .block {
   grid-column-start: 1;
   min-height: calc(var(--h, 1) * var(--module));
 }
 @media screen and (512px <= width < 640px) {
-  .block { --h: var(--h-sm) }
+  :is(.block, .home-title) { --h: var(--h-sm) }
 }
 @media screen and (640px <= width < 1024px) {
-  .block { --h: var(--h-md) }
+  :is(.block, .home-title) { --h: var(--h-md) }
 }
 @media screen and (1024px <= width < 1280px) {
-  .block { --h: var(--h-lg) }
+  :is(.block, .home-title) { --h: var(--h-lg) }
 }
 @media screen and (min-width: 1280px) {
-  .block { --h: var(--h-xl) }
+  :is(.block, .home-title) { --h: var(--h-xl) }
 }
 /* an empty spacer fills one full-width module row */
 .spacer { grid-column: 1 / -1 }

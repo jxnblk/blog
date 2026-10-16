@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Flourish from "./Flourish";
 import { densityField, fillBand } from "./rehypeSections";
 import { rng } from "./rng";
+import { measureHeading, modules } from "./measure";
 import type { PostData } from "./types";
 
 export default function Home (props: {
@@ -17,9 +18,8 @@ export default function Home (props: {
       <main className="main grid">
         <TitleBands position="above" />
         <header className="post-header home-header">
-          <h1 className="home-title">
-            Brent Jackson is a design engineer, aspiring indie game developer, and proud cat parent.
-            Based in Brooklyn, NY
+          <h1 className="home-title" style={titleStyle()}>
+            {TITLE}
           </h1>
         </header>
         <TitleBands position="below" />
@@ -32,6 +32,25 @@ export default function Home (props: {
     </HTML>
   );
 };
+
+const TITLE = "Brent Jackson is a design engineer, aspiring indie game developer, and proud cat parent. Based in Brooklyn, NY";
+
+/** Title height in modules, measured for each grid (see measure.ts)
+ * The title is 32px on 48px lines, full width at 8 columns and 12
+ * columns wide at 16 */
+const TITLE_SIZE = 32;
+const TITLE_LINE = 48;
+const SIZES = [
+  { size: "sm", module: 64, columns: 8 },
+  { size: "md", module: 80, columns: 8 },
+  { size: "lg", module: 64, columns: 12 },
+  { size: "xl", module: 80, columns: 12 },
+];
+
+const titleStyle = () => Object.fromEntries(SIZES.map(({ size, module, columns }) => [
+  `--h-${size}`,
+  modules(measureHeading(TITLE, columns * module, TITLE_SIZE, TITLE_LINE), module),
+])) as React.CSSProperties;
 
 /** Bands of tiles above and below the title
  * The same bands as a post's section breaks, one per column count, with
