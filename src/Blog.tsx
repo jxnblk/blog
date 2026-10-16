@@ -103,17 +103,18 @@ const date = (post: PostData) =>
   post.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' }) ?? "";
 
 // a title, then the date and tags, which wrap; cards are 8 modules
-// wide at every grid
+// wide at every grid, and at least 2 tall to keep the rhythm
+const MIN_HEIGHT = 2;
 function heights (post: PostData): Record<Size, number> {
   const out = {} as Record<Size, number>;
   for (const { size, module } of SIZES) {
     const width = LIST * module;
     const title = measureHeading(post.data.title, width, TITLE_SIZE, TITLE_LINE);
     const meta = measureWrap([date(post), ...(post.data.tags ?? []).map(tag => "#" + tag)], width, META_SIZE);
-    out[size] = modules({
+    out[size] = Math.max(MIN_HEIGHT, modules({
       height: title.height + meta.height,
       risky: title.risky || meta.risky,
-    }, module);
+    }, module));
   }
   return out;
 }
