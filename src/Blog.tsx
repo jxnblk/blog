@@ -5,6 +5,7 @@ import Flourish from "./Flourish";
 import { densityField, endBands } from "./rehypeSections";
 import { createGrid, occupy, place, type Tile } from "./pack";
 import { rng } from "./rng";
+import { measureHeading, measureWrap, modules } from "./measure";
 
 import type { PostData } from "./types";
 
@@ -39,7 +40,7 @@ export default function Blog (props: {
             <li
               key={post.path}
               className="block block-card"
-              style={{ gridRow: i + 1 }}>
+              style={{ gridRow: i + 1, ...cardStyle(post) }}>
               <BlogPostCard {...post} />
             </li>
           ))}
@@ -61,7 +62,7 @@ export function BlogPostCard (props: PostData) {
       </h2>
       <div className="flex wrap gap-1">
         <div>
-          {props.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' })}
+          {date(props)}
         </div>
         {props.data.tags?.map(tag => (
           <div
@@ -90,41 +91,77 @@ export function BlogPostCard (props: PostData) {
 /** Tiles to the right of the list, and below it
  * Cards fill the left 8 of 16 columns, one row each, and a margin
  * spans the other 8 for every row. Tiles are placed in it the same way
- * as in a post (see rehypeSections), against card heights estimated
- * from the title length, and the client hides any that don't fit.
- * Below 16 columns the margin hides. The end band after the list is
- * the same as a post's, at every column count.
+ * as in a post (see rehypeSections), against card heights measured
+ * from the title, date, and tags (see measure.ts), with one margin per
+ * module size. Below 16 columns the margin hides. The end band after
+ * the list is the same as a post's, at every column count.
  */
 const SEED = "blog";
 const COLUMNS = 16;
 const LIST = 8;
-const CHARS_PER_LINE = Math.floor((LIST * 64) / (16 * 0.6));
+const SIZES = [
+  { size: "sm", module: 64 },
+  { size: "md", module: 80 },
+  { size: "lg", module: 64 },
+  { size: "xl", module: 80 },
+] as const;
+type Size = typeof SIZES[number]["size"];
 
-// a title, plus the date and tags line, on two-baseline lines
-const estimate = (post: PostData) =>
-  Math.ceil((Math.ceil(post.data.title.length / CHARS_PER_LINE) + 1) / 2);
+const date = (post: PostData) =>
+  post.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' }) ?? "";
+
+// a title, then the date and tags, which wrap; cards are 8 modules
+// wide at every grid
+function heights (post: PostData): Record<Size, number> {
+  const out = {} as Record<Size, number>;
+  for (const { size, module } of SIZES) {
+    const width = LIST * module;
+    const title = measureHeading(post.data.title, width);
+    const meta = measureWrap([date(post), ...(post.data.tags ?? []).map(tag => "#" + tag)], width);
+    out[size] = modules({
+      height: title.height + meta.height,
+      risky: title.risky || meta.risky,
+    }, module);
+  }
+  return out;
+}
+
+const cardStyle = (post: PostData) => {
+  const h = heights(post);
+  return Object.fromEntries(SIZES.map(({ size }) => [`--h-${size}`, h[size]])) as React.CSSProperties;
+};
 
 function BlogTiles ({ posts }: { posts: PostData[] }) {
   const random = rng(SEED);
   const density = densityField(SEED);
-  const height = posts.reduce((n, post) => n + estimate(post), 0);
-  const grid = createGrid(COLUMNS, height);
-  occupy(grid, 0, 0, LIST, height);
-  const region = { x: LIST, y: 0, w: COLUMNS - LIST, h: height };
-  const tiles = place(random("flourish"), grid, region, density);
-  const bands = endBands(random("narrow"), density, height);
-  let count = tiles.length;
+  const cards = posts.map(heights);
+  const total = (size: Size) => cards.reduce((n, h) => n + h[size], 0);
+  let count = 0;
+  const margins = (["lg", "xl"] as const).map(size => {
+    const height = total(size);
+    const grid = createGrid(COLUMNS, height);
+    occupy(grid, 0, 0, LIST, height);
+    const region = { x: LIST, y: 0, w: COLUMNS - LIST, h: height };
+    const tiles = place(random(size === "lg" ? "flourish" : `flourish:${size}`), grid, region, density);
+    const first = count;
+    count += tiles.length;
+    return { size, tiles, first };
+  });
+  const bands = endBands(random("narrow"), density, total("lg"));
   return (
     <>
-      <li
-        className="margin"
-        style={{
-          gridRow: `1 / span ${posts.length}`,
-          "--start": LIST + 1,
-          "--span": COLUMNS - LIST,
-        } as React.CSSProperties}>
-        <Tiles tiles={tiles} first={0} />
-      </li>
+      {margins.map(({ size, tiles, first }) => (
+        <li
+          key={size}
+          className={`margin margin-${size}`}
+          style={{
+            gridRow: `1 / span ${posts.length}`,
+            "--start": LIST + 1,
+            "--span": COLUMNS - LIST,
+          } as React.CSSProperties}>
+          <Tiles tiles={tiles} first={first} />
+        </li>
+      ))}
       <li
         className="spacer spacer-end"
         style={{ gridRow: posts.length + 1 }}>

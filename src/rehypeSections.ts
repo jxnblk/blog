@@ -14,13 +14,15 @@
  *
  * Placement is a greedy row-by-row pass. Every item takes one row of
  * the grid (rows grow to fit), and each section moves its prose to a
- * column chosen by rng('layout'). Block heights are estimated in
- * modules, and the content is marked on an occupancy grid for the
+ * column chosen by rng('layout'). Block heights are measured in
+ * modules from the font metrics (see measure.ts), and each block's
+ * min-height holds its row to that many modules, so every row ends on
+ * a module line. The content is marked on an occupancy grid for the
  * whole body. Runs of rows that share the same free columns get a
  * margin item, and tiles are placed in margins and bands against that
  * grid (see pack.ts), so they never sit edge to edge with content or
- * each other. The estimates can be off, so the client hides any tile
- * that ends up past its margin or touching content.
+ * each other. The 64px and 80px modules give blocks different
+ * heights, so margins and 16-column bands are placed once for each.
  *
  * Columns are authored against 16 columns: below that, CSS stacks the
  * blocks full width and hides the margins. Instead, some section
@@ -32,6 +34,7 @@ import type { Root, RootContent, Element, ElementContent } from "hast";
 import { rng, type Random } from "./rng";
 import { createGrid, occupy, place, type Tile } from "./pack";
 import { perlin, smoothstep } from "./noise";
+import { measureBlock, modules } from "./measure";
 
 export type BlockType =
   | "heading"
@@ -106,63 +109,31 @@ const element = (
   children: children as ElementContent[],
 });
 
-/** Height estimate (DESIGN.md §1, Prose blocks)
- * Characters ÷ chars-per-line × line-height, rounded up to whole modules.
- * Measured against the 64px module, where blocks are tallest in
- * modules, so margins run long rather than short.
+/** Block heights (see measure.ts)
+ * Measured in modules for each grid from 512px up. Below 1024px every
+ * block spans the full 8 columns, and from there its own width. Below
+ * 512px the module is fluid, so rows end on the baseline instead.
  */
-const MODULE = 64;
-const LINE = 32;
-const CHARS_PER_LINE = Math.floor((PROSE * MODULE) / (16 * 0.6));
-// image aspect ratio when the markup doesn't give a width and height
-const IMAGE_RATIO = 9 / 16;
+type Size = "sm" | "md" | "lg" | "xl";
+const SIZES: { size: Size; module: number; columns: number }[] = [
+  { size: "sm", module: 64, columns: 8 },
+  { size: "md", module: 80, columns: 8 },
+  { size: "lg", module: 64, columns: COLUMNS },
+  { size: "xl", module: 80, columns: COLUMNS },
+];
+// the 16-column grids, which margins are placed against
+const MARGIN_SIZES: Size[] = ["lg", "xl"];
+type Heights = Record<Size, number>;
 
-function toText (node: RootContent | ElementContent): string {
-  if (node.type === "text") return node.value;
-  if (node.type === "element") return node.children.map(toText).join("");
-  return "";
-}
+const uniform = (n: number): Heights => ({ sm: n, md: n, lg: n, xl: n });
 
-const lines = (text: string) =>
-  Math.max(1, Math.ceil(text.trim().length / CHARS_PER_LINE));
-
-function estimateLines (node: RootContent): number {
-  if (!isElement(node)) return lines(toText(node));
-  if (node.tagName === "pre") return toText(node).trimEnd().split("\n").length + 1;
-  if (node.tagName === "table") {
-    return node.children.reduce((n, child) =>
-      n + (child.type === "element" ? child.children.filter(c => c.type === "element").length : 0), 0);
+function heights (block: Block, span: Span): Heights {
+  const out = uniform(1);
+  for (const { size, module, columns } of SIZES) {
+    const width = (columns === COLUMNS ? span.width : PROSE) * module;
+    out[size] = modules(measureBlock(block.nodes, width), module);
   }
-  if (node.tagName === "ul" || node.tagName === "ol") {
-    const items = node.children.filter(c => c.type === "element");
-    return items.reduce((n, item) => n + lines(toText(item)), 0);
-  }
-  return lines(toText(node));
-}
-
-function findMedia (node: RootContent | ElementContent): Element | undefined {
-  if (node.type !== "element") return;
-  if (MEDIA.has(node.tagName)) return node;
-  for (const child of node.children) {
-    const media = findMedia(child);
-    if (media) return media;
-  }
-}
-
-function imageRatio (nodes: RootContent[]) {
-  const media = nodes.map(findMedia).find(Boolean);
-  const width = Number(media?.properties.width);
-  const height = Number(media?.properties.height);
-  return width && height ? height / width : IMAGE_RATIO;
-}
-
-function estimate (block: Block, width: number): number {
-  const { type, nodes } = block;
-  if (type === "heading") return 1;
-  if (type === "image") return Math.max(1, Math.round(width * imageRatio(nodes)));
-  // a blank line between nodes
-  const total = nodes.reduce((n, node) => n + estimateLines(node), 0) + nodes.length - 1;
-  return Math.max(1, Math.ceil((total * LINE) / MODULE));
+  return out;
 }
 
 type Block = { type: BlockType; nodes: RootContent[] };
@@ -221,8 +192,8 @@ function pickOffset (r: Random, previous?: number) {
 
 type Row = {
   el: Element;
-  // estimated height in modules
-  modules: number;
+  // height in modules, by grid
+  heights: Heights;
   // columns holding content
   content?: Span;
   band?: boolean;
@@ -233,7 +204,7 @@ type Row = {
 type Run = Span & { row: number; rows: number; y: number; modules: number };
 
 // merges consecutive rows with the same free span into one run
-function runs (rows: (Row & { y: number; free: Span[] })[]): Run[] {
+function runs (rows: { y: number; modules: number; free: Span[] }[]): Run[] {
   const done: Run[] = [];
   let open = new Map<string, Run>();
   rows.forEach((row, i) => {
@@ -320,13 +291,12 @@ export default function rehypeSections ({ seed }: { seed: string }) {
 
     const random = rng(seed);
     const layout = random("layout");
-    const flourish = random("flourish");
     const density = densityField(seed);
 
     // 1. lay out the rows
     const rows: Row[] = [];
     const spacer = (className = "spacer") =>
-      rows.push({ el: element("div", className, ""), modules: 1 });
+      rows.push({ el: element("div", className, ""), heights: uniform(1) });
     let offset: number | undefined;
 
     sections
@@ -335,7 +305,7 @@ export default function rehypeSections ({ seed }: { seed: string }) {
         if (section.isBreak) {
           rows.push({
             el: element("div", "spacer spacer-section spacer-break", ""),
-            modules: BAND + 2,
+            heights: uniform(BAND + 2),
             band: true,
             boundary: true,
           });
@@ -350,31 +320,18 @@ export default function rehypeSections ({ seed }: { seed: string }) {
           // a heading stays attached to the block it introduces
           if (j > 0 && section.blocks[j - 1].type !== "heading") spacer();
           const span = columns(layout, block.type, offset!);
+          const h = heights(block, span);
           rows.push({
             el: element("div", `block block-${block.type}`,
-              `--start:${span.start};--w:${span.width}`, block.nodes),
-            modules: estimate(block, span.width),
+              `--start:${span.start};--w:${span.width};` +
+              SIZES.map(({ size }) => `--h-${size}:${h[size]}`).join(";"),
+              block.nodes),
+            heights: h,
             content: span,
           });
         });
       });
 
-    // 2. mark the content on the occupancy grid
-    let y = 0;
-    const placed = rows.map((row, i) => {
-      const spans = row.band ? [] : free(row.content
-        // a spacer's margins stay clear of the blocks on either side
-        ?? hull(rows[i - 1]?.content, rows[i + 1]?.content));
-      const out = { ...row, y, free: spans };
-      y += row.modules;
-      return out;
-    });
-    const grid = createGrid(COLUMNS, y);
-    for (const row of placed) {
-      if (row.content) occupy(grid, row.content.start - 1, row.y, row.content.width, row.modules);
-    }
-
-    // 3. place tiles in margins and bands, top to bottom
     let count = 0;
     const toElements = (tiles: Tile[], top = 0) => tiles.map(tile =>
       element("div", "tile",
@@ -386,29 +343,60 @@ export default function rehypeSections ({ seed }: { seed: string }) {
       ])
     );
     // a band's tiles, for one column count, with an empty row around them
-    const band = (columns: number, rows: number, tiles: Tile[]) =>
-      element("div", `band band-${columns}`, `--rows:${rows + 2}`, toElements(tiles, 1));
+    const band = (className: string, rows: number, tiles: Tile[]) =>
+      element("div", `band ${className}`, `--rows:${rows + 2}`, toElements(tiles, 1));
 
-    const regions = [
-      ...runs(placed).map(run => ({ run, y: run.y })),
-      ...placed.filter(row => row.band).map(row => ({ band: row, y: row.y })),
-    ].sort((a, b) => a.y - b.y);
+    // 2. stack the rows at one size's module heights
+    const stack = (size: Size) => {
+      let y = 0;
+      const placed = rows.map((row, i) => {
+        const spans = row.band ? [] : free(row.content
+          // a spacer's margins stay clear of the blocks on either side
+          ?? hull(rows[i - 1]?.content, rows[i + 1]?.content));
+        const modules = row.heights[size];
+        const out = { ...row, modules, y, free: spans };
+        y += modules;
+        return out;
+      });
+      return { placed, height: y };
+    };
 
+    // 3. for each 16-column grid, mark the content on an occupancy
+    // grid, and place tiles in margins and bands, top to bottom. The
+    // grids differ in module size, so each gets its own set, and CSS
+    // shows the one that matches
     const margins: Element[] = [];
-    for (const region of regions) {
-      if ("band" in region && region.band) {
-        const { y } = region.band;
-        const tiles = place(flourish, grid, { x: 0, y: y + 1, w: COLUMNS, h: BAND }, density);
-        region.band.el.children.push(band(COLUMNS, BAND, tiles));
-      } else if ("run" in region && region.run) {
-        const { run } = region;
-        const tiles = place(flourish, grid, { x: run.start - 1, y: run.y, w: run.width, h: run.modules }, density);
-        if (!tiles.length) continue;
-        margins.push(element("div", "margin",
-          `grid-row:${run.row} / span ${run.rows};--start:${run.start};--span:${run.width}`,
-          toElements(tiles)));
+    for (const size of MARGIN_SIZES) {
+      const flourish = random(size === "lg" ? "flourish" : `flourish:${size}`);
+      const { placed, height } = stack(size);
+      const grid = createGrid(COLUMNS, height);
+      for (const row of placed) {
+        if (row.content) occupy(grid, row.content.start - 1, row.y, row.content.width, row.modules);
+      }
+
+      const regions = [
+        ...runs(placed).map(run => ({ run, y: run.y })),
+        ...placed.filter(row => row.band).map(row => ({ band: row, y: row.y })),
+      ].sort((a, b) => a.y - b.y);
+
+      for (const region of regions) {
+        if ("band" in region && region.band) {
+          const { y } = region.band;
+          const tiles = place(flourish, grid, { x: 0, y: y + 1, w: COLUMNS, h: BAND }, density);
+          region.band.el.children.push(band(`band-${COLUMNS} band-${size}`, BAND, tiles));
+        } else if ("run" in region && region.run) {
+          const { run } = region;
+          const tiles = place(flourish, grid, { x: run.start - 1, y: run.y, w: run.width, h: run.modules }, density);
+          if (!tiles.length) continue;
+          margins.push(element("div", `margin margin-${size}`,
+            `grid-row:${run.row} / span ${run.rows};--start:${run.start};--span:${run.width}`,
+            toElements(tiles)));
+        }
       }
     }
+
+    // the narrow bands below follow the density field at the 64px grid
+    const { placed, height: y } = stack("lg");
 
     // 4. below 16 columns, some section spacers become bands. Band
     // tiles follow the density field at the band's place on the page,
@@ -426,18 +414,18 @@ export default function rehypeSections ({ seed }: { seed: string }) {
         const rows = narrow.pick(NARROW_ROWS[columns]);
         const tiles = fill(columns, rows, row.y, 1);
         if (!tiles.length) tiles.push({ x: narrow.int(columns - rows + 1), y: 0, size: rows });
-        row.el.children.push(band(columns, rows, tiles));
+        row.el.children.push(band(`band-${columns}`, rows, tiles));
       }
     }
 
     // 5. a band after the content, at every column count
     const end = element("div", "spacer spacer-end", "");
     for (const { columns, rows, tiles } of endBands(narrow, density, y)) {
-      end.children.push(band(columns, rows, tiles));
+      end.children.push(band(`band-${columns}`, rows, tiles));
     }
 
     tree.children = [
-      ...[...placed, { el: end }].map((row, i) => {
+      ...[...rows, { el: end }].map((row, i) => {
         row.el.properties.style = `grid-row:${i + 1};${row.el.properties.style || ""}`;
         return row.el;
       }),

@@ -329,12 +329,34 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   grid-auto-rows: minmax(var(--module), min-content);
 }
 
-.block { grid-column-start: 1 }
+/* Blocks hold their rows to the height in modules the build measured
+ * for each grid (--h-sm to --h-xl), so every row ends on a module
+ * line. Below 512px the module is fluid, and rows grow to fit */
+.block {
+  grid-column-start: 1;
+  min-height: calc(var(--h, 1) * var(--module));
+}
+@media screen and (512px <= width < 640px) {
+  .block { --h: var(--h-sm) }
+}
+@media screen and (640px <= width < 1024px) {
+  .block { --h: var(--h-md) }
+}
+@media screen and (1024px <= width < 1280px) {
+  .block { --h: var(--h-lg) }
+}
+@media screen and (min-width: 1280px) {
+  .block { --h: var(--h-xl) }
+}
 /* an empty spacer fills one full-width module row */
 .spacer { grid-column: 1 / -1 }
 
-/* headings sit on the bottom edge of their module row */
-.block-heading { align-self: end }
+/* headings sit on the bottom edge of their rows */
+.block-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
 .block-table { overflow-x: auto }
 .block-image :is(img, video, iframe) {
   display: block;
@@ -343,8 +365,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 
 /* Flourish tiles sit on a module grid inside margins and bands.
  * Margins are size-contained so they never grow a row: they stretch
- * to the rows beside them and clip, and the client hides any tile
- * that doesn't fully fit. A band holds its tiles with an empty row
+ * to the rows beside them and clip. A band holds its tiles with an empty row
  * above and below, and section spacers carry one band per column
  * count, so only the one matching the grid shows */
 .margin,
@@ -374,6 +395,13 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 @media screen and (min-width: 1024px) {
   .band-16 { display: grid }
 }
+/* margins and a post's 16-column bands come in one set per module size */
+@media screen and (1024px <= width < 1280px) {
+  .band-xl { display: none }
+}
+@media screen and (min-width: 1280px) {
+  .band-lg { display: none }
+}
 
 @media screen and (min-width: 1024px) {
   .post-title { grid-row: 1 / span 3 }
@@ -383,10 +411,13 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
     grid-column: 1 / span 8;
   }
   .block { grid-column: var(--start, 1) / span var(--w, 8) }
-  .margin {
-    display: grid;
-    grid-column-start: var(--start);
-  }
+  .margin { grid-column-start: var(--start) }
+}
+@media screen and (1024px <= width < 1280px) {
+  .margin-lg { display: grid }
+}
+@media screen and (min-width: 1280px) {
+  .margin-xl { display: grid }
 }
 
 /* Type & color */
