@@ -35,6 +35,9 @@ export type PostData = {
   content: string;
   data: Metadata; // Record<string, string>;
   tree: React.ReactElement;
-  // TODO
-  excerpt?: string;
+  // the text before <!-- more -->, or the first paragraph (see rehypeExcerpt)
+  excerpt?: {
+    hast: import("hast").Root;
+    tree: React.ReactElement;
+  };
 };

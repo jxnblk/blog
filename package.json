@@ -17,6 +17,7 @@
     "@fontsource/plus-jakarta-sans": "^5.3.0",
     "fontkit": "^2.0.4",
     "gray-matter": "^4.0.3",
+    "hast-util-to-jsx-runtime": "^2.3.6",
     "image-size": "^2.0.4",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",

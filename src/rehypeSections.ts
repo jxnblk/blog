@@ -74,11 +74,11 @@ const END_TILES: Record<number, [number, number]> = { 16: [1, 3], 8: [3, 3], 4: 
 const isElement = (node: RootContent): node is Element =>
   node.type === "element";
 
-const isBlank = (node: RootContent) =>
+export const isBlank = (node: RootContent) =>
   node.type === "text" && !node.value.trim();
 
 // a paragraph holding only media (and whitespace) is an image block
-function isMediaParagraph (node: Element) {
+export function isMediaParagraph (node: Element) {
   if (node.tagName !== "p") return false;
   const children = node.children.filter(child => !isBlank(child as RootContent));
   return children.length > 0 && children.every(child =>
