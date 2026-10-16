@@ -556,12 +556,20 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   text-decoration: none;
   background: none;
 }
-.nav > a:hover,
-#color-button:hover {
+.nav > a:hover {
   color: var(--primary);
   text-decoration: underline;
 }
 
+/* The nav buttons: drawn in --text (the G knocks out to --background),
+ * switching to --primary on hover with the same fade as links */
+#color-button,
+.grid-button {
+  transition-property: color, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+#color-button:hover { color: var(--primary) }
 .grid-button {
   font-size: 12px;
   line-height: 1;
@@ -569,7 +577,16 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   background-color: var(--text);
 }
 .grid-button:hover { background-color: var(--primary) }
-.grid-button[aria-pressed="true"] { background-color: var(--primary) }
+/* on: an outline instead of a fill, so it keeps the --text color */
+.grid-button[aria-pressed="true"] {
+  color: var(--text);
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+.grid-button[aria-pressed="true"]:hover {
+  color: var(--primary);
+  background-color: transparent;
+}
 
 .fill { background-color: var(--primary) }
 .fill-greeble { background-color: var(--greeble) }
