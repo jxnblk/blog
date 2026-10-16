@@ -60,6 +60,9 @@ body {
   --primary-1: color-mix(in srgb, var(--primary) 12%, var(--background));
   --primary-0: color-mix(in srgb, var(--primary) 6%, var(--background));
   --primary-dark: color-mix(in srgb, var(--primary) 50%, var(--text));
+  /* the dot grid: a shade off the background, darker on module lines */
+  --dot: color-mix(in srgb, var(--text) 8%, var(--background));
+  --dot-module: color-mix(in srgb, var(--text) 20%, var(--background));
 }
 
 /* Tokens: layout
@@ -442,18 +445,19 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 .fill { background-color: var(--primary) }
 .fill-greeble { background-color: var(--greeble) }
 
-/* Debug overlay: toggle with the "g" key */
-.show-grid .grid {
+/* Dot grid: a dot on every baseline in both directions, and a darker
+ * one where module lines cross. Dots sit on the top-left corner of
+ * each step, so they line up with the grid's columns and rows */
+.grid {
   background-image:
-    linear-gradient(to right, rgba(255, 0, 0, 0.25) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 0, 0, 0.25) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 160, 255, 0.15) 1px, transparent 1px);
+    radial-gradient(circle at 1px 1px, var(--dot-module) 1px, transparent 1.5px),
+    radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 1.5px);
   background-size:
     var(--module) var(--module),
-    var(--module) var(--module),
-    100% var(--baseline);
+    var(--baseline) var(--baseline);
 }
 
+/* Debug */
 .debug {
   outline: 2px solid rgba(0, 255, 255, 0.5);
 }
