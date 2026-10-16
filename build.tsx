@@ -29,6 +29,7 @@ import NotFound from "./src/404";
 import ProtoLayout from "./src/ProtoLayout";
 import ProtoFlourish from "./src/ProtoFlourish";
 import { FlourishTile } from "./src/Flourish";
+import { generateRSS, FEED_PATH } from "./src/rss";
 
 import cssFile from "./src/style.css" with { type: "file" };
 
@@ -201,6 +202,10 @@ async function generateJSON (posts: PostData[]) {
   await writeFile(join(OUT_DIR, "api", "index.json"), indexJSON);
 }
 
+async function generateFeed (posts: PostData[]) {
+  await writeFile(join(OUT_DIR, FEED_PATH), generateRSS(posts, BASE_URL), "utf8");
+}
+
 // fontsource packages imported in style.css, served from /fonts
 const FONTS = [
   "ia-writer-quattro",
@@ -225,6 +230,7 @@ async function build () {
   await Promise.all([
     generateHTML(pages),
     generateJSON(posts),
+    generateFeed(posts),
     copyStatic(),
     // generateMD(pages),
   ]);

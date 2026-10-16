@@ -347,10 +347,6 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
  * left 8 columns, one row each, with a margin of tiles beside them */
 .blog-list { list-style: none }
 .block-card { --w: 8 }
-/* measured in Blog.tsx: a line of space above the excerpt, and the
- * read more link on the line below it */
-.card-excerpt { margin-top: calc(var(--baseline) * 2) }
-.card-more { display: block }
 
 .post-body {
   grid-column: 1 / -1;

@@ -15,6 +15,7 @@ export default function Head (props: {
       <meta name='description' content={desc} />
       <meta name='viewport' content='width=device-width' />
       <link rel="icon" type="image/png" href="/favicon.png" />
+      <link rel="alternate" type="application/rss+xml" title="Jxnblk Blog" href="/rss.xml" />
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script>
       {props.image ? (
         <meta name='twitter:card' content='summary_large_image' />

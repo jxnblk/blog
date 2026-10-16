@@ -5,7 +5,7 @@ import Flourish from "./Flourish";
 import { densityField, endBands } from "./rehypeSections";
 import { createGrid, occupy, place, type Tile } from "./pack";
 import { rng } from "./rng";
-import { measureBlock, measureHeading, measureWrap, modules } from "./measure";
+import { measureHeading, measureWrap, modules } from "./measure";
 
 import type { PostData } from "./types";
 
@@ -71,18 +71,6 @@ export function BlogPostCard (props: PostData) {
           </div>
         ))}
       </div>
-      {props.excerpt && (
-        <>
-          <div className="card-excerpt">
-            {props.excerpt.tree}
-          </div>
-          <a
-            href={'/' + props.path}
-            className="card-more">
-            Read more <span aria-hidden>{">>"}</span>
-          </a>
-        </>
-      )}
     </>
   );
 };
@@ -91,8 +79,8 @@ export function BlogPostCard (props: PostData) {
  * Cards fill the left 8 of 16 columns, one row each, and a margin
  * spans the other 8 for every row. Tiles are placed in it the same way
  * as in a post (see rehypeSections), against card heights measured
- * from the title, date, tags, and excerpt (see measure.ts), with one
- * margin per module size. Below 16 columns the margin hides. The end band after
+ * from the title, date, and tags (see measure.ts), with one margin per
+ * module size. Below 16 columns the margin hides. The end band after
  * the list is the same as a post's, at every column count.
  */
 const SEED = "blog";
@@ -110,26 +98,21 @@ type Size = typeof SIZES[number]["size"];
 const TITLE_SIZE = 32;
 const TITLE_LINE = 48;
 const META_SIZE = 14;
-// the excerpt's margin above, and the read more line below it
-const LINE = 32;
 
 const date = (post: PostData) =>
   post.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' }) ?? "";
 
-// a title, then the date and tags, which wrap, and the excerpt with a
-// read more link; cards are 8 modules wide at every grid
+// a title, then the date and tags, which wrap; cards are 8 modules
+// wide at every grid
 function heights (post: PostData): Record<Size, number> {
   const out = {} as Record<Size, number>;
   for (const { size, module } of SIZES) {
     const width = LIST * module;
     const title = measureHeading(post.data.title, width, TITLE_SIZE, TITLE_LINE);
     const meta = measureWrap([date(post), ...(post.data.tags ?? []).map(tag => "#" + tag)], width, META_SIZE);
-    const excerpt = post.excerpt
-      ? measureBlock(post.excerpt.hast.children, width)
-      : { height: -LINE * 2, risky: false };
     out[size] = modules({
-      height: title.height + meta.height + excerpt.height + LINE * 2,
-      risky: title.risky || meta.risky || excerpt.risky,
+      height: title.height + meta.height,
+      risky: title.risky || meta.risky,
     }, module);
   }
   return out;
