@@ -16,10 +16,10 @@ export default function ProtoLayout (props: {
             Grid Prototype
           </h1>
           <div className="span-4 square fill" />
-          <div className="span-4 square fill-greeble" />
+          <div className="span-4 square fill-tint" />
           <div className="span-2 square" />
           <div className="span-2 square fill" />
-          <div className="span-2 square fill-greeble" />
+          <div className="span-2 square fill-tint" />
         </div>
 
         {/* Section: prose at start-1, flourish slots on the right */}
@@ -35,7 +35,7 @@ export default function ProtoLayout (props: {
               will go. These solid blocks are placeholders for those slots.
             </p>
           </div>
-          <div className="span-4 square fill-greeble" />
+          <div className="span-4 square fill-tint" />
           <div className="span-2 square fill" />
           <div className="span-2 square" />
           <div className="span-2 square" />
@@ -54,7 +54,7 @@ export default function ProtoLayout (props: {
               quarter.
             </p>
           </div>
-          <div className="span-2 square fill-greeble" />
+          <div className="span-2 square fill-tint" />
           <div className="span-2 square fill" />
         </div>
 
@@ -63,7 +63,7 @@ export default function ProtoLayout (props: {
           {[1, 2, 1, 4, 2, 1, 4, 1].map((n, i) => (
             <div
               key={i}
-              className={`span-${n} square ${i % 2 ? "fill" : "fill-greeble"}`}
+              className={`span-${n} square ${i % 2 ? "fill" : "fill-tint"}`}
             />
           ))}
         </div>

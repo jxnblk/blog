@@ -1,6 +1,4 @@
 // color modes script
-// The old modes (light, foliage, paper, amber, tomato) are still in
-// style.css for reference but left out of the cycle
 const modes = [
   'default', // no rule: the :root paper colors
   'green',
@@ -18,7 +16,7 @@ if (modes.includes(cn)) {
   index = modes.indexOf(cn);
   document.body.className = cn;
 } else {
-  // drops a saved old mode
+  // drops a saved mode that no longer exists
   localStorage.removeItem('color');
 }
 

@@ -8,9 +8,8 @@
 - x Color schemes
 - x More shimmery shader
 - x blockquotes
+- x clean up docs
 
-
-- clean up docs
 - clean up old color modes
 - Cleanup unused dev routes
   - dev/palette
