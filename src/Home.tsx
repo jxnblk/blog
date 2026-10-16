@@ -16,13 +16,13 @@ export default function Home (props: {
     <HTML css={props.css} path="">
       <Header />
       <main className="main grid">
-        <TitleBands position="above" />
+        <TitleBands seed={SEED} position="above" />
         <header className="post-header home-header">
-          <h1 className="home-title" style={titleStyle()}>
+          <h1 className="home-title" style={titleStyle(TITLE)}>
             {TITLE}
           </h1>
         </header>
-        <TitleBands position="below" />
+        <TitleBands seed={SEED} position="below" />
         {/* blocks, spacers, and margins come from rehypeSections */}
         <div className="post-body">
           {props.about}
@@ -47,9 +47,9 @@ const SIZES = [
   { size: "xl", module: 80, columns: 12 },
 ];
 
-const titleStyle = () => Object.fromEntries(SIZES.map(({ size, module, columns }) => [
+export const titleStyle = (title: string) => Object.fromEntries(SIZES.map(({ size, module, columns }) => [
   `--h-${size}`,
-  modules(measureHeading(TITLE, columns * module, TITLE_SIZE, TITLE_LINE), module),
+  modules(measureHeading(title, columns * module, TITLE_SIZE, TITLE_LINE), module),
 ])) as React.CSSProperties;
 
 /** Bands of tiles above and below the title
@@ -65,8 +65,11 @@ const BANDS: { columns: number; rows: number; tiles: [number, number] }[] = [
   { columns: 4, rows: 1, tiles: [1, 2] },
 ];
 
-function TitleBands ({ position }: { position: "above" | "below" }) {
-  const seed = `${SEED}:${position}`;
+export function TitleBands ({ seed: page, position }: {
+  seed: string;
+  position: "above" | "below";
+}) {
+  const seed = `${page}:${position}`;
   const random = rng(seed)("tiles");
   const density = densityField(seed);
   return (

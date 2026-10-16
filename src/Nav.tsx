@@ -3,7 +3,7 @@ import GridButton from "./GridButton.tsx";
 
 export default function Nav () {
   return (
-    <nav className="nav">
+    <nav className="nav caps">
       <a href='/blog'>
         Blog
       </a>

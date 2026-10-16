@@ -55,12 +55,12 @@ export default function Blog (props: {
 export function BlogPostCard (props: PostData) {
   return (
     <>
-      <h2>
+      <h2 className="card-title">
         <a href={'/' + props.path}>
           {props.data.title}
         </a>
       </h2>
-      <div className="flex wrap gap-1">
+      <div className="card-meta flex wrap gap-1">
         <div>
           {date(props)}
         </div>
@@ -107,6 +107,11 @@ const SIZES = [
 ] as const;
 type Size = typeof SIZES[number]["size"];
 
+// the title and meta match a post's header (see style.css)
+const TITLE_SIZE = 32;
+const TITLE_LINE = 48;
+const META_SIZE = 14;
+
 const date = (post: PostData) =>
   post.data.date?.toLocaleDateString('en-US', { timeZone: 'UTC' }) ?? "";
 
@@ -116,8 +121,8 @@ function heights (post: PostData): Record<Size, number> {
   const out = {} as Record<Size, number>;
   for (const { size, module } of SIZES) {
     const width = LIST * module;
-    const title = measureHeading(post.data.title, width);
-    const meta = measureWrap([date(post), ...(post.data.tags ?? []).map(tag => "#" + tag)], width);
+    const title = measureHeading(post.data.title, width, TITLE_SIZE, TITLE_LINE);
+    const meta = measureWrap([date(post), ...(post.data.tags ?? []).map(tag => "#" + tag)], width, META_SIZE);
     out[size] = modules({
       height: title.height + meta.height,
       risky: title.risky || meta.risky,

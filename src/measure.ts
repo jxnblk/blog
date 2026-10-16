@@ -21,6 +21,8 @@ import type { Element, ElementContent, RootContent } from "hast";
 const FONTS = "node_modules/@fontsource/ia-writer-quattro/files/ia-writer-quattro-latin";
 // the page only loads mono's regular face, and its glyphs share one width
 const MONO = "node_modules/@fontsource/ia-writer-mono/files/ia-writer-mono-latin-400-normal.woff2";
+// headings are always bold, and the page only loads the upright face
+const HEADING = "node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2";
 const LINE = 32;
 const BASELINE = 16;
 const SIZE = 16;
@@ -39,21 +41,23 @@ const IMAGE_RATIO = 9 / 16;
 const IFRAME_HEIGHT = 150;
 
 const faces: Record<string, Font> = {};
-function face (bold: boolean, italic: boolean, mono: boolean): Font {
-  if (mono) return faces.mono ??= openSync(MONO) as Font;
+function face ({ bold, italic, family }: Style): Font {
+  if (family === "mono") return faces.mono ??= openSync(MONO) as Font;
+  if (family === "heading") return faces.heading ??= openSync(HEADING) as Font;
   const name = `${bold ? 700 : 400}-${italic ? "italic" : "normal"}`;
   return faces[name] ??= openSync(`${FONTS}-${name}.woff2`) as Font;
 }
 
-type Style = { bold: boolean; italic: boolean; size: number; mono: boolean };
-const BODY: Style = { bold: false, italic: false, size: SIZE, mono: false };
+type Family = "body" | "mono" | "heading";
+type Style = { bold: boolean; italic: boolean; size: number; family: Family };
+const BODY: Style = { bold: false, italic: false, size: SIZE, family: "body" };
 
 const widths = new Map<string, number>();
 function measure (text: string, style: Style) {
-  const key = `${+style.bold}${+style.italic}${+style.mono}${style.size}:${text}`;
+  const key = `${+style.bold}${+style.italic}${style.family}${style.size}:${text}`;
   let width = widths.get(key);
   if (width === undefined) {
-    const font = face(style.bold, style.italic, style.mono);
+    const font = face(style);
     width = font.layout(text).advanceWidth * style.size / font.unitsPerEm;
     widths.set(key, width);
   }
@@ -118,7 +122,7 @@ function words (nodes: ElementContent[], style: Style): Word[] {
       bold: style.bold || tag === "strong" || tag === "b" || tag === "th",
       italic: style.italic || tag === "em" || tag === "i",
       size: tag === "code" ? CODE_SIZE : style.size,
-      mono: style.mono || tag === "code",
+      family: tag === "code" ? "mono" : style.family,
     };
     if (tag === "code") pad += CODE_PAD;
     node.children.forEach(child => walk(child, next));
@@ -202,7 +206,7 @@ function flow (nodes: ElementContent[], width: number, style: Style): Box {
 function block (node: Element, width: number, style: Style): Box {
   const { tagName: tag, children } = node;
   if (/^h[1-6]$/.test(tag)) {
-    return lines(children, width, { ...style, bold: true, size: tag === "h6" ? 12 : SIZE });
+    return lines(children, width, { ...style, bold: true, size: tag === "h6" ? 12 : SIZE, family: "heading" });
   }
   if (tag === "img" || tag === "video" || tag === "iframe") return media(node, width);
   if (tag === "pre") return code(node, width);
@@ -231,7 +235,7 @@ const toText = (node: ElementContent): string =>
 // code keeps its lines, and scrolls rather than wrapping
 function code (node: Element, width: number): Box {
   const rows = toText(node).replace(/\n$/, "").split("\n");
-  const widest = Math.max(...rows.map(row => measure(row, { ...BODY, size: CODE_SIZE, mono: true })));
+  const widest = Math.max(...rows.map(row => measure(row, { ...BODY, size: CODE_SIZE, family: "mono" })));
   return {
     height: rows.length * LINE + BASELINE * 2,
     // a scrollbar can add height outside macOS
@@ -300,14 +304,14 @@ export function measureBlock (nodes: RootContent[], width: number): Box {
 }
 
 /** A flex row that wraps: items keep their own width, with a gap
- * between them */
-export function measureWrap (items: string[], width: number, gap = BASELINE): Box {
+ * between them, at body size by default */
+export function measureWrap (items: string[], width: number, size = SIZE, gap = BASELINE): Box {
   if (!items.length) return { height: 0, risky: false };
   let count = 1;
   let x = -gap;
   let risky = false;
   for (const item of items) {
-    const w = measure(item, BODY);
+    const w = measure(item, { ...BODY, size });
     const next = x + gap + w;
     if (Math.abs(next - width) < TOLERANCE) risky = true;
     if (x < 0 || next <= width) x = next;
@@ -319,6 +323,6 @@ export function measureWrap (items: string[], width: number, gap = BASELINE): Bo
   return { height: count * LINE, risky };
 }
 
-/** Bold text at a size and line height, body size by default */
+/** Heading text at a size and line height, body size by default */
 export const measureHeading = (text: string, width: number, size = SIZE, line = LINE): Box =>
-  lines([{ type: "text", value: text }], width, { ...BODY, bold: true, size }, line);
+  lines([{ type: "text", value: text }], width, { ...BODY, bold: true, size, family: "heading" }, line);

@@ -1,6 +1,7 @@
 @import "@fontsource/ia-writer-quattro/400.css";
 @import "@fontsource/ia-writer-quattro/700.css";
 @import "@fontsource/ia-writer-mono/400.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
 
 /** Stylesheet order
  * 1. Tokens: color and layout custom properties
@@ -107,6 +108,11 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 700;
+}
+h1, h2, h3, h4, h5, h6,
+.home-link,
+.nav > * {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 h1, h2, h3, h4, h5 { font-size: 16px }
 h6 { font-size: 12px }
@@ -308,7 +314,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
  * against. Below 16 columns, blocks stack full width
  * on column 1, the margins hide, and some section spacers show a band
  * of tiles instead. The header is 4 modules tall at 16
- * columns, with open space beside the title.
+ * columns, with the title across the full width.
  */
 .post-header {
   grid-column: 1 / -1;
@@ -317,7 +323,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   grid-auto-rows: minmax(var(--module), min-content);
 }
 .post-title {
-  grid-column: 1 / span calc(8 / var(--scale));
+  grid-column: 1 / -1;
   align-self: end;
 }
 .post-meta {
@@ -426,10 +432,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 @media screen and (min-width: 1024px) {
   .post-title { grid-row: 1 / span 3 }
   .home-title { grid-column: 1 / span 12 }
-  .post-meta {
-    grid-row: 4;
-    grid-column: 1 / span 8;
-  }
+  .post-meta { grid-row: 4 }
   .block { grid-column: var(--start, 1) / span var(--w, 8) }
   .margin { grid-column-start: var(--start) }
 }
@@ -443,10 +446,33 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 /* Type & color */
 .site-header,
 .site-footer,
-.post-meta { font-size: 14px }
+.post-meta,
+.card-meta { font-size: 14px }
+
+/* measured at this size on the blog index (see Blog.tsx) */
+.post-title,
+.card-title {
+  font-size: 32px;
+  line-height: 1.5;
+}
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.card-title a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  background: none;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
 
 .home-link,
 .nav > * {
+  font-size: 12px;
   font-weight: 700;
   color: inherit;
   text-decoration: none;
