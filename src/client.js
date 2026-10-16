@@ -4,6 +4,9 @@
 const modes = [
   'default', // no rule: the :root paper colors
   'green',
+  'brown',
+  'yellow',
+  'red',
 ];
 
 let index = 0;

@@ -113,8 +113,48 @@ accents (`primary`, `code`, `grid`) come from paper.
 | `code`       | `#7d238b` | (from paper) | 7.61:1; 6.87:1 on its tint |
 | `grid`       | `#b88114` | (from paper) | dots 1.17:1 / 1.51:1 |
 
-The color mode button cycles only default (paper) and green. The old
+The color mode button cycles default (paper), green, brown, yellow, and red. The old
 modes stay in `src/style.css` for reference.
+
+## Brown
+
+Kraft paper: a light brown paper bag. The background is mid-tone, so the
+paper accents lose contrast on it (teal links drop to about 3.5:1). Brown sets
+darker versions of each accent, same hues.
+
+| Token        | Value     | HSL          | Contrast on bg |
+| ------------ | --------- | ------------ | -------------- |
+| `background` | `#d7c2a2` | 36° 40% 74%  | —              |
+| `text`       | `#402607` | 32° 80% 14%  | 8.09:1         |
+| `primary`    | `#084549` | 184° 80% 16% | 6.19:1; 5.64:1 on its tint |
+| `code`       | `#51165a` | 292° 60% 22% | 7.52:1; 6.82:1 on its tint |
+| `grid`       | `#73510d` | 40° 80% 25%  | dots 1.20:1 / 1.66:1 |
+
+## Yellow
+
+A background a bit lighter than the marigold tiles (center 40° 70% 57%).
+It uses the same text and accents as brown for now.
+
+| Token        | Value     | HSL          | Contrast on bg |
+| ------------ | --------- | ------------ | -------------- |
+| `background` | `#eebf63` | 40° 80% 66%  | —              |
+| `text`       | `#402607` | 32° 80% 14%  | 8.19:1         |
+| `primary`    | `#084549` | 184° 80% 16% | 6.27:1; 5.72:1 on its tint |
+| `code`       | `#51165a` | 292° 60% 22% | 7.61:1; 6.90:1 on its tint |
+| `grid`       | `#73510d` | 40° 80% 25%  | dots 1.19:1 / 1.65:1 |
+
+## Red
+
+Rose: a light background on the poppy hue (4°), with saturated red ink.
+Hydrangea links sit directly opposite (4° + 180°).
+
+| Token        | Value     | HSL          | Contrast on bg |
+| ------------ | --------- | ------------ | -------------- |
+| `background` | `#f5c0bc` | 4° 75% 85%   | —              |
+| `text`       | `#790e06` | 4° 90% 25%   | 7.00:1         |
+| `primary`    | `#0a565c` | 184° 80% 20% | 5.26:1; 4.84:1 on its tint |
+| `code`       | `#5f1b6a` | 292° 60% 26% | 7.10:1; 6.45:1 on its tint |
+| `grid`       | `#c32d22` | 4° 70% 45%   | dots 1.20:1 / 1.67:1 |
 
 ## Open questions
 

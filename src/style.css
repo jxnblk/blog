@@ -38,6 +38,33 @@
   --text: #176b0b; /* hsl(112 82% 23%), the old .foliage text at 112°; 6.01:1 */
   --background: #ebf6ea; /* hsl(112 40% 94%) */
 }
+/* kraft paper: a mid-tone background, so the accents are darker
+ * versions of the paper ones to keep their contrast */
+.brown {
+  --text: #402607; /* hsl(32 80% 14%), 8.09:1 on the background */
+  --background: #d7c2a2; /* hsl(36 40% 74%) */
+  --primary: #084549; /* hydrangea, hsl(184 80% 16%), 6.19:1 */
+  --code: #51165a; /* violet, hsl(292 60% 22%), 7.52:1 */
+  --grid: #73510d; /* marigold, hsl(40 80% 25%) */
+}
+/* a bit lighter than the marigold tiles (40° 70% 57%). Same accents as
+ * .brown for now, kept separate so each can be tuned */
+.yellow {
+  --text: #402607; /* hsl(32 80% 14%), 8.19:1 on the background */
+  --background: #eebf63; /* hsl(40 80% 66%) */
+  --primary: #084549; /* hydrangea, hsl(184 80% 16%), 6.27:1 */
+  --code: #51165a; /* violet, hsl(292 60% 22%), 7.61:1 */
+  --grid: #73510d; /* marigold, hsl(40 80% 25%) */
+}
+/* rose: the poppy hue (4°), light enough that the accents can be
+ * a step lighter than on .yellow */
+.red {
+  --text: #790e06; /* hsl(4 90% 25%), 7.00:1 on the background */
+  --background: #f5c0bc; /* hsl(4 75% 85%) */
+  --primary: #0a565c; /* hydrangea, hsl(184 80% 20%), 5.26:1 */
+  --code: #5f1b6a; /* violet, hsl(292 60% 26%), 7.10:1 */
+  --grid: #c32d22; /* poppy, hsl(4 70% 45%) */
+}
 /* The modes below are the old set, kept for reference but no longer
  * in the cycle in client.js */
 .light {
@@ -296,7 +323,7 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   grid-template-columns: var(--module) auto;
   align-items: center;
 }
-.home-link img {
+.home-link svg {
   display: block;
   justify-self: center;
 }

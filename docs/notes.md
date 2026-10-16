@@ -6,6 +6,10 @@
 - x RSS
 
 - Color schemes
+  - hex vs hsl?
+  - avatar
+  - buttons (+ space)
+- color button ID bug
 - More shimmery shader
 - Cleanup unused dev routes
 
