@@ -275,7 +275,18 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   display: flex;
   align-items: center;
 }
-.nav > button { justify-content: center }
+.nav-buttons {
+  justify-content: center;
+  gap: 8px;
+}
+.grid-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
 .gap-1 { gap: 0 var(--baseline) }
 .wrap { flex-wrap: wrap }
 
@@ -437,18 +448,29 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   text-decoration: none;
   background: none;
 }
-.nav > :hover {
+.nav > a:hover,
+#color-button:hover {
   color: var(--primary);
   text-decoration: underline;
 }
 
+.grid-button {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--background);
+  background-color: var(--text);
+}
+.grid-button:hover { background-color: var(--primary) }
+.grid-button[aria-pressed="true"] { background-color: var(--primary) }
+
 .fill { background-color: var(--primary) }
 .fill-greeble { background-color: var(--greeble) }
 
-/* Dot grid: a dot on every baseline in both directions, and a darker
- * one where module lines cross. Dots sit on the top-left corner of
- * each step, so they line up with the grid's columns and rows */
-.grid {
+/* Dot grid: toggled with the "g" key or the G button. A dot on every
+ * baseline in both directions, and a darker one where module lines
+ * cross. Dots sit on the top-left corner of each step, so they line up
+ * with the grid's columns and rows */
+.show-grid .grid {
   background-image:
     radial-gradient(circle at 1px 1px, var(--dot-module) 1px, transparent 1.5px),
     radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 1.5px);

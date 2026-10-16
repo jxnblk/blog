@@ -1,4 +1,5 @@
 import ColorMode from "./ColorModeButton.tsx";
+import GridButton from "./GridButton.tsx";
 
 export default function Nav () {
   return (
@@ -16,7 +17,10 @@ export default function Nav () {
         target='_blank'>
         Twitter
       </a>
-      <ColorMode />
+      <div className="nav-buttons">
+        <ColorMode />
+        <GridButton />
+      </div>
     </nav>
   );
 };
