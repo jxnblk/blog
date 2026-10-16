@@ -1,22 +1,18 @@
 # Colors
 
-Working notes for the new color themes. The goal: derive every site color from
-the palette the tile flourishes already use, starting with a default theme
-built on the "paper" background.
+The site has one small set of hues. The flourish tiles are generated from
+them, and the theme tokens are built from the same hues, so the page and the
+tiles read as one palette.
 
-The current modes (`light`, `foliage`, `paper`, `amber`, `tomato` in
-`src/style.css` and `src/client.js`) stay in place as reference until the new
-set replaces them.
+## Tile colors
 
-## How the tile colors are derived
+Tile colors are generated in `src/Flourish.tsx`. A runtime layer in
+`src/wind-gl.js` animates on top of them.
 
-All of this lives in `src/Flourish.tsx`, with a runtime layer in
-`src/wind-gl.js`.
-
-### 1. A base color per flourish
+### Base color
 
 Each flourish picks one base color in HSL from its seed. 80% of the time it's
-a foliage green; otherwise it's one of four floral hues, each equally likely
+a foliage green. Otherwise it's one of four floral hues, each equally likely
 (5% each).
 
 | Family    | Hue (°)  | Saturation | Lightness | Chance |
@@ -27,35 +23,35 @@ a foliage green; otherwise it's one of four floral hues, each equally likely
 | Hydrangea | 180–188  | 60–80%     | 50–64%    | 5%     |
 | Violet    | 288–296  | 60–80%     | 50–64%    | 5%     |
 
-The families differ in more than hue. Foliage is muted and darker, and the
-florals are saturated and mid-light, so the florals read as accents against a
-mostly green field.
+Hue isn't the only difference between the families. Foliage is muted and
+darker, while the florals are saturated and mid-light, so the florals stand
+out as accents against a mostly green field.
 
-### 2. Drift through the subdivisions
+### Drift through the subdivisions
 
-Each split hands its child a color shifted from the parent:
+Each split gives its child a color shifted from the parent:
 
-- **Hue:** ±10° (uniform)
-- **Saturation:** ±8%, clamped to 10–90%
-- **Lightness:** 4–10% in a random direction, never less than 4% so
-  neighboring blocks stay distinct, and bounced back if it would leave 12–80%
+- **Hue:** shifts by up to ±10°.
+- **Saturation:** shifts by up to ±8%, kept within 10–90%.
+- **Lightness:** shifts 4–10% up or down. The shift is always at least 4%,
+  so neighboring pieces stay distinct. If a shift would leave the 12–80%
+  range, it goes the other way instead.
 
-The shifts compound, so each flourish is a random walk away from its base
-color. A size-4 tile goes up to 8 levels deep. The typical hue drift there is
-around ±16°, and the worst case is ±80°. Most tiles stay inside their family,
-but deep ones can wander: foliage into yellow-green or teal, marigold toward
-poppy.
+The shifts add up, so each flourish wanders away from its base color. A
+size-4 tile can go up to 8 levels deep. At that depth the hue usually drifts
+about ±16°, and at most ±80°. Most tiles stay within their family, but deep
+ones can wander: foliage toward yellow-green or teal, marigold toward poppy.
 
-### 3. Wind (runtime only)
+### Wind
 
-The WebGL layer pushes each block further with slow noise, up to ±12° hue,
-±8% saturation, and ±10% lightness (`WIND.shift`), then adds film grain. This
-only animates on top of the base colors. It doesn't change the palette.
+The WebGL layer adds slow noise on top of each piece's color (`WIND.shift`):
+up to ±12° hue, ±8% saturation and ±10% lightness. It also adds film grain.
+This only animates the colors and leaves the base palette unchanged.
 
 ## How the hues relate
 
-Foliage is centered on **112°**. Three florals form a **rectangular
-tetrad** on it with a 72° short side:
+Foliage is centered on **112°**. Three of the florals form a **rectangular
+tetrad** with it, with a 72° short side:
 
 | Hue       | Center | Offset from foliage | Role                         |
 | --------- | ------ | ------------------- | ---------------------------- |
@@ -63,132 +59,75 @@ tetrad** on it with a 72° short side:
 | Hydrangea | 184°   | +72°                | short side                   |
 | Violet    | 292°   | +180°               | complement                   |
 | Poppy     | 4°     | +252° (−108°)       | complement + 72°             |
-| Marigold  | 40°    | −72°                | in between, poppy → foliage  |
+| Marigold  | 40°    | −72°                | between poppy and foliage    |
 
 Marigold isn't part of the tetrad. It sits 36° from poppy and 72° from
-foliage, so it bridges the warm side.
+foliage, which connects the warm side of the palette.
 
-(The earlier hand-picked set was foliage ~122°, poppy ~6°, marigold ~41°,
-violet ~272°, and peony ~335°. That set wasn't built from a harmony rule.)
+## Building site colors
 
-## Caveats for deriving site colors
+- **Use each family's center hue.** The tiles cover a range of drifting
+  values, so a family is a band of hues rather than one color.
+- **Check contrast directly.** HSL lightness isn't perceptually even: at the
+  same HSL lightness, marigold looks much lighter than violet. For text and
+  UI colors that need reliable contrast, measure the contrast, or set
+  lightness and chroma in OKLCH.
+- **Body text is always fixed ink on paper.** The seed never decides
+  whether a post is readable.
 
-- **HSL isn't perceptually even.** At the same HSL lightness, marigold looks
-  much lighter than violet. For text and UI tokens that need dependable
-  contrast, convert the family hues to OKLCH and set lightness and chroma
-  there.
-- The tiles are a field of drifting values, so "the tile color" means a hue
-  band, not a single value. Site tokens should use each family's center hue.
+## Tokens
 
-## Default theme: paper
+Each color mode sets a few tokens. Everything else is derived from them in
+`src/style.css`.
 
-Links and their highlights use `primary`, which is the hydrangea hue. The
-tints (`--primary-0` through `--primary-3`, used for underlines, hover
-backgrounds, and table rules) mix it toward the background, so they follow
-automatically.
+| Token        | Use                                              |
+| ------------ | ------------------------------------------------ |
+| `background` | page background                                  |
+| `text`       | body text                                        |
+| `primary`    | links, hover states and pull quotes (hydrangea)  |
+| `code`       | inline and block code (violet)                   |
+| `grid`       | the dot grid (marigold, or poppy on red)         |
 
-Paper is now the default (`:root` in `src/style.css`). The old modes stay
-available as classes for reference, including `.light` (the old white
-default) and `.paper` (the old paper values).
+The tints `--primary-0` to `--primary-3` and `--code-0` mix their color
+toward the background. They're used for underlines, hover backgrounds,
+table rules and code backgrounds. Because they mix toward the background,
+they work in every mode without extra rules, and on black they come out as
+dark shades. The dot grid mixes `grid` at about 15%, and at about 40% on
+module lines.
 
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#fcf6e8` | 42° 77% 95%  | —              |
-| `text`       | `#120d03` | 40° 71% 4%   | 17.97:1        |
-| `primary`    | `#146b71` | 184° 70% 26% | 5.78:1 (hydrangea) |
-| `code`       | `#7d238b` | 292° 60% 34% | 7.84:1 (violet); 7.08:1 on its `--code-0` tint |
-| `grid`       | `#b88114` | 40° 80% 40%  | dots mixed at 15% (1.17:1) and 40% on module lines (1.52:1) (marigold) |
-| `greeble`    | `#ccc09d` | —            | (old paper value, to redo) |
+## Modes
 
-## Green
+Paper is the default and lives in `:root`. Each other mode is a class on
+`body` that sets only the tokens that differ from paper. The color mode
+button cycles through the modes in the order listed below (`src/client.js`).
 
-Built on the foliage hue (112°). It sets only `text` and `background`; the
-accents (`primary`, `code`, `grid`) come from paper.
+Contrast is against the mode's background. For `primary` and `code`, the
+second number is the contrast on that token's own tint.
 
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#ebf6ea` | 112° 40% 94% | —              |
-| `text`       | `#176b0b` | 112° 82% 23% | 6.01:1 (old foliage text at 112°) |
-| `primary`    | `#146b71` | (from paper) | 5.61:1         |
-| `code`       | `#7d238b` | (from paper) | 7.61:1; 6.87:1 on its tint |
-| `grid`       | `#b88114` | (from paper) | dots 1.17:1 / 1.51:1 |
+| Mode   | Background | Text      | Text contrast | Primary contrast | Code contrast   | Grid      |
+| ------ | ---------- | --------- | ------------- | ---------------- | --------------- | --------- |
+| Paper  | `#fcf6e8`  | `#120d03` | 17.97:1       | 5.78:1           | 7.84 / 7.08:1   | `#b88114` |
+| Green  | `#ebf6ea`  | `#176b0b` | 6.01:1        | 5.61:1           | 7.61 / 6.87:1   | paper     |
+| Brown  | `#d7c2a2`  | `#402607` | 8.09:1        | 6.19 / 5.64:1    | 7.52 / 6.82:1   | `#73510d` |
+| Yellow | `#eebf63`  | `#402607` | 8.19:1        | 6.27 / 5.72:1    | 7.61 / 6.90:1   | `#73510d` |
+| Red    | `#f5c0bc`  | `#790e06` | 7.00:1        | 5.26 / 4.84:1    | 7.10 / 6.45:1   | `#c32d22` |
+| White  | `#ffffff`  | `#000000` | 21:1          | 6.23:1           | 8.45:1          | paper     |
+| Black  | `#000000`  | `#ffffff` | 21:1          | 10.45 / 9.83:1   | 8.80 / 8.31:1   | `#e6a219` |
 
-The color mode button cycles default (paper), green, brown, yellow, and red. The old
-modes stay in `src/style.css` for reference.
-
-## Brown
-
-Kraft paper: a light brown paper bag. The background is mid-tone, so the
-paper accents lose contrast on it (teal links drop to about 3.5:1). Brown sets
-darker versions of each accent, same hues.
-
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#d7c2a2` | 36° 40% 74%  | —              |
-| `text`       | `#402607` | 32° 80% 14%  | 8.09:1         |
-| `primary`    | `#084549` | 184° 80% 16% | 6.19:1; 5.64:1 on its tint |
-| `code`       | `#51165a` | 292° 60% 22% | 7.52:1; 6.82:1 on its tint |
-| `grid`       | `#73510d` | 40° 80% 25%  | dots 1.20:1 / 1.66:1 |
-
-## Yellow
-
-A background a bit lighter than the marigold tiles (center 40° 70% 57%).
-It uses the same text and accents as brown for now.
-
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#eebf63` | 40° 80% 66%  | —              |
-| `text`       | `#402607` | 32° 80% 14%  | 8.19:1         |
-| `primary`    | `#084549` | 184° 80% 16% | 6.27:1; 5.72:1 on its tint |
-| `code`       | `#51165a` | 292° 60% 22% | 7.61:1; 6.90:1 on its tint |
-| `grid`       | `#73510d` | 40° 80% 25%  | dots 1.19:1 / 1.65:1 |
-
-## Red
-
-Rose: a light background on the poppy hue (4°), with saturated red ink.
-Hydrangea links sit directly opposite (4° + 180°).
-
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#f5c0bc` | 4° 75% 85%   | —              |
-| `text`       | `#790e06` | 4° 90% 25%   | 7.00:1         |
-| `primary`    | `#0a565c` | 184° 80% 20% | 5.26:1; 4.84:1 on its tint |
-| `code`       | `#5f1b6a` | 292° 60% 26% | 7.10:1; 6.45:1 on its tint |
-| `grid`       | `#c32d22` | 4° 70% 45%   | dots 1.20:1 / 1.67:1 |
-
-## White
-
-Pure white background with pure black text. The accents are the paper
-ones from `:root`, which have a little more contrast on white.
-
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#ffffff` | —            | —              |
-| `text`       | `#000000` | —            | 21:1           |
-| `primary`    | `#146b71` | from paper   | 6.23:1         |
-| `code`       | `#7d238b` | from paper   | 8.45:1         |
-| `grid`       | `#b88114` | from paper   | 3.39:1 (dots are mixed down to ~15–40%) |
-
-## Black
-
-The only dark mode: White inverted. The accents are lighter versions of
-the paper hues. The tints (`primary-0..3`, `code-0`, the dots) mix
-toward the background, so on black they come out as dark shades without
-any extra rules.
-
-| Token        | Value     | HSL          | Contrast on bg |
-| ------------ | --------- | ------------ | -------------- |
-| `background` | `#000000` | —            | —              |
-| `text`       | `#ffffff` | —            | 21:1           |
-| `primary`    | `#47c8d1` | 184° 60% 55% | 10.45:1; 9.83:1 on its tint |
-| `code`       | `#d78de2` | 292° 60% 72% | 8.80:1; 8.31:1 on its tint |
-| `grid`       | `#e6a219` | 40° 80% 50%  | dots 1.20:1, module dots 2.22:1 |
-
-The module dots are stronger than on the light modes (about 1.65:1);
-dark backgrounds need more contrast to read the same, but this may want
-tuning.
-
-## Open questions
-
-- Should the other modes each be built around one family (a foliage mode, a
-  violet or hydrangea mode, and a dark mode)?
+- **Paper:** warm off-white with near-black ink. Its accents are hydrangea
+  `#146b71` and violet `#7d238b`, and the other modes keep these unless
+  they need a different value.
+- **Green:** a light tint of the foliage hue (112°), with foliage text.
+  It uses the paper accents.
+- **Brown:** kraft paper. The background is mid-tone, so the paper accents
+  would lose contrast on it (links drop to about 3.5:1). Instead it uses
+  darker versions of the same hues: `#084549` and `#51165a`.
+- **Yellow:** a little lighter than the marigold tiles. It uses the same
+  text and accents as brown.
+- **Red:** rose, on the poppy hue (4°), with saturated red ink. Its
+  hydrangea links sit directly opposite poppy on the color wheel.
+- **White:** pure white and black, with the paper accents.
+- **Black:** the only dark mode, an inverted white. It uses lighter
+  versions of the accent hues: `#47c8d1` and `#d78de2`. Dark backgrounds
+  need more contrast for the dot grid to look the same, so its module
+  dots are stronger: about 2.2:1, against about 1.65:1 in the light modes.

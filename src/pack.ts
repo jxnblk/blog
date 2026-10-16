@@ -1,7 +1,8 @@
 import type { Random } from "./rng";
 
-// Flourish placement on an occupancy grid (DESIGN.md §5.4). Units are
-// modules, and the grid covers the whole post body, 16 columns wide.
+// Flourish placement on an occupancy grid (docs/design.md, Flourishes).
+// Units are modules, and the grid covers the whole post body, 16
+// columns wide.
 //
 // Content and placed tiles both occupy their cells plus every cell
 // sharing an edge with them, so a tile is never edge to edge with

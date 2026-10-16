@@ -1,4 +1,4 @@
-/** Block heights from font metrics (DESIGN.md §1)
+/** Block heights from font metrics (docs/design.md, Layout)
  * Lays out a block's text the way the browser will, with the same
  * font files the page loads, so the build knows each block's height in
  * modules. Text wraps greedily at spaces, and after hyphens and

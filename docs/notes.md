@@ -7,9 +7,10 @@
 - x color button ID bug
 - x Color schemes
 - x More shimmery shader
+- x blockquotes
 
-- blockquotes
 
+- clean up docs
 - clean up old color modes
 - Cleanup unused dev routes
   - dev/palette

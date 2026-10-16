@@ -1,4 +1,4 @@
-/** Content splitting and layout (DESIGN.md §5)
+/** Content splitting and layout (docs/design.md, Layout)
  * Groups the top-level hast nodes into blocks, flat, so every block is
  * a direct item of the post body's grid. Spacer elements separate
  * the blocks:
@@ -190,7 +190,7 @@ function columns (r: Random, type: BlockType, offset: number): Span {
   return { start: offset, width: PROSE };
 }
 
-/** Pull quotes (DESIGN.md §5)
+/** Pull quotes (docs/design.md, Layout)
  * Every blockquote but an embed becomes a pull quote: a bordered box
  * in the heading face. At 16 columns it's a rectangle of whole
  * modules, as tall as its text at each module size, and never taller
