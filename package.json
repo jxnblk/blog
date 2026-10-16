@@ -7,8 +7,7 @@
   "scripts": {
     "build": "bun build.tsx",
     "start": "bun --watch build.tsx",
-    "serve": "bunx http-server build -c-1",
-    "palette": "bun dev/palette/index.html"
+    "serve": "bunx http-server build -c-1"
   },
   "author": "Brent Jackson",
   "license": "MIT",

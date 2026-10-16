@@ -26,8 +26,6 @@ import Post from "./src/Post";
 import Home from "./src/Home";
 import Blog from "./src/Blog";
 import NotFound from "./src/404";
-import ProtoLayout from "./src/ProtoLayout";
-import ProtoFlourish from "./src/ProtoFlourish";
 import { FlourishTile } from "./src/Flourish";
 import { generateRSS, FEED_PATH } from "./src/rss";
 
@@ -160,18 +158,6 @@ async function getPages (posts: PostData[]): Promise<Page[]> {
   pages.push({
     path: "404",
     html: renderToStaticMarkup(notfound),
-  });
-
-  const protoLayout = <ProtoLayout {...ctx} />;
-  pages.push({
-    path: "layout",
-    html: renderToStaticMarkup(protoLayout),
-  });
-
-  const protoFlourish = <ProtoFlourish {...ctx} />;
-  pages.push({
-    path: "flourish",
-    html: renderToStaticMarkup(protoFlourish),
   });
   return pages;
 }

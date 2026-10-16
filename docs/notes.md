@@ -9,10 +9,9 @@
 - x More shimmery shader
 - x blockquotes
 - x clean up docs
+- x clean up old color modes
+- x Cleanup unused dev routes
 
-- clean up old color modes
-- Cleanup unused dev routes
-  - dev/palette
 - clean up valtown archive
 
 

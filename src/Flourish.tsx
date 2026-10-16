@@ -49,10 +49,6 @@ function baseColor (r: Random): { family: Family; hsl: HSL } {
   return { family, hsl: [range(r, hue), range(r, FLORAL.sat), range(r, FLORAL.light)] };
 }
 
-// overrides the base color after it's drawn, so the seed's draws (and
-// the tile's shape) stay the same. Used by the dev palette app
-export type BaseOverride = (family: Family, hsl: HSL) => HSL;
-
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));
 const signed = (r: Random) => r.next() * 2 - 1;
 
@@ -117,14 +113,13 @@ function subdivide (
   }
 }
 
-export function layout (seed: string, size: number, override?: BaseOverride) {
+export function layout (seed: string, size: number) {
   const r = createRandom(seed);
   const leaves: Leaf[] = [];
   const corner = { right: r.chance(0.5), bottom: r.chance(0.5) };
   const vertical = r.chance(0.5);
   const base = baseColor(r);
-  const color = override ? override(base.family, base.hsl) : base.hsl;
-  subdivide(r, 0, 0, size, size, vertical, corner, 0, maxDepth(size), color, leaves);
+  subdivide(r, 0, 0, size, size, vertical, corner, 0, maxDepth(size), base.hsl, leaves);
   return { family: base.family, leaves };
 }
 
