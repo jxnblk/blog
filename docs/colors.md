@@ -88,7 +88,7 @@ Each color mode sets a few tokens. Everything else is derived from them in
 | `code`       | inline and block code (violet)                   |
 | `grid`       | the dot grid (marigold, or poppy on red)         |
 
-The tints `--primary-0` to `--primary-3` and `--code-0` mix their color
+The tints `--primary-0` to `--primary-2` and `--code-0` mix their color
 toward the background. They're used for underlines, hover backgrounds,
 table rules and code backgrounds. Because they mix toward the background,
 they work in every mode without extra rules, and on black they come out as

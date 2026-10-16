@@ -119,7 +119,7 @@ async function readPosts (): Promise<PostData[]> {
     .map(post => parseMarkdown(post, { sections: true }))
   );
 
-  console.log(posts.length);
+  console.log(`${posts.length} posts found`);
 
   return posts;
 }

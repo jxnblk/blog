@@ -8,7 +8,8 @@ export default function Post (props: PostData & {
   css: string;
 }) {
   if (!props.data.date) {
-    console.error("NO DATE FOR POST " + JSON.stringify(props.data, null, 2));
+    // TODO: support drafts?
+    // console.error("NO DATE FOR POST " + JSON.stringify({ data: props.data }, null, 2));
     return null;
   }
 

@@ -84,11 +84,9 @@
 /* tints of --primary, mixed toward the background. On body so they
  * follow the color mode class set there */
 body {
-  --primary-3: color-mix(in srgb, var(--primary) 50%, var(--background));
   --primary-2: color-mix(in srgb, var(--primary) 25%, var(--background));
   --primary-1: color-mix(in srgb, var(--primary) 12%, var(--background));
   --primary-0: color-mix(in srgb, var(--primary) 6%, var(--background));
-  --primary-dark: color-mix(in srgb, var(--primary) 50%, var(--text));
   /* pressed links and buttons: --primary a step darker in every mode,
    * dark ones included, so a click reads as pushing in */
   --active: color-mix(in srgb, var(--primary) 75%, #000);
@@ -255,40 +253,13 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
  * so its children are grid items too */
 :where(.grid, .post-body) > * {
   min-width: 0;
-  /* span on the end line so .start-* classes can set the start line */
   grid-column-end: span max(1, calc(var(--span, 1) / var(--scale)));
   grid-row: span var(--rows, 1);
 }
 
-.span-1  { --span: 1 }
-.span-2  { --span: 2 }
-.span-4  { --span: 4 }
-.span-8  { --span: 8 }
-.span-16 { --span: 16 }
-.rows-1  { --rows: 1 }
-.rows-2  { --rows: 2 }
-.rows-4  { --rows: 4 }
-.rows-8  { --rows: 8 }
-/* Square blocks: rows match the scaled column span, and the box
- * stays square even when a neighboring text block grows the row */
-.square {
-  grid-row-end: span max(1, calc(var(--span, 1) / var(--scale)));
-  aspect-ratio: 1;
-  align-self: start;
-}
-
-.start-1  { grid-column-start: 1 }
-.start-5  { grid-column-start: calc(4 / var(--scale) + 1) }
-.start-9  { grid-column-start: calc(8 / var(--scale) + 1) }
-.start-13 { grid-column-start: calc(12 / var(--scale) + 1) }
-
-/* Content spans are full width until 16 columns, where they narrow
- * to a fixed measure */
-.text-block,
+/* Content spans are full width until 16 columns, where the layout
+ * sets each block's own columns */
 .block { --span: 16 }
-@media screen and (min-width: 1088px) {
-  .text-block { --span: 8 }
-}
 
 /* Header & footer
  * One row of modules: the home link spans 2 columns (a fixed 64px
@@ -590,8 +561,6 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 }
 .grid-button[aria-pressed="true"]:active { background-color: transparent }
 
-.fill { background-color: var(--primary) }
-
 /* Dot grid: toggled with the "g" key or the G button. A dot on every
  * baseline in both directions, and a darker one where module lines
  * cross. Dots sit on the top-left corner of each step, so they line up
@@ -605,11 +574,3 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
     var(--baseline) var(--baseline);
 }
 
-/* Debug */
-.debug {
-  outline: 2px solid rgba(0, 255, 255, 0.5);
-}
-.debug * {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
-}
-.debug-bg { background-color: tomato }
