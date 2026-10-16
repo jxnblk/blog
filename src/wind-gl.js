@@ -18,6 +18,18 @@
     shift: [12, 8, 10], // max hue, saturation, lightness shift
   };
 
+  // glints: single blocks flash bright now and then, like sun catching
+  // a wet tile; they gather in slow drifting patches of sunlight
+  const GLINT = {
+    rate: [0.15, 0.4], // flashes per second, slowest and fastest block
+    sharpness: 40,     // higher is a shorter, rarer flash
+    brighten: 15,      // lightness added at the peak, percent
+    wash: 6,           // saturation removed at the peak, percent
+    shimmer: [6, 4, 3], // max hue, saturation, lightness drift between peaks
+    sun: 400,          // px per sunlit patch
+    drift: 0.05,       // how fast the sunlit patches change
+  };
+
   // film grain over the blocks; amount 0 turns it off
   const GRAIN = {
     amount: 0.03, // max brightness change, 0 to 1
@@ -38,6 +50,9 @@ uniform float strength;  // wind strength right now, calm to gusty
 uniform vec3 seed;
 uniform vec3 shift;
 uniform vec3 wind;   // scale, evolve, flutter
+uniform vec4 glint;  // slowest rate, fastest rate, sharpness, sun scale
+uniform vec3 light;  // brighten, wash, sun drift
+uniform vec3 shimmer;
 flat out vec3 color;
 
 float hash (vec3 p) {
@@ -72,6 +87,21 @@ void main () {
   // calm spells settle toward the base colors
   float n = (0.7 * gust + 0.3 * flutter) * mix(0.6, 1.0, clamp(strength, 0.0, 1.0));
   vec3 c = hsl + n * shift;
+
+  // each block flashes on its own clock, brighter in the sunlit patches
+  float phase = hash(vec3(center, 1.0) + seed);
+  float rate = mix(glint.x, glint.y, hash(vec3(center, 2.0) + seed) * 0.5 + 0.5);
+  float pulse = pow(max(0.0, sin((time * rate + phase) * 6.2832)), glint.z);
+  float sun = smoothstep(-0.2, 0.6, noise(vec3(center / glint.w, time * light.z) + seed.zyx));
+  float g = pulse * sun;
+  c.z += g * light.x;
+  c.y -= g * light.y;
+  // between flashes, each block drifts gently on its own, more in the sun
+  vec3 drift = vec3(
+    sin((time * rate * 0.31 + hash(vec3(center, 3.0) + seed)) * 6.2832),
+    sin((time * rate * 0.23 + hash(vec3(center, 4.0) + seed)) * 6.2832),
+    sin((time * rate * 0.37 + hash(vec3(center, 5.0) + seed)) * 6.2832));
+  c += drift * shimmer * (0.5 + 0.5 * sun);
   color = hsl2rgb(vec3(c.x / 360.0, clamp(c.yz / 100.0, 0.0, 1.0)));
 
   // snap edges to device pixels, so neighboring blocks share edges exactly
@@ -140,11 +170,14 @@ void main () {
   gl.useProgram(program);
   const uniform = name => gl.getUniformLocation(program, name);
   const u = Object.fromEntries(
-    ['scroll', 'size', 'dpr', 'time', 'offset', 'strength', 'seed', 'shift', 'wind', 'grain'].map(name => [name, uniform(name)]),
+    ['scroll', 'size', 'dpr', 'time', 'offset', 'strength', 'seed', 'shift', 'wind', 'glint', 'light', 'shimmer', 'grain'].map(name => [name, uniform(name)]),
   );
   gl.uniform3f(u.seed, Math.random() * 100, Math.random() * 100, Math.random() * 100);
   gl.uniform3f(u.shift, ...WIND.shift);
   gl.uniform3f(u.wind, WIND.scale, WIND.evolve, WIND.flutter);
+  gl.uniform4f(u.glint, ...GLINT.rate, GLINT.sharpness, GLINT.sun);
+  gl.uniform3f(u.light, GLINT.brighten, GLINT.wash, GLINT.drift);
+  gl.uniform3f(u.shimmer, ...GLINT.shimmer);
 
   // 1D value noise for the wind strength, 0 to 1
   const knots = Array.from({ length: 256 }, () => Math.random());

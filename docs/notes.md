@@ -4,14 +4,14 @@
 - x 404
 - x Excerpts
 - x RSS
+- x color button ID bug
+- x Color schemes
 
-- Color schemes
-  - hex vs hsl?
-  - avatar
-  - buttons (+ space)
-- color button ID bug
 - More shimmery shader
+- clean up old color modes
 - Cleanup unused dev routes
+  - dev/palette
+- clean up valtown archive
 
 
 - Ship
