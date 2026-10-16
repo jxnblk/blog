@@ -1,18 +1,21 @@
-// backup color modes script
+// color modes script
+// The old modes (light, foliage, paper, amber, tomato) are still in
+// style.css for reference but left out of the cycle
 const modes = [
-  'light',
-  'foliage',
-  'paper',
-  'amber',
-  'tomato',
+  'default', // no rule: the :root paper colors
+  'green',
 ];
 
 let index = 0;
 
 const cn = localStorage.getItem('color');
-document.body.className = cn;
-
-if (cn) index = modes.indexOf(cn);
+if (modes.includes(cn)) {
+  index = modes.indexOf(cn);
+  document.body.className = cn;
+} else {
+  // drops a saved old mode
+  localStorage.removeItem('color');
+}
 
 function cycle () {
   index = (index + 1) % modes.length;

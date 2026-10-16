@@ -19,13 +19,13 @@ Each flourish picks one base color in HSL from its seed. 80% of the time it's
 a foliage green; otherwise it's one of four floral hues, each equally likely
 (5% each).
 
-| Family   | Hue (°)   | Saturation | Lightness | Chance |
-| -------- | --------- | ---------- | --------- | ------ |
-| Foliage  | 85–160    | 25–50%     | 22–50%    | 80%    |
-| Poppy    | 0–12      | 60–80%     | 50–64%    | 5%     |
-| Marigold | 36–46     | 60–80%     | 50–64%    | 5%     |
-| Violet   | 265–280   | 60–80%     | 50–64%    | 5%     |
-| Peony    | 325–345   | 60–80%     | 50–64%    | 5%     |
+| Family    | Hue (°)  | Saturation | Lightness | Chance |
+| --------- | -------- | ---------- | --------- | ------ |
+| Foliage   | 74–150   | 25–50%     | 22–50%    | 80%    |
+| Poppy     | 0–8      | 60–80%     | 50–64%    | 5%     |
+| Marigold  | 36–44    | 60–80%     | 50–64%    | 5%     |
+| Hydrangea | 180–188  | 60–80%     | 50–64%    | 5%     |
+| Violet    | 288–296  | 60–80%     | 50–64%    | 5%     |
 
 The families differ in more than hue. Foliage is muted and darker, and the
 florals are saturated and mid-light, so the florals read as accents against a
@@ -52,32 +52,24 @@ The WebGL layer pushes each block further with slow noise, up to ±12° hue,
 ±8% saturation, and ±10% lightness (`WIND.shift`), then adds film grain. This
 only animates on top of the base colors. It doesn't change the palette.
 
-## Do the hues relate to each other?
+## How the hues relate
 
-They weren't built from a harmony rule. The code names them after plants and
-picks bands by eye, and there's no shared anchor hue or offset math. It's
-**not tetradic**. A square tetrad on the foliage center (~122°) would be
-122 / 212 / 302 / 32, and there's nothing near 212 (blue).
+Foliage is centered on **112°**. Three florals form a **rectangular
+tetrad** on it with a 72° short side:
 
-Measured against the foliage center of ~122°, though, the hand-picked hues
-land close to classic relationships:
+| Hue       | Center | Offset from foliage | Role                         |
+| --------- | ------ | ------------------- | ---------------------------- |
+| Foliage   | 112°   | 0°                  | anchor                       |
+| Hydrangea | 184°   | +72°                | short side                   |
+| Violet    | 292°   | +180°               | complement                   |
+| Poppy     | 4°     | +252° (−108°)       | complement + 72°             |
+| Marigold  | 40°    | −72°                | in between, poppy → foliage  |
 
-| Hue          | Center | Offset from foliage | Closest relationship                |
-| ------------ | ------ | ------------------- | ----------------------------------- |
-| Foliage      | ~122°  | 0°                  | anchor                              |
-| Violet       | ~272°  | +150°               | split complement (122 + 150 = 272)  |
-| Peony        | ~335°  | −147°               | split complement (122 + 210 = 332)  |
-| Poppy        | ~6°    | −116°               | triadic (122 + 240 = 2)             |
-| Marigold     | ~41°   | −81°                | none; a warm neighbor of poppy      |
+Marigold isn't part of the tetrad. It sits 36° from poppy and 72° from
+foliage, so it bridges the warm side.
 
-The closest description is **green anchored, with split-complementary
-accents** (violet and peony sit almost exactly at ±150°) and a warm pair
-(poppy and marigold, 35° apart) on the other side of the wheel. Blue,
-roughly 180–260°, is left out entirely, which keeps the palette earthy.
-
-One more coincidence that's useful here: the current `paper` background
-(`#faefd0`) is hue 44° at 81% saturation, inside the **marigold** band. Paper
-is already a very light, desaturated marigold.
+(The earlier hand-picked set was foliage ~122°, poppy ~6°, marigold ~41°,
+violet ~272°, and peony ~335°. That set wasn't built from a harmony rule.)
 
 ## Caveats for deriving site colors
 
@@ -90,26 +82,41 @@ is already a very light, desaturated marigold.
 
 ## Default theme: paper
 
-Start from the current `paper` values and darken the text.
+Links and their highlights use `primary`, which is the hydrangea hue. The
+tints (`--primary-0` through `--primary-3`, used for underlines, hover
+backgrounds, and table rules) mix it toward the background, so they follow
+automatically.
 
-| Token        | Current   | HSL          | Contrast on bg |
+Paper is now the default (`:root` in `src/style.css`). The old modes stay
+available as classes for reference, including `.light` (the old white
+default) and `.paper` (the old paper values).
+
+| Token        | Value     | HSL          | Contrast on bg |
 | ------------ | --------- | ------------ | -------------- |
-| `background` | `#faefd0` | 44° 81% 90%  | —              |
-| `text`       | `#4d4019` | 45° 51% 20%  | 8.88:1         |
-| `primary`    | `#8e5200` | 35° 100% 28% | 5.46:1         |
+| `background` | `#fcf6e8` | 42° 77% 95%  | —              |
+| `text`       | `#120d03` | 40° 71% 4%   | 17.97:1        |
+| `primary`    | `#146b71` | 184° 70% 26% | 5.78:1 (hydrangea) |
+| `code`       | `#7d238b` | 292° 60% 34% | 7.84:1 (violet); 7.08:1 on its `--code-0` tint |
+| `grid`       | `#b88114` | 40° 80% 40%  | dots mixed at 15% (1.17:1) and 40% on module lines (1.52:1) (marigold) |
+| `greeble`    | `#ccc09d` | —            | (old paper value, to redo) |
 
-Candidates for darker text, same hue and saturation:
+## Green
 
-| Text      | HSL         | Contrast |
-| --------- | ----------- | -------- |
-| `#3d3214` | 45° 51% 16% | 11.0:1   |
-| `#2e260f` | 45° 51% 12% | 13.1:1   |
+Built on the foliage hue (112°). It sets only `text` and `background`; the
+accents (`primary`, `code`, `grid`) come from paper.
+
+| Token        | Value     | HSL          | Contrast on bg |
+| ------------ | --------- | ------------ | -------------- |
+| `background` | `#ebf6ea` | 112° 40% 94% | —              |
+| `text`       | `#176b0b` | 112° 82% 23% | 6.01:1 (old foliage text at 112°) |
+| `primary`    | `#146b71` | (from paper) | 5.61:1         |
+| `code`       | `#7d238b` | (from paper) | 7.61:1; 6.87:1 on its tint |
+| `grid`       | `#b88114` | (from paper) | dots 1.17:1 / 1.51:1 |
+
+The color mode button cycles only default (paper) and green. The old
+modes stay in `src/style.css` for reference.
 
 ## Open questions
 
-- Should text keep the marigold hue (warm brown ink), or lean toward a dark
-  foliage green so body text ties to the dominant tile family?
-- Should `primary` (links) come from a floral family, such as poppy or
-  violet, rather than the current amber-brown?
 - Should the other modes each be built around one family (a foliage mode, a
-  violet or peony mode, and a dark mode)?
+  violet or hydrangea mode, and a dark mode)?

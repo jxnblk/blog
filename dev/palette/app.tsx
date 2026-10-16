@@ -24,15 +24,15 @@ const FAMILY_CENTERS: Record<Family, HSL> = {
   ...Object.fromEntries(FLORAL_HUES.map(f => [f.family, [mid(f.hue), mid(FLORAL.sat), mid(FLORAL.light)]])),
 } as Record<Family, HSL>;
 
-const FAMILIES: Family[] = ["foliage", "poppy", "marigold", "peony", "violet"];
+const FAMILIES: Family[] = ["foliage", ...FLORAL_HUES.map(f => f.family)];
 
 const DEFAULTS: Palette = {
-  background: [44, 81, 90], // paper, #faefd0
-  text: [45, 51, 16],       // paper text, darkened
+  background: [42, 77, 95], // paper, #fcf6e8
+  text: [40, 71, 4],        // paper text, #120d03
   ...Object.fromEntries(FAMILIES.map(f => [f, round(FAMILY_CENTERS[f])])),
 } as Palette;
 
-const STORAGE_KEY = "palette";
+const STORAGE_KEY = "palette-v2"; // bumped when the defaults change
 
 function load (): Palette {
   try {

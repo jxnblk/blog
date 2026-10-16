@@ -17,11 +17,14 @@
  * Keep a single top-level :root rule: Bun's minifier (1.4.2) drops all
  * but the last one, even when they set different properties */
 :root {
-  /* color: :root is the light mode, so .light needs no rule */
-  --text: #000;
-  --background: #fff;
-  --primary: #4c4cb1;
-  --greeble: #bbb;
+  /* color: :root is the default paper mode. --primary is the
+   * hydrangea hue (184°); --greeble is carried over from the old .paper */
+  --text: #120d03;
+  --background: #fcf6e8;
+  --primary: #146b71; /* hsl(184 70% 26%), 5.78:1 on the background */
+  --code: #7d238b; /* violet, hsl(292 60% 34%), 7.84:1 on the background */
+  --grid: #b88114; /* marigold, hsl(40 80% 40%), for the dot grid */
+  --greeble: #ccc09d;
   /* layout: see Tokens: layout below */
   --baseline: 16px;
   --module: calc((100vw - 32px) / 4);
@@ -29,30 +32,53 @@
   --scale: 4; /* 16 / --columns */
 }
 
-/* Tokens: color */
+/* Tokens: color
+ * New modes set only what differs from the :root paper mode */
+.green {
+  --text: #176b0b; /* hsl(112 82% 23%), the old .foliage text at 112°; 6.01:1 */
+  --background: #ebf6ea; /* hsl(112 40% 94%) */
+}
+/* The modes below are the old set, kept for reference but no longer
+ * in the cycle in client.js */
+.light {
+  --text: #000;
+  --background: #fff;
+  --primary: #4c4cb1;
+  --greeble: #bbb;
+  --code: var(--primary);
+  --grid: color-mix(in srgb, var(--text) 50%, var(--background));
+}
 .foliage {
   --text: #3a6c0b;
   --background: #f0f4ec;
   --greeble: #a2c185;
   --primary: #5f8e33;
+  --code: var(--primary);
+  --grid: color-mix(in srgb, var(--text) 50%, var(--background));
 }
 .paper {
   --text: #4d4019;
   --background: #faefd0;
   --greeble: #ccc09d;
   --primary: #8e5200;
+  --code: var(--primary);
+  --grid: color-mix(in srgb, var(--text) 50%, var(--background));
 }
 .amber {
   --text: #422c00;
   --background: #e5b656;
   --greeble: #c3a058;
   --primary: #541c00;
+  --code: var(--primary);
+  --grid: color-mix(in srgb, var(--text) 50%, var(--background));
 }
 .tomato {
   --text: #32221b;
   --background: #ee976a;
   --greeble: #f05200;
   --primary: #003c5b;
+  --code: var(--primary);
+  --grid: color-mix(in srgb, var(--text) 50%, var(--background));
 }
 /* tints of --primary, mixed toward the background. On body so they
  * follow the color mode class set there */
@@ -62,9 +88,13 @@ body {
   --primary-1: color-mix(in srgb, var(--primary) 12%, var(--background));
   --primary-0: color-mix(in srgb, var(--primary) 6%, var(--background));
   --primary-dark: color-mix(in srgb, var(--primary) 50%, var(--text));
-  /* the dot grid: a shade off the background, darker on module lines */
-  --dot: color-mix(in srgb, var(--text) 8%, var(--background));
-  --dot-module: color-mix(in srgb, var(--text) 20%, var(--background));
+  /* code background: a tint of --code, like --primary-0 */
+  --code-0: color-mix(in srgb, var(--code) 6%, var(--background));
+  /* the dot grid: a shade off the background, darker on module lines.
+   * The old modes set --grid to half --text, so their dots come out
+   * close to the 8% / 20% --text mix they used before */
+  --dot: color-mix(in srgb, var(--grid) 15%, var(--background));
+  --dot-module: color-mix(in srgb, var(--grid) 40%, var(--background));
 }
 
 /* Tokens: layout
@@ -163,8 +193,8 @@ code, pre {
 /* inline code only, so code inside pre needs no reset */
 :not(pre) > code {
   padding: 2px 4px;
-  color: var(--primary);
-  background-color: var(--primary-0);
+  color: var(--code);
+  background-color: var(--code-0);
   border-radius: 3px;
 }
 /* 14px code on a two-baseline line, with one baseline of padding,
@@ -173,8 +203,8 @@ pre {
   overflow: auto;
   padding: var(--baseline);
   font-size: 14px;
-  color: var(--primary);
-  background-color: var(--primary-0);
+  color: var(--code);
+  background-color: var(--code-0);
   border-radius: 4px;
 }
 

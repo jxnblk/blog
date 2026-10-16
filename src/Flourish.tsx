@@ -17,17 +17,19 @@ function maxDepth (size: number) {
 // sometimes a floral hue. Each division shifts slightly from its parent.
 export type HSL = [number, number, number];
 type Range = [number, number];
-export type Family = "foliage" | "poppy" | "marigold" | "peony" | "violet";
+export type Family = "foliage" | "poppy" | "marigold" | "hydrangea" | "violet";
 
 export const FOLIAGE_CHANCE = 0.8;
 export const FOLIAGE: { hue: Range; sat: Range; light: Range } =
-  { hue: [85, 160], sat: [25, 50], light: [22, 50] };
+  { hue: [74, 150], sat: [25, 50], light: [22, 50] };
+// Florals form a rectangular tetrad on foliage's 112° center, 72° short
+// side: 4°, 184°, 292°. Marigold sits between poppy and foliage at 40°.
 // order matters: the seeded pick indexes into this list
 export const FLORAL_HUES: { family: Family; hue: Range }[] = [
-  { family: "poppy", hue: [0, 12] },
-  { family: "marigold", hue: [36, 46] },
-  { family: "peony", hue: [325, 345] },
-  { family: "violet", hue: [265, 280] },
+  { family: "poppy", hue: [0, 8] },
+  { family: "marigold", hue: [36, 44] },
+  { family: "hydrangea", hue: [180, 188] },
+  { family: "violet", hue: [288, 296] },
 ];
 export const FLORAL = { sat: [60, 80] as Range, light: [50, 64] as Range };
 
