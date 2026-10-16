@@ -191,8 +191,17 @@ async function generateJSON (posts: PostData[]) {
   await writeFile(join(OUT_DIR, "api", "index.json"), indexJSON);
 }
 
+// fontsource packages imported in style.css, served from /fonts
+const FONTS = [
+  "ia-writer-quattro",
+  "ia-writer-mono",
+  "plus-jakarta-sans",
+];
+
 async function copyStatic () {
-  await cp("node_modules/@fontsource/ia-writer-quattro/files", join(OUT_DIR, "fonts"), { recursive: true });
+  for (const font of FONTS) {
+    await cp(`node_modules/@fontsource/${font}/files`, join(OUT_DIR, "fonts"), { recursive: true });
+  }
   for (const name of STATIC) {
     await cp(name, join(OUT_DIR, name), { recursive: true });
   }

@@ -27,6 +27,8 @@ const LINE = 32;
 const BASELINE = 16;
 const SIZE = 16;
 const CODE_SIZE = 14;
+// headings in post content, except h6
+const HEADING_SIZE = 24;
 // inline code's left and right padding
 const CODE_PAD = 4;
 // blockquote padding and border
@@ -206,7 +208,7 @@ function flow (nodes: ElementContent[], width: number, style: Style): Box {
 function block (node: Element, width: number, style: Style): Box {
   const { tagName: tag, children } = node;
   if (/^h[1-6]$/.test(tag)) {
-    return lines(children, width, { ...style, bold: true, size: tag === "h6" ? 12 : SIZE, family: "heading" });
+    return lines(children, width, { ...style, bold: true, size: tag === "h6" ? 12 : HEADING_SIZE, family: "heading" });
   }
   if (tag === "img" || tag === "video" || tag === "iframe") return media(node, width);
   if (tag === "pre") return code(node, width);

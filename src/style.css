@@ -383,6 +383,8 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   flex-direction: column;
   justify-content: end;
 }
+/* 24px on the two-baseline line, measured in measure.ts */
+.block-heading :is(h1, h2, h3, h4, h5) { font-size: 24px }
 .block-table { overflow-x: auto }
 .block-image :is(img, video, iframe) {
   display: block;
@@ -465,9 +467,11 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   background: none;
 }
 
+/* the negative margin takes back the spacing after the last letter */
 .caps {
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
+  margin-right: -0.2em;
 }
 
 .home-link,
