@@ -1,4 +1,0 @@
-{
-  "deno.enable": false,
-  "tsserver.enable": true
-}
