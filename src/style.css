@@ -1,5 +1,6 @@
 @import "@fontsource/ia-writer-quattro/400.css";
 @import "@fontsource/ia-writer-quattro/700.css";
+@import "@fontsource/ia-writer-mono/400.css";
 
 /** Stylesheet order
  * 1. Tokens: color and layout custom properties
@@ -149,7 +150,10 @@ img {
   height: auto;
 }
 
-code { font-size: 14px }
+code, pre {
+  font-family: "iA Writer Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 14px;
+}
 /* inline code only, so code inside pre needs no reset */
 :not(pre) > code {
   padding: 2px 4px;

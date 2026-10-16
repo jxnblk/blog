@@ -12,6 +12,7 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
+    "@fontsource/ia-writer-mono": "^5.3.0",
     "@fontsource/ia-writer-quattro": "^5.3.0",
     "fontkit": "^2.0.4",
     "gray-matter": "^4.0.3",

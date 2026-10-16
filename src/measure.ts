@@ -19,6 +19,8 @@ import { imageSize } from "image-size";
 import type { Element, ElementContent, RootContent } from "hast";
 
 const FONTS = "node_modules/@fontsource/ia-writer-quattro/files/ia-writer-quattro-latin";
+// the page only loads mono's regular face, and its glyphs share one width
+const MONO = "node_modules/@fontsource/ia-writer-mono/files/ia-writer-mono-latin-400-normal.woff2";
 const LINE = 32;
 const BASELINE = 16;
 const SIZE = 16;
@@ -37,20 +39,21 @@ const IMAGE_RATIO = 9 / 16;
 const IFRAME_HEIGHT = 150;
 
 const faces: Record<string, Font> = {};
-function face (bold: boolean, italic: boolean): Font {
+function face (bold: boolean, italic: boolean, mono: boolean): Font {
+  if (mono) return faces.mono ??= openSync(MONO) as Font;
   const name = `${bold ? 700 : 400}-${italic ? "italic" : "normal"}`;
   return faces[name] ??= openSync(`${FONTS}-${name}.woff2`) as Font;
 }
 
-type Style = { bold: boolean; italic: boolean; size: number };
-const BODY: Style = { bold: false, italic: false, size: SIZE };
+type Style = { bold: boolean; italic: boolean; size: number; mono: boolean };
+const BODY: Style = { bold: false, italic: false, size: SIZE, mono: false };
 
 const widths = new Map<string, number>();
 function measure (text: string, style: Style) {
-  const key = `${+style.bold}${+style.italic}${style.size}:${text}`;
+  const key = `${+style.bold}${+style.italic}${+style.mono}${style.size}:${text}`;
   let width = widths.get(key);
   if (width === undefined) {
-    const font = face(style.bold, style.italic);
+    const font = face(style.bold, style.italic, style.mono);
     width = font.layout(text).advanceWidth * style.size / font.unitsPerEm;
     widths.set(key, width);
   }
@@ -115,6 +118,7 @@ function words (nodes: ElementContent[], style: Style): Word[] {
       bold: style.bold || tag === "strong" || tag === "b" || tag === "th",
       italic: style.italic || tag === "em" || tag === "i",
       size: tag === "code" ? CODE_SIZE : style.size,
+      mono: style.mono || tag === "code",
     };
     if (tag === "code") pad += CODE_PAD;
     node.children.forEach(child => walk(child, next));
@@ -227,7 +231,7 @@ const toText = (node: ElementContent): string =>
 // code keeps its lines, and scrolls rather than wrapping
 function code (node: Element, width: number): Box {
   const rows = toText(node).replace(/\n$/, "").split("\n");
-  const widest = Math.max(...rows.map(row => measure(row, { ...BODY, size: CODE_SIZE })));
+  const widest = Math.max(...rows.map(row => measure(row, { ...BODY, size: CODE_SIZE, mono: true })));
   return {
     height: rows.length * LINE + BASELINE * 2,
     // a scrollbar can add height outside macOS

@@ -5,6 +5,7 @@
     "": {
       "name": "jxnblog",
       "dependencies": {
+        "@fontsource/ia-writer-mono": "^5.3.0",
         "@fontsource/ia-writer-quattro": "^5.3.0",
         "fontkit": "^2.0.4",
         "gray-matter": "^4.0.3",
@@ -28,6 +29,8 @@
     },
   },
   "packages": {
+    "@fontsource/ia-writer-mono": ["@fontsource/ia-writer-mono@5.3.0", "", {}, "sha512-8eyf6/Cf1lFOtgzAYtY57qXwuUDbRlqjaa8aW0DBdLc7z1CBxRvNUq6hj6CMdeCym+hhfNCp8oLl305PEF+6ew=="],
+
     "@fontsource/ia-writer-quattro": ["@fontsource/ia-writer-quattro@5.3.0", "", {}, "sha512-J249e+/1kBy9YzJ1JKRPDm0V3ELGwqSlxf3WlB7qNiExLA+kXGN+VwOhILNH21ZcezFVilvA9+ev2r/kZSyy/g=="],
 
     "@swc/helpers": ["@swc/helpers@0.5.23", "", { "dependencies": { "tslib": "^2.8.0" } }, "sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw=="],
