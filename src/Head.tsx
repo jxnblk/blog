@@ -17,6 +17,7 @@ export default function Head (props: {
       <link rel="icon" type="image/png" href="/favicon.png" />
       <link rel="alternate" type="application/rss+xml" title="Jxnblk Blog" href="/rss.xml" />
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFKR2KM1HK"></script>
+      <script dangerouslySetInnerHTML={{ __html: ga }} />
       {props.image ? (
         <meta name='twitter:card' content='summary_large_image' />
       ) : (
@@ -33,3 +34,9 @@ export default function Head (props: {
     </head>
   );
 };
+
+const ga = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HFKR2KM1HK');`;

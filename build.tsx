@@ -182,7 +182,7 @@ async function generateHTML (pages: Page[]) {
     let filename = join(OUT_DIR, page.path, "index.html");
     if (page.path === "404") filename = join(OUT_DIR, "404.html");
     else await mkdir(join(OUT_DIR, page.path), { recursive: true });
-    await writeFile(filename, page.html, "utf8");
+    await writeFile(filename, "<!DOCTYPE html>\n" + page.html, "utf8");
   }
   console.log(`Generated ${pages.length} pages`);
 }
