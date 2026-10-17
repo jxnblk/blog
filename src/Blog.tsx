@@ -13,11 +13,8 @@ export default function Blog (props: {
   posts: PostData[];
   css: string;
 }) {
-  const posts = props.posts?.sort((a, b) => {
-    if (a.data.date < b.data.date) return 1;
-    else if (a.data.date > b.data.date) return -1;
-    else return 0;
-  }).filter(p => !p.data.draft);
+  // sorted and filtered to published posts by build.tsx
+  const posts = props.posts;
 
   return (
     <HTML

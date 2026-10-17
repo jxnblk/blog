@@ -134,7 +134,10 @@ async function readPosts (): Promise<PostData[]> {
 
   console.log(`${posts.length} posts found`);
 
-  return posts;
+  // newest first; undated posts sort last
+  return posts.sort((a, b) =>
+    (b.data.date?.getTime() ?? -Infinity) - (a.data.date?.getTime() ?? -Infinity)
+  );
 }
 
 const about = await getAbout();
@@ -154,16 +157,18 @@ function createPostPage (post: PostData): Page {
 }
 
 
-async function getPages (posts: PostData[]): Promise<Page[]> {
+/** `posts` get a page each (drafts included, for preview); only `published`
+ * posts are listed on the blog index */
+async function getPages (posts: PostData[], published: PostData[]): Promise<Page[]> {
   const pages = posts.map(createPostPage);
 
-  const home = <Home posts={posts} {...ctx} />
+  const home = <Home posts={published} {...ctx} />
   pages.push({
     path: "",
     html: renderToStaticMarkup(home),
   });
 
-  const blog = <Blog posts={posts} {...ctx} />;
+  const blog = <Blog posts={published} {...ctx} />;
   pages.push({
     path: "blog",
     html: renderToStaticMarkup(blog),
@@ -221,10 +226,7 @@ function postToLegacyJSON (post: Partial<PostData>) {
 
 async function generateAllJSON (posts: PostData[]) {
   const all = {
-    posts: posts
-      .filter(post => !post.data.draft)
-      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-      .map(postToLegacyJSON),
+    posts: posts.map(postToLegacyJSON),
     about: postToLegacyJSON({ ...about, path: "blog/about", slug: "about" }),
   };
   await mkdir(join(OUT_DIR, "api"), { recursive: true });
@@ -255,12 +257,15 @@ async function build () {
   await rm(OUT_DIR, { recursive: true, force: true });
   await mkdir(OUT_DIR, { recursive: true });
   const posts = await readPosts();
-  const pages = await getPages(posts);
+  // drafts and undated posts still get a page, but are left out of the
+  // index, the api, and the feed
+  const published = posts.filter(post => !post.data.draft && post.data.date);
+  const pages = await getPages(posts, published);
   await Promise.all([
     generateHTML(pages),
-    generateJSON(posts),
-    generateAllJSON(posts),
-    generateFeed(posts),
+    generateJSON(published),
+    generateAllJSON(published),
+    generateFeed(published),
     copyStatic(),
     // generateMD(pages),
   ]);

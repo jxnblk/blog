@@ -41,10 +41,9 @@ function excerptHTML (excerpt: Root, base: string) {
   return renderToStaticMarkup(toJsxRuntime(hast, { Fragment, jsx, jsxs } as any));
 }
 
+/** `posts` are published and sorted newest first by build.tsx */
 export function generateRSS (posts: PostData[], baseURL: string) {
-  const items = posts
-    .filter(post => !post.data.draft && post.data.date)
-    .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+  const items = posts;
   const updated = items.length ? new Date(items[0].data.date) : new Date();
 
   const item = (post: PostData) => {
