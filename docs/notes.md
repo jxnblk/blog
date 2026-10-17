@@ -1,9 +1,6 @@
 
-
 - Ship
-  - PR
-  - all.json will break live dotcom
-  - DNS updates
+- DNS updates
 
 ---
 
@@ -11,7 +8,7 @@
 - lazy scripts at end (caching?)
 - dev client side seed tester
 
-- More tumblr like feed
+- Feed
 - 3D models
 - Sketches
 - Vectors
