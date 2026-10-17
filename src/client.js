@@ -1,0 +1,49 @@
+// color modes script
+const modes = [
+  'default', // no rule: the :root paper colors
+  'green',
+  'brown',
+  'yellow',
+  'red',
+  'white',
+  'black',
+];
+
+let index = 0;
+
+const cn = localStorage.getItem('color');
+if (modes.includes(cn)) {
+  index = modes.indexOf(cn);
+  document.body.className = cn;
+} else {
+  // drops a saved mode that no longer exists
+  localStorage.removeItem('color');
+}
+
+function cycle () {
+  index = (index + 1) % modes.length;
+  const next = modes[index];
+  document.body.className = next;
+  localStorage.setItem('color', next);
+};
+
+// header and footer each have one
+document.querySelectorAll('.color-button')
+  .forEach(b => b.addEventListener('click', cycle));
+
+// dot grid: the "g" key or the G button
+const gridButtons = document.querySelectorAll('.grid-button');
+function setGrid (on) {
+  document.documentElement.classList.toggle('show-grid', on);
+  gridButtons.forEach(b => b.setAttribute('aria-pressed', String(on)));
+  if (on) localStorage.setItem('grid', '1');
+  else localStorage.removeItem('grid');
+}
+const toggleGrid = () => setGrid(!document.documentElement.classList.contains('show-grid'));
+
+setGrid(!!localStorage.getItem('grid'));
+gridButtons.forEach(b => b.addEventListener('click', toggleGrid));
+document.addEventListener('keydown', e => {
+  if (e.key !== 'g' || e.target !== document.body) return;
+  toggleGrid();
+});
