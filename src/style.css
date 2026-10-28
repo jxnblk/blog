@@ -480,6 +480,48 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   .margin-xl { display: grid }
 }
 
+/* Vehicles
+ * The viewer spans the grid at a whole number of modules tall: square
+ * at 4 columns, 8:5 at 8, and 2:1 at 16. Controls and the caption each
+ * take a module row below it */
+.vehicles-intro { grid-column: 1 / -1 }
+.vehicles { grid-column: 1 / -1 }
+.vehicles-viewer {
+  height: calc(var(--module) * 4);
+  overflow: hidden;
+}
+.vehicles-viewer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.vehicles-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 calc(var(--baseline) * 2);
+  min-height: var(--module);
+}
+.vehicles-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 calc(var(--baseline) * 2);
+}
+.vehicles-caption {
+  display: flex;
+  align-items: center;
+  min-height: var(--module);
+}
+.vehicles-caption[hidden] { display: none }
+@media screen and (min-width: 576px) {
+  .vehicles-viewer { height: calc(var(--module) * 5) }
+}
+@media screen and (min-width: 1088px) {
+  .vehicles-intro { grid-column: 1 / span 8 }
+  .vehicles-viewer { height: calc(var(--module) * 8) }
+}
+
 /* Type & color */
 .site-header,
 .site-footer,
@@ -561,6 +603,31 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   transition-duration: 0s;
 }
 .grid-button[aria-pressed="true"]:active { background-color: transparent }
+
+/* the vehicle viewer's buttons, set like the nav; pressed is
+ * underlined in --primary */
+.vehicles-button {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: calc(var(--baseline) * 2);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition-property: color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.vehicles-button:hover { color: var(--primary) }
+.vehicles-button[aria-pressed="true"] {
+  color: var(--primary);
+  text-decoration-line: underline;
+}
+.vehicles-button:active {
+  color: var(--active);
+  transition-duration: 0s;
+}
+.vehicles-caption { font-size: 14px }
+[aria-busy="true"] .vehicles-viewer { opacity: 0.6 }
 
 /* Dot grid: toggled with the "g" key or the G button. A dot on every
  * baseline in both directions, and a darker one where module lines

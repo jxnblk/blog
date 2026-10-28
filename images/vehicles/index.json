@@ -1,0 +1,89 @@
+{
+  "vehicles": [
+    {
+      "id": "razor",
+      "title": "Razor",
+      "models": 3,
+      "stickers": 6,
+      "lights": 6,
+      "blinking": 2,
+      "spinning": 2
+    },
+    {
+      "id": "hoverbike",
+      "title": "Hoverbike",
+      "models": 1,
+      "stickers": 5,
+      "lights": 3,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "hoverboard",
+      "title": "Hoverboard",
+      "models": 1,
+      "stickers": 2,
+      "lights": 2,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "javelin",
+      "title": "Javelin",
+      "models": 1,
+      "stickers": 0,
+      "lights": 1,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "hoverpack",
+      "title": "Hoverpack",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    }
+  ],
+  "palette": {
+    "albedo": "palette.png",
+    "emission": "palette-emission.png",
+    "mr": "palette-mr.png"
+  },
+  "materials": {
+    "Vantom": {
+      "kind": "solid",
+      "color": [
+        0,
+        0,
+        0
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 0.5
+    },
+    "universal-a": {
+      "kind": "palette",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 1,
+      "roughness": 0
+    },
+    "universal-glass": {
+      "kind": "glass",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 1,
+      "roughness": 0
+    }
+  }
+}

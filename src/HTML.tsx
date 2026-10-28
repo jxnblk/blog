@@ -8,7 +8,8 @@ export default function HTML (props: {
   path: string;
   css: string;
   children: React.ReactNode;
-  // TODO
+  /** module scripts for this page only, by URL */
+  scripts?: string[];
 }) {
   return (
     <html lang="en-us">
@@ -17,6 +18,9 @@ export default function HTML (props: {
         {props.children}
         <script dangerouslySetInnerHTML={{ __html: clientJS }} />
         <script dangerouslySetInnerHTML={{ __html: windGLJS }} />
+        {props.scripts?.map(src => (
+          <script key={src} type="module" src={src} />
+        ))}
       </body>
     </html>
   );

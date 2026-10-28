@@ -1,0 +1,1 @@
+{"id":"javelin","title":"Javelin","root":{"name":"Javelin","children":[{"name":"ac-javelin-jet-p5","q":[0,-1,0,0],"model":"models/ac-javelin-jet-p5.glb"},{"name":"Thruster DynamicLight Quad","p":[0,0.5,-2.31006],"s":[1.06,0.15,1],"light":{"color":[1,0,0]}}]}}
