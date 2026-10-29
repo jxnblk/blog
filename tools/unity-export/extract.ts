@@ -56,7 +56,12 @@ export type ModelUse = {
 export type EntryConfig = {
   id: string;
   title: string;
-  prefab: string;
+  /** a prefab, or a model file placed in a scene as it is */
+  prefab?: string;
+  model?: string;
+  /** for a model: model material name -> Unity material path, as the
+   * scene's renderer sets them */
+  materials?: Record<string, string>;
   /** the Unity project, if not the default */
   project?: string;
   caption?: string;
@@ -133,6 +138,8 @@ export class Extractor {
   }
 
   entry (config: EntryConfig) {
+    if (config.model) return { name: config.title, model: this.bareModel(config.model, config) };
+    if (!config.prefab) throw new Error(`${config.id}: needs a prefab or a model`);
     const table = this.resolver.load(config.prefab);
     const ctx = new Context(table, this);
     const root = ctx.node(table.root, config, true);
@@ -141,6 +148,25 @@ export class Extractor {
     delete root.p; delete root.q; delete root.s;
     root.name = config.title;
     return root;
+  }
+
+  /** a model file on its own, with the materials the entry sets in place
+   * of the importer's */
+  bareModel (path: string, config: EntryConfig) {
+    const remaps = this.modelMaterials(path);
+    const names = modelNames(this.project, path, "Material");
+    for (const [name, mat] of Object.entries(config.materials ?? {})) {
+      if (!names.includes(name)) throw new Error(`${config.id}: ${basename(path)} has no material "${name}"`);
+      if (![...this.guids.values()].includes(mat)) throw new Error(`${config.id}: no material at ${mat}`);
+      remaps[name] = mat;
+    }
+    // its own GLB when the materials differ from the importer's
+    const own = !!config.materials;
+    const key = own ? `${path}#${config.id}` : path;
+    const out = `models/${basename(path, extname(path))}${own ? `-${config.id}` : ""}.glb`;
+    if (!this.models.has(key)) this.models.set(key, { path, out, materials: remaps, hide: config.hide?.[path] ?? [] });
+    for (const m of Object.values(remaps)) if (!EFFECT_MATERIAL.test(m)) this.material(m);
+    return out;
   }
 }
 

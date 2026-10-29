@@ -31,6 +31,7 @@ export type MaterialInfo = {
   metalness: number;
   roughness: number;
   emissive?: [number, number, number]; // linear HDR, solid materials only
+  doubleSided?: boolean;
 };
 
 export type StickerInfo = {
@@ -199,6 +200,7 @@ export class Materials {
     let m = this.cache.get(key);
     if (!m) {
       m = this.create(part, mode);
+      if (part.type === "model" && this.info[part.material]?.doubleSided) m.side = DoubleSide;
       this.cache.set(key, m);
     }
     return m;

@@ -26,6 +26,10 @@ const project = projectPath(args.project!);
 const out = resolve(args.out!);
 const BLENDER = process.env.BLENDER ?? "/Applications/Blender.app/Contents/MacOS/Blender";
 const PALETTE_GRID = 32; // the Polyperfect atlas: 32x32 swatches
+// other palette textures, by file name: swatches per side
+const ATLAS_GRIDS: Record<string, number> = {
+  "Bot Texture Cutout.png": 4, // the Scout's
+};
 const PALETTE_BLOCK = 4; // pixels per swatch in the repacked palette
 const STICKER_PX = 256;
 
@@ -69,7 +73,11 @@ for (const ex of extractors.values()) {
 
 // materials the models use, by name (the page's key)
 const materials: Record<string, any> = {};
-let atlas: { ex: Extractor; set: Record<string, string> } | undefined;
+// palette textures; each palette material samples one, and their swatches
+// share the repacked palette
+type Atlas = { ex: Extractor; albedo: string; emission?: string; mask?: string; metallic: number; smoothness: number };
+const atlases: Atlas[] = [];
+const atlasOf: Record<string, number> = {}; // Unity material path -> atlas
 for (const { ex, use: m } of models.values()) {
   for (const path of Object.values(m.materials)) {
     if (EFFECT_MATERIAL.test(path)) continue;
@@ -79,16 +87,26 @@ for (const { ex, use: m } of models.values()) {
     // MK Toon keeps its color in _AlbedoColor
     const base = (/MKToon/.test(mat.shader) ? mat.colors._AlbedoColor : undefined) ?? mat.colors._BaseColor ?? [1, 1, 1, 1];
     const glow = mat.keywords.includes("_EMISSION") ? mat.colors._EmissionColor : undefined;
+    // both faces drawn: URP's Render Face (_Cull) or MK Toon's, at 0
+    const doubleSided = (/MKToon/.test(mat.shader) ? mat.floats._RenderFace : mat.floats._Cull) === 0;
     if (albedo) {
-      const set = {
-        albedo,
-        emission: mat.textures._EmissionMap,
-        mask: mat.textures._MetallicGlossMap ?? mat.textures._MaskMap,
-      } as Record<string, string>;
-      if (atlas && fileHash(atlas.ex, atlas.set.albedo) !== fileHash(ex, albedo)) {
-        throw new Error(`${mat.name} uses a second palette atlas (${basename(albedo)}); only one is supported`);
+      let i = atlases.findIndex(a => fileHash(a.ex, a.albedo) === fileHash(ex, albedo));
+      if (i < 0) {
+        // only the Polyperfect atlas goes without a listed grid
+        if (!ATLAS_GRIDS[basename(albedo)] && atlases.some(a => !ATLAS_GRIDS[basename(a.albedo)])) {
+          throw new Error(`${mat.name} uses another palette texture (${basename(albedo)}); add its grid to ATLAS_GRIDS`);
+        }
+        i = atlases.push({
+          ex,
+          albedo,
+          emission: mat.keywords.includes("_EMISSION") ? mat.textures._EmissionMap : undefined,
+          mask: mat.textures._MetallicGlossMap ?? mat.textures._MaskMap,
+          // without a mask, the material's own values
+          metallic: mat.floats._Metallic ?? 0,
+          smoothness: mat.floats._Smoothness ?? 0.5,
+        }) - 1;
       }
-      atlas ??= { ex, set };
+      atlasOf[path] = i;
     }
     const info = {
       name: mat.name,
@@ -97,6 +115,7 @@ for (const { ex, use: m } of models.values()) {
       opacity: base[3],
       metalness: mat.floats._Metallic ?? 0,
       roughness: Math.round((1 - (mat.floats._Smoothness ?? 0.5)) * 1000) / 1000,
+      ...(doubleSided ? { doubleSided } : {}),
       ...(!albedo && glow && Math.max(...glow.slice(0, 3)) > 0 ? { emissive: hdr(glow.slice(0, 3) as Vec3) } : {}),
     };
     const prev = materials[mat.name];
@@ -106,7 +125,8 @@ for (const { ex, use: m } of models.values()) {
     materials[mat.name] ??= info;
   }
 }
-if (!atlas?.set.emission || !atlas.set.mask) throw new Error("Palette atlas, emission or mask map not found");
+const main = atlases.find(a => !ATLAS_GRIDS[basename(a.albedo)]);
+if (!main?.emission || !main.mask) throw new Error("Palette atlas, emission or mask map not found");
 
 // Blender writes into a temp dir; the output is swapped in at the end
 const tmp = join(tmpdir(), `unity-export-${process.pid}`);
@@ -127,16 +147,23 @@ const job = {
     // model material name -> page material name
     materials: Object.fromEntries(Object.entries(m.materials).map(([k, path]) =>
       [k, EFFECT_MATERIAL.test(path) ? basename(path, ".mat") : ex.material(path).name])),
+    // page material name -> palette atlas
+    atlases: Object.fromEntries(Object.values(m.materials).filter(path => path in atlasOf)
+      .map(path => [ex.material(path).name, atlasOf[path]])),
     hide: m.hide,
     parts: m.parts,
   })),
   materials,
   palette: {
-    grid: PALETTE_GRID,
     block: PALETTE_BLOCK,
-    albedo: abs(atlas.ex, atlas.set.albedo),
-    emission: abs(atlas.ex, atlas.set.emission),
-    mask: abs(atlas.ex, atlas.set.mask),
+    atlases: atlases.map(a => ({
+      grid: ATLAS_GRIDS[basename(a.albedo)] ?? PALETTE_GRID,
+      albedo: abs(a.ex, a.albedo),
+      emission: a.emission && abs(a.ex, a.emission),
+      mask: a.mask && abs(a.ex, a.mask),
+      metallic: a.metallic,
+      smoothness: a.smoothness,
+    })),
     out: {
       albedo: join(tmp, "palette.png"),
       emission: join(tmp, "palette-emission.png"),

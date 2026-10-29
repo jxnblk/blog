@@ -14,7 +14,7 @@ from mathutils import Matrix
 
 job = json.load(open(sys.argv[sys.argv.index("--") + 1]))
 P = job["palette"]
-GRID = P["grid"]          # cells per side of the source atlas
+ATLASES = P["atlases"]    # source palette textures, each with its grid
 BLOCK = P["block"]        # pixels per swatch side in the output
 INSET = 0.1               # ignore UVs this close to a cell edge, in cells
 
@@ -66,36 +66,65 @@ def import_parts (m):
   for o in [o for o in bpy.data.objects if o not in keep]:
     bpy.data.objects.remove(o, do_unlink=True)
   for o in keep:
-    scale = o.matrix_world.to_scale()
+    # a mirrored node reads as a negative scale; the mesh itself isn't
+    # mirrored (a prefab mirrors it with its own negative scale)
+    scale = [abs(v) for v in o.matrix_world.to_scale()]
     if max(scale) - min(scale) > 1e-6:
       warn(f"{m['name']}: {o.name} has a non-uniform scale {tuple(scale)}")
     o.parent = None
     # Blender reads the files as Y-up and turns them a quarter round X
-    o.matrix_world = Matrix.Rotation(math.pi / 2, 4, "X") @ Matrix.Scale(scale.x, 4)
+    o.matrix_world = Matrix.Rotation(math.pi / 2, 4, "X") @ Matrix.Scale(scale[0], 4)
   return keep
-
-def palette_kind (m, mat_name):
-  unity = m["materials"].get(strip(mat_name))
-  return job["materials"].get(unity, {}).get("kind") if unity else None
 
 def strip (name):
   # Blender suffixes duplicate names: "Universal.001"
   base, _, tail = name.rpartition(".")
   return base if base and tail.isdigit() else name
 
-def face_cells (mesh, uv):
-  """atlas cell of each face, or None if it isn't sampled from the atlas"""
+def load_pixels (path):
+  img = bpy.data.images.load(path)
+  img.colorspace_settings.name = "Non-Color"  # raw stored values
+  w, h = img.size
+  px = np.empty(w * h * 4, dtype=np.float32)
+  img.pixels.foreach_get(px)
+  bpy.data.images.remove(img)
+  return px.reshape(h, w, 4), w, h
+
+_colors = {}
+def cell_color (cell):
+  """median albedo of an atlas cell, to tell apart neighbors that differ"""
+  a, cx, cy = cell
+  if a not in _colors:
+    px, w, h = load_pixels(ATLASES[a]["albedo"])
+    g = ATLASES[a]["grid"]
+    cw, ch = w // g, h // g
+    pad = max(1, int(cw * 0.15))
+    _colors[a] = {(x, y): np.round(np.median(px[y * ch + pad:(y + 1) * ch - pad, x * cw + pad:(x + 1) * cw - pad].reshape(-1, 4), axis=0), 2)
+                  for x in range(g) for y in range(g)}
+  return _colors[a].get((cx % ATLASES[a]["grid"], cy % ATLASES[a]["grid"]))
+
+def face_cells (m, mesh, uv):
+  """(atlas, x, y) cell of each palette face, or None, and whether the
+  face spans more than one cell"""
   out = []
   for poly in mesh.polygons:
+    mat = mesh.materials[poly.material_index] if mesh.materials else None
+    # by the model's own material names, before they're renamed
+    a = m["atlases"].get(m["materials"].get(strip(mat.name))) if mat else None
+    if a is None:
+      out.append((None, False))
+      continue
+    grid = ATLASES[a]["grid"]
     us = [uv.data[i].uv for i in poly.loop_indices]
     cu = sum(u.x for u in us) / len(us)
     cv = sum(u.y for u in us) / len(us)
-    cell = (int(math.floor(cu % 1 * GRID)), int(math.floor(cv % 1 * GRID)))
+    cell = (a, int(math.floor(cu % 1 * grid)), int(math.floor(cv % 1 * grid)))
     spans = False
     for u in us:
-      fx, fy = u.x % 1 * GRID, u.y % 1 * GRID
-      c = (int(math.floor(fx)), int(math.floor(fy)))
-      if c != cell and min(abs(fx - round(fx)), abs(fy - round(fy))) > INSET:
+      fx, fy = u.x % 1 * grid, u.y % 1 * grid
+      c = (a, int(math.floor(fx)), int(math.floor(fy)))
+      if c != cell and min(abs(fx - round(fx)), abs(fy - round(fy))) > INSET \
+          and not np.array_equal(cell_color(c), cell_color(cell)):
         spans = True
     out.append((cell, spans))
   return out
@@ -109,14 +138,13 @@ for m in job["models"]:
     mesh = o.data
     uv = mesh.uv_layers.active
     if not uv: continue
-    for poly, (cell, span) in zip(mesh.polygons, face_cells(mesh, uv)):
-      mat = mesh.materials[poly.material_index] if mesh.materials else None
-      if not mat or palette_kind(m, mat.name) not in ("palette", "glass"): continue
+    for cell, span in face_cells(m, mesh, uv):
+      if cell is None: continue
       used[cell] = used.get(cell, 0) + 1
       spans += span
   if spans: warn(f"{m['name']}: {spans} face(s) span more than one palette cell")
 
-cells = sorted(used, key=lambda c: (-c[1], c[0]))  # top row first
+cells = sorted(used, key=lambda c: (c[0], -c[2], c[1]))  # by atlas, top row first
 side = max(1, math.ceil(math.sqrt(len(cells))))
 slot = {c: i for i, c in enumerate(cells)}
 size = side * BLOCK
@@ -130,27 +158,14 @@ def slot_uv (cell):
 # pass 2: rewrite UVs, rename materials, export
 for m in job["models"]:
   objs = import_model(m)
-  repacked = set()  # materials sampled from the palette, by new name
-  for mat in list(bpy.data.materials):
-    unity = m["materials"].get(strip(mat.name))
-    if unity:
-      info = job["materials"].get(unity, {"name": unity, "kind": None})
-      mat.name = info["name"]
-      if info["kind"] in ("palette", "glass"): repacked.add(mat.name)
-    else:
-      warn(f"{m['name']}: material {mat.name!r} has no Unity material")
-    if mat.node_tree:  # textures stay out of the GLB; the page has its own
-      for n in [n for n in mat.node_tree.nodes if n.type == "TEX_IMAGE"]:
-        mat.node_tree.nodes.remove(n)
   tris = 0
   for o in objs:
     mesh = o.data
     tris += sum(len(p.vertices) - 2 for p in mesh.polygons)
     uv = mesh.uv_layers.active
     if not uv: continue
-    for poly, (cell, _) in zip(mesh.polygons, face_cells(mesh, uv)):
-      mat = mesh.materials[poly.material_index] if mesh.materials else None
-      if not mat or mat.name not in repacked or cell not in slot: continue
+    for poly, (cell, _) in zip(mesh.polygons, face_cells(m, mesh, uv)):
+      if cell not in slot: continue
       u, v = slot_uv(cell)
       for i in poly.loop_indices:
         uv.data[i].uv = (u, v)
@@ -159,6 +174,15 @@ for m in job["models"]:
       mesh.uv_layers.remove(layer)
     for attr in [a for a in mesh.color_attributes]:
       mesh.color_attributes.remove(attr)
+  for mat in list(bpy.data.materials):
+    page = m["materials"].get(strip(mat.name))
+    if page:
+      mat.name = page
+    else:
+      warn(f"{m['name']}: material {mat.name!r} has no Unity material")
+    if mat.node_tree:  # textures stay out of the GLB; the page has its own
+      for n in [n for n in mat.node_tree.nodes if n.type == "TEX_IMAGE"]:
+        mat.node_tree.nodes.remove(n)
   bpy.ops.export_scene.gltf(
     filepath=m["out"],
     export_format="GLB",
@@ -174,23 +198,23 @@ for m in job["models"]:
   print(f"  {m['name']}: {tris} tris, {os.path.getsize(m['out']) // 1024}KB")
 
 # pass 3: the repacked palette images
-def load_pixels (path):
-  img = bpy.data.images.load(path)
-  img.colorspace_settings.name = "Non-Color"  # raw stored values
-  w, h = img.size
-  px = np.empty(w * h * 4, dtype=np.float32)
-  img.pixels.foreach_get(px)
-  bpy.data.images.remove(img)
-  return px.reshape(h, w, 4), w, h
-
-def cell_medians (path):
-  px, w, h = load_pixels(path)
-  cw, ch = w // GRID, h // GRID
-  pad = max(1, int(cw * 0.15))
+def cell_medians (key, fallback):
+  """median of each used cell in each atlas's `key` texture, or fallback
+  for an atlas without one"""
   out = {}
-  for (cx, cy) in cells:
-    block = px[cy * ch + pad:(cy + 1) * ch - pad, cx * cw + pad:(cx + 1) * cw - pad].reshape(-1, 4)
-    out[(cx, cy)] = np.median(block, axis=0)
+  for a, atlas in enumerate(ATLASES):
+    mine = [c for c in cells if c[0] == a]
+    if not mine: continue
+    if not atlas.get(key):
+      for c in mine: out[c] = np.array(fallback(atlas), dtype=np.float32)
+      continue
+    px, w, h = load_pixels(atlas[key])
+    grid = atlas["grid"]
+    cw, ch = w // grid, h // grid
+    pad = max(1, int(cw * 0.15))
+    for (_, cx, cy) in mine:
+      block = px[cy * ch + pad:(cy + 1) * ch - pad, cx * cw + pad:(cx + 1) * cw - pad].reshape(-1, 4)
+      out[(a, cx, cy)] = np.median(block, axis=0)
   return out
 
 def write (path, colors, srgb):
@@ -207,9 +231,10 @@ def write (path, colors, srgb):
   img.save()
   bpy.data.images.remove(img)
 
-albedo = cell_medians(P["albedo"])
-emission = cell_medians(P["emission"])
-mask = cell_medians(P["mask"])
+albedo = cell_medians("albedo", lambda a: [1, 1, 1, 1])
+emission = cell_medians("emission", lambda a: [0, 0, 0, 1])
+# URP's mask: R metallic, A smoothness
+mask = cell_medians("mask", lambda a: [a["metallic"], 0, 0, a["smoothness"]])
 mr = {}
 for c in cells:
   metallic, smooth = mask[c][0], mask[c][3]
@@ -220,7 +245,7 @@ write(P["out"]["albedo"], albedo, True)
 write(P["out"]["emission"], emission, True)
 write(P["out"]["mr"], mr, False)
 for c in cells:
-  report["palette"][f"{c[0]},{c[1]}"] = {
+  report["palette"][",".join(map(str, c))] = {
     "uses": used[c],
     "albedo": [round(float(v), 3) for v in albedo[c]],
     "emission": [round(float(v), 3) for v in emission[c][:3]],

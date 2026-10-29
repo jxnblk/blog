@@ -46,6 +46,15 @@
       "spinning": 0
     },
     {
+      "id": "bicycle",
+      "title": "Bicycle",
+      "models": 7,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
       "id": "crawler",
       "title": "Crawler",
       "models": 9,
@@ -118,11 +127,65 @@
       "spinning": 0
     },
     {
+      "id": "wolf",
+      "title": "Wolf Sculpture",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
       "id": "server-rack",
       "title": "Server Rack",
       "models": 1,
       "stickers": 4,
       "lights": 3,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "scout",
+      "title": "Scout",
+      "models": 13,
+      "stickers": 1,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "pk9",
+      "title": "PK9",
+      "models": 13,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "security-bot",
+      "title": "Security Bot",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "eau-bot",
+      "title": "EAU Bot",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "botdroid",
+      "title": "BotDroid 3B",
+      "models": 11,
+      "stickers": 0,
+      "lights": 0,
       "blinking": 0,
       "spinning": 0
     }
@@ -236,6 +299,51 @@
       "opacity": 1,
       "metalness": 0,
       "roughness": 0.2
+    },
+    "MK Building": {
+      "kind": "solid",
+      "color": [
+        0.48999998,
+        0.5968421,
+        0.7
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1
+    },
+    "MK Two Sided Steel": {
+      "kind": "solid",
+      "color": [
+        0.16470587,
+        0.23529415,
+        0.3
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1,
+      "doubleSided": true
+    },
+    "Scout": {
+      "kind": "palette",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 0.8,
+      "roughness": 0.8
+    },
+    "FlashingLightRed": {
+      "kind": "solid",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 1,
+      "roughness": 0
     }
   }
 }

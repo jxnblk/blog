@@ -33,6 +33,7 @@ export const ENTRIES: EntryConfig[] = [
     title: "Hoverpack",
     prefab: "Assets/Vehicles/Hoverpack/Hoverpack.prefab",
   },
+  { id: "bicycle", title: "Bicycle", prefab: "Assets/Vehicles/Bicycle/Bicycle.prefab" },
   { id: "crawler", title: "Crawler", project: AC_MINI, prefab: "Assets/Prefabs/Crawler.prefab" },
   { id: "airship", title: "Airship", project: AC_MINI, prefab: "Assets/Prefabs/Airship.prefab" },
   { id: "tram", title: "Tram", project: AC_MINI, prefab: "Assets/Prefabs/Tram.prefab" },
@@ -41,5 +42,18 @@ export const ENTRIES: EntryConfig[] = [
   { id: "ballbot", title: "Ballbot", project: AC_MINI, prefab: "Assets/Prefabs/Bots/Ballbot 2.prefab" },
   { id: "fabricator", title: "Fabricator", project: AC_MINI, prefab: "Assets/Prefabs/Fabricator.prefab" },
   { id: "terminal", title: "Terminal", project: AC_MINI, prefab: "Assets/Prefabs/KeyLocations/Terminal.prefab" },
+  {
+    id: "wolf",
+    title: "Wolf Sculpture",
+    project: AC_MINI,
+    // placed in the City scene as the model itself, in steel
+    model: "Assets/Models/Props/ac-origami-wolf.fbx",
+    materials: { Universal: "Assets/Materials/MK Toon/MK Two Sided Steel.mat" },
+  },
   { id: "server-rack", title: "Server Rack", project: AC_MINI, prefab: "Assets/Prefabs/Mechanics/ServerRack.prefab" },
+  { id: "scout", title: "Scout", project: AC_MINI, prefab: "Assets/Prefabs/Characters/Scout.prefab" },
+  { id: "pk9", title: "PK9", project: AC_MINI, prefab: "Assets/Scout/PK9.prefab" },
+  { id: "security-bot", title: "Security Bot", project: AC_MINI, prefab: "Assets/Prefabs/Mechanics/SecurityBot.prefab" },
+  { id: "eau-bot", title: "EAU Bot", project: AC_MINI, prefab: "Assets/Models/Vehicles/EAU Bot.prefab" },
+  { id: "botdroid", title: "BotDroid 3B", project: AC_MINI, prefab: "Assets/Models/Characters/BotDroid/BotDroid 3B.prefab" },
 ];

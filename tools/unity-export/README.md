@@ -21,15 +21,20 @@ own `project` (the bots and props come from `~/unity/ac-mini`). The
 projects must share the palette atlas; a model, material or sticker found
 in both is written once.
 
+An entry is usually a `prefab`. For a model placed in a scene as it is
+(the wolf sculpture), an entry names the `model` file instead, with
+`materials` for any the scene's renderer changes (model material name →
+Unity material path). Those get their own GLB, `<model>-<id>.glb`.
+
 ## What it reads
 
 Only text and source files under the project's `Assets/`, read-only. It never
 writes to the Unity project and doesn't use `Library/`.
 
 - `*.meta` for the guid → path index, and FBX material remaps
-- the prefabs in `entries.ts`, with the prefabs, variants and
+- the prefabs and models in `entries.ts`, with the prefabs, variants and
   models they nest
-- `.mat` files for material colors and textures
+- `.mat` files for material colors, textures and render faces
 - the FBX models, the Polyperfect palette atlas, and the sticker sheets
   (through Blender)
 
@@ -42,7 +47,10 @@ writes to the Unity project and doesn't use `Library/`.
   Unity material names
 - `palette.png`, `palette-emission.png`, `palette-mr.png`: only the palette
   swatches the models use, repacked into a small atlas (the model UVs are
-  moved to match). The original atlas isn't shipped.
+  moved to match). The original atlas isn't shipped. Other flat-color
+  textures (the Scout's) are listed in `ATLAS_GRIDS` in `index.ts` with
+  their swatches per side, and their swatches join the same atlas; one
+  without a metallic map takes its material's metallic and smoothness.
 - `stickers/*.png`: the sticker sheet cells the entries use, 256px
 
 ## How it works
@@ -76,5 +84,7 @@ writes to the Unity project and doesn't use `Library/`.
   Material overrides on those nodes are reported, not applied.
 - A model with a single top-level node has that node's own transform
   replaced by the prefab's, as in Unity.
+- A part's mesh is written unmirrored, as Unity reads it; the prefab's
+  negative scale mirrors it (the Scout's right legs).
 - Skipped: particles, trails, HUDs (inactive until mounted), haze quads,
   and other textured quads such as the Hoverbike's QR code.
