@@ -64,13 +64,14 @@ async function main (root: HTMLElement) {
   const base = root.dataset.src!;
   const viewer = root.querySelector<HTMLElement>(".vehicles-viewer")!;
 
-  const renderer = new WebGLRenderer({ antialias: true });
+  // a transparent canvas, so the page (and its dot grid) shows through
+  const renderer = new WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   viewer.append(renderer.domElement);
 
   const scene = new Scene();
   const theme = readTheme();
-  scene.background = theme.background.clone();
   const pmrem = new PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environmentIntensity = 0.6;
@@ -86,9 +87,9 @@ async function main (root: HTMLElement) {
   controls.enableZoom = false;
   controls.autoRotateSpeed = 1.5;
 
-  // no tone mapping, so the background matches the page. Bloom starts
-  // above 1, brighter than any page background, so only lights and the
-  // brightest highlights glow
+  // no tone mapping, so the paper-colored materials match the page.
+  // Bloom starts above 1, so only lights and the brightest highlights
+  // glow; its glow carries alpha, so it shows over the page too
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new Vector2(1, 1), 0.4, 0.2, 1);
@@ -240,9 +241,7 @@ async function main (root: HTMLElement) {
 
   // follow the site's color mode (client.js sets a class on body)
   new MutationObserver(() => {
-    const t = readTheme();
-    (scene.background as Color).copy(t.background);
-    materials.setTheme(t);
+    materials.setTheme(readTheme());
   }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
 
   // size to the container
