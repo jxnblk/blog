@@ -13,7 +13,6 @@ import {
   Scene,
   Sphere,
   Timer,
-  Vector2,
   Vector3,
   WebGLRenderer,
 } from "three";
@@ -22,7 +21,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
-import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import { unityBloom } from "./bloom";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 import { loadPalette, Materials, type MaterialInfo, type Mode, type StickerInfo, type Theme } from "./materials";
 import { blink, light, sticker, type Blinker, type LightInfo } from "./quads";
@@ -88,11 +87,12 @@ async function main (root: HTMLElement) {
   controls.autoRotateSpeed = 1.5;
 
   // no tone mapping, so the paper-colored materials match the page.
-  // Bloom starts above 1, so only lights and the brightest highlights
-  // glow; its glow carries alpha, so it shows over the page too
+  // Bloom, measured like Unity's (bloom.ts), starts above 1, so only
+  // lights and the brightest highlights glow. The glow is additive
+  // (bloom.ts), so it brightens the page behind the transparent canvas
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new Vector2(1, 1), 0.4, 0.2, 1);
+  const bloom = unityBloom(0.4, 0.2, 1);
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
 
@@ -231,7 +231,7 @@ async function main (root: HTMLElement) {
     select(ids[(i + by + ids.length) % ids.length]);
   }
   // arrow keys step while focus is in the viewer's controls
-  root.addEventListener("keydown", e => {
+  root.addEventListener("keydown", (e: KeyboardEvent) => {
     if (e.key === "ArrowLeft") step(-1);
     else if (e.key === "ArrowRight") step(1);
     else return;

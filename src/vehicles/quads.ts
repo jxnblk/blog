@@ -3,7 +3,7 @@
 // matches that, and keeps sticker UVs reading the right way after the
 // X mirror from Unity's left-handed space.
 import { Color, DoubleSide, Mesh, MeshBasicMaterial, PlaneGeometry } from "three";
-import { loadSticker, type Materials, type Mode, type StickerInfo } from "./materials";
+import { capGlow, isWhite, loadSticker, WHITE_GLOW, type Materials, type Mode, type StickerInfo } from "./materials";
 
 export const quad = new PlaneGeometry(1, 1).rotateY(Math.PI);
 
@@ -23,12 +23,15 @@ export async function sticker (base: string, info: StickerInfo, materials: Mater
 
 export type Blinker = { mesh: Mesh; color: Color; delay: number; timer: number; lit: boolean };
 
-// Unity's lights are HDR colors near 1; brighter here so they clear the
-// bloom threshold, which sits above the page background
-const BOOST = 3;
+// Unity's light colors, which are mostly 1 at their brightest channel,
+// boosted so they clear the bloom threshold of 1 (bloom.ts glows only
+// the part over it). The few brighter ones (up to 4) hit the glow
+// ceiling, since there's no tone mapping here to tame them
+const BOOST = 2;
 
 export function light (info: LightInfo, materials: Materials, blinkers: Blinker[]) {
-  const color = new Color(...info.color).multiplyScalar(BOOST);
+  const color = capGlow(new Color(...info.color).multiplyScalar(BOOST));
+  if (isWhite(color.r, color.g, color.b)) color.multiplyScalar(WHITE_GLOW);
   const mesh = new Mesh(quad);
   mesh.userData.part = { type: "light", color };
   if (info.blink) {

@@ -66,7 +66,49 @@ export async function loadPalette (base: string, files: Record<keyof Palette, st
     load(files.emission, true),
     load(files.mr, false),
   ]);
+  dimWhite(emission);
   return { albedo, emission, mr };
+}
+
+/** White glows read much hotter here than in Unity, so white lights
+ * (the hoverbike's light quads, and the white emission swatch the
+ * Javelin's lights use) are dimmed by this much, in linear light */
+export const WHITE_GLOW = 0.65;
+// near enough to white: every channel within 10% of the brightest
+export const isWhite = (r: number, g: number, b: number) => {
+  const max = Math.max(r, g, b);
+  return max > 0 && Math.min(r, g, b) / max >= 0.9;
+};
+
+// scales the white swatches of the emission palette by WHITE_GLOW
+function dimWhite (t: Texture) {
+  const img = t.image as HTMLImageElement;
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext("2d")!;
+  ctx.drawImage(img, 0, 0);
+  const data = ctx.getImageData(0, 0, img.width, img.height);
+  const px = data.data;
+  // the texture is sRGB: dim in linear light, then encode back
+  const scale = (v: number) =>
+    Math.round(dimSRGB(v / 255, WHITE_GLOW) * 255);
+  for (let i = 0; i < px.length; i += 4) {
+    if (!isWhite(px[i], px[i + 1], px[i + 2])) continue;
+    px[i] = scale(px[i]);
+    px[i + 1] = scale(px[i + 1]);
+    px[i + 2] = scale(px[i + 2]);
+  }
+  ctx.putImageData(data, 0, 0);
+  t.image = canvas;
+  t.needsUpdate = true;
+}
+
+// an sRGB channel (0 to 1) scaled by factor in linear light
+function dimSRGB (v: number, factor: number) {
+  const linear = v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  const l = linear * factor;
+  return l <= 0.0031308 ? l * 12.92 : 1.055 * l ** (1 / 2.4) - 0.055;
 }
 
 const stickerTextures = new Map<string, Promise<Texture>>();
@@ -85,6 +127,33 @@ export function loadSticker (url: string) {
 
 export const srgb = (c: [number, number, number]) =>
   new Color().setRGB(c[0], c[1], c[2], SRGBColorSpace);
+
+/** Unity's HDR glows go far brighter than this viewer can show without
+ * Unity's tone mapping and post processing (up to 16 for some
+ * stickers). Scale any color whose brightest channel is over the
+ * ceiling back down to it, keeping its hue */
+// The bloom only glows the part of a pixel over 1, so the sun's
+// highlights on metal and gloss barely reach it. This scales just those
+// highlights (not the diffuse light, so painted colors stay put)
+export const GLINT = 3;
+
+function glint<M extends MeshStandardMaterial> (m: M): M {
+  m.onBeforeCompile = shader => {
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "vec3 totalSpecular = reflectedLight.directSpecular",
+      `vec3 totalSpecular = ${GLINT.toFixed(2)} * reflectedLight.directSpecular`,
+    );
+  };
+  m.customProgramCacheKey = () => "glint" + GLINT;
+  return m;
+}
+
+export const GLOW_CEILING = 3;
+export function capGlow (c: Color) {
+  const max = Math.max(c.r, c.g, c.b);
+  if (max > GLOW_CEILING) c.multiplyScalar(GLOW_CEILING / max);
+  return c;
+}
 
 // stickers sit on surfaces: pull them toward the camera in depth
 const decal = { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4 };
@@ -148,7 +217,7 @@ export class Materials {
           depthWrite: false,
         });
       }
-      return new MeshStandardMaterial(textured ? {
+      return glint(new MeshStandardMaterial(textured ? {
         map: albedo,
         metalnessMap: mr,
         roughnessMap: mr,
@@ -161,7 +230,7 @@ export class Materials {
         color: srgb(info.color),
         metalness: info.metalness,
         roughness: info.roughness,
-      });
+      }));
     }
 
     if (mode === "toon") {
@@ -195,7 +264,7 @@ export class Materials {
         alphaTest: 0.5,
         side: FrontSide,
         ...(s.emissive ? {
-          emissive: new Color(...s.emissive),
+          emissive: capGlow(new Color(...s.emissive)),
           emissiveMap: part.map,
         } : {}),
         ...decal,
@@ -206,7 +275,7 @@ export class Materials {
         map: part.map,
         color: srgb(s.tint),
         alphaTest: 0.5,
-        emissive: s.emissive ? new Color(...s.emissive) : undefined,
+        emissive: s.emissive ? capGlow(new Color(...s.emissive)) : undefined,
         ...decal,
       });
     }
