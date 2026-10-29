@@ -40,62 +40,64 @@ export default function Vehicles (props: {
     >
       <Header />
       <main className="main grid">
-        <header className="post-header">
+        <header className="post-header vehicles-header">
           <h1 className="post-title">
             Vehicles
           </h1>
         </header>
-        <p className="vehicles-intro">
-          Vehicles from Novantica, exported from the Unity project with their
-          stickers and lights. Drag to orbit, scroll or pinch to zoom.
-        </p>
-        <div className="spacer" />
         <section
           id="vehicles"
           className="vehicles"
           data-src={VEHICLES_SRC}
           data-vehicle={first?.id}
           data-mode={MODES[0].id}>
-          <div className="vehicles-viewer">
-            <noscript>
-              The viewer needs JavaScript and WebGL.
-            </noscript>
+          <div className="vehicles-stage">
+            <div className="vehicles-viewer">
+              <noscript>
+                The viewer needs JavaScript and WebGL.
+              </noscript>
+            </div>
+            <button
+              type="button"
+              className="vehicles-round vehicles-arrow vehicles-prev"
+              data-step="-1"
+              aria-label="Previous vehicle">
+              <Chevron />
+            </button>
+            <button
+              type="button"
+              className="vehicles-round vehicles-arrow vehicles-next"
+              data-step="1"
+              aria-label="Next vehicle">
+              <Chevron />
+            </button>
+            <p className="vehicles-name caps" aria-live="polite">
+              {first?.title}
+            </p>
           </div>
-          <div className="vehicles-controls">
-            <div className="vehicles-group" role="group" aria-label="Vehicle">
+          <div className="vehicles-bar">
+            <div className="vehicles-dots" role="group" aria-label="Vehicle">
               {props.vehicles.map(v => (
                 <button
                   key={v.id}
                   type="button"
-                  className="vehicles-button caps"
+                  className="vehicles-dot"
                   data-vehicle={v.id}
-                  aria-pressed={v.id === first?.id}>
-                  {v.title}
-                </button>
+                  aria-label={v.title}
+                  aria-pressed={v.id === first?.id}
+                />
               ))}
             </div>
-            <div className="vehicles-group" role="group" aria-label="Shading">
-              {MODES.map((m, i) => (
-                <button
-                  key={m.id}
-                  type="button"
-                  className="vehicles-button caps"
-                  data-mode={m.id}
-                  aria-pressed={i === 0}>
-                  {m.title}
-                </button>
-              ))}
-            </div>
+            {/* cycles through MODES; the label names the current one */}
+            <button
+              type="button"
+              className="vehicles-round vehicles-shading"
+              data-modes={JSON.stringify(MODES)}
+              aria-label={`Shading: ${MODES[0].title}`}
+              title={`Shading: ${MODES[0].title}`}>
+              <span className="vehicles-shading-icon" aria-hidden="true" />
+            </button>
           </div>
-          {props.vehicles.map(v => (
-            <p
-              key={v.id}
-              className="vehicles-caption"
-              data-vehicle={v.id}
-              hidden={v.id !== first?.id}>
-              {caption(v)}
-            </p>
-          ))}
         </section>
       </main>
       <Footer />
@@ -103,13 +105,18 @@ export default function Vehicles (props: {
   );
 };
 
-function caption (v: VehicleSummary) {
-  if (v.caption) return v.caption;
-  const parts = [];
-  if (v.stickers) parts.push(count(v.stickers, "sticker"));
-  if (v.lights) parts.push(count(v.lights, "light") + (v.blinking ? `, ${v.blinking} blinking` : ""));
-  if (v.spinning) parts.push(count(v.spinning, "spinning ring"));
-  return [v.title, ...parts].join(" · ");
+// points left; the next button flips it in CSS
+function Chevron () {
+  return (
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+      <path
+        d="M15 5l-7 7 7 7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
-
-const count = (n: number, noun: string) => `${n} ${noun}${n === 1 ? "" : "s"}`;

@@ -481,11 +481,15 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 }
 
 /* Vehicles
- * The viewer spans the grid at a whole number of modules tall: square
- * at 4 columns, 8:5 at 8, and 2:1 at 16. Controls and the caption each
- * take a module row below it */
-.vehicles-intro { grid-column: 1 / -1 }
+ * A carousel: the viewer spans the grid at a whole number of modules
+ * tall (square at 4 columns, 8:5 at 8, 2:1 at 16), with arrows over
+ * its edges and the name over its bottom. The dots take a module row
+ * below it, with the shading button at the right in line with the
+ * next arrow */
+/* the header is a single module row: just the title */
+.vehicles-header .post-title { grid-row: 1 }
 .vehicles { grid-column: 1 / -1 }
+.vehicles-stage { position: relative }
 .vehicles-viewer {
   height: calc(var(--module) * 4);
   overflow: hidden;
@@ -495,30 +499,47 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
   width: 100%;
   height: 100%;
 }
-.vehicles-controls {
+/* the arrows and the shading button: three-baseline circles */
+.vehicles-round {
+  display: grid;
+  place-items: center;
+  width: calc(var(--baseline) * 3);
+  height: calc(var(--baseline) * 3);
+  border-radius: 50%;
+}
+.vehicles-arrow,
+.vehicles-shading {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+}
+.vehicles-prev { left: var(--baseline) }
+.vehicles-next,
+.vehicles-shading { right: var(--baseline) }
+.vehicles-next svg { scale: -1 1 }
+/* the name sits over the bottom of the viewer, on a two-baseline line
+ * one baseline up. Pointer events pass through, so dragging over it
+ * still orbits */
+.vehicles-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--baseline);
+  text-align: center;
+  pointer-events: none;
+}
+.vehicles-bar {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 0 calc(var(--baseline) * 2);
   min-height: var(--module);
 }
-.vehicles-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 calc(var(--baseline) * 2);
-}
-.vehicles-caption {
-  display: flex;
-  align-items: center;
-  min-height: var(--module);
-}
-.vehicles-caption[hidden] { display: none }
+.vehicles-dots { display: flex }
 @media screen and (min-width: 576px) {
   .vehicles-viewer { height: calc(var(--module) * 5) }
 }
 @media screen and (min-width: 1088px) {
-  .vehicles-intro { grid-column: 1 / span 8 }
   .vehicles-viewer { height: calc(var(--module) * 8) }
 }
 
@@ -604,29 +625,72 @@ td { box-shadow: inset 0 -1px 0 var(--primary-1) }
 }
 .grid-button[aria-pressed="true"]:active { background-color: transparent }
 
-/* the vehicle viewer's buttons, set like the nav; pressed is
- * underlined in --primary */
-.vehicles-button {
+/* set like the nav, in caps */
+.vehicles-name {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: 700;
   line-height: calc(var(--baseline) * 2);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  transition-property: color;
+}
+
+/* arrows and the shading button: a soft disc in --text, --primary
+ * on hover */
+.vehicles-round {
+  color: var(--text);
+  background-color: color-mix(in srgb, var(--text) 8%, transparent);
+  transition-property: color, background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
 }
-.vehicles-button:hover { color: var(--primary) }
-.vehicles-button[aria-pressed="true"] {
+.vehicles-round:hover {
   color: var(--primary);
-  text-decoration-line: underline;
+  background-color: var(--primary-1);
 }
-.vehicles-button:active {
+.vehicles-round:active {
   color: var(--active);
   transition-duration: 0s;
 }
-.vehicles-caption { font-size: 14px }
+/* a placeholder dot until the shading icon is drawn */
+.vehicles-shading-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* dots, like Apple's: small dots in a pill, with the current one
+ * stretched into a bar. Each button is taller than its dot so it's
+ * easier to hit */
+.vehicles-dots {
+  padding: 0 calc(var(--baseline) * 0.75);
+  border-radius: calc(var(--baseline) * 1.5);
+  background-color: color-mix(in srgb, var(--text) 8%, transparent);
+}
+/* three baselines tall, like the arrows and shading button */
+.vehicles-dot {
+  display: flex;
+  align-items: center;
+  height: calc(var(--baseline) * 3);
+  padding: 0 4px;
+}
+.vehicles-dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: color-mix(in srgb, var(--text) 35%, transparent);
+  transition-property: width, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.vehicles-dot:hover::after { background-color: var(--primary) }
+.vehicles-dot[aria-pressed="true"]::after {
+  width: 24px;
+  background-color: var(--text);
+}
+@media (prefers-reduced-motion: reduce) {
+  .vehicles-dot::after { transition-duration: 0s }
+}
 [aria-busy="true"] .vehicles-viewer { opacity: 0.6 }
 
 /* Dot grid: toggled with the "g" key or the G button. A dot on every

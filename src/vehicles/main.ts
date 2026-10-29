@@ -82,6 +82,8 @@ async function main (root: HTMLElement) {
   const camera = new PerspectiveCamera(30, 1, 0.05, 200);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
+  // let wheel events scroll the page instead of zooming
+  controls.enableZoom = false;
   controls.autoRotateSpeed = 1.5;
 
   // no tone mapping, so the background matches the page. Bloom starts
@@ -190,31 +192,50 @@ async function main (root: HTMLElement) {
 
   // controls
   const buttons = [...root.querySelectorAll<HTMLButtonElement>("button")];
-  const press = (attr: "vehicle" | "mode", value: string) => {
+  const press = (value: string) => {
     for (const b of buttons) {
-      if (b.dataset[attr] !== undefined) b.setAttribute("aria-pressed", String(b.dataset[attr] === value));
+      if (b.dataset.vehicle !== undefined) b.setAttribute("aria-pressed", String(b.dataset.vehicle === value));
     }
   };
   for (const b of buttons) {
     b.addEventListener("click", () => {
       if (b.dataset.vehicle) select(b.dataset.vehicle);
-      if (b.dataset.mode) {
-        press("mode", b.dataset.mode);
-        setMode(b.dataset.mode as Mode);
-      }
+      if (b.dataset.step) step(Number(b.dataset.step));
+      if (b.dataset.modes) cycleMode(b);
     });
   }
+  // the shading button steps to the next mode in its list
+  function cycleMode (b: HTMLButtonElement) {
+    const modes: { id: Mode; title: string }[] = JSON.parse(b.dataset.modes!);
+    const i = modes.findIndex(m => m.id === mode);
+    const next = modes[(i + 1) % modes.length];
+    setMode(next.id);
+    const label = `Shading: ${next.title}`;
+    b.setAttribute("aria-label", label);
+    b.title = label;
+  }
   const ids = index.vehicles.map(v => v.id);
+  const name = root.querySelector<HTMLElement>(".vehicles-name")!;
   function select (id: string, updateHash = true) {
     if (!ids.includes(id)) return;
-    press("vehicle", id);
+    press(id);
     root.dataset.vehicle = id;
-    for (const p of root.querySelectorAll<HTMLElement>(".vehicles-caption")) {
-      p.hidden = p.dataset.vehicle !== id;
-    }
+    name.textContent = index.vehicles.find(v => v.id === id)!.title;
     if (updateHash) history.replaceState(null, "", "#" + id);
     show(id);
   }
+  // the carousel wraps around at both ends
+  function step (by: number) {
+    const i = ids.indexOf(root.dataset.vehicle ?? ids[0]);
+    select(ids[(i + by + ids.length) % ids.length]);
+  }
+  // arrow keys step while focus is in the viewer's controls
+  root.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+    else return;
+    e.preventDefault();
+  });
   addEventListener("hashchange", () => select(location.hash.slice(1), false));
 
   // follow the site's color mode (client.js sets a class on body)

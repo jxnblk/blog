@@ -31,18 +31,18 @@
       "id": "javelin",
       "title": "Javelin",
       "models": 1,
-      "stickers": 0,
-      "lights": 1,
-      "blinking": 0,
+      "stickers": 9,
+      "lights": 4,
+      "blinking": 2,
       "spinning": 0
     },
     {
       "id": "hoverpack",
       "title": "Hoverpack",
       "models": 1,
-      "stickers": 0,
-      "lights": 0,
-      "blinking": 0,
+      "stickers": 4,
+      "lights": 3,
+      "blinking": 2,
       "spinning": 0
     }
   ],
