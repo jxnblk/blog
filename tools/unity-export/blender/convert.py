@@ -10,6 +10,7 @@
 
 import bpy, bmesh, json, math, os, sys
 import numpy as np
+from mathutils import Matrix
 
 job = json.load(open(sys.argv[sys.argv.index("--") + 1]))
 P = job["palette"]
@@ -36,6 +37,8 @@ def import_model (m):
       continue
     for c in [o, *o.children_recursive]:
       bpy.data.objects.remove(c, do_unlink=True)
+  if m.get("parts"):
+    return import_parts(m)
   # Unity makes a lone top-level node the model root, and the prefab's
   # root transform replaces that node's own; keep only the import's
   # axis and unit conversion
@@ -47,6 +50,29 @@ def import_model (m):
       print(f"  {m['name']}: lone root {o.name!r} offset {tuple(round(v, 4) for v in loc)} dropped")
     o.location = (0, 0, 0)
   return [o for o in bpy.data.objects if o.type == "MESH"]
+
+def import_parts (m):
+  """A Unity mesh is the file's raw geometry in meters, without its
+  node's transform (the prefab places it). Keep the named objects, each
+  with only the import's axis and unit conversion, so the GLB has them
+  at the origin, named for the page to pick out."""
+  keep = []
+  for name in m["parts"]:
+    o = bpy.data.objects.get(name)
+    if not o or o.type != "MESH":
+      warn(f"{m['name']}: no mesh named {name!r}")
+    else:
+      keep.append(o)
+  for o in [o for o in bpy.data.objects if o not in keep]:
+    bpy.data.objects.remove(o, do_unlink=True)
+  for o in keep:
+    scale = o.matrix_world.to_scale()
+    if max(scale) - min(scale) > 1e-6:
+      warn(f"{m['name']}: {o.name} has a non-uniform scale {tuple(scale)}")
+    o.parent = None
+    # Blender reads the files as Y-up and turns them a quarter round X
+    o.matrix_world = Matrix.Rotation(math.pi / 2, 4, "X") @ Matrix.Scale(scale.x, 4)
+  return keep
 
 def palette_kind (m, mat_name):
   unity = m["materials"].get(strip(mat_name))
@@ -108,7 +134,7 @@ for m in job["models"]:
   for mat in list(bpy.data.materials):
     unity = m["materials"].get(strip(mat.name))
     if unity:
-      info = job["materials"][unity]
+      info = job["materials"].get(unity, {"name": unity, "kind": None})
       mat.name = info["name"]
       if info["kind"] in ("palette", "glass"): repacked.add(mat.name)
     else:

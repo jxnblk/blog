@@ -10,6 +10,7 @@ import {
   type Object3D,
   PerspectiveCamera,
   PMREMGenerator,
+  PropertyBinding,
   Scene,
   Sphere,
   Timer,
@@ -32,6 +33,7 @@ type Node = {
   q?: [number, number, number, number];
   s?: [number, number, number];
   model?: string;
+  part?: string; // one object out of the model
   sticker?: StickerInfo;
   light?: LightInfo;
   spin?: number;
@@ -126,7 +128,11 @@ async function main (root: HTMLElement) {
       if (n.q) o.quaternion.fromArray(n.q);
       if (n.s) o.scale.fromArray(n.s);
       if (n.model) {
-        const model = (await loadModel(base + n.model)).clone();
+        const file = await loadModel(base + n.model);
+        // the loader names nodes as animation tracks need: "zFT RB" -> "zFT_RB"
+        const source = n.part ? file.getObjectByName(PropertyBinding.sanitizeNodeName(n.part)) : file;
+        if (!source) throw new Error(`${n.model} has no part ${n.part}`);
+        const model = source.clone();
         model.traverse(m => {
           if (m instanceof Mesh) {
             // Blender may suffix a repeated name: "universal-a.001"

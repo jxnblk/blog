@@ -30,6 +30,7 @@ export type MaterialInfo = {
   opacity: number;
   metalness: number;
   roughness: number;
+  emissive?: [number, number, number]; // linear HDR, solid materials only
 };
 
 export type StickerInfo = {
@@ -149,6 +150,13 @@ function glint<M extends MeshStandardMaterial> (m: M): M {
 }
 
 export const GLOW_CEILING = 3;
+/** an emissive surface color, treated like the light quads' */
+function glow (c: [number, number, number]) {
+  const color = capGlow(new Color(...c));
+  if (isWhite(color.r, color.g, color.b)) color.multiplyScalar(WHITE_GLOW);
+  return color;
+}
+
 export function capGlow (c: Color) {
   const max = Math.max(c.r, c.g, c.b);
   if (max > GLOW_CEILING) c.multiplyScalar(GLOW_CEILING / max);
@@ -230,6 +238,7 @@ export class Materials {
         color: srgb(info.color),
         metalness: info.metalness,
         roughness: info.roughness,
+        emissive: info.emissive ? glow(info.emissive) : undefined,
       }));
     }
 
@@ -237,6 +246,7 @@ export class Materials {
       return toon({
         map: textured ? albedo : undefined,
         emissiveMap: textured ? emission : undefined,
+        emissive: info.emissive ? glow(info.emissive) : undefined,
         color: srgb(info.color),
         transparent: glass,
       });

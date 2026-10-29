@@ -1,7 +1,10 @@
 import type { VehicleConfig } from "./extract";
 
-// The vehicles on the /vehicles page, in order. `caption` is optional
+// The models on the /vehicles page, in order. `caption` is optional
 // text shown under the viewer.
+
+// the earlier AC Mini project, for the bots and props
+const AC_MINI = "~/unity/ac-mini";
 export const VEHICLES: VehicleConfig[] = [
   {
     id: "razor",
@@ -30,4 +33,13 @@ export const VEHICLES: VehicleConfig[] = [
     title: "Hoverpack",
     prefab: "Assets/Vehicles/Hoverpack/Hoverpack.prefab",
   },
+  { id: "crawler", title: "Crawler", project: AC_MINI, prefab: "Assets/Prefabs/Crawler.prefab" },
+  { id: "airship", title: "Airship", project: AC_MINI, prefab: "Assets/Prefabs/Airship.prefab" },
+  { id: "tram", title: "Tram", project: AC_MINI, prefab: "Assets/Prefabs/Tram.prefab" },
+  { id: "subway-car", title: "Subway Car", project: AC_MINI, prefab: "Assets/Prefabs/Subway Car.prefab" },
+  { id: "sweeper-bot", title: "Sweeper Bot", project: AC_MINI, prefab: "Assets/Models/Vehicles/SweeperBot.prefab" },
+  { id: "ballbot", title: "Ballbot", project: AC_MINI, prefab: "Assets/Prefabs/Bots/Ballbot 2.prefab" },
+  { id: "fabricator", title: "Fabricator", project: AC_MINI, prefab: "Assets/Prefabs/Fabricator.prefab" },
+  { id: "terminal", title: "Terminal", project: AC_MINI, prefab: "Assets/Prefabs/KeyLocations/Terminal.prefab" },
+  { id: "server-rack", title: "Server Rack", project: AC_MINI, prefab: "Assets/Prefabs/Mechanics/ServerRack.prefab" },
 ];

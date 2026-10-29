@@ -3,7 +3,7 @@
 // converted from Unity (left-handed) to three.js/glTF (right-handed) by
 // mirroring X: p = (-x, y, z), q = (x, -y, -z, w).
 import { readFileSync } from "node:fs";
-import { basename, extname } from "node:path";
+import { basename, dirname, extname } from "node:path";
 import { Resolver, type Obj, type Table } from "./prefab";
 import { readMaterial, type Mat } from "./material";
 import { num } from "./unity-yaml";
@@ -36,6 +36,7 @@ export type Node = {
   q?: Quat;
   s?: Vec3;
   model?: string; // output path of the model's GLB, relative to the output dir
+  part?: string; // with `model`: the one object to take from it, by name
   sticker?: StickerData;
   light?: LightData;
   spin?: number; // degrees per second about local +Y
@@ -47,12 +48,17 @@ export type ModelUse = {
   out: string;
   materials: Record<string, string>; // model material name -> Unity material path
   hide: string[];
+  /** a parts file: only these objects, each at the origin, for renderers
+   * that draw one of the model's meshes each */
+  parts?: string[];
 };
 
 export type VehicleConfig = {
   id: string;
   title: string;
   prefab: string;
+  /** the Unity project, if not the default */
+  project?: string;
   caption?: string;
   /** model nodes to leave out, by name, for each model path. Nodes inside
    * a model are known to the prefab only by hashed fileIDs, so an inactive
@@ -69,6 +75,7 @@ const SCRIPTS = {
   blinkingLight: "Assets/Scripts/BlinkingLight.cs",
   rotatable: "Assets/Scripts/Rotatable.cs",
 };
+const MODEL_EXT = /\.(fbx|obj|blend|dae)$/i;
 const LIGHT_MODES = ["black", "white", "green", "orange", "blue", "red"];
 
 export class Extractor {
@@ -91,7 +98,8 @@ export class Extractor {
     return m;
   }
 
-  /** model material name -> Unity material, from the importer's remaps */
+  /** model material name -> Unity material: the importer's remaps, then
+   * a search by name the way the importer's settings ask for */
   modelMaterials (path: string) {
     const text = readFileSync(`${this.project}/${path}.meta`, "utf8");
     const out: Record<string, string> = {};
@@ -100,7 +108,28 @@ export class Extractor {
       const mat = this.guids.get(guid);
       if (mat) out[name.trim()] = mat;
     }
+    const search = Number(text.match(/materialSearch: (\d)/)?.[1] ?? 1);
+    for (const name of modelNames(this.project, path, "Material")) {
+      if (out[name]) continue;
+      const found = this.findMaterial(path, name, search);
+      if (found) out[name] = found;
+      else this.warn(`${basename(path)}: no Unity material for "${name}"`);
+    }
     return out;
+  }
+
+  /** ModelImporter's search: 0 a Materials folder beside the model, 1 the
+   * Materials folders up to Assets, 2 the whole project */
+  findMaterial (model: string, name: string, search: number) {
+    const all = [...this.guids.values()];
+    if (search === 2) return all.find(p => basename(p) === `${name}.mat`);
+    let dir = dirname(model);
+    while (dir.startsWith("Assets")) {
+      const p = `${dir}/Materials/${name}.mat`;
+      if (all.includes(p)) return p;
+      if (search === 0) break;
+      dir = dirname(dir);
+    }
   }
 
   vehicle (config: VehicleConfig) {
@@ -164,11 +193,24 @@ class Context {
     const renderer = comps.find(c => c.type === "MeshRenderer" && c.data.m_Enabled !== "0");
     const materials: string[] = (renderer?.data.m_Materials ?? [])
       .map((m: any) => this.ex.guids.get(m.guid)).filter(Boolean);
+    // a renderer drawing one mesh out of a model file
+    const filter = comps.find(c => c.type === "MeshFilter");
+    const meshFile = this.ex.guids.get(filter?.data.m_Mesh?.guid);
+    const isPart = !!(renderer && !tr.model && meshFile && MODEL_EXT.test(meshFile));
 
     if (sticker && renderer) {
       node.sticker = this.sticker(sticker, materials[0], light);
     } else if (light && renderer) {
       node.light = lightData(light, this.script(light) === SCRIPTS.blinkingLight);
+    } else if (isPart) {
+      if (materials.some(m => EFFECT_MATERIAL.test(m))) return;
+      const name = this.meshName(meshFile!, filter!.data.m_Mesh.fileID);
+      if (!name) {
+        this.ex.warn(`${config.id}: no mesh in ${basename(meshFile!)} for "${go.data.m_Name}"`);
+        return;
+      }
+      node.model = this.part(meshFile!, name, materials, config);
+      node.part = name;
     } else if (renderer && !tr.model) {
       if (!materials.some(m => EFFECT_MATERIAL.test(m))) {
         this.ex.warn(`${config.id}: skipped mesh "${go.data.m_Name}" (${materials.map(m => basename(m)).join(", ")})`);
@@ -220,6 +262,35 @@ class Context {
     return out;
   }
 
+  /** Unity names a model's meshes after their nodes, with the fileID
+   * xxHash64("Type:Mesh->" + name + index), the index counting repeats */
+  meshName (path: string, fileID: string) {
+    for (const name of modelNames(this.ex.project, path, "Model")) {
+      for (let i = 0; i < 4; i++) {
+        if (BigInt.asIntN(64, Bun.hash.xxHash64(`Type:Mesh->${name}${i}`)).toString() === fileID) return name;
+      }
+    }
+  }
+
+  part (path: string, name: string, materials: string[], config: VehicleConfig) {
+    const remaps = this.ex.modelMaterials(path);
+    for (const m of materials) {
+      if (!Object.values(remaps).includes(m)) {
+        this.ex.warn(`${config.id}: part "${name}" of ${basename(path)} uses ${basename(m)}; the model's own materials are used`);
+      }
+    }
+    const key = path + "#parts";
+    const out = `models/${basename(path, extname(path))}-parts.glb`;
+    const prev = this.ex.models.get(key);
+    if (prev) {
+      if (!prev.parts!.includes(name)) prev.parts!.push(name);
+    } else {
+      this.ex.models.set(key, { path, out, materials: remaps, hide: [], parts: [name] });
+    }
+    for (const m of Object.values(remaps)) if (!EFFECT_MATERIAL.test(m)) this.ex.material(m);
+    return out;
+  }
+
   sticker (s: Obj, materialPath: string | undefined, light: Obj | undefined): StickerData | undefined {
     if (!materialPath) return;
     const mat = this.ex.material(materialPath);
@@ -246,6 +317,29 @@ class Context {
   }
 }
 
+/** node ("Model") or material names in an FBX, binary or ASCII */
+function modelNames (project: string, path: string, kind: "Model" | "Material") {
+  if (!/\.fbx$/i.test(path)) return [];
+  const buf = readFileSync(`${project}/${path}`);
+  const text = buf.toString("latin1");
+  const names = new Set<string>();
+  if (text.startsWith("Kaydara FBX Binary")) {
+    // a string property: "S", a uint32 length, then "name\x00\x01Model"
+    const tail = `\x00\x01${kind}`;
+    for (let i = text.indexOf(tail); i >= 0; i = text.indexOf(tail, i + 1)) {
+      for (let start = i; start >= 5 && i - start <= 256; start--) {
+        if (text[start - 5] === "S" && buf.readUInt32LE(start - 4) === i - start + tail.length) {
+          names.add(text.slice(start, i));
+          break;
+        }
+      }
+    }
+  } else {
+    for (const m of text.matchAll(new RegExp(`${kind}: -?\\d+, "${kind}::([^"]*)"`, "g"))) names.add(m[1]);
+  }
+  return [...names];
+}
+
 function lightData (o: Obj, blinking: boolean): LightData {
   const mode = LIGHT_MODES[num(o.data.color)] ?? "black";
   const c = o.data[mode] ?? { r: 0, g: 0, b: 0 };
@@ -256,7 +350,7 @@ function lightData (o: Obj, blinking: boolean): LightData {
 
 /** an HDR color picked in sRGB and scaled by an intensity: linearize the
  * hue, keep the intensity */
-function hdr (c: Vec3): Vec3 {
+export function hdr (c: Vec3): Vec3 {
   const k = Math.max(1, ...c);
   return round(c.map(v => srgbToLinear(v / k) * k) as Vec3);
 }

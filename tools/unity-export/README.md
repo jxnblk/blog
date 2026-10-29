@@ -16,6 +16,11 @@ bun run export:vehicles [--project ~/unity/na-map-prototype] [--out images/vehic
 
 Unity doesn't need to be installed or open.
 
+`--project` is the default project. An entry in `vehicles.ts` can set its
+own `project` (the bots and props come from `~/unity/ac-mini`). The
+projects must share the palette atlas; a model, material or sticker found
+in both is written once.
+
 ## What it reads
 
 Only text and source files under the project's `Assets/`, read-only. It never
@@ -49,6 +54,14 @@ writes to the Unity project and doesn't use `Library/`.
   is `(prefabInstance ^ sourceId) & 0x7FFFFFFFFFFFFFFF`, then each
   instance's modifications, removed components, and added objects apply
   from the inside out.
+- A renderer that draws one mesh out of a model (not a placed model) is
+  a part: Unity names a model's meshes after their nodes, with the fileID
+  `xxHash64("Type:Mesh->" + name + "0")`, which `extract.ts` matches
+  against the node names in the FBX. Each such model gets a
+  `<name>-parts.glb` with those objects at the origin, and the node names
+  its `part`.
+- Model materials without a remap in the `.meta` are found by name, as the
+  importer's `materialSearch` does (the `Materials` folders up to `Assets`).
 - `extract.ts` keeps the active objects that draw: model roots, `Sticker`
   quads, `DynamicLight`/`BlinkingLight` quads, and `Rotatable` spins.
   Models whose materials are all haze/distortion effects are skipped.

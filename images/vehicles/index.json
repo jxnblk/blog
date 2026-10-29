@@ -44,6 +44,87 @@
       "lights": 3,
       "blinking": 2,
       "spinning": 0
+    },
+    {
+      "id": "crawler",
+      "title": "Crawler",
+      "models": 9,
+      "stickers": 7,
+      "lights": 2,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "airship",
+      "title": "Airship",
+      "models": 1,
+      "stickers": 8,
+      "lights": 3,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "tram",
+      "title": "Tram",
+      "models": 1,
+      "stickers": 14,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "subway-car",
+      "title": "Subway Car",
+      "models": 1,
+      "stickers": 6,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "sweeper-bot",
+      "title": "Sweeper Bot",
+      "models": 1,
+      "stickers": 4,
+      "lights": 1,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "ballbot",
+      "title": "Ballbot",
+      "models": 20,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "fabricator",
+      "title": "Fabricator",
+      "models": 1,
+      "stickers": 1,
+      "lights": 1,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "terminal",
+      "title": "Terminal",
+      "models": 1,
+      "stickers": 1,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "server-rack",
+      "title": "Server Rack",
+      "models": 1,
+      "stickers": 4,
+      "lights": 3,
+      "blinking": 0,
+      "spinning": 0
     }
   ],
   "palette": {
@@ -84,6 +165,77 @@
       "opacity": 1,
       "metalness": 1,
       "roughness": 0
+    },
+    "zzMK Aluminum": {
+      "kind": "solid",
+      "color": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1
+    },
+    "Glass": {
+      "kind": "solid",
+      "color": [
+        0.10117648,
+        0.16862746,
+        0.16862746
+      ],
+      "opacity": 1,
+      "metalness": 0.1,
+      "roughness": 0.02
+    },
+    "Light": {
+      "kind": "solid",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 0.5,
+      "emissive": [
+        2.99608,
+        2.99608,
+        2.99608
+      ]
+    },
+    "MK Steel": {
+      "kind": "solid",
+      "color": [
+        0.1109375,
+        0.15625,
+        0.2
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1
+    },
+    "MK Gold": {
+      "kind": "solid",
+      "color": [
+        1,
+        0.7509804,
+        0.5
+      ],
+      "opacity": 1,
+      "metalness": 0.4,
+      "roughness": 0.5
+    },
+    "DynamicLight": {
+      "kind": "solid",
+      "color": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 0.2
     }
   }
 }
