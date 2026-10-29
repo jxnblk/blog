@@ -69,7 +69,18 @@ export type EntryConfig = {
    * a model are known to the prefab only by hashed fileIDs, so an inactive
    * one is reported and has to be named here. */
   hide?: Record<string, string[]>;
+  /** how the entry first faces the page's camera, in degrees: tipped
+   * about X, then turned about Y (page space: Y up, the camera toward +X +Z) */
+  rotation?: { x?: number; y?: number };
 };
+
+/** a turn of x degrees about X, then y degrees about Y, as a quaternion */
+function turn (x: number, y: number): Quat {
+  const hx = x * Math.PI / 360, hy = y * Math.PI / 360;
+  const [sx, cx, sy, cy] = [Math.sin(hx), Math.cos(hx), Math.sin(hy), Math.cos(hy)];
+  // qY * qX
+  return [cy * sx, sy * cx, -sy * sx, cy * cx].map(v => Math.round(v * 1e6) / 1e6) as Quat;
+}
 
 // materials whose objects are screen-space effects, not surfaces
 export const EFFECT_MATERIAL = /haze|distortion/i;
@@ -137,7 +148,13 @@ export class Extractor {
     }
   }
 
-  entry (config: EntryConfig) {
+  entry (config: EntryConfig): Node {
+    const root = this.entryRoot(config);
+    if (config.rotation) root.q = turn(config.rotation.x ?? 0, config.rotation.y ?? 0);
+    return root;
+  }
+
+  entryRoot (config: EntryConfig): Node {
     if (config.model) return { name: config.title, model: this.bareModel(config.model, config) };
     if (!config.prefab) throw new Error(`${config.id}: needs a prefab or a model`);
     const table = this.resolver.load(config.prefab);

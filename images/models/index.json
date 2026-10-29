@@ -188,6 +188,15 @@
       "lights": 0,
       "blinking": 0,
       "spinning": 0
+    },
+    {
+      "id": "arm",
+      "title": "ARM",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
     }
   ],
   "palette": {
@@ -344,6 +353,17 @@
       "opacity": 1,
       "metalness": 1,
       "roughness": 0
+    },
+    "MK Translucent 1": {
+      "kind": "solid",
+      "color": [
+        0,
+        0,
+        0
+      ],
+      "opacity": 0.16862746,
+      "metalness": 0,
+      "roughness": 1
     }
   }
 }

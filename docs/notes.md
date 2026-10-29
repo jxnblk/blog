@@ -1,9 +1,8 @@
 
 - Models
   - x Wolf - Bicycle
-  - Scout + Police bots
-  - ARM
-  - (computers/props)
+  - x Scout + Police bots
+  - x ARM
   - furniture?
 
 

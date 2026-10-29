@@ -26,6 +26,10 @@ An entry is usually a `prefab`. For a model placed in a scene as it is
 `materials` for any the scene's renderer changes (model material name →
 Unity material path). Those get their own GLB, `<model>-<id>.glb`.
 
+An entry can set `rotation` (`{ x, y }` in degrees, tipped about X, then
+turned about Y) for how it first faces the page's camera, as the ARM does
+to show its face.
+
 ## What it reads
 
 Only text and source files under the project's `Assets/`, read-only. It never

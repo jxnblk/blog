@@ -56,4 +56,13 @@ export const ENTRIES: EntryConfig[] = [
   { id: "security-bot", title: "Security Bot", project: AC_MINI, prefab: "Assets/Prefabs/Mechanics/SecurityBot.prefab" },
   { id: "eau-bot", title: "EAU Bot", project: AC_MINI, prefab: "Assets/Models/Vehicles/EAU Bot.prefab" },
   { id: "botdroid", title: "BotDroid 3B", project: AC_MINI, prefab: "Assets/Models/Characters/BotDroid/BotDroid 3B.prefab" },
+  {
+    id: "arm",
+    title: "ARM",
+    project: AC_MINI,
+    // the model in the ARM ads
+    model: "Assets/Models/Greebs/ac-arm-dark.fbx",
+    // the face toward the camera
+    rotation: { x: 73, y: 55 },
+  },
 ];
