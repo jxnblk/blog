@@ -1,4 +1,4 @@
-// The /vehicles viewer: loads the exported vehicles (images/vehicles,
+// The /models viewer: loads the exported models (images/models,
 // written by tools/unity-export) and draws one at a time.
 import {
   Box3,
@@ -41,12 +41,12 @@ type Node = {
 };
 
 type Index = {
-  vehicles: { id: string; title: string }[];
+  entries: { id: string; title: string }[];
   palette: { albedo: string; emission: string; mr: string };
   materials: Record<string, MaterialInfo>;
 };
 
-type Vehicle = {
+type Entry = {
   group: Group;
   blinkers: Blinker[];
   spinners: { node: Object3D; speed: number }[];
@@ -55,15 +55,15 @@ type Vehicle = {
 
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
-const root = document.getElementById("vehicles");
+const root = document.getElementById("models");
 if (root) main(root).catch(err => {
   console.error(err);
-  root.querySelector(".vehicles-viewer")!.textContent = "The viewer couldn't load.";
+  root.querySelector(".models-viewer")!.textContent = "The viewer couldn't load.";
 });
 
 async function main (root: HTMLElement) {
   const base = root.dataset.src!;
-  const viewer = root.querySelector<HTMLElement>(".vehicles-viewer")!;
+  const viewer = root.querySelector<HTMLElement>(".models-viewer")!;
 
   // a transparent canvas, so the page (and its dot grid) shows through
   const renderer = new WebGLRenderer({ antialias: true, alpha: true });
@@ -113,14 +113,14 @@ async function main (root: HTMLElement) {
   };
 
   let mode = (root.dataset.mode ?? "studio") as Mode;
-  const vehicles = new Map<string, Promise<Vehicle>>();
-  let current: Vehicle | undefined;
+  const entries = new Map<string, Promise<Entry>>();
+  let current: Entry | undefined;
   let currentId = "";
 
-  async function build (id: string): Promise<Vehicle> {
+  async function build (id: string): Promise<Entry> {
     const data: { root: Node } = await (await fetch(`${base}${id}.json`)).json();
     const blinkers: Blinker[] = [];
-    const spinners: Vehicle["spinners"] = [];
+    const spinners: Entry["spinners"] = [];
     const make = async (n: Node): Promise<Object3D> => {
       const o = new Group();
       o.name = n.name;
@@ -158,27 +158,27 @@ async function main (root: HTMLElement) {
 
   async function show (id: string) {
     currentId = id;
-    let v = vehicles.get(id);
+    let v = entries.get(id);
     if (!v) {
       v = build(id);
-      vehicles.set(id, v);
+      entries.set(id, v);
     }
     root.setAttribute("aria-busy", "true");
-    const vehicle = await v;
+    const entry = await v;
     if (currentId !== id) return; // another was picked meanwhile
     root.removeAttribute("aria-busy");
     if (current) scene.remove(current.group);
-    current = vehicle;
-    materials.apply(vehicle.group, mode);
-    scene.add(vehicle.group);
-    frame(vehicle.sphere);
+    current = entry;
+    materials.apply(entry.group, mode);
+    scene.add(entry.group);
+    frame(entry.sphere);
   }
 
-  // a three-quarter view from the front left, fitted to the vehicle
+  // a three-quarter view from the front left, fitted to the model
   function frame (sphere: Sphere) {
     const fov = camera.fov * Math.PI / 180;
     const fit = Math.min(fov, 2 * Math.atan(Math.tan(fov / 2) * camera.aspect));
-    // the bounding sphere is loose around long, thin vehicles
+    // the bounding sphere is loose around long, thin models
     const distance = sphere.radius / Math.sin(fit / 2) * 0.95;
     const dir = new Vector3(1.6, 0.6, 1.1).normalize();
     controls.target.copy(sphere.center);
@@ -201,12 +201,12 @@ async function main (root: HTMLElement) {
   const buttons = [...root.querySelectorAll<HTMLButtonElement>("button")];
   const press = (value: string) => {
     for (const b of buttons) {
-      if (b.dataset.vehicle !== undefined) b.setAttribute("aria-pressed", String(b.dataset.vehicle === value));
+      if (b.dataset.entry !== undefined) b.setAttribute("aria-pressed", String(b.dataset.entry === value));
     }
   };
   for (const b of buttons) {
     b.addEventListener("click", () => {
-      if (b.dataset.vehicle) select(b.dataset.vehicle);
+      if (b.dataset.entry) select(b.dataset.entry);
       if (b.dataset.step) step(Number(b.dataset.step));
       if (b.dataset.modes) cycleMode(b);
     });
@@ -221,19 +221,19 @@ async function main (root: HTMLElement) {
     b.setAttribute("aria-label", label);
     b.title = label;
   }
-  const ids = index.vehicles.map(v => v.id);
-  const name = root.querySelector<HTMLElement>(".vehicles-name")!;
+  const ids = index.entries.map(v => v.id);
+  const name = root.querySelector<HTMLElement>(".models-name")!;
   function select (id: string, updateHash = true) {
     if (!ids.includes(id)) return;
     press(id);
-    root.dataset.vehicle = id;
-    name.textContent = index.vehicles.find(v => v.id === id)!.title;
+    root.dataset.entry = id;
+    name.textContent = index.entries.find(v => v.id === id)!.title;
     if (updateHash) history.replaceState(null, "", "#" + id);
     show(id);
   }
   // the carousel wraps around at both ends
   function step (by: number) {
-    const i = ids.indexOf(root.dataset.vehicle ?? ids[0]);
+    const i = ids.indexOf(root.dataset.entry ?? ids[0]);
     select(ids[(i + by + ids.length) % ids.length]);
   }
   // arrow keys step while focus is in the viewer's controls
@@ -282,7 +282,7 @@ async function main (root: HTMLElement) {
     renderer.setAnimationLoop(entry.isIntersecting ? loop : null);
   }).observe(viewer);
 
-  select(ids.includes(location.hash.slice(1)) ? location.hash.slice(1) : root.dataset.vehicle ?? ids[0], false);
+  select(ids.includes(location.hash.slice(1)) ? location.hash.slice(1) : root.dataset.entry ?? ids[0], false);
 }
 
 function readTheme (): Theme {

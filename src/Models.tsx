@@ -2,10 +2,10 @@ import HTML from "./HTML";
 import Header from "./Header";
 import Footer from "./Footer";
 
-/** /vehicles: the Novantica vehicles in a three.js viewer (vehicles/main.ts).
+/** /models: models from Novantica in a three.js viewer (models/main.ts).
  * The models, stickers, and lights come from the Unity project through
- * tools/unity-export, which writes images/vehicles. */
-export type VehicleSummary = {
+ * tools/unity-export, which writes images/models. */
+export type EntrySummary = {
   id: string;
   title: string;
   caption?: string;
@@ -15,7 +15,7 @@ export type VehicleSummary = {
   spinning: number;
 };
 
-export const VEHICLES_SRC = "/images/vehicles/";
+export const MODELS_SRC = "/images/models/";
 
 const MODES = [
   { id: "studio", title: "Studio" },
@@ -23,66 +23,66 @@ const MODES = [
   { id: "blueprint", title: "Blueprint" },
 ];
 
-export default function Vehicles (props: {
+export default function Models (props: {
   css: string;
-  vehicles: VehicleSummary[];
+  entries: EntrySummary[];
 }) {
-  const [first] = props.vehicles;
+  const [first] = props.entries;
   return (
     <HTML
-      path="vehicles"
+      path="models"
       css={props.css}
-      scripts={["/js/vehicles.js"]}
+      scripts={["/js/models.js"]}
       data={{
-        title: "Vehicles",
-        description: "Vehicles from Novantica, rendered with three.js",
+        title: "Models",
+        description: "Models from Novantica, rendered with three.js",
       }}
     >
       <Header />
       <main className="main grid">
-        <header className="post-header vehicles-header">
+        <header className="post-header models-header">
           <h1 className="post-title">
-            Vehicles
+            Models
           </h1>
         </header>
         <section
-          id="vehicles"
-          className="vehicles"
-          data-src={VEHICLES_SRC}
-          data-vehicle={first?.id}
+          id="models"
+          className="models"
+          data-src={MODELS_SRC}
+          data-entry={first?.id}
           data-mode={MODES[0].id}>
-          <div className="vehicles-stage">
-            <div className="vehicles-viewer">
+          <div className="models-stage">
+            <div className="models-viewer">
               <noscript>
                 The viewer needs JavaScript and WebGL.
               </noscript>
             </div>
             <button
               type="button"
-              className="vehicles-round vehicles-arrow vehicles-prev"
+              className="models-round models-arrow models-prev"
               data-step="-1"
-              aria-label="Previous vehicle">
+              aria-label="Previous model">
               <Chevron />
             </button>
             <button
               type="button"
-              className="vehicles-round vehicles-arrow vehicles-next"
+              className="models-round models-arrow models-next"
               data-step="1"
-              aria-label="Next vehicle">
+              aria-label="Next model">
               <Chevron />
             </button>
-            <p className="vehicles-name caps" aria-live="polite">
+            <p className="models-name caps" aria-live="polite">
               {first?.title}
             </p>
           </div>
-          <div className="vehicles-bar">
-            <div className="vehicles-dots" role="group" aria-label="Vehicle">
-              {props.vehicles.map(v => (
+          <div className="models-bar">
+            <div className="models-dots" role="group" aria-label="Model">
+              {props.entries.map(v => (
                 <button
                   key={v.id}
                   type="button"
-                  className="vehicles-dot"
-                  data-vehicle={v.id}
+                  className="models-dot"
+                  data-entry={v.id}
                   aria-label={v.title}
                   aria-pressed={v.id === first?.id}
                 />
@@ -91,11 +91,11 @@ export default function Vehicles (props: {
             {/* cycles through MODES; the label names the current one */}
             <button
               type="button"
-              className="vehicles-round vehicles-shading"
+              className="models-round models-shading"
               data-modes={JSON.stringify(MODES)}
               aria-label={`Shading: ${MODES[0].title}`}
               title={`Shading: ${MODES[0].title}`}>
-              <span className="vehicles-shading-icon" aria-hidden="true" />
+              <span className="models-shading-icon" aria-hidden="true" />
             </button>
           </div>
         </section>

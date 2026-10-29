@@ -53,7 +53,7 @@ export type ModelUse = {
   parts?: string[];
 };
 
-export type VehicleConfig = {
+export type EntryConfig = {
   id: string;
   title: string;
   prefab: string;
@@ -132,12 +132,12 @@ export class Extractor {
     }
   }
 
-  vehicle (config: VehicleConfig) {
+  entry (config: EntryConfig) {
     const table = this.resolver.load(config.prefab);
     const ctx = new Context(table, this);
     const root = ctx.node(table.root, config, true);
     if (!root) throw new Error(`${config.prefab}: nothing to draw`);
-    // the vehicle's own placement in a scene is not part of the model
+    // the entry's own placement in a scene is not part of the model
     delete root.p; delete root.q; delete root.s;
     root.name = config.title;
     return root;
@@ -172,7 +172,7 @@ class Context {
     return o.type === "MonoBehaviour" ? this.ex.guids.get(o.data.m_Script?.guid) : undefined;
   }
 
-  node (transformId: string, config: VehicleConfig, isRoot = false): Node | undefined {
+  node (transformId: string, config: EntryConfig, isRoot = false): Node | undefined {
     const tr = this.table.objects.get(transformId);
     if (!tr) return;
     const go = this.table.objects.get(tr.data.m_GameObject?.fileID);
@@ -229,7 +229,7 @@ class Context {
     return node;
   }
 
-  model (path: string, config: VehicleConfig) {
+  model (path: string, config: EntryConfig) {
     const remaps = this.ex.modelMaterials(path);
     // overrides on the model's own renderers; their nodes can't be named,
     // but if every material is an effect the whole model is one
@@ -272,7 +272,7 @@ class Context {
     }
   }
 
-  part (path: string, name: string, materials: string[], config: VehicleConfig) {
+  part (path: string, name: string, materials: string[], config: EntryConfig) {
     const remaps = this.ex.modelMaterials(path);
     for (const m of materials) {
       if (!Object.values(remaps).includes(m)) {

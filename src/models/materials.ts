@@ -1,4 +1,4 @@
-// Shading modes for the vehicle viewer. Every mesh records what it is in
+// Shading modes for the model viewer. Every mesh records what it is in
 // userData.part, and applyMode swaps its material for the current mode.
 import {
   Color,

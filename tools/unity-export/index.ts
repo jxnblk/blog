@@ -1,8 +1,8 @@
-// Exports the Novantica vehicles for the /vehicles page.
+// Exports the Novantica models for the /models page.
 //
-//   bun run export:vehicles [--project ~/unity/na-map-prototype] [--out images/vehicles]
+//   bun run export:models [--project ~/unity/na-map-prototype] [--out images/models]
 //
-// --project is the default; an entry in vehicles.ts can name another.
+// --project is the default; an entry in entries.ts can name another.
 // Reads the Unity project (never writes to it), runs Blender headless
 // for the models and textures, and writes JSON, GLB and PNG files that
 // are committed with the site. See README.md.
@@ -13,12 +13,12 @@ import { parseArgs } from "node:util";
 import { indexGuids } from "./unity-yaml";
 import { Resolver } from "./prefab";
 import { Extractor, EFFECT_MATERIAL, hdr, type ModelUse, type Node, type StickerData, type Vec3 } from "./extract";
-import { VEHICLES } from "./vehicles";
+import { ENTRIES } from "./entries";
 
 const { values: args } = parseArgs({
   options: {
     project: { type: "string", default: join(homedir(), "unity/na-map-prototype") },
-    out: { type: "string", default: "images/vehicles" },
+    out: { type: "string", default: "images/models" },
   },
 });
 const projectPath = (p: string) => resolve(p.replace(/^~/, homedir()));
@@ -45,9 +45,9 @@ function extractor (path: string) {
   }
   return ex;
 }
-const vehicles = VEHICLES.map(v => ({
+const entries = ENTRIES.map(v => ({
   config: v,
-  root: extractor(v.project ? projectPath(v.project) : project).vehicle(v),
+  root: extractor(v.project ? projectPath(v.project) : project).entry(v),
 }));
 const warnings = [...extractors.values()].flatMap(ex => ex.resolver.warnings);
 
@@ -170,7 +170,7 @@ rmSync(join(tmp, "job.json"));
 
 // JSON for the page
 const index = {
-  vehicles: vehicles.map(({ config, root }) => ({
+  entries: entries.map(({ config, root }) => ({
     id: config.id,
     title: config.title,
     caption: config.caption,
@@ -180,7 +180,7 @@ const index = {
   materials: Object.fromEntries(Object.values(materials).map(({ name, ...m }) => [name, m])),
 };
 writeFileSync(join(tmp, "index.json"), JSON.stringify(index, null, 2) + "\n");
-for (const { config, root } of vehicles) {
+for (const { config, root } of entries) {
   writeFileSync(join(tmp, `${config.id}.json`), JSON.stringify({ id: config.id, title: config.title, root }, publicFields) + "\n");
 }
 
@@ -190,7 +190,7 @@ Bun.spawnSync(["mv", tmp, out]);
 
 // summary
 console.log("");
-for (const v of index.vehicles) {
+for (const v of index.entries) {
   console.log(`${v.title.padEnd(12)} ${v.models} model(s), ${v.stickers} sticker(s), ${v.lights} light(s)` +
     (v.blinking ? ` (${v.blinking} blinking)` : "") + (v.spinning ? `, ${v.spinning} spinning` : ""));
 }

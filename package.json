@@ -8,7 +8,7 @@
     "build": "bun build.tsx",
     "start": "bun --watch build.tsx",
     "serve": "bunx http-server build -c-1",
-    "export:vehicles": "bun tools/unity-export/index.ts"
+    "export:models": "bun tools/unity-export/index.ts"
   },
   "author": "Brent Jackson",
   "license": "MIT",

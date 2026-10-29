@@ -27,7 +27,7 @@ import Post from "./src/Post";
 import Home from "./src/Home";
 import Blog from "./src/Blog";
 import NotFound from "./src/404";
-import Vehicles, { type VehicleSummary } from "./src/Vehicles";
+import Models, { type EntrySummary } from "./src/Models";
 import { FlourishTile } from "./src/Flourish";
 import { generateRSS, FEED_PATH } from "./src/rss";
 
@@ -58,13 +58,13 @@ const bundle = await Bun.build({
 const css = (await bundle.outputs[0].text()).replaceAll("./files/", "/fonts/");
 
 // page scripts, bundled into build/js after the build dir is cleared
-const SCRIPTS = ["src/vehicles/main.ts"];
+const SCRIPTS = ["src/models/main.ts"];
 
 async function buildScripts () {
   const result = await Bun.build({
     entrypoints: SCRIPTS,
     outdir: join(OUT_DIR, "js"),
-    // src/vehicles/main.ts -> js/vehicles.js
+    // src/models/main.ts -> js/models.js
     root: "src",
     naming: "[dir].[ext]",
     minify: true,
@@ -73,9 +73,9 @@ async function buildScripts () {
   if (!result.success) throw new AggregateError(result.logs, "Script build failed");
 }
 
-// committed output of `bun run export:vehicles`
-function readVehicles (): VehicleSummary[] {
-  return JSON.parse(readFileSync("images/vehicles/index.json", "utf8")).vehicles;
+// committed output of `bun run export:models`
+function readEntries (): EntrySummary[] {
+  return JSON.parse(readFileSync("images/models/index.json", "utf8")).entries;
 }
 
 async function getAbout () {
@@ -196,10 +196,10 @@ async function getPages (posts: PostData[], published: PostData[]): Promise<Page
     html: renderToStaticMarkup(blog),
   });
 
-  const vehicles = <Vehicles vehicles={readVehicles()} {...ctx} />;
+  const models = <Models entries={readEntries()} {...ctx} />;
   pages.push({
-    path: "vehicles",
-    html: renderToStaticMarkup(vehicles),
+    path: "models",
+    html: renderToStaticMarkup(models),
   });
 
   const notfound = <NotFound {...ctx} />;

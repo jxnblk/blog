@@ -1,11 +1,11 @@
-# Unity vehicle export
+# Unity model export
 
-Exports the Novantica vehicles from the Unity project for the `/vehicles`
-page. The output in `images/vehicles/` is committed, so building the site
+Exports the Novantica models from the Unity projects for the `/models`
+page. The output in `images/models/` is committed, so building the site
 (and CI) needs neither Unity nor Blender.
 
 ```sh
-bun run export:vehicles [--project ~/unity/na-map-prototype] [--out images/vehicles]
+bun run export:models [--project ~/unity/na-map-prototype] [--out images/models]
 ```
 
 ## Requirements
@@ -16,7 +16,7 @@ bun run export:vehicles [--project ~/unity/na-map-prototype] [--out images/vehic
 
 Unity doesn't need to be installed or open.
 
-`--project` is the default project. An entry in `vehicles.ts` can set its
+`--project` is the default project. An entry in `entries.ts` can set its
 own `project` (the bots and props come from `~/unity/ac-mini`). The
 projects must share the palette atlas; a model, material or sticker found
 in both is written once.
@@ -27,7 +27,7 @@ Only text and source files under the project's `Assets/`, read-only. It never
 writes to the Unity project and doesn't use `Library/`.
 
 - `*.meta` for the guid → path index, and FBX material remaps
-- the vehicle prefabs in `vehicles.ts`, with the prefabs, variants and
+- the prefabs in `entries.ts`, with the prefabs, variants and
   models they nest
 - `.mat` files for material colors and textures
 - the FBX models, the Polyperfect palette atlas, and the sticker sheets
@@ -35,15 +35,15 @@ writes to the Unity project and doesn't use `Library/`.
 
 ## What it writes
 
-- `index.json`: the vehicle list, with counts, and the model materials
-- `<id>.json`: each vehicle as a tree of nodes, in three.js/glTF space
+- `index.json`: the list of entries, with counts, and the model materials
+- `<id>.json`: each entry as a tree of nodes, in three.js/glTF space
   (Unity's X is mirrored), with `model`, `sticker`, `light` and `spin` nodes
 - `models/*.glb`: one per FBX, without textures; material names are the
   Unity material names
 - `palette.png`, `palette-emission.png`, `palette-mr.png`: only the palette
   swatches the models use, repacked into a small atlas (the model UVs are
   moved to match). The original atlas isn't shipped.
-- `stickers/*.png`: the sticker sheet cells the vehicles use, 256px
+- `stickers/*.png`: the sticker sheet cells the entries use, 256px
 
 ## How it works
 
@@ -72,7 +72,7 @@ writes to the Unity project and doesn't use `Library/`.
 
 - Nodes inside a model are known to a prefab only by hashed fileIDs. When a
   prefab switches one off, the export warns, and the node has to be named in
-  `hide` in `vehicles.ts` (as for the Javelin's `nose tail lights.001`).
+  `hide` in `entries.ts` (as for the Javelin's `nose tail lights.001`).
   Material overrides on those nodes are reported, not applied.
 - A model with a single top-level node has that node's own transform
   replaced by the prefab's, as in Unity.

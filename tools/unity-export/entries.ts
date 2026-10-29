@@ -1,11 +1,11 @@
-import type { VehicleConfig } from "./extract";
+import type { EntryConfig } from "./extract";
 
-// The models on the /vehicles page, in order. `caption` is optional
+// The entries on the /models page, in order. `caption` is optional
 // text shown under the viewer.
 
 // the earlier AC Mini project, for the bots and props
 const AC_MINI = "~/unity/ac-mini";
-export const VEHICLES: VehicleConfig[] = [
+export const ENTRIES: EntryConfig[] = [
   {
     id: "razor",
     title: "Razor",

@@ -1,4 +1,4 @@
-# Headless Blender step of the vehicle export (see ../README.md).
+# Headless Blender step of the model export (see ../README.md).
 #
 #   Blender -b --factory-startup -P convert.py -- job.json
 #
