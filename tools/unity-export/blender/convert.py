@@ -193,6 +193,7 @@ for m in job["models"]:
     export_animations=False,
     export_cameras=False,
     export_lights=False,
+    export_copyright=job["copyright"],
   )
   report["models"][m["name"]] = {"tris": tris, "bytes": os.path.getsize(m["out"])}
   print(f"  {m['name']}: {tris} tris, {os.path.getsize(m['out']) // 1024}KB")

@@ -49,7 +49,7 @@ writes to the Unity project and doesn't use `Library/`.
 - `<id>.json`: each entry as a tree of nodes, in three.js/glTF space
   (Unity's X is mirrored), with `model`, `sticker`, `light` and `spin` nodes
 - `models/*.glb`: one per FBX, without textures; material names are the
-  Unity material names
+  Unity material names, and `asset.copyright` is `COPYRIGHT` in `index.ts`
 - `palette.png`, `palette-emission.png`, `palette-mr.png`: only the palette
   swatches the models use, repacked into a small atlas (the model UVs are
   moved to match). The original atlas isn't shipped. Other flat-color

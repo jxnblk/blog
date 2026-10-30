@@ -32,6 +32,8 @@ const ATLAS_GRIDS: Record<string, number> = {
 };
 const PALETTE_BLOCK = 4; // pixels per swatch in the repacked palette
 const STICKER_PX = 256;
+// written into every GLB's asset.copyright
+const COPYRIGHT = "© Brent Jackson. All rights reserved.";
 
 if (!existsSync(BLENDER)) throw new Error(`Blender not found at ${BLENDER}; set BLENDER`);
 
@@ -140,6 +142,7 @@ for (const ex of extractors.values()) {
   for (const s of ex.stickers.values()) if (!stickers.has(s.texture)) stickers.set(s.texture, { ex, s });
 }
 const job = {
+  copyright: COPYRIGHT,
   models: [...models.values()].map(({ ex, use: m }) => ({
     name: basename(m.out, ".glb"),
     src: abs(ex, m.path),
