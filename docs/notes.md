@@ -1,21 +1,17 @@
 
-- Ship
-- DNS updates
+- Models
+  - x Wolf - Bicycle
+  - x Scout + Police bots
+  - x ARM
+  - furniture?
 
----
 
-- Render blocking body color
-- lazy scripts at end (caching?)
 - dev client side seed tester
 
 - Feed
-- 3D models
+  - 3D models
 - Sketches
 - Vectors
-
----
-
-Font alternatives
 
 - Ferro
 - Space Grotesk

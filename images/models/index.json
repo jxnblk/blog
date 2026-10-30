@@ -1,0 +1,349 @@
+{
+  "entries": [
+    {
+      "id": "razor",
+      "title": "Razor",
+      "models": 3,
+      "stickers": 6,
+      "lights": 6,
+      "blinking": 2,
+      "spinning": 2
+    },
+    {
+      "id": "hoverbike",
+      "title": "Hoverbike",
+      "models": 1,
+      "stickers": 5,
+      "lights": 3,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "hoverboard",
+      "title": "Hoverboard",
+      "models": 1,
+      "stickers": 2,
+      "lights": 2,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "javelin",
+      "title": "Javelin",
+      "models": 1,
+      "stickers": 9,
+      "lights": 4,
+      "blinking": 2,
+      "spinning": 0
+    },
+    {
+      "id": "hoverpack",
+      "title": "Hoverpack",
+      "models": 1,
+      "stickers": 4,
+      "lights": 3,
+      "blinking": 2,
+      "spinning": 0
+    },
+    {
+      "id": "bicycle",
+      "title": "Bicycle",
+      "models": 7,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "crawler",
+      "title": "Crawler",
+      "models": 9,
+      "stickers": 7,
+      "lights": 2,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "airship",
+      "title": "Airship",
+      "models": 1,
+      "stickers": 8,
+      "lights": 3,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "tram",
+      "title": "Tram",
+      "models": 1,
+      "stickers": 14,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "subway-car",
+      "title": "Subway Car",
+      "models": 1,
+      "stickers": 6,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "sweeper-bot",
+      "title": "Sweeper Bot",
+      "models": 1,
+      "stickers": 4,
+      "lights": 1,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "fabricator",
+      "title": "Fabricator",
+      "models": 1,
+      "stickers": 1,
+      "lights": 1,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "terminal",
+      "title": "Terminal",
+      "models": 1,
+      "stickers": 1,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "wolf",
+      "title": "Wolf Sculpture",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "server-rack",
+      "title": "Server Rack",
+      "models": 1,
+      "stickers": 4,
+      "lights": 3,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "scout",
+      "title": "Scout",
+      "models": 13,
+      "stickers": 1,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "pk9",
+      "title": "PK9",
+      "models": 13,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "security-bot",
+      "title": "Security Bot",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "eau-bot",
+      "title": "EAU Bot",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "botdroid",
+      "title": "BotDroid 3B",
+      "models": 11,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    },
+    {
+      "id": "arm",
+      "title": "ARM",
+      "models": 1,
+      "stickers": 0,
+      "lights": 0,
+      "blinking": 0,
+      "spinning": 0
+    }
+  ],
+  "palette": {
+    "albedo": "palette.png",
+    "emission": "palette-emission.png",
+    "mr": "palette-mr.png"
+  },
+  "materials": {
+    "Vantom": {
+      "kind": "solid",
+      "color": [
+        0,
+        0,
+        0
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 0.5
+    },
+    "universal-a": {
+      "kind": "palette",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 1,
+      "roughness": 0
+    },
+    "universal-glass": {
+      "kind": "glass",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 1,
+      "roughness": 0
+    },
+    "zzMK Aluminum": {
+      "kind": "solid",
+      "color": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1
+    },
+    "Glass": {
+      "kind": "solid",
+      "color": [
+        0.10117648,
+        0.16862746,
+        0.16862746
+      ],
+      "opacity": 1,
+      "metalness": 0.1,
+      "roughness": 0.02
+    },
+    "Light": {
+      "kind": "solid",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 0.5,
+      "emissive": [
+        2.99608,
+        2.99608,
+        2.99608
+      ]
+    },
+    "MK Steel": {
+      "kind": "solid",
+      "color": [
+        0.1109375,
+        0.15625,
+        0.2
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1
+    },
+    "MK Gold": {
+      "kind": "solid",
+      "color": [
+        1,
+        0.7509804,
+        0.5
+      ],
+      "opacity": 1,
+      "metalness": 0.4,
+      "roughness": 0.5
+    },
+    "MK Building": {
+      "kind": "solid",
+      "color": [
+        0.48999998,
+        0.5968421,
+        0.7
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1
+    },
+    "MK Two Sided Steel": {
+      "kind": "solid",
+      "color": [
+        0.16470587,
+        0.23529415,
+        0.3
+      ],
+      "opacity": 1,
+      "metalness": 0,
+      "roughness": 1,
+      "doubleSided": true
+    },
+    "Scout": {
+      "kind": "palette",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 0.8,
+      "roughness": 0.8
+    },
+    "FlashingLightRed": {
+      "kind": "solid",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "opacity": 1,
+      "metalness": 1,
+      "roughness": 0
+    },
+    "MK Translucent 1": {
+      "kind": "solid",
+      "color": [
+        0,
+        0,
+        0
+      ],
+      "opacity": 0.16862746,
+      "metalness": 0,
+      "roughness": 1
+    }
+  }
+}
