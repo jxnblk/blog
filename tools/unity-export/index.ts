@@ -208,7 +208,7 @@ const index = {
 };
 writeFileSync(join(tmp, "index.json"), JSON.stringify(index, null, 2) + "\n");
 for (const { config, root } of entries) {
-  writeFileSync(join(tmp, `${config.id}.json`), JSON.stringify({ id: config.id, title: config.title, root }, publicFields) + "\n");
+  writeFileSync(join(tmp, `${config.id}.json`), JSON.stringify({ id: config.id, title: config.title, ...(config.level ? { level: true } : {}), root }, publicFields) + "\n");
 }
 
 rmSync(out, { recursive: true, force: true });

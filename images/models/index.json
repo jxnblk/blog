@@ -100,15 +100,6 @@
       "spinning": 0
     },
     {
-      "id": "ballbot",
-      "title": "Ballbot",
-      "models": 20,
-      "stickers": 0,
-      "lights": 0,
-      "blinking": 0,
-      "spinning": 0
-    },
-    {
       "id": "fabricator",
       "title": "Fabricator",
       "models": 1,
@@ -297,17 +288,6 @@
       "opacity": 1,
       "metalness": 0.4,
       "roughness": 0.5
-    },
-    "DynamicLight": {
-      "kind": "solid",
-      "color": [
-        0.2,
-        0.2,
-        0.2
-      ],
-      "opacity": 1,
-      "metalness": 0,
-      "roughness": 0.2
     },
     "MK Building": {
       "kind": "solid",

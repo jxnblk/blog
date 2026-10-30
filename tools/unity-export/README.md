@@ -27,8 +27,9 @@ An entry is usually a `prefab`. For a model placed in a scene as it is
 Unity material path). Those get their own GLB, `<model>-<id>.glb`.
 
 An entry can set `rotation` (`{ x, y }` in degrees, tipped about X, then
-turned about Y) for how it first faces the page's camera, as the ARM does
-to show its face.
+turned about Y) for how it first faces the page's camera, and `level` to
+be framed from its own height rather than from a little above, as the ARM
+does to show its face square to the screen.
 
 ## What it reads
 

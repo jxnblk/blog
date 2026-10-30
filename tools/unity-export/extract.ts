@@ -72,6 +72,8 @@ export type EntryConfig = {
   /** how the entry first faces the page's camera, in degrees: tipped
    * about X, then turned about Y (page space: Y up, the camera toward +X +Z) */
   rotation?: { x?: number; y?: number };
+  /** framed from the model's own height rather than from a little above */
+  level?: boolean;
 };
 
 /** a turn of x degrees about X, then y degrees about Y, as a quaternion */

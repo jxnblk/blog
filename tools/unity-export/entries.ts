@@ -39,7 +39,8 @@ export const ENTRIES: EntryConfig[] = [
   { id: "tram", title: "Tram", project: AC_MINI, prefab: "Assets/Prefabs/Tram.prefab" },
   { id: "subway-car", title: "Subway Car", project: AC_MINI, prefab: "Assets/Prefabs/Subway Car.prefab" },
   { id: "sweeper-bot", title: "Sweeper Bot", project: AC_MINI, prefab: "Assets/Models/Vehicles/SweeperBot.prefab" },
-  { id: "ballbot", title: "Ballbot", project: AC_MINI, prefab: "Assets/Prefabs/Bots/Ballbot 2.prefab" },
+  // hidden from the page for now
+  // { id: "ballbot", title: "Ballbot", project: AC_MINI, prefab: "Assets/Prefabs/Bots/Ballbot 2.prefab" },
   { id: "fabricator", title: "Fabricator", project: AC_MINI, prefab: "Assets/Prefabs/Fabricator.prefab" },
   { id: "terminal", title: "Terminal", project: AC_MINI, prefab: "Assets/Prefabs/KeyLocations/Terminal.prefab" },
   {
@@ -62,7 +63,8 @@ export const ENTRIES: EntryConfig[] = [
     project: AC_MINI,
     // the model in the ARM ads
     model: "Assets/Models/Greebs/ac-arm-dark.fbx",
-    // the face toward the camera
-    rotation: { x: 73, y: 55 },
+    // the face upright and square to a level camera
+    rotation: { x: 90, y: 55.5 },
+    level: true,
   },
 ];

@@ -51,6 +51,7 @@ type Entry = {
   blinkers: Blinker[];
   spinners: { node: Object3D; speed: number }[];
   sphere: Sphere;
+  level: boolean; // framed from its own height, not from above
 };
 
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -118,7 +119,7 @@ async function main (root: HTMLElement) {
   let currentId = "";
 
   async function build (id: string): Promise<Entry> {
-    const data: { root: Node } = await (await fetch(`${base}${id}.json`)).json();
+    const data: { root: Node; level?: boolean } = await (await fetch(`${base}${id}.json`)).json();
     const blinkers: Blinker[] = [];
     const spinners: Entry["spinners"] = [];
     const make = async (n: Node): Promise<Object3D> => {
@@ -153,7 +154,7 @@ async function main (root: HTMLElement) {
     materials.apply(group, mode);
     group.updateMatrixWorld(true);
     const sphere = new Box3().setFromObject(group).getBoundingSphere(new Sphere());
-    return { group, blinkers, spinners, sphere };
+    return { group, blinkers, spinners, sphere, level: !!data.level };
   }
 
   async function show (id: string) {
@@ -171,16 +172,17 @@ async function main (root: HTMLElement) {
     current = entry;
     materials.apply(entry.group, mode);
     scene.add(entry.group);
-    frame(entry.sphere);
+    frame(entry);
   }
 
-  // a three-quarter view from the front left, fitted to the model
-  function frame (sphere: Sphere) {
+  // a three-quarter view from the front left, from a little above (or
+  // level), fitted to the model
+  function frame ({ sphere, level }: Entry) {
     const fov = camera.fov * Math.PI / 180;
     const fit = Math.min(fov, 2 * Math.atan(Math.tan(fov / 2) * camera.aspect));
     // the bounding sphere is loose around long, thin models
     const distance = sphere.radius / Math.sin(fit / 2) * 0.95;
-    const dir = new Vector3(1.6, 0.6, 1.1).normalize();
+    const dir = new Vector3(1.6, level ? 0 : 0.6, 1.1).normalize();
     controls.target.copy(sphere.center);
     camera.position.copy(sphere.center).addScaledVector(dir, distance);
     camera.near = distance / 50;
@@ -259,7 +261,7 @@ async function main (root: HTMLElement) {
     bloom.resolution.set(w, h);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    if (current) frame(current.sphere);
+    if (current) frame(current);
   };
   new ResizeObserver(resize).observe(viewer);
   resize();
